@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:reference",
+ "creation": "2020-06-14 12:50:41.615167",
+ "description": "Warehouse Operation of type reception.",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "reference",
+  "status",
+  "target_warehouse",
+  "column_break_3",
+  "date",
+  "weight",
+  "pieces",
+  "extra_info_section",
+  "attachment",
+  "parcels_in_reception_section",
+  "warehouse_receipt_lines"
+ ],
+ "fields": [
+  {
+   "default": "0.00",
+   "description": "Weight in LB.",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight",
+   "precision": "2"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval: doc.status != 'CLOSED';",
+   "fieldname": "parcels_in_reception_section",
+   "fieldtype": "Section Break",
+   "label": "Parcels in Receipt"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "description": "Warehouse internal reference code.",
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Reference",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "description": "Count of pieces in the operation.",
+   "fieldname": "pieces",
+   "fieldtype": "Int",
+   "label": "Pieces"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "ON_HAND",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "DRAFT\nOPEN\nON_HAND\nIN_PROCESS\nCLOSED",
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "PDF file",
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "Attachment"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "description": "Real date of document generation.",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date",
+   "read_only_depends_on": "eval: doc.status == 'CLOSED';\n",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "extra_info_section",
+   "fieldtype": "Section Break",
+   "label": "Extra info"
+  },
+  {
+   "bold": 1,
+   "description": "Warehouse where reception occurred",
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Target warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "columns": 10,
+   "description": "Packages received in warehouse receipt.",
+   "fieldname": "warehouse_receipt_lines",
+   "fieldtype": "Table MultiSelect",
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Parcels",
+   "options": "Warehouse Receipt Line",
+   "read_only_depends_on": "eval: doc.status == 'CLOSED';",
+   "reqd": 1
+  }
+ ],
+ "links": [
+  {
+   "group": "Shipment",
+   "link_doctype": "Shipment",
+   "link_fieldname": "warehouse_receipt"
+  }
+ ],
+ "modified": "2020-07-04 10:53:32.082541",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Warehouse Receipt",
+ "name_case": "UPPER CASE",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "reference",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "reference",
+ "track_changes": 1
+}

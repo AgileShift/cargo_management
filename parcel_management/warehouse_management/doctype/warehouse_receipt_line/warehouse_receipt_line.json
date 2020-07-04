@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "creation": "2020-06-15 06:50:54.767049",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "parcel"
+ ],
+ "fields": [
+  {
+   "fieldname": "parcel",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Parcel",
+   "options": "Parcel",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2020-07-04 10:51:54.784786",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Warehouse Receipt Line",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

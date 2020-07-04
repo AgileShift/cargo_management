@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include parcel_management *.css
+recursive-include parcel_management *.csv
+recursive-include parcel_management *.html
+recursive-include parcel_management *.ico
+recursive-include parcel_management *.js
+recursive-include parcel_management *.json
+recursive-include parcel_management *.md
+recursive-include parcel_management *.png
+recursive-include parcel_management *.py
+recursive-include parcel_management *.svg
+recursive-include parcel_management *.txt
+recursive-exclude parcel_management *.pyc

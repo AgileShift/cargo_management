@@ -1,0 +1,313 @@
+{
+ "actions": [
+  {
+   "action": "parcel_management.parcel_management.doctype.parcel.actions.visit_carrier_detail_page",
+   "action_type": "Server Action",
+   "label": "Visit carrier detail page"
+  },
+  {
+   "action": "parcel_management.parcel_management.doctype.parcel.actions.update_data_from_carrier",
+   "action_type": "Server Action",
+   "label": "Update data from carrier"
+  }
+ ],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:tracking_number",
+ "creation": "2020-06-12 19:06:49.803202",
+ "description": "Doc Type o save data of a parcel, This is the same as a Package.",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tracking_number",
+  "customer",
+  "customer_name",
+  "carrier",
+  "column_break_1",
+  "status",
+  "track",
+  "additional_data_from_carrier_section",
+  "carrier_est_delivery",
+  "carrier_est_weight",
+  "carrier_real_delivery",
+  "column_break_2",
+  "carrier_status",
+  "carrier_status_detail",
+  "signed_by",
+  "section_break_6",
+  "shipper",
+  "notes",
+  "content_section",
+  "content",
+  "total_amount",
+  "internal_data_section",
+  "consignee_name",
+  "column_break_3",
+  "weight",
+  "pieces",
+  "easypost_id"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "default": "UNKNOWN",
+   "description": "Name of the carrier handling the shipment.",
+   "fieldname": "carrier",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Carrier",
+   "options": "Parcel Carrier",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "description": "Tracking code provided by the carrier.",
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Tracking number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "0",
+   "description": "Parcel is requested to be tracked.",
+   "fieldname": "track",
+   "fieldtype": "Check",
+   "label": "Track",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "description": "The current status of the parcel.",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "waiting_for_reception\nwaiting_confirmation\nwaiting_for_departure\nin_transit\nin_customs\nready_to_pickup\nfinished\nfully_refunded\npartially_refunded\non_hold\ncancelled\nin_matra_int\nin_almasa\nin_matra_img",
+   "search_index": 1
+  },
+  {
+   "description": "Store that sends the package.",
+   "fieldname": "shipper",
+   "fieldtype": "Data",
+   "label": "Shipper"
+  },
+  {
+   "description": "Notes or instructions",
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval: doc.status != 'finished';",
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break",
+   "label": "Additional data from customer"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "internal_data_section",
+   "fieldtype": "Section Break",
+   "label": "Internal data"
+  },
+  {
+   "bold": 1,
+   "description": "Estimated delivery date provided by the carrier (if available)",
+   "fieldname": "carrier_est_delivery",
+   "fieldtype": "Datetime",
+   "label": "Carrier estimated delivery date"
+  },
+  {
+   "bold": 1,
+   "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
+   "fieldname": "carrier_real_delivery",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Carrier real delivery date"
+  },
+  {
+   "description": "The name of the person who signed for the package (if available)",
+   "fieldname": "signed_by",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Signed by"
+  },
+  {
+   "description": "The current status of the package provided by the carrier (if available)",
+   "fieldname": "carrier_status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Carrier status",
+   "options": "unknown\npre_transit\nin_transit\nout_for_delivery\ndelivered\navailable_for_pickup\nreturn_to_sender\nfailure\ncancelled\nerror",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "carrier_status_detail",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Carrier status detail"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "easypost_id",
+   "fieldname": "additional_data_from_carrier_section",
+   "fieldtype": "Section Break",
+   "label": "Additional data from carrier"
+  },
+  {
+   "description": "Name on the package label",
+   "fieldname": "consignee_name",
+   "fieldtype": "Data",
+   "label": "Consignee name"
+  },
+  {
+   "default": "1",
+   "description": "Quantity of packages in shipment",
+   "fieldname": "pieces",
+   "fieldtype": "Int",
+   "label": "Pieces"
+  },
+  {
+   "description": "Required to fetch data after an easypost tracking number is created.",
+   "fieldname": "easypost_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Easypost ID",
+   "print_hide": 1,
+   "unique": 1
+  },
+  {
+   "description": "Estimated weight of the package as measured by the carrier (if available).",
+   "fieldname": "carrier_est_weight",
+   "fieldtype": "Float",
+   "label": "Carrier estimated weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Table",
+   "options": "Parcel Content"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Real weight measured",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight",
+   "precision": "2"
+  },
+  {
+   "columns": 2,
+   "depends_on": "content",
+   "description": "Total declared value in package.",
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "options": "USD",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "content_section",
+   "fieldtype": "Section Break",
+   "label": "Content"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "depends_on": "customer",
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  }
+ ],
+ "links": [
+  {
+   "group": "Warehouse",
+   "link_doctype": "Warehouse Receipt",
+   "link_fieldname": "parcel"
+  },
+  {
+   "group": "Shipment",
+   "link_doctype": "Shipment",
+   "link_fieldname": "warehouse_receipt"
+  }
+ ],
+ "modified": "2020-07-04 14:43:19.276113",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Parcel",
+ "name_case": "UPPER CASE",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "customer_name",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "tracking_number",
+ "track_changes": 1
+}

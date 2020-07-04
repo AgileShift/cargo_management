@@ -1,0 +1,137 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:reference",
+ "creation": "2020-06-14 12:54:12.963505",
+ "description": "Shipment",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "reference",
+  "status",
+  "type",
+  "column_break_4",
+  "attachment",
+  "weight",
+  "date",
+  "section_break_7",
+  "notes",
+  "commodities_in_shipment_section",
+  "shipment_lines"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "description": "Number or Identifier",
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Reference",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight",
+   "precision": "2"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "description": "Transportation Type",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Type",
+   "options": "AIR\nOCEAN",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "description": "Status of Shipment",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "LOADING\nLOADED\nIN_TRANSIT\nRECEIVED",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "description": "Real date of document generation.",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date"
+  },
+  {
+   "description": "Internal Notes only",
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "Attachment"
+  },
+  {
+   "fieldname": "commodities_in_shipment_section",
+   "fieldtype": "Section Break",
+   "label": "Commodities in Shipment"
+  },
+  {
+   "fieldname": "shipment_lines",
+   "fieldtype": "Table MultiSelect",
+   "label": "Warehouse Receipts",
+   "options": "Shipment Line",
+   "read_only_depends_on": "eval: doc.status == 'RECEIVED';"
+  }
+ ],
+ "links": [],
+ "modified": "2020-06-22 14:51:39.266626",
+ "modified_by": "Administrator",
+ "module": "Warehouse Management",
+ "name": "Shipment",
+ "name_case": "UPPER CASE",
+ "nsm_parent_field": "parent_shipment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "reference",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "reference",
+ "track_changes": 1
+}

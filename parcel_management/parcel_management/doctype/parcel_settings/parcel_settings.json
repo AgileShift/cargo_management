@@ -1,0 +1,81 @@
+{
+ "actions": [],
+ "creation": "2020-06-27 10:29:04.374462",
+ "description": "Settings of the Package Management Module",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "easypost_active",
+  "easypost_settings_section",
+  "easypost_api_key",
+  "carriers_section",
+  "default_carrier_detail_page_url",
+  "carriers"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "description": "The easypost API is going to be used.",
+   "fieldname": "easypost_active",
+   "fieldtype": "Check",
+   "label": "Easypost Active"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:!doc.easypost_api_key",
+   "depends_on": "easypost_active",
+   "fieldname": "easypost_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Easypost Settings"
+  },
+  {
+   "depends_on": "easypost_active",
+   "description": "Easypost API Key.",
+   "fieldname": "easypost_api_key",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "API Key",
+   "mandatory_depends_on": "easypost_active"
+  },
+  {
+   "fieldname": "carriers_section",
+   "fieldtype": "Section Break",
+   "label": "Carrier Settings"
+  },
+  {
+   "description": "This is the default carrier page to fetch details if no carrier page is specified.",
+   "fieldname": "default_carrier_detail_page_url",
+   "fieldtype": "Data",
+   "label": "Default carrier detail page"
+  },
+  {
+   "fieldname": "carriers",
+   "fieldtype": "Table",
+   "label": "List of carriers available and his API code",
+   "options": "Package Carrier"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2020-07-03 22:48:10.769770",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Parcel Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
