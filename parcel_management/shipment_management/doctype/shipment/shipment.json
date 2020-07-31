@@ -34,10 +34,17 @@
    "unique": 1
   },
   {
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "label": "Weight",
-   "precision": "2"
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "description": "Status of Shipment",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "LOADING\nLOADED\nIN_TRANSIT\nRECEIVED",
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -54,17 +61,19 @@
    "search_index": 1
   },
   {
-   "allow_in_quick_entry": 1,
-   "bold": 1,
-   "description": "Status of Shipment",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Status",
-   "options": "LOADING\nLOADED\nIN_TRANSIT\nRECEIVED",
-   "reqd": 1,
-   "search_index": 1
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "Attachment"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight",
+   "precision": "2"
   },
   {
    "description": "Real date of document generation.",
@@ -75,23 +84,14 @@
    "label": "Date"
   },
   {
-   "description": "Internal Notes only",
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
-  },
-  {
-   "fieldname": "column_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "section_break_7",
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "attachment",
-   "fieldtype": "Attach",
-   "label": "Attachment"
+   "description": "Internal Notes only",
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
   },
   {
    "fieldname": "commodities_in_shipment_section",
@@ -107,9 +107,9 @@
   }
  ],
  "links": [],
- "modified": "2020-06-22 14:51:39.266626",
+ "modified": "2020-07-31 16:31:40.129674",
  "modified_by": "Administrator",
- "module": "Warehouse Management",
+ "module": "Shipment Management",
  "name": "Shipment",
  "name_case": "UPPER CASE",
  "nsm_parent_field": "parent_shipment",

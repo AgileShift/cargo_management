@@ -1,0 +1,95 @@
+{
+ "cards": [
+  {
+   "hidden": 0,
+   "label": "Parcel",
+   "links": "[\n    {\n        \"label\": \"Parcel\",\n        \"name\": \"Parcel\",\n        \"onboard\": 0,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Parcel\"\n    },\n    {\n        \"label\": \"Issue\",\n        \"name\": \"Issue\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Issue\"\n    },\n    {\n        \"label\": \"Parcel Settings\",\n        \"name\": \"Parcel Settings\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Parcel Settings\"\n    }\n]\n"
+  },
+  {
+   "hidden": 0,
+   "label": "Warehouse",
+   "links": "[\n    {\n        \"label\": \"Warehouse Receipt\",\n        \"name\": \"Warehouse Receipt\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Warehouse Receipt\"\n    }\n]"
+  },
+  {
+   "hidden": 0,
+   "label": "Shipment",
+   "links": "[\n    {\n        \"label\": \"Shipment\",\n        \"name\": \"Shipment\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Shipment\"\n    }\n]"
+  }
+ ],
+ "cards_label": "Quick Access",
+ "category": "Domains",
+ "charts": [],
+ "creation": "2020-07-05 15:49:07.860880",
+ "developer_mode_only": 0,
+ "disable_user_customization": 1,
+ "docstatus": 0,
+ "doctype": "Desk Page",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "label": "Parcel",
+ "modified": "2020-07-05 18:06:42.941926",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Parcel",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "label": "All Active Packages",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"status\": [\"not in\", [\"finished\",\"cancelled\"]]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#78d6ff",
+   "format": "{} Pending",
+   "label": "To be delivered today",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#cef6d1",
+   "format": "{} Delivered",
+   "label": "Delivered today",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"carrier_real_delivery\": [\"Timespan\", \"today\"]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#ffe8cd",
+   "format": "{} Pending",
+   "label": "Last Week pending confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"last week\"],\n    \"status\": [\"=\",\"waiting_confirmation\"]\n}\n",
+   "type": "DocType"
+  },
+  {
+   "color": "#ffe8cd",
+   "format": "{} Pending",
+   "label": "All Pending confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"status\": \"waiting_confirmation\"\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#ff7846",
+   "label": "Without Carrier Data",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"not in\", [\"finished\",\"cancelled\"]]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#cef6d1",
+   "format": "{} Ready",
+   "label": "Ready to pickup",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"status\": [\"=\", \"ready_to_pickup\"]\n}",
+   "type": "DocType"
+  }
+ ],
+ "shortcuts_label": "Shortcuts"
+}

@@ -33,7 +33,7 @@
    "depends_on": "easypost_active",
    "description": "Easypost API Key.",
    "fieldname": "easypost_api_key",
-   "fieldtype": "Data",
+   "fieldtype": "Password",
    "in_list_view": 1,
    "label": "API Key",
    "mandatory_depends_on": "easypost_active"
@@ -53,12 +53,12 @@
    "fieldname": "carriers",
    "fieldtype": "Table",
    "label": "List of carriers available and his API code",
-   "options": "Package Carrier"
+   "options": "Parcel Carrier"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2020-07-03 22:48:10.769770",
+ "modified": "2020-07-05 17:52:58.319480",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Settings",

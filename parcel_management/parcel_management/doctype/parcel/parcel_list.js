@@ -3,7 +3,7 @@ frappe.listview_settings['Parcel'] = {
 
     add_fields: ['status'],
     filters: [
-        ['status', '!=', 'finished'],
+        ['status', 'not in', ['finished', 'cancelled', 'fully_refunded']],
     ],
     hide_name_column: true,
 

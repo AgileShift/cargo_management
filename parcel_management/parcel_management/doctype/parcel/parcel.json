@@ -40,7 +40,7 @@
   "notes",
   "content_section",
   "content",
-  "total_amount",
+  "total",
   "internal_data_section",
   "consignee_name",
   "column_break_3",
@@ -150,7 +150,6 @@
    "fieldname": "carrier_status",
    "fieldtype": "Select",
    "in_filter": 1,
-   "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Carrier status",
@@ -207,6 +206,7 @@
   {
    "fieldname": "content",
    "fieldtype": "Table",
+   "in_preview": 1,
    "options": "Parcel Content"
   },
   {
@@ -219,17 +219,6 @@
    "fieldtype": "Float",
    "label": "Weight",
    "precision": "2"
-  },
-  {
-   "columns": 2,
-   "depends_on": "content",
-   "description": "Total declared value in package.",
-   "fieldname": "total_amount",
-   "fieldtype": "Currency",
-   "label": "Total Amount",
-   "options": "USD",
-   "precision": "2",
-   "read_only": 1
   },
   {
    "fieldname": "content_section",
@@ -257,6 +246,15 @@
    "in_standard_filter": 1,
    "label": "Customer Name",
    "read_only": 1
+  },
+  {
+   "depends_on": "content",
+   "description": "Total declared value in package.",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "options": "currency",
+   "read_only": 1
   }
  ],
  "links": [
@@ -271,7 +269,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-07-04 14:43:19.276113",
+ "modified": "2020-07-28 17:35:04.549582",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -306,6 +304,7 @@
  "quick_entry": 1,
  "search_fields": "customer_name",
  "show_name_in_global_search": 1,
+ "show_preview_popup": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "title_field": "tracking_number",

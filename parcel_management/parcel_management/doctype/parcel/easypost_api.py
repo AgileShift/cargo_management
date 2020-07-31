@@ -72,3 +72,19 @@ class EasypostAPI(object):
     def convert_weight_to_lb(weight=0):
         """ In easypost weight comes in ounces. """
         return weight/16 if weight else None
+
+
+@frappe.whitelist(allow_guest=True)
+def easypost_webhook(**kwargs):
+    """
+    =/api/method/parcel_management.parcel_management.doctype.parcel.easypost_api.easypost_webhook
+    """
+    parcel_data = kwargs['result']
+
+    # TODO: Finish!
+    frappe.db.set_value('Parcel', parcel_data['tracking_number'], {
+        'status': parcel_data['status'],
+        'status_detail': parcel_data['status_detail'],
+    })
+
+    return True

@@ -23,7 +23,7 @@
  "fields": [
   {
    "default": "0.00",
-   "description": "Weight in LB.",
+   "description": "Weight in LB provided by the warehouse (if available).",
    "fieldname": "weight",
    "fieldtype": "Float",
    "label": "Weight",
@@ -48,7 +48,7 @@
    "unique": 1
   },
   {
-   "description": "Count of pieces in the operation.",
+   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
    "fieldname": "pieces",
    "fieldtype": "Int",
    "label": "Pieces"
@@ -57,6 +57,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "ON_HAND",
+   "description": "The current status of the warehouse receipt.",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -94,7 +95,7 @@
   },
   {
    "bold": 1,
-   "description": "Warehouse where reception occurred",
+   "description": "Warehouse where reception occurred.",
    "fieldname": "target_warehouse",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -123,7 +124,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-07-04 10:53:32.082541",
+ "modified": "2020-07-05 09:12:57.440891",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",

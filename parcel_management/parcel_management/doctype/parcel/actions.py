@@ -24,7 +24,25 @@ def visit_carrier_detail_page(doc):
 
     carrier_detail_page_url = frappe.get_value('Parcel Carrier', doc.get('carrier'), 'carrier_detail_page_url')
 
-    if not carrier_detail_page_url:  # The carrier doesnt have a specific detail page. we must use the default
-        carrier_detail_page_url = frappe.get_value('Parcel Settings', None, 'default_carrier_detail_page_url')
+    if not carrier_detail_page_url:  # The carrier doesnt have a specific detail page. we must use the default on system
+        carrier_detail_page_url = frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url')
 
     webbrowser.open_new_tab(carrier_detail_page_url + doc.get('tracking_number'))
+
+    frappe.get_all(
+        'Parcel',
+        fields="status, name, carrier, customer, shipper, `tabParcel Content`.description, `tabParcel Content`.rate",
+        filters=[
+            ['name', 'in', 'test_jeans, TBA932557303000']
+        ],
+        debug=True
+    )
+
+    frappe.get_all(
+        'Parcel Content',
+        fields=['parent', 'description', 'qty', 'rate', 'amount'],
+        filters=[
+            ['parent', 'in', 'test_jeans, TBA932557303000']
+        ],
+    )
+
