@@ -51,7 +51,6 @@
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "default": "UNKNOWN",
    "description": "Name of the carrier handling the shipment.",
    "fieldname": "carrier",
    "fieldtype": "Link",
@@ -269,7 +268,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-07-28 17:35:04.549582",
+ "modified": "2020-07-31 22:34:47.293664",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
