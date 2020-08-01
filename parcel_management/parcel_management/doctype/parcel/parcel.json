@@ -231,7 +231,6 @@
    "fieldtype": "Link",
    "label": "Customer",
    "options": "Customer",
-   "reqd": 1,
    "search_index": 1
   },
   {
@@ -268,7 +267,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-07-31 22:34:47.293664",
+ "modified": "2020-08-01 00:10:13.390222",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
