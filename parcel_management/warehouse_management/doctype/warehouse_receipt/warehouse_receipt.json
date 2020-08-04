@@ -113,8 +113,7 @@
    "in_standard_filter": 1,
    "label": "Parcels",
    "options": "Warehouse Receipt Line",
-   "read_only_depends_on": "eval: doc.status == 'CLOSED';",
-   "reqd": 1
+   "read_only_depends_on": "eval: doc.status == 'CLOSED';"
   }
  ],
  "links": [
@@ -124,7 +123,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-07-05 09:12:57.440891",
+ "modified": "2020-08-04 12:14:01.109730",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",

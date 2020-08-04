@@ -1,0 +1,33 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "doc.status==\"in_transit\"",
+ "creation": "2020-08-01 19:06:59.436751",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Parcel",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "Hola {{ doc.customer_name }}\n\nTu paquete ha sido entregado!\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\n{{ doc.tracking_number }}\n\n\nSaludos,\nQuickBox Nicaragua\n",
+ "modified": "2020-08-02 10:10:21.693957",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Parcel Delivered By Carrier",
+ "owner": "Administrator",
+ "property_value": "email_sent_test_v2",
+ "recipients": [
+  {
+   "cc": "jeansreal@hotmai.com",
+   "email_by_document_field": "owner"
+  }
+ ],
+ "send_system_notification": 1,
+ "sender": "Default Outgoing Account",
+ "sender_email": "no-reply@gruporeal.org",
+ "set_property_after_alert": "notes",
+ "subject": "{{ doc.name }} has been delivered by the carrier.",
+ "value_changed": "status"
+}
