@@ -79,12 +79,15 @@ def easypost_webhook(**kwargs):
     """
     =/api/method/parcel_management.parcel_management.doctype.parcel.easypost_api.easypost_webhook
     """
+    if kwargs['description'] != 'tracker.updated':
+        return 'Post is not update.'
+
     parcel_data = kwargs['result']
 
-    # TODO: Finish!
-    frappe.db.set_value('Parcel', parcel_data['tracking_number'], {
-        'status': parcel_data['status'],
-        'status_detail': parcel_data['status_detail'],
+    # TODO: Make some adjustments. Like transact email!
+    frappe.db.set_value('Parcel', parcel_data['tracking_code'], {
+        'carrier_status': parcel_data['status'],
+        'carrier_status_detail': parcel_data['status_detail'],
     })
 
-    return True
+    return 'Parcel Updated'
