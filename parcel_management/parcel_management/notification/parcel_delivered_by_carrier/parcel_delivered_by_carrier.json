@@ -11,8 +11,8 @@
  "event": "Value Change",
  "idx": 0,
  "is_standard": 1,
- "message": "Hola {{ doc.customer_name }}\n\nTu paquete ha sido entregado!\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\n{{ doc.tracking_number }}\n\n\nSaludos,\nQuickBox Nicaragua\n",
- "modified": "2020-08-02 10:10:21.693957",
+ "message": "Hola {{ doc.customer_name }}!\n\nTu paquete ha sido entregado por el carrier.\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua\n\nPaquete: {{ doc.tracking_number }}\n\n\nSaludos,\nQuickBox Nicaragua\n",
+ "modified": "2020-08-04 15:38:46.953667",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Delivered By Carrier",
@@ -25,8 +25,6 @@
   }
  ],
  "send_system_notification": 1,
- "sender": "Default Outgoing Account",
- "sender_email": "no-reply@gruporeal.org",
  "set_property_after_alert": "notes",
  "subject": "{{ doc.name }} has been delivered by the carrier.",
  "value_changed": "status"
