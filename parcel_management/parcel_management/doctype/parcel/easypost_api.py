@@ -84,10 +84,10 @@ def easypost_webhook(**kwargs):
 
     parcel_data = kwargs['result']
 
-    # TODO: Make some adjustments. Like transact email!
-    frappe.set_value('Parcel', parcel_data['tracking_code'], {
+    # TODO: Make some adjustments. Like transact email! and verify the parcel exists!
+    frappe.db.set_value('Parcel', parcel_data['tracking_code'], {
         'carrier_status': parcel_data['status'],
         'carrier_status_detail': parcel_data['status_detail'],
     })
 
-    return 'Parcel Updated.'
+    return 'Parcel {0} updated.'.format(parcel_data['tracking_code'])
