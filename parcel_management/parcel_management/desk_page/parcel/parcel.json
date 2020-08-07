@@ -29,7 +29,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-08-07 14:10:59.433559",
+ "modified": "2020-08-07 16:25:55.337206",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -48,7 +48,7 @@
    "format": "{} Pending",
    "label": "To be delivered today",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"]\n}",
+   "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"],\n    \"carrier_status\": [\"!=\", \"delivered\"]\n}",
    "type": "DocType"
   },
   {

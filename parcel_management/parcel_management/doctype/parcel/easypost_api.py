@@ -86,6 +86,7 @@ def easypost_webhook(**kwargs):
 
     carrier_real_delivery_datetime = ''
     if parcel_data['status'] == 'delivered':  # if parcel is delivered
+        # TODO: if delivered then, we must change the status of the field.
         carrier_real_delivery_datetime = EasypostAPI.naive_dt_to_local_dt(parcel_data['tracking_details'][-1]['datetime'], False)
 
     # TODO: Make some adjustments. Like transact email! and verify the parcel exists!
