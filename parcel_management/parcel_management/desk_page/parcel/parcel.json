@@ -29,7 +29,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-07-05 18:06:42.941926",
+ "modified": "2020-08-07 12:54:42.872140",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -73,6 +73,14 @@
    "label": "All Pending confirmation",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"status\": \"waiting_confirmation\"\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#fff168",
+   "format": "{} Waiting",
+   "label": "All Waiting for departure",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"status\": \"waiting_for_departure\"\n}",
    "type": "DocType"
   },
   {
