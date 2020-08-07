@@ -37,8 +37,22 @@ frappe.ui.form.on('Parcel', {
     },
 
     refresh: function(frm) {
-        // TODO
-        frm.dashboard.set_headline('Mensaje humano del estado del paquete?');
+
+        // TODO: Improve this
+        switch (frm.doc.status) {
+            case 'waiting_for_reception':
+                frm.dashboard.set_headline('Paquete aun no se entrega en almacen.', 'blue');
+            break;
+            case 'waiting_confirmation':
+                frm.dashboard.set_headline('Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow');
+            break;
+            case 'waiting_for_departure':
+                frm.dashboard.set_headline('Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'yellow');
+            break;
+
+            // TODO: Package has an issue?
+        }
+
     }
 
 });
