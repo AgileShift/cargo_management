@@ -7,7 +7,7 @@ frappe.listview_settings['Warehouse Receipt'] = {
     hide_name_column: true,
 
     get_indicator(doc) {
-        // TODO: Finish Indicators
+        // TODO: Finish Indicators. maybe use the default manager of frappe?
         switch (doc.status) {
             case 'DRAFT':
                 return [__('Draft'), 'orange', 'status,=,DRAFT']

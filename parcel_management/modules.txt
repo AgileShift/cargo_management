@@ -1,4 +1,5 @@
 Parcel Management
-Warehouse Management
-Sales Management
+Warehouse Customization
+Sales Customization
 Shipment Management
+Support Customization

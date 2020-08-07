@@ -265,9 +265,14 @@
    "group": "Shipment",
    "link_doctype": "Shipment",
    "link_fieldname": "warehouse_receipt"
+  },
+  {
+   "group": "Support",
+   "link_doctype": "Issue",
+   "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-08-01 00:10:13.390222",
+ "modified": "2020-08-07 13:43:02.932448",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
