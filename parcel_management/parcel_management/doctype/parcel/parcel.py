@@ -79,11 +79,11 @@ class Parcel(Document):
             self.carrier_est_delivery = EasypostAPI.naive_dt_to_local_dt(carrier_details.est_delivery_date, self.flags.uses_utc)
 
             # If parcel is delivered, we get the last update details & delivery datetime
-            if carrier_details.status == 'delivered' and carrier_details.status_detail == 'arrived_at_destination':
+            if carrier_details.status == 'delivered' or carrier_details.status_detail == 'arrived_at_destination':
                 self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(carrier_details.tracking_details[-1].datetime, self.flags.uses_utc)
 
                 if self.status == 'waiting_for_reception':  # Parcel is delivered and we're waiting for reception
-                    self.status = 'waiting_confirmation'
+                    self.status = 'waiting_confirmation'  # Pending a confirmation from the warehouse!
 
             elif carrier_details.status == 'in_transit':
                 self.status = 'waiting_for_reception'

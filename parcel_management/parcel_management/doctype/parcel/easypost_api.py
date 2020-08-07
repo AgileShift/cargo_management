@@ -90,4 +90,12 @@ def easypost_webhook(**kwargs):
         'carrier_status_detail': parcel_data['status_detail'],
     })
 
+    # TODO: Sent a real time message
+    frappe.publish_realtime('display_alert', message='Parcel is configured not to track.')
+
+    # frappe.publish_realtime(event='eval_js', message="frappe.show_alert({message: {{0}}, indicator: {{1}}}, 5)".format('Alerta de Paquete', 'yellow'))
+                                                      # frappe.show_alert({message: msg, indicator: 'yellow'}, 5);
+
+    # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7
+
     return 'Parcel {0} updated.'.format(parcel_data['tracking_code'])

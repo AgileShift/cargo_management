@@ -1,5 +1,11 @@
 {
- "actions": [],
+ "actions": [
+  {
+   "action": "parcel_management.warehouse_management.doctype.warehouse_receipt.actions.manual_confirm_parcels",
+   "action_type": "Server Action",
+   "label": "Confirm Parcels"
+  }
+ ],
  "allow_import": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:50:41.615167",
@@ -118,12 +124,17 @@
  ],
  "links": [
   {
+   "group": "Parcel",
+   "link_doctype": "Parcel",
+   "link_fieldname": "tracking_number"
+  },
+  {
    "group": "Shipment",
    "link_doctype": "Shipment",
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-08-04 12:14:01.109730",
+ "modified": "2020-08-07 12:38:07.525068",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
