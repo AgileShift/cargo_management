@@ -84,14 +84,21 @@ def easypost_webhook(**kwargs):
 
     parcel_data = kwargs['result']
 
+    carrier_real_delivery_datetime = ''
+    if parcel_data['status'] == 'delivered':  # if parcel is delivered
+        carrier_real_delivery_datetime = EasypostAPI.naive_dt_to_local_dt(parcel_data['tracking_details'][-1]['datetime'], False)
+
     # TODO: Make some adjustments. Like transact email! and verify the parcel exists!
+    # TODO: maybe update date with the same function as _get_easypost_data from Document
     frappe.db.set_value('Parcel', parcel_data['tracking_code'], {
         'carrier_status': parcel_data['status'],
         'carrier_status_detail': parcel_data['status_detail'],
+        'carrier_est_delivery': parcel_data['est_delivery_date'],  # Always update this!
+        'carrier_real_delivery': carrier_real_delivery_datetime,  # TODO: Localize with UTC
     })
 
     # TODO: Sent a real time message
-    frappe.publish_realtime('display_alert', message='Parcel is configured not to track.')
+    # frappe.publish_realtime('display_alert', message='Parcel is configured not to track.')
 
     # frappe.publish_realtime(event='eval_js', message="frappe.show_alert({message: {{0}}, indicator: {{1}}}, 5)".format('Alerta de Paquete', 'yellow'))
                                                       # frappe.show_alert({message: msg, indicator: 'yellow'}, 5);
