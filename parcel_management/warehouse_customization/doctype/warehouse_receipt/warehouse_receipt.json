@@ -1,7 +1,7 @@
 {
  "actions": [
   {
-   "action": "parcel_management.warehouse_management.doctype.warehouse_receipt.actions.manual_confirm_parcels",
+   "action": "parcel_management.warehouse_customization.doctype.warehouse_receipt.actions.manual_confirm_parcels",
    "action_type": "Server Action",
    "label": "Confirm Parcels"
   }
@@ -134,9 +134,9 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-08-07 12:38:07.525068",
+ "modified": "2020-08-07 14:44:33.119330",
  "modified_by": "Administrator",
- "module": "Warehouse Management",
+ "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
  "name_case": "UPPER CASE",
  "owner": "Administrator",
