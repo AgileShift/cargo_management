@@ -18,7 +18,13 @@
  ],
  "cards_label": "Quick Access",
  "category": "Domains",
- "charts": [],
+ "charts": [
+  {
+   "chart_name": "Parcels reported today",
+   "label": "Parcels reported today"
+  }
+ ],
+ "charts_label": "Dashboard",
  "creation": "2020-07-05 15:49:07.860880",
  "developer_mode_only": 0,
  "disable_user_customization": 1,
@@ -29,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-08-07 16:25:55.337206",
+ "modified": "2020-08-08 00:55:07.691309",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -38,7 +44,7 @@
  "pin_to_top": 1,
  "shortcuts": [
   {
-   "label": "All Active Packages",
+   "label": "All Active Parcels",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"not in\", [\"finished\",\"cancelled\"]]\n}",
    "type": "DocType"
