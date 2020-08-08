@@ -20,8 +20,8 @@
  "category": "Domains",
  "charts": [
   {
-   "chart_name": "Parcels reported today",
-   "label": "Parcels reported today"
+   "chart_name": "Parcels reported monthly",
+   "label": "Parcels reported monthly"
   }
  ],
  "charts_label": "Dashboard",
@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-08-08 00:55:07.691309",
+ "modified": "2020-08-08 01:30:02.567887",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
