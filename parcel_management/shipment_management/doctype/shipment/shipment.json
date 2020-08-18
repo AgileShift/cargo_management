@@ -1,5 +1,11 @@
 {
- "actions": [],
+ "actions": [
+  {
+   "action": "parcel_management.shipment_management.doctype.shipment.actions.mark_shipment_in_transit",
+   "action_type": "Server Action",
+   "label": "Mark in transit"
+  }
+ ],
  "allow_import": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:54:12.963505",
@@ -107,7 +113,7 @@
   }
  ],
  "links": [],
- "modified": "2020-07-31 16:31:40.129674",
+ "modified": "2020-08-17 14:28:32.598876",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",

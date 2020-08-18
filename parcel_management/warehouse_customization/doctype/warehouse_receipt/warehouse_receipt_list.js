@@ -15,6 +15,8 @@ frappe.listview_settings['Warehouse Receipt'] = {
                 return [__('Open'), 'blue', 'status,=,OPEN']
             case 'CLOSED':
                 return [__('Closed'), 'green', 'status,=,CLOSED']
+            case 'RECEIVED':
+                return [__('Received'), 'green', 'status,=,RECEIVED']
         }
     }
 }
