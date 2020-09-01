@@ -16,7 +16,7 @@ class EasypostAPIError(easypost.Error):
 class EasypostAPI(object):
     """ Easypost methods to control class API and parse data. """
 
-    easypost.api_key = frappe.get_single('Parcel Settings').easypost_api_key
+    easypost.api_key = frappe.get_single('Parcel Settings').get_password('easypost_api_key')
 
     @staticmethod
     def create_package(tracking_number, carrier):
@@ -27,6 +27,9 @@ class EasypostAPI(object):
         @param carrier: String Code of Carrier
         @return: EasyPostObject
         """
+        print('DATOS ASDASDASD')
+        print(easypost.api_key)
+        print(frappe.get_single('Parcel Settings').easypost_api_key)
 
         # TODO: Try to find a carrier before creating the tracker
         return easypost.Tracker.create(
@@ -36,6 +39,8 @@ class EasypostAPI(object):
 
     @staticmethod
     def get_package_data(easypost_id):
+
+        print(easypost.api_key)
 
         return easypost.Tracker.retrieve(
             easypost_id=easypost_id
