@@ -27,10 +27,6 @@ class EasypostAPI(object):
         @param carrier: String Code of Carrier
         @return: EasyPostObject
         """
-        print('DATOS ASDASDASD')
-        print(easypost.api_key)
-        print(frappe.get_single('Parcel Settings').easypost_api_key)
-
         # TODO: Try to find a carrier before creating the tracker
         return easypost.Tracker.create(
             tracking_code=tracking_number,
@@ -39,8 +35,7 @@ class EasypostAPI(object):
 
     @staticmethod
     def get_package_data(easypost_id):
-
-        print(easypost.api_key)
+        """ Retrieve from Easypost using the ID provided """
 
         return easypost.Tracker.retrieve(
             easypost_id=easypost_id
