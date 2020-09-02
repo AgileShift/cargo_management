@@ -25,6 +25,11 @@ class Parcel(Document):
 
     def before_save(self):
         """ Before is saved But after validate. We add new data and save once. When Insert(Create) or Save(Update). """
+        if self.has_value_changed('carrier'):  # If that changed. We need to reset the easypost_id
+            self.easypost_id = None
+            print('Has value Changed?')
+            frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
+
         if self.can_track():  # Validate all checks if we can track the parcel.
             self._get_data_from_easypost_api()  # TODO: Validate if we have more tracking apis
 
@@ -57,6 +62,7 @@ class Parcel(Document):
 
     def _get_data_from_easypost_api(self):
         """ this def communicates with the API. """
+        print('Getting data from easypost?')
         try:
             if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
                 carrier_details = EasypostAPI.get_package_data(self.easypost_id)
