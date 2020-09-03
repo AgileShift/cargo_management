@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-08-08 01:30:02.567887",
+ "modified": "2020-09-02 22:05:32.311004",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -103,6 +103,11 @@
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"=\", \"ready_to_pickup\"]\n}",
    "type": "DocType"
+  },
+  {
+   "label": "Dashboard",
+   "link_to": "Parcel",
+   "type": "Dashboard"
   }
  ],
  "shortcuts_label": "Shortcuts"

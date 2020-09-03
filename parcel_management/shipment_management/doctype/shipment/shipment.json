@@ -7,6 +7,7 @@
   }
  ],
  "allow_import": 1,
+ "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:54:12.963505",
  "description": "Shipment",
@@ -109,11 +110,12 @@
    "fieldtype": "Table MultiSelect",
    "label": "Warehouse Receipts",
    "options": "Shipment Line",
-   "read_only_depends_on": "eval: doc.status == 'RECEIVED';"
+   "read_only_depends_on": "eval: doc.status == 'RECEIVED';",
+   "reqd": 1
   }
  ],
  "links": [],
- "modified": "2020-08-17 14:28:32.598876",
+ "modified": "2020-09-02 21:33:23.398416",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",
@@ -129,13 +131,44 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
+   "role": "Item Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1
   }
  ],
  "quick_entry": 1,
- "search_fields": "reference",
+ "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "title_field": "reference",
