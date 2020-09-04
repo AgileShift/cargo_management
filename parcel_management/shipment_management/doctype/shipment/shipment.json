@@ -22,9 +22,9 @@
   "attachment",
   "weight",
   "date",
-  "section_break_7",
+  "sb_0",
   "notes",
-  "commodities_in_shipment_section",
+  "sb_1",
   "shipment_lines"
  ],
  "fields": [
@@ -91,19 +91,10 @@
    "label": "Date"
   },
   {
-   "fieldname": "section_break_7",
-   "fieldtype": "Section Break"
-  },
-  {
    "description": "Internal Notes only",
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes"
-  },
-  {
-   "fieldname": "commodities_in_shipment_section",
-   "fieldtype": "Section Break",
-   "label": "Commodities in Shipment"
   },
   {
    "fieldname": "shipment_lines",
@@ -112,10 +103,18 @@
    "options": "Shipment Line",
    "read_only_depends_on": "eval: doc.status == 'RECEIVED';",
    "reqd": 1
+  },
+  {
+   "fieldname": "sb_0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sb_1",
+   "fieldtype": "Section Break"
   }
  ],
  "links": [],
- "modified": "2020-09-02 21:33:23.398416",
+ "modified": "2020-09-03 21:29:45.568875",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",

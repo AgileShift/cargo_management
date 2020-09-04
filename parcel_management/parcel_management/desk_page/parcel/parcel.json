@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-09-02 22:05:32.311004",
+ "modified": "2020-09-03 21:50:33.410512",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -44,7 +44,7 @@
  "pin_to_top": 1,
  "shortcuts": [
   {
-   "label": "All Active Parcels",
+   "label": "All active parcels",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"not in\", [\"finished\",\"cancelled\"]]\n}",
    "type": "DocType"
@@ -68,7 +68,7 @@
   {
    "color": "#ffe8cd",
    "format": "{} Pending",
-   "label": "Last Week pending confirmation",
+   "label": "Last week pending confirmation",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"last week\"],\n    \"status\": [\"=\",\"waiting_confirmation\"]\n}\n",
    "type": "DocType"
@@ -76,7 +76,7 @@
   {
    "color": "#ffe8cd",
    "format": "{} Pending",
-   "label": "All Pending confirmation",
+   "label": "All pending confirmation",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"status\": \"waiting_confirmation\"\n}",
    "type": "DocType"
@@ -84,14 +84,14 @@
   {
    "color": "#fff168",
    "format": "{} Waiting",
-   "label": "All Waiting for departure",
+   "label": "All waiting for departure",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": \"waiting_for_departure\"\n}",
    "type": "DocType"
   },
   {
    "color": "#ff7846",
-   "label": "Without Carrier Data",
+   "label": "Without carrier data",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"not in\", [\"finished\",\"cancelled\"]]\n}",
    "type": "DocType"

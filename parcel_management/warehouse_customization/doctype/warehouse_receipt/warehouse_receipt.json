@@ -21,26 +21,19 @@
   "date",
   "weight",
   "pieces",
-  "extra_info_section",
+  "sb_0",
   "attachment",
-  "parcels_in_reception_section",
+  "sb_1",
   "warehouse_receipt_lines"
  ],
  "fields": [
   {
    "default": "0.00",
-   "description": "Weight in LB provided by the warehouse (if available).",
+   "description": "Weight in pounds provided by the warehouse (if available).",
    "fieldname": "weight",
    "fieldtype": "Float",
    "label": "Weight",
    "precision": "2"
-  },
-  {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: doc.status != 'CLOSED';",
-   "fieldname": "parcels_in_reception_section",
-   "fieldtype": "Section Break",
-   "label": "Parcels in Receipt"
   },
   {
    "allow_in_quick_entry": 1,
@@ -63,7 +56,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "ON_HAND",
-   "description": "The current status of the warehouse receipt.",
+   "description": "Current status of the warehouse receipt.",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -77,7 +70,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "description": "PDF file",
+   "description": "Warehouse receipt scan",
    "fieldname": "attachment",
    "fieldtype": "Attach",
    "label": "Attachment"
@@ -94,12 +87,6 @@
    "reqd": 1
   },
   {
-   "collapsible": 1,
-   "fieldname": "extra_info_section",
-   "fieldtype": "Section Break",
-   "label": "Extra info"
-  },
-  {
    "bold": 1,
    "description": "Warehouse where reception occurred.",
    "fieldname": "target_warehouse",
@@ -112,14 +99,25 @@
   },
   {
    "columns": 10,
-   "description": "Packages received in warehouse receipt.",
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table MultiSelect",
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Parcels",
+   "label": "Parcels in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'CLOSED';"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sb_0",
+   "fieldtype": "Section Break",
+   "label": "Additional data"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval: doc.status != 'CLOSED';",
+   "fieldname": "sb_1",
+   "fieldtype": "Section Break"
   }
  ],
  "links": [
@@ -134,7 +132,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-09-02 21:30:31.357052",
+ "modified": "2020-09-03 17:21:28.241006",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

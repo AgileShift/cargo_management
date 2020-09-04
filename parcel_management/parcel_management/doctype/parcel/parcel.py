@@ -27,7 +27,7 @@ class Parcel(Document):
         """ Before is saved But after validate. We add new data and save once. When Insert(Create) or Save(Update). """
 
         # Already Exists and we're changing the carrier.We need to reset the easypost_id
-        if not self.get('__islocal') and self.has_value_changed('carrier'):
+        if not self.is_new() and self.has_value_changed('carrier'):
             self.easypost_id = None
             frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
 

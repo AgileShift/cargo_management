@@ -1,0 +1,62 @@
+Parcel,Paquete
+Tracking number, Numero de rastreo
+Tracking code provided by the carrier.,Numero de rastreo brindado por el transportista.
+Carrier,Transportista
+Name of the carrier handling the shipment.,Nombre del transportista que maneja el envío.
+Current status of the parcel.,Estado actual del paquete.
+Track,Rastrear
+Parcel is requested to be tracked.,Se solicita el seguimiento del paquete.
+Additional data from carrier,Datos adicionales del transportista.
+Carrier estimated delivery date,Fecha de entrega estimada del transportista
+Estimated delivery date provided by the carrier (if available),Fecha de entrega estimada proporcionada por el transportista (si está disponible)
+Carrier estimated weight,Peso estimado del transportista
+Estimated weight of the package as measured by the carrier (if available).,Peso estimado del paquete medido por el transportista (si está disponible).
+Carrier real delivery date,Fecha de entrega real del transportista
+Delivery date time (timezone aware) provided by the carrier (if available).,Fecha y hora de entrega (consciente de la zona horaria) proporcionada por el transportista (si está disponible).
+Carrier status, Estado del transportista
+The current status of the package provided by the carrier (if available),El estado actual del paquete proporcionado por el transportista (si está disponible)
+Signed by,Firmado por
+The name of the person who signed for the package (if available),El nombre de la persona que firmó el paquete (si está disponible)
+Additional data from customer,Datos adicionales del cliente
+Shipper,Vendedor
+Store that sends the package.,Tienda que envía el paquete.
+Notes or instructions,Notas o instrucciones
+Total declared value in package.,Valor total declarado en el paquete.
+Internal data,Datos internos
+Consignee name,Nombre del destinatario
+Name on the package label,Nombre en la etiqueta del paquete
+Real weight measured,Peso real medido
+Pieces,Piezas
+Quantity of packages in shipment,Cantidad de paquetes en el envío
+Visit carrier detail page,Visitar la página de detalles del transportista
+Update data from carrier,Actualizar datos del transportista
+
+Warehouse Receipt, Recibo de almacén
+Current status of the warehouse receipt.,Estado acual del recibo de almacén.
+Target warehouse,Almacén de destino
+Warehouse where reception occurred.,Almacén donde se produjo la recepción.
+Real date of document generation.,Fecha real de generación del documento.
+Weight in pounds provided by the warehouse (if available).,Peso en libras proporcionado por el almacén (si está disponible).
+Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
+Additional data,Datos adicionales
+Warehouse receipt scan,Escaneo del recibo de almacén
+Parcels in Warehouse Receipt,Paquetes en el recibo de almacén
+Packages received in warehouse receipt.,paquetes recibidos en recibo de almacén.
+
+Shipment,Embarque
+Number or Identifier,Número o identificador
+Status of Shipment,Estado del embarque
+Transportation Type,Tipo de transporte
+Internal Notes only,Notas internas solamente
+Warehouse Receipts,Recibos de almacén
+
+Parcel Settings,Configuración de Paquetes
+
+All active parcels,Todos los paquetes activos
+To be delivered today,Para ser entregados hoy
+Delivered today,Entregados hoy
+Last week pending confirmation,Pendientes de confirmación en la semana pasada
+All pending confirmation,Todo los pendientes de confirmación
+All waiting for departure,Todos los que esperan despacho
+Without carrier data,Sin datos del transportista
+Ready to pickup,Listos para recoger

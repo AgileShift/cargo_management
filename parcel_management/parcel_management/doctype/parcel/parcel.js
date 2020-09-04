@@ -38,7 +38,11 @@ frappe.ui.form.on('Parcel', {
 
     refresh: function(frm) {
 
-        // TODO: Improve this
+        if (frm.is_new()) {
+            return; // No Messages or etc..
+        }
+
+        // TODO: Improve this messages
         switch (frm.doc.status) {
             case 'waiting_for_reception':
                 frm.dashboard.set_headline('Paquete aun no se entrega en almacen.', 'blue');
@@ -49,7 +53,6 @@ frappe.ui.form.on('Parcel', {
             case 'waiting_for_departure':
                 frm.dashboard.set_headline('Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'yellow');
             break;
-
             // TODO: Package has an issue?
         }
 

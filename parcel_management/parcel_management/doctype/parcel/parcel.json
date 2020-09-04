@@ -81,7 +81,7 @@
   },
   {
    "bold": 1,
-   "description": "The current status of the parcel.",
+   "description": "Current status of the parcel.",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_filter": 1,
@@ -160,7 +160,8 @@
    "fieldname": "carrier_status_detail",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Carrier status detail"
+   "label": "Carrier status detail",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_1",
@@ -196,6 +197,7 @@
    "unique": 1
   },
   {
+   "default": "0.00",
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
@@ -274,7 +276,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-09-02 21:17:41.698840",
+ "modified": "2020-09-03 11:38:17.298626",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
