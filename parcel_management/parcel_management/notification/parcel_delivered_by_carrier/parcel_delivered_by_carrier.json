@@ -1,7 +1,7 @@
 {
  "attach_print": 0,
  "channel": "Email",
- "condition": "doc.status==\"in_transit\"",
+ "condition": "doc.status==\"waiting_confirmation\"",
  "creation": "2020-08-01 19:06:59.436751",
  "days_in_advance": 0,
  "docstatus": 0,
@@ -11,21 +11,21 @@
  "event": "Value Change",
  "idx": 0,
  "is_standard": 1,
- "message": "Hola {{ doc.customer_name }}!\n\nTu paquete ha sido entregado por el carrier.\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua\n\nPaquete: {{ doc.tracking_number }}\n\n\nSaludos,\nQuickBox Nicaragua\n",
- "modified": "2020-08-04 15:38:46.953667",
+ "message": "Hola {{ doc.customer_name }}!\n\nTu paquete ha sido entregado por el carrier.\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua\n\nPaquete: {{ doc.tracking_number }}\n\nSaludos,\nQuickBox Nicaragua\n",
+ "modified": "2020-09-06 07:44:10.812702",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Delivered By Carrier",
  "owner": "Administrator",
- "property_value": "email_sent_test_v2",
+ "property_value": "",
  "recipients": [
   {
-   "cc": "jeansreal@hotmai.com",
-   "email_by_document_field": "owner"
+   "cc": "",
+   "email_by_document_field": "customer_email"
   }
  ],
- "send_system_notification": 1,
- "set_property_after_alert": "notes",
+ "send_system_notification": 0,
+ "set_property_after_alert": "",
  "subject": "{{ doc.name }} has been delivered by the carrier.",
  "value_changed": "status"
 }

@@ -26,7 +26,7 @@ class Parcel(Document):
     def before_save(self):
         """ Before is saved But after validate. We add new data and save once. When Insert(Create) or Save(Update). """
 
-        # Already Exists and we're changing the carrier.We need to reset the easypost_id
+        # Already Exists and we're changing the carrier. We need to reset the easypost_id
         if not self.is_new() and self.has_value_changed('carrier'):
             self.easypost_id = None
             frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
@@ -60,6 +60,20 @@ class Parcel(Document):
             return False
 
         return True
+
+    def can_change_status(self, new_status):
+        """ Validate the current status of the package and validates if a change is possible.
+
+        @return Boolean, String
+        """
+        if self.status == new_status:
+            return False, 'No puede cambiar el mismo estado'
+
+        if new_status is 'waiting_for_departure' and self.status in ['waiting_for_receipt',
+                                                                       'waiting_for_confirmation']:
+            return True, 'El paquete esta esperando recepcion o confirmacion, y ahora esta esperando despacho de Miami'
+        else:
+            return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
 
     def _get_data_from_easypost_api(self):
         """ this def communicates with the API. """

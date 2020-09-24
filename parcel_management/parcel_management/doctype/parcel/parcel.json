@@ -23,6 +23,7 @@
   "tracking_number",
   "customer",
   "customer_name",
+  "customer_email",
   "carrier",
   "column_break_1",
   "status",
@@ -257,6 +258,16 @@
    "label": "Total",
    "options": "currency",
    "read_only": 1
+  },
+  {
+   "fetch_from": "customer.email_id",
+   "fieldname": "customer_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Customer Email",
+   "options": "Email",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "links": [
@@ -276,7 +287,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-09-03 11:38:17.298626",
+ "modified": "2020-09-06 07:11:08.846121",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

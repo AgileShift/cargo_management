@@ -77,7 +77,7 @@ class EasypostAPI(object):
 @frappe.whitelist(allow_guest=True)
 def easypost_webhook(**kwargs):
     """
-    =/api/method/parcel_management.parcel_management.doctype.parcel.easypost_api.easypost_webhook
+    ={URL}/api/method/parcel_management.parcel_management.doctype.parcel.easypost_api.easypost_webhook
     """
     if kwargs['description'] != 'tracker.updated':
         return 'Post is not update.'
@@ -89,14 +89,19 @@ def easypost_webhook(**kwargs):
         # TODO: if delivered then, we must change the status of the field.
         carrier_real_delivery_datetime = EasypostAPI.naive_dt_to_local_dt(parcel_data['tracking_details'][-1]['datetime'], False)
 
+        # Manually Setting the new status of the parcel!
+        frappe.get_doc('Parcel', parcel_data['tracking_code']).db_set('status', 'waiting_confirmation')
+
+    carrier_estimated_delivery_date = EasypostAPI.naive_dt_to_local_dt(parcel_data['est_delivery_date'], False)
+
     # TODO: Make some adjustments. Like transact email! and verify the parcel exists!
     # TODO: maybe update date with the same function as _get_easypost_data from Document
     frappe.db.set_value('Parcel', parcel_data['tracking_code'], {
         'carrier_status': parcel_data['status'],
         'carrier_status_detail': parcel_data['status_detail'],
-        'carrier_est_delivery': parcel_data['est_delivery_date'],  # Always update this!
+        'carrier_est_delivery': carrier_estimated_delivery_date,  # Always update this!
         'carrier_real_delivery': carrier_real_delivery_datetime,  # TODO: Localize with UTC
-    })
+    }, modified_by='EasyPost API')
 
     # TODO: Sent a real time message
     # frappe.publish_realtime('display_alert', message='Parcel is configured not to track.')
