@@ -15,7 +15,7 @@
  "allow_rename": 1,
  "autoname": "field:tracking_number",
  "creation": "2020-06-12 19:06:49.803202",
- "description": "Doc Type o save data of a parcel, This is the same as a Package.",
+ "description": "DocType to save data of a parcel, This is the same as a Package.",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -256,7 +256,7 @@
    "fieldname": "total",
    "fieldtype": "Currency",
    "label": "Total",
-   "options": "currency",
+   "options": "USD",
    "read_only": 1
   },
   {
@@ -287,7 +287,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-09-06 07:11:08.846121",
+ "modified": "2020-09-25 11:42:38.729742",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

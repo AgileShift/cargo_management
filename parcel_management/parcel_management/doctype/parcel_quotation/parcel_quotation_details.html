@@ -1,0 +1,51 @@
+<div class="results">
+    {% for item in doc.items %}
+
+        <div class="item-data">
+            <p>Producto: {{ item.url }}</p>
+
+            {% if doc.purchase_assistance %}
+                <p>Costo del Producto: ${{ item.product_price }}</p>
+
+                {% if item.has_shipping %}
+                    <p>Costo de Envio del Producto: ${{ item.shipping_price }}</p>
+                {% endif %}
+
+                {% if item.has_taxes %}
+                    <p>Impuesto del Producto: ${{ item.taxes }}</p>
+                {% endif %}
+
+                {% if item.has_shipping || item.has_taxes %}
+                    <p>Subtotal del producto: ${{ flt(item.product_total, 2) }}</p>
+                {% endif %}
+            {% endif %}
+
+            {% if doc.detail_pricing_rules %}
+                {% if item.import_price_type == 'Weight' %}
+                    <p>Peso del Producto: {{ item.weight }} LB</p>
+                    <p>Costo por Libra: ${{ item.import_price_per_pound }} x libra</p>
+                {% else %}
+                    <p>Porcentaje de Importacion: {{ item.import_percentage }}%</p>
+                {% endif %}
+            {% endif %}
+
+            <p>Valor de Importacion a Managua: ${{ item.import_price }}</p>
+
+            {% if doc.purchase_assitance %}
+                <p>Valor total del producto en tus manos: $</p>
+            {% endif %}
+
+            {% closest_arrival_date = new Date(item.closest_arrival_date).toLocaleDateString('es-ES', {day: 'numeric', month: 'long', timeZone: 'utc'}) %}
+            <p>Fecha estimada de llegada al Almacen:
+                {% if item.longest_arrival_date %}
+                    Entre el {{ closest_arrival_date }} y el {{ new Date(item.longest_arrival_date).toLocaleDateString('es-ES', {day: 'numeric', month: 'long', timeZone: 'utc'}) }}
+                {% else %}
+                    El {{ closest_arrival_date }}
+                {% endif %}
+            </p>
+
+            <p>Fecha estimada de entrega en Managua: </p>
+        </div>
+        <hr>
+    {% endfor %}
+</div>

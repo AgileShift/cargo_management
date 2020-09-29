@@ -6,9 +6,9 @@ function calculate_parcel_total(frm) {
 
 function calculate_parcel_content_amount_and_parcel_total(frm, cdt, cdn) {
     // Calculates the 'amount' field on Parcel Content Doctype(Child) and 'total' field on Parcel Doctype(Parent)
-    let parcel_content_row = locals[cdt][cdn]; // Getting Child Row
+    let row = locals[cdt][cdn]; // Getting Child Row
 
-    parcel_content_row.amount = parcel_content_row.qty * parcel_content_row.rate;  // Calculating amount
+    row.amount = row.qty * row.rate;  // Calculating amount
 
     refresh_field('amount', cdn, 'content'); // Show change on 'amount' field. Without triggering any event.
 
@@ -67,11 +67,11 @@ frappe.ui.form.on('Parcel Content', {
         calculate_parcel_total(frm);
     },
 
-    rate(frm, cdt, cdn) {
+    rate: function(frm, cdt, cdn) {
         calculate_parcel_content_amount_and_parcel_total(frm, cdt, cdn);
     },
 
-    qty(frm, cdt, cdn) {
+    qty: function(frm, cdt, cdn) {
         calculate_parcel_content_amount_and_parcel_total(frm, cdt, cdn);
     },
 

@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "creation": "2020-09-25 11:33:06.630419",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "url",
+  "weight",
+  "has_shipping",
+  "has_taxes",
+  "column_break_3",
+  "product_price",
+  "shipping_price",
+  "taxes",
+  "section_break_9",
+  "closest_arrival_date",
+  "column_break_11",
+  "longest_arrival_date",
+  "section_break_7",
+  "product_total",
+  "column_break_9",
+  "import_price",
+  "section_break_13",
+  "import_price_type",
+  "column_break_15",
+  "import_price_per_pound",
+  "import_percentage"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "URL or Name"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "fieldname": "product_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Product Price",
+   "options": "USD"
+  },
+  {
+   "columns": 1,
+   "depends_on": "has_shipping",
+   "fieldname": "shipping_price",
+   "fieldtype": "Currency",
+   "label": "Shipping Price",
+   "mandatory_depends_on": "eval: doc.has_shipping",
+   "options": "USD"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "has_taxes",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Has Taxes",
+   "print_hide": 1
+  },
+  {
+   "columns": 1,
+   "depends_on": "has_taxes",
+   "fieldname": "taxes",
+   "fieldtype": "Currency",
+   "label": "Taxes",
+   "options": "USD",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "description": "Weight of the item in pounds.",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight"
+  },
+  {
+   "columns": 2,
+   "fieldname": "closest_arrival_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Closest Arrival Date"
+  },
+  {
+   "fieldname": "longest_arrival_date",
+   "fieldtype": "Date",
+   "label": "Longest Arrival Date"
+  },
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "import_price_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Import Price Type",
+   "options": "Weight\nPercentage"
+  },
+  {
+   "depends_on": "eval: doc.import_price_type == 'Percentage'",
+   "description": "Import Percentage",
+   "fieldname": "import_percentage",
+   "fieldtype": "Percent",
+   "label": "Percentage"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_shipping",
+   "fieldtype": "Check",
+   "label": "Has Shipping",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break",
+   "label": "Prices"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "product_total",
+   "fieldtype": "Currency",
+   "label": "Product Total Price",
+   "options": "USD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Arrival Date"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval: doc.import_price_type == 'Weight'",
+   "description": "Import Price per each pound",
+   "fieldname": "import_price_per_pound",
+   "fieldtype": "Currency",
+   "label": "Price per Pound"
+  },
+  {
+   "description": "This is an approximate value",
+   "fieldname": "import_price",
+   "fieldtype": "Currency",
+   "label": "Import Price",
+   "options": "USD"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2020-09-26 14:43:16.059627",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Parcel Quotation Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
