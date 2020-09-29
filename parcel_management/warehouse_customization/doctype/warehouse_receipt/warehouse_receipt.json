@@ -7,6 +7,7 @@
   }
  ],
  "allow_import": 1,
+ "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:50:41.615167",
  "description": "Warehouse Operation of type reception.",
@@ -139,7 +140,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-09-06 14:16:15.883517",
+ "modified": "2020-09-29 13:38:27.907169",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
