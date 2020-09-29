@@ -69,8 +69,7 @@ class Parcel(Document):
         if self.status == new_status:
             return False, 'No puede cambiar el mismo estado'
 
-        if new_status is 'waiting_for_departure' and self.status in ['waiting_for_receipt',
-                                                                       'waiting_for_confirmation']:
+        if (new_status is 'waiting_for_departure') and self.status in ['waiting_for_receipt', 'waiting_confirmation']:
             return True, 'El paquete esta esperando recepcion o confirmacion, y ahora esta esperando despacho de Miami'
         else:
             return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
