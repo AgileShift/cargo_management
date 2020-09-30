@@ -1,50 +1,62 @@
 <div class="results">
     {% for item in doc.items %}
-
         <div class="item-data">
             <p>Producto: {{ item.url }}</p>
 
             {% if doc.purchase_assistance %}
-                <p>Costo del Producto: ${{ item.product_price }}</p>
+                <p>
+                    Costo del Producto: ${{ item.product_price }}
 
-                {% if item.has_shipping %}
-                    <p>Costo de Envio del Producto: ${{ item.shipping_price }}</p>
-                {% endif %}
+                    {% if item.has_shipping %}
+                        <br>Costo de Envio del Producto: ${{ item.shipping_price }}
+                    {% endif %}
 
-                {% if item.has_taxes %}
-                    <p>Impuesto del Producto: ${{ item.taxes }}</p>
-                {% endif %}
+                    {% if item.has_taxes %}
+                        <br>Impuesto del Producto: ${{ item.taxes }}
+                    {% endif %}
 
-                {% if item.has_shipping || item.has_taxes %}
-                    <p>Subtotal del producto: ${{ flt(item.product_total, 2) }}</p>
-                {% endif %}
+                    {% if item.has_shipping || item.has_taxes %}
+                        <br>Total del producto: ${{ item.product_total }}
+                    {% endif %}
+                </p>
             {% endif %}
 
             {% if doc.detail_pricing_rules %}
                 {% if item.import_price_type == 'Weight' %}
-                    <p>Peso del Producto: {{ item.weight }} LB</p>
                     <p>Costo por Libra: ${{ item.import_price_per_pound }} x libra</p>
                 {% else %}
                     <p>Porcentaje de Importacion: {{ item.import_percentage }}%</p>
                 {% endif %}
             {% endif %}
 
-            <p>Valor de Importacion a Managua: ${{ item.import_price }}</p>
-
-            {% if doc.purchase_assitance %}
-                <p>Valor total del producto en tus manos: $</p>
+            {% if item.import_price_type == 'Weight' %}
+                <p>
+                    Peso Aprox del Producto: {{ item.weight }} LB <br>
+                    Importacion Aprox a Managua: ${{ item.import_price }}
+                </p>
+            {% else %}
+                <p>Importacion a Managua: ${{ item.import_price }}</p>
             {% endif %}
 
-            {% closest_arrival_date = new Date(item.closest_arrival_date).toLocaleDateString('es-ES', {day: 'numeric', month: 'long', timeZone: 'utc'}) %}
+            {% if doc.purchase_assistance %}
+                <p>Total del producto en sus manos: ${{ flt(item.product_total + item.import_price, 2) }}</p>
+            {% endif %}
+
             <p>Fecha estimada de llegada al Almacen:
                 {% if item.longest_arrival_date %}
-                    Entre el {{ closest_arrival_date }} y el {{ new Date(item.longest_arrival_date).toLocaleDateString('es-ES', {day: 'numeric', month: 'long', timeZone: 'utc'}) }}
+                    Entre el {{ item.closest_arrival_date }} y el {{ item.longest_arrival_date }}
                 {% else %}
-                    El {{ closest_arrival_date }}
+                    {{ item.closest_arrival_date }}
                 {% endif %}
             </p>
 
-            <p>Fecha estimada de entrega en Managua: </p>
+            <p>Fecha estimada de entrega en Managua:
+                {% if item.longest_arrival_date %}
+                    En toda la semana del {{ item.closest_delivery_date }} y la semana del {{ item.longest_delivery_date }}
+                {% else %}
+                    En toda la semana del {{ item.closest_delivery_date }}
+                {% endif %}
+            </p>
         </div>
         <hr>
     {% endfor %}

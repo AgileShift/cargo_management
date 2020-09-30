@@ -15,8 +15,10 @@
   "taxes",
   "section_break_9",
   "closest_arrival_date",
-  "column_break_11",
   "longest_arrival_date",
+  "column_break_11",
+  "closest_departure_date",
+  "longest_departure_date",
   "section_break_7",
   "product_total",
   "column_break_9",
@@ -82,12 +84,14 @@
   },
   {
    "columns": 2,
+   "description": "Arrival to warehouse",
    "fieldname": "closest_arrival_date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Closest Arrival Date"
   },
   {
+   "description": "Arrival to warehouse",
    "fieldname": "longest_arrival_date",
    "fieldtype": "Date",
    "label": "Longest Arrival Date"
@@ -146,7 +150,7 @@
   {
    "fieldname": "section_break_9",
    "fieldtype": "Section Break",
-   "label": "Arrival Date"
+   "label": "Arrival and Departure Dates"
   },
   {
    "fieldname": "column_break_9",
@@ -165,11 +169,23 @@
    "fieldtype": "Currency",
    "label": "Import Price",
    "options": "USD"
+  },
+  {
+   "description": "Departure from warehouse",
+   "fieldname": "closest_departure_date",
+   "fieldtype": "Date",
+   "label": "Closest Departure Date"
+  },
+  {
+   "description": "Departure from warehouse",
+   "fieldname": "longest_departure_date",
+   "fieldtype": "Date",
+   "label": "Longest Departure Date"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2020-09-26 14:43:16.059627",
+ "modified": "2020-09-30 12:49:57.026735",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation Item",
