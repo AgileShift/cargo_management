@@ -52,9 +52,9 @@
 
             <p>Fecha estimada de entrega en Managua:
                 {% if item.longest_arrival_date %}
-                    En toda la semana del {{ item.closest_delivery_date }} y la semana del {{ item.longest_delivery_date }}
+                    En la semana del {{ item.closest_delivery_date }} o la semana del {{ item.longest_delivery_date }}
                 {% else %}
-                    En toda la semana del {{ item.closest_delivery_date }}
+                    En la semana del {{ item.closest_delivery_date }}
                 {% endif %}
             </p>
         </div>

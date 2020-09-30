@@ -71,6 +71,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "default": "17",
    "description": "Calculated days take from departure to arrival",
    "fieldname": "transit_days",
    "fieldtype": "Int",
@@ -78,7 +79,7 @@
   }
  ],
  "links": [],
- "modified": "2020-09-30 12:52:11.416621",
+ "modified": "2020-09-30 15:57:13.414885",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation",
