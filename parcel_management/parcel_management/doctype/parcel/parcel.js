@@ -42,6 +42,23 @@ frappe.ui.form.on('Parcel', {
             return; // No Messages or etc..
         }
 
+        // This custom button should live as an Action in the Doctype(Doctype Actions) -> inside actions.py
+        frm.add_custom_button(__('Visit carrier detail page'), () => {
+            frappe.db.get_value('Parcel Carrier', {'name': frm.doc.carrier}, 'carrier_detail_page_url', (r) => {
+                if (r.carrier_detail_page_url) {
+                    window.open(r.carrier_detail_page_url + frm.doc.tracking_number, '_blank');
+                    return; // Exiting the callback
+                }
+
+                // The carrier doesnt have a specific detail page. we must use the default on system
+                frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url')
+                    .then(url => {
+                        window.open(url + frm.doc.tracking_number, '_blank');
+                    });
+
+            }, 'Parcel Settings');
+        });
+
         // TODO: Improve this messages
         switch (frm.doc.status) {
             case 'waiting_for_reception':
@@ -55,8 +72,7 @@ frappe.ui.form.on('Parcel', {
             break;
             // TODO: Package has an issue?
         }
-
-    }
+    },
 
 });
 

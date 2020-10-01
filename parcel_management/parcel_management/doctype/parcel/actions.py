@@ -1,5 +1,4 @@
 import json
-import webbrowser
 
 import frappe
 
@@ -16,32 +15,4 @@ def update_data_from_carrier(doc):
         parcel.save()  # Trigger before_save who calls can_track with the bypass flag on so we avoid revalidation check
         frappe.publish_realtime('new_carrier_data', user=frappe.session.user)  # Send update to frontend to reload.
 
-
-@frappe.whitelist(allow_guest=False)
-def visit_carrier_detail_page(doc):
-    """ Opens a browser tab to the carrier detail page with all the package information from carrier."""
-    doc = json.loads(doc)  # Package object
-
-    carrier_detail_page_url = frappe.get_value('Parcel Carrier', doc.get('carrier'), 'carrier_detail_page_url')
-
-    if not carrier_detail_page_url:  # The carrier doesnt have a specific detail page. we must use the default on system
-        carrier_detail_page_url = frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url')
-
-    webbrowser.open_new_tab(carrier_detail_page_url + doc.get('tracking_number'))
-
-    # frappe.get_all(
-    #     'Parcel',
-    #     fields="status, name, carrier, customer, shipper, `tabParcel Content`.description, `tabParcel Content`.rate",
-    #     filters=[
-    #         ['name', 'in', 'test_jeans, TBA932557303000']
-    #     ],
-    #     debug=True
-    # )
-
-    # frappe.get_all(
-    #     'Parcel Content',
-    #     fields=['parent', 'description', 'qty', 'rate', 'amount'],
-    #     filters=[
-    #         ['parent', 'in', 'test_jeans, TBA932557303000']
-    #     ],
-    # )
+# Here must exists the: 'Visit carrier detail page' Button that lives in parcel.js -> Using webbrowser

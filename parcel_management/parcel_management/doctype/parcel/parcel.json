@@ -1,11 +1,6 @@
 {
  "actions": [
   {
-   "action": "parcel_management.parcel_management.doctype.parcel.actions.visit_carrier_detail_page",
-   "action_type": "Server Action",
-   "label": "Visit carrier detail page"
-  },
-  {
    "action": "parcel_management.parcel_management.doctype.parcel.actions.update_data_from_carrier",
    "action_type": "Server Action",
    "label": "Update data from carrier"
@@ -287,7 +282,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-09-25 11:42:38.729742",
+ "modified": "2020-09-30 21:19:00.046799",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
