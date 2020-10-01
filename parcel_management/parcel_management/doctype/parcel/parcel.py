@@ -107,4 +107,9 @@ class Parcel(Document):
             elif carrier_details.status == 'in_transit':
                 self.status = 'waiting_for_reception'
 
+            self.carrier_last_detail = "{}\n{}".format(
+                carrier_details.tracking_details[-1].message,
+                carrier_details.tracking_details[-1].description
+            )
+
             frappe.publish_realtime('display_alert', message='Parcel has been updated.', user=frappe.session.user)

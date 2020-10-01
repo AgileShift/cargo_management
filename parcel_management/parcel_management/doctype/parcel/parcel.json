@@ -31,6 +31,8 @@
   "carrier_status",
   "carrier_status_detail",
   "signed_by",
+  "section_break_17",
+  "carrier_last_detail",
   "section_break_6",
   "shipper",
   "notes",
@@ -205,8 +207,7 @@
    "fieldtype": "Table",
    "in_preview": 1,
    "label": "Content",
-   "options": "Parcel Content",
-   "reqd": 1
+   "options": "Parcel Content"
   },
   {
    "fieldname": "column_break_3",
@@ -263,6 +264,17 @@
    "options": "Email",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "description": "Latest carrier update",
+   "fieldname": "carrier_last_detail",
+   "fieldtype": "Small Text",
+   "label": "Carrier Last Detail",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_17",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -282,7 +294,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-09-30 21:19:00.046799",
+ "modified": "2020-10-01 16:25:41.794379",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
