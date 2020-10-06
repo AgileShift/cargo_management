@@ -74,6 +74,12 @@ frappe.ui.form.on('Parcel', {
         }
     },
 
+    tracking_number: function (frm) {
+        // Little Helper: TODO
+        console.log(
+            frm.doc.tracking_number.includes('TBA')
+        )
+    }
 });
 
 frappe.ui.form.on('Parcel Content', {

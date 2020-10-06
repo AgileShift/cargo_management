@@ -3,7 +3,7 @@
   {
    "hidden": 0,
    "label": "Parcel",
-   "links": "[\n    {\n        \"label\": \"Parcel\",\n        \"name\": \"Parcel\",\n        \"onboard\": 0,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Parcel\"\n    },\n    {\n        \"label\": \"Issue\",\n        \"name\": \"Issue\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Issue\"\n    },\n    {\n        \"label\": \"Parcel Settings\",\n        \"name\": \"Parcel Settings\",\n        \"onboard\": 0,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Parcel Settings\"\n    }\n]\n"
+   "links": "[\n    {\n        \"label\": \"Parcel\",\n        \"name\": \"Parcel\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Parcel\"\n    },\n    {\n        \"label\": \"Parcel Quotation\",\n        \"name\": \"Parcel Quotation\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Parcel Quotation\"\n    },\n    {\n        \"label\": \"Issue\",\n        \"name\": \"Issue\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"doctype\": \"Issue\"\n    },\n    {\n        \"label\": \"Parcel Settings\",\n        \"name\": \"Parcel Settings\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Parcel Settings\"\n    }\n]\n"
   },
   {
    "hidden": 0,
@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-09-29 14:36:24.739800",
+ "modified": "2020-10-01 19:19:11.929765",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

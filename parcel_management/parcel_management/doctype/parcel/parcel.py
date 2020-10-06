@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import frappe
 from frappe.model.document import Document
 
@@ -17,11 +14,25 @@ class Parcel(Document):
         'carrier_uses_utc': True|False,  # Carrier uses UTC date times. Comes from DB
     }
     """
+    def validate(self):
+        """
+        TODO: USPS label has another length that the provided by the shipper
+        """
 
-    # TODO: Make this validations!
-    # def validate(self):
-    #     if 'TBA' in self.tracking_number and self.carrier != 'AmazonMws':
-    #         frappe.throw()
+        # Only uppercase tracking numbers
+        self.tracking_number = self.tracking_number.upper()
+
+        tracking_number_strip = self.tracking_number[:3]
+
+        # TODO: What if, what happens in frontend?
+        if '1Z' in tracking_number_strip and self.carrier != 'UPS':
+            frappe.throw('Tracking de UPS')
+        elif any(s in tracking_number_strip for s in ['LY', 'LB']) and self.carrier != 'USPS':
+            frappe.throw('Posiblemente Tracking de USPS')
+        elif 'TBA' in tracking_number_strip and self.carrier != 'AmazonMws':
+            frappe.throw('Tracking de Amazon')
+        elif 'JJD' in tracking_number_strip:
+            frappe.throw('Convertir a tracking de DHL')
 
     def before_save(self):
         """ Before is saved But after validate. We add new data and save once. When Insert(Create) or Save(Update). """
@@ -69,7 +80,7 @@ class Parcel(Document):
         if self.status == new_status:
             return False, 'No puede cambiar el mismo estado'
 
-        if (new_status is 'waiting_for_departure') and self.status in ['waiting_for_reception', 'waiting_confirmation']:
+        if (new_status == 'waiting_for_departure') and self.status in ['waiting_for_reception', 'waiting_confirmation']:
             return True, 'El paquete esta esperando recepcion o confirmacion, y ahora esta esperando despacho de Miami'
         else:
             return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
@@ -109,7 +120,8 @@ class Parcel(Document):
 
             self.carrier_last_detail = "{}\n\n{}".format(
                 carrier_details.tracking_details[-1].message,
-                carrier_details.tracking_details[-1].description
+                carrier_details.tracking_details[-1].description or 'Sin Descripcion'
             )
 
             frappe.publish_realtime('display_alert', message='Parcel has been updated.', user=frappe.session.user)
+#128 TODO: Delete this.

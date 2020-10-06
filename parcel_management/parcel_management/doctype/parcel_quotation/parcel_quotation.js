@@ -55,7 +55,7 @@ frappe.ui.form.on('Parcel Quotation', {
 
                 if (item.closest_departure_date) {
                     item_to_parse.closest_delivery_date = new Date(
-                        moment(item.closest_departure_date).add(frm.doc.transit_days, 'days')
+                        moment(item.closest_departure_date).add(frm.doc.transit_days, 'days') // FIXME: frappe.datetime.add_days('', '')
                     ).toLocaleDateString('es-ES', date_string_options);
                 }
                 if (item.longest_departure_date) {
