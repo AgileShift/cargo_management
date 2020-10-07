@@ -87,7 +87,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "waiting_for_reception\nwaiting_confirmation\nwaiting_for_departure\nin_transit\nin_customs\nready_to_pickup\nfinished\nfully_refunded\npartially_refunded\non_hold\ncancelled\nin_matra_int\nin_almasa\nin_matra_img",
+   "options": "Awaiting Receipt\nAwaiting Confirmation\nAwaiting Dispatch\nIn Transit\nIn Customs\nSorting\nAvailable to Pickup\nFinished\nCancelled\nfully_refunded\npartially_refunded\non_hold\nin_matra_int\nin_almasa\nin_matra_img",
    "search_index": 1
   },
   {
@@ -294,7 +294,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-10-01 16:25:41.794379",
+ "modified": "2020-10-07 08:27:56.516660",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
