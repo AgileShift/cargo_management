@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-01 19:19:11.929765",
+ "modified": "2020-10-07 08:58:41.412676",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -46,7 +46,7 @@
   {
    "label": "All active parcels",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": [\"not in\", [\"waiting_for_departure\", \"in_transit\", \"finished\",\"cancelled\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"not in\", [\"Waiting for Dispatch\", \"In Transit\", \"Finished\", \"Cancelled\"]]\n}",
    "type": "DocType"
   },
   {
@@ -70,7 +70,7 @@
    "format": "{} Pending",
    "label": "Last week pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"last week\"],\n    \"status\": [\"=\",\"waiting_confirmation\"]\n}\n",
+   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"last week\"],\n    \"status\": [\"=\",\"Awaiting Confirmation\"]\n}\n",
    "type": "DocType"
   },
   {
@@ -78,15 +78,15 @@
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"status\": \"waiting_confirmation\"\n}",
+   "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"status\": \"Awaiting Confirmation\"\n}",
    "type": "DocType"
   },
   {
    "color": "#fff168",
    "format": "{} Waiting",
-   "label": "All waiting for departure",
+   "label": "Waiting for dispatch",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": \"waiting_for_departure\"\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Dispatch\"\n}",
    "type": "DocType"
   },
   {
@@ -99,9 +99,9 @@
   {
    "color": "#cef6d1",
    "format": "{} Ready",
-   "label": "Ready to pickup",
+   "label": "Available to pickup",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": [\"=\", \"ready_to_pickup\"]\n}",
+   "stats_filter": "{\n    \"status\": [\"=\", \"Available to Pickup\"]\n}",
    "type": "DocType"
   },
   {

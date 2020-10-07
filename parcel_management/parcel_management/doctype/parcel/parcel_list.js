@@ -1,25 +1,29 @@
 // Personalization for the Parcel List View
 frappe.listview_settings['Parcel'] = {
-
+    // Add fields to fetch
     add_fields: ['status'],
+
+    // Setting default filters
     filters: [
         ['status', 'not in', ['Finished', 'Cancelled', 'fully_refunded']],
     ],
-    hide_name_column: true,
+    hide_name_column: true, // Hide the last column which shows the `name`
 
-    get_indicator(doc) {
+    get_indicator(doc) {  // customize indicator color
         // TODO: Finish Indicators
         switch (doc.status) {
             case 'Awaiting Receipt':
-                return [__('Waiting Reception'), 'blue', 'status,=,waiting_for_reception']
+                return [__('Awaiting Receipt'), 'blue', 'status,=,Awaiting Receipt']
             case 'Awaiting Confirmation':
-                return [__('Waiting Confirmation'), 'orange', 'status,=,waiting_confirmation']
+                return [__('Awaiting Confirmation'), 'orange', 'status,=,Awaiting Confirmation']
             case 'Awaiting Dispatch':
-                return [__('Waiting for Departure'), 'yellow', 'status,=,waiting_for_departure']
+                return [__('Awaiting Dispatch'), 'yellow', 'status,=,Awaiting Dispatch']
             case 'In Transit':
-                return [__('In Transit'), 'purple', 'status,=,in_transit']
+                return [__('In Transit'), 'purple', 'status,=,In Transit']
             case 'Finished':
-                return [__('Finished'), 'green', 'status,=,finished']
+                return [__('Finished'), 'green', 'status,=,Finished']
+            case 'Cancelled':
+                return [__('Cancelled'), 'red', 'status,=,Cancelled']
 
         }
     }

@@ -11,7 +11,8 @@ def mark_shipment_in_transit(doc):
         warehouse_receipt = frappe.get_doc('Warehouse Receipt', shipment_line.get('warehouse_receipt'))
 
         # TODO: Optimize, one single query to alter all statuses.
-        frappe.db.set_value('Warehouse Receipt', shipment_line.get('warehouse_receipt'), 'status', 'CLOSED')
+        # frappe.db.set_value('Warehouse Receipt', shipment_line.get('warehouse_receipt'), 'status', 'CLOSED')
 
         for wr_receipt_line in warehouse_receipt.warehouse_receipt_lines:
-            frappe.db.set_value('Parcel', wr_receipt_line.get('parcel'), 'status', 'in_transit')
+            frappe.db.set_value('Parcel', wr_receipt_line.get('parcel'), 'status', 'Finished')
+# TODO: This is only provisional for the moment
