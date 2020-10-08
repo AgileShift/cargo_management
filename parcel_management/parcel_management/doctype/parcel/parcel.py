@@ -34,16 +34,18 @@ class Parcel(Document):
         elif 'JJD' in tracking_number_strip:
             frappe.throw('Convertir a tracking de DHL')
 
+    def before_insert(self):
+        """ This is called before the document is inserted on DB """
+        if self.can_track():  # Validate all checks if we can track the parcel.
+            self._get_data_from_easypost_api()  # TODO: Validate if we have more tracking apis
+
     def before_save(self):
         """ Before is saved But after validate. We add new data and save once. When Insert(Create) or Save(Update). """
 
-        # Already Exists and we're changing the carrier. We need to reset the easypost_id
+        # Already exists and we're changing the carrier. We need to reset the easypost_id
         if not self.is_new() and self.has_value_changed('carrier'):
             self.easypost_id = None
             frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
-
-        if self.can_track():  # Validate all checks if we can track the parcel.
-            self._get_data_from_easypost_api()  # TODO: Validate if we have more tracking apis
 
     def get_carrier_flags(self):
         """ Return the carrier global flags settings handling the parcel as a dict. """
@@ -78,10 +80,10 @@ class Parcel(Document):
         @return Boolean, String
         """
         if self.status == new_status:
-            return False, 'No puede cambiar el mismo estado'
+            return False, 'No puede cambiar el mismo estado.'
 
-        if (new_status == 'Waiting Dispatch') and self.status in ['waiting_for_reception', 'waiting_confirmation']:
-            return True, 'El paquete esta esperando recepcion o confirmacion, y ahora esta esperando despacho de Miami'
+        if (new_status == 'Waiting Dispatch') and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
+            return True, 'El paquete esta esperando recepcion o confirmacion y ahora esta esperando salida de Miami.'
         else:
             return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
 
@@ -113,10 +115,10 @@ class Parcel(Document):
                 self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(carrier_details.tracking_details[-1].datetime, self.flags.uses_utc)
 
                 if self.status == 'waiting_for_reception':  # Parcel is delivered and we're waiting for reception
-                    self.status = 'waiting_confirmation'  # Pending a confirmation from the warehouse!
+                    self.status = 'Awaiting Confirmation'  # Pending a confirmation from the warehouse!
 
             elif carrier_details.status == 'in_transit':
-                self.status = 'waiting_for_reception'
+                self.status = 'Awaiting Receipt'
 
             self.carrier_last_detail = "{}\n\n{}".format(
                 carrier_details.tracking_details[-1].message,
