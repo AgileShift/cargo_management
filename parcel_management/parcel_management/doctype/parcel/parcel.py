@@ -34,18 +34,18 @@ class Parcel(Document):
         elif 'JJD' in tracking_number_strip:
             frappe.throw('Convertir a tracking de DHL')
 
-    def before_insert(self):
-        """ This is called before the document is inserted on DB """
-        if self.can_track():  # Validate all checks if we can track the parcel.
-            self._get_data_from_easypost_api()  # TODO: Validate if we have more tracking apis
-
     def before_save(self):
-        """ Before is saved But after validate. We add new data and save once. When Insert(Create) or Save(Update). """
+        """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
 
-        # Already exists and we're changing the carrier. We need to reset the easypost_id
-        if not self.is_new() and self.has_value_changed('carrier'):
-            self.easypost_id = None
-            frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
+        print('Before save')
+
+        if self.can_track():
+            if self.is_new():  # This simulate before_insert() BUT after validate()
+                self._get_data_from_easypost_api()
+            elif self.has_value_changed('carrier'):  # Already exists and the carrier has changed.
+                frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
+                self.easypost_id = None
+                self._get_data_from_easypost_api()
 
     def get_carrier_flags(self):
         """ Return the carrier global flags settings handling the parcel as a dict. """
@@ -56,7 +56,8 @@ class Parcel(Document):
         return frappe.get_doc('Parcel Carrier', self.carrier)
 
     def can_track(self):
-        """ This def validate if a parcel can be tracked by any mean. """
+        print('Can Track')
+        """ This def validate if a parcel can be tracked by any mean using API """
         # TODO: Validate if any tracker API is enabled.
 
         if self.flags.ignore_track_validation:  # Bypass validations flag
@@ -82,13 +83,14 @@ class Parcel(Document):
         if self.status == new_status:
             return False, 'No puede cambiar el mismo estado.'
 
-        if (new_status == 'Waiting Dispatch') and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
+        if (new_status == 'Awaiting Dispatch') and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
             return True, 'El paquete esta esperando recepcion o confirmacion y ahora esta esperando salida de Miami.'
         else:
             return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
 
     def _get_data_from_easypost_api(self):
         """ this def communicates with the API. """
+        print('GETTING DATA FROM EASYPOST')
         try:
             if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
                 carrier_details = EasypostAPI.get_package_data(self.easypost_id)

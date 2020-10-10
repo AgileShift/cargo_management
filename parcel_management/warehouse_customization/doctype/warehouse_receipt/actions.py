@@ -29,7 +29,7 @@ def manual_confirm_parcels(doc):
         progress = float(i) * 100 / wr_lines_len
 
         parcel = frappe.get_doc('Parcel', wr_line['parcel'])
-        able_to_change, message = parcel.can_change_status('waiting_for_departure')
+        able_to_change, message = parcel.can_change_status('Awaiting Dispatch')
 
         if able_to_change:
             real_number_of_updated_doc += 1
@@ -38,7 +38,7 @@ def manual_confirm_parcels(doc):
                 print('Mutting emails')
                 parcel.set()
             else:
-                parcel.db_set('status', 'waiting_for_departure', update_modified=False)
+                parcel.db_set('status', 'Awaiting Departure', update_modified=False)
 
         frappe.publish_progress(
             percent=progress, title='Confirming Parcels', doctype='Parcel', docname=parcel.name,
