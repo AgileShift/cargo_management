@@ -39,13 +39,24 @@ class Parcel(Document):
 
         print('Before save')
 
+        if self.flags.requested_to_track:
+            print('flags is set!')
+            return
+            print('Flags is requested to track!')
+
         if self.can_track():
             if self.is_new():  # This simulate before_insert() BUT after validate()
-                self._get_data_from_easypost_api()
+                # self._get_data_from_easypost_api()
+                print('Is new!')
             elif self.has_value_changed('carrier'):  # Already exists and the carrier has changed.
                 frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
                 self.easypost_id = None
-                self._get_data_from_easypost_api()
+                print('Carrier has changed')
+                # self._get_data_from_easypost_api()
+            if self.flags.requested_to_track:
+                print('requested to track!, inside can track')
+
+            # 53 - 8 Lines
 
     def get_carrier_flags(self):
         """ Return the carrier global flags settings handling the parcel as a dict. """
@@ -82,9 +93,12 @@ class Parcel(Document):
         """
         if self.status == new_status:
             return False, 'No puede cambiar el mismo estado.'
-
-        if (new_status == 'Awaiting Dispatch') and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
-            return True, 'El paquete esta esperando recepcion o confirmacion y ahora esta esperando salida de Miami.'
+        elif new_status == 'Awaiting Confirmation' and self.status == 'Awaiting Receipt':
+            return True, 'El paquete estaba esperando reception y ahora esta esperando confirmacion'
+        elif new_status == 'Awaiting Dispatch' and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
+            return True, 'El paquete estaba esperando recepcion o confirmacion y ahora esta esperando salida de Miami.'
+        elif new_status == 'In Transit' and self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'Awaiting Dispatch']:
+            return True, ''
         else:
             return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
 

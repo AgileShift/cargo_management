@@ -11,7 +11,7 @@ def update_data_from_carrier(doc):
 
     # Verify if we can track, because .save() will update doc, even if we can't track. Then we would have to reload doc.
     if parcel.can_track():
-        parcel._get_data_from_easypost_api()
+        parcel.flags.requested_to_track = True  # Setting bypass flag On. See Parcel Doctype flags
         parcel.save()  # Trigger before_save who calls can_track with the bypass flag on so we avoid revalidation check
         frappe.publish_realtime('new_carrier_data', user=frappe.session.user)  # Send update to frontend to reload.
 

@@ -229,6 +229,7 @@
    "bold": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer",
    "search_index": 1
@@ -241,7 +242,6 @@
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Customer Name",
    "read_only": 1
   },
@@ -294,7 +294,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-10-07 08:27:56.516660",
+ "modified": "2020-10-16 08:58:59.363024",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
