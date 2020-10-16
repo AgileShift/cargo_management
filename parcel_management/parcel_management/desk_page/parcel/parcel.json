@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-16 12:56:57.802927",
+ "modified": "2020-10-16 13:09:45.151854",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -70,7 +70,7 @@
    "format": "",
    "label": "Available for Pickup in post office",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_status\": [\"=\", \"available_for_pickup\"]\n}",
+   "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"available_for_pickup\"]\n}",
    "type": "DocType"
   },
   {
@@ -107,7 +107,7 @@
    "color": "#ff7846",
    "label": "Without carrier data",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"not in\", [\"Finished\",\"Cancelled\"]]\n}",
+   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"=\", \"Awaiting Receipt\"]\n}",
    "type": "DocType"
   },
   {
