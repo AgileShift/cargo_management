@@ -37,26 +37,15 @@ class Parcel(Document):
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
 
-        print('Before save')
-
-        if self.flags.requested_to_track:
-            print('flags is set!')
-            return
-            print('Flags is requested to track!')
-
         if self.can_track():
             if self.is_new():  # This simulate before_insert() BUT after validate()
-                # self._get_data_from_easypost_api()
-                print('Is new!')
+                self._get_data_from_easypost_api()
             elif self.has_value_changed('carrier'):  # Already exists and the carrier has changed.
                 frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
                 self.easypost_id = None
-                print('Carrier has changed')
-                # self._get_data_from_easypost_api()
-            if self.flags.requested_to_track:
-                print('requested to track!, inside can track')
-
-            # 53 - 8 Lines
+                self._get_data_from_easypost_api()
+            elif self.flags.requested_to_track:
+                self._get_data_from_easypost_api()
 
     def get_carrier_flags(self):
         """ Return the carrier global flags settings handling the parcel as a dict. """
@@ -67,12 +56,11 @@ class Parcel(Document):
         return frappe.get_doc('Parcel Carrier', self.carrier)
 
     def can_track(self):
-        print('Can Track')
         """ This def validate if a parcel can be tracked by any mean using API """
         # TODO: Validate if any tracker API is enabled.
 
-        if self.flags.ignore_track_validation:  # Bypass validations flag
-            return True  # if set to ignore validations then go: this flag is set hardcoded so we can "trust".
+        if self.flags.requested_to_track:  # Bypass validations flag
+            return True  # if set then go: this flag is set hardcoded so we can "trust".
 
         if not self.track:  # Parcel is not configured to be tracked, no matter if easypost_id exists.
             frappe.publish_realtime('display_alert', message='Parcel is configured not to track.', user=frappe.session.user)

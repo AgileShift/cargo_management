@@ -24,10 +24,10 @@ frappe.ui.form.on('Parcel', {
             frappe.show_alert({message: msg, indicator: 'yellow'}, 5);
         }); // TODO: Validate this action when the list page is open!
 
-        // This is for python api alert on new data received.
-        frappe.realtime.on('new_carrier_data', () => {
-            frm.reload_doc(); // Reload form UI data from db.
-        });
+        // TODO: this must be running from core frappe code. some glitch make us hardcoded the realtime handler here.
+        // frappe.realtime.on("doc_update", () => {
+        //     frm.reload_doc(); // Reload form UI data from db.
+        // });
     },
 
     onload: function(frm) {
@@ -59,7 +59,7 @@ frappe.ui.form.on('Parcel', {
             }, 'Parcel Settings');
         });
 
-        // TODO: Improve this messages
+        // TODO: Improve this messages. must come from backend!!
         switch (frm.doc.status) {
             case 'waiting_for_reception':
                 frm.dashboard.set_headline('Paquete aun no se entrega en almacen.', 'blue');
@@ -74,12 +74,7 @@ frappe.ui.form.on('Parcel', {
         }
     },
 
-    tracking_number: function (frm) {
-        // Little Helper: TODO
-        console.log(
-            frm.doc.tracking_number.includes('TBA')
-        )
-    }
+    // TODO: Tracking Validator from backend, and Carrier Select helper.
 });
 
 frappe.ui.form.on('Parcel Content', {
