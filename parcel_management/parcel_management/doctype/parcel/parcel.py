@@ -55,6 +55,10 @@ class Parcel(Document):
         """ Return a object with all the carrier global settings handling the parcel. """
         return frappe.get_doc('Parcel Carrier', self.carrier)
 
+    def get_detailed_status(self):
+        # TODO:
+        pass
+
     def can_track(self):
         """ This def validate if a parcel can be tracked by any mean using API """
         # TODO: Validate if any tracker API is enabled.

@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-07 08:58:41.412676",
+ "modified": "2020-10-16 12:56:57.802927",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -66,6 +66,14 @@
    "type": "DocType"
   },
   {
+   "color": "#ff4d4d",
+   "format": "",
+   "label": "Available for Pickup in post office",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"carrier_status\": [\"=\", \"available_for_pickup\"]\n}",
+   "type": "DocType"
+  },
+  {
    "color": "#ffe8cd",
    "format": "{} Pending",
    "label": "Last week pending confirmation",
@@ -90,10 +98,16 @@
    "type": "DocType"
   },
   {
+   "label": "In Transit",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
+   "type": "DocType"
+  },
+  {
    "color": "#ff7846",
    "label": "Without carrier data",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"not in\", [\"finished\",\"cancelled\"]]\n}",
+   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"not in\", [\"Finished\",\"Cancelled\"]]\n}",
    "type": "DocType"
   },
   {
