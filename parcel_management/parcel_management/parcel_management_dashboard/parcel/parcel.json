@@ -1,6 +1,9 @@
 {
  "cards": [
   {
+   "card": "New Customers"
+  },
+  {
    "card": "Parcels reported today"
   }
  ],
@@ -18,7 +21,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2020-09-29 12:35:18.494258",
+ "modified": "2020-10-16 13:26:15.899589",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
