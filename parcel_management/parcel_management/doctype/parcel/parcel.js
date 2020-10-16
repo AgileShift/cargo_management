@@ -25,9 +25,9 @@ frappe.ui.form.on('Parcel', {
         }); // TODO: Validate this action when the list page is open!
 
         // TODO: this must be running from core frappe code. some glitch make us hardcoded the realtime handler here.
-        // frappe.realtime.on("doc_update", () => {
-        //     frm.reload_doc(); // Reload form UI data from db.
-        // });
+        frappe.realtime.on("doc_update", () => {
+            frm.reload_doc(); // Reload form UI data from db.
+        });
     },
 
     onload: function(frm) {
