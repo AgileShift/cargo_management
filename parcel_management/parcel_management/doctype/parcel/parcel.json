@@ -150,7 +150,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Carrier status",
-   "options": "unknown\npre_transit\nin_transit\nout_for_delivery\ndelivered\navailable_for_pickup\nreturn_to_sender\nfailure\ncancelled\nerror",
+   "options": "Unknown\nPre Transit\nIn Transit\nOut For Delivery\nDelivered\nAvailable For Pickup\nReturn To Sender\nFailure\nCancelled\nError",
    "read_only": 1,
    "search_index": 1
   },
@@ -195,7 +195,6 @@
    "unique": 1
   },
   {
-   "default": "0.00",
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
@@ -217,8 +216,7 @@
    "description": "Real weight measured",
    "fieldname": "weight",
    "fieldtype": "Float",
-   "label": "Weight",
-   "precision": "2"
+   "label": "Weight"
   },
   {
    "fieldname": "content_section",
@@ -294,7 +292,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-10-16 08:58:59.363024",
+ "modified": "2020-10-19 15:15:57.018318",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

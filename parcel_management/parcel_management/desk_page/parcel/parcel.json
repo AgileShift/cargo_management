@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-16 13:09:45.151854",
+ "modified": "2020-10-19 15:18:16.669125",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -54,7 +54,7 @@
    "format": "{} Pending",
    "label": "To be delivered today",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"],\n    \"carrier_status\": [\"!=\", \"delivered\"]\n}",
+   "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"],\n    \"carrier_status\": [\"!=\", \"Delivered\"]\n}",
    "type": "DocType"
   },
   {
@@ -62,7 +62,7 @@
    "format": "{} Delivered",
    "label": "Delivered today",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"carrier_real_delivery\": [\"Timespan\", \"today\"]\n}",
+   "stats_filter": "{\n    \"carrier_status\": \"Delivered\",\n    \"carrier_real_delivery\": [\"Timespan\", \"today\"]\n}",
    "type": "DocType"
   },
   {
@@ -70,15 +70,15 @@
    "format": "",
    "label": "Available for Pickup in post office",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"available_for_pickup\"]\n}",
+   "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"Available For Pickup\"]\n}",
    "type": "DocType"
   },
   {
    "color": "#ffe8cd",
    "format": "{} Pending",
-   "label": "Last week pending confirmation",
+   "label": "This week pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"last week\"],\n    \"status\": [\"=\",\"Awaiting Confirmation\"]\n}\n",
+   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"This Week\"],\n    \"status\": [\"=\",\"Awaiting Confirmation\"]\n}\n",
    "type": "DocType"
   },
   {
@@ -86,13 +86,13 @@
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_status\": \"delivered\",\n    \"status\": \"Awaiting Confirmation\"\n}",
+   "stats_filter": "{\n    \"carrier_status\": \"Delivered\",\n    \"status\": \"Awaiting Confirmation\"\n}",
    "type": "DocType"
   },
   {
    "color": "#fff168",
    "format": "{} Waiting",
-   "label": "Waiting for dispatch",
+   "label": "Awaiting dispatch",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": \"Awaiting Dispatch\"\n}",
    "type": "DocType"

@@ -14,4 +14,4 @@ def update_data_from_carrier(doc):
         parcel.flags.requested_to_track = True  # Setting bypass flag On. See Parcel Doctype flags
         parcel.save()  # Trigger before_save who calls can_track with the bypass flag on so we avoid revalidation check
 
-# Here must exists the: 'Visit carrier detail page' Button that lives in parcel.js -> Using webbrowser
+# Here must exists the: 'Visit carrier detail page' Button that lives in parcel.js -> Using python webbrowser

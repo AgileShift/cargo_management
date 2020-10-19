@@ -16,30 +16,52 @@ class EasypostAPIError(easypost.Error):
 class EasypostAPI(object):
     """ Easypost methods to control class API and parse data. """
 
-    easypost.api_key = frappe.get_single('Parcel Settings').get_password('easypost_api_key')
+    def __init__(self, carrier_uses_utc):
+        self.carrier_uses_utc = carrier_uses_utc
+        self.instance = None
+        self.api_key = frappe.get_single('Parcel Settings').get_password('easypost_api_key')
 
-    @staticmethod
-    def create_package(tracking_number, carrier):
+    def create_package(self, tracking_number, carrier):
         """
         Create a Tracking Resource on Easypost API
 
         @param tracking_number: String Tracking Number
         @param carrier: String Code of Carrier
-        @return: EasyPostObject
         """
-        # TODO: Try to find a carrier before creating the tracker
-        return easypost.Tracker.create(
+        self.instance = easypost.Tracker.create(
             tracking_code=tracking_number,
-            carrier=carrier
+            carrier=carrier,
+            api_key=self.api_key
         )
+        self._normalize_data()
 
-    @staticmethod
-    def get_package_data(easypost_id):
+    def retrieve_package_data(self, easypost_id):
         """ Retrieve from Easypost using the ID provided """
-
-        return easypost.Tracker.retrieve(
-            easypost_id=easypost_id
+        self.instance = easypost.Tracker.retrieve(
+            easypost_id=easypost_id,
+            api_key=self.api_key
         )
+        self._normalize_data()
+
+    def convert_from_webhook(self, response):
+        """ Convert a dict to a Easypost Object. """
+        self.instance = easypost.convert_to_easypost_object(
+            response=response,
+            api_key=self.api_key
+        )
+        self._normalize_data()
+
+    def _normalize_data(self):
+        """ This normalize all the data will correct values """
+        # Normalize Status
+        self.instance.status = self.normalize_status(self.instance.status)
+        self.instance.status_detail = self.normalize_status(self.instance.status_detail)
+
+        # In easypost weight comes in ounces, we convert to pounds.
+        self.instance.weight_in_pounds = self.instance.weight/16 if self.instance.weight else 0.00
+
+        # Normalize Dates. Some Carriers send the data in UTC others no
+        self.instance.naive_est_delivery_date = self.naive_dt_to_local_dt(self.instance.est_delivery_date, self.carrier_uses_utc)
 
     @staticmethod
     def naive_dt_to_local_dt(dt_str, uses_utc):
@@ -53,6 +75,7 @@ class EasypostAPI(object):
         https://www.easypost.com/does-your-api-return-time-according-to-the-package-destinations-time-zone
         https://www.easypost.com/why-are-there-time-zone-discrepancies-on-trackers
         """
+
         if not dt_str:  # Sometimes datetime string if empty for some values, so return None value.
             return
 
@@ -69,9 +92,9 @@ class EasypostAPI(object):
         return local_tz.fromutc(naive_datetime).replace(tzinfo=None)
 
     @staticmethod
-    def convert_weight_to_lb(weight=0):
-        """ In easypost weight comes in ounces. """
-        return weight/16 if weight else None
+    def normalize_status(status):
+        """ Normalize to frappe conventions. Easypost send snake_case status, we use individual words titled """
+        return status.replace('_', ' ').title()
 
 
 @frappe.whitelist(allow_guest=True)
@@ -112,3 +135,5 @@ def easypost_webhook(**kwargs):
     # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7
 
     return 'Parcel {0} updated.'.format(parcel_data['tracking_code'])
+
+#137
