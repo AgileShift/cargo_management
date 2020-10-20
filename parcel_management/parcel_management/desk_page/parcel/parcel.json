@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-19 15:18:16.669125",
+ "modified": "2020-10-20 13:50:25.309429",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -78,7 +78,7 @@
    "format": "{} Pending",
    "label": "This week pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"This Week\"],\n    \"status\": [\"=\",\"Awaiting Confirmation\"]\n}\n",
+   "stats_filter": "{\n    \"carrier_real_delivery\": [\"Timespan\",\"this week\"],\n    \"status\": [\"=\",\"Awaiting Confirmation\"]\n}\n",
    "type": "DocType"
   },
   {
@@ -86,7 +86,7 @@
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"carrier_status\": \"Delivered\",\n    \"status\": \"Awaiting Confirmation\"\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Confirmation\",\n    \"carrier_status\": [\"in\", [\"Unknown\",\"Delivered\",null]]\n}",
    "type": "DocType"
   },
   {
