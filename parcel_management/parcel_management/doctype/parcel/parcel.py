@@ -77,9 +77,14 @@ class Parcel(Document):
 
         @return Boolean, String
         """
+        # Quick Workounds for production:
+        self.status = new_status
+        return True
+
         if self.status == new_status:
             return False, 'No puede cambiar el mismo estado.'
         elif new_status == 'Awaiting Confirmation' and self.status == 'Awaiting Receipt':
+            self.status = new_status
             return True, 'El paquete estaba esperando reception y ahora esta esperando confirmacion'
         elif new_status == 'Awaiting Dispatch' and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
             return True, 'El paquete estaba esperando recepcion o confirmacion y ahora esta esperando salida de Miami.'
