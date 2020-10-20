@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-20 13:50:25.309429",
+ "modified": "2020-10-20 14:02:09.193479",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -86,7 +86,7 @@
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": \"Awaiting Confirmation\",\n    \"carrier_status\": [\"in\", [\"Unknown\",\"Delivered\",null]]\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Confirmation\",\n    \"carrier_status\": [\"in\", [\"Unknown\",\"Delivered\"]]\n}",
    "type": "DocType"
   },
   {
