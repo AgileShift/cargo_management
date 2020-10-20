@@ -112,12 +112,13 @@ def easypost_webhook(**kwargs):
         return 'Parcel {} not found.'.format(kwargs['result']['tracking_code'])
     else:
         parcel.parse_data_from_easypost_webhook(kwargs)
+        parcel.flags.saves_from_webhook = True  # This flag is set because Doc will be saved from webhook data
         parcel.save(ignore_permissions=True)
 
         frappe.publish_realtime(
             event='eval_js',  # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7
             message='frappe.show_alert({}, 10);'.format({
-                'message': "Parcel {0} is {1}.".format(parcel.tracking_number, parcel.carrier_status),
+                'message': "Parcel <a href='#Form/Parcel/{0}'>{0}</a> is {1}.".format(parcel.tracking_number, parcel.carrier_status),
                 'indicator': 'blue'  # TODO: Indicator depends on carrier_status
             })
         )

@@ -10,6 +10,7 @@ class Parcel(Document):
 
     custom flags = {
         'requested_to_track': True|False, # If we will ignore all can_track validations. Internal hardcoded bypass
+        'saves_from_webhook': True|False, # If data comes from external API. We avoid all checks and just save.
         'carrier_can_track': True|False, # Carrier can track in API. Comes from DB
         'carrier_uses_utc': True|False,  # Carrier uses UTC date times. Comes from DB
     }
@@ -35,7 +36,7 @@ class Parcel(Document):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
 
         if self.flags.saves_from_webhook:
-            return  # Ignores the rest, we're not fetching, we're parsing and saving from API
+            return  # Ignores the rest, we're not fetching, we're parsing and saving from API. No user involved.
 
         if self.can_track():
             if self.flags.requested_to_track or self.is_new():  # This simulate before_insert() BUT after validate()
@@ -94,8 +95,6 @@ class Parcel(Document):
 
         self._parse_data_from_easypost_instance(easypost_api.instance)
 
-        self.flags.saves_from_webhook = True  # This flag is set because Doc will be saved from webhook data
-
     def _request_data_from_easypost_api(self):
         """ Handles POST or GET to the Easypost API. Also parses the data. """
         try:
@@ -139,5 +138,3 @@ class Parcel(Document):
                 instance.tracking_details[-1].message,
                 instance.tracking_details[-1].description or 'Without Description'
             )
-
-#137
