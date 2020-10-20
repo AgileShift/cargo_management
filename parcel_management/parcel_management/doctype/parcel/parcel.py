@@ -22,7 +22,7 @@ class Parcel(Document):
         self.tracking_number = self.tracking_number.upper()  # Only uppercase tracking numbers
         tracking_number_strip = self.tracking_number[:3]
 
-        # TODO: What if, what happens in frontend?
+        # TODO: What if, what happens in frontend. Translate
         if '1Z' in tracking_number_strip and self.carrier != 'UPS':
             frappe.throw('Tracking de UPS')
         elif any(s in tracking_number_strip for s in ['LY', 'LB']) and self.carrier != 'USPS':
@@ -134,7 +134,14 @@ class Parcel(Document):
             self.change_status('Awaiting Receipt')
 
         if instance.tracking_details:
-            self.carrier_last_detail = "{}\n\n{}".format(
-                instance.tracking_details[-1].message,
-                instance.tracking_details[-1].description or 'Without Description'
+            latest_tracking_details = instance.tracking_details[-1]
+
+            self.carrier_last_detail = "{}\n\n{}\n\n{}".format(
+                latest_tracking_details.message,
+                latest_tracking_details.description or 'Without Description',
+                '{}, {}, {}'.format(  # TODO: Work this out!
+                    latest_tracking_details.tracking_location.city,
+                    latest_tracking_details.tracking_location.state or '',
+                    latest_tracking_details.tracking_location.zip or ''
+                )
             )

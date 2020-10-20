@@ -61,13 +61,13 @@ frappe.ui.form.on('Parcel', {
 
         // TODO: Improve this messages. must come from backend!!
         switch (frm.doc.status) {
-            case 'waiting_for_reception':
+            case 'Awaiting Receipt':
                 frm.dashboard.set_headline('Paquete aun no se entrega en almacen.', 'blue');
             break;
-            case 'waiting_confirmation':
+            case 'Awaiting Confirmation':
                 frm.dashboard.set_headline('Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow');
             break;
-            case 'waiting_for_departure':
+            case 'Awaiting Dispatch':
                 frm.dashboard.set_headline('Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'yellow');
             break;
             // TODO: Package has an issue?
