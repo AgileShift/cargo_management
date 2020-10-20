@@ -25,8 +25,8 @@
   "track",
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
-  "carrier_est_weight",
   "carrier_real_delivery",
+  "carrier_est_weight",
   "column_break_2",
   "carrier_status",
   "carrier_status_detail",
@@ -121,7 +121,7 @@
   },
   {
    "bold": 1,
-   "description": "Estimated delivery date provided by the carrier (if available)",
+   "description": "Estimated delivery date provided by the carrier (if available).",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
    "label": "Carrier estimated delivery date"
@@ -133,7 +133,8 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Carrier real delivery date"
+   "label": "Carrier real delivery date",
+   "read_only": 1
   },
   {
    "description": "The name of the person who signed for the package (if available)",
@@ -292,7 +293,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-10-19 15:15:57.018318",
+ "modified": "2020-10-19 18:42:12.731905",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

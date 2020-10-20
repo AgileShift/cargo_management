@@ -58,7 +58,7 @@ class EasypostAPI(object):
         self.instance.status_detail = self.normalize_status(self.instance.status_detail)
 
         # In easypost weight comes in ounces, we convert to pounds.
-        self.instance.weight_in_pounds = self.instance.weight/16 if self.instance.weight else 0.00
+        self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else 0.00
 
         # Normalize Dates. Some Carriers send the data in UTC others no
         self.instance.naive_est_delivery_date = self.naive_dt_to_local_dt(self.instance.est_delivery_date, self.carrier_uses_utc)
@@ -99,41 +99,27 @@ class EasypostAPI(object):
 
 @frappe.whitelist(allow_guest=True)
 def easypost_webhook(**kwargs):
-    """
-    ={URL}/api/method/parcel_management.parcel_management.doctype.parcel.easypost_api.easypost_webhook
-    """
+    """ POST To: {URL}/api/method/parcel_management.parcel_management.doctype.parcel.easypost_api.easypost_webhook """
     if kwargs['description'] != 'tracker.updated':
-        return 'Post is not update.'
+        return 'Post is not update.'  # This returns a 200 status.
 
-    parcel_data = kwargs['result']
+    frappe.session.user = 'Easypost API'  # Quick Hack. Very useful
 
-    carrier_real_delivery_datetime = ''
-    if parcel_data['status'] == 'delivered':  # If parcel is delivered
-        # TODO: if delivered then, we must change the status of the field.
-        carrier_real_delivery_datetime = EasypostAPI.naive_dt_to_local_dt(parcel_data['tracking_details'][-1]['datetime'], False)
+    try:
+        parcel = frappe.get_doc('Parcel', kwargs['result']['tracking_code'])  # Trying to fetch the parcel Document
+        parcel.load_carrier_flags()
+    except frappe.DoesNotExistError:
+        return 'Parcel {} not found.'.format(kwargs['result']['tracking_code'])
+    else:
+        parcel.parse_data_from_easypost_webhook(kwargs)
+        parcel.save(ignore_permissions=True)
 
-        # Manually Setting the new status of the parcel!
-        frappe.get_doc('Parcel', parcel_data['tracking_code']).db_set('status', 'waiting_confirmation')
+        frappe.publish_realtime(
+            event='eval_js',  # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7
+            message='frappe.show_alert({}, 10);'.format({
+                'message': "Parcel {0} is {1}.".format(parcel.tracking_number, parcel.carrier_status),
+                'indicator': 'blue'  # TODO: Indicator depends on carrier_status
+            })
+        )
 
-    carrier_estimated_delivery_date = EasypostAPI.naive_dt_to_local_dt(parcel_data['est_delivery_date'], False)
-
-    # TODO: Make some adjustments. Like transact email! and verify the parcel exists!
-    # TODO: maybe update date with the same function as _get_easypost_data from Document
-    frappe.db.set_value('Parcel', parcel_data['tracking_code'], {
-        'carrier_status': parcel_data['status'],
-        'carrier_status_detail': parcel_data['status_detail'],
-        'carrier_est_delivery': carrier_estimated_delivery_date,  # Always update this!
-        'carrier_real_delivery': carrier_real_delivery_datetime,  # TODO: Localize with UTC
-    }, modified_by='EasyPost API')
-
-    # TODO: Sent a real time message
-    # frappe.publish_realtime('display_alert', message='Parcel is configured not to track.')
-
-    # frappe.publish_realtime(event='eval_js', message="frappe.show_alert({message: {{0}}, indicator: {{1}}}, 5)".format('Alerta de Paquete', 'yellow'))
-                                                      # frappe.show_alert({message: msg, indicator: 'yellow'}, 5);
-
-    # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7
-
-    return 'Parcel {0} updated.'.format(parcel_data['tracking_code'])
-
-#137
+    return 'Parcel {} updated.'.format(parcel.tracking_number)

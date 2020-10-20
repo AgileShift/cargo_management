@@ -34,20 +34,23 @@ class Parcel(Document):
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
 
+        if self.flags.saves_from_webhook:
+            return  # Ignores the rest, we're not fetching, we're parsing and saving from API
+
         if self.can_track():
             if self.flags.requested_to_track or self.is_new():  # This simulate before_insert() BUT after validate()
-                self._get_data_from_easypost_api()
+                self._request_data_from_easypost_api()
             elif self.has_value_changed('carrier'):  # Already exists and the carrier has changed.
                 frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
                 self.easypost_id = None  # For the moment EasyPost has no way to update the carrier of a package.
-                self._get_data_from_easypost_api()
+                self._request_data_from_easypost_api()
 
     def can_track(self):
         """ This def validate if a parcel can be tracked by any mean using API, also loads the carrier flags. """
         # TODO: Validate if any tracker API is enabled.
 
         if self.flags.requested_to_track:  # Bypass validations flag
-            return True  # if set then go: this flag is set hardcoded so we can "trust".
+            return True  # if set to true then go. This flag is set hardcoded so we can "trust".
 
         if not self.track:  # Parcel is not configured to be tracked, no matter if easypost_id exists.
             frappe.publish_realtime('display_alert', message='Parcel is configured not to track.', user=frappe.session.user)
@@ -84,8 +87,17 @@ class Parcel(Document):
         else:
             return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
 
-    def _get_data_from_easypost_api(self):
-        """ Handles post or get. Also parses the data. """
+    def parse_data_from_easypost_webhook(self, response):
+        """ Convert the webhook POST to a Easypost Object, then parses the data to the Document. """
+        easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
+        easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
+
+        self._parse_data_from_easypost_instance(easypost_api.instance)
+
+        self.flags.saves_from_webhook = True  # This flag is set because Doc will be saved from webhook data
+
+    def _request_data_from_easypost_api(self):
+        """ Handles POST or GET to the Easypost API. Also parses the data. """
         try:
             easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
 
@@ -127,3 +139,5 @@ class Parcel(Document):
                 instance.tracking_details[-1].message,
                 instance.tracking_details[-1].description or 'Without Description'
             )
+
+#137
