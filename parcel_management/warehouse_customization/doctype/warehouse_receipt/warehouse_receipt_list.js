@@ -2,21 +2,19 @@
 frappe.listview_settings['Warehouse Receipt'] = {
     add_fields: ['status'],
     filters: [
-        ['status', '!=', 'CLOSED'],
+        ['status', '!=', 'Closed'],
     ],
     hide_name_column: true,
 
     get_indicator(doc) {
         // TODO: Finish Indicators. maybe use the default manager of frappe?
         switch (doc.status) {
-            case 'DRAFT':
-                return [__('Draft'), 'orange', 'status,=,DRAFT']
-            case 'OPEN':
-                return [__('Open'), 'blue', 'status,=,OPEN']
-            case 'CLOSED':
-                return [__('Closed'), 'green', 'status,=,CLOSED']
-            case 'RECEIVED':
-                return [__('Received'), 'green', 'status,=,RECEIVED']
+            case 'Open':
+                return [__('Open'), 'blue', 'status,=,Open']
+            case 'In Process':
+                return [__('In Process'), 'orange', 'status,=,In Process']
+            case 'Closed':
+                return [__('Closed'), 'green', 'status,=,Closed']
         }
     }
 }

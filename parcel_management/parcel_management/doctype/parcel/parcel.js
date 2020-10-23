@@ -20,7 +20,7 @@ frappe.ui.form.on('Parcel', {
     setup: function(frm) {
         // This allow us to send non-obtrusive messages from the backend: FIXME: is another way? Refactor.
         // https://frappeframework.com/docs/user/en/api/dialog#frappeshow_alert its not available for Python API.
-        frappe.realtime.on('display_alert', function (msg) {
+        frappe.realtime.on('display_alert', (msg) => {
             frappe.show_alert({message: msg, indicator: 'yellow'}, 5);
         }); // TODO: Validate this action when the list page is open!
 

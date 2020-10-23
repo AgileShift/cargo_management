@@ -16,6 +16,10 @@ class Parcel(Document):
     }
     """
 
+    def __iasdniat__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.status = None
+
     def validate(self):
         # TODO: USPS label has another length that the provided by the shipper
 
@@ -38,8 +42,12 @@ class Parcel(Document):
         if self.flags.saves_from_webhook:
             return  # Ignores the rest, we're not fetching, we're parsing and saving from API. No user involved.
 
-        if self.can_track():
-            if self.flags.requested_to_track or self.is_new():  # This simulate before_insert() BUT after validate()
+        if self.flags.requested_to_track:  # Bypass validations flag. This flag is set hardcoded so we can "trust".
+            self._request_data_from_easypost_api()
+            return
+
+        if self.can_track():  # This is reach when the user has requested to save by normal conditions(Using Save btn).
+            if self.is_new():  # Call this here because before_save() simulate before_insert() with a validate().
                 self._request_data_from_easypost_api()
             elif self.has_value_changed('carrier'):  # Already exists and the carrier has changed.
                 frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
@@ -49,9 +57,6 @@ class Parcel(Document):
     def can_track(self):
         """ This def validate if a parcel can be tracked by any mean using API, also loads the carrier flags. """
         # TODO: Validate if any tracker API is enabled.
-
-        if self.flags.requested_to_track:  # Bypass validations flag
-            return True  # if set to true then go. This flag is set hardcoded so we can "trust".
 
         if not self.track:  # Parcel is not configured to be tracked, no matter if easypost_id exists.
             frappe.publish_realtime('display_alert', message='Parcel is configured not to track.', user=frappe.session.user)
@@ -73,25 +78,22 @@ class Parcel(Document):
         self.flags.carrier_uses_utc = carrier_flags.uses_utc
 
     def change_status(self, new_status):
-        """ Validate the current status of the package and validates if a change is possible.
+        """ Validate the current status of the package and validates if a change is possible. """
 
-        @return Boolean, String
-        """
-        # Quick Workounds for production:
-        self.status = new_status
-        return True
+        # Package was waiting for receipt, now is mark as delivered. waiting for confirmation.
+        # Package was waiting for receipt or confirmation and now is waiting for the dispatch.
+        # Package was not received, and not confirmed, but has appear on the warehouse receipt list
 
-        if self.status == new_status:
-            return False, 'No puede cambiar el mismo estado.'
-        elif new_status == 'Awaiting Confirmation' and self.status == 'Awaiting Receipt':
+        if self.status != new_status and \
+                (self.status == 'Awaiting Receipt' and new_status == 'Awaiting Confirmation') or \
+                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation'] and new_status == 'Awaiting Dispatch') or \
+                (self.status == 'Awaiting Dispatch' and new_status == 'In Transit'):
             self.status = new_status
-            return True, 'El paquete estaba esperando reception y ahora esta esperando confirmacion'
-        elif new_status == 'Awaiting Dispatch' and self.status in ['Awaiting Receipt', 'Awaiting Confirmation']:
-            return True, 'El paquete estaba esperando recepcion o confirmacion y ahora esta esperando salida de Miami.'
-        elif new_status == 'In Transit' and self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'Awaiting Dispatch']:
-            return True, ''
-        else:
-            return False, 'No se puede cambiar el status: {0} a {1}'.format(self.status, new_status)
+            print('From {0}, To {1}'.format(self.status, new_status))
+            return True
+
+        print('No Equivalente')
+        print('Is {} was going to {}'.format(self.status, new_status))
 
     def parse_data_from_easypost_webhook(self, response):
         """ Convert the webhook POST to a Easypost Object, then parses the data to the Document. """
@@ -124,7 +126,7 @@ class Parcel(Document):
     def _parse_data_from_easypost_instance(self, instance):
         """ This parses all the data from an easypost instance(with all the details) to our Parcel Doctype """
         self.carrier_status = instance.status or 'Unknown'
-        self.carrier_status_detail = instance.status_detail
+        self.carrier_status_detail = instance.status_detail or 'Unknown'
 
         self.signed_by = instance.signed_by or None
 

@@ -57,14 +57,14 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "default": "ON_HAND",
+   "default": "Open",
    "description": "Current status of the warehouse receipt.",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "DRAFT\nOPEN\nON_HAND\nIN_PROCESS\nCLOSED",
+   "options": "Open\nIn Process\nClosed",
    "search_index": 1
   },
   {
@@ -140,7 +140,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-09-29 13:38:27.907169",
+ "modified": "2020-10-23 13:57:28.800597",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
