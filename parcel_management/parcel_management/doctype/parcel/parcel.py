@@ -16,23 +16,17 @@ class Parcel(Document):
     }
     """
 
-    def __iasdniat__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.status = None
-
     def validate(self):
-        # TODO: USPS label has another length that the provided by the shipper
-
         self.tracking_number = self.tracking_number.upper()  # Only uppercase tracking numbers
         tracking_number_strip = self.tracking_number[:3]
 
         # TODO: What if, what happens in frontend. Translate
         if '1Z' in tracking_number_strip and self.carrier != 'UPS':
             frappe.throw('Tracking de UPS')
-        elif any(s in tracking_number_strip for s in ['LY', 'LB']) and self.carrier != 'USPS':
-            frappe.throw('Posiblemente Tracking de USPS')
         elif 'TBA' in tracking_number_strip and self.carrier != 'AmazonMws':
             frappe.throw('Tracking de Amazon')
+        elif any(s in tracking_number_strip for s in ['LY', 'LB']) and self.carrier != 'USPS':
+            frappe.throw('Posiblemente Tracking de USPS')
         elif 'JJD' in tracking_number_strip:
             frappe.throw('Convertir a tracking de DHL')
 
@@ -72,10 +66,8 @@ class Parcel(Document):
 
     def load_carrier_flags(self):
         """ Loads the carrier global flags settings handling the parcel in the flags of the Document. """
-        carrier_flags = frappe.get_value('Parcel Carrier', self.carrier, fieldname=('can_track', 'uses_utc'), as_dict=True)
-
-        self.flags.carrier_can_track = carrier_flags.can_track
-        self.flags.carrier_uses_utc = carrier_flags.uses_utc
+        self.flags.carrier_can_track, self.flags.carrier_uses_utc = \
+            frappe.get_value('Parcel Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])
 
     def change_status(self, new_status):
         """ Validate the current status of the package and validates if a change is possible. """
@@ -94,6 +86,21 @@ class Parcel(Document):
 
         print('No Equivalente')
         print('Is {} was going to {}'.format(self.status, new_status))
+
+    def get_explained_status(self):
+        """ This returns a detailed explanation of the current status of the Parcel. """
+        if self.status == 'Awaiting Receipt':
+            message, color = 'Paquete aun no se entrega en almacen.', 'blue'
+        elif self.status == 'Awaiting Confirmation':
+            message, color = 'Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow'
+        elif self.status == 'Awaiting Dispatch':
+            message, color = 'Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'blue'
+        elif self.status == 'In Transit':
+            message, color = 'Paquete esta en transito a destino.', 'blue'
+        else:
+            message, color = 'Contactese para obtener mayor informacion del paquete.', 'yellow'
+
+        return {'message': message, 'color': color}
 
     def parse_data_from_easypost_webhook(self, response):
         """ Convert the webhook POST to a Easypost Object, then parses the data to the Document. """
@@ -152,3 +159,13 @@ class Parcel(Document):
                     latest_tracking_details.tracking_location.zip or ''
                 )
             )
+
+
+""" API Methods to communicate with the model that holds our business logic. """
+
+
+@frappe.whitelist(allow_guest=False)
+def get_parcel_explained_status(source_name):
+    return frappe.get_doc('Parcel', source_name).get_explained_status()
+
+#168

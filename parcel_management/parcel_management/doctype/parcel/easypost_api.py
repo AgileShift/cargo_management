@@ -17,8 +17,8 @@ class EasypostAPI(object):
     """ Easypost methods to control class API and parse data. """
 
     def __init__(self, carrier_uses_utc):
+        self.instance = {}
         self.carrier_uses_utc = carrier_uses_utc
-        self.instance = None
         self.api_key = frappe.get_single('Parcel Settings').get_password('easypost_api_key')
 
     def create_package(self, tracking_number, carrier):

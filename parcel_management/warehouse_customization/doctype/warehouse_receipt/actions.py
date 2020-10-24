@@ -16,7 +16,7 @@ def get_parcels_in_warehouse_receipt(warehouse_receipt=None, warehouse_receipt_l
 
 
 @frappe.whitelist(allow_guest=False)
-def manual_confirm_parcels(doc):
+def confirm_parcels(doc):
     """ Confirms the receipt of the parcels. """
     doc = json.loads(doc)
 

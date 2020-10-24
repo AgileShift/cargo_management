@@ -1,7 +1,6 @@
 function calculate_parcel_total(frm) {
     // Calculate the 'total' field on Parcel Doctype(Parent)
-    frm.doc.total = frm.get_sum('content', 'amount');  // Using some built-in function: get_sum()
-    frm.refresh_field('total');  // Using frm here to refresh the parent field 'total'.
+    frm.set_value('total', frm.get_sum('content', 'amount'));  // Using some built-in function: get_sum()
 }
 
 function calculate_parcel_content_amount_and_parcel_total(frm, cdt, cdn) {
@@ -37,41 +36,55 @@ frappe.ui.form.on('Parcel', {
     },
 
     refresh: function(frm) {
-
         if (frm.is_new()) {
             return; // No Messages or etc..
         }
 
-        // This custom button should live as an Action in the Doctype(Doctype Actions) -> inside actions.py
+        // Better to add button here to use: 'window'. Rather than as Server Side Action Button on Doctype.
         frm.add_custom_button(__('Visit carrier detail page'), () => {
-            frappe.db.get_value('Parcel Carrier', {'name': frm.doc.carrier}, 'carrier_detail_page_url', (r) => {
-                if (r.carrier_detail_page_url) {
-                    window.open(r.carrier_detail_page_url + frm.doc.tracking_number, '_blank');
-                    return; // Exiting the callback
+            frappe.utils.play_sound('click');  // Really Necessary?
+            frappe.call({
+                method: 'parcel_management.parcel_management.doctype.parcel.actions.get_carrier_detail_page_url',
+                args: {carrier: frm.doc.carrier},
+                callback: (r) => {
+                    window.open(r.message + frm.doc.tracking_number, '_blank');
                 }
-
-                // The carrier doesnt have a specific detail page. we must use the default on system
-                frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url')
-                    .then(url => {
-                        window.open(url + frm.doc.tracking_number, '_blank');
-                    });
-
-            }, 'Parcel Settings');
+            });
         });
 
-        // TODO: Improve this messages. must come from backend!!
-        switch (frm.doc.status) {
-            case 'Awaiting Receipt':
-                frm.dashboard.set_headline('Paquete aun no se entrega en almacen.', 'blue');
-            break;
-            case 'Awaiting Confirmation':
-                frm.dashboard.set_headline('Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow');
-            break;
-            case 'Awaiting Dispatch':
-                frm.dashboard.set_headline('Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'yellow');
-            break;
-            // TODO: Package has an issue?
-        }
+        // Intro Message
+        frappe.call({
+            method: 'parcel_management.parcel_management.doctype.parcel.parcel.get_parcel_explained_status',
+            args: {source_name: frm.doc.name},
+            async: false,
+            callback: (r) => {
+                frm.layout.show_message(r.message.message, r.message.color);
+            }
+        });
+
+        // TODO: Finish The Progress Bar
+        // frm.dashboard.add_progress("Status", [
+        //     {
+        //         title: "Not sent" + " Queued",
+        //         width: "25%",
+        //         progress_class: "progress-bar-info"
+        //     },
+        //     {
+        //         title: "Sent" + " Sent",
+        //         width: "10%",
+        //         progress_class: "progress-bar-success"
+        //     },
+        //     {
+        //         title: "Sending" + " Sending",
+        //         width: "5%",
+        //         progress_class: "progress-bar-warning"
+        //     },
+        //     {
+        //         title: "Error" + "% Error",
+        //         width: "60%",
+        //         progress_class: "progress-bar-danger"
+        //     }
+        // ]);
     },
 
     // TODO: Tracking Validator from backend, and Carrier Select helper.
@@ -93,3 +106,4 @@ frappe.ui.form.on('Parcel Content', {
     },
 
 });
+//104

@@ -5,7 +5,7 @@ import frappe
 
 @frappe.whitelist(allow_guest=False)
 def update_data_from_carrier(doc):
-    """ Fetch new data from carrier if we can track and update the doc if its open. """
+    """ Used as Action button in Doctype: Fetch new data from carrier if we can track and update the doc if its open """
     doc = json.loads(doc)
     parcel = frappe.get_doc('Parcel', doc.get('name'))
 
@@ -14,4 +14,10 @@ def update_data_from_carrier(doc):
         parcel.flags.requested_to_track = True  # Setting bypass flag On. See Parcel Doctype flags.
         parcel.save()  # Trigger before_save who checks for the bypass flag on. so we avoid revalidation check.
 
-# Here must exists the: 'Visit carrier detail page' Button that lives in parcel.js -> Using python webbrowser
+
+@frappe.whitelist(allow_guest=False)
+def get_carrier_detail_page_url(carrier: str):
+    """ Util: Return the carrier detail page URL to append to a tracking number. Used in a Form Action Button """
+    return \
+        frappe.get_value('Parcel Carrier', carrier, 'carrier_detail_page_url', cache=True) or \
+        frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url', cache=True)
