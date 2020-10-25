@@ -1,5 +1,4 @@
 import frappe
-import json
 
 
 def get_parcels_in_warehouse_receipt(warehouse_receipt=None, warehouse_receipt_lines=None):
@@ -17,32 +16,35 @@ def get_parcels_in_warehouse_receipt(warehouse_receipt=None, warehouse_receipt_l
 
 @frappe.whitelist(allow_guest=False)
 def confirm_parcels(doc):
-    """ Confirms the receipt of the parcels. """
-    doc = json.loads(doc)
+    """ Used as Action button in Doctype: Confirms the receipt of the parcels. Change status to: "Awaiting Dispatch" """
+    doc = frappe.parse_json(doc)
 
     wr_lines = doc.get('warehouse_receipt_lines')
     wr_lines_len = len(wr_lines)
-
     real_number_of_updated_doc = 0
 
     for i, wr_line in enumerate(wr_lines, start=1):
         progress = float(i) * 100 / wr_lines_len
 
         parcel = frappe.get_doc('Parcel', wr_line['parcel'])
-        able_to_change, message = parcel.change_status('Awaiting Dispatch')
+        able_to_change = parcel.change_status('Awaiting Dispatch')
+
 
         if able_to_change:
             real_number_of_updated_doc += 1
 
             if doc.get('mute_emails'):
                 print('Mutting emails')
-                parcel.set()
+                # parcel.set()
             else:
-                parcel.db_set('status', 'Awaiting Dispatch', update_modified=False)
+                pass
+                # parcel.db_set('status', 'Awaiting Dispatch', update_modified=False)
 
         frappe.publish_progress(
             percent=progress, title='Confirming Parcels', doctype='Parcel', docname=parcel.name,
             description='Confirming Parcel {0}'.format(parcel.tracking_number)
         )
+
+    print('   ')
 
     frappe.msgprint(msg='{0} Parcels confirmed of {1}.'.format(real_number_of_updated_doc, wr_lines_len), title='Success')

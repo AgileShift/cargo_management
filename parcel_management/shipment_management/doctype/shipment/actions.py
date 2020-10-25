@@ -1,11 +1,10 @@
 import frappe
-import json
 
 
 @frappe.whitelist(allow_guest=False)
 def mark_shipment_in_transit(doc):
     """ Change status of the parcels and the warehouses receipts of the parcels. """
-    doc = json.loads(doc)
+    doc = frappe.parse_json(doc)
 
     for shipment_line in doc.get('shipment_lines'):
         warehouse_receipt = frappe.get_doc('Warehouse Receipt', shipment_line.get('warehouse_receipt'))

@@ -80,12 +80,14 @@ class Parcel(Document):
                 (self.status == 'Awaiting Receipt' and new_status == 'Awaiting Confirmation') or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation'] and new_status == 'Awaiting Dispatch') or \
                 (self.status == 'Awaiting Dispatch' and new_status == 'In Transit'):
+
+            print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.tracking_number))
+
             self.status = new_status
-            print('From {0}, To {1}'.format(self.status, new_status))
             return True
 
-        print('No Equivalente')
-        print('Is {} was going to {}'.format(self.status, new_status))
+        print('FALSE. Is {} was going to {}: {}'.format(self.status, new_status, self.tracking_number))
+        return False
 
     def get_explained_status(self):
         """ This returns a detailed explanation of the current status of the Parcel. """

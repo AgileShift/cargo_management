@@ -1,12 +1,10 @@
-import json
-
 import frappe
 
 
 @frappe.whitelist(allow_guest=False)
 def update_data_from_carrier(doc):
     """ Used as Action button in Doctype: Fetch new data from carrier if we can track and update the doc if its open """
-    doc = json.loads(doc)
+    doc = frappe.parse_json(doc)
     parcel = frappe.get_doc('Parcel', doc.get('name'))
 
     # Verify if we can track, because .save() will update doc, even if we can't track. Then we would have to reload doc.
