@@ -56,7 +56,7 @@ frappe.ui.form.on('Parcel', {
         frappe.call({
             method: 'parcel_management.parcel_management.doctype.parcel.parcel.get_parcel_explained_status',
             args: {source_name: frm.doc.name},
-            async: false,
+            async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {
                 frm.layout.show_message(r.message.message, r.message.color);
             }
