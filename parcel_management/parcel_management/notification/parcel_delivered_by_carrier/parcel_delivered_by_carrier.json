@@ -1,7 +1,7 @@
 {
  "attach_print": 0,
  "channel": "Email",
- "condition": "doc.status==\"waiting_confirmation\"",
+ "condition": "doc.status==\"Awaiting Dispatch\"",
  "creation": "2020-08-01 19:06:59.436751",
  "days_in_advance": 0,
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "idx": 0,
  "is_standard": 1,
  "message": "Hola {{ doc.customer_name }}!\n\nTu paquete ha sido entregado por el carrier.\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua\n\nPaquete: {{ doc.tracking_number }}\n\nSaludos,\nQuickBox Nicaragua\n",
- "modified": "2020-09-06 07:44:10.812702",
+ "modified": "2020-10-26 11:28:41.877403",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Delivered By Carrier",
@@ -20,7 +20,7 @@
  "property_value": "",
  "recipients": [
   {
-   "cc": "",
+   "cc": "jeansreal@hotmail.com",
    "email_by_document_field": "customer_email"
   }
  ],
