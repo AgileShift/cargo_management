@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-21 18:21:55.323208",
+ "modified": "2020-10-26 13:05:42.402473",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -46,7 +46,7 @@
   {
    "label": "All active parcels",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": [\"not in\", [\"Waiting for Dispatch\", \"In Transit\", \"Finished\", \"Cancelled\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Dispatch\", \"In Transit\", \"Finished\", \"Cancelled\"]]\n}",
    "type": "DocType"
   },
   {
