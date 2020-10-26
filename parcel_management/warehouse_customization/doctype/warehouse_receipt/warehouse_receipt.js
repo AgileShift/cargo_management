@@ -24,10 +24,7 @@ frappe.ui.form.on('Warehouse Receipt', {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
                     method: 'parcel_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_parcels',
-                    args: {doc: frm.doc},
-                    callback: (r) => {
-                        console.log(r);
-                    }
+                    args: {doc: frm.doc}
                 })
             });
         }

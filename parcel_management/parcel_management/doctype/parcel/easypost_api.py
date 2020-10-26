@@ -110,10 +110,10 @@ def easypost_webhook(**kwargs):
     except frappe.DoesNotExistError:
         return 'Parcel {} not found.'.format(kwargs['result']['tracking_code'])  # TODO: Add some log?
     else:
-        parcel.load_carrier_flags()  # This is called on parcel.can_track(). But we avoid that validation.
+        parcel.load_carrier_flags()  # This is called on def can_track(). But we avoid that validation on webhook event.
         parcel.parse_data_from_easypost_webhook(kwargs)
-        parcel.flags.saves_from_webhook = True  # This flag is set because Doc will be saved from webhook data
-        parcel.save(ignore_permissions=True)
+        parcel.flags.ignore_validate = True  # Set flag ON because Doc will be saved from webhook data. No validations.
+        parcel.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
         frappe.publish_realtime(
             event='eval_js',  # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7

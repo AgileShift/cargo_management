@@ -9,8 +9,8 @@ def update_data_from_carrier(doc):
 
     # Verify if we can track, because .save() will update doc, even if we can't track. Then we would have to reload doc.
     if parcel.can_track():
-        parcel.flags.requested_to_track = True  # Setting bypass flag On. See Parcel Doctype flags.
-        parcel.save()  # Trigger before_save who checks for the bypass flag on. so we avoid revalidation check.
+        parcel.flags.requested_to_track = True  # Set bypass flag ON. See Parcel Doctype flags. Go directly to track.
+        parcel.save()  # Trigger before_save() who checks for the bypass flag. We avoid revalidation checks.
 
 
 @frappe.whitelist(allow_guest=False)

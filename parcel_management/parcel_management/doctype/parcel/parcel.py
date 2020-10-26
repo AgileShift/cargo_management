@@ -8,19 +8,25 @@ class Parcel(Document):
     """
     Parcel Doctype: a Package ;)
 
+    All this are set internally hardcoded. So we can trust in the origin.
     custom flags = {
-        'requested_to_track': True|False, # If we will ignore all can_track validations. Internal hardcoded bypass
-        'saves_from_webhook': True|False, # If data comes from external API. We avoid all checks and just save.
-        'carrier_can_track': True|False, # Carrier can track in API. Comes from DB
-        'carrier_uses_utc': True|False,  # Carrier uses UTC date times. Comes from DB
+        'ignore_validate':    Frappe Core Flag if is set avoid: before_validate(), validate() and before_save()
+        'requested_to_track': If Parcel was requested to be tracked we bypass all validations.
+        'carrier_can_track':  Carrier can track in API. Comes from related Link to "Parcel Carrier" Doctype.
+        'carrier_uses_utc':   Carrier uses UTC date times. Comes from related Link to "Parcel Carrier" Doctype.
     }
     """
 
     def validate(self):
+        """ Validate def. We try to detect a valid tracking number. """
+
+        if self.flags.requested_to_track:  # If requested: bypass. We should have validate before set this flag.
+            return
+
         self.tracking_number = self.tracking_number.upper()  # Only uppercase tracking numbers
         tracking_number_strip = self.tracking_number[:3]
 
-        # TODO: What if, what happens in frontend. Translate
+        # TODO: What if: What happens in frontend?. Translate spanish?
         if '1Z' in tracking_number_strip and self.carrier != 'UPS':
             frappe.throw('Tracking de UPS')
         elif 'TBA' in tracking_number_strip and self.carrier != 'AmazonMws':
@@ -33,23 +39,15 @@ class Parcel(Document):
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
 
-        if self.flags.saves_from_webhook:
-            return  # Ignores the rest, we're not fetching, we're parsing and saving from API. No user involved.
-
-        if self.flags.requested_to_track:  # Bypass validations flag. This flag is set hardcoded so we can "trust".
+        if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
+            self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to be tracked.
+        elif self.has_value_changed('carrier') and self.can_track():  # Already exists and the carrier has changed.
+            frappe.msgprint('Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
+            self.easypost_id = None
             self._request_data_from_easypost_api()
-            return
-
-        if self.can_track():  # This is reach when the user has requested to save by normal conditions(Using Save btn).
-            if self.is_new():  # Call this here because before_save() simulate before_insert() with a validate().
-                self._request_data_from_easypost_api()
-            elif self.has_value_changed('carrier'):  # Already exists and the carrier has changed.
-                frappe.msgprint('Carrier has changed, so we request new data.', title='The carrier has changed')
-                self.easypost_id = None  # For the moment EasyPost has no way to update the carrier of a package.
-                self._request_data_from_easypost_api()
 
     def can_track(self):
-        """ This def validate if a parcel can be tracked by any mean using API, also loads the carrier flags. """
+        """ This def validate if a parcel can be tracked by any mean using any API, also loads the carrier flags. """
         # TODO: Validate if any tracker API is enabled.
 
         if not self.track:  # Parcel is not configured to be tracked, no matter if easypost_id exists.
@@ -105,7 +103,7 @@ class Parcel(Document):
         return {'message': message, 'color': color}
 
     def parse_data_from_easypost_webhook(self, response):
-        """ Convert the webhook POST to a Easypost Object, then parses the data to the Document. """
+        """ Convert a Easypost webhook POST to a Easypost Object, then parses the data to the Document. """
         easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
         easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
 
@@ -118,7 +116,7 @@ class Parcel(Document):
 
             if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
                 easypost_api.retrieve_package_data(self.easypost_id)
-            else:  # Parcel don't exists on easypost and is requested to be tracked. we create a new one and attach it.
+            else:  # Parcel don't exists on easypost and is requested to be tracked. We create a new one and attach it.
                 easypost_api.create_package(self.tracking_number, self.carrier)
 
                 self.easypost_id = easypost_api.instance.id  # EasyPost ID. Only on creation
@@ -130,7 +128,7 @@ class Parcel(Document):
         else:  # Data to parse that will be save
             self._parse_data_from_easypost_instance(easypost_api.instance)
 
-            frappe.publish_realtime('display_alert', message='Parcel has been updated.', user=frappe.session.user)
+            frappe.publish_realtime('display_alert', message='Parcel has been updated from API.', user=frappe.session.user)
 
     def _parse_data_from_easypost_instance(self, instance):
         """ This parses all the data from an easypost instance(with all the details) to our Parcel Doctype """
@@ -143,7 +141,7 @@ class Parcel(Document):
         self.carrier_est_delivery = instance.naive_est_delivery_date
 
         # If parcel is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
-        if (instance.status == 'Delivered') or (instance.status_detail == 'Arrived At Destination'):
+        if instance.status == 'Delivered' or instance.status_detail == 'Arrived At Destination':
             self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(instance.tracking_details[-1].datetime, self.flags.carrier_uses_utc)
             self.change_status('Awaiting Confirmation')
         else:  # TODO: Change the status when the carrier status: return_to_sender, failure, cancelled, error
@@ -170,4 +168,4 @@ class Parcel(Document):
 def get_parcel_explained_status(source_name):
     return frappe.get_doc('Parcel', source_name).get_explained_status()
 
-#168
+#172
