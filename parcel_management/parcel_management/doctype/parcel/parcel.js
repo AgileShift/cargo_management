@@ -58,7 +58,9 @@ frappe.ui.form.on('Parcel', {
             args: {source_name: frm.doc.name},
             async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {
-                frm.layout.show_message(r.message.message, r.message.color);
+                if (r.message) { // Has a valid message
+                    frm.set_intro(r.message.message, r.message.color); // frm.layout.show_message()
+                }
             }
         });
 

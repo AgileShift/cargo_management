@@ -97,6 +97,10 @@ class Parcel(Document):
             message, color = 'Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'blue'
         elif self.status == 'In Transit':
             message, color = 'Paquete esta en transito a destino.', 'blue'
+        elif self.status == 'Available to Pickup':
+            message, color = 'Paquete esta listo para ser retirado.', 'blue'
+        elif self.status == 'Finished' or self.status == 'Cancelled':
+            return  # No message
         else:
             message, color = 'Contactese para obtener mayor informacion del paquete.', 'yellow'
 

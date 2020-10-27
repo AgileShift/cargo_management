@@ -1,6 +1,6 @@
 import frappe
 
-
+# TODO: Delete this?
 def get_parcels_in_warehouse_receipt(warehouse_receipt=None, warehouse_receipt_lines=None):
 
     if warehouse_receipt_lines:  # Get the parcels using the receipt lines
@@ -17,6 +17,7 @@ def get_parcels_in_warehouse_receipt(warehouse_receipt=None, warehouse_receipt_l
 @frappe.whitelist(allow_guest=False)
 def confirm_parcels(doc):
     """ Used as Action button in Doctype: Confirms the receipt of the parcels. Change status to: "Awaiting Dispatch" """
+    # TODO: Make this some sort or generic def, to change status across multiple statuses
     doc = frappe.parse_json(doc)
 
     wr_lines = doc.warehouse_receipt_lines  # Getting all the Parcels
