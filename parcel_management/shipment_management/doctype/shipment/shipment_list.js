@@ -1,19 +1,18 @@
 frappe.listview_settings['Shipment'] = {
     add_fields: ['status'],
     filters: [
-        ['status', '!=', 'RECEIVED'],
+        ['status', '!=', 'Received'],
     ],
     hide_name_column: true,
 
     get_indicator(doc) {
-        // TODO: Finish Indicators
         switch (doc.status) {
-            case 'LOADING':
-                return [__('Draft'), 'orange', 'status,=,LOADING']
-            case 'IN_TRANSIT':
-                return [__('Open'), 'blue', 'status,=,IN_TRANSIT']
-            case 'RECEIVED':
-                return [__('Closed'), 'green', 'status,=,RECEIVED']
+            case 'Open':
+                return [__('Open'), 'blue', 'status,=,Open']
+            case 'In Transit':
+                return [__('Open'), 'orange', 'status,=,In Transit']
+            case 'Received':
+                return [__('Received'), 'green', 'status,=,Received']
         }
     }
 }

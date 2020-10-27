@@ -108,7 +108,7 @@
   },
   {
    "collapsible": 1,
-   "collapsible_depends_on": "eval: doc.status != 'finished';",
+   "collapsible_depends_on": "eval: doc.status != 'Finished';",
    "fieldname": "section_break_6",
    "fieldtype": "Section Break",
    "label": "Additional data from customer"
@@ -293,7 +293,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-10-19 18:42:12.731905",
+ "modified": "2020-10-26 20:53:26.532660",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

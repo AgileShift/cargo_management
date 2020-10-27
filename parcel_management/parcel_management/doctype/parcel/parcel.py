@@ -28,13 +28,13 @@ class Parcel(Document):
 
         # TODO: What if: What happens in frontend?. Translate spanish?
         if '1Z' in tracking_number_strip and self.carrier != 'UPS':
-            frappe.throw('Tracking de UPS')
+            frappe.throw('UPS Tracking')
         elif 'TBA' in tracking_number_strip and self.carrier != 'AmazonMws':
-            frappe.throw('Tracking de Amazon')
+            frappe.throw('Amazon Tracking')
         elif any(s in tracking_number_strip for s in ['LY', 'LB']) and self.carrier != 'USPS':
-            frappe.throw('Posiblemente Tracking de USPS')
+            frappe.throw('Possibly a USPS Tracking')
         elif 'JJD' in tracking_number_strip:
-            frappe.throw('Convertir a tracking de DHL')
+            frappe.throw('Convert to DHL Tracking')
 
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
@@ -171,5 +171,3 @@ class Parcel(Document):
 @frappe.whitelist(allow_guest=False)
 def get_parcel_explained_status(source_name):
     return frappe.get_doc('Parcel', source_name).get_explained_status()
-
-#172

@@ -1,11 +1,5 @@
 {
- "actions": [
-  {
-   "action": "parcel_management.shipment_management.doctype.shipment.actions.mark_shipment_in_transit",
-   "action_type": "Server Action",
-   "label": "Mark in transit"
-  }
- ],
+ "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:reference",
@@ -18,10 +12,11 @@
   "reference",
   "status",
   "type",
+  "mute_emails",
   "column_break_4",
-  "attachment",
-  "weight",
   "date",
+  "weight",
+  "pieces",
   "sb_0",
   "notes",
   "sb_1",
@@ -43,19 +38,21 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "description": "Status of Shipment",
+   "default": "Open",
+   "description": "Current status of the Shipment.",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "LOADING\nLOADED\nIN_TRANSIT\nRECEIVED",
+   "options": "Open\nIn Transit\nReceived",
    "reqd": 1,
    "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
+   "default": "Ocean",
    "description": "Transportation Type",
    "fieldname": "type",
    "fieldtype": "Select",
@@ -63,7 +60,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Type",
-   "options": "AIR\nOCEAN",
+   "options": "Air\nOcean",
    "reqd": 1,
    "search_index": 1
   },
@@ -72,17 +69,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "attachment",
-   "fieldtype": "Attach",
-   "label": "Attachment"
-  },
-  {
+   "default": "0.00",
+   "description": "Weight in pounds provided by the warehouse (if available).",
    "fieldname": "weight",
    "fieldtype": "Float",
    "label": "Weight",
    "precision": "2"
   },
   {
+   "default": "Now",
    "description": "Real date of document generation.",
    "fieldname": "date",
    "fieldtype": "Date",
@@ -91,7 +86,7 @@
    "label": "Date"
   },
   {
-   "description": "Internal Notes only",
+   "description": "Internal notes only.",
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes"
@@ -99,9 +94,11 @@
   {
    "fieldname": "shipment_lines",
    "fieldtype": "Table MultiSelect",
-   "label": "Warehouse Receipts",
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse Receipts in Shipment",
    "options": "Shipment Line",
-   "read_only_depends_on": "eval: doc.status == 'RECEIVED';",
+   "read_only_depends_on": "eval: doc.status == 'Received';",
    "reqd": 1
   },
   {
@@ -111,10 +108,29 @@
   {
    "fieldname": "sb_1",
    "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "description": "Don't send emails notifications",
+   "fieldname": "mute_emails",
+   "fieldtype": "Check",
+   "label": "Don't Send Emails"
+  },
+  {
+   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
+   "fieldname": "pieces",
+   "fieldtype": "Int",
+   "label": "Pieces"
   }
  ],
- "links": [],
- "modified": "2020-09-03 21:29:45.568875",
+ "links": [
+  {
+   "group": "Warehouse Receipt",
+   "link_doctype": "Warehouse Receipt",
+   "link_fieldname": "reference"
+  }
+ ],
+ "modified": "2020-10-26 21:42:06.514723",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",

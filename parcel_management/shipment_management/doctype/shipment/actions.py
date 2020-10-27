@@ -3,10 +3,10 @@ import frappe
 
 @frappe.whitelist(allow_guest=False)
 def mark_shipment_in_transit(doc):
-    """ Change status of the parcels and the warehouses receipts of the parcels. """
+    """ Used as Action button in Doctype: Change status of the parcels and the warehouses receipts of the shipment. """
     doc = frappe.parse_json(doc)
 
-    for shipment_line in doc.get('shipment_lines'):
+    for shipment_line in doc.shipment_lines:
         warehouse_receipt = frappe.get_doc('Warehouse Receipt', shipment_line.get('warehouse_receipt'))
 
         # TODO: Optimize, one single query to alter all statuses.
@@ -14,4 +14,3 @@ def mark_shipment_in_transit(doc):
 
         for wr_receipt_line in warehouse_receipt.warehouse_receipt_lines:
             frappe.db.set_value('Parcel', wr_receipt_line.get('parcel'), 'status', 'Finished')
-# TODO: This is only provisional for the moment

@@ -18,7 +18,7 @@
   "weight",
   "pieces",
   "sb_0",
-  "attachment",
+  "notes",
   "sb_1",
   "warehouse_receipt_lines"
  ],
@@ -66,20 +66,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "description": "Warehouse receipt scan",
-   "fieldname": "attachment",
-   "fieldtype": "Attach",
-   "label": "Attachment"
-  },
-  {
    "allow_in_quick_entry": 1,
+   "default": "Now",
    "description": "Real date of document generation.",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Date",
-   "read_only_depends_on": "eval: doc.status == 'CLOSED';\n",
+   "read_only_depends_on": "eval: doc.status == 'Closed';\n",
    "reqd": 1
   },
   {
@@ -101,25 +96,30 @@
    "in_standard_filter": 1,
    "label": "Parcels in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
-   "read_only_depends_on": "eval: doc.status == 'CLOSED';"
+   "read_only_depends_on": "eval: doc.status == 'Closed';"
   },
   {
    "collapsible": 1,
-   "fieldname": "sb_0",
-   "fieldtype": "Section Break",
-   "label": "Additional data"
-  },
-  {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: doc.status != 'CLOSED';",
+   "collapsible_depends_on": "eval: doc.status != 'Closed';",
    "fieldname": "sb_1",
    "fieldtype": "Section Break"
   },
   {
    "default": "0",
+   "description": "Don't send emails notifications",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
    "label": "Don't Send Emails"
+  },
+  {
+   "fieldname": "sb_0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Internal notes only.",
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
   }
  ],
  "links": [
@@ -134,7 +134,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-10-25 11:52:34.164286",
+ "modified": "2020-10-26 21:42:07.291428",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

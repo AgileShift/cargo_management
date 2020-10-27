@@ -37,7 +37,7 @@ frappe.ui.form.on('Parcel', {
 
     refresh: function(frm) {
         if (frm.is_new()) {
-            return; // No Messages or etc..
+            return;
         }
 
         // Better to add button here to use: 'window'. Rather than as Server Side Action Button on Doctype.
@@ -108,4 +108,3 @@ frappe.ui.form.on('Parcel Content', {
     },
 
 });
-//104

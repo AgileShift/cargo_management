@@ -13,19 +13,17 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     refresh: function (frm) {
-
         if (frm.is_new()) {
             return;
         }
 
-        // Adding the confirm parcel button if warehouse receipt is open
         if (frm.doc.status === 'Open') {
             frm.page.add_action_item(__('Confirm Parcels'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'parcel_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_parcels',
+                    method: 'parcel_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_parcels_in_wr',
                     args: {doc: frm.doc}
-                })
+                });
             });
         }
     },

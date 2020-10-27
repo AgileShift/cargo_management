@@ -1,16 +1,12 @@
-// Personalization for the Parcel List View
 frappe.listview_settings['Parcel'] = {
-    // Add fields to fetch
     add_fields: ['status'],
-
-    // Setting default filters
     filters: [
         ['status', 'not in', ['Finished', 'Cancelled', 'fully_refunded']],
     ],
-    hide_name_column: true, // Hide the last column which shows the `name`
+    hide_name_column: true,
 
-    get_indicator(doc) {  // customize indicator color
-        // TODO: Finish Indicators
+    get_indicator(doc) {
+        // TODO: Finish Indicator
         switch (doc.status) {
             case 'Awaiting Receipt':
                 return [__('Awaiting Receipt'), 'blue', 'status,=,Awaiting Receipt']
@@ -20,11 +16,16 @@ frappe.listview_settings['Parcel'] = {
                 return [__('Awaiting Dispatch'), 'yellow', 'status,=,Awaiting Dispatch']
             case 'In Transit':
                 return [__('In Transit'), 'purple', 'status,=,In Transit']
+            case 'In Customs':
+                return [__('In Customs'), 'black', 'status,=,In Customs']
+            case 'Sorting':
+                return [__('Sorting'), 'black', 'status,=,Sorting']
+            case 'Available to Pickup':
+                return [__('Available to Pickup'), 'green', 'status,=,Available to Pickup']
             case 'Finished':
                 return [__('Finished'), 'green', 'status,=,Finished']
             case 'Cancelled':
                 return [__('Cancelled'), 'red', 'status,=,Cancelled']
-
         }
     }
 
