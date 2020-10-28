@@ -7,12 +7,11 @@ def confirm_parcels_in_wr(doc):
     # TODO: Make this some sort or generic def, to change status across multiple statuses
     doc = frappe.parse_json(doc)
 
-    wr_lines = doc.warehouse_receipt_lines  # Getting all the Parcels
-    wr_lines_len = len(wr_lines)
+    wr_lines, wr_lines_len = doc.warehouse_receipt_lines, len(doc.warehouse_receipt_lines)
     updated_docs = 0
 
     # Core: Silence Notifications and emails!
-    frappe.flags.mute_emails, frappe.flags.in_import = doc.mute_emails, doc.mute_emails
+    frappe.flags.mute_emails = frappe.flags.in_import = doc.mute_emails
 
     for i, wr_line in enumerate(wr_lines, start=1):
         progress = i * 100 / wr_lines_len
@@ -30,6 +29,6 @@ def confirm_parcels_in_wr(doc):
             description='Confirming Parcel {0}.'.format(parcel.tracking_number),
         )
 
-    frappe.flags.mute_emails, frappe.flags.in_import = False, False  # Reset core flags.
+    frappe.flags.mute_emails = frappe.flags.in_import = False  # Reset core flags.
 
     frappe.msgprint(msg='{0} Parcels confirmed of {1}.'.format(updated_docs, wr_lines_len), title='Success')

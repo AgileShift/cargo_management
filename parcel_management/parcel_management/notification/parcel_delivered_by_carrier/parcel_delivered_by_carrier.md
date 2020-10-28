@@ -1,12 +1,16 @@
 Hola {{ doc.customer_name }}!
 
-Tu paquete ha sido entregado por el carrier.
+El transportista nos indica que tu paquete: {{ doc.tracking_number }} ha sido entregado.
 
-Espera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.
+Espera 24 horas habiles para que el almacen en Miami lo procese y verifique.<br>
+Recibiras un correo de confirmacion una vez tengamos el paquete.
 
-Una vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua
+Una vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua.
 
-Paquete: {{ doc.tracking_number }}
+<ul>
+    <li>Paquete: {{ doc.tracking_number }}</li>
+    <li>Transportista: {{ doc.carrier }}</li>
+</ul>
 
-Saludos,
+Saludos, <br>
 QuickBox Nicaragua

@@ -11,8 +11,8 @@
  "event": "Value Change",
  "idx": 0,
  "is_standard": 1,
- "message": "Hola {{ doc.customer_name }}!\n\nTu paquete ha sido entregado por el carrier.\n\nEspera 24 horas habiles para que nuestro almacen lo procese y pueda brindarte un confirmado interno.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua\n\nPaquete: {{ doc.tracking_number }}\n\nSaludos,\nQuickBox Nicaragua\n",
- "modified": "2020-10-26 11:28:41.877403",
+ "message": "Hola {{ doc.customer_name }}!\n\nEl transportista nos indica que tu paquete ha sido entregado.\n\nEspera 24 horas habiles para que el almacen en Miami lo procese y verifique.\nRecibiras un correo de confirmacion cuando tengamos el paquete.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua\n\nPaquete: {{ doc.tracking_number }}\n\nSaludos,\nQuickBox Nicaragua\n",
+ "modified": "2020-10-26 21:49:20.822789",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Delivered By Carrier",
@@ -20,7 +20,7 @@
  "property_value": "",
  "recipients": [
   {
-   "cc": "jeansreal@hotmail.com",
+   "cc": "",
    "email_by_document_field": "customer_email"
   }
  ],
