@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-28 08:23:16.265274",
+ "modified": "2020-10-28 13:29:15.218412",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -50,7 +50,7 @@
    "type": "DocType"
   },
   {
-   "color": "#78d6ff",
+   "color": "#d2f1ff",
    "format": "{} Pending",
    "label": "To be delivered today",
    "link_to": "Parcel",
@@ -58,7 +58,7 @@
    "type": "DocType"
   },
   {
-   "color": "#98d85b",
+   "color": "#9deca2",
    "format": "{} Delivered",
    "label": "Delivered today",
    "link_to": "Parcel",
@@ -74,7 +74,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ffe8cd",
+   "color": "#ffd2c2",
    "format": "{} Pending",
    "label": "This week pending confirmation",
    "link_to": "Parcel",
@@ -82,7 +82,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ffa00a",
+   "color": "#ffd2c2",
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Parcel",
@@ -90,7 +90,7 @@
    "type": "DocType"
   },
   {
-   "color": "#feef72",
+   "color": "#fff168",
    "format": "{} Waiting",
    "label": "Awaiting dispatch",
    "link_to": "Parcel",
@@ -98,7 +98,7 @@
    "type": "DocType"
   },
   {
-   "color": "#743ee2",
+   "color": "#7575ff",
    "label": "In Transit",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
@@ -112,7 +112,7 @@
    "type": "DocType"
   },
   {
-   "color": "#98d85b",
+   "color": "#9deca2",
    "format": "{} Ready",
    "label": "Available to pickup",
    "link_to": "Parcel",

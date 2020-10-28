@@ -276,6 +276,7 @@
    "fieldtype": "Column Break"
   }
  ],
+ "index_web_pages_for_search": 1,
  "links": [
   {
    "group": "Warehouse",
@@ -293,7 +294,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-10-26 20:53:26.532660",
+ "modified": "2020-10-28 12:57:59.588767",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
