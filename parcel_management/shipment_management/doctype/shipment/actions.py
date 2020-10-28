@@ -33,12 +33,12 @@ def mark_shipment_in_transit(source_name: str):
 
     frappe.flags.mute_emails, frappe.flags.in_import = False, False
 
-    frappe.msgprint(msg='{0} Warehouse Receipt in transit.'.format(len(shipment.shipment_lines)), title='Success')
-    frappe.msgprint(msg='{0} Parcels changed to in transit of {1}.'.format(updated_parcels, total_parcels))
+    frappe.msgprint(msg=[
+        '{0} Warehouse Receipt in transit.'.format(len(shipment.shipment_lines)),
+        '{0} Parcels changed to in transit of {1}.'.format(updated_parcels, total_parcels)
+    ], title='Success', as_list=True)
 
-
-
-"""]
+"""
 Shipment
 Pasa de in transit, a in customs
 Cuanto esta in customs, aparece un boton para crear la hoja de recepcion!

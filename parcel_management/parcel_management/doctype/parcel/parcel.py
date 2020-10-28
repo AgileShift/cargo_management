@@ -51,13 +51,13 @@ class Parcel(Document):
         # TODO: Validate if any tracker API is enabled.
 
         if not self.track:  # Parcel is not configured to be tracked, no matter if easypost_id exists.
-            frappe.publish_realtime('display_alert', message='Parcel is configured not to track.', user=frappe.session.user)
+            frappe.msgprint(msg='Parcel is configured not to track.', indicator='yellow', alert=True)
             return False
 
         self.load_carrier_flags()  # Load carrier global flags settings an attach to the document flags.
 
         if not self.flags.carrier_can_track:  # Carrier is configured to not track. So we don't bother.
-            frappe.publish_realtime('display_alert', message='Parcel is handled by a carrier we dont\'t track.', user=frappe.session.user)
+            frappe.msgprint(msg='Parcel is handled by a carrier we cant\'t track.', indicator='red', alert=True)
             return False
 
         return True
@@ -88,7 +88,7 @@ class Parcel(Document):
         return False
 
     def get_explained_status(self):
-        """ This returns a detailed explanation of the current status of the Parcel. """
+        """ This returns a detailed explanation of the current status of the Parcel and compatible colors. """
         if self.status == 'Awaiting Receipt':
             message, color = 'Paquete aun no se entrega en almacen.', 'blue'
         elif self.status == 'Awaiting Confirmation':
@@ -126,13 +126,13 @@ class Parcel(Document):
                 self.easypost_id = easypost_api.instance.id  # EasyPost ID. Only on creation
 
         except EasypostAPIError as e:
-            frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=0, indicator='red')
+            frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=False, indicator='red')
             return  # Exit because this has failed(Create or Update)
 
         else:  # Data to parse that will be save
             self._parse_data_from_easypost_instance(easypost_api.instance)
 
-            frappe.publish_realtime('display_alert', message='Parcel has been updated from API.', user=frappe.session.user)
+            frappe.msgprint(msg='Parcel has been updated from API.', alert=True)
 
     def _parse_data_from_easypost_instance(self, instance):
         """ This parses all the data from an easypost instance(with all the details) to our Parcel Doctype """

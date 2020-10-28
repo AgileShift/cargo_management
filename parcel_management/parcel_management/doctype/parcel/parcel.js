@@ -17,16 +17,10 @@ function calculate_parcel_content_amount_and_parcel_total(frm, cdt, cdn) {
 frappe.ui.form.on('Parcel', {
 
     setup: function(frm) {
-        // This allow us to send non-obtrusive messages from the backend: FIXME: is another way? Refactor.
-        // https://frappeframework.com/docs/user/en/api/dialog#frappeshow_alert its not available for Python API.
-        frappe.realtime.on('display_alert', (msg) => {
-            frappe.show_alert({message: msg, indicator: 'yellow'}, 5);
-        }); // TODO: Validate this action when the list page is open!
-
         // TODO: this must be running from core frappe code. Some glitch make us hardcoded the realtime handler here.
-        frappe.realtime.on('doc_update', () => { // See: https://github.com/frappe/frappe/pull/11137
-            frm.reload_doc(); // Reload form UI data from db.
-        });
+        // frappe.realtime.on('doc_update', () => { // See: https://github.com/frappe/frappe/pull/11137
+        //     frm.reload_doc(); // Reload form UI data from db.
+        // });
     },
 
     onload: function(frm) {
