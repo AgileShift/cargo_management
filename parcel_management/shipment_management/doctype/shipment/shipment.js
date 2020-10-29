@@ -24,8 +24,6 @@ frappe.ui.form.on('Shipment', {
             return;
         }
 
-        frm.page.clear_actions_menu();
-
         if (frm.doc.status === 'Open') {
             frm.page.add_action_item(__('Confirm Transit'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
@@ -34,6 +32,8 @@ frappe.ui.form.on('Shipment', {
                     args: {source_name: frm.doc.name}
                 });
             });
+        } else {
+            frm.page.clear_actions_menu();
         }
 
         // TODO: Add intro message for helper!

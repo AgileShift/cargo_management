@@ -6,11 +6,12 @@ frappe.listview_settings['Shipment'] = {
     hide_name_column: true,
 
     get_indicator(doc) {
+        // TODO: Finish Indicator
         switch (doc.status) {
             case 'Open':
-                return [__('Open'), 'blue', 'status,=,Open']
+                return [__('Open'), 'yellow', 'status,=,Open']
             case 'In Transit':
-                return [__('In Transit'), 'orange', 'status,=,In Transit']
+                return [__('In Transit'), 'purple', 'status,=,In Transit']
             case 'Received':
                 return [__('Received'), 'green', 'status,=,Received']
         }

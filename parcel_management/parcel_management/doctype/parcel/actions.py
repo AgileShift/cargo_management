@@ -12,6 +12,8 @@ def update_data_from_carrier(doc):
         parcel.flags.requested_to_track = True  # Set bypass flag ON. See Parcel Doctype flags. Go directly to track.
         parcel.save()  # Trigger before_save() who checks for the bypass flag. We avoid revalidation checks.
 
+    return {}  # FIXME: To prevent reload_doc two times by: execute_action() called if using "Server Action"
+
 
 @frappe.whitelist(allow_guest=False)
 def get_carrier_detail_page_url(carrier: str):

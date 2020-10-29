@@ -18,7 +18,7 @@ def confirm_parcels_in_wr(doc):
 
         parcel = frappe.get_doc('Parcel', wr_line['parcel'])  # Getting Parcel Doctype
 
-        if parcel.change_status('Awaiting Dispatch'):  # If Status can be changed
+        if parcel.change_status('Awaiting Dispatch'):  # If Status can be changed. To prevent unnecessary updates
             updated_docs += 1
             parcel.flags.ignore_validate = True  # Set flag ON because Doc will be saved from bulk edit. No validations.
             parcel.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.

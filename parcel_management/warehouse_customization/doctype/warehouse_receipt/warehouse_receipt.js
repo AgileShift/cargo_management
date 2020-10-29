@@ -24,8 +24,6 @@ frappe.ui.form.on('Warehouse Receipt', {
             return;
         }
 
-        frm.page.clear_actions_menu();
-
         if (frm.doc.status === 'Open') {
             frm.page.add_action_item(__('Confirm Parcels'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
@@ -34,6 +32,8 @@ frappe.ui.form.on('Warehouse Receipt', {
                     args: {doc: frm.doc}
                 });
             });
+        } else {
+            frm.page.clear_actions_menu();
         }
 
         // TODO: Add intro message when the warehouse is on shipment!

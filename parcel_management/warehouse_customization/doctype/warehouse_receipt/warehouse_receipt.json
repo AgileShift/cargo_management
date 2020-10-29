@@ -4,7 +4,7 @@
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:50:41.615167",
- "description": "Warehouse Operation of type reception.",
+ "description": "Warehouse Receipt",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -24,12 +24,13 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "default": "0.00",
    "description": "Weight in pounds provided by the warehouse (if available).",
    "fieldname": "weight",
    "fieldtype": "Float",
-   "label": "Weight",
-   "precision": "2"
+   "in_preview": 1,
+   "label": "Weight"
   },
   {
    "allow_in_quick_entry": 1,
@@ -38,6 +39,7 @@
    "fieldname": "reference",
    "fieldtype": "Data",
    "in_global_search": 1,
+   "in_list_view": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -46,6 +48,7 @@
    "description": "Count of pieces(boxes) provided by the warehouse (if available).",
    "fieldname": "pieces",
    "fieldtype": "Int",
+   "in_preview": 1,
    "label": "Pieces"
   },
   {
@@ -59,6 +62,7 @@
    "in_standard_filter": 1,
    "label": "Status",
    "options": "Open\nIn Transit\nClosed",
+   "reqd": 1,
    "search_index": 1
   },
   {
@@ -67,14 +71,14 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "default": "Now",
+   "default": "now",
    "description": "Real date of document generation.",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Date",
-   "read_only_depends_on": "eval: doc.status == 'Closed';\n",
+   "read_only_depends_on": "eval: doc.status == 'Closed';",
    "reqd": 1
   },
   {
@@ -89,6 +93,7 @@
    "reqd": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "columns": 10,
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table MultiSelect",
@@ -96,7 +101,8 @@
    "in_standard_filter": 1,
    "label": "Parcels in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
-   "read_only_depends_on": "eval: doc.status == 'Closed';"
+   "read_only_depends_on": "eval: doc.status == 'Closed';",
+   "reqd": 1
   },
   {
    "collapsible": 1,
@@ -122,6 +128,7 @@
    "label": "Notes"
   }
  ],
+ "index_web_pages_for_search": 1,
  "links": [
   {
    "group": "Parcel",
@@ -134,7 +141,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-10-26 21:42:07.291428",
+ "modified": "2020-10-28 18:53:37.724977",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
@@ -188,8 +195,8 @@
    "share": 1
   }
  ],
- "quick_entry": 1,
  "show_name_in_global_search": 1,
+ "show_preview_popup": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "title_field": "reference",

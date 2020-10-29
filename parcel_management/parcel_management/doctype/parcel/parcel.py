@@ -42,7 +42,7 @@ class Parcel(Document):
         if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
             self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to be tracked.
         elif self.has_value_changed('carrier') and self.can_track():  # Already exists and the carrier has changed.
-            frappe.msgprint('Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
+            frappe.msgprint(msg='Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
             self.easypost_id = None
             self._request_data_from_easypost_api()
 

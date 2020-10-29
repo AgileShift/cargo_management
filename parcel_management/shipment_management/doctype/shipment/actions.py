@@ -18,15 +18,17 @@ def mark_shipment_in_transit(source_name: str):
             parcel = frappe.get_doc('Parcel', wr_line.parcel)  # Getting Parcel Doctype
             total_parcels += 1
 
-            if parcel.change_status('In Transit'):  # FIX: What happens if a warehouse receipt has not confirmed parcels
+            if parcel.change_status('In Transit'):  # If Status can be changed. To prevent unnecessary updates
                 updated_parcels += 1
                 parcel.flags.ignore_validate = True  # Set flag ON because Doc will be saved from bulk edit. No validations.
                 parcel.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
+        # TODO: Maybe make a safe def to prevent unnecessary saves
         warehouse_receipt.status = 'In Transit'
         warehouse_receipt.flags.ignore_validate = True
         warehouse_receipt.save(ignore_permissions=True)
 
+    # TODO: Maybe make a safe def to prevent unnecessary saves
     shipment.status = 'In Transit'
     shipment.flags.ignore_validate = True
     shipment.save(ignore_permissions=True)
@@ -36,7 +38,7 @@ def mark_shipment_in_transit(source_name: str):
     frappe.msgprint(msg=[
         '{0} Warehouse Receipt in transit.'.format(len(shipment.shipment_lines)),
         '{0} Parcels changed to in transit of {1}.'.format(updated_parcels, total_parcels)
-    ], title='Success', as_list=True)
+    ], title='Success')  # FIXME: as_list=True in next updates for production
 
 """
 Shipment
