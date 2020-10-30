@@ -12,8 +12,8 @@ frappe.listview_settings['Parcel'] = {
                 return [__('Awaiting Receipt'), 'blue', 'status,=,Awaiting Receipt']
             case 'Awaiting Confirmation':
                 return [__('Awaiting Confirmation'), 'orange', 'status,=,Awaiting Confirmation']
-            case 'Awaiting Dispatch':
-                return [__('Awaiting Dispatch'), 'yellow', 'status,=,Awaiting Dispatch']
+            case 'Awaiting Departure':
+                return [__('Awaiting Departure'), 'yellow', 'status,=,Awaiting Departure']
             case 'In Transit':
                 return [__('In Transit'), 'purple', 'status,=,In Transit']
             case 'In Customs':

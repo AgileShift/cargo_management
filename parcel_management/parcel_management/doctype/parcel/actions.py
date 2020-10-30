@@ -16,6 +16,7 @@ def update_data_from_carrier(doc):
 
 
 @frappe.whitelist(allow_guest=False)
+@frappe.read_only()
 def get_carrier_detail_page_url(carrier: str):
     """ Util: Return the carrier detail page URL to append to a tracking number. Used in a Form Action Button """
     return \

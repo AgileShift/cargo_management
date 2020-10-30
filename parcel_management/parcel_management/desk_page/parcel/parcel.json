@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-28 13:29:15.218412",
+ "modified": "2020-10-29 23:09:16.763697",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -46,13 +46,13 @@
   {
    "label": "All active parcels",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Dispatch\", \"In Transit\", \"Finished\", \"Cancelled\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Departure\", \"In Transit\", \"Finished\", \"Cancelled\"]]\n}",
    "type": "DocType"
   },
   {
    "color": "#d2f1ff",
    "format": "{} Pending",
-   "label": "To be delivered today",
+   "label": "Arriving today",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"],\n    \"carrier_status\": [\"!=\", \"Delivered\"]\n}",
    "type": "DocType"
@@ -60,7 +60,7 @@
   {
    "color": "#9deca2",
    "format": "{} Delivered",
-   "label": "Delivered today",
+   "label": "Arrived today",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"carrier_status\": \"Delivered\",\n    \"carrier_real_delivery\": [\"Timespan\", \"today\"]\n}",
    "type": "DocType"
@@ -68,7 +68,7 @@
   {
    "color": "#ff4d4d",
    "format": "",
-   "label": "Available for Pickup in post office",
+   "label": "Available for Pickup at post office",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"Available For Pickup\"]\n}",
    "type": "DocType"
@@ -92,9 +92,9 @@
   {
    "color": "#fff168",
    "format": "{} Waiting",
-   "label": "Awaiting dispatch",
+   "label": "Awaiting departure",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": \"Awaiting Dispatch\"\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Departure\"\n}",
    "type": "DocType"
   },
   {

@@ -3,7 +3,7 @@ import frappe
 
 @frappe.whitelist(allow_guest=False)
 def confirm_parcels_in_wr(doc):
-    """ Used as Action button in Doctype: Confirms the receipt of the parcels. Change status to: "Awaiting Dispatch" """
+    """ Used as Action button in Doctype: Confirms the receipt of the parcels. Change status to: "Awaiting Departure" """
     # TODO: Make this some sort or generic def, to change status across multiple statuses
     doc = frappe.parse_json(doc)
 
@@ -18,7 +18,7 @@ def confirm_parcels_in_wr(doc):
 
         parcel = frappe.get_doc('Parcel', wr_line['parcel'])  # Getting Parcel Doctype
 
-        if parcel.change_status('Awaiting Dispatch'):  # If Status can be changed. To prevent unnecessary updates
+        if parcel.change_status('Awaiting Departure'):  # If Status can be changed. To prevent unnecessary updates
             updated_docs += 1
             parcel.flags.ignore_validate = True  # Set flag ON because Doc will be saved from bulk edit. No validations.
             parcel.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.

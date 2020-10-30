@@ -1,6 +1,3 @@
-// Copyright (c) 2020, Agile Shift and contributors
-// For license information, please see license.txt
-
 function calculate_product_total_taxes_and_import_price(frm, cdt, cdn) {
     // This func is called on Child Doctype when: product, shipping or taxes are modified.
     let row = locals[cdt][cdn]; // Getting Child Row
@@ -53,7 +50,7 @@ frappe.ui.form.on('Parcel Quotation', {
                 item_to_parse.closest_arrival_date = new Date(item.closest_arrival_date).toLocaleDateString('es-ES', date_string_options);
                 item_to_parse.longest_arrival_date = (item.longest_arrival_date) ? new Date(item.longest_arrival_date).toLocaleDateString('es-ES', date_string_options) : null;
 
-                if (item.closest_departure_date) {
+                if (item.closest_departure_date) { // If has a closest departure date calculate closest delivery date.
                     item_to_parse.closest_delivery_date = new Date(
                         moment(item.closest_departure_date).add(frm.doc.transit_days, 'days') // FIXME: frappe.datetime.add_days('', '')
                     ).toLocaleDateString('es-ES', date_string_options);

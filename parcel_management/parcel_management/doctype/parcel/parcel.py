@@ -71,13 +71,13 @@ class Parcel(Document):
         """ Validate the current status of the package and validates if a change is possible. """
 
         # Package was waiting for receipt, now is mark as delivered. waiting for confirmation.
-        # Package was waiting for receipt or confirmation and now is waiting for the dispatch.
+        # Package was waiting for receipt or confirmation and now is waiting for the departure.
         # Package was not received, and not confirmed, but has appear on the warehouse receipt list
 
         if self.status != new_status and \
                 (self.status == 'Awaiting Receipt' and new_status == 'Awaiting Confirmation') or \
-                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation'] and new_status == 'Awaiting Dispatch') or \
-                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'Awaiting Dispatch'] and new_status == 'In Transit'):
+                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation'] and new_status == 'Awaiting Departure') or \
+                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'Awaiting Departure'] and new_status == 'In Transit'):
 
             print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.tracking_number))
 
@@ -93,8 +93,8 @@ class Parcel(Document):
             message, color = 'Paquete aun no se entrega en almacen.', 'blue'
         elif self.status == 'Awaiting Confirmation':
             message, color = 'Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow'
-        elif self.status == 'Awaiting Dispatch':
-            message, color = 'Paquete fue recepcionado, esperando proximo despacho de mercaderia.', 'blue'
+        elif self.status == 'Awaiting Departure':
+            message, color = 'Paquete fue recepcionado, esperando proxima salida de mercaderia.', 'blue'
         elif self.status == 'In Transit':
             message, color = 'Paquete esta en transito a destino.', 'blue'
         elif self.status == 'Available to Pickup':
