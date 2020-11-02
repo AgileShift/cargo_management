@@ -15,6 +15,7 @@
   "mute_emails",
   "column_break_3",
   "date",
+  "departure_date",
   "weight",
   "pieces",
   "sb_0",
@@ -126,6 +127,16 @@
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes"
+  },
+  {
+   "bold": 1,
+   "description": "Real departure date of the shipment to his final destination.",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Departure date",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -141,7 +152,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-10-28 18:53:37.724977",
+ "modified": "2020-11-01 22:27:14.459010",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

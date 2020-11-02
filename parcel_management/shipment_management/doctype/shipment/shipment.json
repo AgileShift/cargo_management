@@ -14,7 +14,6 @@
   "type",
   "mute_emails",
   "column_break_4",
-  "date",
   "departure_date",
   "weight",
   "pieces",
@@ -77,13 +76,6 @@
    "fieldtype": "Float",
    "in_preview": 1,
    "label": "Weight"
-  },
-  {
-   "default": "now",
-   "description": "Real date of document generation.",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
   },
   {
    "description": "Internal notes only.",
@@ -149,7 +141,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-11-01 11:37:09.797866",
+ "modified": "2020-11-01 21:01:42.329867",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",
