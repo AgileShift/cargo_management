@@ -15,6 +15,7 @@
   "mute_emails",
   "column_break_4",
   "date",
+  "departure_date",
   "weight",
   "pieces",
   "sb_0",
@@ -78,15 +79,11 @@
    "label": "Weight"
   },
   {
-   "allow_in_quick_entry": 1,
    "default": "now",
    "description": "Real date of document generation.",
    "fieldname": "date",
    "fieldtype": "Date",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Date",
-   "reqd": 1
+   "label": "Date"
   },
   {
    "description": "Internal notes only.",
@@ -126,6 +123,17 @@
    "fieldtype": "Int",
    "in_preview": 1,
    "label": "Pieces"
+  },
+  {
+   "bold": 1,
+   "default": "now",
+   "description": "Real departure date of the shipment to his final destination.",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Departure date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -141,7 +149,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-10-28 18:57:18.575286",
+ "modified": "2020-11-01 11:37:09.797866",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",
