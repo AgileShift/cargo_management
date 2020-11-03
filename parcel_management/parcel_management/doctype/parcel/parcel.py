@@ -76,8 +76,8 @@ class Parcel(Document):
 
         if self.status != new_status and \
                 (self.status == 'Awaiting Receipt' and new_status == 'Awaiting Confirmation') or \
-                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation'] and new_status == 'Awaiting Departure') or \
-                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'Awaiting Departure'] and new_status == 'In Transit'):
+                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation'] and new_status == 'Awaiting Departure') or \
+                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure'] and new_status == 'In Transit'):
 
             print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.tracking_number))
 
@@ -93,6 +93,8 @@ class Parcel(Document):
             message, color = 'Paquete aun no se entrega en almacen.', 'blue'
         elif self.status == 'Awaiting Confirmation':
             message, color = 'Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow'
+        elif self.status == 'In Extraordinary Confirmation':
+            message, color = 'Paquete se encuentra en una verificacion fuera de lo habitual.', 'yellow'
         elif self.status == 'Awaiting Departure':
             message, color = 'Paquete fue recepcionado, esperando proxima salida de mercaderia.', 'blue'
         elif self.status == 'In Transit':

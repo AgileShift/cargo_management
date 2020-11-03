@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-10-29 23:09:16.763697",
+ "modified": "2020-11-03 12:45:44.018679",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -44,13 +44,29 @@
  "pin_to_top": 1,
  "shortcuts": [
   {
+   "doc_view": "List",
    "label": "All active parcels",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Departure\", \"In Transit\", \"Finished\", \"Cancelled\"]]\n}",
    "type": "DocType"
   },
   {
+   "color": "#ff7846",
+   "doc_view": "List",
+   "label": "Without carrier data",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"=\", \"Awaiting Receipt\"]\n}",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Dashboard",
+   "link_to": "Parcel",
+   "type": "Dashboard"
+  },
+  {
    "color": "#d2f1ff",
+   "doc_view": "List",
    "format": "{} Pending",
    "label": "Arriving today",
    "link_to": "Parcel",
@@ -59,6 +75,7 @@
   },
   {
    "color": "#9deca2",
+   "doc_view": "List",
    "format": "{} Delivered",
    "label": "Arrived today",
    "link_to": "Parcel",
@@ -67,6 +84,7 @@
   },
   {
    "color": "#ff4d4d",
+   "doc_view": "List",
    "format": "",
    "label": "Available for Pickup at post office",
    "link_to": "Parcel",
@@ -75,6 +93,7 @@
   },
   {
    "color": "#ffd2c2",
+   "doc_view": "List",
    "format": "{} Pending",
    "label": "This week pending confirmation",
    "link_to": "Parcel",
@@ -83,14 +102,25 @@
   },
   {
    "color": "#ffd2c2",
+   "doc_view": "List",
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\": \"Awaiting Confirmation\",\n    \"carrier_status\": [\"in\", [\"Unknown\",\"Delivered\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Confirmation\", \"In Extraordinary Confirmation\"]],\n    \"carrier_status\": [\"in\", [\"Unknown\",\"Delivered\"]]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#ffa685",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "In extraordinary confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\n    \"status\": \"In Extraordinary Confirmation\"\n}",
    "type": "DocType"
   },
   {
    "color": "#fff168",
+   "doc_view": "List",
    "format": "{} Waiting",
    "label": "Awaiting departure",
    "link_to": "Parcel",
@@ -99,30 +129,20 @@
   },
   {
    "color": "#7575ff",
+   "doc_view": "List",
    "label": "In Transit",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
    "type": "DocType"
   },
   {
-   "color": "#ff7846",
-   "label": "Without carrier data",
-   "link_to": "Parcel",
-   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"=\", \"Awaiting Receipt\"]\n}",
-   "type": "DocType"
-  },
-  {
    "color": "#9deca2",
+   "doc_view": "List",
    "format": "{} Ready",
    "label": "Available to pickup",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"=\", \"Available to Pickup\"]\n}",
    "type": "DocType"
-  },
-  {
-   "label": "Dashboard",
-   "link_to": "Parcel",
-   "type": "Dashboard"
   }
  ],
  "shortcuts_label": "Shortcuts"

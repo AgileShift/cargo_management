@@ -22,3 +22,5 @@ def get_carrier_detail_page_url(carrier: str):
     return \
         frappe.get_value('Parcel Carrier', carrier, 'carrier_detail_page_url', cache=True) or \
         frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url', cache=True)
+
+# TODO: Add a Action button for "In Extraordinary Confirmation"
