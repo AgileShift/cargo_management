@@ -132,6 +132,7 @@
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Carrier real delivery date",
    "read_only": 1
@@ -294,7 +295,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-11-03 12:36:58.474486",
+ "modified": "2020-11-03 16:22:12.549123",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
