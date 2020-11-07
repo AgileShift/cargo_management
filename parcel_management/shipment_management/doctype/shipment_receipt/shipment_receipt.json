@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "autoname": "field:reference",
+ "creation": "2020-11-03 16:50:04.125725",
+ "description": "Shipment Receipt.",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "reference",
+  "shipment",
+  "status",
+  "column_break_3",
+  "departure_date",
+  "arrival_date",
+  "section_break_6",
+  "test",
+  "shipment_receipt_lines"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "description": "Reference to the shipment to be received.",
+   "fieldname": "shipment",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Shipment",
+   "options": "Shipment",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "shipment.departure_date",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date",
+   "read_only": 1
+  },
+  {
+   "description": "Shipment Name",
+   "fetch_from": "shipment.reference",
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "arrival_date",
+   "fieldtype": "Date",
+   "label": "Arrival Date"
+  },
+  {
+   "fieldname": "shipment_receipt_lines",
+   "fieldtype": "Table",
+   "label": "Parcels in Shipment Receipt",
+   "options": "Shipment Receipt Line",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "test",
+   "fieldtype": "Data",
+   "label": "Warehouse Receipt in Shipment Receipt"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nClosed",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2020-11-03 17:15:03.752106",
+ "modified_by": "Administrator",
+ "module": "Shipment Management",
+ "name": "Shipment Receipt",
+ "name_case": "UPPER CASE",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

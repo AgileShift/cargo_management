@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "creation": "2020-11-03 17:04:43.949612",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "parcel",
+  "customer_name",
+  "carrier_weight",
+  "weight"
+ ],
+ "fields": [
+  {
+   "fieldname": "parcel",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Parcel",
+   "options": "Parcel",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "parcel.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "parcel.carrier_est_weight",
+   "fetch_if_empty": 1,
+   "fieldname": "carrier_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Carrier Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2020-11-03 17:55:34.151680",
+ "modified_by": "Administrator",
+ "module": "Shipment Management",
+ "name": "Shipment Receipt Line",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
