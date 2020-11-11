@@ -41,7 +41,10 @@ frappe.ui.form.on('Parcel', {
                 method: 'parcel_management.parcel_management.doctype.parcel.actions.get_carrier_detail_page_url',
                 args: {carrier: frm.doc.carrier},
                 callback: (r) => {
-                    window.open(r.message + frm.doc.tracking_number, '_blank');
+                    // FIXME: Don't working on mobile -> window.open(url, '_blank');
+                    let carrier_tab = window.open();
+                    carrier_tab.opener = null;
+                    carrier_tab.location = r.message + frm.doc.tracking_number
                 }
             });
         });
