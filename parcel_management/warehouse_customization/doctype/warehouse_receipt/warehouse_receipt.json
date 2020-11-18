@@ -112,7 +112,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "default": "0",
+   "default": "1",
    "description": "Don't send emails notifications",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
@@ -152,7 +152,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-11-01 22:27:14.459010",
+ "modified": "2020-11-18 10:47:59.403377",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

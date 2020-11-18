@@ -103,7 +103,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "default": "0",
+   "default": "1",
    "description": "Don't send emails notifications",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
@@ -141,7 +141,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-11-01 21:01:42.329867",
+ "modified": "2020-11-18 10:48:27.973574",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",
