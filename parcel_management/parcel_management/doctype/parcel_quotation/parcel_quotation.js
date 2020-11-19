@@ -1,4 +1,4 @@
-function calculate_product_total_taxes_and_import_price(frm, cdt, cdn) {
+function calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn) {
     // This func is called on Child Doctype when: product, shipping or taxes are modified.
     let row = locals[cdt][cdn]; // Getting Child Row
 
@@ -8,10 +8,15 @@ function calculate_product_total_taxes_and_import_price(frm, cdt, cdn) {
     row.product_total = flt(row.product_price + row.shipping_price + row.taxes, 2);
 
     // We call the import price calculation to check if is by weight or percentage
-    calculate_import_price(frm, cdt, cdn);
+    calculate_import_price_per_item(frm, cdt, cdn);
 }
 
-function calculate_import_price(frm, cdt, cdn) {
+function calculate_quotation_total_import(frm) {
+    // Calculate the 'total_import' field on Parcel Quotation Doctype(Parent)
+    frm.set_value('total_import', frm.get_sum('items', 'import_price'));  // Using some built-in function: get_sum()
+}
+
+function calculate_import_price_per_item(frm, cdt, cdn) {
     let row = locals[cdt][cdn]; // Getting Child Row
 
     const minImportPrice = 5.00; // TODO: Get this dynamically
@@ -25,6 +30,8 @@ function calculate_import_price(frm, cdt, cdn) {
     // Setting the Minimum Price to invoice
     row.import_price = (row.import_price < minImportPrice) ? minImportPrice : row.import_price;
 
+    calculate_quotation_total_import(frm);  // Recalculating the total_import in Parent Doctype
+
     frm.refresh_fields();
 }
 
@@ -32,6 +39,7 @@ function calculate_import_price(frm, cdt, cdn) {
 frappe.ui.form.on('Parcel Quotation', {
     onload: function (frm) {
         // Setting Currency Labels
+        frm.set_currency_labels(['total_import'], 'USD');
         frm.set_currency_labels(
             ['product_price', 'shipping_price', 'taxes', 'import_price_per_pound', 'product_total', 'import_price'],
             'USD',
@@ -78,29 +86,29 @@ frappe.ui.form.on('Parcel Quotation Item', {
     // Children doctype of Parcel Quotation
 
     product_price: function (frm, cdt, cdn) {
-        calculate_product_total_taxes_and_import_price(frm, cdt, cdn);
+        calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn);
     },
     shipping_price: function (frm, cdt, cdn) {
-        calculate_product_total_taxes_and_import_price(frm, cdt, cdn);
+        calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn);
     },
     has_shipping: function(frm, cdt, cdn) {
-        calculate_product_total_taxes_and_import_price(frm, cdt, cdn);
+        calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn);
     },
     has_taxes: function (frm, cdt, cdn) {
-        calculate_product_total_taxes_and_import_price(frm, cdt, cdn);
+        calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn);
     },
 
     import_price_type: function (frm, cdt, cdn) {
-        calculate_import_price(frm, cdt, cdn);
+        calculate_import_price_per_item(frm, cdt, cdn);
     },
     weight: function(frm, cdt, cdn) {
-        calculate_import_price(frm, cdt, cdn);
+        calculate_import_price_per_item(frm, cdt, cdn);
     },
     import_price_per_pound: function(frm, cdt, cdn) {
-        calculate_import_price(frm, cdt, cdn);
+        calculate_import_price_per_item(frm, cdt, cdn);
     },
     import_percentage: function (frm, cdt, cdn) {
-        calculate_import_price(frm, cdt, cdn);
+        calculate_import_price_per_item(frm, cdt, cdn);
     },
 
 })

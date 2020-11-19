@@ -16,6 +16,8 @@
   "section_break_5",
   "items",
   "section_break_8",
+  "total_import",
+  "section_break_11",
   "text"
  ],
  "fields": [
@@ -79,11 +81,25 @@
    "fieldname": "transit_days",
    "fieldtype": "Int",
    "label": "Transit days"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "items",
+   "description": "Total import price.",
+   "fieldname": "total_import",
+   "fieldtype": "Currency",
+   "label": "Total Import",
+   "options": "USD",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-11-19 08:31:05.600906",
+ "modified": "2020-11-19 09:00:43.877260",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation",
