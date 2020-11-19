@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "autoname": "format:PQ-{YYYY}-{customer_name}-{#####}",
  "creation": "2020-09-25 11:26:16.113073",
  "description": "Doctype to create a quotation of a parcel.",
  "doctype": "DocType",
@@ -29,6 +30,7 @@
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Customer Name",
    "read_only": 1
@@ -64,6 +66,7 @@
    "default": "0",
    "fieldname": "purchase_assistance",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Purchase assistance"
   },
   {
@@ -78,8 +81,9 @@
    "label": "Transit days"
   }
  ],
+ "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-09-30 15:57:13.414885",
+ "modified": "2020-11-19 08:31:05.600906",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation",
