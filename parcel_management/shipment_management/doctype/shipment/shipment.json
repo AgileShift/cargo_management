@@ -11,7 +11,7 @@
  "field_order": [
   "reference",
   "status",
-  "type",
+  "transportation_type",
   "mute_emails",
   "column_break_4",
   "departure_date",
@@ -26,7 +26,7 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "description": "Number or Identifier",
+   "description": "Internal reference code.",
    "fieldname": "reference",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -39,28 +39,13 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "Open",
-   "description": "Current status of the Shipment.",
+   "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
    "options": "Open\nIn Transit\nReceived",
-   "reqd": 1,
-   "search_index": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "bold": 1,
-   "default": "Ocean",
-   "description": "Transportation Type",
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Type",
-   "options": "Air\nOcean",
    "reqd": 1,
    "search_index": 1
   },
@@ -104,7 +89,6 @@
   },
   {
    "default": "1",
-   "description": "Don't send emails notifications",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
    "label": "Don't Send Emails"
@@ -126,6 +110,20 @@
    "in_preview": 1,
    "label": "Departure date",
    "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "Ocean",
+   "fieldname": "transportation_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transportation type",
+   "options": "Air\nOcean",
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -141,7 +139,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-11-18 10:48:27.973574",
+ "modified": "2020-11-22 12:20:33.007198",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",

@@ -79,7 +79,7 @@
   },
   {
    "bold": 1,
-   "description": "Current status of the parcel.",
+   "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_filter": 1,
@@ -295,7 +295,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-11-22 09:40:27.735873",
+ "modified": "2020-11-22 12:08:10.391090",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

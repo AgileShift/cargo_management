@@ -12,8 +12,8 @@ function calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn) 
 }
 
 function calculate_quotation_total_import(frm) {
-    // Calculate the 'total_import' field on Parcel Quotation Doctype(Parent)
-    frm.set_value('total_import', frm.get_sum('items', 'import_price'));  // Using some built-in function: get_sum()
+    // Calculate the 'total_import_cost' field on Parcel Quotation Doctype(Parent)
+    frm.set_value('total_import_cost', frm.get_sum('items', 'import_price'));  // Using some built-in function: get_sum()
 }
 
 function calculate_import_price_per_item(frm, cdt, cdn) {
@@ -39,7 +39,7 @@ function calculate_import_price_per_item(frm, cdt, cdn) {
 frappe.ui.form.on('Parcel Quotation', {
     onload: function (frm) {
         // Setting Currency Labels
-        frm.set_currency_labels(['total_import'], 'USD');
+        frm.set_currency_labels(['total_import_cost'], 'USD');
         frm.set_currency_labels(
             ['product_price', 'shipping_price', 'taxes', 'import_price_per_pound', 'product_total', 'import_price'],
             'USD',

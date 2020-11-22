@@ -36,7 +36,7 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "description": "Warehouse internal reference code.",
+   "description": "Internal reference code.",
    "fieldname": "reference",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -56,7 +56,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "Open",
-   "description": "Current status of the warehouse receipt.",
+   "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -113,7 +113,6 @@
   },
   {
    "default": "1",
-   "description": "Don't send emails notifications",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
    "label": "Don't Send Emails"
@@ -152,7 +151,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-11-18 10:47:59.403377",
+ "modified": "2020-11-22 12:07:11.978783",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

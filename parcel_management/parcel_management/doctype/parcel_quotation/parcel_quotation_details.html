@@ -21,7 +21,7 @@
                 </p>
             {% endif %}
 
-            {% if doc.detail_pricing_rules %}
+            {% if doc.detail_pricing %}
                 {% if item.import_price_type == 'Weight' %}
                     <p>Costo por Libra: ${{ item.import_price_per_pound }} x libra</p>
                 {% else %}

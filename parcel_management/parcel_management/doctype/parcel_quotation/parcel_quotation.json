@@ -11,12 +11,12 @@
   "customer_name",
   "column_break_3",
   "transit_days",
-  "detail_pricing_rules",
+  "detail_pricing",
   "purchase_assistance",
   "section_break_5",
   "items",
   "section_break_8",
-  "total_import",
+  "total_import_cost",
   "section_break_11",
   "text"
  ],
@@ -51,12 +51,6 @@
    "label": "Text"
   },
   {
-   "default": "0",
-   "fieldname": "detail_pricing_rules",
-   "fieldtype": "Check",
-   "label": "Detail pricing rules"
-  },
-  {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
   },
@@ -77,7 +71,7 @@
   },
   {
    "default": "17",
-   "description": "Calculated days taken from departure to arrival.",
+   "description": "Approximate days taken from departure to arrival.",
    "fieldname": "transit_days",
    "fieldtype": "Int",
    "label": "Transit days"
@@ -88,18 +82,24 @@
   },
   {
    "default": "0",
+   "fieldname": "detail_pricing",
+   "fieldtype": "Check",
+   "label": "Detail pricing"
+  },
+  {
+   "default": "0",
    "depends_on": "items",
-   "description": "Total import price.",
-   "fieldname": "total_import",
+   "description": "This cost is an approximate, the total may vary depending on the actual weight of the package and/or changes in the value of the product.",
+   "fieldname": "total_import_cost",
    "fieldtype": "Currency",
-   "label": "Total Import",
+   "label": "Total import cost",
    "options": "USD",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-11-22 10:33:06.518279",
+ "modified": "2020-11-22 11:45:26.066244",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation",

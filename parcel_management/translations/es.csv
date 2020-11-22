@@ -1,9 +1,10 @@
+Parcel Settings,Configuración de Paquetes
+
 Parcel,Paquete
 Tracking number,Número de rastreo
 Tracking code provided by the carrier.,Número de rastreo brindado por el transportista.
 Carrier,Transportista
 Name of the carrier handling the shipment.,Nombre del transportista que maneja el envío.
-Current status of the parcel.,Estado actual del paquete.
 Track,Rastrear
 Parcel is requested to be tracked.,Se solicita el seguimiento del paquete.
 Additional data from carrier,Datos adicionales del transportista
@@ -37,7 +38,6 @@ Internal data,Datos internos
 Consignee name,Nombre del consignatario
 Name on the package label.,Nombre en la etiqueta del paquete.
 Real weight measured,Peso real medido
-Pieces,Piezas
 Quantity of packages in shipment.,Cantidad de paquetes en el envío.
 
 Visit carrier detail page,Visitar página de detalles del transportista
@@ -52,31 +52,31 @@ This week pending confirmation,Pendientes de confirmación de esta semana
 All pending confirmation,Todos los pendientes de confirmación
 
 Parcel Quotation,Cotización de paquete
-Transit days,Días de transito
-Calculated days taken from departure to arrival.,Dias calculados que se toma desde el despacho hasta el arrivo.
-Detail pricing rules,TODO
-Purchase assistance,TODO
+Transit days,Días de tránsito
+Approximate days taken from departure to arrival.,Días aproximados tomados desde el despacho hasta el arribo.
+Detail pricing,Precios detallados
+Purchase assistance,Asistencia de compra
+Total import cost,Costo total de importación
+"This cost is an approximate, the total may vary depending on the actual weight of the package and/or changes in the value of the product.","Este costo es un aproximado, el total puede variar segun el peso real del paquete y/o cambios en el valor del producto."
 
-Warehouse Receipt, Recibo de almacén
-Current status of the warehouse receipt.,Estado acual del recibo de almacén.
+Render Quotation,Visualizar Cotización
+
+Warehouse Receipt,Recibo de almacén
 Target warehouse,Almacén de destino
 Warehouse where reception occurred.,Almacén donde se produjo la recepción.
 Real date of document generation.,Fecha real de generación del documento.
-Weight in pounds provided by the warehouse (if available).,Peso en libras proporcionado por el almacén (si está disponible).
-Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
-Additional data,Datos adicionales
-Warehouse receipt scan,Escaneo del recibo de almacén
+Departure date,Fecha de despacho
+Real departure date of the shipment to his final destination.,Fecha real de salida del embarque a su destino final.
 Parcels in Warehouse Receipt,Paquetes en el recibo de almacén
-Packages received in warehouse receipt.,paquetes recibidos en recibo de almacén.
 
 Shipment,Embarque
-Number or Identifier,Número o identificador
-Status of Shipment,Estado del embarque
-Transportation Type,Tipo de transporte
-Internal Notes only,Notas internas solamente
-Warehouse Receipts,Recibos de almacén
+Transportation type,Tipo de transporte
+Warehouse Receipts in Shipment,Recibos de almacén en envío
 
-Parcel Settings,Configuración de Paquetes
+Pieces,Piezas
+Internal reference code.,Código de referencia interno.
+Weight in pounds provided by the warehouse (if available).,Peso en libras proporcionado por el almacén (si está disponible).
+Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
+Internal notes only.,Solo notas internas.
 
 Save,Guardar
-apps/frappe/frappe/public/js/frappe/form/sidebar/form_sidebar.js +260,{0} edited this {1},{0} editaste esto {1}
