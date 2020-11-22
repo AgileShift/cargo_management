@@ -10,7 +10,7 @@
  "chart_options": "",
  "charts": [
   {
-   "chart": "Parcels reported monthly",
+   "chart": "Parcels reported",
    "width": "Full"
   }
  ],
@@ -21,7 +21,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2020-10-16 13:26:15.899589",
+ "modified": "2020-11-22 10:53:21.512127",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

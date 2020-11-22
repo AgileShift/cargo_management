@@ -16,15 +16,15 @@
    "links": "[\n    {\n        \"label\": \"Shipment\",\n        \"name\": \"Shipment\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"count\": true,\n        \"doctype\": \"Shipment\"\n    }\n]"
   }
  ],
- "cards_label": "Quick Access",
+ "cards_label": "",
  "category": "Domains",
  "charts": [
   {
-   "chart_name": "Parcels reported monthly",
-   "label": "Parcels reported monthly"
+   "chart_name": "Parcels reported",
+   "label": "Parcels reported"
   }
  ],
- "charts_label": "Dashboard",
+ "charts_label": "",
  "creation": "2020-07-05 15:49:07.860880",
  "developer_mode_only": 0,
  "disable_user_customization": 1,
@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Parcel",
- "modified": "2020-11-03 12:45:44.018679",
+ "modified": "2020-11-22 10:50:34.436922",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -86,7 +86,7 @@
    "color": "#ff4d4d",
    "doc_view": "List",
    "format": "",
-   "label": "Available for Pickup at post office",
+   "label": "Available for pickup at post office",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"Available For Pickup\"]\n}",
    "type": "DocType"
@@ -113,7 +113,7 @@
    "color": "#ffa685",
    "doc_view": "List",
    "format": "{} Pending",
-   "label": "In extraordinary confirmation",
+   "label": "In Extraordinary Confirmation",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": \"In Extraordinary Confirmation\"\n}",
    "type": "DocType"
@@ -122,7 +122,7 @@
    "color": "#fff168",
    "doc_view": "List",
    "format": "{} Waiting",
-   "label": "Awaiting departure",
+   "label": "Awaiting Departure",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": \"Awaiting Departure\"\n}",
    "type": "DocType"
@@ -139,11 +139,11 @@
    "color": "#9deca2",
    "doc_view": "List",
    "format": "{} Ready",
-   "label": "Available to pickup",
+   "label": "Available to Pickup",
    "link_to": "Parcel",
    "stats_filter": "{\n    \"status\": [\"=\", \"Available to Pickup\"]\n}",
    "type": "DocType"
   }
  ],
- "shortcuts_label": "Shortcuts"
+ "shortcuts_label": ""
 }

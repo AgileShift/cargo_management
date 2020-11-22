@@ -138,7 +138,7 @@
    "read_only": 1
   },
   {
-   "description": "The name of the person who signed for the package (if available)",
+   "description": "The name of the person who signed for the package (if available).",
    "fieldname": "signed_by",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -175,14 +175,14 @@
    "label": "Additional data from carrier"
   },
   {
-   "description": "Name on the package label",
+   "description": "Name on the package label.",
    "fieldname": "consignee_name",
    "fieldtype": "Data",
    "label": "Consignee name"
   },
   {
    "default": "1",
-   "description": "Quantity of packages in shipment",
+   "description": "Quantity of packages in shipment.",
    "fieldname": "pieces",
    "fieldtype": "Int",
    "label": "Pieces"
@@ -266,10 +266,10 @@
    "read_only": 1
   },
   {
-   "description": "Latest carrier update",
+   "bold": 1,
    "fieldname": "carrier_last_detail",
    "fieldtype": "Small Text",
-   "label": "Carrier Last Detail",
+   "label": "Carrier last detail",
    "read_only": 1
   },
   {
@@ -295,7 +295,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-11-03 16:22:12.549123",
+ "modified": "2020-11-22 09:40:27.735873",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

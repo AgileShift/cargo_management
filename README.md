@@ -14,6 +14,10 @@ System to manage warehouses, customers, packages and custom logistic details.
 Python EasyPost API for Package Tracking details
 > `easypost==4.1.0`
 
+# TODO:
+1. Work on the translations
+2. Rename parcel fields: by_carrier
+
 
 #### License
 
