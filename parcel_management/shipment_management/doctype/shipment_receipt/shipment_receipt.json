@@ -57,6 +57,7 @@
    "label": "Arrival Date"
   },
   {
+   "fetch_from": "shipment.shipment_lines",
    "fieldname": "shipment_receipt_lines",
    "fieldtype": "Table",
    "label": "Parcels in Shipment Receipt",
@@ -82,7 +83,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-11-03 17:15:03.752106",
+ "modified": "2020-11-22 14:54:25.937601",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt",

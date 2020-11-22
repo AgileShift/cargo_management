@@ -71,12 +71,13 @@ Parcels in Warehouse Receipt,Paquetes en el recibo de almacén
 
 Shipment,Embarque
 Transportation type,Tipo de transporte
-Warehouse Receipts in Shipment,Recibos de almacén en envío
+Warehouse Receipts in Shipment,Recibos de almacén en el envío
+
+Shipment Receipt,Recibo de embarque
 
 Pieces,Piezas
 Internal reference code.,Código de referencia interno.
 Weight in pounds provided by the warehouse (if available).,Peso en libras proporcionado por el almacén (si está disponible).
 Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
-Internal notes only.,Solo notas internas.
 
 Save,Guardar

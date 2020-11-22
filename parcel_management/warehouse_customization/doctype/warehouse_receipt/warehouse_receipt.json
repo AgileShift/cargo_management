@@ -19,8 +19,6 @@
   "weight",
   "pieces",
   "sb_0",
-  "notes",
-  "sb_1",
   "warehouse_receipt_lines"
  ],
  "fields": [
@@ -106,12 +104,6 @@
    "reqd": 1
   },
   {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: doc.status != 'Closed';",
-   "fieldname": "sb_1",
-   "fieldtype": "Section Break"
-  },
-  {
    "default": "1",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
@@ -120,12 +112,6 @@
   {
    "fieldname": "sb_0",
    "fieldtype": "Section Break"
-  },
-  {
-   "description": "Internal notes only.",
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
   },
   {
    "bold": 1,
@@ -151,7 +137,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-11-22 12:07:11.978783",
+ "modified": "2020-11-22 16:12:11.327484",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

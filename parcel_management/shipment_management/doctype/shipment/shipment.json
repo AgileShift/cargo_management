@@ -18,8 +18,6 @@
   "weight",
   "pieces",
   "sb_0",
-  "notes",
-  "sb_1",
   "shipment_lines"
  ],
  "fields": [
@@ -63,12 +61,6 @@
    "label": "Weight"
   },
   {
-   "description": "Internal notes only.",
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
-  },
-  {
    "allow_in_quick_entry": 1,
    "fieldname": "shipment_lines",
    "fieldtype": "Table MultiSelect",
@@ -81,10 +73,6 @@
   },
   {
    "fieldname": "sb_0",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "sb_1",
    "fieldtype": "Section Break"
   },
   {
@@ -139,7 +127,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-11-22 12:20:33.007198",
+ "modified": "2020-11-22 16:12:49.870231",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",
