@@ -14,7 +14,7 @@
   "departure_date",
   "arrival_date",
   "section_break_6",
-  "test",
+  "shipment_receipt_warehouse_lines",
   "shipment_receipt_lines"
  ],
  "fields": [
@@ -57,7 +57,6 @@
    "label": "Arrival Date"
   },
   {
-   "fetch_from": "shipment.shipment_lines",
    "fieldname": "shipment_receipt_lines",
    "fieldtype": "Table",
    "label": "Parcels in Shipment Receipt",
@@ -69,21 +68,29 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "test",
-   "fieldtype": "Data",
-   "label": "Warehouse Receipt in Shipment Receipt"
-  },
-  {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "options": "Open\nClosed",
    "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "shipment_receipt_warehouse_lines",
+   "fieldtype": "Table MultiSelect",
+   "label": "Warehouse Receipt in Shipment Receipt",
+   "options": "Shipment Receipt Warehouse Line"
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2020-11-22 14:54:25.937601",
+ "links": [
+  {
+   "group": "Shipment",
+   "link_doctype": "Shipment",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2020-11-22 23:17:22.306773",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt",
