@@ -12,8 +12,15 @@ def update_data_from_carrier(doc):
         parcel.flags.requested_to_track = True  # Set bypass flag ON. See Parcel Doctype flags. Go directly to track.
         parcel.save()  # Trigger before_save() who checks for the bypass flag. We avoid revalidation checks.
 
-    return {}  # FIXME: To prevent reload_doc two times by: execute_action() called if using "Server Action"
+    return {}  # FIX: To prevent reload_doc being called twice by: execute_action() called if using "Server Action"
 
+# TODO: FINISH
+@frappe.whitelist(allow_guest=False)
+def update_data_from_carrier_bulk(names):
+    print(names)
+
+    for name in names:
+        update_data_from_carrier(name)
 
 @frappe.whitelist(allow_guest=False)
 @frappe.read_only()
@@ -22,5 +29,3 @@ def get_carrier_detail_page_url(carrier: str):
     return \
         frappe.get_value('Parcel Carrier', carrier, 'carrier_detail_page_url', cache=True) or \
         frappe.db.get_single_value('Parcel Settings', 'default_carrier_detail_page_url', cache=True)
-
-# TODO: Add a Action button for "In Extraordinary Confirmation"

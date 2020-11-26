@@ -1,34 +1,56 @@
 frappe.listview_settings['Parcel'] = {
-    add_fields: ['status'],
+    add_fields: ['status', 'carrier'],
     filters: [
         ['status', 'not in', ['Finished', 'Cancelled', 'fully_refunded']],
     ],
     hide_name_column: true,
 
     get_indicator(doc) {
-        // TODO: Finish Indicator
-        switch (doc.status) {
-            case 'Awaiting Receipt':
-                return [__('Awaiting Receipt'), 'blue', 'status,=,Awaiting Receipt']
-            case 'Awaiting Confirmation':
-                return [__('Awaiting Confirmation'), 'orange', 'status,=,Awaiting Confirmation']
-            case 'In Extraordinary Confirmation':
-                return [__('In Extraordinary Confirmation'), 'red', 'status,=,In Extraordinary Confirmation']
-            case 'Awaiting Departure':
-                return [__('Awaiting Departure'), 'yellow', 'status,=,Awaiting Departure']
-            case 'In Transit':
-                return [__('In Transit'), 'purple', 'status,=,In Transit']
-            case 'In Customs':
-                return [__('In Customs'), 'black', 'status,=,In Customs']
-            case 'Sorting':
-                return [__('Sorting'), 'black', 'status,=,Sorting']
-            case 'Available to Pickup':
-                return [__('Available to Pickup'), 'green', 'status,=,Available to Pickup']
-            case 'Finished':
-                return [__('Finished'), 'green', 'status,=,Finished']
-            case 'Cancelled':
-                return [__('Cancelled'), 'red', 'status,=,Cancelled']
-        }
-    }
+        const status_color = {
+            'Awaiting Receipt': 'blue',
+            'Awaiting Confirmation': 'orange',
+            'In Extraordinary Confirmation': 'red',
+            'Awaiting Departure': 'yellow',
+            'In Transit': 'purple',
+            'In Customs': 'black',
+            'Sorting': 'black',
+            'Available to Pickup': 'green',
+            'Finished': 'green',
+            'Cancelled': 'red',
+        };
 
+        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
+    },
+
+    onload: function (listview) {
+        listview.page.add_action_item(__('Update data from carrier'), function () {
+            // TODO FINISH:
+            listview.call_for_selected_items(
+                'parcel_management.parcel_management.doctype.parcel.actions.update_data_from_carrier_bulk', {
+            });
+
+        });
+    },
+
+    button: {
+        show(doc) {
+            return doc.name;
+        },
+        get_label() {
+            return __('Carrier page')
+        },
+        get_description(doc) {
+            return __('Visit carrier detail page')
+        },
+        action(doc) {
+            frappe.utils.play_sound('click');  // Really Necessary?
+            frappe.call({
+                method: 'parcel_management.parcel_management.doctype.parcel.actions.get_carrier_detail_page_url',
+                args: {carrier: doc.carrier},
+                callback: (r) => {  // FIXME: Don't working on mobile -> window.open(url, '_blank');
+                    window.open(r.message + doc.tracking_number, '_blank');
+                }
+            });
+        },
+    },
 }

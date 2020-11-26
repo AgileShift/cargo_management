@@ -8,7 +8,6 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     onload: function (frm) {
-
 	    frm.set_query('warehouse_receipt_lines', () => {
             return {
                 'filters': [
@@ -16,7 +15,6 @@ frappe.ui.form.on('Warehouse Receipt', {
                 ]
             };
         });
-
     },
 
     refresh: function (frm) {

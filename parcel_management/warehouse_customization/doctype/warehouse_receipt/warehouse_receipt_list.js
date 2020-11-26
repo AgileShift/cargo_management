@@ -6,14 +6,12 @@ frappe.listview_settings['Warehouse Receipt'] = {
     hide_name_column: true,
 
     get_indicator(doc) {
-        // TODO: Finish Indicator
-        switch (doc.status) {
-            case 'Open':
-                return [__('Open'), 'yellow', 'status,=,Open']
-            case 'In Transit':
-                return [__('In Transit'), 'purple', 'status,=,In Transit']
-            case 'Closed':
-                return [__('Closed'), 'green', 'status,=,Closed']
-        }
+        const status_color = {
+            'Open': 'yellow',
+            'In Transit': 'purple',
+            'Closed': 'green',
+        };
+
+        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
     }
 }

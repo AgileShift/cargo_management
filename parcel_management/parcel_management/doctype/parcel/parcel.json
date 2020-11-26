@@ -61,10 +61,13 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "columns": 4,
    "description": "Tracking code provided by the carrier.",
    "fieldname": "tracking_number",
    "fieldtype": "Data",
    "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Tracking number",
    "reqd": 1,
    "unique": 1
@@ -79,10 +82,10 @@
   },
   {
    "bold": 1,
+   "columns": 2,
    "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
-   "in_filter": 1,
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
@@ -133,11 +136,12 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "in_preview": 1,
-   "in_standard_filter": 1,
    "label": "Carrier real delivery date",
    "read_only": 1
   },
   {
+   "bold": 1,
+   "columns": 1,
    "description": "The name of the person who signed for the package (if available).",
    "fieldname": "signed_by",
    "fieldtype": "Data",
@@ -197,6 +201,7 @@
    "unique": 1
   },
   {
+   "bold": 1,
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
@@ -237,15 +242,18 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
+   "columns": 3,
    "depends_on": "customer",
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Customer Name",
    "read_only": 1
   },
   {
+   "bold": 1,
    "default": "0",
    "depends_on": "content",
    "description": "Total declared value in package.",
@@ -262,7 +270,6 @@
    "hidden": 1,
    "label": "Customer Email",
    "options": "Email",
-   "print_hide": 1,
    "read_only": 1
   },
   {
@@ -295,7 +302,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-11-22 12:08:10.391090",
+ "modified": "2020-11-24 17:13:54.247825",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
