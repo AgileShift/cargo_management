@@ -38,12 +38,13 @@ Carrier last detail, Última actualización del transportista
 Additional data from customer,Datos adicionales de el cliente
 Shipper,Vendedor
 Store that sends the package.,Tienda que envía el paquete.
-Notes or instructions,Notas o instrucciones
+Notes or instructions.,Notas o instrucciones.
+Order number,Número de orden
 Total declared value in package.,Valor total declarado del paquete.
 Internal data,Datos internos
 Consignee name,Nombre del consignatario
 Name on the package label.,Nombre en la etiqueta del paquete.
-Real weight measured,Peso real medido
+Real weight measured.,Peso real medido.
 Quantity of packages in shipment.,Cantidad de paquetes en el envío.
 
 Visit carrier detail page,Visitar página de detalles del transportista
