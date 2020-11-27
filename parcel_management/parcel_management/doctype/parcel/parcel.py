@@ -90,6 +90,7 @@ class Parcel(Document):
 
     def get_explained_status(self):
         """ This returns a detailed explanation of the current status of the Parcel and compatible colors. """
+        # TODO: Translate this
         if self.status == 'Awaiting Receipt':
             message, color = 'Paquete aún no se entrega en almacén.', 'blue'
         elif self.status == 'Awaiting Confirmation':

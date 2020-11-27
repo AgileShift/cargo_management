@@ -15,10 +15,9 @@
    "options": "Warehouse Receipt"
   }
  ],
- "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2020-11-22 22:58:24.207136",
+ "modified": "2020-11-27 00:37:57.827537",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt Warehouse Line",

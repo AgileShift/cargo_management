@@ -19,6 +19,15 @@
  ],
  "fields": [
   {
+   "description": "Shipment Name",
+   "fetch_from": "shipment.reference",
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
    "allow_in_quick_entry": 1,
    "description": "Reference to the shipment to be received.",
    "fieldname": "shipment",
@@ -32,42 +41,6 @@
    "unique": 1
   },
   {
-   "fetch_from": "shipment.departure_date",
-   "fieldname": "departure_date",
-   "fieldtype": "Date",
-   "label": "Departure Date",
-   "read_only": 1
-  },
-  {
-   "description": "Shipment Name",
-   "fetch_from": "shipment.reference",
-   "fieldname": "reference",
-   "fieldtype": "Data",
-   "label": "Reference",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "arrival_date",
-   "fieldtype": "Date",
-   "label": "Arrival Date"
-  },
-  {
-   "fieldname": "shipment_receipt_lines",
-   "fieldtype": "Table",
-   "label": "Parcels in Shipment Receipt",
-   "options": "Shipment Receipt Line",
-   "reqd": 1
-  },
-  {
-   "fieldname": "section_break_6",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -75,14 +48,40 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "shipment.departure_date",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "arrival_date",
+   "fieldtype": "Date",
+   "label": "Arrival Date"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
    "bold": 1,
    "fieldname": "shipment_receipt_warehouse_lines",
    "fieldtype": "Table MultiSelect",
    "label": "Warehouse Receipt in Shipment Receipt",
    "options": "Shipment Receipt Warehouse Line"
+  },
+  {
+   "fieldname": "shipment_receipt_lines",
+   "fieldtype": "Table",
+   "label": "Parcels in Shipment Receipt",
+   "options": "Shipment Receipt Line",
+   "reqd": 1
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [
   {
    "group": "Shipment",
@@ -90,7 +89,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2020-11-22 23:17:22.306773",
+ "modified": "2020-11-27 00:36:35.972692",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt",

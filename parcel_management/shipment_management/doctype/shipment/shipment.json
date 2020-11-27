@@ -48,32 +48,18 @@
    "search_index": 1
   },
   {
-   "fieldname": "column_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
    "allow_in_quick_entry": 1,
-   "default": "0.00",
-   "description": "Weight in pounds provided by the warehouse (if available).",
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "in_preview": 1,
-   "label": "Weight"
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "shipment_lines",
-   "fieldtype": "Table MultiSelect",
-   "in_preview": 1,
+   "bold": 1,
+   "default": "Ocean",
+   "fieldname": "transportation_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Warehouse Receipts in Shipment",
-   "options": "Shipment Line",
-   "read_only_depends_on": "eval: doc.status == 'Received';",
-   "reqd": 1
-  },
-  {
-   "fieldname": "sb_0",
-   "fieldtype": "Section Break"
+   "label": "Transportation type",
+   "options": "Air\nOcean",
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "default": "1",
@@ -82,11 +68,8 @@
    "label": "Don't Send Emails"
   },
   {
-   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
-   "fieldname": "pieces",
-   "fieldtype": "Int",
-   "in_preview": 1,
-   "label": "Pieces"
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
   },
   {
    "bold": 1,
@@ -101,20 +84,36 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "bold": 1,
-   "default": "Ocean",
-   "fieldname": "transportation_type",
-   "fieldtype": "Select",
-   "in_filter": 1,
-   "in_list_view": 1,
+   "default": "0.00",
+   "description": "Weight in pounds provided by the warehouse (if available).",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_preview": 1,
+   "label": "Weight"
+  },
+  {
+   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
+   "fieldname": "pieces",
+   "fieldtype": "Int",
+   "in_preview": 1,
+   "label": "Pieces"
+  },
+  {
+   "fieldname": "sb_0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "shipment_lines",
+   "fieldtype": "Table MultiSelect",
+   "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Transportation type",
-   "options": "Air\nOcean",
-   "reqd": 1,
-   "search_index": 1
+   "label": "Warehouse Receipts in Shipment",
+   "options": "Shipment Line",
+   "read_only_depends_on": "eval: doc.status == 'Received';",
+   "reqd": 1
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [
   {
    "group": "Parcel",
@@ -127,7 +126,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-11-22 16:12:49.870231",
+ "modified": "2020-11-27 00:35:34.532552",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",

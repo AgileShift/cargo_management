@@ -38,36 +38,8 @@
    "read_only": 1
   },
   {
-   "fieldname": "items",
-   "fieldtype": "Table",
-   "label": "Items",
-   "options": "Parcel Quotation Item",
-   "reqd": 1
-  },
-  {
-   "bold": 1,
-   "fieldname": "text",
-   "fieldtype": "HTML",
-   "label": "Text"
-  },
-  {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_5",
-   "fieldtype": "Section Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "purchase_assistance",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "label": "Purchase assistance"
-  },
-  {
-   "fieldname": "section_break_8",
-   "fieldtype": "Section Break"
   },
   {
    "default": "17",
@@ -77,14 +49,32 @@
    "label": "Transit days"
   },
   {
-   "fieldname": "section_break_11",
-   "fieldtype": "Section Break"
-  },
-  {
    "default": "0",
    "fieldname": "detail_pricing",
    "fieldtype": "Check",
    "label": "Detail pricing"
+  },
+  {
+   "default": "0",
+   "fieldname": "purchase_assistance",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Purchase assistance"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Parcel Quotation Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
   },
   {
    "default": "0",
@@ -95,11 +85,20 @@
    "label": "Total import cost",
    "options": "USD",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "text",
+   "fieldtype": "HTML",
+   "label": "Text"
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-11-22 11:45:26.066244",
+ "modified": "2020-11-27 00:33:57.716446",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation",
@@ -163,6 +162,7 @@
    "share": 1
   }
  ],
+ "search_fields": "customer, customer_name",
  "sort_field": "modified",
  "sort_order": "DESC"
 }

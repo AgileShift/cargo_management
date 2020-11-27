@@ -24,15 +24,6 @@
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "default": "0.00",
-   "description": "Weight in pounds provided by the warehouse (if available).",
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "in_preview": 1,
-   "label": "Weight"
-  },
-  {
-   "allow_in_quick_entry": 1,
    "bold": 1,
    "description": "Internal reference code.",
    "fieldname": "reference",
@@ -42,13 +33,6 @@
    "label": "Reference",
    "reqd": 1,
    "unique": 1
-  },
-  {
-   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
-   "fieldname": "pieces",
-   "fieldtype": "Int",
-   "in_preview": 1,
-   "label": "Pieces"
   },
   {
    "allow_in_quick_entry": 1,
@@ -63,6 +47,23 @@
    "options": "Open\nIn Transit\nClosed",
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "bold": 1,
+   "description": "Warehouse where reception occurred.",
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Target warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "mute_emails",
+   "fieldtype": "Check",
+   "label": "Don't Send Emails"
   },
   {
    "fieldname": "column_break_3",
@@ -82,14 +83,33 @@
   },
   {
    "bold": 1,
-   "description": "Warehouse where reception occurred.",
-   "fieldname": "target_warehouse",
-   "fieldtype": "Link",
+   "description": "Real departure date of the shipment to his final destination.",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Target warehouse",
-   "options": "Warehouse",
-   "reqd": 1
+   "label": "Departure date",
+   "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "0.00",
+   "description": "Weight in pounds provided by the warehouse (if available).",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_preview": 1,
+   "label": "Weight"
+  },
+  {
+   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
+   "fieldname": "pieces",
+   "fieldtype": "Int",
+   "in_preview": 1,
+   "label": "Pieces"
+  },
+  {
+   "fieldname": "sb_0",
+   "fieldtype": "Section Break"
   },
   {
    "allow_in_quick_entry": 1,
@@ -102,29 +122,8 @@
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Closed';",
    "reqd": 1
-  },
-  {
-   "default": "1",
-   "fieldname": "mute_emails",
-   "fieldtype": "Check",
-   "label": "Don't Send Emails"
-  },
-  {
-   "fieldname": "sb_0",
-   "fieldtype": "Section Break"
-  },
-  {
-   "bold": 1,
-   "description": "Real departure date of the shipment to his final destination.",
-   "fieldname": "departure_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Departure date",
-   "read_only": 1
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [
   {
    "group": "Parcel",
@@ -137,7 +136,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-11-22 16:12:11.327484",
+ "modified": "2020-11-27 00:38:50.653447",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

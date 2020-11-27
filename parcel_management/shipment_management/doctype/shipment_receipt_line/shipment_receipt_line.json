@@ -44,10 +44,9 @@
    "reqd": 1
   }
  ],
- "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2020-11-03 17:55:34.151680",
+ "modified": "2020-11-27 00:37:29.649406",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt Line",

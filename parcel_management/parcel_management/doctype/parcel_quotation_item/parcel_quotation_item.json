@@ -38,6 +38,36 @@
    "label": "URL or Name"
   },
   {
+   "bold": 1,
+   "columns": 1,
+   "default": "1.00",
+   "description": "Weight of the item in pounds.",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_shipping",
+   "fieldtype": "Check",
+   "label": "Has Shipping",
+   "print_hide": 1
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "has_taxes",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Has Taxes",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
    "columns": 1,
    "fieldname": "product_price",
    "fieldtype": "Currency",
@@ -58,15 +88,6 @@
   },
   {
    "columns": 1,
-   "default": "0",
-   "fieldname": "has_taxes",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "label": "Has Taxes",
-   "print_hide": 1
-  },
-  {
-   "columns": 1,
    "depends_on": "has_taxes",
    "fieldname": "taxes",
    "fieldtype": "Currency",
@@ -76,14 +97,9 @@
    "read_only": 1
   },
   {
-   "bold": 1,
-   "columns": 1,
-   "default": "1.00",
-   "description": "Weight of the item in pounds.",
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Weight"
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Arrival and Departure Dates"
   },
   {
    "columns": 2,
@@ -100,83 +116,8 @@
    "label": "Longest Arrival Date"
   },
   {
-   "bold": 1,
-   "columns": 2,
-   "fieldname": "import_price_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Import Price Type",
-   "options": "Weight\nPercentage"
-  },
-  {
-   "default": "35.00",
-   "depends_on": "eval: doc.import_price_type == 'Percentage'",
-   "description": "Import Percentage",
-   "fieldname": "import_percentage",
-   "fieldtype": "Percent",
-   "label": "Percentage",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "section_break_7",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "has_shipping",
-   "fieldtype": "Check",
-   "label": "Has Shipping",
-   "print_hide": 1
-  },
-  {
    "fieldname": "column_break_11",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_13",
-   "fieldtype": "Section Break",
-   "label": "Prices"
-  },
-  {
-   "fieldname": "column_break_15",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "product_total",
-   "fieldtype": "Currency",
-   "label": "Product Total Price",
-   "options": "USD",
-   "read_only": 1
-  },
-  {
-   "fieldname": "section_break_9",
-   "fieldtype": "Section Break",
-   "label": "Arrival and Departure Dates"
-  },
-  {
-   "fieldname": "column_break_9",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "5.00",
-   "depends_on": "eval: doc.import_price_type == 'Weight'",
-   "description": "Import Price per each pound",
-   "fieldname": "import_price_per_pound",
-   "fieldtype": "Currency",
-   "label": "Price per Pound",
-   "print_hide": 1
-  },
-  {
-   "description": "This is an approximate value",
-   "fieldname": "import_price",
-   "fieldtype": "Currency",
-   "label": "Import Price",
-   "options": "USD",
-   "read_only": 1
   },
   {
    "description": "Departure from warehouse",
@@ -189,12 +130,70 @@
    "fieldname": "longest_departure_date",
    "fieldtype": "Date",
    "label": "Longest Departure Date"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "product_total",
+   "fieldtype": "Currency",
+   "label": "Product Total Price",
+   "options": "USD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "This is an approximate value",
+   "fieldname": "import_price",
+   "fieldtype": "Currency",
+   "label": "Import Price",
+   "options": "USD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break",
+   "label": "Prices"
+  },
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "import_price_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Import Price Type",
+   "options": "Weight\nPercentage"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "5.00",
+   "depends_on": "eval: doc.import_price_type == 'Weight'",
+   "description": "Import Price per each pound",
+   "fieldname": "import_price_per_pound",
+   "fieldtype": "Currency",
+   "label": "Price per Pound",
+   "print_hide": 1
+  },
+  {
+   "default": "35.00",
+   "depends_on": "eval: doc.import_price_type == 'Percentage'",
+   "description": "Import Percentage",
+   "fieldname": "import_percentage",
+   "fieldtype": "Percent",
+   "label": "Percentage",
+   "print_hide": 1
   }
  ],
- "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2020-11-19 08:53:49.684465",
+ "modified": "2020-11-27 00:34:34.733371",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Quotation Item",
