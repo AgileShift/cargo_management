@@ -14,13 +14,17 @@ def update_data_from_carrier(doc):
 
     return {}  # FIX: To prevent reload_doc being called twice by: execute_action() called if using "Server Action"
 
-# TODO: FINISH
+
 @frappe.whitelist(allow_guest=False)
 def update_data_from_carrier_bulk(names):
-    print(names)
+    # TODO: FINISH
+    names = frappe.parse_json(names)
 
     for name in names:
-        update_data_from_carrier(name)
+        update_data_from_carrier({
+            'name': name
+        })
+
 
 @frappe.whitelist(allow_guest=False)
 @frappe.read_only()

@@ -5,6 +5,15 @@ Tracking number,Número de rastreo
 Tracking code provided by the carrier.,Número de rastreo brindado por el transportista.
 Carrier,Transportista
 Name of the carrier handling the shipment.,Nombre del transportista que maneja el envío.
+
+Awaiting Receipt,Esperando Recepción
+Awaiting Confirmation,Esperando Confirmación
+In Extraordinary Confirmation,En Confirmación Extraordinaria
+Awaiting Departure,Esperando Despacho
+In Customs,En Aduana
+Sorting,Clasificando
+Available to Pickup,Disponible para Retirar
+
 Track,Rastrear
 Parcel is requested to be tracked.,Se solicita el seguimiento del paquete.
 Additional data from carrier,Datos adicionales del transportista
@@ -15,17 +24,14 @@ Delivery date time (timezone aware) provided by the carrier (if available).,Fech
 Carrier estimated weight,Peso estimado según el transportista
 Estimated weight of the package as measured by the carrier (if available).,Peso estimado del paquete medido por el transportista (si está disponible).
 
+
 Carrier status,Estado según el transportista
 The current status of the package provided by the carrier (if available),El estado actual del paquete proporcionado por el transportista (si está disponible)
-Awaiting Receipt,Esperando Recepción
-Awaiting Confirmation,Esperando Confirmación
-In Extraordinary Confirmation,En Confirmación Extraordinaria
-Awaiting Departure,Esperando Despacho
-In Customs,En Aduana
-Sorting,Clasificando
-Available to Pickup,Disponible para Retirar
+Delivered,Entregado
 
 Carrier status detail,Detalle del estado según el transportista
+Arrived At Destination,Llegó a destino
+
 Signed by,Firmado por
 The name of the person who signed for the package (if available).,El nombre de la persona que firmó el paquete (si está disponible).
 Carrier last detail, Última actualización del transportista
@@ -41,7 +47,7 @@ Real weight measured,Peso real medido
 Quantity of packages in shipment.,Cantidad de paquetes en el envío.
 
 Visit carrier detail page,Visitar página de detalles del transportista
-apps/parcel_management/parcel_management/parcel_management/doctype/parcel/parcel.json +6,Update data from carrier,Actualizar datos del transportista
+Update data from carrier,Actualizar datos del transportista
 
 All active parcels,Todos los paquetes activos
 Without carrier data,Sin datos del transportista
@@ -50,6 +56,10 @@ Arrived today,Llegaron hoy
 Available for pickup at post office,Disponible para recoger en la oficina postal
 This week pending confirmation,Pendientes de confirmación de esta semana
 All pending confirmation,Todos los pendientes de confirmación
+
+Parcel is configured not to track.,El paquete está configurado para no rastrear.
+Parcel is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.
+Parcel has been updated from API,El paquete se ha actualizado desde el API.
 
 Parcel Quotation,Cotización de paquete
 Transit days,Días de tránsito

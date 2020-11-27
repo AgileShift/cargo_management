@@ -1,3 +1,4 @@
+from frappe import _
 import frappe
 from frappe.model.document import Document
 
@@ -51,13 +52,13 @@ class Parcel(Document):
         # TODO: Validate if any tracker API is enabled.
 
         if not self.track:  # Parcel is not configured to be tracked, no matter if easypost_id exists.
-            frappe.msgprint(msg='Parcel is configured not to track.', indicator='yellow', alert=True)
+            frappe.msgprint(msg=_('Parcel is configured not to track.'), indicator='yellow', alert=True)
             return False
 
         self.load_carrier_flags()  # Load carrier global flags settings an attach to the document flags.
 
         if not self.flags.carrier_can_track:  # Carrier is configured to not track. So we don't bother.
-            frappe.msgprint(msg='Parcel is handled by a carrier we cant\'t track.', indicator='red', alert=True)
+            frappe.msgprint(msg=_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
             return False
 
         return True
@@ -78,7 +79,7 @@ class Parcel(Document):
                 (self.status == 'Awaiting Receipt' and new_status == 'Awaiting Confirmation') or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation'] and new_status == 'Awaiting Departure') or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure'] and new_status == 'In Transit'):
-
+            # TODO: Finish
             print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.tracking_number))
 
             self.status = new_status
@@ -90,13 +91,13 @@ class Parcel(Document):
     def get_explained_status(self):
         """ This returns a detailed explanation of the current status of the Parcel and compatible colors. """
         if self.status == 'Awaiting Receipt':
-            message, color = 'Paquete aun no se entrega en almacen.', 'blue'
+            message, color = 'Paquete aún no se entrega en almacén.', 'blue'
         elif self.status == 'Awaiting Confirmation':
-            message, color = 'Paquete fue entregado segun el carrier, esperando confirmacion del almacen.', 'yellow'
+            message, color = 'Paquete fue entregado segun el transportista, esperando confirmacion del almacén.', 'yellow'
         elif self.status == 'In Extraordinary Confirmation':
-            message, color = 'Paquete se encuentra en una verificacion fuera de lo habitual.', 'yellow'
+            message, color = 'Paquete se encuentra en una verificación fuera de lo habitual.', 'yellow'
         elif self.status == 'Awaiting Departure':
-            message, color = 'Paquete fue recepcionado, esperando proxima salida de mercaderia.', 'blue'
+            message, color = 'Paquete fue recepcionado, esperando proximo despacho de carga.', 'blue'
         elif self.status == 'In Transit':
             message, color = 'Paquete esta en transito a destino.', 'blue'
         elif self.status == 'Available to Pickup':
@@ -104,7 +105,7 @@ class Parcel(Document):
         elif self.status == 'Finished' or self.status == 'Cancelled':
             return  # No message
         else:
-            message, color = 'Contactese para obtener mayor informacion del paquete.', 'yellow'
+            message, color = 'Contáctese para obtener mayor información del paquete.', 'yellow'
 
         return {'message': message, 'color': color}
 
@@ -134,7 +135,7 @@ class Parcel(Document):
         else:  # Data to parse that will be save
             self._parse_data_from_easypost_instance(easypost_api.instance)
 
-            frappe.msgprint(msg='Parcel has been updated from API.', alert=True)
+            frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
 
     def _parse_data_from_easypost_instance(self, instance):
         """ This parses all the data from an easypost instance(with all the details) to our Parcel Doctype """
@@ -172,4 +173,4 @@ class Parcel(Document):
 
 @frappe.whitelist(allow_guest=False)
 def get_parcel_explained_status(source_name: str):
-    return frappe.get_doc('Parcel', source_name).get_explained_status()
+    return frappe.get_doc('Parcel', source_name, cache=True).get_explained_status()

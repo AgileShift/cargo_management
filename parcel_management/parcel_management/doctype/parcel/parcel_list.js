@@ -23,13 +23,15 @@ frappe.listview_settings['Parcel'] = {
     },
 
     onload: function (listview) {
-        listview.page.add_action_item(__('Update data from carrier'), function () {
-            // TODO FINISH:
+        listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
+            // TODO FINISH.... This is work in progress
+            // Bulk Dialog - should sent email if status is changed?
+            // Bulk show_progress. This actually reloads the form? if so. how many times?
             listview.call_for_selected_items(
-                'parcel_management.parcel_management.doctype.parcel.actions.update_data_from_carrier_bulk', {
-            });
+                'parcel_management.parcel_management.doctype.parcel.actions.update_data_from_carrier_bulk'
+            );
+        })
 
-        });
     },
 
     button: {
