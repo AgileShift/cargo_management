@@ -8,7 +8,6 @@ frappe.ui.form.on('Shipment', {
     },
 
     onload: function(frm) {
-
         frm.set_query('shipment_lines', () => {
             return {
                 'filters': [
@@ -16,7 +15,6 @@ frappe.ui.form.on('Shipment', {
                 ]
             }
         });
-
     },
 
     refresh: function(frm) {
@@ -38,5 +36,4 @@ frappe.ui.form.on('Shipment', {
 
         // TODO: Add intro message for helper!
     }
-
 });

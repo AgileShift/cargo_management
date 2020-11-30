@@ -3,7 +3,7 @@ import frappe
 
 @frappe.whitelist(allow_guest=False)
 def confirm_parcels_in_wr(doc):
-    """ Used as Action button in Doctype: Confirms the receipt of the parcels. Change status to: "Awaiting Departure" """
+    """ Used as Action button in Doctype: Confirm the receipt of the parcels. Change status to: "Awaiting Departure" """
     # TODO: Make this some sort or generic def, to change status across multiple statuses
     doc = frappe.parse_json(doc)
 
