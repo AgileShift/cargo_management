@@ -46,6 +46,7 @@ class Parcel(Document):
             frappe.msgprint(msg='Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
             self.easypost_id = None
             self._request_data_from_easypost_api()
+        # TODO: When track is recently set to active!
 
     def can_track(self):
         """ This def validate if a parcel can be tracked by any mean using any API, also loads the carrier flags. """

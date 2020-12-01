@@ -79,17 +79,17 @@ class EasypostAPI(object):
         if not dt_str:  # Sometimes datetime string if empty for some values, so return None value.
             return
 
-        # Parse datetime from string. At this moment we do not know if it is in UTC or local.
-        naive_datetime = datetime.datetime.strptime(dt_str, '%Y-%m-%dT%H:%M:%SZ')
+        # Parse datetime from string; At this moment we don't know if it's in UTC or local.
+        naive_datetime = datetime.datetime.strptime(dt_str, '%Y-%m-%dT%H:%M:%S%z')
 
         if not uses_utc:  # API already give us local datetime. So no need to convert to local from UTC
-            return naive_datetime
+            return naive_datetime.replace(tzinfo=None)
 
         # TODO: Make this conversion warehouse location aware!. For now we're pretending only Miami is local timezone
         local_tz = pytz.timezone('America/New_York')  # https://stackoverflow.com/a/32313111/3172310
 
-        # Use local timezone to convert UTC naive datetime to local datetime+timezone. Then return naive local datetime.
-        return local_tz.fromutc(naive_datetime).replace(tzinfo=None)
+        # Return unaware local datetime: Converts unaware UTC datetime to aware UTC and then delete the timezone info.
+        return naive_datetime.astimezone(tz=local_tz).replace(tzinfo=None)
 
     @staticmethod
     def normalize_status(status):
