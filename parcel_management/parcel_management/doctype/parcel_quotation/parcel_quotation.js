@@ -77,7 +77,7 @@ frappe.ui.form.on('Parcel Quotation', {
             $(frm.fields_dict['text'].wrapper)
                 .html(frappe.render_template('parcel_quotation_details', {doc: doc_to_render}));
 
-            frappe.show_alert({message: 'Success', indicator: 'green'}, 5);
+            frappe.show_alert({message: __('Success'), indicator: 'green'}, 5);
         })
     }
 });

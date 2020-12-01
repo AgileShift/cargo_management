@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 
 
 @frappe.whitelist(allow_guest=False)
@@ -7,8 +8,8 @@ def confirm_parcels_in_wr(doc):
     # TODO: Make this some sort or generic def, to change status across multiple statuses
     doc = frappe.parse_json(doc)
 
-    wr_lines, wr_lines_len = doc.warehouse_receipt_lines, len(doc.warehouse_receipt_lines)
     updated_docs = 0
+    wr_lines, wr_lines_len = doc.warehouse_receipt_lines, len(doc.warehouse_receipt_lines)
 
     # Core: Silence Notifications and emails!
     frappe.flags.mute_emails = frappe.flags.in_import = doc.mute_emails
@@ -25,10 +26,10 @@ def confirm_parcels_in_wr(doc):
 
         # TODO: Fix, after publish progress: CTL+S is not working.
         frappe.publish_progress(
-            percent=progress, title='Confirming Parcels',
-            description='Confirming Parcel {0}.'.format(parcel.tracking_number),
+            percent=progress, title=_('Confirming Parcels'),
+            description=_('Confirming Parcel {0}').format(parcel.tracking_number),
         )
 
     frappe.flags.mute_emails = frappe.flags.in_import = False  # Reset core flags.
 
-    frappe.msgprint(msg='{0} Parcels confirmed of {1}.'.format(updated_docs, wr_lines_len), title='Success')
+    frappe.msgprint(msg='{0} Parcels confirmed of {1}.'.format(updated_docs, wr_lines_len), title=_('Success'))

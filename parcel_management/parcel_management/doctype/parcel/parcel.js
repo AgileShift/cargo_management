@@ -40,7 +40,8 @@ frappe.ui.form.on('Parcel', {
             frappe.call({
                 method: 'parcel_management.parcel_management.doctype.parcel.actions.get_carrier_detail_page_url',
                 args: {carrier: frm.doc.carrier},
-                callback: (r) => {  // FIXME: Don't working on mobile -> window.open(url, '_blank');
+                async: false,  // async false to allow window to open a new tab. FIXME: Throws a deprecated message
+                callback: (r) => {
                     window.open(r.message + frm.doc.tracking_number, '_blank');
                 }
             });

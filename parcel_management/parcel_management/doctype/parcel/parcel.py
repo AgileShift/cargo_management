@@ -132,7 +132,7 @@ class Parcel(Document):
 
         except EasypostAPIError as e:
             frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=False, indicator='red')
-            return  # Exit because this has failed(Create or Update)
+            return  # Exit because this has failed(Create or Update)  # FIXME: don't throw because we need to save
 
         else:  # Data to parse that will be save
             self._parse_data_from_easypost_instance(easypost_api.instance)

@@ -1,5 +1,7 @@
 {
  "actions": [],
+ "allow_copy": 1,
+ "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-11-03 16:50:04.125725",
  "description": "Shipment Receipt.",
@@ -89,7 +91,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2020-11-27 00:36:35.972692",
+ "modified": "2020-12-01 09:32:44.823919",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt",
@@ -110,6 +112,7 @@
   }
  ],
  "quick_entry": 1,
+ "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1

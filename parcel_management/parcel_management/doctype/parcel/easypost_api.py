@@ -66,10 +66,10 @@ class EasypostAPI(object):
     @staticmethod
     def naive_dt_to_local_dt(dt_str, uses_utc):
         """
-        Convert naive datetime to local datetime if using UTC. else just return the naive because is already local date
-        @param dt_str: EasyPost datetime format: 2020-06-015T06:00:00Z
+        Convert string datetime to unaware naive datetime;
+        @param dt_str: EasyPost datetime format: 2020-06-015T06:00:00Z or 2020-06-015T06:00:00+00:00
         @param uses_utc: Boolean if time is UTC
-        @return: datetime
+        @return: datetime: Return naive it not using UTC else return local datetime, both are UTC unaware
 
         Some carriers already return datetime without UTC, its localized:
         https://www.easypost.com/does-your-api-return-time-according-to-the-package-destinations-time-zone
