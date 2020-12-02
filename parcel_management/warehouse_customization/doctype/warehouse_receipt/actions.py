@@ -32,4 +32,4 @@ def confirm_parcels_in_wr(doc):
 
     frappe.flags.mute_emails = frappe.flags.in_import = False  # Reset core flags.
 
-    frappe.msgprint(msg='{0} Parcels confirmed of {1}.'.format(updated_docs, wr_lines_len), title=_('Success'))
+    frappe.msgprint(msg=_('{0} Parcels confirmed of {1}.').format(updated_docs, wr_lines_len), title=_('Success'))

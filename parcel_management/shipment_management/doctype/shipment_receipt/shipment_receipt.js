@@ -6,7 +6,7 @@ frappe.ui.form.on('Shipment Receipt', {
 
         frm.clear_table('shipment_receipt_lines');
 
-        frappe.show_progress()
+        // frappe.show_progress()
 
         frappe.model.with_doc('Shipment', frm.doc.shipment, () => {
             $.each(frappe.model.get_doc('Shipment', frm.doc.shipment).shipment_lines, (i, sl) => {

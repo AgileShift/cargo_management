@@ -1,5 +1,5 @@
 import frappe
-
+from frappe import _
 
 @frappe.whitelist(allow_guest=False)
 def mark_shipment_in_transit(source_name: str):
@@ -38,9 +38,11 @@ def mark_shipment_in_transit(source_name: str):
     frappe.msgprint(msg=[
         '{0} Warehouse Receipt in transit.'.format(len(shipment.shipment_lines)),
         '{0} Parcels changed to in transit of {1}.'.format(updated_parcels, total_parcels)
-    ], title='Success')  # FIXME: as_list=True in next updates for production
+    ], title=_('Success'), as_list=True)
+
 
 """
+TODO:
 Shipment
 Pasa de in transit, a in customs
 Cuanto esta in customs, aparece un boton para crear la hoja de recepcion!

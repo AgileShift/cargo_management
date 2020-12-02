@@ -41,7 +41,7 @@ frappe.listview_settings['Parcel'] = {
         get_label() {
             return __('Carrier page')
         },
-        get_description(doc) {
+        get_description() {
             return __('Visit carrier detail page')
         },
         action(doc) {
@@ -49,7 +49,7 @@ frappe.listview_settings['Parcel'] = {
             frappe.call({
                 method: 'parcel_management.parcel_management.doctype.parcel.actions.get_carrier_detail_page_url',
                 args: {carrier: doc.carrier},
-                callback: (r) => {  // FIXME: Don't working on mobile -> window.open(url, '_blank');
+                callback: (r) => {
                     window.open(r.message + doc.tracking_number, '_blank');
                 }
             });

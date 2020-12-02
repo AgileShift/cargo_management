@@ -1,8 +1,10 @@
 import datetime
 
 import easypost
-import frappe
 import pytz
+
+import frappe
+from frappe import _
 
 
 class EasypostAPIError(easypost.Error):
@@ -115,10 +117,21 @@ def easypost_webhook(**kwargs):
         parcel.flags.ignore_validate = True  # Set flag ON because Doc will be saved from webhook data. No validations.
         parcel.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
+        # TODO: Translate: alert message and button
+        parcel_route = "frappe.set_route('Form', 'Parcel', '{}')".format(parcel.tracking_number)
+        alert_message = 'Parcel <a onclick="{0}">{1}</a> is {2}.'\
+            .format(parcel_route, parcel.tracking_number, parcel.carrier_status)
+        alert_body = '''
+            <div class="next-action-container">
+                <button onclick="{}" class="next-action"><span>{}</span></button>
+            </div>
+        '''.format(parcel_route, _('View'))
+
         frappe.publish_realtime(
             event='eval_js',  # https://discuss.erpnext.com/t/popup-message-using-frappe-publish-realtime/37286/7
             message='frappe.show_alert({}, 10);'.format({
-                'message': "Parcel <a href='#Form/Parcel/{0}'>{0}</a> is {1}.".format(parcel.tracking_number, parcel.carrier_status),
+                'body': alert_body,
+                'message': alert_message,
                 'indicator': 'blue'  # TODO: Indicator depends on carrier_status
             })
         )
