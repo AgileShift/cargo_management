@@ -1,40 +1,40 @@
 frappe.ui.form.on('Shipment Receipt', {
 
     shipment: function (frm) {
-        let warehouse_receipts = [];
-        let parcels = []
-
         frm.clear_table('shipment_receipt_lines');
 
-        // frappe.show_progress()
+        // TODO: frappe.show_progress()
+        frappe.model.with_doc('Shipment', frm.doc.shipment)
+            .then(shipment => shipment.shipment_lines.map(sl => sl.warehouse_receipt)) // Return WRs in Shipment
+            .then(warehouse_receipts => { // Read all WR names
+                return Promise.all( // Return all promises when completed
+                    warehouse_receipts.map(wr => { // Iter all over the WR names
+                        return frappe.model.with_doc('Warehouse Receipt', wr) // Get individual WR Doc
+                            .then(wr => wr.warehouse_receipt_lines.map(wrl => wrl.parcel)); // Return parcels names in WR
+                    })
+                ).then(promises => [].concat.apply([], promises)); // Return all the promises into 1 array
+            })
+            .then(parcels => { // Read all parcels names
+                frappe.show_alert('Adding Parcels.');
 
-        frappe.model.with_doc('Shipment', frm.doc.shipment, () => {
-            $.each(frappe.model.get_doc('Shipment', frm.doc.shipment).shipment_lines, (i, sl) => {
-                warehouse_receipts.push(sl.warehouse_receipt);  // Getting all warehouse Receipts in Shipment
-            });
-        }).then(() => {
-            $.each(warehouse_receipts, (i, wr) => {
-                frappe.model.with_doc('Warehouse Receipt', wr, () => {
-                    $.each(frappe.model.get_doc('Warehouse Receipt', wr).warehouse_receipt_lines, (i, wrl) => {
-                        parcels.push(wrl.parcel);
+                return Promise.all( // Return all promises when completed.
+                    parcels.map(parcel_name => { // Iter all over the parcels names
+                        return frappe.model.with_doc('Parcel', parcel_name); // Return individual Parcel Doc
+                    })
+                ).then(promises => promises.sort((a, b) => (a.customer > b.customer) ? 1 : ((b.customer > a.customer) ? -1 : 0)));
+            })
+            .then(parcels => {
+                frappe.show_alert('Parcels added.');
+
+                parcels.forEach(parcel => {
+                    frm.add_child('shipment_receipt_lines', { // Add the parcel to the child table
+                        'parcel': parcel.name,
+                        'customer_name': parcel.customer_name,
+                        'carrier_weight': parcel.carrier_est_weight,
                     });
-                }).then(() => {
-                    $.each(parcels, (i, parcel) => {
-                        let cd = frm.add_child('shipment_receipt_lines');
-                        frappe.get_doc('Parcel')
-                        frappe.model.set_value(cd.doctype, cd.name, 'parcel', parcel);
-                    });
-
-                    //61290980628043021406
-
-                    frm.refresh_field('shipment_receipt_lines');
-                    frm.refresh();
                 });
-            });
-        }).finally(() => {
-            console.log(warehouse_receipts);
-            console.log(parcels);
+
+                frm.refresh_field('shipment_receipt_lines'); // Refresh the child table.
         });
     }
-
 });
