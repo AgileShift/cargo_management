@@ -30,6 +30,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -136,7 +137,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-11-27 00:38:50.653447",
+ "modified": "2020-12-02 22:07:08.558561",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

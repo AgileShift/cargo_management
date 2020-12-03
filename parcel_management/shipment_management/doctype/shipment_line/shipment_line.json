@@ -11,15 +11,17 @@
   {
    "fieldname": "warehouse_receipt",
    "fieldtype": "Link",
+   "in_global_search": 1,
    "in_list_view": 1,
    "label": "Warehouse Receipt",
    "options": "Warehouse Receipt",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2020-07-31 16:31:52.099712",
+ "modified": "2020-12-02 22:15:43.620598",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Line",

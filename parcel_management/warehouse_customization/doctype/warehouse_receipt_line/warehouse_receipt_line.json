@@ -11,15 +11,17 @@
   {
    "fieldname": "parcel",
    "fieldtype": "Link",
+   "in_global_search": 1,
    "in_list_view": 1,
    "label": "Parcel",
    "options": "Parcel",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2020-11-27 00:39:04.736266",
+ "modified": "2020-12-02 22:08:47.486641",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

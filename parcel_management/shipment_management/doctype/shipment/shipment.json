@@ -29,6 +29,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -126,7 +127,7 @@
    "link_fieldname": "reference"
   }
  ],
- "modified": "2020-11-27 00:35:34.532552",
+ "modified": "2020-12-02 22:06:52.976814",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment",

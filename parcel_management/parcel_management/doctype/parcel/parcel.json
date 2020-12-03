@@ -81,6 +81,7 @@
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
+   "in_global_search": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Customer Name",
@@ -323,7 +324,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-11-27 00:24:16.623801",
+ "modified": "2020-12-02 22:04:25.611255",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
