@@ -1,5 +1,15 @@
 frappe.ui.form.on('Shipment Receipt', {
 
+    onload: function (frm) {
+	    frm.set_query('parcel', 'shipment_receipt_lines', () => {
+            return {
+                'filters': [
+                    ['Parcel', 'status', 'not in', ['Available to Pickup', 'Finished']]
+                ]
+            };
+        });
+    },
+
     shipment: function (frm) {
         frm.clear_table('shipment_receipt_lines');
 
