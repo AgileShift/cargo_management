@@ -9,6 +9,7 @@ frappe.ui.form.on('Shipment Receipt', {
             .then(warehouse_receipts => { // Read all WR names
                 return Promise.all( // Return all promises when completed
                     warehouse_receipts.map(wr => { // Iter all over the WR names
+                        frm.add_child('shipment_receipt_warehouse_lines', {'warehouse_receipt': wr}); // TODO: Finish
                         return frappe.model.with_doc('Warehouse Receipt', wr) // Get individual WR Doc
                             .then(wr => wr.warehouse_receipt_lines.map(wrl => wrl.parcel)); // Return parcels names in WR
                     })
@@ -27,13 +28,19 @@ frappe.ui.form.on('Shipment Receipt', {
                 frappe.show_alert('Parcels added.');
 
                 parcels.forEach(parcel => {
+                    let parcel_content = parcel.content.map(c => {
+                        return `Desc: ${c.description} | Monto: $${c.amount}`;
+                    });
+
                     frm.add_child('shipment_receipt_lines', { // Add the parcel to the child table
                         'parcel': parcel.name,
                         'customer_name': parcel.customer_name,
                         'carrier_weight': parcel.carrier_est_weight,
+                        'content': parcel_content.join('\n\n'),
                     });
                 });
 
+                frm.refresh_field('shipment_receipt_warehouse_lines'); // Refresh the child table.
                 frm.refresh_field('shipment_receipt_lines'); // Refresh the child table.
         });
     }
