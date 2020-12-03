@@ -10,7 +10,8 @@
   "carrier_weight",
   "weight",
   "column_break_5",
-  "content"
+  "content",
+  "import_price"
  ],
  "fields": [
   {
@@ -53,11 +54,17 @@
   {
    "fieldname": "column_break_5",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "import_price",
+   "fieldtype": "Currency",
+   "label": "Import Price",
+   "options": "USD"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2020-12-02 18:23:39.555624",
+ "modified": "2020-12-02 18:37:56.580561",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt Line",
