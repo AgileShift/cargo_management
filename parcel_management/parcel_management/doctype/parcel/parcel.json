@@ -324,7 +324,7 @@
    "link_fieldname": "parcel"
   }
  ],
- "modified": "2020-12-02 22:04:25.611255",
+ "modified": "2020-12-02 22:45:07.564329",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -386,7 +386,7 @@
   }
  ],
  "quick_entry": 1,
- "search_fields": "customer, customer_name",
+ "search_fields": "customer, customer_name, status",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
  "sort_field": "modified",
