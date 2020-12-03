@@ -25,6 +25,9 @@
    "fetch_from": "shipment.reference",
    "fieldname": "reference",
    "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -91,7 +94,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2020-12-01 09:32:44.823919",
+ "modified": "2020-12-02 21:49:34.631849",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt",
