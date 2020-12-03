@@ -29,7 +29,7 @@ frappe.ui.form.on('Shipment Receipt', {
 
                 parcels.forEach(parcel => {
                     let parcel_content = parcel.content.map(c => {
-                        return `Desc: ${c.description} | Monto: $${c.amount}`;
+                        return `Descripcion: ${c.description}\nMonto: $${c.amount}`;
                     });
 
                     frm.add_child('shipment_receipt_lines', { // Add the parcel to the child table
