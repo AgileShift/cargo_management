@@ -21,6 +21,7 @@
  ],
  "fields": [
   {
+   "columns": 3,
    "description": "Shipment Name",
    "fetch_from": "shipment.reference",
    "fieldname": "reference",
@@ -34,6 +35,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "columns": 2,
    "description": "Reference to the shipment to be received.",
    "fieldname": "shipment",
    "fieldtype": "Link",
@@ -46,8 +48,11 @@
    "unique": 1
   },
   {
+   "columns": 2,
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Open\nClosed",
    "reqd": 1
@@ -57,15 +62,21 @@
    "fieldtype": "Column Break"
   },
   {
+   "columns": 2,
    "fetch_from": "shipment.departure_date",
    "fieldname": "departure_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Departure Date",
    "read_only": 1
   },
   {
+   "columns": 2,
    "fieldname": "arrival_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Arrival Date"
   },
   {
@@ -94,7 +105,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2020-12-02 21:49:34.631849",
+ "modified": "2020-12-03 21:18:34.603728",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipment Receipt",
@@ -115,8 +126,11 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "shipment,status",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "timeline_field": "shipment",
+ "title_field": "reference",
  "track_changes": 1
 }
