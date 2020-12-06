@@ -1,6 +1,6 @@
-## Parcel Management
+## Package Management
 
-Parcel Tracker Core in Frappe Framework.
+Package Tracker Core in Frappe Framework.
 
 Includes:
 - App Core

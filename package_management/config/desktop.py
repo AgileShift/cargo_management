@@ -4,10 +4,10 @@ from frappe import _
 def get_data():
 	return [
 		{
-			"module_name": "Parcel Management",
+			"module_name": "Package Management",
 			"color": "red",
 			"icon": "icon-paper-clip",
 			"type": "module",
-			"label": _("Parcel Management")
+			"label": _("Package Management")
 		}
 	]

@@ -1,4 +1,4 @@
-frappe.ui.form.on('Warehouse Receipt', {
+frappe.ui.form.on('Shipment', {
 
     setup: function (frm) {
         // TODO: this must be running from core frappe code. Some glitch make us hardcoded the realtime handler here.
@@ -7,34 +7,33 @@ frappe.ui.form.on('Warehouse Receipt', {
         });
     },
 
-    onload: function (frm) {
-	    frm.set_query('warehouse_receipt_lines', () => {
+    onload: function(frm) {
+        frm.set_query('shipment_lines', () => {
             return {
                 'filters': [
-                    ['Parcel', 'status', 'not in', ['Available to Pickup', 'Finished']]
+                    ['Warehouse Receipt', 'status', '=', 'Open']
                 ]
-            };
+            }
         });
     },
 
-    refresh: function (frm) {
+    refresh: function(frm) {
         if (frm.is_new()) {
             return;
         }
 
         if (frm.doc.status === 'Open') {
-            frm.page.add_action_item(__('Confirm Parcels'), () => {
+            frm.page.add_action_item(__('Confirm Transit'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'parcel_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_parcels_in_wr',
-                    args: {doc: frm.doc}
+                    method: 'package_management.shipment_management.doctype.shipment.actions.mark_shipment_in_transit',
+                    args: {source_name: frm.doc.name}
                 });
             });
         } else {
             frm.page.clear_actions_menu();
         }
 
-        // TODO: Add intro message when the warehouse is on shipment!
-    },
-
+        // TODO: Add intro message for helper!
+    }
 });

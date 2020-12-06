@@ -36,11 +36,13 @@ frappe.ui.form.on('Parcel', {
 
         // Better to add button here to use: 'window'. Rather than as Server Side Action Button on Doctype.
         frm.add_custom_button(__('Visit carrier detail page'), () => {
-            frappe.utils.play_sound('click');  // Really Necessary?
+            //frappe.utils.play_sound('click');  // Really Necessary?. FIXME: On Safari plays after window is closed!
             frappe.call({
-                method: 'parcel_management.parcel_management.doctype.parcel.actions.get_carrier_detail_page_url',
+                method: 'package_management.package_management.doctype.parcel.actions.get_carrier_detail_page_url',
                 args: {carrier: frm.doc.carrier},
-                async: false,  // async false to allow window to open a new tab. FIXME: Throws a deprecated message
+                freeze: true,
+                freeze_message: __('Opening detail page...'),
+                async: false, // FIXME: allow window to open a new tab in safari, also it seems to delay play_sound
                 callback: (r) => {
                     window.open(r.message + frm.doc.tracking_number, '_blank');
                 }
@@ -49,7 +51,7 @@ frappe.ui.form.on('Parcel', {
 
         // Intro Message
         frappe.call({
-            method: 'parcel_management.parcel_management.doctype.parcel.parcel.get_parcel_explained_status',
+            method: 'package_management.package_management.doctype.parcel.parcel.get_parcel_explained_status',
             args: {source_name: frm.doc.name},
             async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {

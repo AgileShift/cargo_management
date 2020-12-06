@@ -4,13 +4,13 @@ from setuptools import setup, find_packages
 with open('requirements.txt') as f:
 	install_requires = f.read().strip().split('\n')
 
-# get version from __version__ variable in parcel_management/__init__.py
-from parcel_management import __version__ as version
+# get version from __version__ variable in package_management/__init__.py
+from package_management import __version__ as version
 
 setup(
-	name='parcel_management',
+	name='package_management',
 	version=version,
-	description='Track parcels(Packages) across multiple carriers.',
+	description='Track Packages across multiple carriers.',
 	author='Agile Shift',
 	author_email='contacto@agileshift.io',
 	packages=find_packages(),
