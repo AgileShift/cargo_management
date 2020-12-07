@@ -119,7 +119,7 @@
    "fieldtype": "Table MultiSelect",
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Parcels in Warehouse Receipt",
+   "label": "Packages in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Closed';",
    "reqd": 1
@@ -127,8 +127,8 @@
  ],
  "links": [
   {
-   "group": "Parcel",
-   "link_doctype": "Parcel",
+   "group": "Package",
+   "link_doctype": "Package",
    "link_fieldname": "tracking_number"
   },
   {

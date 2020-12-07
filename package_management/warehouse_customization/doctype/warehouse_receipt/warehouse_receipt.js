@@ -11,7 +11,7 @@ frappe.ui.form.on('Warehouse Receipt', {
 	    frm.set_query('warehouse_receipt_lines', () => {
             return {
                 'filters': [
-                    ['Parcel', 'status', 'not in', ['Available to Pickup', 'Finished']]
+                    ['Package', 'status', 'not in', ['Available to Pickup', 'Finished']]
                 ]
             };
         });
@@ -23,10 +23,10 @@ frappe.ui.form.on('Warehouse Receipt', {
         }
 
         if (frm.doc.status === 'Open') {
-            frm.page.add_action_item(__('Confirm Parcels'), () => {
+            frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'package_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_parcels_in_wr',
+                    method: 'package_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_packages_in_wr',
                     args: {doc: frm.doc}
                 });
             });

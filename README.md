@@ -16,7 +16,7 @@ Python EasyPost API for Package Tracking details
 
 # TODO:
 1. Work on the translations
-2. Rename parcel fields: by_carrier
+2. Rename Package fields: by_carrier
 
 
 #### License

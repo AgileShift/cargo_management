@@ -117,8 +117,8 @@
  ],
  "links": [
   {
-   "group": "Parcel",
-   "link_doctype": "Parcel",
+   "group": "Package",
+   "link_doctype": "Package",
    "link_fieldname": "name"
   },
   {

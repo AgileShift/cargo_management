@@ -93,7 +93,7 @@
   {
    "fieldname": "shipment_receipt_lines",
    "fieldtype": "Table",
-   "label": "Parcels in Shipment Receipt",
+   "label": "Packages in Shipment Receipt",
    "options": "Shipment Receipt Line",
    "reqd": 1
   }

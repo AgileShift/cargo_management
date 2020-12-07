@@ -3,4 +3,4 @@
 *.egg-info
 *.swp
 tags
-parcel_management/docs/current
+package_management/docs/current

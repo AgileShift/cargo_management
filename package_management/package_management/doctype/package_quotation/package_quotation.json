@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "autoname": "format:PQ-{YYYY}-{customer_name}-{#####}",
+ "creation": "2020-09-25 11:26:16.113073",
+ "description": "Doctype to create a quotation of a package.",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "customer_name",
+  "column_break_3",
+  "transit_days",
+  "detail_pricing",
+  "purchase_assistance",
+  "section_break_5",
+  "items",
+  "section_break_8",
+  "total_import_cost",
+  "section_break_11",
+  "text"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "17",
+   "description": "Approximate days taken from departure to arrival.",
+   "fieldname": "transit_days",
+   "fieldtype": "Int",
+   "label": "Transit days"
+  },
+  {
+   "default": "0",
+   "fieldname": "detail_pricing",
+   "fieldtype": "Check",
+   "label": "Detail pricing"
+  },
+  {
+   "default": "0",
+   "fieldname": "purchase_assistance",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Purchase assistance"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Package Quotation Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "items",
+   "description": "This cost is an approximate, the total may vary depending on the actual weight of the package and/or changes in the value of the product.",
+   "fieldname": "total_import_cost",
+   "fieldtype": "Currency",
+   "label": "Total import cost",
+   "options": "USD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "text",
+   "fieldtype": "HTML",
+   "label": "Text"
+  }
+ ],
+ "links": [],
+ "modified": "2020-11-27 00:33:57.716446",
+ "modified_by": "Administrator",
+ "module": "Package Management",
+ "name": "Package Quotation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Item Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1
+  }
+ ],
+ "search_fields": "customer, customer_name",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

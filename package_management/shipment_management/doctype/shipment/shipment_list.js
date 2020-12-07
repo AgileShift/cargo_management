@@ -1,7 +1,7 @@
 frappe.listview_settings['Shipment'] = {
     add_fields: ['status'],
     filters: [
-        ['status', '!=', 'Closed'],
+        ['status', '!=', 'Received'],
     ],
     hide_name_column: true,
 

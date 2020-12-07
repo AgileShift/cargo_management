@@ -1,10 +1,10 @@
 frappe.ui.form.on('Shipment Receipt', {
 
     onload: function (frm) {
-	    frm.set_query('parcel', 'shipment_receipt_lines', () => {
+	    frm.set_query('Package', 'shipment_receipt_lines', () => {
             return {
                 'filters': [
-                    ['Parcel', 'status', 'not in', ['Available to Pickup', 'Finished']]
+                    ['Package', 'status', 'not in', ['Available to Pickup', 'Finished']]
                 ]
             };
         });
@@ -19,34 +19,33 @@ frappe.ui.form.on('Shipment Receipt', {
             .then(warehouse_receipts => { // Read all WR names
                 return Promise.all( // Return all promises when completed
                     warehouse_receipts.map(wr => { // Iter all over the WR names
-                        frm.add_child('shipment_receipt_warehouse_lines', {'warehouse_receipt': wr}); // TODO: Finish
+                        // frm.add_child('shipment_receipt_warehouse_lines', {'warehouse_receipt': wr}); // TODO: Finish
                         return frappe.model.with_doc('Warehouse Receipt', wr) // Get individual WR Doc
-                            .then(wr => wr.warehouse_receipt_lines.map(wrl => wrl.parcel)); // Return parcels names in WR
+                            .then(wr => wr.warehouse_receipt_lines.map(wrl => wrl.package)); // Return packages names in WR
                     })
                 ).then(promises => [].concat.apply([], promises)); // Return all the promises into 1 array
             })
-            .then(parcels => { // Read all parcels names
-                frappe.show_alert('Adding Parcels.');
-
+            .then(packages => { // Read all packages names
+                frappe.show_alert('Adding Packages.');
                 return Promise.all( // Return all promises when completed.
-                    parcels.map(parcel_name => { // Iter all over the parcels names
-                        return frappe.model.with_doc('Parcel', parcel_name); // Return individual Parcel Doc
+                    packages.map(package_name => { // Iter all over the packages names
+                        return frappe.model.with_doc('Package', package_name); // Return individual Package Doc
                     })
                 ).then(promises => promises.sort((a, b) => (a.customer > b.customer) ? 1 : ((b.customer > a.customer) ? -1 : 0)));
             })
-            .then(parcels => {
-                frappe.show_alert('Parcels added.');
+            .then(packages => {
+                frappe.show_alert('Packages added.');
 
-                parcels.forEach(parcel => {
-                    let parcel_content = parcel.content.map(c => {
+                packages.forEach(package_doc => {
+                    let package_content = package_doc.content.map(c => {
                         return `Descripcion: ${c.description}\nMonto: $${c.amount}`;
                     });
 
-                    frm.add_child('shipment_receipt_lines', { // Add the parcel to the child table
-                        'parcel': parcel.name,
-                        'customer_name': parcel.customer_name,
-                        'carrier_weight': parcel.carrier_est_weight,
-                        'content': parcel_content.join('\n\n'),
+                    frm.add_child('shipment_receipt_lines', { // Add the package to the child table
+                        'package': package_doc.name,
+                        'customer_name': package_doc.customer_name,
+                        'carrier_weight': package_doc.carrier_est_weight,
+                        'content': package_content.join('\n\n'),
                     });
                 });
 

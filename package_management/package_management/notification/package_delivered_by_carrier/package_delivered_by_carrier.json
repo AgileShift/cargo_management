@@ -1,0 +1,32 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "condition": "doc.status==\"Awaiting Confirmation\"",
+ "creation": "2020-08-01 19:06:59.436751",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Package",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "Hola {{ doc.customer_name }}!\n\nEl transportista nos indica que tu paquete: {{ doc.tracking_number }} ha sido entregado.\n\nEspera 24 horas habiles para que el almacen en Miami lo procese y verifique.<br>\nRecibiras un correo de confirmacion una vez tengamos el paquete.\n\nUna vez te brindemos el confirmado, te brindaremos la fecha de entrega estimada en Nicaragua.\n\n<ul>\n    <li>Paquete: {{ doc.tracking_number }}</li>\n    <li>Transportista: {{ doc.carrier }}</li>\n</ul>\n\nSaludos, <br>\nQuickBox Nicaragua\n",
+ "modified": "2020-10-29 23:09:48.401264",
+ "modified_by": "Administrator",
+ "module": "Package Management",
+ "name": "Package Delivered By Carrier",
+ "owner": "Administrator",
+ "property_value": "",
+ "recipients": [
+  {
+   "cc": "",
+   "receiver_by_document_field": "customer_email"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "set_property_after_alert": "",
+ "subject": "{{ doc.name }} has been delivered by the carrier.",
+ "value_changed": "status"
+}

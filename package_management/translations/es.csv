@@ -1,6 +1,5 @@
-Parcel Settings,Configuración de Paquetes
+Package Settings,Configuraciones de paquete
 
-Parcel,Paquete
 Tracking number,Número de rastreo
 Tracking code provided by the carrier.,Número de rastreo brindado por el transportista.
 Carrier,Transportista
@@ -15,7 +14,7 @@ Sorting,Clasificando
 Available to Pickup,Disponible para Retirar
 
 Track,Rastrear
-Parcel is requested to be tracked.,Se solicita el seguimiento del paquete.
+Package is requested to be tracked.,Se solicita el seguimiento del paquete.
 Additional data from carrier,Datos adicionales del transportista
 Carrier estimated delivery date,Fecha de entrega estimada del transportista
 Estimated delivery date provided by the carrier (if available).,Fecha de entrega estimada proporcionada por el transportista (si está disponible).
@@ -50,7 +49,7 @@ Quantity of packages in shipment.,Cantidad de paquetes en el envío.
 Visit carrier detail page,Visitar página de detalles del transportista
 Update data from carrier,Actualizar datos del transportista
 
-All active parcels,Todos los paquetes activos
+All active packages,Todos los paquetes activos
 Without carrier data,Sin datos del transportista
 Arriving today,Llegando hoy
 Arrived today,Llegaron hoy
@@ -58,11 +57,11 @@ Available for pickup at post office,Disponible para recoger en la oficina postal
 This week pending confirmation,Pendientes de confirmación de esta semana
 All pending confirmation,Todos los pendientes de confirmación
 
-Parcel is configured not to track.,El paquete está configurado para no rastrear.
-Parcel is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.
-Parcel has been updated from API.,El paquete se ha actualizado desde el API.
+Package is configured not to track.,El paquete está configurado para no rastrear.
+Package is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.
+Package has been updated from API.,El paquete se ha actualizado desde el API.
 
-Parcel Quotation,Cotización de paquete
+Package Quotation,Cotización de paquete
 Transit days,Días de tránsito
 Approximate days taken from departure to arrival.,Días aproximados tomados desde el despacho hasta el arribo.
 Detail pricing,Precios detallados
@@ -78,7 +77,7 @@ Warehouse where reception occurred.,Almacén donde se produjo la recepción.
 Real date of document generation.,Fecha real de generación del documento.
 Departure date,Fecha de despacho
 Real departure date of the shipment to his final destination.,Fecha real de salida del embarque a su destino final.
-Parcels in Warehouse Receipt,Paquetes en el recibo de almacén
+Packages in Warehouse Receipt,Paquetes en el recibo de almacén
 
 Shipment,Embarque
 Transportation type,Tipo de transporte
