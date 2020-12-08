@@ -27,7 +27,7 @@ def confirm_packages_in_wr(doc):
         # TODO: Fix, after publish progress: CTL+S is not working.
         frappe.publish_progress(
             percent=progress, title=_('Confirming Packages'),
-            description=_('Confirming Package {0}').format(Package.tracking_number),
+            description=_('Confirming Package {0}').format(package.tracking_number),
         )
 
     frappe.flags.mute_emails = frappe.flags.in_import = False  # Reset core flags.
