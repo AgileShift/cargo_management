@@ -4,15 +4,15 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include package_management *.css
-recursive-include package_management *.csv
-recursive-include package_management *.html
-recursive-include package_management *.ico
-recursive-include package_management *.js
-recursive-include package_management *.json
-recursive-include package_management *.md
-recursive-include package_management *.png
-recursive-include package_management *.py
-recursive-include package_management *.svg
-recursive-include package_management *.txt
-recursive-exclude package_management *.pyc
+recursive-include cargo_management *.css
+recursive-include cargo_management *.csv
+recursive-include cargo_management *.html
+recursive-include cargo_management *.ico
+recursive-include cargo_management *.js
+recursive-include cargo_management *.json
+recursive-include cargo_management *.md
+recursive-include cargo_management *.png
+recursive-include cargo_management *.py
+recursive-include cargo_management *.svg
+recursive-include cargo_management *.txt
+recursive-exclude cargo_management *.pyc

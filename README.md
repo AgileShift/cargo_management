@@ -1,4 +1,4 @@
-## Package Management
+## Cargo Management
 
 Package Tracker Core in Frappe Framework.
 
@@ -7,7 +7,7 @@ Includes:
 - Business Admin
 
 ## Description
-System to manage warehouses, customers, packages and custom logistic details.
+System to manage warehouses, customers, packages and custom broker logistic details.
 
 # Python Libraries
 

@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 with open('requirements.txt') as f:
 	install_requires = f.read().strip().split('\n')
 
-# get version from __version__ variable in package_management/__init__.py
-from package_management import __version__ as version
+# get version from __version__ variable in cargo_management/__init__.py
+from cargo_management import __version__ as version
 
 setup(
-	name='package_management',
+	name='cargo_management',
 	version=version,
 	description='Track Packages across multiple carriers.',
 	author='Agile Shift',
