@@ -26,7 +26,7 @@ frappe.ui.form.on('Warehouse Receipt', {
             frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'package_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_packages_in_wr',
+                    method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.confirm_packages_in_wr',
                     args: {doc: frm.doc}
                 });
             });

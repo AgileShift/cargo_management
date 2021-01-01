@@ -38,7 +38,7 @@ frappe.ui.form.on('Package', {
         frm.add_custom_button(__('Visit carrier detail page'), () => {
             //frappe.utils.play_sound('click');  // Really Necessary?. FIXME: On Safari plays after window is closed!
             frappe.call({
-                method: 'package_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
+                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
                 args: {carrier: frm.doc.carrier},
                 freeze: true,
                 freeze_message: __('Opening detail page...'),
@@ -51,7 +51,7 @@ frappe.ui.form.on('Package', {
 
         // Intro Message
         frappe.call({
-            method: 'package_management.package_management.doctype.package.package.get_package_explained_status',
+            method: 'cargo_management.package_management.doctype.package.package.get_package_explained_status',
             args: {source_name: frm.doc.name},
             async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {

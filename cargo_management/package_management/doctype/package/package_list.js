@@ -28,7 +28,7 @@ frappe.listview_settings['Package'] = {
             // Bulk Dialog - should sent email if status is changed?
             // Bulk show_progress. This actually reloads the form? if so. how many times?
             listview.call_for_selected_items(
-                'package_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
+                'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
             );
         })
 
@@ -47,7 +47,7 @@ frappe.listview_settings['Package'] = {
         action(doc) {
             frappe.utils.play_sound('click');  // Really Necessary?
             frappe.call({
-                method: 'package_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
+                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
                 args: {carrier: doc.carrier},
                 callback: (r) => {
                     window.open(r.message + doc.tracking_number, '_blank');

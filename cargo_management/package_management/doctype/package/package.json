@@ -1,7 +1,7 @@
 {
  "actions": [
   {
-   "action": "package_management.package_management.doctype.package.actions.update_data_from_carrier",
+   "action": "cargo_management.package_management.doctype.package.actions.update_data_from_carrier",
    "action_type": "Server Action",
    "label": "Update data from carrier"
   }

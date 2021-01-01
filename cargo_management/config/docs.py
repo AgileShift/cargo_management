@@ -3,7 +3,7 @@ Configuration for docs
 """
 
 source_link = "https://github.com/AgileShift/cargo_management"
-# docs_base_url = "https://[org_name].github.io/package_management"
+# docs_base_url = "https://[org_name].github.io/cargo_management"
 # headline = "App that does everything"
 # sub_heading = "Yes, you got that right the first time, everything"
 
