@@ -24,7 +24,6 @@ Delivery date time (timezone aware) provided by the carrier (if available).,Fech
 Carrier estimated weight,Peso estimado según el transportista
 Estimated weight of the package as measured by the carrier (if available).,Peso estimado del paquete medido por el transportista (si está disponible).
 
-
 Carrier status,Estado según el transportista
 The current status of the package provided by the carrier (if available),El estado actual del paquete proporcionado por el transportista (si está disponible)
 Delivered,Entregado
