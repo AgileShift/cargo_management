@@ -12,7 +12,7 @@ setup(
 	version=version,
 	description='Track Packages across multiple carriers.',
 	author='Agile Shift',
-	author_email='contacto@agileshift.io',
+	author_email='contacto@gruporeal.org',
 	packages=find_packages(),
 	zip_safe=False,
 	include_package_data=True,

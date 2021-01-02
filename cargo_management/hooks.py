@@ -6,7 +6,7 @@ app_publisher = "Agile Shift"
 app_description = "Track Packages across multiple carriers."
 app_icon = "icon-paper-clip"
 app_color = "red"
-app_email = "contacto@agileshift.io"
+app_email = "contacto@gruporeal.org"
 app_license = "MIT"
 
 # TODO: add a custom "domains": see erpnext.hooks.py
