@@ -4,26 +4,26 @@
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-11-03 16:50:04.125725",
- "description": "Shipment Receipt.",
+ "description": "Cargo Shipment Receipt.",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "reference",
-  "shipment",
+  "cargo_shipment",
   "status",
   "column_break_3",
   "departure_date",
   "arrival_date",
   "section_break_6",
-  "shipment_receipt_warehouse_lines",
-  "shipment_receipt_lines"
+  "cargo_shipment_receipt_warehouse_lines",
+  "cargo_shipment_receipt_lines"
  ],
  "fields": [
   {
    "columns": 3,
-   "description": "Shipment Name",
-   "fetch_from": "shipment.reference",
+   "description": "Cargo Shipment Name",
+   "fetch_from": "cargo_shipment.reference",
    "fieldname": "reference",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -36,14 +36,14 @@
   {
    "allow_in_quick_entry": 1,
    "columns": 2,
-   "description": "Reference to the shipment to be received.",
-   "fieldname": "shipment",
+   "description": "Reference to the cargo shipment to be received.",
+   "fieldname": "cargo_shipment",
    "fieldtype": "Link",
    "in_global_search": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Shipment",
-   "options": "Shipment",
+   "label": "Cargo Shipment",
+   "options": "Cargo Shipment",
    "reqd": 1,
    "unique": 1
   },
@@ -63,7 +63,7 @@
   },
   {
    "columns": 2,
-   "fetch_from": "shipment.departure_date",
+   "fetch_from": "cargo_shipment.departure_date",
    "fieldname": "departure_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -85,30 +85,30 @@
   },
   {
    "bold": 1,
-   "fieldname": "shipment_receipt_warehouse_lines",
+   "fieldname": "cargo_shipment_receipt_warehouse_lines",
    "fieldtype": "Table MultiSelect",
-   "label": "Warehouse Receipt in Shipment Receipt",
-   "options": "Shipment Receipt Warehouse Line"
+   "label": "Warehouse Receipt in Cargo Shipment Receipt",
+   "options": "Cargo Shipment Receipt Warehouse Line"
   },
   {
-   "fieldname": "shipment_receipt_lines",
+   "fieldname": "cargo_shipment_receipt_lines",
    "fieldtype": "Table",
-   "label": "Packages in Shipment Receipt",
-   "options": "Shipment Receipt Line",
+   "label": "Packages in Cargo Shipment Receipt",
+   "options": "Cargo Shipment Receipt Line",
    "reqd": 1
   }
  ],
  "links": [
   {
-   "group": "Shipment",
-   "link_doctype": "Shipment",
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment",
    "link_fieldname": "name"
   }
  ],
  "modified": "2020-12-03 21:18:34.603728",
  "modified_by": "Administrator",
- "module": "Shipment Management",
- "name": "Shipment Receipt",
+ "module": "Shipment Customization",
+ "name": "Cargo Shipment Receipt",
  "name_case": "UPPER CASE",
  "owner": "Administrator",
  "permissions": [
@@ -126,11 +126,11 @@
   }
  ],
  "quick_entry": 1,
- "search_fields": "shipment,status",
+ "search_fields": "cargo_shipment,status",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "timeline_field": "shipment",
+ "timeline_field": "cargo_shipment",
  "title_field": "reference",
  "track_changes": 1
 }

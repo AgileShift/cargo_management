@@ -313,13 +313,13 @@
    "link_fieldname": "package"
   },
   {
-   "group": "Shipment",
-   "link_doctype": "Shipment",
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment",
    "link_fieldname": "warehouse_receipt"
   },
   {
-   "group": "Shipment",
-   "link_doctype": "Shipment Receipt",
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "package"
   },
   {

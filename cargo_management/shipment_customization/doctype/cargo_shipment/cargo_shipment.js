@@ -1,4 +1,4 @@
-frappe.ui.form.on('Shipment', {
+frappe.ui.form.on('Cargo Shipment', {
 
     setup: function (frm) {
         // TODO: this must be running from core frappe code. Some glitch make us hardcoded the realtime handler here.
@@ -8,7 +8,7 @@ frappe.ui.form.on('Shipment', {
     },
 
     onload: function(frm) {
-        frm.set_query('shipment_lines', () => {
+        frm.set_query('cargo_shipment_lines', () => {
             return {
                 'filters': [
                     ['Warehouse Receipt', 'status', '=', 'Open']
@@ -26,7 +26,7 @@ frappe.ui.form.on('Shipment', {
             frm.page.add_action_item(__('Confirm Transit'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'package_management.shipment_management.doctype.shipment.actions.mark_shipment_in_transit',
+                    method: 'package_management.shipment_customization.doctype.cargo_shipment.actions.mark_shipment_in_transit',
                     args: {source_name: frm.doc.name}
                 });
             });

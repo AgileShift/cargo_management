@@ -1,5 +1,5 @@
 Package Management
-Warehouse Customization
+Shipment Customization
 Sales Customization
-Shipment Management
 Support Customization
+Warehouse Customization

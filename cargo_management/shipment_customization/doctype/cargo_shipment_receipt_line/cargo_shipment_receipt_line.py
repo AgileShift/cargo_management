@@ -1,5 +1,5 @@
 from frappe.model.document import Document
 
 
-class ShipmentReceipt(Document):
+class CargoShipmentReceiptLine(Document):
 	pass

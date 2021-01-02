@@ -1,7 +1,7 @@
-frappe.ui.form.on('Shipment Receipt', {
+frappe.ui.form.on('Cargo Shipment Receipt', {
 
     onload: function (frm) {
-	    frm.set_query('Package', 'shipment_receipt_lines', () => {
+	    frm.set_query('Package', 'cargo_shipment_receipt_lines', () => {
             return {
                 'filters': [
                     ['Package', 'status', 'not in', ['Available to Pickup', 'Finished']]
@@ -10,12 +10,12 @@ frappe.ui.form.on('Shipment Receipt', {
         });
     },
 
-    shipment: function (frm) {
-        frm.clear_table('shipment_receipt_lines');
+    cargo_shipment: function (frm) {
+        frm.clear_table('cargo_shipment_receipt_lines');
 
         // TODO: frappe.show_progress()
-        frappe.model.with_doc('Shipment', frm.doc.shipment)
-            .then(shipment => shipment.shipment_lines.map(sl => sl.warehouse_receipt)) // Return WRs in Shipment
+        frappe.model.with_doc('Cargo Shipment', frm.doc.cargo_shipment)
+            .then(shipment => shipment.cargo_shipment_lines.map(sl => sl.warehouse_receipt)) // Return WRs in Shipment
             .then(warehouse_receipts => { // Read all WR names
                 return Promise.all( // Return all promises when completed
                     warehouse_receipts.map(wr => { // Iter all over the WR names
@@ -41,7 +41,7 @@ frappe.ui.form.on('Shipment Receipt', {
                         return `Descripcion: ${c.description}\nMonto: $${c.amount}`;
                     });
 
-                    frm.add_child('shipment_receipt_lines', { // Add the package to the child table
+                    frm.add_child('cargo_shipment_receipt_lines', { // Add the package to the child table
                         'package': package_doc.name,
                         'customer_name': package_doc.customer_name,
                         'carrier_weight': package_doc.carrier_est_weight,
@@ -49,8 +49,8 @@ frappe.ui.form.on('Shipment Receipt', {
                     });
                 });
 
-                frm.refresh_field('shipment_receipt_warehouse_lines'); // Refresh the child table.
-                frm.refresh_field('shipment_receipt_lines'); // Refresh the child table.
+                frm.refresh_field('cargo_shipment_receipt_warehouse_lines'); // Refresh the child table.
+                frm.refresh_field('cargo_shipment_receipt_lines'); // Refresh the child table.
         });
     }
 });

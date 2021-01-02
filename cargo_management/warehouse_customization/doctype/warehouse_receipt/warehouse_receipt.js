@@ -34,7 +34,7 @@ frappe.ui.form.on('Warehouse Receipt', {
             frm.page.clear_actions_menu();
         }
 
-        // TODO: Add intro message when the warehouse is on shipment!
+        // TODO: Add intro message when the warehouse is on cargo_shipment!
     },
 
 });

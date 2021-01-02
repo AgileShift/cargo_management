@@ -4,7 +4,7 @@
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:54:12.963505",
- "description": "Shipment",
+ "description": "Cargo Shipment",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -18,7 +18,7 @@
   "weight",
   "pieces",
   "sb_0",
-  "shipment_lines"
+  "cargo_shipment_lines"
  ],
  "fields": [
   {
@@ -75,7 +75,7 @@
   {
    "bold": 1,
    "default": "now",
-   "description": "Real departure date of the shipment to his final destination.",
+   "description": "Real departure date of cargo shipment to his final destination.",
    "fieldname": "departure_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -105,12 +105,12 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "shipment_lines",
+   "fieldname": "cargo_shipment_lines",
    "fieldtype": "Table MultiSelect",
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Warehouse Receipts in Shipment",
-   "options": "Shipment Line",
+   "label": "Warehouse Receipts in Cargo Shipment",
+   "options": "Cargo Shipment Line",
    "read_only_depends_on": "eval: doc.status == 'Received';",
    "reqd": 1
   }
@@ -129,8 +129,8 @@
  ],
  "modified": "2020-12-02 22:06:52.976814",
  "modified_by": "Administrator",
- "module": "Shipment Management",
- "name": "Shipment",
+ "module": "Shipment Customization",
+ "name": "Cargo Shipment",
  "name_case": "UPPER CASE",
  "nsm_parent_field": "parent_shipment",
  "owner": "Administrator",

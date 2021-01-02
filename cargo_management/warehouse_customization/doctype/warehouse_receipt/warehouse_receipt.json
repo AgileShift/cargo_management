@@ -84,7 +84,7 @@
   },
   {
    "bold": 1,
-   "description": "Real departure date of the shipment to his final destination.",
+   "description": "Real departure date of cargo shipment to his final destination.",
    "fieldname": "departure_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -132,8 +132,8 @@
    "link_fieldname": "tracking_number"
   },
   {
-   "group": "Shipment",
-   "link_doctype": "Shipment",
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment",
    "link_fieldname": "warehouse_receipt"
   }
  ],

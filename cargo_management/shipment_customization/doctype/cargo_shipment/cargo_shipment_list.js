@@ -1,4 +1,4 @@
-frappe.listview_settings['Shipment'] = {
+frappe.listview_settings['Cargo Shipment'] = {
     add_fields: ['status'],
     filters: [
         ['status', '!=', 'Received'],
