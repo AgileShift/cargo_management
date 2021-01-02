@@ -1,5 +1,6 @@
 Package Settings,Configuraciones de paquete
 
+Package,Paquete
 Tracking number,Número de rastreo
 Tracking code provided by the carrier.,Número de rastreo brindado por el transportista.
 Carrier,Transportista
@@ -75,19 +76,21 @@ Warehouse Receipt,Recibo de almacén
 Target warehouse,Almacén de destino
 Warehouse where reception occurred.,Almacén donde se produjo la recepción.
 Real date of document generation.,Fecha real de generación del documento.
-Departure date,Fecha de despacho
-Real departure date of the shipment to his final destination.,Fecha real de salida del embarque a su destino final.
+Real departure date of cargo shipment to his final destination.,Fecha real de despacho del envío de carga a su destino final.
 Packages in Warehouse Receipt,Paquetes en el recibo de almacén
 
-Shipment,Embarque
+Cargo Shipment,Envío de Carga
 Transportation type,Tipo de transporte
-Warehouse Receipts in Shipment,Recibos de almacén en el envío
+Warehouse Receipts in Cargo Shipment,Recibos de almacén en el envío de carga
 
-Shipment Receipt,Recibo de embarque
+Cargo Shipment Receipt,Recibo de envío de carga
+Reference of the cargo shipment to be received.,Referencia del envío de carga a recibir.
+Warehouse Receipts in Cargo Shipment Receipt,Recibos de almacén en el recibo de envío de carga
+Packages in Cargo Shipment Receipt,Paquetes en el recibo de envío de carga
 
 Pieces,Piezas
 Internal reference code.,Código de referencia interno.
 Weight in pounds provided by the warehouse (if available).,Peso en libras proporcionado por el almacén (si está disponible).
 Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
-
-Save,Guardar
+Departure date,Fecha de despacho
+Arrival Date,Fecha de arribo

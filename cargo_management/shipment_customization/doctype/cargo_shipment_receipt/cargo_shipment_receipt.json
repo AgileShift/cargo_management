@@ -22,7 +22,6 @@
  "fields": [
   {
    "columns": 3,
-   "description": "Cargo Shipment Name",
    "fetch_from": "cargo_shipment.reference",
    "fieldname": "reference",
    "fieldtype": "Data",
@@ -36,7 +35,7 @@
   {
    "allow_in_quick_entry": 1,
    "columns": 2,
-   "description": "Reference to the cargo shipment to be received.",
+   "description": "Reference of the cargo shipment to be received.",
    "fieldname": "cargo_shipment",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -87,7 +86,7 @@
    "bold": 1,
    "fieldname": "cargo_shipment_receipt_warehouse_lines",
    "fieldtype": "Table MultiSelect",
-   "label": "Warehouse Receipt in Cargo Shipment Receipt",
+   "label": "Warehouse Receipts in Cargo Shipment Receipt",
    "options": "Cargo Shipment Receipt Warehouse Line"
   },
   {
@@ -98,14 +97,8 @@
    "reqd": 1
   }
  ],
- "links": [
-  {
-   "group": "Cargo Shipment",
-   "link_doctype": "Cargo Shipment",
-   "link_fieldname": "name"
-  }
- ],
- "modified": "2020-12-03 21:18:34.603728",
+ "links": [],
+ "modified": "2021-01-02 01:05:36.995057",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",

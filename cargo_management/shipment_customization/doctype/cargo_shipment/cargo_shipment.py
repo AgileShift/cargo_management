@@ -4,9 +4,9 @@ from frappe.model.document import Document
 
 class CargoShipment(Document):
 	"""
-		TODO: Enable Doctype Quick Entry
-		If doctype "Quick Entry" and field "date" default value: "Now" its fails miserably:
-		https://github.com/frappe/frappe/issues/11001
+	TODO: Enable Doctype Quick Entry
+	If doctype "Quick Entry" and field "date" default value: "Now" its fails miserably:
+	https://github.com/frappe/frappe/issues/11001
 	"""
 
 	def before_save(self):

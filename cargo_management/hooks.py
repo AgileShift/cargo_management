@@ -9,8 +9,6 @@ app_color = "red"
 app_email = "contacto@gruporeal.org"
 app_license = "MIT"
 
-# TODO: add a custom "domains": see erpnext.hooks.py
-
 # Includes in <head>
 # ------------------
 
@@ -134,6 +132,8 @@ app_license = "MIT"
 # exempt linked doctypes from being automatically cancelled
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
+
+# TODO: Add 'domains' this, can be useful. Like add default data
 
 global_search_doctypes = {
 	"Default": [

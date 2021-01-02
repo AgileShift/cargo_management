@@ -117,17 +117,17 @@
  ],
  "links": [
   {
-   "group": "Package",
-   "link_doctype": "Package",
-   "link_fieldname": "name"
-  },
-  {
    "group": "Warehouse Receipt",
    "link_doctype": "Warehouse Receipt",
    "link_fieldname": "reference"
+  },
+  {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment Receipt",
+   "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2020-12-02 22:06:52.976814",
+ "modified": "2021-01-02 00:56:06.511236",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",
