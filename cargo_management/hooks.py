@@ -135,3 +135,11 @@ app_license = "MIT"
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
 
+global_search_doctypes = {
+	"Default": [
+		{"doctype": "Package"},
+		{"doctype": "Warehouse Receipt"},
+		{"doctype": "Cargo Shipment"},
+		{"doctype": "Cargo Shipment Receipt"},
+	]
+}
