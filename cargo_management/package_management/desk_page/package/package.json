@@ -13,7 +13,7 @@
   {
    "hidden": 0,
    "label": "Cargo Shipment",
-   "links": "[\n    {\n        \"label\": \"Cargo Shipment\",\n        \"name\": \"Cargo Shipment\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Shipment\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Shipment Receipt\",\n        \"name\": \"Shipment Receipt\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Shipment Receipt\",\n        \"onboard\": 1\n    }\n]"
+   "links": "[\n    {\n        \"label\": \"Cargo Shipment\",\n        \"name\": \"Cargo Shipment\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Cargo Shipment\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Cargo Shipment Receipt\",\n        \"name\": \"Cargo Shipment Receipt\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Cargo Shipment Receipt\",\n        \"onboard\": 1\n    }\n]"
   }
  ],
  "cards_label": "",

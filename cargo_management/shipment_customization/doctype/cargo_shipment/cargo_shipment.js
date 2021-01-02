@@ -26,7 +26,7 @@ frappe.ui.form.on('Cargo Shipment', {
             frm.page.add_action_item(__('Confirm Transit'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'package_management.shipment_customization.doctype.cargo_shipment.actions.mark_shipment_in_transit',
+                    method: 'package_management.shipment_customization.doctype.cargo_shipment.actions.mark_cargo_shipment_in_transit',
                     args: {source_name: frm.doc.name}
                 });
             });
