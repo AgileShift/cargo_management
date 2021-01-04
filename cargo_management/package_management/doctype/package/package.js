@@ -24,6 +24,16 @@ frappe.ui.form.on('Package', {
     },
 
     onload: function(frm) {
+        // Setting custom queries
+        frm.set_query('item_code', 'content', () => {
+            return {
+                filters: {
+                    'is_sales_item': true,
+                    'has_variants': false
+                }
+            }
+        });
+
         // Setting Currency Labels
         frm.set_currency_labels(['total'], 'USD');
         frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');

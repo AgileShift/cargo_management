@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "description",
+  "item_code",
   "qty",
   "rate",
   "amount"
@@ -51,11 +52,18 @@
    "print_width": "100px",
    "read_only": 1,
    "width": "100px"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2020-09-25 11:43:21.826335",
+ "modified": "2021-01-03 19:55:03.626267",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Content",

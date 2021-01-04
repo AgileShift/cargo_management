@@ -10,9 +10,9 @@ frappe.ui.form.on('Warehouse Receipt', {
     onload: function (frm) {
 	    frm.set_query('warehouse_receipt_lines', () => {
             return {
-                'filters': [
-                    ['Package', 'status', 'not in', ['Available to Pickup', 'Finished']]
-                ]
+                filters: {
+                    status: ['not in', ['Available to Pickup', 'Finished']]
+                }
             };
         });
     },

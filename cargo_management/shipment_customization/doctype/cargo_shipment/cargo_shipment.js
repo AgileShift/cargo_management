@@ -10,9 +10,9 @@ frappe.ui.form.on('Cargo Shipment', {
     onload: function(frm) {
         frm.set_query('cargo_shipment_lines', () => {
             return {
-                'filters': [
-                    ['Warehouse Receipt', 'status', '=', 'Open']
-                ]
+                filters: {
+                    status: 'Open'
+                }
             }
         });
     },

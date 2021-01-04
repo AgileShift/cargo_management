@@ -1,11 +1,18 @@
 frappe.ui.form.on('Cargo Shipment Receipt', {
 
+    setup: function (frm) {
+        // TODO: this must be running from core frappe code. Some glitch make us hardcoded the realtime handler here.
+        frappe.realtime.on('doc_update', () => { // See: https://github.com/frappe/frappe/pull/11137
+            frm.reload_doc(); // Reload form UI data from db.
+        });
+    },
+
     onload: function (frm) {
-	    frm.set_query('Package', 'cargo_shipment_receipt_lines', () => {
+	    frm.set_query('package', 'cargo_shipment_receipt_lines', () => {
             return {
-                'filters': [
-                    ['Package', 'status', 'not in', ['Available to Pickup', 'Finished']]
-                ]
+                filters: {
+                    status: ['not in', ['Available to Pickup', 'Finished']]
+                }
             };
         });
     },

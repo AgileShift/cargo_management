@@ -31,7 +31,6 @@ frappe.listview_settings['Package'] = {
                 'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
             );
         })
-
     },
 
     button: {
