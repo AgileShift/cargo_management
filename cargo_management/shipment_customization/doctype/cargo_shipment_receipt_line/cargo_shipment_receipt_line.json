@@ -6,7 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "package",
-  "item",
+  "item_code",
   "customer_name",
   "carrier_weight",
   "weight",
@@ -69,17 +69,17 @@
   },
   {
    "columns": 2,
-   "fieldname": "item",
+   "fieldname": "item_code",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Item",
+   "label": "Item Code",
    "options": "Item",
    "reqd": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2020-12-13 22:58:50.762636",
+ "modified": "2021-01-03 22:06:18.595891",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt Line",

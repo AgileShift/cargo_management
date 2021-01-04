@@ -65,9 +65,17 @@ frappe.ui.form.on('Package', {
             args: {source_name: frm.doc.name},
             async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {
-                if (r.message) { // Has a valid message
-                    frm.set_intro(r.message.message, r.message.color); // frm.layout.show_message()
+                let intro_message = '';
+
+                if (Array.isArray(r.message.message)) { // If there are multiple messages.
+                    r.message.message.forEach((message) => {
+                        intro_message += "<div>" + message + "</div>";
+                    });
+                } else {
+                    intro_message = r.message.message;
                 }
+
+                frm.set_intro(intro_message, r.message.color);  // frm.layout.show_message()
             }
         });
 
@@ -115,3 +123,4 @@ frappe.ui.form.on('Package Content', {
     },
 
 });
+//126

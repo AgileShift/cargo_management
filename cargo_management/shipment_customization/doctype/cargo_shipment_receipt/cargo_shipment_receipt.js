@@ -45,11 +45,12 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 
                 packages.forEach(package_doc => {
                     let package_content = package_doc.content.map(c => {
-                        return `Descripcion: ${c.description}\nMonto: $${c.amount}`;
+                        return `Descripcion: ${c.description}\nMonto: $${c.amount}\nCodigo: ${c.item_code}`;
                     });
 
                     frm.add_child('cargo_shipment_receipt_lines', { // Add the package to the child table
                         'package': package_doc.name,
+                        // 'item_code': package_doc.item_code,  TODO: This is not working, because the package is set one time
                         'customer_name': package_doc.customer_name,
                         'carrier_weight': package_doc.carrier_est_weight,
                         'content': package_content.join('\n\n'),
