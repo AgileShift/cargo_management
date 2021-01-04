@@ -12,8 +12,8 @@ def mark_cargo_shipment_in_transit(source_name: str):
     # Core: Silence Notifications and emails!
     frappe.flags.mute_emails = frappe.flags.in_import = cargo_shipment.mute_emails
 
-    for cargo_shipment_line in cargo_shipment.cargo_shipment_lines:
-        warehouse_receipt = frappe.get_doc('Warehouse Receipt', cargo_shipment_line.warehouse_receipt)
+    for cs_line in cargo_shipment.cargo_shipment_lines:
+        warehouse_receipt = frappe.get_doc('Warehouse Receipt', cs_line.warehouse_receipt)
 
         for wr_line in warehouse_receipt.warehouse_receipt_lines:
             package = frappe.get_doc('Package', wr_line.package)  # Getting Package Doctype
@@ -37,6 +37,6 @@ def mark_cargo_shipment_in_transit(source_name: str):
     frappe.flags.mute_emails, frappe.flags.in_import = False, False
 
     frappe.msgprint(msg=[
-        '{0} Warehouse Receipt in transit.'.format(len(cargo_shipment.shipment_lines)),
-        '{0} Packages changed to in transit of {1}.'.format(updated_packages, total_packages)
+        '{} Warehouse Receipt in transit.'.format(len(cargo_shipment.cargo_shipment_lines)),
+        '{} of {} Packages in transit.'.format(updated_packages, total_packages)
     ], title=_('Success'), as_list=True)
