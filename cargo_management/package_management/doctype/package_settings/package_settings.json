@@ -23,7 +23,7 @@
   },
   {
    "collapsible": 1,
-   "collapsible_depends_on": "eval:!doc.easypost_api_key",
+   "collapsible_depends_on": "eval: !doc.easypost_api_key",
    "depends_on": "easypost_active",
    "fieldname": "easypost_settings_section",
    "fieldtype": "Section Break",
@@ -58,7 +58,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2020-09-02 20:37:49.626113",
+ "modified": "2021-01-05 07:46:32.398786",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Settings",

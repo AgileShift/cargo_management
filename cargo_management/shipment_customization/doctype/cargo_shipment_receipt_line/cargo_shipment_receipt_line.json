@@ -7,11 +7,14 @@
  "field_order": [
   "package",
   "item_code",
+  "customer",
   "customer_name",
   "carrier_weight",
-  "weight",
   "column_break_5",
   "content",
+  "section_break_7",
+  "gross_weight",
+  "column_break_9",
   "import_price"
  ],
  "fields": [
@@ -27,7 +30,6 @@
   },
   {
    "columns": 2,
-   "fetch_from": "package.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -45,14 +47,6 @@
    "read_only": 1
   },
   {
-   "columns": 1,
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Weight",
-   "reqd": 1
-  },
-  {
    "fieldname": "content",
    "fieldtype": "Text",
    "label": "Content"
@@ -65,6 +59,7 @@
    "fieldname": "import_price",
    "fieldtype": "Currency",
    "label": "Import Price",
+   "non_negative": 1,
    "options": "USD"
   },
   {
@@ -75,11 +70,35 @@
    "label": "Item Code",
    "options": "Item",
    "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "package.customer",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "read_only_depends_on": "eval: doc.package == null || doc.customer_name != null"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-01-03 22:06:18.595891",
+ "modified": "2021-01-05 07:45:26.919263",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt Line",
