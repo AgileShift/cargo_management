@@ -35,7 +35,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2020-12-09 09:18:34.137258",
+ "modified": "2021-01-05 08:30:07.280340",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
@@ -51,11 +51,11 @@
    "type": "DocType"
   },
   {
-   "color": "#ff7846",
+   "color": "#a83333",
    "doc_view": "List",
    "label": "Without carrier data",
    "link_to": "Package",
-   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": [\"=\", \"Awaiting Receipt\"]\n}",
+   "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": \"Awaiting Receipt\"\n}",
    "type": "DocType"
   },
   {
@@ -65,12 +65,12 @@
    "type": "Dashboard"
   },
   {
-   "color": "#d2f1ff",
+   "color": "#a6e4ff",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "Arriving today",
    "link_to": "Package",
-   "stats_filter": "{\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"],\n    \"carrier_status\": [\"!=\", \"Delivered\"]\n}",
+   "stats_filter": "{\n    \"carrier_status\": [\"!=\", \"Delivered\"],\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"]\n}",
    "type": "DocType"
   },
   {
@@ -83,12 +83,38 @@
    "type": "DocType"
   },
   {
-   "color": "#ff4d4d",
+   "color": "#ffb1b1",
+   "doc_view": "List",
+   "format": "{} Late",
+   "label": "Arriving Late",
+   "link_to": "Package",
+   "stats_filter": "{\n    \"carrier_status\": [\"!=\", \"Delivered\"],\n    \"carrier_est_delivery\": [\"Timespan\", \"last week\"]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#ff8989",
    "doc_view": "List",
    "format": "",
    "label": "Available for pickup at post office",
    "link_to": "Package",
    "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"Available For Pickup\"]\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#fff168",
+   "doc_view": "List",
+   "format": "{} Waiting",
+   "label": "Awaiting Departure",
+   "link_to": "Package",
+   "stats_filter": "{\n    \"status\": \"Awaiting Departure\"\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "#7575ff",
+   "doc_view": "List",
+   "label": "In Transit",
+   "link_to": "Package",
+   "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
    "type": "DocType"
   },
   {
@@ -116,23 +142,6 @@
    "label": "In Extraordinary Confirmation",
    "link_to": "Package",
    "stats_filter": "{\n    \"status\": \"In Extraordinary Confirmation\"\n}",
-   "type": "DocType"
-  },
-  {
-   "color": "#fff168",
-   "doc_view": "List",
-   "format": "{} Waiting",
-   "label": "Awaiting Departure",
-   "link_to": "Package",
-   "stats_filter": "{\n    \"status\": \"Awaiting Departure\"\n}",
-   "type": "DocType"
-  },
-  {
-   "color": "#7575ff",
-   "doc_view": "List",
-   "label": "In Transit",
-   "link_to": "Package",
-   "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
    "type": "DocType"
   },
   {
