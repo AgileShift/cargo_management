@@ -19,9 +19,9 @@ def confirm_packages_in_wr(doc):
 
         package = frappe.get_doc('Package', wr_line['package'])  # Getting Package Doctype
 
-        if package.change_status('Awaiting Departure'):  # If Status can be changed. To prevent unnecessary updates
+        if package.change_status('Awaiting Departure'):  # If status can be changed. To prevent unnecessary updates
             updated_docs += 1
-            package.flags.ignore_validate = True  # Set flag ON because Doc will be saved from bulk edit. No validations.
+            package.flags.ignore_validate = True  # Set flag ON because Doc will be saved from bulk edit. No validations
             package.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
         # TODO: Fix, after publish progress: CTL+S is not working.
