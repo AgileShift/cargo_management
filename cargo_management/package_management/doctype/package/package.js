@@ -16,13 +16,6 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 
 frappe.ui.form.on('Package', {
 
-    setup: function(frm) {
-        // TODO: this must be running from core frappe code. Some glitch make us hardcoded the realtime handler here.
-        frappe.realtime.on('doc_update', () => { // See: https://github.com/frappe/frappe/pull/11137
-            frm.reload_doc(); // Reload form UI data from db.
-        });
-    },
-
     onload: function(frm) {
         // Setting custom queries
         frm.set_query('item_code', 'content', () => {
@@ -107,9 +100,8 @@ frappe.ui.form.on('Package', {
     // TODO: Tracking Validator from backend, and Carrier Select helper.
 });
 
+// Children Doctype of Package
 frappe.ui.form.on('Package Content', {
-    // Children Doctype of Package
-
     content_remove(frm) {
         calculate_package_total(frm);
     },
@@ -121,6 +113,4 @@ frappe.ui.form.on('Package Content', {
     qty: function(frm, cdt, cdn) {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     },
-
 });
-//126

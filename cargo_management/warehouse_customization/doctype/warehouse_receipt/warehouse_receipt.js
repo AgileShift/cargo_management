@@ -1,12 +1,5 @@
 frappe.ui.form.on('Warehouse Receipt', {
 
-    setup: function (frm) {
-        // TODO: this must be running from core frappe code. Some glitch make us hardcoded the realtime handler here.
-        frappe.realtime.on('doc_update', () => { // See: https://github.com/frappe/frappe/pull/11137
-            frm.reload_doc(); // Reload form UI data from db.
-        });
-    },
-
     onload: function (frm) {
 	    frm.set_query('warehouse_receipt_lines', () => {
             return {
