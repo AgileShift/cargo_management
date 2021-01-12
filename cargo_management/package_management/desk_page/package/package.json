@@ -14,6 +14,11 @@
    "hidden": 0,
    "label": "Cargo Shipment",
    "links": "[\n    {\n        \"label\": \"Cargo Shipment\",\n        \"name\": \"Cargo Shipment\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Cargo Shipment\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Cargo Shipment Receipt\",\n        \"name\": \"Cargo Shipment Receipt\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Cargo Shipment Receipt\",\n        \"onboard\": 1\n    }\n]"
+  },
+  {
+   "hidden": 0,
+   "label": "Selling",
+   "links": "[\n    {\n        \"label\": \"Customer\",\n        \"name\": \"Customer\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Customer\"\n    },\n    {\n        \"label\": \"Sales Order\",\n        \"name\": \"Sales Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Order\"\n    },\n    {\n        \"label\": \"Sales Invoice\",\n        \"name\": \"Sales Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Invoice\"\n    }\n]"
   }
  ],
  "cards_label": "",
@@ -35,7 +40,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2021-01-05 08:30:07.280340",
+ "modified": "2021-01-11 22:24:30.621038",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
