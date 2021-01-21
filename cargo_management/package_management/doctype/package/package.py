@@ -38,7 +38,6 @@ class Package(Document):
 
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
-
         if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
             self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to be tracked.
         elif self.has_value_changed('carrier') and self.can_track():  # Already exists and the carrier has changed.
@@ -49,7 +48,7 @@ class Package(Document):
 
     def can_track(self):
         """ This def validate if a package can be tracked by any mean using any API, also loads the carrier flags. """
-        # TODO: Validate if any tracker API is enabled.
+        # TODO: Validate if a tracker API is enabled.
 
         if not self.track:  # Package is not configured to be tracked, no matter if easypost_id exists.
             frappe.msgprint(msg=_('Package is configured not to track.'), indicator='yellow', alert=True)
@@ -66,7 +65,7 @@ class Package(Document):
     def load_carrier_flags(self):
         """ Loads the carrier global flags settings handling the package in the flags of the Document. """
         self.flags.carrier_can_track, self.flags.carrier_uses_utc = \
-            frappe.get_value('Package Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])
+            frappe.get_value('Package Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])  # TODO Cache
 
     def change_status(self, new_status):
         """ Validate the current status of the package and validates if a change is possible. """
