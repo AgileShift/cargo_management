@@ -24,7 +24,7 @@
   {
    "fieldname": "competitor_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
+   "in_global_search": 1,
    "label": "Name",
    "reqd": 1,
    "unique": 1
@@ -46,6 +46,7 @@
   {
    "fieldname": "departure_dates",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Departure dates",
    "reqd": 1
   },
@@ -61,6 +62,7 @@
    "default": "1.00",
    "fieldname": "minimum_weight",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Minimum weight",
    "non_negative": 1,
    "reqd": 1
@@ -78,13 +80,13 @@
   {
    "fieldname": "departure_day",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Departure day",
    "reqd": 1
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-02-07 17:32:29.781711",
+ "modified": "2021-02-07 17:53:58.162029",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Competitor",
@@ -94,14 +96,39 @@
   {
    "create": 1,
    "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
-   "share": 1,
+   "role": "Sales User",
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Item Manager",
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All"
   }
  ],
  "quick_entry": 1,
