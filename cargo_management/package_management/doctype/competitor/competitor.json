@@ -11,14 +11,19 @@
  "field_order": [
   "competitor_name",
   "contact",
+  "provider",
+  "transportation_type",
   "column_break_3",
   "departure_dates",
   "departure_day",
   "transit_days",
   "section_break_6",
   "minimum_weight",
+  "rounded_weight",
   "section_break_8",
-  "rates"
+  "rates",
+  "section_break_12",
+  "notes"
  ],
  "fields": [
   {
@@ -32,23 +37,20 @@
   {
    "fieldname": "contact",
    "fieldtype": "Data",
-   "label": "Contact",
-   "reqd": 1
+   "label": "Contact Person"
   },
   {
    "fieldname": "transit_days",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Transit days",
-   "non_negative": 1,
-   "reqd": 1
+   "non_negative": 1
   },
   {
    "fieldname": "departure_dates",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Departure dates",
-   "reqd": 1
+   "label": "Departure dates"
   },
   {
    "fieldname": "column_break_3",
@@ -60,6 +62,7 @@
   },
   {
    "default": "1.00",
+   "description": "Minimum weight to use the service.",
    "fieldname": "minimum_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -81,16 +84,45 @@
    "fieldname": "departure_day",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Departure day",
+   "label": "Departure day"
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Data",
+   "label": "Provider"
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  },
+  {
+   "default": "0",
+   "fieldname": "rounded_weight",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Rounded weight"
+  },
+  {
+   "fieldname": "transportation_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transportation type",
+   "options": "Sea\nAir",
    "reqd": 1
   }
  ],
  "links": [],
- "modified": "2021-02-07 17:53:58.162029",
+ "modified": "2021-02-07 19:17:50.331893",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Competitor",
- "name_case": "Title Case",
  "owner": "Administrator",
  "permissions": [
   {
@@ -131,9 +163,8 @@
    "role": "All"
   }
  ],
- "quick_entry": 1,
  "show_name_in_global_search": 1,
- "sort_field": "modified",
+ "sort_field": "name",
  "sort_order": "DESC",
  "track_changes": 1
 }
