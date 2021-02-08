@@ -18,7 +18,7 @@
   {
    "hidden": 0,
    "label": "Selling",
-   "links": "[\n    {\n        \"label\": \"Customer\",\n        \"name\": \"Customer\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Customer\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Order\",\n        \"name\": \"Sales Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Order\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Invoice\",\n        \"name\": \"Sales Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Invoice\",\n        \"onboard\": 1\n    }\n]"
+   "links": "[\n    {\n        \"label\": \"Customer\",\n        \"name\": \"Customer\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Customer\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Order\",\n        \"name\": \"Sales Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Order\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Invoice\",\n        \"name\": \"Sales Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Invoice\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Competitor\",\n        \"name\": \"Competitor\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Competitor\"\n    }\n]"
   }
  ],
  "cards_label": "",
@@ -38,9 +38,10 @@
  "extends_another_page": 0,
  "hide_custom": 0,
  "idx": 0,
+ "is_default": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2021-01-12 07:16:13.079268",
+ "modified": "2021-02-07 18:05:54.721146",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
