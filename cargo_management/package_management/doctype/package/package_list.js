@@ -1,7 +1,7 @@
 frappe.listview_settings['Package'] = {
     add_fields: ['status', 'carrier'],
     filters: [
-        ['status', 'not in', ['Finished', 'Cancelled', 'fully_refunded']],
+        ['status', 'not in', ['Finished', 'Cancelled', 'Returned to Sender', 'fully_refunded']],
     ],
     hide_name_column: true,
 

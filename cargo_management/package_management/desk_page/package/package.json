@@ -41,7 +41,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2021-02-07 18:05:54.721146",
+ "modified": "2021-02-09 20:08:11.472919",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
@@ -53,7 +53,7 @@
    "doc_view": "List",
    "label": "All active packages",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Departure\", \"In Transit\", \"Sorting\", \"Finished\", \"Cancelled\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Departure\", \"In Transit\", \"Sorting\", \"Finished\", \"Cancelled\", \"Returned to Sender\"]]\n}",
    "type": "DocType"
   },
   {
