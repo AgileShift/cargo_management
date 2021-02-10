@@ -75,7 +75,7 @@ class Package(Document):
         # Package was not received, and not confirmed, but has appear on the warehouse receipt list
 
         if self.status != new_status and \
-                (self.status == 'Awaiting Receipt' and new_status == 'Awaiting Confirmation') or \
+                (self.status == 'Awaiting Receipt' and (new_status == 'Awaiting Confirmation' or new_status == 'Returned to Sender')) or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation'] and new_status == 'Awaiting Departure') or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure'] and new_status == 'In Transit'):
             # TODO: Finish
@@ -128,7 +128,6 @@ class Package(Document):
             if self.status == 'In Extraordinary Confirmation':
                 color = 'yellow'
                 message.append('El paquete se encuentra en una verificación fuera de lo habitual.')
-
         elif self.status == 'Awaiting Departure':
             message = ['El paquete fue recepcionado.', 'Esperando próximo despacho de carga.']
         elif self.status == 'In Transit':
@@ -137,6 +136,8 @@ class Package(Document):
             message = 'El paquete esta listo para ser retirado.'
         elif self.status == 'Finished' or self.status == 'Cancelled':
             return  # No message
+        elif self.status == 'Returned to Sender':
+            message, color = ['El paquete fue devuelto por el transportista al vendedor.', 'Contáctese con su vendedor para obtener mayor información.'], 'yellow'
         else:
             message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'yellow'
 
@@ -184,7 +185,9 @@ class Package(Document):
         if instance.status == 'Delivered' or instance.status_detail == 'Arrived At Destination':
             self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(instance.tracking_details[-1].datetime, self.flags.carrier_uses_utc)
             self.change_status('Awaiting Confirmation')
-        else:  # TODO: Change the status when the carrier status: return_to_sender, failure, cancelled, error
+        elif instance.status == 'Return To Sender' or instance.status_detail == 'Return':
+            self.change_status('Returned to Sender')
+        else:  # TODO: Change the status when the carrier status: failure, cancelled, error
             self.change_status('Awaiting Receipt')
 
         if instance.tracking_details:

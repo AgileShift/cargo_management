@@ -96,7 +96,7 @@ class EasypostAPI(object):
     @staticmethod
     def normalize_status(status):
         """ Normalize to frappe conventions. Easypost send snake_case status, we use individual words titled """
-        return status.replace('_', ' ').title()
+        return status.replace('_', ' ').title()  # We dont override if the data is empty.
 
 
 @frappe.whitelist(allow_guest=True)
