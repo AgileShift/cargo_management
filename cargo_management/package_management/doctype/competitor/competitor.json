@@ -23,7 +23,9 @@
   "section_break_8",
   "rates",
   "section_break_12",
-  "notes"
+  "notes",
+  "column_break_16",
+  "address"
  ],
  "fields": [
   {
@@ -116,10 +118,19 @@
    "label": "Transportation type",
    "options": "Sea\nAir",
    "reqd": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Adress"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2021-02-07 19:17:50.331893",
+ "modified": "2021-02-10 09:56:28.884439",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Competitor",
