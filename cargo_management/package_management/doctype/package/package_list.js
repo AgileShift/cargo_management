@@ -17,6 +17,7 @@ frappe.listview_settings['Package'] = {
             'Available to Pickup': 'green',
             'Finished': 'green',
             'Cancelled': 'red',
+            'Returned to Sender': 'red',
         };
 
         return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
