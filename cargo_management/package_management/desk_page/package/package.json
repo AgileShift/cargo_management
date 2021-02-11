@@ -41,7 +41,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2021-02-09 20:08:11.472919",
+ "modified": "2021-02-11 07:59:04.707035",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
@@ -94,7 +94,7 @@
    "format": "{} Late",
    "label": "Arriving Late",
    "link_to": "Package",
-   "stats_filter": "{\n    \"carrier_status\": [\"!=\", \"Delivered\"],\n    \"carrier_est_delivery\": [\"Timespan\", \"last week\"]\n}",
+   "stats_filter": "{\n    \"carrier_status\": [\"not in\", [\"Delivered\", \"Return To Sender\"]],\n    \"carrier_est_delivery\": [\"Timespan\", \"last week\"]\n}",
    "type": "DocType"
   },
   {
