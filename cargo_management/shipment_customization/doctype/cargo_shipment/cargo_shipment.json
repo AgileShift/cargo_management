@@ -15,7 +15,11 @@
   "mute_emails",
   "column_break_4",
   "departure_date",
+  "expected_arrival_date",
+  "arrival_date",
+  "section_break_8",
   "weight",
+  "column_break_10",
   "pieces",
   "sb_0",
   "cargo_shipment_lines"
@@ -113,6 +117,25 @@
    "options": "Cargo Shipment Line",
    "read_only_depends_on": "eval: doc.status == 'Received';",
    "reqd": 1
+  },
+  {
+   "fieldname": "expected_arrival_date",
+   "fieldtype": "Date",
+   "label": "Expected Arrival Date"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Real arrival date of cargo shipment to his final destination.",
+   "fieldname": "arrival_date",
+   "fieldtype": "Date",
+   "label": "Arrival Date"
   }
  ],
  "links": [
@@ -127,7 +150,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-01-02 00:56:06.511236",
+ "modified": "2021-02-12 15:57:37.935808",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",

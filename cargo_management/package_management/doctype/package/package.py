@@ -112,7 +112,7 @@ class Package(Document):
                     )
                 ]
 
-                delivered_since = frappe.utils.time_diff_in_seconds(None,self.carrier_real_delivery)  # datetime is UTC
+                delivered_since = frappe.utils.time_diff_in_seconds(None, self.carrier_real_delivery)  # datetime is UTC
 
                 # Package is no more within the 24 hours timespan to be confirmed. TODO: check against current user tz.
                 if (round(delivered_since / 3600, 2) >= 24.00):  # Same as: time_diff_in_hours() >= 24.00
