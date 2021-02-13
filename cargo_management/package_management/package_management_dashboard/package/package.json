@@ -4,7 +4,7 @@
    "card": "New Customers"
   },
   {
-   "card": "Packages reported today"
+   "card": "New Packages"
   }
  ],
  "chart_options": "",
@@ -21,7 +21,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2020-11-22 10:53:21.512127",
+ "modified": "2021-02-13 07:03:46.872729",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
