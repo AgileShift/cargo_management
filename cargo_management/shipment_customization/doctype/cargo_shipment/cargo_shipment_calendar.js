@@ -2,7 +2,7 @@ frappe.views.calendar['Cargo Shipment'] = {
     fields: ['departure_date', 'expected_arrival_date', 'name', 'reference', 'status'],
     field_map: {
         start: 'departure_date',
-        end: 'expected_arrival_date', // What happens when the cargo shipment is received? end -> must be arrival_date
+        end: 'expected_arrival_date', // TODO: What happens when the cargo shipment is received? end -> must be arrival_date
         id: 'name',
         title: 'reference'
     },
