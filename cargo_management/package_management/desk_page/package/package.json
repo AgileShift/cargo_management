@@ -23,12 +23,7 @@
  ],
  "cards_label": "",
  "category": "Domains",
- "charts": [
-  {
-   "chart_name": "Packages reported",
-   "label": "Packages reported"
-  }
- ],
+ "charts": [],
  "charts_label": "",
  "creation": "2020-07-05 15:49:07.860880",
  "developer_mode_only": 0,
@@ -41,7 +36,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2021-02-11 07:59:04.707035",
+ "modified": "2021-02-13 08:14:12.809186",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

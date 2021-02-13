@@ -10,7 +10,11 @@
  "chart_options": "",
  "charts": [
   {
-   "chart": "Packages reported",
+   "chart": "Package Summary",
+   "width": "Half"
+  },
+  {
+   "chart": "Reported Packages",
    "width": "Full"
   }
  ],
@@ -21,7 +25,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2021-02-13 07:03:46.872729",
+ "modified": "2021-02-13 08:16:14.558321",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
