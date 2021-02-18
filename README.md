@@ -12,7 +12,7 @@ System to manage warehouses, customers, packages and custom broker logistic deta
 # Python Libraries
 
 Python EasyPost API for Package Tracking details
-> `easypost==5.0.0`
+> easypost==5.0.0
 
 # TODO:
 1. https://github.com/frappe/erpnext/pull/24055/files

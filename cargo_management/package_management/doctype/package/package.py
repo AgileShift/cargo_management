@@ -207,6 +207,7 @@ class Package(Document):
 """ API Methods to communicate with the model that holds our business logic. """
 
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist()
+@frappe.read_only()
 def get_package_explained_status(source_name: str):
     return frappe.get_doc('Package', source_name, cache=True).get_explained_status()

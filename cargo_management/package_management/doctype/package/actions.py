@@ -1,7 +1,7 @@
 import frappe
 
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist()
 def update_data_from_carrier(doc):
     """ Used as Action button in Doctype: Fetch new data from carrier if we can track and update the doc if its open """
     doc = frappe.parse_json(doc)
@@ -15,7 +15,7 @@ def update_data_from_carrier(doc):
     return {}  # FIX: To prevent reload_doc being called twice by: execute_action() called if using "Server Action"
 
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist()
 def update_data_from_carrier_bulk(names):
     # TODO: FINISH
     names = frappe.parse_json(names)
@@ -26,7 +26,7 @@ def update_data_from_carrier_bulk(names):
         })
 
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist()
 @frappe.read_only()
 def get_carrier_detail_page_url(carrier: str):
     """ Util: Return the carrier detail page URL to append to a tracking number. Used in a Form Action Button """

@@ -64,11 +64,9 @@ frappe.ui.form.on('Package', {
                     r.message.message.forEach((message) => {
                         intro_message += "<div>" + message + "</div>";
                     });
-                } else {
-                    intro_message = r.message.message;
                 }
 
-                frm.set_intro(intro_message, r.message.color);  // frm.layout.show_message()
+                frm.set_intro(intro_message ? intro_message : r.message.message, r.message.color);  // frm.layout.show_message()
             }
         });
 
@@ -97,7 +95,7 @@ frappe.ui.form.on('Package', {
         // ]);
     },
 
-    // TODO: Tracking Validator from backend, and Carrier Select helper.
+    // TODO: Tracking Validator from backend and Carrier Select helper.
 });
 
 // Children Doctype of Package

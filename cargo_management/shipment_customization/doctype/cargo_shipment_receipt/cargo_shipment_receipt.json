@@ -1,16 +1,23 @@
 {
- "actions": [],
+ "actions": [
+  {
+   "action": "cargo_management.shipment_customization",
+   "action_type": "Server Action",
+   "group": "Create",
+   "label": "Casd"
+  }
+ ],
  "allow_copy": 1,
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-11-03 16:50:04.125725",
- "description": "Cargo Shipment Receipt.",
+ "description": "Cargo Shipment Receipt",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "reference",
   "cargo_shipment",
+  "reference",
   "status",
   "column_break_3",
   "departure_date",
@@ -43,11 +50,13 @@
    "in_standard_filter": 1,
    "label": "Cargo Shipment",
    "options": "Cargo Shipment",
+   "read_only_depends_on": "eval: !doc.__islocal",
    "reqd": 1,
    "unique": 1
   },
   {
    "columns": 2,
+   "depends_on": "eval: !doc.__islocal",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -89,7 +98,8 @@
    "fieldname": "cargo_shipment_receipt_warehouse_lines",
    "fieldtype": "Table MultiSelect",
    "label": "Warehouse Receipts in Cargo Shipment Receipt",
-   "options": "Cargo Shipment Receipt Warehouse Line"
+   "options": "Cargo Shipment Receipt Warehouse Line",
+   "reqd": 1
   },
   {
    "fieldname": "cargo_shipment_receipt_lines",
@@ -100,7 +110,7 @@
   }
  ],
  "links": [],
- "modified": "2021-02-12 15:56:37.619249",
+ "modified": "2021-02-18 01:31:15.214348",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",

@@ -318,12 +318,22 @@
    "link_fieldname": "package"
   },
   {
+   "group": "Sell",
+   "link_doctype": "Sales Order",
+   "link_fieldname": "package"
+  },
+  {
+   "group": "Sell",
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "package"
+  },
+  {
    "group": "Support",
    "link_doctype": "Issue",
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-02-09 19:55:46.894286",
+ "modified": "2021-02-17 17:53:27.383847",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

@@ -2,7 +2,7 @@ import frappe
 from frappe import _
 
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist()
 def confirm_packages_in_wr(doc):
     """ Used as Action button in Doctype: Confirm the receipt of the packages. Change status to: "Awaiting Departure" """
     # TODO: Make this some sort or generic def, to change status across multiple statuses

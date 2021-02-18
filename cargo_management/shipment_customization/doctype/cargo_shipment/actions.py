@@ -2,9 +2,9 @@ import frappe
 from frappe import _
 
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist()
 def mark_cargo_shipment_in_transit(source_name: str):
-    """ Used as Action button in Doctype: Change status of the packages and the warehouses receipts of the cargo shipment """
+    """ Used as Action button in Doctype: Change status of the packages and the warehouse receipts of the cargo shipment """
     cargo_shipment = frappe.get_doc('Cargo Shipment', source_name)
 
     total_packages = updated_packages = 0  # For Count purposes
