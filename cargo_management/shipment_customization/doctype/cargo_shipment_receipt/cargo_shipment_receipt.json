@@ -1,12 +1,5 @@
 {
- "actions": [
-  {
-   "action": "cargo_management.shipment_customization",
-   "action_type": "Server Action",
-   "group": "Create",
-   "label": "Casd"
-  }
- ],
+ "actions": [],
  "allow_copy": 1,
  "allow_rename": 1,
  "autoname": "field:reference",
@@ -110,7 +103,7 @@
   }
  ],
  "links": [],
- "modified": "2021-02-18 01:31:15.214348",
+ "modified": "2021-02-20 13:23:38.266417",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",

@@ -14,6 +14,22 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
         });
     },
 
+    refresh: function (frm) {
+        frm.add_custom_button(__('Sales Invoice'), () => {
+            frappe.utils.play_sound('click');  // Really Necessary?
+            frappe.call({
+                method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
+                args: {doc: frm.doc},
+                freeze: true,
+                freeze_message: __('Creating Sales Invoice...')
+            }).then(r => {
+                console.log(r.message); // TODO: pending to finish!
+            });
+        }, __('Create'));
+
+        frm.page.set_inner_btn_group_as_primary(__('Create'))
+    },
+
     cargo_shipment: function (frm) {
         if (!frm.doc.cargo_shipment) {
             return;
@@ -40,14 +56,10 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                 });
             });
 
-            r.message.warehouse_receipts.forEach(wr => {
-                frm.add_child('cargo_shipment_receipt_warehouse_lines', {
-                    'warehouse_receipt': wr
-                })
-            })
+            r.message.warehouse_receipts.forEach(wr => frm.add_child('cargo_shipment_receipt_warehouse_lines', {'warehouse_receipt': wr}));
 
-            frm.refresh_field('cargo_shipment_receipt_warehouse_lines'); // Refresh the child table.
-            frm.refresh_field('cargo_shipment_receipt_lines'); // Refresh the child table.
+            frm.refresh_field('cargo_shipment_receipt_warehouse_lines'); // Refresh the child tables
+            frm.refresh_field('cargo_shipment_receipt_lines');
         });
 
     }

@@ -15,7 +15,8 @@
   "section_break_7",
   "gross_weight",
   "column_break_9",
-  "import_price"
+  "import_price",
+  "sales_invoice"
  ],
  "fields": [
   {
@@ -93,11 +94,17 @@
    "label": "Customer",
    "options": "Customer",
    "read_only_depends_on": "eval: doc.package == null || doc.customer_name != null"
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-02-17 16:02:36.955852",
+ "modified": "2021-02-20 12:48:54.971604",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt Line",

@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 import frappe
 
 
@@ -36,6 +38,40 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 
 
 @frappe.whitelist()
-def make_sales_invoice():
-    """ Create sales invoice for each customer and packages in the cargo shipment receipt. """
-    pass
+def make_sales_invoice(doc):
+    """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
+    doc = frappe.parse_json(doc)  # Cargo Shipment Receipt Doc
+
+    data = defaultdict(list)
+    for item in doc.cargo_shipment_receipt_lines:
+        key = item.pop('customer')
+        data[key].append(item)
+
+    # print(data)
+
+    for invoice_data in data:
+        # FIX HERE!
+        target = frappe.new_doc('Sales Invoice')
+        target.customer = str(invoice_data)
+        target.company = 'QuickBox Nicaragua'
+        target.currency = 'USD'
+
+        for item in data[invoice_data]:
+            print(item.get('customer_name'))
+
+            target.append('items', {
+                'item_code': item.get('item_code'),
+                'package': item.get('package'),
+                'qty': item.get('gross_weight', 1),
+                'rate': 3.00  #item.get('import_price', 1)
+            })
+
+        target.set_missing_values()
+
+        print(target)
+
+        target.save()
+        print(target.name)
+        return target
+
+    return data
