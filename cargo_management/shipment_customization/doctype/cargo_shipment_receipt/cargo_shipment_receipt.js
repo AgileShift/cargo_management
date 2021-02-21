@@ -19,7 +19,9 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
             frappe.utils.play_sound('click');  // Really Necessary?
             frappe.call({
                 method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
-                args: {doc: frm.doc},
+                args: {
+                    cargo_shipment_receipt_lines: frm.doc.cargo_shipment_receipt_lines
+                },
                 freeze: true,
                 freeze_message: __('Creating Sales Invoice...')
             }).then(r => {
@@ -51,7 +53,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                     // 'item_code': package_doc.item_code,  TODO: This is not working, because the package is set one time
                     'customer': package_doc.customer,
                     'customer_name': package_doc.customer_name,
-                    'carrier_weight': package_doc.carrier_est_weight,
+                    'carrier_est_weight': package_doc.carrier_est_weight,
                     'content': package_doc.content
                 });
             });

@@ -37,41 +37,40 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
     }
 
 
+# TODO: Crear facturas - Cada Invoice Item: debe de tener package
 @frappe.whitelist()
-def make_sales_invoice(doc):
+def make_sales_invoice(cargo_shipment_receipt_lines):
     """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
-    doc = frappe.parse_json(doc)  # Cargo Shipment Receipt Doc
+    cargo_shipment_receipt_lines = frappe.parse_json(cargo_shipment_receipt_lines)
 
-    data = defaultdict(list)
-    for item in doc.cargo_shipment_receipt_lines:
-        key = item.pop('customer')
-        data[key].append(item)
+    # Sorting all the customers data in a single dict
+    customers_to_invoice = defaultdict(list)
+    for item in cargo_shipment_receipt_lines:
+        customer = item.pop('customer')
+        customers_to_invoice[customer].append(item)
 
-    # print(data)
+    # Creating a Sales Invoice for each customer
+    for customer in customers_to_invoice:
+        sales_invoice = frappe.new_doc('Sales Invoice')
+        sales_invoice.customer = customer
+        # sales_invoice.company = 'QuickBox Nicaragua'  # TODO
+        # sales_invoice.currency = 'USD'   # TODO
 
-    for invoice_data in data:
-        # FIX HERE!
-        target = frappe.new_doc('Sales Invoice')
-        target.customer = str(invoice_data)
-        target.company = 'QuickBox Nicaragua'
-        target.currency = 'USD'
-
-        for item in data[invoice_data]:
-            print(item.get('customer_name'))
-
-            target.append('items', {
+        # Iterate over customer items to invoice
+        for item in customers_to_invoice[customer]:
+            sales_invoice.append('items', {
                 'item_code': item.get('item_code'),
                 'package': item.get('package'),
+                # TODO: Working
                 'qty': item.get('gross_weight', 1),
-                'rate': 3.00  #item.get('import_price', 1)
+                'rate': item.get('import_price', 1)
             })
 
-        target.set_missing_values()
+        return sales_invoice
 
-        print(target)
+        sales_invoice.set_missing_values()
+        sales_invoice.save()
 
-        target.save()
-        print(target.name)
-        return target
+        return sales_invoice
 
-    return data
+    return customers_to_invoice
