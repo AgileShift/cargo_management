@@ -15,7 +15,10 @@
   "section_break_7",
   "gross_weight",
   "column_break_9",
-  "import_price",
+  "billable_qty_or_weight",
+  "column_break_12",
+  "item_price",
+  "section_break_14",
   "sales_invoice"
  ],
  "fields": [
@@ -47,13 +50,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "import_price",
-   "fieldtype": "Currency",
-   "label": "Import Price",
-   "non_negative": 1,
-   "options": "USD"
-  },
-  {
    "columns": 2,
    "fieldname": "item_code",
    "fieldtype": "Link",
@@ -63,6 +59,7 @@
   },
   {
    "columns": 1,
+   "description": "The gross weight of the package.",
    "fieldname": "gross_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -86,6 +83,7 @@
    "read_only_depends_on": "eval: doc.package == null || doc.customer_name != null"
   },
   {
+   "columns": 1,
    "fieldname": "sales_invoice",
    "fieldtype": "Link",
    "label": "Sales Invoice",
@@ -99,13 +97,36 @@
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Carrier Weight",
+   "label": "Carrier estimated weight",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "item_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Item Price",
+   "non_negative": 1,
+   "options": "USD"
+  },
+  {
+   "description": "Quantity or Weight in Pounds.",
+   "fieldname": "billable_qty_or_weight",
+   "fieldtype": "Float",
+   "label": "Billable Quantity or Weight"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-02-20 15:24:39.222439",
+ "modified": "2021-02-21 18:55:44.828876",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt Line",

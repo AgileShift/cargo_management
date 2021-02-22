@@ -36,8 +36,9 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
         'warehouse_receipts': wrs,
     }
 
-
+# TODO: Status: in Sorting - Ready to Pickup? WHEN?
 # TODO: Crear facturas - Cada Invoice Item: debe de tener package
+# TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
 @frappe.whitelist()
 def make_sales_invoice(cargo_shipment_receipt_lines):
     """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
@@ -52,25 +53,26 @@ def make_sales_invoice(cargo_shipment_receipt_lines):
     # Creating a Sales Invoice for each customer
     for customer in customers_to_invoice:
         sales_invoice = frappe.new_doc('Sales Invoice')
-        sales_invoice.customer = customer
-        # sales_invoice.company = 'QuickBox Nicaragua'  # TODO
-        # sales_invoice.currency = 'USD'   # TODO
+        sales_invoice.customer = customer  # Company and Currency are automatically set
 
         # Iterate over customer items to invoice
         for item in customers_to_invoice[customer]:
-            sales_invoice.append('items', {
-                'item_code': item.get('item_code'),
-                'package': item.get('package'),
-                # TODO: Working
-                'qty': item.get('gross_weight', 1),
-                'rate': item.get('import_price', 1)
-            })
+            item_data = {  # Always pass this data
+                'item_code': item['item_code'],
+                'package': item['package'],
+                'qty': item['billable_qty_or_weight'],
+                'total_weight': item['gross_weight'],  # TODO: weight_per_unit
+                'description': item.get('content')
+            }
 
-        return sales_invoice
+            if item['item_price'] > 0.00:
+                item_data.update({'price_list_rate': item['item_price']})
+
+            sales_invoice.append('items', item_data)
 
         sales_invoice.set_missing_values()
-        sales_invoice.save()
+        sales_invoice.save()  # Saving a invoice as draft
 
         return sales_invoice
 
-    return customers_to_invoice
+    return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table!!!.
