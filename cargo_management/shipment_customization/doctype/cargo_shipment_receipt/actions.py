@@ -51,6 +51,7 @@ def make_sales_invoice(cargo_shipment_receipt_lines):
         customers_to_invoice[customer].append(item)
 
     # Creating a Sales Invoice for each customer
+    customers_invoices = defaultdict(list)
     for customer in customers_to_invoice:
         sales_invoice = frappe.new_doc('Sales Invoice')
         sales_invoice.customer = customer  # Company and Currency are automatically set
@@ -71,8 +72,10 @@ def make_sales_invoice(cargo_shipment_receipt_lines):
             sales_invoice.append('items', item_data)
 
         sales_invoice.set_missing_values()
-        sales_invoice.save()  # Saving a invoice as draft
+        sales_invoice.save(ignore_permissions=True)  # Saving a invoice as draft
 
-        return sales_invoice
+        customers_invoices[customer] = sales_invoice.name
+        print(customers_invoices)
+        # return customers_invoices
 
     return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table!!!.

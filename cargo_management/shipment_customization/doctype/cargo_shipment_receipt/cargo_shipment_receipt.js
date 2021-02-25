@@ -24,8 +24,19 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                 },
                 freeze: true,
                 freeze_message: __('Creating Sales Invoice...')
-            }).then(r => {
-                console.log(r.message); // TODO: pending to finish!
+            }).then(r => { // Return customers invoices
+                frm.doc.cargo_shipment_receipt_lines.forEach((csrl) => {
+                    console.log(csrl);
+                    console.log(csrl.sales_invoice);
+                    console.log(r.message);
+                    console.log(r.message[csrl.customer]);
+
+                    csrl.sales_invoice = r.message[csrl.customer]
+                });
+
+                frm.refresh_field('cargo_shipment_receipt_lines');
+
+                frm.save();
             });
         }, __('Create'));
 
