@@ -33,15 +33,19 @@
   "signed_by",
   "section_break_17",
   "carrier_last_detail",
+  "content_section",
+  "content",
+  "has_shipping",
+  "section_break_21",
+  "shipping_price",
+  "column_break_22",
+  "total",
   "section_break_6",
   "shipper",
   "notes",
   "column_break_21",
   "order_number",
   "signature",
-  "content_section",
-  "content",
-  "total",
   "internal_data_section",
   "consignee_name",
   "column_break_3",
@@ -304,6 +308,29 @@
    "fieldname": "gross_weight",
    "fieldtype": "Float",
    "label": "Gross Weight"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_shipping",
+   "fieldtype": "Check",
+   "label": "Has Shipping"
+  },
+  {
+   "depends_on": "has_shipping",
+   "fieldname": "shipping_price",
+   "fieldtype": "Currency",
+   "label": "Shipping Price",
+   "mandatory_depends_on": "eval: doc.has_shipping",
+   "options": "USD",
+   "print_hide_if_no_value": 1
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
   }
  ],
  "links": [
@@ -333,7 +360,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-02-17 17:53:27.383847",
+ "modified": "2021-03-04 13:03:38.234615",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

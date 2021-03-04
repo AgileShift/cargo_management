@@ -1,6 +1,9 @@
 function calculate_package_total(frm) {
+    let content_amount = frm.get_sum('content', 'amount');  // Using some built-in function: get_sum()
+    let total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_price : content_amount;
+
     // Calculate the 'total' field on Package Doctype(Parent)
-    frm.set_value('total', frm.get_sum('content', 'amount'));  // Using some built-in function: get_sum()
+    frm.set_value('total', total);
 }
 
 function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
@@ -28,7 +31,7 @@ frappe.ui.form.on('Package', {
         });
 
         // Setting Currency Labels
-        frm.set_currency_labels(['total'], 'USD');
+        frm.set_currency_labels(['total', 'shipping_price'], 'USD');
         frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
     },
 
@@ -94,6 +97,17 @@ frappe.ui.form.on('Package', {
         //     }
         // ]);
     },
+
+    has_shipping: function (frm) {
+        if (!frm.doc.has_shipping) {
+            frm.doc.shipping_price = 0; // Empty the value of the field.
+        }
+        calculate_package_total(frm);
+    },
+
+    shipping_price: function (frm) {
+        calculate_package_total(frm);
+    }
 
     // TODO: Tracking Validator from backend and Carrier Select helper.
 });

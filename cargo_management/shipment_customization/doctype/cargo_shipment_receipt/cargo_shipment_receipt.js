@@ -1,5 +1,7 @@
 frappe.ui.form.on('Cargo Shipment Receipt', {
 
+    // TODO: On Save set customer on the package that are not set!
+
     onload: function (frm) {
         // Adding the two possible ways to trigger a fetch for customer_name
         frm.add_fetch('package', 'customer_name', 'customer_name');
@@ -15,6 +17,8 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
     },
 
     refresh: function (frm) {
+        // TODO: after UI release: refresh packages button
+
         frm.add_custom_button(__('Sales Invoice'), () => {
             frappe.utils.play_sound('click');  // Really Necessary?
             frappe.call({
