@@ -1,18 +1,15 @@
 function calculate_package_total(frm) {
     let content_amount = frm.get_sum('content', 'amount');  // Using some built-in function: get_sum()
-    let total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_price : content_amount;
+    frm.doc.total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_price : content_amount;  // Calculate the 'total' field on Package Doctype(Parent)
 
-    // Calculate the 'total' field on Package Doctype(Parent)
-    frm.set_value('total', total);
+    frm.refresh_fields();  // Refresh all fields. FIXME: Maybe is not the better way..
 }
 
 function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     // Calculates the 'amount' field on Package Content Doctype(Child) and 'total' field on Package Doctype(Parent)
-    let row = locals[cdt][cdn]; // Getting Child Row
+    let content_row = locals[cdt][cdn]; // Getting Child Row
 
-    row.amount = row.qty * row.rate;  // Calculating amount
-
-    refresh_field('amount', cdn, 'content'); // Show change on 'amount' field. Without triggering any event.
+    content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in eddited row
 
     calculate_package_total(frm); // Calculate the parent 'total' field and trigger events.
 }

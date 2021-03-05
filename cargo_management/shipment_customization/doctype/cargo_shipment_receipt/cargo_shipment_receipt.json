@@ -95,6 +95,7 @@
    "reqd": 1
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "cargo_shipment_receipt_lines",
    "fieldtype": "Table",
    "label": "Packages in Cargo Shipment Receipt",
@@ -103,7 +104,7 @@
   }
  ],
  "links": [],
- "modified": "2021-02-20 13:23:38.266417",
+ "modified": "2021-03-04 22:04:42.837608",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",

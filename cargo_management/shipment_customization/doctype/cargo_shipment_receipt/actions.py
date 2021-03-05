@@ -16,11 +16,12 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
         SELECT
             p.name, p.customer_name, p.customer, p.carrier_est_weight,
             GROUP_CONCAT(DISTINCT
-                'Descripcion: ', pc.description,
+                pc.description,
                 '\nMonto: $', FORMAT(pc.amount, 2),
                 '\nCodigo: ', IFNULL(pc.item_code, '')
-                SEPARATOR '\n\n'
-            ) AS content
+                SEPARATOR '\n\n'  # TODO: Add total details from package
+            ) AS content,
+            p.total
         FROM tabPackage p
             LEFT JOIN `tabPackage Content` pc ON pc.parent = p.name
             INNER JOIN `tabWarehouse Receipt Line` wrl ON wrl.package = p.name
