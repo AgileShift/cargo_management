@@ -4,19 +4,10 @@ from frappe.model.utils.rename_doc import update_linked_doctypes, get_fetch_fiel
 class CargoShipmentReceipt(Document):
 
 	def validate(self):
-		# print(
-		# 	sorted(self.cargo_shipment_receipt_lines, key=lambda item: item.customer_name)
-		# )
-
-		# for i, item in enumerate(sorted(self.cargo_shipment_receipt_lines, key=lambda item: item.customer), start=1):
-		# 	item.idx = i
-
-		super(CargoShipmentReceipt, self).validate()
-
-	def before_save(self):
-		
-
-		super(CargoShipmentReceipt, self).before_save()
+		# TODO: make this sort function refresh the table
+		sorted_list = sorted(self.cargo_shipment_receipt_lines, key=lambda item: item.customer_name if item.customer_name else '')
+		for i, item in enumerate(sorted_list, start=1 ):
+			item.idx = i
 
 	# def on_update(self):
 		""" After succesfull save. We link our docs! """

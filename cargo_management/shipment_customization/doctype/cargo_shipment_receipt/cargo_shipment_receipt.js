@@ -17,7 +17,8 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
     },
 
     refresh: function (frm) {
-        // TODO: after UI release: refresh packages button
+        // TODO: after UI release: Child table dont update after save(validate method sorts the child table)
+        // TODO: Add a button to sort child table by customer name.
 
         frm.add_custom_button(__('Sales Invoice'), () => {
             frappe.utils.play_sound('click');  // Really Necessary?
