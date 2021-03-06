@@ -64,7 +64,7 @@ def make_sales_invoice(doc):
         csrl_invoiced_items = []
         for item in customers_to_invoice[customer]:
             item_data = {  # Always pass this data
-                'item_code': 'IP Varios - PESO',  #item['item_code']
+                'item_code': item.item_code,
                 'package': item.package,
                 'qty': item.billable_qty_or_weight,
                 'total_weight': item.gross_weight,  # TODO: weight_per_unit
