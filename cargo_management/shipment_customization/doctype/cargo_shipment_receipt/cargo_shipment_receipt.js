@@ -22,11 +22,12 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 
         frm.add_custom_button(__('Sales Invoice'), () => {
             frappe.utils.play_sound('click');  // Really Necessary?
+            // TODO: Little hack? fix after new UI: Button should be hidden if change is made -> look in warehouse receipt change status action
+            frm.save();
+
             frappe.call({
                 method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
-                args: {
-                    cargo_shipment_receipt_lines: frm.doc.cargo_shipment_receipt_lines
-                },
+                args: {doc: frm.doc},
                 freeze: true,
                 freeze_message: __('Creating Sales Invoice...')
             }).then(r => { // Return customers invoices
@@ -40,8 +41,6 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                 });
 
                 frm.refresh_field('cargo_shipment_receipt_lines');
-
-                frm.save();
             });
         }, __('Create'));
 

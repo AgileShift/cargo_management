@@ -41,42 +41,49 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 # TODO: Crear facturas - Cada Invoice Item: debe de tener package
 # TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
 @frappe.whitelist()
-def make_sales_invoice(cargo_shipment_receipt_lines):
+def make_sales_invoice(doc):
     """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
-    cargo_shipment_receipt_lines = frappe.parse_json(cargo_shipment_receipt_lines)
+    doc = frappe.parse_json(doc)
+    cargo_shipment_receipt = frappe.get_doc('Cargo Shipment Receipt', doc.get('name'))
 
     # Sorting all the customers data in a single dict
     customers_to_invoice = defaultdict(list)
-    for item in cargo_shipment_receipt_lines:
-        customer = item.pop('customer')
-        customers_to_invoice[customer].append(item)
+    for item in cargo_shipment_receipt.cargo_shipment_receipt_lines:
+        if not item.customer:
+            frappe.throw('Agregar cliente a fila: {}, Paquete: {}'.format(item.get('idx'), item.get('package')))
+
+        customers_to_invoice[item.customer].append(item)
 
     # Creating a Sales Invoice for each customer
-    customers_invoices = defaultdict(list)
+    # TODO: Validate fields and throw before start to create sales order!
     for customer in customers_to_invoice:
         sales_invoice = frappe.new_doc('Sales Invoice')
         sales_invoice.customer = customer  # Company and Currency are automatically set
 
         # Iterate over customer items to invoice
+        csrl_invoiced_items = []
         for item in customers_to_invoice[customer]:
             item_data = {  # Always pass this data
-                'item_code': item['item_code'],
-                'package': item['package'],
-                'qty': item['billable_qty_or_weight'],
-                'total_weight': item['gross_weight'],  # TODO: weight_per_unit
-                'description': item.get('content')
+                'item_code': 'IP Varios - PESO',  #item['item_code']
+                'package': item.package,
+                'qty': item.billable_qty_or_weight,
+                'total_weight': item.gross_weight,  # TODO: weight_per_unit
+                'description': item.content
             }
 
-            if item['item_price'] > 0.00:
-                item_data.update({'price_list_rate': item['item_price']})
+            if item.item_price > 0.00:
+                item_data.update({'price_list_rate': item.item_price})
 
-            sales_invoice.append('items', item_data)
+            sales_invoice.append('items', item_data)  # Add each items
+            csrl_invoiced_items.append(item.name)
 
         sales_invoice.set_missing_values()
         sales_invoice.save(ignore_permissions=True)  # Saving a invoice as draft
 
-        customers_invoices[customer] = sales_invoice.name
-        print(customers_invoices)
-        # return customers_invoices
+        for item in csrl_invoiced_items:
+            frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
+
+    cargo_shipment_receipt.notify_update()
+    cargo_shipment_receipt.save(ignore_permissions=True)  # Send update notify
 
     return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table!!!.
