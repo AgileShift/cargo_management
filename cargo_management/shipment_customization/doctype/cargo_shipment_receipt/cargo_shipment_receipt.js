@@ -94,4 +94,10 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 // Child Table
 frappe.ui.form.on('Cargo Shipment Receipt Line', {
     // TODO: We should allow always customer to be read not read_only?
+
+    // TODO: Add a button to trigger this info!
+    gross_weight: function (frm, cdt, cdn) {
+        frm.set_value('gross_weight', frm.get_sum('cargo_shipment_receipt_lines', 'gross_weight'));
+    }
+
 });

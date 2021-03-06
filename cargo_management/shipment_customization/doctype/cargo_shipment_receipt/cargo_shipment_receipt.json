@@ -17,7 +17,8 @@
   "arrival_date",
   "section_break_6",
   "cargo_shipment_receipt_warehouse_lines",
-  "cargo_shipment_receipt_lines"
+  "cargo_shipment_receipt_lines",
+  "gross_weight"
  ],
  "fields": [
   {
@@ -101,10 +102,17 @@
    "label": "Packages in Cargo Shipment Receipt",
    "options": "Cargo Shipment Receipt Line",
    "reqd": 1
+  },
+  {
+   "description": "Total billable gross weight of the cargo shipment receipt",
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Total Gross Weight",
+   "read_only": 1
   }
  ],
  "links": [],
- "modified": "2021-03-04 22:04:42.837608",
+ "modified": "2021-03-06 10:12:33.400671",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",

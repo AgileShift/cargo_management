@@ -42,6 +42,9 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 # TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
 @frappe.whitelist()
 def make_sales_invoice(doc):
+
+    # TODO: Set customer if not set!.
+
     """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
     doc = frappe.parse_json(doc)
     cargo_shipment_receipt = frappe.get_doc('Cargo Shipment Receipt', doc.get('name'))
