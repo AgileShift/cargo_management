@@ -64,7 +64,8 @@
    "default": "1",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
-   "label": "Don't Send Emails"
+   "label": "Don't Send Emails",
+   "print_hide": 1
   },
   {
    "fieldname": "column_break_3",
@@ -116,7 +117,7 @@
    "allow_in_quick_entry": 1,
    "columns": 10,
    "fieldname": "warehouse_receipt_lines",
-   "fieldtype": "Table MultiSelect",
+   "fieldtype": "Table",
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Packages in Warehouse Receipt",
@@ -137,7 +138,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2020-12-02 22:07:08.558561",
+ "modified": "2021-03-15 17:19:46.878100",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
