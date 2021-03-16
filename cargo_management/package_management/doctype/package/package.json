@@ -10,7 +10,7 @@
  "allow_rename": 1,
  "autoname": "field:tracking_number",
  "creation": "2020-06-12 19:06:49.803202",
- "description": "DocType to save data of a package, This is the same as a Package.",
+ "description": "DocType to save data of a package.",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -37,7 +37,7 @@
   "content",
   "has_shipping",
   "section_break_21",
-  "shipping_price",
+  "shipping_amount",
   "column_break_22",
   "total",
   "section_break_6",
@@ -218,7 +218,7 @@
    "collapsible_depends_on": "eval: !in_list(['Sorting', 'Available to Pickup', 'Finished'], doc.status)",
    "fieldname": "section_break_6",
    "fieldtype": "Section Break",
-   "label": "Additional data from customer"
+   "label": "Additional Information"
   },
   {
    "description": "Store that sends the package.",
@@ -239,7 +239,7 @@
   {
    "fieldname": "order_number",
    "fieldtype": "Data",
-   "label": "Order number"
+   "label": "Number of Order"
   },
   {
    "depends_on": "eval: !doc.__islocal",
@@ -263,10 +263,10 @@
    "bold": 1,
    "default": "0",
    "depends_on": "content",
-   "description": "Total declared value in package.",
+   "description": "Total Declared Amount",
    "fieldname": "total",
    "fieldtype": "Currency",
-   "label": "Total",
+   "label": "Total(Amt)",
    "options": "USD",
    "read_only": 1
   },
@@ -313,16 +313,7 @@
    "default": "0",
    "fieldname": "has_shipping",
    "fieldtype": "Check",
-   "label": "Has Shipping"
-  },
-  {
-   "depends_on": "has_shipping",
-   "fieldname": "shipping_price",
-   "fieldtype": "Currency",
-   "label": "Shipping Price",
-   "mandatory_depends_on": "eval: doc.has_shipping",
-   "options": "USD",
-   "print_hide_if_no_value": 1
+   "label": "Has shipping cost"
   },
   {
    "fieldname": "column_break_22",
@@ -331,6 +322,15 @@
   {
    "fieldname": "section_break_21",
    "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "has_shipping",
+   "fieldname": "shipping_amount",
+   "fieldtype": "Currency",
+   "label": "Shipping Amount",
+   "mandatory_depends_on": "eval: doc.has_shipping",
+   "options": "USD",
+   "print_hide_if_no_value": 1
   }
  ],
  "links": [
@@ -360,7 +360,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-03-04 13:03:38.234615",
+ "modified": "2021-03-16 14:28:02.420124",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

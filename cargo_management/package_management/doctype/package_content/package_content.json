@@ -6,13 +6,16 @@
  "engine": "InnoDB",
  "field_order": [
   "description",
-  "item_code",
   "qty",
   "rate",
-  "amount"
+  "amount",
+  "section_break_5",
+  "item_code",
+  "import_price"
  ],
  "fields": [
   {
+   "columns": 2,
    "fieldname": "description",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -21,7 +24,7 @@
   },
   {
    "bold": 1,
-   "columns": 2,
+   "columns": 1,
    "default": "1.00",
    "fieldname": "qty",
    "fieldtype": "Float",
@@ -30,16 +33,14 @@
    "reqd": 1
   },
   {
-   "columns": 2,
+   "columns": 1,
    "default": "0.00",
    "fieldname": "rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Rate",
    "options": "USD",
-   "print_width": "100px",
-   "reqd": 1,
-   "width": "100px"
+   "reqd": 1
   },
   {
    "columns": 2,
@@ -49,21 +50,33 @@
    "in_list_view": 1,
    "label": "Amount",
    "options": "USD",
-   "print_width": "100px",
-   "read_only": 1,
-   "width": "100px"
+   "read_only": 1
   },
   {
+   "columns": 2,
    "fieldname": "item_code",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Item Code",
    "options": "Item"
+  },
+  {
+   "columns": 1,
+   "fieldname": "import_price",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Import Price",
+   "non_negative": 1,
+   "options": "USD"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Column Break"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-03-04 12:54:37.904092",
+ "modified": "2021-03-16 14:59:56.528096",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Content",

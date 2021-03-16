@@ -1,6 +1,6 @@
 function calculate_package_total(frm) {
     let content_amount = frm.get_sum('content', 'amount');  // Using some built-in function: get_sum()
-    frm.doc.total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_price : content_amount;  // Calculate the 'total' field on Package Doctype(Parent)
+    frm.doc.total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_amount : content_amount;  // Calculate the 'total' field on Package Doctype(Parent)
 
     frm.refresh_fields();  // Refresh all fields. FIXME: Maybe is not the better way..
 }
@@ -13,6 +13,8 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 
     calculate_package_total(frm); // Calculate the parent 'total' field and trigger events.
 }
+
+// todo: MATCH the new and current fields!! import_price for example
 
 frappe.ui.form.on('Package', {
 
@@ -28,7 +30,7 @@ frappe.ui.form.on('Package', {
         });
 
         // Setting Currency Labels
-        frm.set_currency_labels(['total', 'shipping_price'], 'USD');
+        frm.set_currency_labels(['total', 'shipping_amount'], 'USD');
         frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
     },
 
@@ -97,12 +99,12 @@ frappe.ui.form.on('Package', {
 
     has_shipping: function (frm) {
         if (!frm.doc.has_shipping) {
-            frm.doc.shipping_price = 0; // Empty the value of the field.
+            frm.doc.shipping_amount = 0; // Empty the value of the field.
         }
         calculate_package_total(frm);
     },
 
-    shipping_price: function (frm) {
+    shipping_amount: function (frm) {
         calculate_package_total(frm);
     }
 

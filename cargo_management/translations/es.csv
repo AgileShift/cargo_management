@@ -26,20 +26,22 @@ Estimated weight of the package as measured by the carrier (if available).,Peso 
 
 Carrier status,Estado según el transportista
 The current status of the package provided by the carrier (if available),El estado actual del paquete proporcionado por el transportista (si está disponible)
+Available For Pickup,Disponible para recoger
 Delivered,Entregado
 
 Carrier status detail,Detalle del estado según el transportista
-Arrived At Destination,Llegó a destino
+Arrived At Pickup Location,Llegó al lugar de recogida
+Arrived At Destination,Llegó al destino
 
 Signed by,Firmado por
 The name of the person who signed for the package (if available).,El nombre de la persona que firmó el paquete (si está disponible).
 Carrier last detail, Última actualización del transportista
-Additional data from customer,Datos adicionales de el cliente
+
+Has shipping cost,Tiene costo de envío
+
 Shipper,Vendedor
 Store that sends the package.,Tienda que envía el paquete.
 Notes or instructions.,Notas o instrucciones.
-Order number,Número de orden
-Total declared value in package.,Valor total declarado del paquete.
 Internal data,Datos internos
 Consignee name,Nombre del consignatario
 Name on the package label.,Nombre en la etiqueta del paquete.
@@ -73,9 +75,10 @@ Total import cost,Costo total de importación
 Render Quotation,Visualizar Cotización
 
 Warehouse Receipt,Recibo de almacén
-Target warehouse,Almacén de destino
+Target Warehouse,Almacén de destino
 Warehouse where reception occurred.,Almacén donde se produjo la recepción.
 Real date of document generation.,Fecha real de generación del documento.
+
 Real departure date of cargo shipment to his final destination.,Fecha real de despacho del envío de carga a su destino final.
 Packages in Warehouse Receipt,Paquetes en el recibo de almacén
 
