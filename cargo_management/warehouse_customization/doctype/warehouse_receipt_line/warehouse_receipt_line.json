@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "package",
+  "carrier_real_delivery",
   "date"
  ],
  "fields": [
@@ -21,17 +22,28 @@
    "search_index": 1
   },
   {
-   "columns": 4,
+   "columns": 2,
    "description": "Actual Date of Receipt provided by the warehouse (if available).",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date"
+  },
+  {
+   "columns": 2,
+   "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
+   "fetch_from": "package.carrier_real_delivery",
+   "fetch_if_empty": 1,
+   "fieldname": "carrier_real_delivery",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Carrier real delivery date",
+   "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-03-15 17:17:21.812030",
+ "modified": "2021-03-23 10:13:20.283615",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

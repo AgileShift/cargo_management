@@ -87,6 +87,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Customer Name",
    "read_only": 1
@@ -360,7 +361,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-03-18 11:57:37.808398",
+ "modified": "2021-03-23 10:18:37.774100",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
