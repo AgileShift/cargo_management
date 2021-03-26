@@ -17,6 +17,7 @@
   "date",
   "departure_date",
   "weight",
+  "gross_weight",
   "pieces",
   "sb_0",
   "warehouse_receipt_lines"
@@ -124,6 +125,11 @@
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Closed';",
    "reqd": 1
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight"
   }
  ],
  "links": [
@@ -138,7 +144,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-03-16 14:41:47.311925",
+ "modified": "2021-03-26 10:32:40.503896",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
