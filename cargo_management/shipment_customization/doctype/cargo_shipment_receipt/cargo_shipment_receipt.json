@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_copy": 1,
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-11-03 16:50:04.125725",
@@ -112,7 +111,7 @@
   }
  ],
  "links": [],
- "modified": "2021-03-06 10:12:33.400671",
+ "modified": "2021-03-25 16:59:55.490769",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",
