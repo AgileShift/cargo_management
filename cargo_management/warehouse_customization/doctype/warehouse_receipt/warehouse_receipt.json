@@ -15,17 +15,17 @@
   "column_break_3",
   "status",
   "section_break_7",
-  "date",
+  "opening_date",
   "column_break_8",
+  "closing_date",
+  "column_break_10",
   "departure_date",
   "additional_information_section",
   "gross_weight",
   "weight",
   "pieces",
   "sb_0",
-  "warehouse_receipt_lines",
-  "opening_date",
-  "closing_date"
+  "warehouse_receipt_lines"
  ],
  "fields": [
   {
@@ -76,18 +76,6 @@
   {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "default": "now",
-   "description": "Real date of document generation.",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Date",
-   "read_only_depends_on": "eval: doc.status == 'Closed';",
-   "reqd": 1
   },
   {
    "bold": 1,
@@ -159,6 +147,10 @@
    "fieldname": "closing_date",
    "fieldtype": "Datetime",
    "label": "Closing Date"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -173,7 +165,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-03-27 22:44:25.431969",
+ "modified": "2021-03-27 22:58:53.072242",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
