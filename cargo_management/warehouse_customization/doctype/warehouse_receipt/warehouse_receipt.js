@@ -1,7 +1,7 @@
 frappe.ui.form.on('Warehouse Receipt', {
 
     onload: function (frm) {
-	    frm.set_query('warehouse_receipt_lines', () => {
+	    frm.set_query('package', 'warehouse_receipt_lines', () => {
             return {
                 filters: {
                     status: ['not in', ['Available to Pickup', 'Finished']]
@@ -15,6 +15,7 @@ frappe.ui.form.on('Warehouse Receipt', {
             return;
         }
 
+        // TODO: Work on this
         if (frm.doc.status === 'Open') {
             frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.utils.play_sound('click');  // Really Necessary?
@@ -28,6 +29,7 @@ frappe.ui.form.on('Warehouse Receipt', {
         }
 
         // TODO: Add intro message when the warehouse is on cargo_shipment!
+        // TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
     },
 
 });

@@ -10,17 +10,22 @@
  "engine": "InnoDB",
  "field_order": [
   "reference",
-  "status",
   "target_warehouse",
   "mute_emails",
   "column_break_3",
+  "status",
+  "section_break_7",
   "date",
+  "column_break_8",
   "departure_date",
-  "weight",
+  "additional_information_section",
   "gross_weight",
+  "weight",
   "pieces",
   "sb_0",
-  "warehouse_receipt_lines"
+  "warehouse_receipt_lines",
+  "opening_date",
+  "closing_date"
  ],
  "fields": [
   {
@@ -111,6 +116,7 @@
    "label": "Pieces"
   },
   {
+   "collapsible": 1,
    "fieldname": "sb_0",
    "fieldtype": "Section Break"
   },
@@ -130,6 +136,29 @@
    "fieldname": "gross_weight",
    "fieldtype": "Float",
    "label": "Gross Weight"
+  },
+  {
+   "fieldname": "additional_information_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opening_date",
+   "fieldtype": "Datetime",
+   "label": "Opening Date"
+  },
+  {
+   "fieldname": "closing_date",
+   "fieldtype": "Datetime",
+   "label": "Closing Date"
   }
  ],
  "links": [
@@ -144,7 +173,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-03-26 10:32:40.503896",
+ "modified": "2021-03-27 22:44:25.431969",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
