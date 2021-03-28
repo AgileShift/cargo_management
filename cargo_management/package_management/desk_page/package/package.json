@@ -19,6 +19,11 @@
    "hidden": 0,
    "label": "Selling",
    "links": "[\n    {\n        \"label\": \"Customer\",\n        \"name\": \"Customer\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Customer\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Order\",\n        \"name\": \"Sales Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Order\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Invoice\",\n        \"name\": \"Sales Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Invoice\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Competitor\",\n        \"name\": \"Competitor\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Competitor\"\n    }\n]"
+  },
+  {
+   "hidden": 0,
+   "label": "Buying",
+   "links": "[\n    {\n        \"label\": \"Purchase Order\",\n        \"name\": \"Purchase Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Purchase Order\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Purchase Invoice\",\n        \"name\": \"Purchase Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Purchase Invoice\",\n        \"onboard\": 1\n    }\n]"
   }
  ],
  "cards_label": "",
@@ -36,7 +41,7 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Package",
- "modified": "2021-03-18 12:45:53.080596",
+ "modified": "2021-03-28 00:11:22.643352",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
@@ -58,12 +63,6 @@
    "link_to": "Package",
    "stats_filter": "{\n    \"easypost_id\": [\"is\", \"not set\"],\n    \"status\": \"Awaiting Receipt\"\n}",
    "type": "DocType"
-  },
-  {
-   "doc_view": "",
-   "label": "Dashboard",
-   "link_to": "Package",
-   "type": "Dashboard"
   },
   {
    "color": "#a6e4ff",
@@ -144,6 +143,12 @@
    "link_to": "Package",
    "stats_filter": "{\n    \"status\": \"In Extraordinary Confirmation\"\n}",
    "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Dashboard",
+   "link_to": "Package",
+   "type": "Dashboard"
   },
   {
    "color": "#9deca2",
