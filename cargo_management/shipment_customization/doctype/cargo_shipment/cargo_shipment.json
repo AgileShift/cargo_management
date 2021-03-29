@@ -23,9 +23,9 @@
   "dimensions_section",
   "length",
   "column_break_15",
-  "width_cm",
+  "width",
   "column_break_17",
-  "height_cm",
+  "height",
   "section_break_8",
   "weight",
   "gross_weight",
@@ -167,16 +167,6 @@
    "label": "Length (cm)"
   },
   {
-   "fieldname": "width_cm",
-   "fieldtype": "Float",
-   "label": "Width (cm)"
-  },
-  {
-   "fieldname": "height_cm",
-   "fieldtype": "Float",
-   "label": "Height (cm)"
-  },
-  {
    "fieldname": "column_break_15",
    "fieldtype": "Column Break"
   },
@@ -199,6 +189,16 @@
   {
    "fieldname": "column_break_10",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "label": "Width (cm)"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "label": "Height (cm)"
   }
  ],
  "links": [
@@ -213,7 +213,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-03-28 23:27:50.900415",
+ "modified": "2021-03-28 23:32:08.654012",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",
