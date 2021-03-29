@@ -106,12 +106,12 @@
    "description": "Total billable gross weight of the cargo shipment receipt",
    "fieldname": "gross_weight",
    "fieldtype": "Float",
-   "label": "Total Gross Weight",
+   "label": "Total Gross Weight (in pounds)",
    "read_only": 1
   }
  ],
  "links": [],
- "modified": "2021-03-25 16:59:55.490769",
+ "modified": "2021-03-28 23:06:34.122718",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",

@@ -10,16 +10,27 @@
  "engine": "InnoDB",
  "field_order": [
   "reference",
-  "status",
   "transportation_type",
   "mute_emails",
   "column_break_4",
+  "status",
+  "data_6",
   "departure_date",
+  "column_break_8",
   "expected_arrival_date",
+  "column_break_10",
   "arrival_date",
+  "dimensions_section",
+  "length",
+  "column_break_15",
+  "width_cm",
+  "column_break_17",
+  "height_cm",
   "section_break_8",
   "weight",
-  "column_break_10",
+  "gross_weight",
+  "column_break_12",
+  "volumetric_weight",
   "pieces",
   "sb_0",
   "cargo_shipment_lines"
@@ -128,14 +139,66 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "column_break_10",
-   "fieldtype": "Column Break"
-  },
-  {
    "description": "Real arrival date of cargo shipment to his final destination.",
    "fieldname": "arrival_date",
    "fieldtype": "Date",
-   "label": "Arrival Date"
+   "label": "Arrival Date",
+   "read_only": 1
+  },
+  {
+   "description": "Gross Weight (in pounds) provided by the warehouse (if available).",
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight"
+  },
+  {
+   "fieldname": "volumetric_weight",
+   "fieldtype": "Float",
+   "label": "Volumetric Weight"
+  },
+  {
+   "fieldname": "dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Dimensions"
+  },
+  {
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "label": "Length (cm)"
+  },
+  {
+   "fieldname": "width_cm",
+   "fieldtype": "Float",
+   "label": "Width (cm)"
+  },
+  {
+   "fieldname": "height_cm",
+   "fieldtype": "Float",
+   "label": "Height (cm)"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "data_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -150,7 +213,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-02-12 15:57:37.935808",
+ "modified": "2021-03-28 23:27:50.900415",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",

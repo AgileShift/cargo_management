@@ -22,7 +22,8 @@
   "departure_date",
   "additional_information_section",
   "gross_weight",
-  "weight",
+  "column_break_14",
+  "volumetric_weight",
   "pieces",
   "sb_0",
   "warehouse_receipt_lines"
@@ -88,15 +89,6 @@
    "read_only": 1
   },
   {
-   "allow_in_quick_entry": 1,
-   "default": "0.00",
-   "description": "Weight in pounds provided by the warehouse (if available).",
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "in_preview": 1,
-   "label": "Weight"
-  },
-  {
    "description": "Count of pieces(boxes) provided by the warehouse (if available).",
    "fieldname": "pieces",
    "fieldtype": "Int",
@@ -123,7 +115,7 @@
   {
    "fieldname": "gross_weight",
    "fieldtype": "Float",
-   "label": "Gross Weight"
+   "label": "Total Gross Weight (in pounds)"
   },
   {
    "fieldname": "additional_information_section",
@@ -151,6 +143,19 @@
   {
    "fieldname": "column_break_10",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "0.00",
+   "description": "Weight in pounds provided by the warehouse (if available).",
+   "fieldname": "volumetric_weight",
+   "fieldtype": "Float",
+   "in_preview": 1,
+   "label": "Total Volumetric Weight"
   }
  ],
  "links": [
@@ -165,7 +170,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-03-27 22:58:53.072242",
+ "modified": "2021-03-28 23:16:17.500017",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

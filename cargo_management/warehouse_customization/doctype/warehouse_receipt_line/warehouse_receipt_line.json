@@ -14,8 +14,17 @@
   "carrier_real_delivery",
   "column_break_8",
   "date",
+  "dimmensions_section",
+  "length",
+  "column_break_12",
+  "width",
+  "column_break_14",
+  "height",
   "section_break_10",
-  "carrier_est_weight"
+  "carrier_est_weight",
+  "column_break_18",
+  "gross_weight",
+  "volumetric_weight"
  ],
  "fields": [
   {
@@ -96,13 +105,57 @@
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Carrier estimated weight",
+   "label": "Carrier estimated weight (in pounds)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "label": "Length (cm)"
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "label": "Width (cm)"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "label": "Height (cm)"
+  },
+  {
+   "fieldname": "dimmensions_section",
+   "fieldtype": "Section Break",
+   "label": "Dimensions"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Gross weight of the package as measured by the warehouse (if available).",
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight (in pounds)"
+  },
+  {
+   "fieldname": "volumetric_weight",
+   "fieldtype": "Float",
+   "label": "Volumetric weight",
    "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-03-27 21:23:01.976775",
+ "modified": "2021-03-28 23:10:07.223602",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

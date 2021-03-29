@@ -167,7 +167,7 @@
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
-   "label": "Carrier estimated weight",
+   "label": "Carrier estimated weight (in pounds)",
    "read_only": 1
   },
   {
@@ -305,10 +305,10 @@
    "unique": 1
   },
   {
-   "description": "The gross weight of the package.",
+   "description": "Gross weight of the package.",
    "fieldname": "gross_weight",
    "fieldtype": "Float",
-   "label": "Gross Weight"
+   "label": "Gross Weight (in pounds)"
   },
   {
    "default": "0",
@@ -361,7 +361,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-03-23 10:18:37.774100",
+ "modified": "2021-03-28 23:11:01.571839",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

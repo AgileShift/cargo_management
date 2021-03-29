@@ -16,7 +16,6 @@ Available to Pickup,Disponible para Retirar
 Never Arrived,Nunca Llegó
 Returned to Sender,Devuelto al Remitente
 
-
 Track,Rastrear
 Package is requested to be tracked.,Se solicita el seguimiento del paquete.
 Additional data from carrier,Datos adicionales del transportista
@@ -24,7 +23,7 @@ Carrier estimated delivery date,Fecha de entrega estimada del transportista
 Estimated delivery date provided by the carrier (if available).,Fecha de entrega estimada proporcionada por el transportista (si está disponible).
 Carrier real delivery date,Fecha de entrega real del transportista
 Delivery date time (timezone aware) provided by the carrier (if available).,Fecha y hora de entrega (consciente de la zona horaria) proporcionada por el transportista (si está disponible).
-Carrier estimated weight,Peso estimado según el transportista
+Carrier estimated weight (in pounds),Peso estimado según el transportista (en libras)
 Estimated weight of the package as measured by the carrier (if available).,Peso estimado del paquete medido por el transportista (si está disponible).
 
 Carrier status,Estado según el transportista
@@ -48,7 +47,7 @@ Notes or instructions.,Notas o instrucciones.
 Internal data,Datos internos
 Consignee name,Nombre del consignatario
 Name on the package label.,Nombre en la etiqueta del paquete.
-The gross weight of the package.,El peso bruto del paquete.
+Gross weight of the package.,Peso bruto del paquete.
 Quantity of packages in shipment.,Cantidad de paquetes en el envío.
 
 Visit carrier detail page,Visitar página de detalles del transportista
@@ -80,9 +79,6 @@ Render Quotation,Visualizar Cotización
 Warehouse Receipt,Recibo de almacén
 Target Warehouse,Almacén de destino
 Warehouse where reception occurred.,Almacén donde se produjo la recepción.
-Real date of document generation.,Fecha real de generación del documento.
-
-Real departure date of cargo shipment to his final destination.,Fecha real de despacho del envío de carga a su destino final.
 Packages in Warehouse Receipt,Paquetes en el recibo de almacén
 
 Cargo Shipment,Envío de Carga
@@ -94,9 +90,11 @@ Reference of the cargo shipment to be received.,Referencia del envío de carga a
 Warehouse Receipts in Cargo Shipment Receipt,Recibos de almacén en el recibo de envío de carga
 Packages in Cargo Shipment Receipt,Paquetes en el recibo de envío de carga
 
+Gross Weight (in pounds), Peso bruto (en libras)
 Pieces,Piezas
 Internal reference code.,Código de referencia interno.
-Weight in pounds provided by the warehouse (if available).,Peso en libras proporcionado por el almacén (si está disponible).
+Gross Weight (in pounds) provided by the warehouse (if available).,Peso bruto (en libras) proporcionado por el almacén (si está disponible).
 Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
 Departure date,Fecha de despacho
 Arrival Date,Fecha de arribo
+Real departure date of cargo shipment to his final destination.,Fecha real de despacho del envío de carga a su destino final.
