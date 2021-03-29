@@ -27,7 +27,6 @@
   "column_break_17",
   "height",
   "section_break_8",
-  "weight",
   "gross_weight",
   "column_break_12",
   "volumetric_weight",
@@ -99,15 +98,6 @@
    "reqd": 1
   },
   {
-   "allow_in_quick_entry": 1,
-   "default": "0.00",
-   "description": "Weight in pounds provided by the warehouse (if available).",
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "in_preview": 1,
-   "label": "Weight"
-  },
-  {
    "description": "Count of pieces(boxes) provided by the warehouse (if available).",
    "fieldname": "pieces",
    "fieldtype": "Int",
@@ -154,7 +144,8 @@
   {
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
-   "label": "Volumetric Weight"
+   "label": "Volumetric Weight",
+   "read_only": 1
   },
   {
    "fieldname": "dimensions_section",
@@ -213,7 +204,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-03-28 23:32:08.654012",
+ "modified": "2021-03-28 23:34:39.184605",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",
