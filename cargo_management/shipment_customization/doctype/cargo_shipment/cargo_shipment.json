@@ -194,11 +194,6 @@
  ],
  "links": [
   {
-   "group": "Warehouse Receipt",
-   "link_doctype": "Warehouse Receipt",
-   "link_fieldname": "reference"
-  },
-  {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "cargo_shipment"
