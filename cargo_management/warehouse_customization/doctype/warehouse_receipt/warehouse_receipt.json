@@ -163,11 +163,6 @@
    "group": "Package",
    "link_doctype": "Package",
    "link_fieldname": "tracking_number"
-  },
-  {
-   "group": "Cargo Shipment",
-   "link_doctype": "Cargo Shipment",
-   "link_fieldname": "warehouse_receipt"
   }
  ],
  "modified": "2021-03-28 23:16:17.500017",
