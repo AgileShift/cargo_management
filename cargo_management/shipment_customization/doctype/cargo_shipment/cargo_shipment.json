@@ -192,14 +192,8 @@
    "label": "Height (cm)"
   }
  ],
- "links": [
-  {
-   "group": "Cargo Shipment",
-   "link_doctype": "Cargo Shipment Receipt",
-   "link_fieldname": "cargo_shipment"
-  }
- ],
- "modified": "2021-03-28 23:34:39.184605",
+ "links": [],
+ "modified": "2021-04-01 17:17:45.082138",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",

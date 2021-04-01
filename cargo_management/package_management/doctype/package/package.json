@@ -334,34 +334,8 @@
    "print_hide_if_no_value": 1
   }
  ],
- "links": [
-  {
-   "group": "Warehouse",
-   "link_doctype": "Warehouse Receipt",
-   "link_fieldname": "package"
-  },
-  {
-   "group": "Cargo Shipment",
-   "link_doctype": "Cargo Shipment Receipt",
-   "link_fieldname": "package"
-  },
-  {
-   "group": "Sell",
-   "link_doctype": "Sales Order",
-   "link_fieldname": "package"
-  },
-  {
-   "group": "Sell",
-   "link_doctype": "Sales Invoice",
-   "link_fieldname": "package"
-  },
-  {
-   "group": "Support",
-   "link_doctype": "Issue",
-   "link_fieldname": "package"
-  }
- ],
- "modified": "2021-03-28 23:11:01.571839",
+ "links": [],
+ "modified": "2021-04-01 17:18:23.809461",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

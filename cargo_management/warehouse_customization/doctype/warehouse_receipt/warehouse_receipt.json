@@ -158,14 +158,8 @@
    "label": "Total Volumetric Weight"
   }
  ],
- "links": [
-  {
-   "group": "Package",
-   "link_doctype": "Package",
-   "link_fieldname": "tracking_number"
-  }
- ],
- "modified": "2021-03-28 23:16:17.500017",
+ "links": [],
+ "modified": "2021-04-01 17:18:01.478029",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
