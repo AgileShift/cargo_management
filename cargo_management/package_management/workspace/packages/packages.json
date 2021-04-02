@@ -1,32 +1,5 @@
 {
- "cards": [
-  {
-   "hidden": 0,
-   "label": "Package",
-   "links": "[\n    {\n        \"label\": \"Package\",\n        \"name\": \"Package\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Package\"\n    },\n    {\n        \"label\": \"Package Quotation\",\n        \"name\": \"Package Quotation\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Package Quotation\"\n    },\n    {\n        \"label\": \"Issue\",\n        \"name\": \"Issue\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"doctype\": \"Issue\"\n    },\n    {\n        \"label\": \"Package Settings\",\n        \"name\": \"Package Settings\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Package Settings\"\n    }\n]\n"
-  },
-  {
-   "hidden": 0,
-   "label": "Warehouse",
-   "links": "[\n    {\n        \"label\": \"Warehouse\",\n        \"name\": \"Warehouse\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Warehouse\"\n    },\n    {\n        \"label\": \"Warehouse Receipt\",\n        \"name\": \"Warehouse Receipt\",\n        \"onboard\": 1,\n        \"type\": \"doctype\",\n        \"doctype\": \"Warehouse Receipt\"\n    }\n]"
-  },
-  {
-   "hidden": 0,
-   "label": "Cargo Shipment",
-   "links": "[\n    {\n        \"label\": \"Cargo Shipment\",\n        \"name\": \"Cargo Shipment\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Cargo Shipment\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Cargo Shipment Receipt\",\n        \"name\": \"Cargo Shipment Receipt\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Cargo Shipment Receipt\",\n        \"onboard\": 1\n    }\n]"
-  },
-  {
-   "hidden": 0,
-   "label": "Selling",
-   "links": "[\n    {\n        \"label\": \"Customer\",\n        \"name\": \"Customer\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Customer\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Order\",\n        \"name\": \"Sales Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Order\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Sales Invoice\",\n        \"name\": \"Sales Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Sales Invoice\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Competitor\",\n        \"name\": \"Competitor\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Competitor\"\n    }\n]"
-  },
-  {
-   "hidden": 0,
-   "label": "Buying",
-   "links": "[\n    {\n        \"label\": \"Purchase Order\",\n        \"name\": \"Purchase Order\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Purchase Order\",\n        \"onboard\": 1\n    },\n    {\n        \"label\": \"Purchase Invoice\",\n        \"name\": \"Purchase Invoice\",\n        \"type\": \"doctype\",\n        \"doctype\": \"Purchase Invoice\",\n        \"onboard\": 1\n    }\n]"
-  }
- ],
- "cards_label": "",
+ "cards_label": "Links",
  "category": "Domains",
  "charts": [],
  "charts_label": "",
@@ -34,14 +7,51 @@
  "developer_mode_only": 0,
  "disable_user_customization": 1,
  "docstatus": 0,
- "doctype": "Desk Page",
+ "doctype": "Workspace",
  "extends_another_page": 0,
  "hide_custom": 0,
+ "icon": "stock",
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
  "label": "Packages",
- "modified": "2021-03-28 00:11:22.643352",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package",
+   "link_to": "Package",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package",
+   "link_to": "Warehouse Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2021-04-01 19:12:54.363743",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -50,6 +60,7 @@
  "pin_to_top": 1,
  "shortcuts": [
   {
+   "color": "Grey",
    "doc_view": "List",
    "label": "All active packages",
    "link_to": "Package",
@@ -57,7 +68,7 @@
    "type": "DocType"
   },
   {
-   "color": "#a83333",
+   "color": "Red",
    "doc_view": "List",
    "label": "Without carrier data",
    "link_to": "Package",
@@ -65,7 +76,7 @@
    "type": "DocType"
   },
   {
-   "color": "#a6e4ff",
+   "color": "Lightblue",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "Arriving today",
@@ -74,7 +85,7 @@
    "type": "DocType"
   },
   {
-   "color": "#9deca2",
+   "color": "Green",
    "doc_view": "List",
    "format": "{} Delivered",
    "label": "Arrived today",
@@ -83,7 +94,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ffb1b1",
+   "color": "Red",
    "doc_view": "List",
    "format": "{} Late",
    "label": "Arriving Late",
@@ -92,7 +103,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ff8989",
+   "color": "Red",
    "doc_view": "List",
    "format": "",
    "label": "Available for pickup at post office",
@@ -101,7 +112,7 @@
    "type": "DocType"
   },
   {
-   "color": "#fff168",
+   "color": "Yellow",
    "doc_view": "List",
    "format": "{} Waiting",
    "label": "Awaiting Departure",
@@ -110,7 +121,7 @@
    "type": "DocType"
   },
   {
-   "color": "#7575ff",
+   "color": "Purple",
    "doc_view": "List",
    "label": "In Transit",
    "link_to": "Package",
@@ -118,7 +129,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ffd2c2",
+   "color": "Orange",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "This week pending confirmation",
@@ -127,7 +138,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ffd2c2",
+   "color": "Orange",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "All pending confirmation",
@@ -136,7 +147,7 @@
    "type": "DocType"
   },
   {
-   "color": "#ffa685",
+   "color": "Red",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "In Extraordinary Confirmation",
@@ -151,7 +162,7 @@
    "type": "Dashboard"
   },
   {
-   "color": "#9deca2",
+   "color": "Blue",
    "doc_view": "List",
    "format": "{} Ready",
    "label": "Available to Pickup",
