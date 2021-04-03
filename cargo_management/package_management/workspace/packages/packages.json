@@ -188,7 +188,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-04-03 08:09:49.762781",
+ "modified": "2021-04-03 15:06:45.098881",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -295,7 +295,7 @@
   },
   {
    "doc_view": "",
-   "icon": "crm",
+   "icon": "",
    "label": "Dashboard",
    "link_to": "Package",
    "type": "Dashboard"

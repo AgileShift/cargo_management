@@ -342,6 +342,11 @@
    "link_fieldname": "package"
   },
   {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment Receipt",
+   "link_fieldname": "package"
+  },
+  {
    "group": "Sell",
    "link_doctype": "Sales Order",
    "link_fieldname": "package"
@@ -350,9 +355,14 @@
    "group": "Sell",
    "link_doctype": "Sales Invoice",
    "link_fieldname": "package"
+  },
+  {
+   "group": "Support",
+   "link_doctype": "Issue",
+   "link_fieldname": "package"
   }
  ],
- "modified": "2021-04-03 09:51:43.579575",
+ "modified": "2021-04-03 15:21:55.383397",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

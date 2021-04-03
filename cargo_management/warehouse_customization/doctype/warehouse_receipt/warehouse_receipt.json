@@ -37,7 +37,6 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -65,7 +64,8 @@
    "in_standard_filter": 1,
    "label": "Target Warehouse",
    "options": "Warehouse",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "default": "1",
@@ -84,6 +84,7 @@
    "fieldname": "departure_date",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Departure date",
    "read_only": 1
@@ -133,11 +134,17 @@
   {
    "fieldname": "opening_date",
    "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Opening Date"
   },
   {
    "fieldname": "closing_date",
    "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Closing Date"
   },
   {
@@ -158,8 +165,19 @@
    "label": "Total Volumetric Weight"
   }
  ],
- "links": [],
- "modified": "2021-04-01 17:18:01.478029",
+ "links": [
+  {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment",
+   "link_fieldname": "warehouse_receipt"
+  },
+  {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment Receipt",
+   "link_fieldname": "warehouse_receipt"
+  }
+ ],
+ "modified": "2021-04-03 15:27:04.406543",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
