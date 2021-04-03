@@ -7,14 +7,14 @@ frappe.listview_settings['Package'] = {
 
     get_indicator(doc) {
         const status_color = {
-            'Awaiting Receipt': 'blue',
+            'Awaiting Receipt': 'lightblue',
             'Awaiting Confirmation': 'orange',
             'In Extraordinary Confirmation': 'red',
             'Awaiting Departure': 'yellow',
             'In Transit': 'purple',
-            'In Customs': 'black',
-            'Sorting': 'black',
-            'Available to Pickup': 'green',
+            'In Customs': 'gray',
+            'Sorting': 'orange',
+            'Available to Pickup': 'blue',
             'Finished': 'green',
             'Cancelled': 'red',
             'Never Arrived': 'red',

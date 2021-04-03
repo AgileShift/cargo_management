@@ -13,7 +13,7 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/cargo_management/css/package_management.css"
+app_include_css = ["/assets/css/package-indicator.min.css"]
 # app_include_js = "/assets/cargo_management/js/package_management.js"
 
 # include js, css files in header of web template

@@ -47,7 +47,7 @@ frappe.ui.form.on('Package', {
                 args: {carrier: frm.doc.carrier},
                 freeze: true,
                 freeze_message: __('Opening detail page...'),
-                async: false, // FIXME: allow window to open a new tab in safari, also it seems to delay play_sound
+                // async: false, // FIXME: allow window to open a new tab in safari, also it seems to delay play_sound
                 callback: (r) => {
                     window.open(r.message + frm.doc.tracking_number, '_blank');
                 }
@@ -58,7 +58,7 @@ frappe.ui.form.on('Package', {
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.package.get_package_explained_status',
             args: {source_name: frm.doc.name},
-            async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
+            // async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {
                 let intro_message = '';
 
@@ -69,6 +69,9 @@ frappe.ui.form.on('Package', {
                 }
 
                 frm.set_intro(intro_message ? intro_message : r.message.message, r.message.color);  // frm.layout.show_message()
+
+                // FIXME: Override default color layout set in core: layout.js -> show_message def, core only allows blue and yellow
+                frm.layout.message.removeClass(frm.layout.message_color).addClass(r.message.color); // This allow to have same color on indicator, dot and alert..
             }
         });
 

@@ -1,0 +1,5 @@
+{
+	"css/package-indicator.min.css": [
+		"public/scss/package-indicator.scss"
+	]
+}

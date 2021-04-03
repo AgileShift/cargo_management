@@ -90,12 +90,17 @@ class Package(Document):
     def get_explained_status(self):
         """ This returns a detailed explanation of the current status of the Package and compatible colors. """
         # TODO: one of the best datetime format: "E d LLL yyyy 'at' h:MM a" # TODO: translate this strings.
-        color = 'blue'
+        color = 'lightblue'
 
         if self.status == 'Awaiting Receipt':
             message = ['El transportista aún no ha entregado el paquete.']
 
             if self.carrier_est_delivery:  # The carrier has provided a estimated delivery date
+                est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to date
+
+                if est_delivery_diff == 0: ## Delivery is today
+                    message.append('La fecha prevista de entrega es hoy.')
+
                 message.append(
                     'La fecha prevista es: {}'.format(frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
                 )
@@ -140,6 +145,9 @@ class Package(Document):
             message, color = ['El paquete fue devuelto por el transportista al vendedor.', 'Contáctese con su vendedor para obtener mayor información.'], 'yellow'
         else:
             message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'yellow'
+
+        print(message)
+        print(color)
 
         return {'message': message, 'color': color}
 

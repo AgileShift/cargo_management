@@ -18,6 +18,7 @@
  "links": [
   {
    "hidden": 0,
+   "icon": "stock",
    "is_query_report": 0,
    "label": "Package",
    "link_type": "DocType",
@@ -36,6 +37,34 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Package Quotation",
+   "link_to": "Package Quotation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Issue",
+   "link_to": "Issue",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package Settings",
+   "link_to": "Package Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "map",
+   "is_query_report": 0,
    "label": "Warehouse",
    "link_type": "DocType",
    "onboard": 0,
@@ -44,14 +73,122 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Package",
+   "label": "Warehouse",
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse Receipt",
    "link_to": "Warehouse Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "branch",
+   "is_query_report": 0,
+   "label": "Cargo Shipment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cargo Shipment",
+   "link_to": "Cargo Shipment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cargo Shipment Receipt",
+   "link_to": "Cargo Shipment Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "sell",
+   "is_query_report": 0,
+   "label": "Selling",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer",
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Order",
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoice",
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Competitor",
+   "link_to": "Competitor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "buying",
+   "is_query_report": 0,
+   "label": "Buying",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Order",
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2021-04-01 19:12:54.363743",
+ "modified": "2021-04-03 08:09:49.762781",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -79,6 +216,7 @@
    "color": "Lightblue",
    "doc_view": "List",
    "format": "{} Pending",
+   "icon": "",
    "label": "Arriving today",
    "link_to": "Package",
    "stats_filter": "{\n    \"carrier_status\": [\"!=\", \"Delivered\"],\n    \"carrier_est_delivery\": [\"Timespan\", \"today\"]\n}",
@@ -157,6 +295,7 @@
   },
   {
    "doc_view": "",
+   "icon": "crm",
    "label": "Dashboard",
    "link_to": "Package",
    "type": "Dashboard"

@@ -1,0 +1,25 @@
+// Overrides and adds to core.
+// Used to add custom status colors for Package Doctype indicators-pills|dots and intro messages.
+// See: package_list.js for color references
+
+//frappe/public/scss/common/indicator.scss
+// This is for the indicator dot colors, see: list_view.js -> get_indicator_dot()
+@mixin indicator-color($color) {
+  &::before,
+  &::after {
+    background: var(--text-on-#{$color});
+  }
+}
+
+// FIXME: In core this is set only as .indicator-pill Used in: Workspace(shortcut), listview(row field) or form-view(status indicator))
+// As a .indicator it will be used in: Listview(row indicator dot) shown in mobile.
+
+.indicator.purple {
+  @include indicator-color('purple');
+}
+
+.indicator.lightblue {
+  @include indicator-color('light-blue');
+}
+
+//frappe/public/.....

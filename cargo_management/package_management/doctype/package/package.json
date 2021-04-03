@@ -334,8 +334,24 @@
    "print_hide_if_no_value": 1
   }
  ],
- "links": [],
- "modified": "2021-04-01 17:18:23.809461",
+ "links": [
+  {
+   "group": "Warehouse",
+   "link_doctype": "Warehouse Receipt",
+   "link_fieldname": "package"
+  },
+  {
+   "group": "Sell",
+   "link_doctype": "Sales Order",
+   "link_fieldname": "package"
+  },
+  {
+   "group": "Sell",
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "package"
+  }
+ ],
+ "modified": "2021-04-03 00:07:49.406919",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
