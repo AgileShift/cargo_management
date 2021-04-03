@@ -41,13 +41,12 @@ frappe.ui.form.on('Package', {
 
         // Better to add button here to use: 'window'. Rather than as Server Side Action Button on Doctype.
         frm.add_custom_button(__('Visit carrier detail page'), () => {
-            //frappe.utils.play_sound('click');  // Really Necessary?. FIXME: On Safari plays after window is closed!
             frappe.call({
                 method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
                 args: {carrier: frm.doc.carrier},
                 freeze: true,
                 freeze_message: __('Opening detail page...'),
-                // async: false, // FIXME: allow window to open a new tab in safari, also it seems to delay play_sound
+                // async: false, // FIXME: allow window to open a new tab in safari
                 callback: (r) => {
                     window.open(r.message + frm.doc.tracking_number, '_blank');
                 }
@@ -58,20 +57,14 @@ frappe.ui.form.on('Package', {
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.package.get_package_explained_status',
             args: {source_name: frm.doc.name},
-            // async: false, // TODO: Fix as false show deprecated message, and true renders two times the message
             callback: (r) => {
-                let intro_message = '';
-
                 if (Array.isArray(r.message.message)) { // If there are multiple messages.
-                    r.message.message.forEach((message) => {
-                        intro_message += "<div>" + message + "</div>";
-                    });
+                    r.message.message = r.message.message.map(message => "<div>" + message + "</div>").join('');
                 }
 
-                frm.set_intro(intro_message ? intro_message : r.message.message, r.message.color);  // frm.layout.show_message()
-
-                // FIXME: Override default color layout set in core: layout.js -> show_message def, core only allows blue and yellow
-                frm.layout.message.removeClass(frm.layout.message_color).addClass(r.message.color); // This allow to have same color on indicator, dot and alert..
+                // FIXME: Override default color layout set in core: layout.js -> show_message() def. Core only allows blue and yellow
+                frm.set_intro(r.message.message); // core code do not allow more colors..
+                frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // This allow to have same color on indicator, dot and alert..
             }
         });
 

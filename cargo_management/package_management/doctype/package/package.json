@@ -254,6 +254,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "content",
    "fieldtype": "Table",
    "in_preview": 1,
@@ -351,7 +352,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-04-03 00:07:49.406919",
+ "modified": "2021-04-03 09:51:43.579575",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

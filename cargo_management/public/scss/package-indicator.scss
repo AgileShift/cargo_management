@@ -2,7 +2,7 @@
 // Used to add custom status colors for Package Doctype indicators-pills|dots and intro messages.
 // See: package_list.js for color references
 
-//frappe/public/scss/common/indicator.scss
+// frappe/public/scss/common/indicator.scss
 // This is for the indicator dot colors, see: list_view.js -> get_indicator_dot()
 @mixin indicator-color($color) {
   &::before,
@@ -13,13 +13,34 @@
 
 // FIXME: In core this is set only as .indicator-pill Used in: Workspace(shortcut), listview(row field) or form-view(status indicator))
 // As a .indicator it will be used in: Listview(row indicator dot) shown in mobile.
+.indicator {
+  &.purple {
+    @include indicator-color('purple');
+  }
 
-.indicator.purple {
-  @include indicator-color('purple');
+  &.lightblue {
+    @include indicator-color('light-blue');
+  }
 }
 
-.indicator.lightblue {
-  @include indicator-color('light-blue');
+
+// frappe/public/scss/desk/form.scss
+// This is for the set_intro_message color in form view, see: layout.js -> show_message()
+@mixin form-message-background($color) {
+  background: var(--bg-#{$color});
+  color: var(--text-on-#{$color});
 }
 
-//frappe/public/.....
+.form-message {
+  &.lightblue {
+    @include form-message-background('light-blue')
+  }
+
+  &.purple {
+    @include form-message-background('purple')
+  }
+
+  &.gray {
+    @include form-message-background('light-gray')
+  }
+}

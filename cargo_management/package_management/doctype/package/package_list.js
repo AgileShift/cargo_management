@@ -46,7 +46,6 @@ frappe.listview_settings['Package'] = {
             return __('Visit carrier detail page')
         },
         action(doc) {
-            frappe.utils.play_sound('click');  // Really Necessary?
             frappe.call({
                 method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
                 args: {carrier: doc.carrier},

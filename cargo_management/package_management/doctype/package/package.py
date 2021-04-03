@@ -92,62 +92,72 @@ class Package(Document):
         # TODO: one of the best datetime format: "E d LLL yyyy 'at' h:MM a" # TODO: translate this strings.
         color = 'lightblue'
 
+        # TODO: If no Track or Easypost is not set(we can't track) show the alert. If is true and no est_delivery
         if self.status == 'Awaiting Receipt':
             message = ['El transportista aún no ha entregado el paquete.']
 
             if self.carrier_est_delivery:  # The carrier has provided a estimated delivery date
-                est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to date
+                est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to today
+                est_delivery_date = frappe.utils.format_date(self.carrier_est_delivery, 'medium')  # readable date
 
-                if est_delivery_diff == 0: ## Delivery is today
-                    message.append('La fecha prevista de entrega es hoy.')
-
-                message.append(
-                    'La fecha prevista es: {}'.format(frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
-                )
+                if est_delivery_diff == 0:  # Delivery is today
+                    message.append('La fecha programada de entrega es hoy.')
+                elif est_delivery_diff == -1:  # Delivery is tomorrow
+                    message.append('La fecha programada es mañana.')
+                elif est_delivery_diff < 0:  # Delivery is in the next days
+                    message.append('La fecha programada es: {}'.format(est_delivery_date))
+                else:  # Delivery is late
+                    color = 'red'
+                    message.append('Esta retrasado. Debio de ser entregado el: {}'.format(est_delivery_date))
+                    message.append('Contacte a su proveedor para obtener mas información.')
             else:
                 color = 'yellow'
                 message.append('No se ha indicado una fecha de entrega estimada.')
         elif self.status == 'Awaiting Confirmation' or self.status == 'In Extraordinary Confirmation':
-            color = 'yellow'
-
             if self.carrier_real_delivery:
                 message = [
-                    'El paquete fue entregado según el transportista el: {}.'.format(
+                    'El transportista indica que entrego el paquete el: {}'.format(
                         frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
                     )
                 ]
 
                 delivered_since = frappe.utils.time_diff_in_seconds(None, self.carrier_real_delivery)  # datetime is UTC
 
-                # Package is no more within the 24 hours timespan to be confirmed. TODO: check against current user tz.
-                if (round(delivered_since / 3600, 2) >= 24.00):  # Same as: time_diff_in_hours() >= 24.00
-                    message.append('Han pasado: {} y el paquete no ha sido confirmado por el almacén.'.format(
+                # Package has exceeded the 24 hours timespan to be confirmed. TODO: check against current user tz.
+                if round(float(delivered_since) / 3600, 2) >= 24.00:  # Same as: time_diff_in_hours() >= 24.00
+                    color = 'red'
+                    message.append('Han pasado: {} y el paquete aun no ha sido confirmado por el almacén.'.format(
                         frappe.utils.format_duration(delivered_since)
                     ))
                 else:
-                    color = 'blue'
                     message.append('Por favor espera 24 horas hábiles para que el almacén confirme la recepción.')
             else:
+                color = 'orange'
                 message = ['El transportista no índico una fecha de entrega.']
 
             if self.status == 'In Extraordinary Confirmation':
-                color = 'yellow'
+                color = 'red'
                 message.append('El paquete se encuentra en una verificación fuera de lo habitual.')
         elif self.status == 'Awaiting Departure':
+            # TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
             message = ['El paquete fue recepcionado.', 'Esperando próximo despacho de carga.']
         elif self.status == 'In Transit':
-            message = 'El paquete esta en transito a destino.'  # TODO: Add Depature and arrival?
+            # TODO: Add Departure date and est arrival date
+            message, color = 'El paquete esta en transito a destino.', 'purple'
+        elif self.status == 'In Customs':
+            message, color = 'El paquete se encuentra en proceso de desaduanaje.', 'gray'
+        elif self.status == 'Sorting':
+            return  # No Message
         elif self.status == 'Available to Pickup':
-            message = 'El paquete esta listo para ser retirado.'
-        elif self.status == 'Finished' or self.status == 'Cancelled':
+            message, color = 'El paquete esta listo para ser retirado.', 'blue'
+        elif self.status == 'Finished':
             return  # No message
+        elif self.status == 'Never Arrived':
+            message, color = 'El paquete nunca llego al almacén.', 'red'
         elif self.status == 'Returned to Sender':
-            message, color = ['El paquete fue devuelto por el transportista al vendedor.', 'Contáctese con su vendedor para obtener mayor información.'], 'yellow'
+            message, color = ['El paquete fue devuelto por el transportista al vendedor.', 'Contáctese con su vendedor para obtener mayor información.'], 'red'
         else:
             message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'yellow'
-
-        print(message)
-        print(color)
 
         return {'message': message, 'color': color}
 
