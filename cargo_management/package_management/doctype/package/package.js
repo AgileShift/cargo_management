@@ -15,6 +15,7 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 }
 
 // todo: MATCH the new and current fields!! import_price for example
+// TODO: Tracking Validator from backend and Carrier Select helper.
 
 frappe.ui.form.on('Package', {
 
@@ -46,51 +47,28 @@ frappe.ui.form.on('Package', {
                 args: {carrier: frm.doc.carrier},
                 freeze: true,
                 freeze_message: __('Opening detail page...'),
-                // async: false, // FIXME: allow window to open a new tab in safari
                 callback: (r) => {
                     window.open(r.message + frm.doc.tracking_number, '_blank');
                 }
             });
         });
 
-        // Intro Message
+        // Detailed Status Message
         frappe.call({
-            method: 'cargo_management.package_management.doctype.package.package.get_package_explained_status',
+            method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
             args: {source_name: frm.doc.name},
             callback: (r) => {
                 if (Array.isArray(r.message.message)) { // If there are multiple messages.
-                    r.message.message = r.message.message.map(message => "<div>" + message + "</div>").join('');
+                    r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
                 }
 
-                // FIXME: Override default color layout set in core: layout.js -> show_message() def. Core only allows blue and yellow
-                frm.set_intro(r.message.message); // core code do not allow more colors..
+                // FIXME: Override default color layout set in core: layout.js -> show_message()
+                frm.set_intro(r.message.message, ''); // Core only allows blue and yellow
                 frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // This allow to have same color on indicator, dot and alert..
             }
         });
 
-        // TODO: Finish The Progress Bar
-        // frm.dashboard.add_progress("Status", [
-        //     {
-        //         title: "Not sent" + " Queued",
-        //         width: "25%",
-        //         progress_class: "progress-bar-info"
-        //     },
-        //     {
-        //         title: "Sent" + " Sent",
-        //         width: "10%",
-        //         progress_class: "progress-bar-success"
-        //     },
-        //     {
-        //         title: "Sending" + " Sending",
-        //         width: "5%",
-        //         progress_class: "progress-bar-warning"
-        //     },
-        //     {
-        //         title: "Error" + "% Error",
-        //         width: "60%",
-        //         progress_class: "progress-bar-danger"
-        //     }
-        // ]);
+        // TODO: Finish The Progress Bar -> frm.dashboard.add_progress("Status", []
     },
 
     has_shipping: function (frm) {
@@ -103,8 +81,6 @@ frappe.ui.form.on('Package', {
     shipping_amount: function (frm) {
         calculate_package_total(frm);
     }
-
-    // TODO: Tracking Validator from backend and Carrier Select helper.
 });
 
 // Children Doctype of Package
@@ -119,5 +95,5 @@ frappe.ui.form.on('Package Content', {
 
     qty: function(frm, cdt, cdn) {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
-    },
+    }
 });

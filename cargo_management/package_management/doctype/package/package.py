@@ -69,7 +69,9 @@ class Package(Document):
 
     def change_status(self, new_status):
         """ Validate the current status of the package and validates if a change is possible. """
+        # TODO: Validate this when status is changed on Form-View or List-View
 
+        # Use Cases?
         # Package was waiting for receipt, now is mark as delivered. waiting for confirmation.
         # Package was waiting for receipt or confirmation and now is waiting for the departure.
         # Package was not received, and not confirmed, but has appear on the warehouse receipt list
@@ -220,12 +222,3 @@ class Package(Document):
                     latest_tracking_details.tracking_location.zip or ''
                 )
             )
-
-
-""" API Methods to communicate with the model that holds our business logic. """
-
-
-@frappe.whitelist()
-@frappe.read_only()
-def get_package_explained_status(source_name: str):
-    return frappe.get_doc('Package', source_name, cache=True).get_explained_status()

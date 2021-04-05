@@ -4,13 +4,9 @@ from frappe import _
 
 @frappe.whitelist()
 def mark_cargo_shipment_in_transit(source_name: str):
-    """ Used as Action button in Doctype: Change status of the packages and the warehouse receipts of the cargo shipment """
     cargo_shipment = frappe.get_doc('Cargo Shipment', source_name)
 
     total_packages = updated_packages = 0  # For Count purposes
-
-    # Core: Silence Notifications and emails!
-    frappe.flags.mute_emails = frappe.flags.in_import = cargo_shipment.mute_emails
 
     for cs_line in cargo_shipment.cargo_shipment_lines:
         warehouse_receipt = frappe.get_doc('Warehouse Receipt', cs_line.warehouse_receipt)
@@ -34,9 +30,8 @@ def mark_cargo_shipment_in_transit(source_name: str):
     cargo_shipment.flags.ignore_validate = True
     cargo_shipment.save(ignore_permissions=True)
 
-    frappe.flags.mute_emails, frappe.flags.in_import = False, False
-
     frappe.msgprint(msg=[
         '{} Warehouse Receipt in transit.'.format(len(cargo_shipment.cargo_shipment_lines)),
         '{} of {} Packages in transit.'.format(updated_packages, total_packages)
     ], title=_('Success'), as_list=True)
+#43

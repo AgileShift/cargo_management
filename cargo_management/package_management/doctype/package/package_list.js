@@ -49,6 +49,8 @@ frappe.listview_settings['Package'] = {
             frappe.call({
                 method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
                 args: {carrier: doc.carrier},
+                freeze: true,
+                freeze_message: __('Opening detail page...'),
                 callback: (r) => {
                     window.open(r.message + doc.tracking_number, '_blank');
                 }

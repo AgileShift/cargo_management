@@ -15,10 +15,12 @@ frappe.ui.form.on('Cargo Shipment', {
 
         if (frm.doc.status === 'Open') {
             frm.page.add_action_item(__('Confirm Transit'), () => {
-                frappe.utils.play_sound('click');  // Really Necessary?
                 frappe.call({
-                    method: 'cargo_management.shipment_customization.doctype.cargo_shipment.actions.mark_cargo_shipment_in_transit',
-                    args: {source_name: frm.doc.name}
+                    method: 'cargo_management.package_management.doctype.package.actions.update_status',
+                    args: {
+                        source_doc: frm.doc,
+                        action: 'confirm_transit'
+                    }
                 });
             });
         } else {

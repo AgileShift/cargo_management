@@ -119,8 +119,7 @@ def easypost_webhook(**kwargs):
 
         # TODO: Translate: alert message and button
         package_route = "frappe.set_route('Form', 'Package', '{}')".format(package.tracking_number)
-        alert_message = 'Package <a onclick="{0}">{1}</a> is {2}.'\
-            .format(package_route, package.tracking_number, package.carrier_status)
+        alert_message = 'Package <a onclick="{0}">{1}</a> is {2}.'.format(package_route, package.tracking_number, package.carrier_status)
         alert_body = '''
             <div class="next-action-container">
                 <button onclick="{}" class="next-action"><span>{}</span></button>
