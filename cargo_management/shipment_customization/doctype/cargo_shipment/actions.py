@@ -4,7 +4,24 @@ from frappe import _
 
 @frappe.whitelist()
 def mark_cargo_shipment_in_transit(source_name: str):
-    cargo_shipment = frappe.get_doc('Cargo Shipment', source_name)
+    doc = frappe.get_doc('Cargo Shipment', source_name)
+
+    doctypes_to_update = {
+        # 'Cargo Shipment': {
+        #     'new_status': 'In Transit',
+        #     'child_doc_lines': doc.get('cargo_shipment_lines'),
+        # },
+        'Warehouse Receipt': {
+            'new_status': 'In Transit',
+            'doc_names': doc.get('cargo_shipment_lines'),
+            'updated': 0
+        },
+        'Package': {
+            'new_status': 'In Transit',
+            'doc_names': doc.get('cargo_shipment_lines'),  # TODO: Gather this data!!
+            'updated': 0,
+        }
+    }
 
     total_packages = updated_packages = 0  # For Count purposes
 
