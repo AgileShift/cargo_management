@@ -26,10 +26,10 @@ frappe.ui.form.on('Warehouse Receipt', {
         if (frm.doc.status === 'Open') {
             frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.call({
-                    method: 'cargo_management.package_management.doctype.package.actions.update_status',
+                    method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.update_status',
                     args: {
-                        source_doc: frm.doc,
-                        action: 'confirm_packages'
+                        doc: frm.doc,
+                        new_status: 'Awaiting Departure'
                     }
                 });
             });

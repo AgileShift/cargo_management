@@ -16,6 +16,9 @@ Python EasyPost API for Package Tracking details
 
 # TODO:
 1. https://github.com/frappe/erpnext/pull/24055/files
+2. Rename Modules:
+    - Shipment Customization to Cargo Shipment Management
+    - Or find a better convention!
 
 #### License
 
