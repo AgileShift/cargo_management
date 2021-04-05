@@ -51,14 +51,15 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "default": "Open",
+   "default": "Awaiting Departure",
+   "depends_on": "eval: !doc.__islocal",
    "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Open\nIn Transit\nReceived",
+   "options": "Awaiting Departure\nIn Transit\nSorting\nFinished",
    "reqd": 1,
    "search_index": 1
   },
@@ -80,7 +81,8 @@
    "default": "1",
    "fieldname": "mute_emails",
    "fieldtype": "Check",
-   "label": "Don't Send Emails"
+   "label": "Don't Send Emails",
+   "print_hide": 1
   },
   {
    "fieldname": "column_break_4",
@@ -116,7 +118,7 @@
    "in_standard_filter": 1,
    "label": "Warehouse Receipts in Cargo Shipment",
    "options": "Cargo Shipment Line",
-   "read_only_depends_on": "eval: doc.status == 'Received';",
+   "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
   },
   {
@@ -198,7 +200,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-04-03 15:28:35.412406",
+ "modified": "2021-04-05 13:49:59.762539",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment",

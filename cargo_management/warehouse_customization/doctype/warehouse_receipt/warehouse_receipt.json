@@ -44,14 +44,15 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "default": "Open",
+   "default": "Awaiting Departure",
+   "depends_on": "eval: !doc.__islocal",
    "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Open\nIn Transit\nSorting\nClosed",
+   "options": "Awaiting Departure\nIn Transit\nSorting\nFinished",
    "reqd": 1,
    "search_index": 1
   },
@@ -110,7 +111,7 @@
    "in_standard_filter": 1,
    "label": "Packages in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
-   "read_only_depends_on": "eval: doc.status == 'Closed';",
+   "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
   },
   {
@@ -177,7 +178,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-04-05 12:33:43.196662",
+ "modified": "2021-04-05 13:48:59.916561",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

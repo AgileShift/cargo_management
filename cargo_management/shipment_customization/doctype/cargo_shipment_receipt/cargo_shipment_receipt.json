@@ -10,9 +10,12 @@
  "field_order": [
   "cargo_shipment",
   "reference",
+  "mute_emails",
+  "c_column",
   "status",
   "column_break_3",
   "departure_date",
+  "column_break_8",
   "arrival_date",
   "section_break_6",
   "cargo_shipment_receipt_warehouse_lines",
@@ -48,19 +51,21 @@
    "unique": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "columns": 2,
+   "default": "Awaiting Receipt",
    "depends_on": "eval: !doc.__islocal",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Open\nSorting\nClosed",
+   "options": "Awaiting Receipt\nSorting\nFinished",
    "reqd": 1
   },
   {
    "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
+   "fieldtype": "Section Break"
   },
   {
    "columns": 2,
@@ -108,10 +113,25 @@
    "fieldtype": "Float",
    "label": "Total Gross Weight (in pounds)",
    "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "mute_emails",
+   "fieldtype": "Check",
+   "label": "Don't Send Emails",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "c_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2021-04-05 12:34:25.754103",
+ "modified": "2021-04-05 13:46:01.584726",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Shipment Receipt",
