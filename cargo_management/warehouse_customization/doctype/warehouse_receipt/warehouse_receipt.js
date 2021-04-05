@@ -11,19 +11,22 @@ frappe.ui.form.on('Warehouse Receipt', {
 	    frm.set_query('package', 'warehouse_receipt_lines', () => {
             return {
                 filters: {
-                    status: ['not in', ['Available to Pickup', 'Finished']]
+                    status: ['not in', ['In Customs', 'Sorting', 'Available to Pickup', 'Finished']]
                 }
             };
         });
     },
 
     refresh: function (frm) {
+        // TODO: Add intro message when the warehouse is on cargo_shipment!
+        // TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
+
         if (frm.is_new()) {
             return;
         }
 
         // TODO: Work on this
-        if (frm.doc.status === 'Open') {
+        if (frm.doc.status === 'Awaiting Departure') {
             frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.call({
                     method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.update_status',
@@ -34,11 +37,7 @@ frappe.ui.form.on('Warehouse Receipt', {
                 });
             });
         }// else {
-            // frm.page.clear_actions_menu();
+            // frm.page.clear_actions_menu();  # TODO
         // }
-
-        // TODO: Add intro message when the warehouse is on cargo_shipment!
-        // TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
-    },
-
+    }
 });

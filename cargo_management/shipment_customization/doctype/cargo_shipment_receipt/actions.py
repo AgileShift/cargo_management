@@ -1,6 +1,28 @@
 from collections import defaultdict
 
 import frappe
+from cargo_management.package_management.doctype.package.utils import get_field_list_from_child_table, change_status
+
+
+@frappe.whitelist()
+def update_status(source_doc_name: str, new_status: str):
+    doc = frappe.get_doc('Cargo Shipment Receipt', source_doc_name)  # Getting the Cargo Shipment Receipt Doc.
+
+    # We Mark the actual child tables added to the parent, because we can dynamically add
+    change_status(docs_to_update={
+        'Cargo Shipment Receipt': {
+            'doc_names': [doc.name]
+        },
+        'Cargo Shipment': {
+            'doc_names': [doc.cargo_shipment]
+        },
+        'Warehouse Receipt': {
+            'doc_names': get_field_list_from_child_table(doc.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt')
+        },
+        'Package': {
+            'doc_names': get_field_list_from_child_table(doc.cargo_shipment_receipt_lines, 'package')
+        }
+    }, new_status=new_status, msg_title='Marked as Sorting', mute_emails=doc.mute_emails)
 
 
 @frappe.whitelist()
@@ -37,12 +59,11 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
         'warehouse_receipts': wrs,
     }
 
-# TODO: Status: in Sorting - Ready to Pickup? WHEN?
-# TODO: Crear facturas - Cada Invoice Item: debe de tener package
-# TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
+
 @frappe.whitelist()
 def make_sales_invoice(doc):
-
+    # TODO: Crear facturas - Cada Invoice Item: debe de tener package
+    # TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
     # TODO: Set customer if not set!.
 
     """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """

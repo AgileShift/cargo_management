@@ -1,15 +1,16 @@
 frappe.listview_settings['Cargo Shipment'] = {
     add_fields: ['status'],
     filters: [
-        ['status', '!=', 'Received'],
+        ['status', '!=', 'Finished'],
     ],
     hide_name_column: true,
 
     get_indicator(doc) {
         const status_color = {
-            'Open': 'yellow',
+            'Awaiting Departure': 'yellow',
             'In Transit': 'purple',
-            'Closed': 'green',
+            'Sorting': 'orange',
+            'Finished': 'green',
         };
 
         return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];

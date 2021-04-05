@@ -1,16 +1,18 @@
 frappe.ui.form.on('Cargo Shipment Receipt', {
 
     // TODO: On Save set customer on the package that are not set!
+    // TODO: Formatter for Package item?
 
     onload: function (frm) {
         // Adding the two possible ways to trigger a fetch for customer_name
         frm.add_fetch('package', 'customer_name', 'customer_name');
         frm.add_fetch('customer', 'customer_name', 'customer_name');
 
+        // TODO: Set Query for cargo_shipment_receipt_warehouse_lines
 	    frm.set_query('package', 'cargo_shipment_receipt_lines', () => {
             return {
                 filters: {
-                    status: ['not in', ['Available to Pickup', 'Finished']]
+                    status: ['not in', ['In Customs', 'Sorting', 'Available to Pickup', 'Finished']]
                 }
             };
         });
@@ -19,6 +21,26 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
     refresh: function (frm) {
         // TODO: after UI release: Child table dont update after save(validate method sorts the child table)
         // TODO: Add a button to sort child table by customer name.
+        // TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
+        // TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
+
+        if (frm.is_new()) {
+            return;
+        }
+
+        if (frm.doc.status === 'Awaiting Receipt') {
+            frm.page.add_action_item(__('Mark as Sorting'), () => {
+                frappe.call({
+                    method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.update_status',
+                    args: {
+                        source_doc_name: frm.doc.name,
+                        new_status: 'Sorting'
+                    }
+                });
+            });
+        } else {
+            frm.page.clear_actions_menu();
+        }
 
         frm.add_custom_button(__('Sales Invoice'), () => {
             // TODO: Little hack? fix after new UI: Button should be hidden if change is made -> look in warehouse receipt change status action
