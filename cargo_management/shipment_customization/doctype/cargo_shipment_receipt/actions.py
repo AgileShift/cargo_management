@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 import frappe
-from cargo_management.package_management.doctype.package.utils import get_field_list_from_child_table, change_status
+from cargo_management.package_management.doctype.package.utils import get_list_from_child_table, change_status
 
 
 @frappe.whitelist()
@@ -10,18 +10,10 @@ def update_status(source_doc_name: str, new_status: str):
 
     # We Mark the actual child tables added to the parent, because we can dynamically add
     change_status(docs_to_update={
-        'Cargo Shipment Receipt': {
-            'doc_names': [doc.name]
-        },
-        'Cargo Shipment': {
-            'doc_names': [doc.cargo_shipment]
-        },
-        'Warehouse Receipt': {
-            'doc_names': get_field_list_from_child_table(doc.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt')
-        },
-        'Package': {
-            'doc_names': get_field_list_from_child_table(doc.cargo_shipment_receipt_lines, 'package')
-        }
+        'Cargo Shipment Receipt': [doc.name],
+        'Cargo Shipment': [doc.cargo_shipment],
+        'Warehouse Receipt': get_list_from_child_table(doc.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'),
+        'Package': get_list_from_child_table(doc.cargo_shipment_receipt_lines, 'package')
     }, new_status=new_status, msg_title='Marked as Sorting', mute_emails=doc.mute_emails)
 
 
