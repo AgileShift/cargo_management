@@ -38,9 +38,9 @@ def change_status(docs_to_update: dict, new_status: str = None, msg_title: str =
                 doc.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
             iter_doc += 1  # Count each time we iter a doc to change. We dont reset so we can count all doctypes.
-            frappe.publish_progress(
-                percent=(iter_doc * 100 / total_doc_names), title=msg_title,  # doctype=doctype, docname=name,
-                description='Updating Status to {doctype}: {doc_name}'.format(doctype=doctype, doc_name=name),
+            frappe.publish_progress(  # TODO: Sometimes this dont get to 100%
+                percent=(iter_doc / total_doc_names * 100), title=msg_title,  # doctype=doctype, docname=name,
+                description='Updating Status to {doctype}: {doc_name}'.format(doctype=doctype, doc_name=name)
             )
 
         # Creating Message to show with results of status change to doctype

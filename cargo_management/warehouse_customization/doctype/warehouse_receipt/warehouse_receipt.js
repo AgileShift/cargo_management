@@ -30,6 +30,7 @@ frappe.ui.form.on('Warehouse Receipt', {
             frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.call({
                     method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.update_status',
+                    freeze: true,
                     args: {
                         doc: frm.doc,
                         new_status: 'Awaiting Departure'

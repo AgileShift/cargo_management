@@ -32,6 +32,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
             frm.page.add_action_item(__('Mark as Sorting'), () => {
                 frappe.call({
                     method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.update_status',
+                    freeze: true,
                     args: {
                         source_doc_name: frm.doc.name,
                         new_status: 'Sorting'
