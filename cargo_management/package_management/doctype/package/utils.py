@@ -16,22 +16,13 @@ def change_status(docs_to_update: dict, new_status: str = None, msg_title: str =
     @param msg_title: str. Title for the dialog
     @param mute_emails: bool. This activate or deactivates notifications on backend. True if not sent
     """
-    message = []  # For Gathering Message.
-
-    """ TODO
-    for i, wr_line in enumerate(doc.warehouse_receipt_lines, start=1):
-        progress = i * 100 / len(doc.warehouse_receipt_lines)
-
-    # TODO: Fix, after publish progress: CTL+S is not working.
-    frappe.publish_progress(
-        percent=progress, title='Confirming Packages',
-        description='Updating Status to {doctype} {doc_name}'.format(doctype=package.tracking_number),
-    ) """
+    message, iter_doc = [], 0  # For Gathering Message, counter of current iter of all doc_names
+    total_doc_names = sum(len(docs) if type(docs) == list else len(docs['doc_names']) for docs in docs_to_update.values())
 
     frappe.flags.mute_emails = frappe.flags.in_import = mute_emails  # Core: Silence all notifications and emails.
 
     for doctype, opts in docs_to_update.items():  # Iterate all over Doctypes. opts can be: dict or list.
-        updated_docs = 0                          # Reset Updated Docs Counter to zero each time we change of doctype
+        updated_docs = 0                          # Reset Updated Docs Counter to zero each time we change of doctype.
 
         try:  # If opts is a dict -> {'doc_names': [doc_names], 'new_status': 'string' }
             doc_names, doc_new_status = opts['doc_names'], opts.get('new_status', new_status)  # if no status is passed
@@ -42,11 +33,17 @@ def change_status(docs_to_update: dict, new_status: str = None, msg_title: str =
             doc = frappe.get_doc(doctype, name)   # Getting Doc from current Doctype
 
             if doc.change_status(doc_new_status):  # If status can be changed. Prevent unnecessary updates
-                updated_docs += 1                  # Add to updated docs
+                updated_docs += 1                  # Count, because this document could be updated
                 doc.flags.ignore_validate = True   # Set flag ON because Doc will be saved from bulk edit. No validations
                 doc.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
-        # Creating Message to show as result of this Iteration
+            iter_doc += 1  # Count each time we iter a doc to change. We dont reset so we can count all doctypes.
+            frappe.publish_progress(
+                percent=(iter_doc * 100 / total_doc_names), title=msg_title,  # doctype=doctype, docname=name,
+                description='Updating Status to {doctype}: {doc_name}'.format(doctype=doctype, doc_name=name),
+            )
+
+        # Creating Message to show with results of status change to doctype
         message.append('{updated} out of {total} {doctype}s have been updated to {new_status}.'.format(
             updated=updated_docs, total=len(doc_names), doctype=doctype, new_status=doc_new_status
         ))
