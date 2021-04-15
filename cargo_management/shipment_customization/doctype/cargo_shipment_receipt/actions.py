@@ -89,7 +89,7 @@ def make_sales_invoice(doc):
             }
 
             # if item.item_price > 0.00:
-            #     item_data.update({'price_list_rate': item.item_price})
+            #     item_data.update({'price_list_rate': item.item_price}) # TODO: Remove this field?
 
             sales_invoice.append('items', item_data)  # Add each items
             csrl_invoiced_items.append(item.name)
