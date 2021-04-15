@@ -82,13 +82,14 @@ def make_sales_invoice(doc):
             item_data = {  # Always pass this data
                 'item_code': item.item_code,
                 'package': item.package,
-                'qty': item.billable_qty_or_weight,
-                'total_weight': item.gross_weight,  # TODO: weight_per_unit
-                'description': item.content
+                'qty': item.billable_qty_or_weight or item.gross_weight,  # TODO: Rename billable_qty_or_weight
+                'weight_per_unit': item.gross_weight if item.billable_qty_or_weight else 1,
+                'total_weight': item.gross_weight,
+                'description': item.content or item.item_code
             }
 
-            if item.item_price > 0.00:
-                item_data.update({'price_list_rate': item.item_price})
+            # if item.item_price > 0.00:
+            #     item_data.update({'price_list_rate': item.item_price})
 
             sales_invoice.append('items', item_data)  # Add each items
             csrl_invoiced_items.append(item.name)
@@ -96,8 +97,8 @@ def make_sales_invoice(doc):
         sales_invoice.set_missing_values()
         sales_invoice.save(ignore_permissions=True)  # Saving a invoice as draft
 
-        for item in csrl_invoiced_items:
-            frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
+        # for item in csrl_invoiced_items:
+        #     frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
 
     cargo_shipment_receipt.notify_update()
     cargo_shipment_receipt.save(ignore_permissions=True)  # Send update notify
