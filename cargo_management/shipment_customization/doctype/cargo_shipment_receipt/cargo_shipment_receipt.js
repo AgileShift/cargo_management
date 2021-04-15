@@ -28,7 +28,8 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
             return;
         }
 
-        if (frm.doc.status === 'Awaiting Receipt') {
+        if (frm.doc.status === 'Awaiting Receipt' || frm.doc.status === 'Sorting') { // Awaiting or actually sorting
+
             frm.page.add_action_item(__('Mark as Sorting'), () => {
                 frappe.call({
                     method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.update_status',
@@ -39,31 +40,33 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                     }
                 });
             });
-        } else if (frm.doc.status === 'Sorting') {
-            frm.add_custom_button(__('Sales Invoice'), () => {
-                // TODO: Little hack? fix after new UI: Button should be hidden if change is made -> look in warehouse receipt change status action
-                frm.save();
 
-                frappe.call({
-                    method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
-                    args: {doc: frm.doc},
-                    freeze: true,
-                    freeze_message: __('Creating Sales Invoice...')
-                }).then(r => { // Return customers invoices
-                    frm.doc.cargo_shipment_receipt_lines.forEach((csrl) => {
-                        console.log(csrl);
-                        console.log(csrl.sales_invoice);
-                        console.log(r.message);
-                        console.log(r.message[csrl.customer]);
+            if (frm.doc.status === 'Sorting') {
+                frm.add_custom_button(__('Sales Invoice'), () => {
+                    // TODO: Little hack? fix after new UI: Button should be hidden if change is made -> look in warehouse receipt change status action
+                    frm.save();
 
-                        csrl.sales_invoice = r.message[csrl.customer]
+                    frappe.call({
+                        method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
+                        args: {doc: frm.doc},
+                        freeze: true,
+                        freeze_message: __('Creating Sales Invoice...')
+                    }).then(r => { // Return customers invoices
+                        frm.doc.cargo_shipment_receipt_lines.forEach((csrl) => {
+                            console.log(csrl);
+                            console.log(csrl.sales_invoice);
+                            console.log(r.message);
+                            console.log(r.message[csrl.customer]);
+
+                            csrl.sales_invoice = r.message[csrl.customer]
+                        });
+
+                        frm.refresh_field('cargo_shipment_receipt_lines');
                     });
+                }, __('Create'));
 
-                    frm.refresh_field('cargo_shipment_receipt_lines');
-                });
-            }, __('Create'));
-
-            frm.page.set_inner_btn_group_as_primary(__('Create'));
+                frm.page.set_inner_btn_group_as_primary(__('Create'));
+            }
         }
     },
 

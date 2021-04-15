@@ -79,6 +79,12 @@ def make_sales_invoice(doc):
         # Iterate over customer items to invoice
         csrl_invoiced_items = []
         for item in customers_to_invoice[customer]:
+
+            print(item.package)
+            print(item.billable_qty_or_weight)
+            print(item.gross_weight)
+            print(item.billable_qty_or_weight or item.gross_weight)
+
             item_data = {  # Always pass this data
                 'item_code': item.item_code,
                 'package': item.package,
