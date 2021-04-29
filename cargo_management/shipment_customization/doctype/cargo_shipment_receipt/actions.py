@@ -64,11 +64,23 @@ def make_sales_invoice(doc):
 
     # Sorting all the customers data in a single dict
     customers_to_invoice = defaultdict(list)
+    warning_messages = []
     for item in cargo_shipment_receipt.cargo_shipment_receipt_lines:
         if not item.customer:
             frappe.throw('Agregar cliente a fila: {}, Paquete: {}'.format(item.get('idx'), item.get('package')))
 
+        if item.sales_invoice:
+            # TODO: What happens if invoice exists and there is a new sales item?
+            warning_messages.append('No se creara factura para: {}. Ya tiene Factura.'.format(item.get('package')))
+            continue
+
         customers_to_invoice[item.customer].append(item)
+
+    # print('warning_messages')
+    # frappe.msgprint(msg=warning_messages, title='Advertencias', as_list=True, indicator='orange')
+
+    # if not customers_to_invoice:
+    #     return None
 
     # Creating a Sales Invoice for each customer
     # TODO: Validate fields and throw before start to create sales order!
@@ -79,12 +91,6 @@ def make_sales_invoice(doc):
         # Iterate over customer items to invoice
         csrl_invoiced_items = []
         for item in customers_to_invoice[customer]:
-
-            print(item.package)
-            print(item.billable_qty_or_weight)
-            print(item.gross_weight)
-            print(item.billable_qty_or_weight or item.gross_weight)
-
             item_data = {  # Always pass this data
                 'item_code': item.item_code,
                 'package': item.package,
@@ -100,13 +106,21 @@ def make_sales_invoice(doc):
             sales_invoice.append('items', item_data)  # Add each items
             csrl_invoiced_items.append(item.name)
 
+        print('Before Saving?')
+
         sales_invoice.set_missing_values()
         sales_invoice.save(ignore_permissions=True)  # Saving a invoice as draft
 
-        # for item in csrl_invoiced_items:
-        #     frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
+        print('creating sales invoice?')
 
-    cargo_shipment_receipt.notify_update()
-    cargo_shipment_receipt.save(ignore_permissions=True)  # Send update notify
+        for item in csrl_invoiced_items:
+            print(item, sales_invoice.name)
+            frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
+            frappe.db.commit()  # TODO: Not the best way. but its working
 
-    return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table!!!.
+    frappe.db.commit()  # Save all?
+
+    # cargo_shipment_receipt.notify_update()
+    # cargo_shipment_receipt.save(ignore_permissions=True)  # Send update notify
+
+    return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table?
