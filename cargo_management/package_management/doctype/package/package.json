@@ -51,7 +51,8 @@
   "column_break_3",
   "gross_weight",
   "pieces",
-  "easypost_id"
+  "easypost_id",
+  "warehouse_receipt"
  ],
  "fields": [
   {
@@ -333,6 +334,18 @@
    "mandatory_depends_on": "eval: doc.has_shipping",
    "options": "USD",
    "print_hide_if_no_value": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "warehouse_receipt",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse Receipt",
+   "options": "Warehouse Receipt",
+   "read_only": 1
   }
  ],
  "links": [
@@ -362,7 +375,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-04-03 15:21:55.383397",
+ "modified": "2021-04-29 13:29:51.939180",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

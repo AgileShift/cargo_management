@@ -4,7 +4,7 @@
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:50:41.615167",
- "description": "Warehouse Receipt",
+ "description": "Warehouse Receipt.",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -168,6 +168,11 @@
  ],
  "links": [
   {
+   "group": "Package",
+   "link_doctype": "Package",
+   "link_fieldname": "warehouse_receipt"
+  },
+  {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
    "link_fieldname": "warehouse_receipt"
@@ -178,7 +183,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-04-05 13:48:59.916561",
+ "modified": "2021-04-29 13:24:47.586519",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
