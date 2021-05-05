@@ -119,7 +119,7 @@ class Package(Document):
         elif self.status == 'Awaiting Confirmation' or self.status == 'In Extraordinary Confirmation':
             if self.carrier_real_delivery:
                 message = [
-                    'El transportista indica que entrego el paquete el: {}'.format(
+                    'El transportista indica que entrego el paquete el: {}.'.format(
                         frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
                     )
                 ]
@@ -129,7 +129,7 @@ class Package(Document):
                 # Package has exceeded the 24 hours timespan to be confirmed. TODO: check against current user tz.
                 if round(float(delivered_since) / 3600, 2) >= 24.00:  # Same as: time_diff_in_hours() >= 24.00
                     color = 'red'
-                    message.append('Han pasado: {} y el paquete aun no ha sido confirmado por el almacén.'.format(
+                    message.append('Han pasado: {} y el paquete aun no ha sido recibido por el almacén.'.format(
                         frappe.utils.format_duration(delivered_since)
                     ))
                 else:
@@ -140,7 +140,7 @@ class Package(Document):
 
             if self.status == 'In Extraordinary Confirmation':
                 color = 'red'
-                message.append('El paquete se encuentra en una verificación fuera de lo habitual.')
+                message.append('El paquete se encuentra siendo verificado de forma extraordinaria.')
         elif self.status == 'Awaiting Departure':
             # TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
             message = ['El paquete fue recepcionado.', 'Esperando próximo despacho de carga.']
@@ -150,17 +150,21 @@ class Package(Document):
         elif self.status == 'In Customs':
             message, color = 'El paquete se encuentra en proceso de desaduanaje.', 'gray'
         elif self.status == 'Sorting':
-            return  # No Message
+            message, color = 'El paquete se encuentra siendo clasificado en oficina.', 'blue'
         elif self.status == 'Available to Pickup':
             message, color = 'El paquete esta listo para ser retirado.', 'blue'
         elif self.status == 'Finished':
             return  # No message
         elif self.status == 'Never Arrived':
-            message, color = 'El paquete nunca llego al almacén.', 'red'
+            message, color = ['El paquete no llego al almacén.'], 'red'
         elif self.status == 'Returned to Sender':
-            message, color = ['El paquete fue devuelto por el transportista al vendedor.', 'Contáctese con su vendedor para obtener mayor información.'], 'red'
+            message, color = ['El paquete fue devuelto por el transportista al vendedor.'], 'red'
         else:
             message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'yellow'
+
+        # Adding extra message
+        if self.status == 'Never Arrived' or self.status == 'Returned to Sender':
+            message.append('Contáctese con su vendedor y/o transportista para obtener mayor información.')
 
         return {'message': message, 'color': color}
 
