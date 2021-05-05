@@ -23,6 +23,7 @@
   "column_break_1",
   "status",
   "track",
+  "assisted_purchase",
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
   "carrier_real_delivery",
@@ -132,7 +133,7 @@
    "search_index": 1
   },
   {
-   "default": "0",
+   "default": "1",
    "description": "Package is requested to be tracked.",
    "fieldname": "track",
    "fieldtype": "Check",
@@ -346,6 +347,15 @@
    "label": "Warehouse Receipt",
    "options": "Warehouse Receipt",
    "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "0",
+   "description": "Package was purchased using Shopping Assistance service.",
+   "fieldname": "assisted_purchase",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Assisted Purchase"
   }
  ],
  "links": [
@@ -375,7 +385,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-04-29 13:29:51.939180",
+ "modified": "2021-05-05 07:50:16.200236",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
