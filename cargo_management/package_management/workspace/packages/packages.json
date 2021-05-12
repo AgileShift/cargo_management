@@ -18,6 +18,25 @@
  "links": [
   {
    "hidden": 0,
+   "icon": "file",
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "Package",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Delayed Packages",
+   "link_to": "Delayed Packages",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "icon": "stock",
    "is_query_report": 0,
    "label": "Package",
@@ -188,7 +207,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-05-12 08:48:23.957041",
+ "modified": "2021-05-12 15:07:47.394263",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
