@@ -14,8 +14,9 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     calculate_package_total(frm); // Calculate the parent 'total' field and trigger events.
 }
 
-// todo: MATCH the new and current fields!! import_price for example
+// todo: MATCH the new and current fields! import_price for example
 // TODO: Tracking Validator from backend and Carrier Select helper.
+// TODO: Finish The Progress Bar -> frm.dashboard.add_progress("Status", []
 
 frappe.ui.form.on('Package', {
 
@@ -32,7 +33,7 @@ frappe.ui.form.on('Package', {
 
         // Setting Currency Labels
         frm.set_currency_labels(['total', 'shipping_amount'], 'USD');
-        frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
+        // frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
     },
 
     refresh: function(frm) {
@@ -40,35 +41,12 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        // Better to add button here to use: 'window'. Rather than as Server Side Action Button on Doctype.
-        frm.add_custom_button(__('Visit carrier detail page'), () => {
-            frappe.call({
-                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
-                args: {carrier: frm.doc.carrier},
-                freeze: true,
-                freeze_message: __('Opening detail page...'),
-                callback: (r) => {
-                    window.open(r.message + frm.doc.tracking_number, '_blank');
-                }
-            });
-        });
+        frm.events.get_detailed_status_message(frm); // Intro Message
 
-        // Detailed Status Message
-        frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
-            args: {source_name: frm.doc.name},
-            callback: (r) => {
-                if (Array.isArray(r.message.message)) { // If there are multiple messages.
-                    r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
-                }
-
-                // FIXME: Override default color layout set in core: layout.js -> show_message()
-                frm.set_intro(r.message.message, ''); // Core only allows blue and yellow
-                frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // This allow to have same color on indicator, dot and alert..
-            }
-        });
-
-        // TODO: Finish The Progress Bar -> frm.dashboard.add_progress("Status", []
+        if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
+            frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm) , __('Get Items From'));
+        }
+        frm.add_custom_button(__('Visit carrier detail page'), () => frm.events.visit_carrier_detail_page(frm.doc));
     },
 
     has_shipping: function (frm) {
@@ -80,6 +58,119 @@ frappe.ui.form.on('Package', {
 
     shipping_amount: function (frm) {
         calculate_package_total(frm);
+    },
+
+    get_detailed_status_message: function (frm) {
+        frappe.call('cargo_management.package_management.doctype.package.actions.get_explained_status', {
+            source_name: frm.doc.name
+        }).then(r => {
+            if ($.isArray(r.message.message)) { // If there are multiple messages.
+                r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
+            }
+
+            frm.set_intro(r.message.message, ''); // FIXME: Core only allows blue & yellow: layout.js -> show_message()
+            frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // Set same color on message as on status indicator dot.
+        });
+    },
+
+    visit_carrier_detail_page: function (doc) {
+        frappe.call({
+            method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
+            args: {carrier: doc.carrier},
+            freeze: true,
+            freeze_message: __('Opening detail page...'),
+            callback: (r) => {
+                window.open(r.message + doc.tracking_number, '_blank');
+            }
+        });
+    },
+
+    sales_order_dialog: function (frm) {
+        const so_dialog = new frappe.ui.form.MultiSelectDialog({
+            doctype: 'Sales Order',
+            target: frm,
+            setters: {
+                delivery_date: undefined,
+                status: undefined
+            },
+            get_query: () => {
+                return {
+                    filters: {  // TODO: Only uncompleted orders!
+                        docstatus: 1,
+                        customer: frm.doc.customer,
+                    }
+                };
+            },
+            action: (selections) => {
+                if (selections.length === 0) {
+                    frappe.msgprint(__("Please select {0}", [this.doctype]))
+                    return;
+                }
+                // sales_order_dialog.dialog.hide();
+                frm.events.sales_order_items_dialog()
+            },
+            add_filters_group: 1
+        });
+    },
+
+    sales_order_items_dialog: function (frm) {
+        const sales_order_items_dialog = new frappe.ui.Dialog({
+            title: __('Select Items'),
+            fields: [
+                {
+                    fieldname: 'trans_items',
+                    fieldtype: 'Table',
+                    label: 'Items',
+                    cannot_add_row: false,
+                    fields: [
+                        {
+                            fieldtype: 'Data',
+                            fieldname: "docname",
+                            read_only: 1,
+                            hidden: 1,
+                        }, {
+                            fieldtype: 'Link',
+                            fieldname: "item_code",
+                            options: 'Item',
+                            in_list_view: 1,
+                            read_only: 0,
+                            disabled: 0,
+                            label: __('Item Code')
+                        }, {
+                            fieldtype: 'Data',
+                            fieldname: "description",
+                            in_list_view: 1,
+                            read_only: 0,
+                            disabled: 0,
+                            label: __('Description')
+                        }, {
+                            fieldtype: 'Float',
+                            fieldname: "qty",
+                            default: 0,
+                            read_only: 0,
+                            in_list_view: 1,
+                            label: __('Qty'),
+                            // precision: get_precision("qty")
+                        }, {
+                            fieldtype: 'Currency',
+                            fieldname: "rate",
+                            options: "currency",
+                            default: 0,
+                            read_only: 0,
+                            in_list_view: 1,
+                            label: __('Rate'),
+                            // precision: get_precision("rate")
+                        }
+                    ]
+                }
+            ],
+            primary_action: function () {
+
+            },
+            primary_action_label: __('Select')
+        })
+
+        sales_order_items_dialog.show();
     }
 });
 
@@ -97,3 +188,4 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
+//192

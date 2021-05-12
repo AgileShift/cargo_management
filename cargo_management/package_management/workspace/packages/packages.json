@@ -188,7 +188,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-04-03 15:06:45.098881",
+ "modified": "2021-05-12 08:48:23.957041",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -237,7 +237,7 @@
    "format": "{} Late",
    "label": "Arriving Late",
    "link_to": "Package",
-   "stats_filter": "{\n    \"carrier_status\": [\"not in\", [\"Delivered\", \"Return To Sender\"]],\n    \"carrier_est_delivery\": [\"Timespan\", \"last week\"]\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Receipt\",\n    \"carrier_est_delivery\": [\"Between\", [date.year_start(), date.add_days(undefined, -1)]]\n}",
    "type": "DocType"
   },
   {
