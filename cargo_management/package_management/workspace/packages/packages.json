@@ -18,7 +18,6 @@
  "links": [
   {
    "hidden": 0,
-   "icon": "file",
    "is_query_report": 0,
    "label": "Reports",
    "link_type": "DocType",
@@ -26,7 +25,6 @@
    "type": "Card Break"
   },
   {
-   "dependencies": "Package",
    "hidden": 0,
    "is_query_report": 0,
    "label": "Delayed Packages",
@@ -207,7 +205,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-05-12 15:07:47.394263",
+ "modified": "2021-05-12 19:44:09.374832",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
