@@ -27,8 +27,17 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Delayed Packages",
-   "link_to": "Delayed Packages",
+   "label": "Arriving Late",
+   "link_to": "Arriving Late",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Awaiting Confirmation",
+   "link_to": "Awaiting Confirmation",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -205,7 +214,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-05-12 19:44:09.374832",
+ "modified": "2021-05-13 10:11:53.449691",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
