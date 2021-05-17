@@ -10,7 +10,7 @@ class CargoShipmentReceipt(Document):
 			item.idx = i
 
 		# def on_update(self):
-		""" After succesfull save. We link our docs! """
+		# """ After succesfull save. We link our docs! """
 
 		# for csrl in self.cargo_shipment_receipt_lines:
 		# 	print(csrl.customer)

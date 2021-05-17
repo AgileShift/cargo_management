@@ -15,7 +15,7 @@ class EasypostAPIError(easypost.Error):
     pass
 
 
-class EasypostAPI(object):
+class EasypostAPI:
     """ Easypost methods to control class API and parse data. """
 
     def __init__(self, carrier_uses_utc):
