@@ -48,9 +48,9 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                         args: {doc: frm.doc},
                         freeze: true,
                         freeze_message: __('Creating Sales Invoice...')
-                    }).then(r => { // Return customers invoices
-                        frm.refresh_field('cargo_shipment_receipt_lines');
-                    });
+                    });//.then(r => { // Return customers invoices
+                        // frm.refresh_field('cargo_shipment_receipt_lines');
+                    // });
                 }, __('Create'));
 
                 frm.page.set_inner_btn_group_as_primary(__('Create'));
@@ -107,7 +107,7 @@ frappe.ui.form.on('Cargo Shipment Receipt Line', {
     // TODO: We should allow always customer to be read not read_only?
 
     // TODO: Add a button to trigger this info!
-    gross_weight: function (frm, cdt, cdn) {
+    gross_weight: function (frm) {
         frm.set_value('gross_weight', frm.get_sum('cargo_shipment_receipt_lines', 'gross_weight'));
     }
 

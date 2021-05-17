@@ -77,9 +77,9 @@ class Package(Document):
         # Package was not received, and not confirmed, but has appear on the warehouse receipt list
 
         if self.status != new_status and \
-                (self.status == 'Awaiting Receipt' and (new_status == 'Awaiting Confirmation' or new_status == 'Returned to Sender')) or \
+                (self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
-                (self.status in ['Awaiting Departure'] and new_status == 'In Transit') or \
+                (self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting'):
             # TODO: Finish
             print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.tracking_number))
@@ -116,7 +116,7 @@ class Package(Document):
             else:
                 color = 'yellow'
                 message.append('No se ha indicado una fecha de entrega estimada.')
-        elif self.status == 'Awaiting Confirmation' or self.status == 'In Extraordinary Confirmation':
+        elif self.status in ['Awaiting Confirmation', 'In Extraordinary Confirmation']:
             if self.carrier_real_delivery:
                 message = [
                     'El transportista indica que entrego el paquete el: {}.'.format(
@@ -163,7 +163,7 @@ class Package(Document):
             message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'yellow'
 
         # Adding extra message
-        if self.status == 'Never Arrived' or self.status == 'Returned to Sender':
+        if self.status in ['Never Arrived', 'Returned to Sender']:
             message.append('Contáctese con su vendedor y/o transportista para obtener mayor información.')
 
         return {'message': message, 'color': color}

@@ -93,6 +93,7 @@ frappe.ui.form.on('Package', {
                 delivery_date: undefined,
                 status: undefined
             },
+            add_filters_group: 1,
             get_query: () => {
                 return {
                     filters: {  // TODO: Only uncompleted orders!
@@ -103,25 +104,33 @@ frappe.ui.form.on('Package', {
             },
             action: (selections) => {
                 if (selections.length === 0) {
-                    frappe.msgprint(__("Please select {0}", [this.doctype]))
+                    frappe.msgprint(__("Please select {0}", [so_dialog.doctype]))
                     return;
                 }
-                // sales_order_dialog.dialog.hide();
-                frm.events.sales_order_items_dialog()
-            },
-            add_filters_group: 1
+                // so_dialog.dialog.hide();
+                frm.events.so_items_dialog(selections);
+            }
         });
     },
 
-    sales_order_items_dialog: function (frm) {
-        const sales_order_items_dialog = new frappe.ui.Dialog({
+    so_items_dialog: async function (sales_orders) {
+        // Getting all sales order items from Sales Order
+        let sale_order_items = await frappe.db.get_list('Sales Order Item', {
+            filters: {'parent': ['in', sales_orders]},
+            fields: ['name as docname', 'item_code', 'description', 'qty', 'rate']
+        });
+
+        const so_items_dialog = new frappe.ui.Dialog({ // FIXME: Make MultiSelectDialog?
             title: __('Select Items'),
             fields: [
                 {
                     fieldname: 'trans_items',
                     fieldtype: 'Table',
-                    label: 'Items',
-                    cannot_add_row: false,
+                    label: __('Items'),
+                    cannot_add_rows: true,
+                    in_place_edit: true,
+                    reqd: 1,
+                    data: sale_order_items,
                     fields: [
                         {
                             fieldtype: 'Data',
@@ -133,21 +142,18 @@ frappe.ui.form.on('Package', {
                             fieldname: "item_code",
                             options: 'Item',
                             in_list_view: 1,
-                            read_only: 0,
-                            disabled: 0,
+                            read_only: 1,
                             label: __('Item Code')
                         }, {
                             fieldtype: 'Data',
                             fieldname: "description",
                             in_list_view: 1,
-                            read_only: 0,
-                            disabled: 0,
+                            read_only: 1,
                             label: __('Description')
                         }, {
                             fieldtype: 'Float',
                             fieldname: "qty",
-                            default: 0,
-                            read_only: 0,
+                            read_only: 1,
                             in_list_view: 1,
                             label: __('Qty'),
                             // precision: get_precision("qty")
@@ -155,22 +161,22 @@ frappe.ui.form.on('Package', {
                             fieldtype: 'Currency',
                             fieldname: "rate",
                             options: "currency",
-                            default: 0,
-                            read_only: 0,
+                            read_only: 1,
                             in_list_view: 1,
                             label: __('Rate'),
                             // precision: get_precision("rate")
                         }
                     ]
-                }
+                },
             ],
-            primary_action: function () {
-
+            primary_action: function (jkjk) {
+                console.log(jkjk);
             },
             primary_action_label: __('Select')
-        })
+        });
 
-        sales_order_items_dialog.show();
+        so_items_dialog.fields_dict.trans_items.grid.refresh();
+        so_items_dialog.show();
     }
 });
 

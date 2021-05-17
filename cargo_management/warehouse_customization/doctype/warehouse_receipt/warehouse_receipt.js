@@ -1,11 +1,11 @@
 frappe.ui.form.on('Warehouse Receipt', {
 
-    setup: function (frm) {
+    // setup: function (frm) {
         // TODO: formatter for package item?
 		// frm.set_indicator_formatter('package', (doc) => {
 		//     return (doc.status==='In Transit') ? "green" : "orange"
 		// });
-    },
+    // },
 
     onload: function (frm) {
 	    frm.set_query('package', 'warehouse_receipt_lines', () => {

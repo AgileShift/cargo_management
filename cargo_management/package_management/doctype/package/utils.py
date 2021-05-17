@@ -17,7 +17,7 @@ def change_status(docs_to_update: dict, new_status: str = None, msg_title: str =
     @param mute_emails: bool. This activate or deactivates notifications on backend. True if not sent
     """
     message, iter_doc = [], 0  # For Gathering Message, counter of current iter of all doc_names
-    total_doc_names = sum(len(docs) if type(docs) == list else len(docs['doc_names']) for docs in docs_to_update.values())
+    total_doc_names = sum(len(docs) if type(docs) is list else len(docs['doc_names']) for docs in docs_to_update.values())
 
     frappe.flags.mute_emails = frappe.flags.in_import = mute_emails  # Core: Silence all notifications and emails.
 
