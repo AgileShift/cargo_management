@@ -89,7 +89,7 @@ def make_sales_invoice(doc):
         sales_invoice.customer = customer  # Company and Currency are automatically set
 
         # Iterate over customer items to invoice
-        csrl_invoiced_items = []
+        # csrl_invoiced_items = []
         for item in customers_to_invoice[customer]:
             item_data = {  # Always pass this data
                 'item_code': item.item_code,
@@ -104,7 +104,7 @@ def make_sales_invoice(doc):
             #     item_data.update({'price_list_rate': item.item_price}) # TODO: Remove this field?
 
             sales_invoice.append('items', item_data)  # Add each items
-            csrl_invoiced_items.append(item.name)
+            # csrl_invoiced_items.append(item.name)
 
         print('Before Saving?')
 
@@ -113,12 +113,12 @@ def make_sales_invoice(doc):
 
         print('creating sales invoice?')
 
-        for item in csrl_invoiced_items:
-            print(item, sales_invoice.name)
-            frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
-            frappe.db.commit()  # TODO: Not the best way. but its working
+        # for item in csrl_invoiced_items:
+        #     print(item, sales_invoice.name)
+        #     frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
+        #     frappe.db.commit()  # TODO: Not the best way. but its working
 
-    frappe.db.commit()  # Save all?
+    # frappe.db.commit()  # Save all?
 
     # cargo_shipment_receipt.notify_update()
     # cargo_shipment_receipt.save(ignore_permissions=True)  # Send update notify

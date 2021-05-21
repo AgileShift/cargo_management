@@ -108,75 +108,53 @@ frappe.ui.form.on('Package', {
                     return;
                 }
                 // so_dialog.dialog.hide();
-                frm.events.so_items_dialog(selections);
+                frm.events.so_items_dialog(frm, selections);
             }
         });
     },
 
-    so_items_dialog: async function (sales_orders) {
+    so_items_dialog: async function (frm, sales_orders) {
         // Getting all sales order items from Sales Order
         let sale_order_items = await frappe.db.get_list('Sales Order Item', {
             filters: {'parent': ['in', sales_orders]},
             fields: ['name as docname', 'item_code', 'description', 'qty', 'rate']
         });
 
-        const so_items_dialog = new frappe.ui.Dialog({ // FIXME: Make MultiSelectDialog?
-            title: __('Select Items'),
-            fields: [
+        const so_items_dialog = new frappe.ui.form.MultiSelectDialog({
+            doctype: 'Sales Order Item',
+            target: frm,
+            setters: {
+                // item_code: undefined,
+                // qty: undefined,
+                // rate: undefined
+            },
+            data_fields: [
                 {
-                    fieldname: 'trans_items',
-                    fieldtype: 'Table',
-                    label: __('Items'),
-                    cannot_add_rows: true,
-                    in_place_edit: true,
-                    reqd: 1,
-                    data: sale_order_items,
-                    fields: [
-                        {
-                            fieldtype: 'Data',
-                            fieldname: "docname",
-                            read_only: 1,
-                            hidden: 1,
-                        }, {
-                            fieldtype: 'Link',
-                            fieldname: "item_code",
-                            options: 'Item',
-                            in_list_view: 1,
-                            read_only: 1,
-                            label: __('Item Code')
-                        }, {
-                            fieldtype: 'Data',
-                            fieldname: "description",
-                            in_list_view: 1,
-                            read_only: 1,
-                            label: __('Description')
-                        }, {
-                            fieldtype: 'Float',
-                            fieldname: "qty",
-                            read_only: 1,
-                            in_list_view: 1,
-                            label: __('Qty'),
-                            // precision: get_precision("qty")
-                        }, {
-                            fieldtype: 'Currency',
-                            fieldname: "rate",
-                            options: "currency",
-                            read_only: 1,
-                            in_list_view: 1,
-                            label: __('Rate'),
-                            // precision: get_precision("rate")
-                        }
-                    ]
+                    fieldtype: 'Currency',
+                    options: "USD",
+                    fieldname: "rate",
+                    read_only: 1,
+                    hidden: 1,
                 },
-            ],
-            primary_action: function (jkjk) {
+                {
+                    fieldname: 'item_code',
+                    fieldtype: 'Data',
+                    label: __('Item sshhshsh')
+                }],
+            get_query: () => {
+                return {
+                    filters: {
+                        parent: ['in', sales_orders]
+                    }
+                }
+            },
+            add_filters_group: 1,
+            action: (jkjk) => {
                 console.log(jkjk);
             },
             primary_action_label: __('Select')
         });
 
-        so_items_dialog.fields_dict.trans_items.grid.refresh();
-        so_items_dialog.show();
     }
 });
 
@@ -194,4 +172,4 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
-//192
+//192 - 203
