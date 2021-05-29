@@ -1,7 +1,10 @@
 {
  "cards": [
   {
-   "card": "New Packages"
+   "card": "New Packages - SEA"
+  },
+  {
+   "card": "New Packages - AIR"
   },
   {
    "card": "New Customers"
@@ -23,9 +26,9 @@
  "docstatus": 0,
  "doctype": "Dashboard",
  "idx": 1,
- "is_default": 0,
+ "is_default": 1,
  "is_standard": 1,
- "modified": "2021-04-03 08:23:27.386346",
+ "modified": "2021-05-27 10:19:24.955965",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
