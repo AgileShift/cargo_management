@@ -9,14 +9,14 @@ frappe.listview_settings['Package'] = {
         const status_color = {
             'Awaiting Receipt': 'lightblue',
             'Awaiting Confirmation': 'orange',
-            'In Extraordinary Confirmation': 'red',
-            'Awaiting Departure': 'yellow',
+            'In Extraordinary Confirmation': 'pink',
+            'Awaiting Departure': 'cyan',
             'In Transit': 'purple',
             'In Customs': 'gray',
-            'Sorting': 'orange',
+            'Sorting': 'yellow',
             'Available to Pickup': 'blue',
             'Finished': 'green',
-            'Cancelled': 'red',
+            'Cancelled': 'darkgrey',
             'Never Arrived': 'red',
             'Returned to Sender': 'red',
         };
@@ -24,16 +24,16 @@ frappe.listview_settings['Package'] = {
         return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
     },
 
-    onload: function (listview) {
-        listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
+    // onload: function (listview) {
+    //     listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
             // TODO FINISH.... This is work in progress
             // Bulk Dialog - should sent email if status is changed?
             // Bulk show_progress. This actually reloads the form? if so. how many times?
-            listview.call_for_selected_items(
-                'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
-            );
-        })
-    },
+            // listview.call_for_selected_items(
+            //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
+            // );
+        // })
+    // },
 
     button: {
         show(doc) {

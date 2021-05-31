@@ -214,7 +214,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-05-13 10:11:53.449691",
+ "modified": "2021-05-31 07:59:06.883078",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -223,7 +223,7 @@
  "pin_to_top": 1,
  "shortcuts": [
   {
-   "color": "Grey",
+   "color": "lightblue",
    "doc_view": "List",
    "label": "All active packages",
    "link_to": "Package",

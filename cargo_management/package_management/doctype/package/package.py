@@ -110,7 +110,7 @@ class Package(Document):
                 elif est_delivery_diff < 0:  # Delivery is in the next days
                     message.append('La fecha programada es: {}'.format(est_delivery_date))
                 else:  # Delivery is late
-                    color = 'red'
+                    color = 'pink'
                     message.append('Esta retrasado. Debio de ser entregado el: {}'.format(est_delivery_date))
                     message.append('Contacte a su proveedor para obtener mas información.')
             else:
@@ -135,11 +135,11 @@ class Package(Document):
                 else:
                     message.append('Por favor espera 24 horas hábiles para que el almacén confirme la recepción.')
             else:
-                color = 'orange'
+                color = 'yellow'
                 message = ['El transportista no índico una fecha de entrega.']
 
             if self.status == 'In Extraordinary Confirmation':
-                color = 'red'
+                color = 'pink'
                 message.append('El paquete se encuentra siendo verificado de forma extraordinaria.')
         elif self.status == 'Awaiting Departure':
             # TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
@@ -160,7 +160,7 @@ class Package(Document):
         elif self.status == 'Returned to Sender':
             message, color = ['El paquete fue devuelto por el transportista al vendedor.'], 'red'
         else:
-            message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'yellow'
+            message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'orange'
 
         # Adding extra message
         if self.status in ['Never Arrived', 'Returned to Sender']:

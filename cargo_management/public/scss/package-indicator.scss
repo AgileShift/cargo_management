@@ -3,7 +3,7 @@
 // See: package_list.js for color references
 
 // frappe/public/scss/common/indicator.scss
-// This is for the indicator dot colors, see: list_view.js -> get_indicator_dot()
+// This is for the indicator dot color, see: list_view.js -> get_indicator_dot()
 @mixin indicator-color($color) {
   &::before,
   &::after {
@@ -11,21 +11,21 @@
   }
 }
 
-// FIXME: In core this is set only as .indicator-pill Used in: Workspace(shortcut), listview(row field) or form-view(status indicator))
-// As a .indicator it will be used in: Listview(row indicator dot) shown in mobile.
+// FIXME: In core colors are set only for .indicator-pill Used in: Workspace(shortcut), List-View(row status field) and Form-View(status indicator))
+// As a .indicator it will be used in: List-View(row status indicator dot) shown in mobile. See -> get_indicator_dot()
 .indicator {
   &.purple {
-    @include indicator-color('purple');
+    //@include indicator-color('purple');
   }
 
   &.lightblue {
-    @include indicator-color('light-blue');
+    //@include indicator-color('light-blue');
   }
 }
 
 
 // frappe/public/scss/desk/form.scss
-// This is for the set_intro_message color in form view, see: layout.js -> show_message()
+// This is for the get_detailed_status_message in form view Package doctype, see: layout.js -> show_message()
 @mixin form-message-background($color) {
   background: var(--bg-#{$color});
   color: var(--text-on-#{$color});
@@ -42,5 +42,9 @@
 
   &.gray {
     @include form-message-background('light-gray')
+  }
+
+  &.pink {
+    @include form-message-background('pink')
   }
 }
