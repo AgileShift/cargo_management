@@ -305,7 +305,9 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Easypost ID",
+   "no_copy": 1,
    "print_hide": 1,
+   "report_hide": 1,
    "unique": 1
   },
   {
@@ -398,7 +400,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-05-26 17:53:57.205533",
+ "modified": "2021-05-31 09:12:26.270706",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

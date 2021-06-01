@@ -13,11 +13,11 @@
  "chart_options": "",
  "charts": [
   {
-   "chart": "Package Summary",
+   "chart": "Packages by Type of Transport",
    "width": "Full"
   },
   {
-   "chart": "Packages Trend",
+   "chart": "Package Summary",
    "width": "Full"
   }
  ],
@@ -28,7 +28,7 @@
  "idx": 1,
  "is_default": 1,
  "is_standard": 1,
- "modified": "2021-05-27 10:19:24.955965",
+ "modified": "2021-06-01 00:39:56.452502",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

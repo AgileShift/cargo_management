@@ -1,5 +1,5 @@
 {
- "cards_label": "Links",
+ "cards_label": "",
  "category": "Domains",
  "charts": [],
  "charts_label": "",
@@ -25,21 +25,23 @@
    "type": "Card Break"
   },
   {
+   "dependencies": "Package",
    "hidden": 0,
    "is_query_report": 0,
    "label": "Arriving Late",
    "link_to": "Arriving Late",
    "link_type": "Report",
-   "onboard": 0,
+   "onboard": 1,
    "type": "Link"
   },
   {
+   "dependencies": "Package",
    "hidden": 0,
    "is_query_report": 0,
    "label": "Awaiting Confirmation",
    "link_to": "Awaiting Confirmation",
    "link_type": "Report",
-   "onboard": 0,
+   "onboard": 1,
    "type": "Link"
   },
   {
@@ -214,7 +216,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-05-31 07:59:06.883078",
+ "modified": "2021-05-31 15:01:53.985103",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -231,7 +233,7 @@
    "type": "DocType"
   },
   {
-   "color": "Red",
+   "color": "red",
    "doc_view": "List",
    "label": "Without carrier data",
    "link_to": "Package",
@@ -239,7 +241,7 @@
    "type": "DocType"
   },
   {
-   "color": "Lightblue",
+   "color": "lightblue",
    "doc_view": "List",
    "format": "{} Pending",
    "icon": "",
@@ -249,7 +251,7 @@
    "type": "DocType"
   },
   {
-   "color": "Green",
+   "color": "green",
    "doc_view": "List",
    "format": "{} Delivered",
    "label": "Arrived today",
@@ -258,7 +260,7 @@
    "type": "DocType"
   },
   {
-   "color": "Red",
+   "color": "pink",
    "doc_view": "List",
    "format": "{} Late",
    "label": "Arriving Late",
@@ -267,7 +269,7 @@
    "type": "DocType"
   },
   {
-   "color": "Red",
+   "color": "pink",
    "doc_view": "List",
    "format": "",
    "label": "Available for pickup at post office",
@@ -276,7 +278,7 @@
    "type": "DocType"
   },
   {
-   "color": "Yellow",
+   "color": "cyan",
    "doc_view": "List",
    "format": "{} Waiting",
    "label": "Awaiting Departure",
@@ -285,7 +287,7 @@
    "type": "DocType"
   },
   {
-   "color": "Purple",
+   "color": "purple",
    "doc_view": "List",
    "label": "In Transit",
    "link_to": "Package",
@@ -293,7 +295,7 @@
    "type": "DocType"
   },
   {
-   "color": "Orange",
+   "color": "orange",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "This week pending confirmation",
@@ -302,7 +304,7 @@
    "type": "DocType"
   },
   {
-   "color": "Orange",
+   "color": "orange",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "All pending confirmation",
@@ -311,7 +313,7 @@
    "type": "DocType"
   },
   {
-   "color": "Red",
+   "color": "pink",
    "doc_view": "List",
    "format": "{} Pending",
    "label": "In Extraordinary Confirmation",
@@ -327,7 +329,7 @@
    "type": "Dashboard"
   },
   {
-   "color": "Blue",
+   "color": "blue",
    "doc_view": "List",
    "format": "{} Ready",
    "label": "Available to Pickup",
