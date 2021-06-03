@@ -7,8 +7,13 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
         time_interval=None, heatmap_year=None, refresh=None):
     """ Custom Chart using core Dashboard Chart Data.
     We need a Count Chart for each transportation_type. We request each data and create a single Cross Chart.
-    If we @cache_source as in core, we get a trouble because Core tries to find a Dashboard Chart from Database..
+    If we @cache_source in core we get a trouble because Core tries to find a Dashboard Chart from Database.
+
+    # TODO: Make this with some dynamic variable.
+    chart['yMarkers'] = [{ 'label': "Marker", 'value': 70 }]
+    chart['yRegions'] = [{ 'label': "Region", 'start': 5, 'end': 50 }]
     """
+    filters = frappe.parse_json(filters)  # Converting Filters
 
     chart_config = {
         'from_date': from_date or None,
@@ -21,19 +26,19 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
         'based_on': 'creation',
         'document_type': 'Package',
         'group_by_type': 'Count',  # Unnecessary
-        'filters_json': [  # TODO: Append filters param with our custom filter_json to pass all filters to query.
-            ['Package', 'transportation_type', '=', 'Sea', False]
+        # TODO: Append filters Dynamically
+        'filters_json': [
+            ['Package', 'transportation_type', '=', 'Sea', False],
+            ['Package', 'assisted_purchase', '=', filters['assisted_purchase'], False],
         ],
-        'name': 'SEA - Packages'  # Readable label name
+        'name': 'SEA'  # Readable label name
     }
 
     chart = build_chart_data(chart=chart_config, no_cache=True)  # Fetching initial 'Sea' Chart
 
-    chart_config['name'], chart_config['filters_json'][0][3] = 'AIR - Packages', 'Air'  # Change config to 'Air'
-    chart['datasets'].append(build_chart_data(chart=chart_config, no_cache=True)['datasets'][0])  # Append directly
-
-    # TODO: Make this with some dynamic variable.
-    # chart['yMarkers'] = [{ 'label': "Marker", 'value': 70 }]
-    # chart['yRegions'] = [{ 'label': "Region", 'start': 5, 'end': 50 }]
+    chart_config['name'], chart_config['filters_json'][0][3] = 'AIR', 'Air'  # Change config to 'Air'
+    chart['datasets'].append(
+        build_chart_data(chart=chart_config, no_cache=True)['datasets'][0]  # append only data set to initial chart/
+    )  # Append directly
 
     return chart
