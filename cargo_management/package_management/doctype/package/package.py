@@ -129,7 +129,7 @@ class Package(Document):
                 # Package has exceeded the 24 hours timespan to be confirmed. TODO: check against current user tz.
                 if round(float(delivered_since) / 3600, 2) >= 24.00:  # Same as: time_diff_in_hours() >= 24.00
                     color = 'red'
-                    message.append('Han pasado: {} y el paquete aun no ha sido recibido por el almacén.'.format(
+                    message.append('Ha pasado: {} y el paquete aun no ha sido recibido por el almacén.'.format(
                         frappe.utils.format_duration(delivered_since)
                     ))
                 else:

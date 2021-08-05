@@ -1,6 +1,5 @@
-# TODO: Maybe we can move this to a module?
 import frappe
-
+# TODO: Maybe we can move this to a module. It's Generic and Works tieh many doctypes from this app?
 
 def get_list_from_child_table(child_lines: list, field: str):
     """ This takes a List of Dicts [{}] and return a List of values. """
