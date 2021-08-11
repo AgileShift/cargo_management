@@ -65,6 +65,6 @@ def get_package_for_customer_query(tracking_number: str):
         'carrier_last_detail': package.carrier_last_detail,
         'carrier_est_delivery': package.carrier_est_delivery,
         'carrier_est_weight': package.carrier_est_weight,
-        'message': package.get_explained_status(),
+        'message': package.get_explained_status(),  # TODO: Best way to do it?
         'carrier_detail_page': carrier_detail_page
     }
