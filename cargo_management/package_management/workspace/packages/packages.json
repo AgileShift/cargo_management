@@ -216,7 +216,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-06-16 09:58:54.561203",
+ "modified": "2021-08-10 23:18:16.523882",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -229,7 +229,7 @@
    "doc_view": "List",
    "label": "All active packages",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"not in\", [\"Awaiting Departure\", \"In Transit\", \"Sorting\", \"Finished\", \"Cancelled\", \"Never Arrived\", \"Returned to Sender\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Receipt\", \"Awaiting Confirmation\", \"Awaiting Departure\", \"In Transit\", \"In Customs\", \"Sorting\"]]\n}",
    "type": "DocType"
   },
   {

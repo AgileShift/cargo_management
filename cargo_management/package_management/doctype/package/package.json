@@ -153,7 +153,8 @@
    "description": "Estimated delivery date provided by the carrier (if available).",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
-   "label": "Carrier estimated delivery date"
+   "label": "Carrier estimated delivery date",
+   "mandatory_depends_on": "eval: doc.carrier == 'AmazonMws'"
   },
   {
    "bold": 1,
@@ -400,7 +401,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-05-31 09:12:26.270706",
+ "modified": "2021-08-10 23:29:31.007841",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
