@@ -103,6 +103,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_bulk_edit": 1,
    "allow_in_quick_entry": 1,
    "columns": 10,
    "fieldname": "warehouse_receipt_lines",
@@ -183,7 +184,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-04-29 13:24:47.586519",
+ "modified": "2021-08-26 13:38:04.107785",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

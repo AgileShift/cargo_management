@@ -6,25 +6,25 @@
  "engine": "InnoDB",
  "field_order": [
   "package",
-  "section_break_2",
+  "section_break_1",
   "customer",
-  "column_break_2",
+  "section_break_2",
   "customer_name",
   "section_break_6",
   "carrier_real_delivery",
   "column_break_8",
+  "carrier_est_weight",
+  "section_break_10",
   "date",
+  "column_break_18",
+  "gross_weight",
+  "volumetric_weight",
   "dimmensions_section",
   "length",
   "column_break_12",
   "width",
   "column_break_14",
-  "height",
-  "section_break_10",
-  "carrier_est_weight",
-  "column_break_18",
-  "gross_weight",
-  "volumetric_weight"
+  "height"
  ],
  "fields": [
   {
@@ -39,7 +39,7 @@
    "search_index": 1
   },
   {
-   "columns": 2,
+   "columns": 1,
    "description": "Actual Date of Receipt provided by the warehouse (if available).",
    "fieldname": "date",
    "fieldtype": "Date",
@@ -78,12 +78,8 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "section_break_2",
-   "fieldtype": "Section Break"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_6",
@@ -95,7 +91,8 @@
   },
   {
    "fieldname": "section_break_10",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Warehouse Details"
   },
   {
    "columns": 1,
@@ -141,21 +138,28 @@
    "fieldtype": "Column Break"
   },
   {
+   "columns": 1,
    "description": "Gross weight of the package as measured by the warehouse (if available).",
    "fieldname": "gross_weight",
    "fieldtype": "Float",
-   "label": "Gross Weight (in pounds)"
+   "in_list_view": 1,
+   "label": "Gross Weight (in pounds)",
+   "non_negative": 1
   },
   {
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
    "label": "Volumetric weight",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-03-28 23:10:07.223602",
+ "modified": "2021-08-26 13:47:03.458251",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",
