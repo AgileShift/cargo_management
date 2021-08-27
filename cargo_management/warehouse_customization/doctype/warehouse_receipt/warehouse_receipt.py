@@ -17,7 +17,7 @@ class WarehouseReceipt(Document):
     def on_update(self):
         """ Add the Warehouse Receipt to the Package Doc. This allow to have mutual reference WR to Pack """
         # TODO: Set only if is not set  ?
-        # TODO: What happens if deleted - It must be some sort of cleaning method? ?
+        # TODO: What happens if deleted - It must be some sort of cleaning method?
 
         for wr_line in self.warehouse_receipt_lines:
             # TODO: Add: Warehouse -> Receipt Date & Weight

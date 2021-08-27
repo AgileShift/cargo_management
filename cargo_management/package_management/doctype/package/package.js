@@ -33,7 +33,7 @@ frappe.ui.form.on('Package', {
 
         // Setting Currency Labels
         frm.set_currency_labels(['total', 'shipping_amount'], 'USD');
-        // frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
+        frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
     },
 
     refresh: function(frm) {

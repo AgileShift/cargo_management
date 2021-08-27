@@ -20,13 +20,13 @@
   "closing_date",
   "column_break_10",
   "departure_date",
+  "sb_0",
+  "warehouse_receipt_lines",
   "additional_information_section",
   "gross_weight",
-  "column_break_14",
-  "volumetric_weight",
   "pieces",
-  "sb_0",
-  "warehouse_receipt_lines"
+  "column_break_14",
+  "volumetric_weight"
  ],
  "fields": [
   {
@@ -127,7 +127,8 @@
   },
   {
    "fieldname": "section_break_7",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Logistic Dates"
   },
   {
    "fieldname": "column_break_8",
@@ -184,7 +185,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-08-26 13:38:04.107785",
+ "modified": "2021-08-27 11:42:51.318734",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

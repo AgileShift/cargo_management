@@ -11,7 +11,7 @@ frappe.ui.form.on('Warehouse Receipt', {
 	    frm.set_query('package', 'warehouse_receipt_lines', () => {
             return {
                 filters: {
-                    status: ['not in', ['In Customs', 'Sorting', 'Available to Pickup', 'Finished']]
+                    status: ['not in', ['Awaiting Departure', 'In Transit', 'In Customs', 'Sorting', 'Available to Pickup', 'Finished']]
                 }
             };
         });
