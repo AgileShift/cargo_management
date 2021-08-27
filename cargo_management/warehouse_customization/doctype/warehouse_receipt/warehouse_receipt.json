@@ -158,7 +158,6 @@
    "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
    "fieldname": "carrier_est_gross_weight",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Estimated Gross Weight by Carriers (in pounds)",
    "read_only": 1
   },
@@ -167,7 +166,6 @@
    "description": "Estimated gross weight of the packages as measured by the warehouse (if available).",
    "fieldname": "warehouse_est_gross_weight",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Estimated Gross Weight by Warehouse (in pounds)",
    "read_only": 1
   },
@@ -193,7 +191,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-08-27 14:48:53.295799",
+ "modified": "2021-08-27 14:59:20.072610",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
