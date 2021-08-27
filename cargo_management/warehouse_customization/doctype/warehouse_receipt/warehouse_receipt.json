@@ -57,7 +57,6 @@
    "search_index": 1
   },
   {
-   "bold": 1,
    "description": "Warehouse where reception occurred.",
    "fieldname": "target_warehouse",
    "fieldtype": "Link",
@@ -97,12 +96,10 @@
   },
   {
    "allow_bulk_edit": 1,
-   "allow_in_quick_entry": 1,
    "columns": 10,
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table",
    "in_preview": 1,
-   "in_standard_filter": 1,
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
@@ -191,7 +188,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-08-27 14:59:20.072610",
+ "modified": "2021-08-27 15:06:46.212146",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

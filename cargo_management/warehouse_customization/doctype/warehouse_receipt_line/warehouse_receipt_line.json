@@ -12,7 +12,7 @@
   "section_break_2",
   "customer_name",
   "section_break_10",
-  "date",
+  "received_date",
   "description",
   "column_break_18",
   "warehouse_est_weight",
@@ -43,15 +43,6 @@
   {
    "bold": 1,
    "columns": 1,
-   "description": "Actual Date of Receipt provided by the warehouse (if available).",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Received Date"
-  },
-  {
-   "bold": 1,
-   "columns": 1,
    "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
    "fetch_from": "package.carrier_real_delivery",
    "fetch_if_empty": 1,
@@ -59,6 +50,7 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "Carrier real delivery date",
+   "print_hide": 1,
    "read_only": 1
   },
   {
@@ -69,6 +61,7 @@
    "in_global_search": 1,
    "label": "Customer",
    "options": "Customer",
+   "print_hide": 1,
    "read_only": 1,
    "search_index": 1
   },
@@ -108,22 +101,26 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Carrier estimated weight (in pounds)",
+   "print_hide": 1,
    "read_only": 1
   },
   {
    "fieldname": "length",
    "fieldtype": "Float",
-   "label": "Length (cm)"
+   "label": "Length (cm)",
+   "print_hide": 1
   },
   {
    "fieldname": "width",
    "fieldtype": "Float",
-   "label": "Width (cm)"
+   "label": "Width (cm)",
+   "print_hide": 1
   },
   {
    "fieldname": "height",
    "fieldtype": "Float",
-   "label": "Height (cm)"
+   "label": "Height (cm)",
+   "print_hide": 1
   },
   {
    "collapsible": 1,
@@ -147,6 +144,7 @@
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
    "label": "Volumetric Weight",
+   "print_hide_if_no_value": 1,
    "read_only": 1
   },
   {
@@ -179,11 +177,21 @@
    "in_list_view": 1,
    "label": "Warehouse estimated weight (in pounds)",
    "non_negative": 1
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "default": "Today",
+   "description": "Actual Date of Receipt provided by the warehouse (if available).",
+   "fieldname": "received_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Received Date"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-08-27 14:56:25.353658",
+ "modified": "2021-08-27 15:40:20.471703",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

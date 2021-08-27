@@ -18,7 +18,6 @@
   "tracking_number",
   "customer",
   "customer_name",
-  "customer_email",
   "carrier",
   "column_break_1",
   "status",
@@ -49,10 +48,6 @@
   "order_number",
   "signature",
   "internal_data_section",
-  "consignee_name",
-  "column_break_3",
-  "gross_weight",
-  "pieces",
   "easypost_id",
   "warehouse_receipt"
  ],
@@ -93,15 +88,6 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Customer Name",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "customer.email_id",
-   "fieldname": "customer_email",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Customer Email",
-   "options": "Email",
    "read_only": 1
   },
   {
@@ -284,23 +270,6 @@
    "label": "Internal data"
   },
   {
-   "description": "Name on the package label.",
-   "fieldname": "consignee_name",
-   "fieldtype": "Data",
-   "label": "Consignee name"
-  },
-  {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "1",
-   "description": "Quantity of packages in shipment.",
-   "fieldname": "pieces",
-   "fieldtype": "Int",
-   "label": "Pieces"
-  },
-  {
    "description": "Required to fetch data after an easypost tracking number is created.",
    "fieldname": "easypost_id",
    "fieldtype": "Data",
@@ -310,12 +279,6 @@
    "print_hide": 1,
    "report_hide": 1,
    "unique": 1
-  },
-  {
-   "description": "Gross weight of the package.",
-   "fieldname": "gross_weight",
-   "fieldtype": "Float",
-   "label": "Gross Weight (in pounds)"
   },
   {
    "default": "0",
@@ -401,7 +364,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-08-27 14:56:30.537886",
+ "modified": "2021-08-27 15:30:19.258448",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
