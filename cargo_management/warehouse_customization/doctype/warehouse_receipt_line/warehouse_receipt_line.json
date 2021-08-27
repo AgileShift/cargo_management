@@ -15,7 +15,7 @@
   "date",
   "description",
   "column_break_18",
-  "gross_weight",
+  "warehouse_est_weight",
   "dimmensions_section",
   "length",
   "column_break_12",
@@ -41,6 +41,7 @@
    "search_index": 1
   },
   {
+   "bold": 1,
    "columns": 1,
    "description": "Actual Date of Receipt provided by the warehouse (if available).",
    "fieldname": "date",
@@ -49,6 +50,7 @@
    "label": "Received Date"
   },
   {
+   "bold": 1,
    "columns": 1,
    "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
    "fetch_from": "package.carrier_real_delivery",
@@ -86,7 +88,7 @@
   {
    "fieldname": "section_break_6",
    "fieldtype": "Section Break",
-   "label": "Additional data from carrier"
+   "label": "Additional Data from Carrier"
   },
   {
    "fieldname": "column_break_8",
@@ -142,18 +144,9 @@
    "fieldtype": "Column Break"
   },
   {
-   "columns": 1,
-   "description": "Gross weight of the package as measured by the warehouse (if available).",
-   "fieldname": "gross_weight",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Gross Weight (in pounds)",
-   "non_negative": 1
-  },
-  {
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
-   "label": "Volumetric weight",
+   "label": "Volumetric Weight",
    "read_only": 1
   },
   {
@@ -162,6 +155,7 @@
   },
   {
    "columns": 1,
+   "description": "Internal reference code.",
    "fieldname": "wr_reference",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -175,11 +169,21 @@
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Description"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "description": "Estimated weight of the package as measured by the warehouse (if available).",
+   "fieldname": "warehouse_est_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Warehouse estimated weight (in pounds)",
+   "non_negative": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-08-27 11:17:50.732189",
+ "modified": "2021-08-27 14:56:25.353658",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

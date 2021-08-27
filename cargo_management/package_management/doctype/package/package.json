@@ -146,7 +146,7 @@
    "collapsible_depends_on": "easypost_id",
    "fieldname": "additional_data_from_carrier_section",
    "fieldtype": "Section Break",
-   "label": "Additional data from carrier"
+   "label": "Additional Data from Carrier"
   },
   {
    "bold": 1,
@@ -401,7 +401,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-08-10 23:29:31.007841",
+ "modified": "2021-08-27 14:56:30.537886",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

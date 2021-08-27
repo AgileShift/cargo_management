@@ -40,5 +40,10 @@ frappe.ui.form.on('Warehouse Receipt', {
         }// else {
             // frm.page.clear_actions_menu();  # TODO
         // }
+    },
+
+    before_save: function (frm) {
+        frm.set_value('warehouse_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'warehouse_est_weight'));
+        frm.set_value('carrier_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'carrier_est_weight'));
     }
 });

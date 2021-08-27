@@ -4,7 +4,6 @@
  "allow_rename": 1,
  "autoname": "field:reference",
  "creation": "2020-06-14 12:50:41.615167",
- "description": "Warehouse Receipt.",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -23,8 +22,9 @@
   "sb_0",
   "warehouse_receipt_lines",
   "additional_information_section",
-  "gross_weight",
-  "pieces",
+  "warehouse_est_gross_weight",
+  "column_break_16",
+  "carrier_est_gross_weight",
   "column_break_14",
   "volumetric_weight"
  ],
@@ -87,20 +87,13 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Departure date",
+   "label": "Departure Date",
    "read_only": 1
   },
   {
-   "description": "Count of pieces(boxes) provided by the warehouse (if available).",
-   "fieldname": "pieces",
-   "fieldtype": "Int",
-   "in_preview": 1,
-   "label": "Pieces"
-  },
-  {
-   "collapsible": 1,
    "fieldname": "sb_0",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Packages in Warehouse Receipt"
   },
   {
    "allow_bulk_edit": 1,
@@ -110,15 +103,9 @@
    "fieldtype": "Table",
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Packages in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
-  },
-  {
-   "fieldname": "gross_weight",
-   "fieldtype": "Float",
-   "label": "Total Gross Weight (in pounds)"
   },
   {
    "fieldname": "additional_information_section",
@@ -139,15 +126,14 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Opening Date"
+   "label": "Opening Date",
+   "reqd": 1
   },
   {
    "fieldname": "closing_date",
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "in_preview": 1,
-   "in_standard_filter": 1,
    "label": "Closing Date"
   },
   {
@@ -166,6 +152,28 @@
    "fieldtype": "Float",
    "in_preview": 1,
    "label": "Total Volumetric Weight"
+  },
+  {
+   "bold": 1,
+   "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
+   "fieldname": "carrier_est_gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Estimated Gross Weight by Carriers (in pounds)",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "description": "Estimated gross weight of the packages as measured by the warehouse (if available).",
+   "fieldname": "warehouse_est_gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Estimated Gross Weight by Warehouse (in pounds)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -185,7 +193,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-08-27 11:42:51.318734",
+ "modified": "2021-08-27 14:48:53.295799",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

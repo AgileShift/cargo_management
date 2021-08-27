@@ -3,16 +3,7 @@ import frappe
 
 
 class WarehouseReceipt(Document):
-    # TODO: Finalizar el peso por volumen y peso reportado de cada paquete
-    # TODO: Finalizar el peso por volumen y peso reportado global
-
-    # TODO: Pieces -> SUM of pieces of each package in warehouse receipt?
-    # TODO: Weight -> SUM of weight of each package in warehouse receipt?
-    """
-        TODO: Enable Doctype Quick Entry for Opening Date as now
-        If doctype "Quick Entry" and field "date" default value: "Now" its fails miserably:
-        https://github.com/frappe/frappe/issues/11001
-    """
+    # TODO: Finalizar el peso por volumen por paquete y global
 
     def on_update(self):
         """ Add the Warehouse Receipt to the Package Doc. This allow to have mutual reference WR to Pack """
