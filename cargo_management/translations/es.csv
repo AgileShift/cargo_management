@@ -81,6 +81,8 @@ Warehouse Receipt,Recibo de almacén
 Target Warehouse,Almacén de destino
 Warehouse where reception occurred.,Almacén donde se produjo la recepción.
 Packages in Warehouse Receipt,Paquetes en el recibo de almacén
+Estimated Gross Weight by Warehouse (in pounds),Peso Bruto estimado según el almacén (en libras)
+Estimated Gross Weight by Carriers (in pounds),Peso Bruto estimado según el transportista (en libras)
 
 Cargo Shipment,Envío de Carga
 Transportation type,Tipo de transporte

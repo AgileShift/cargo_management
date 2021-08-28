@@ -216,7 +216,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-08-10 23:18:16.523882",
+ "modified": "2021-08-27 17:04:49.971826",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -265,7 +265,7 @@
    "format": "{} Late",
    "label": "Arriving Late",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": \"Awaiting Receipt\",\n    \"carrier_est_delivery\": [\"Between\", [date.year_start(), date.add_days(undefined, -1)]]\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Receipt\",\n    \"carrier_est_delivery\": [\"Timespan\", \"this quarter\"]\n}",
    "type": "DocType"
   },
   {
@@ -274,7 +274,7 @@
    "format": "",
    "label": "Available for pickup at post office",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"=\", \"Awaiting Receipt\"],\n    \"carrier_status\": [\"=\", \"Available For Pickup\"]\n}",
+   "stats_filter": "{\n    \"status\": \"Awaiting Receipt\",\n    \"carrier_status\": \"Available For Pickup\"\n}",
    "type": "DocType"
   },
   {
@@ -300,7 +300,7 @@
    "format": "{} Pending",
    "label": "This week pending confirmation",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Confirmation\", \"In Extraordinary Confirmation\"]],\n    \"carrier_real_delivery\": [\"Timespan\",\"this week\"]\n}\n",
+   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Confirmation\", \"In Extraordinary Confirmation\"]],\n    \"carrier_real_delivery\": [\"Timespan\", \"this week\"]\n}",
    "type": "DocType"
   },
   {
@@ -309,7 +309,7 @@
    "format": "{} Pending",
    "label": "All pending confirmation",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Confirmation\", \"In Extraordinary Confirmation\"]],\n    \"carrier_status\": [\"in\", [\"Unknown\",\"Delivered\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Confirmation\", \"In Extraordinary Confirmation\"]]\n}",
    "type": "DocType"
   },
   {
@@ -334,7 +334,7 @@
    "format": "{} Ready",
    "label": "Available to Pickup",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"=\", \"Available to Pickup\"]\n}",
+   "stats_filter": "{\n    \"status\": \"Available to Pickup\"\n}",
    "type": "DocType"
   },
   {
@@ -343,7 +343,7 @@
    "format": "{} Returned",
    "label": "Returned to Sender",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"=\", \"Returned to Sender\"],\n    \"creation\": [\"Timespan\",\"last month\"]\n}",
+   "stats_filter": "{\n    \"status\": \"Returned to Sender\",\n    \"creation\": [\"Timespan\", \"last month\"]\n}",
    "type": "DocType"
   }
  ],

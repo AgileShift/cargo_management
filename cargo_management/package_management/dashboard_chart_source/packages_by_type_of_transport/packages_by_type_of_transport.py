@@ -36,9 +36,10 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
 
     chart = build_chart_data(chart=chart_config, no_cache=True)  # Fetching initial 'Sea' Chart
 
-    chart_config['name'], chart_config['filters_json'][0][3] = 'AIR', 'Air'  # Change config to 'Air'
+    chart_config['name'], chart_config['filters_json'][0][3] = 'AIR', 'Air'  # Change filter to 'Air'
+
     chart['datasets'].append(
-        build_chart_data(chart=chart_config, no_cache=True)['datasets'][0]  # append only data set to initial chart/
-    )  # Append directly
+        build_chart_data(chart=chart_config, no_cache=True)['datasets'][0]
+    ) # append only dataset
 
     return chart

@@ -1,0 +1,2 @@
+execute:frappe.delete_doc('Doctype', 'Competitor Rate', force=True)
+execute:frappe.delete_doc('Doctype', 'Competitor', force=True)

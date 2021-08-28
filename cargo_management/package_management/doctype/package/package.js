@@ -1,8 +1,8 @@
 function calculate_package_total(frm) {
-    let content_amount = frm.get_sum('content', 'amount');  // Using some built-in function: get_sum()
+    let content_amount = frm.get_sum('content', 'amount');
     frm.doc.total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_amount : content_amount;  // Calculate the 'total' field on Package Doctype(Parent)
 
-    frm.refresh_fields();  // Refresh all fields. FIXME: Maybe is not the better way..
+    frm.refresh_fields(); // FIXME: Maybe is not the better way..
 }
 
 function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
@@ -11,7 +11,7 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 
     content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in eddited row
 
-    calculate_package_total(frm); // Calculate the parent 'total' field and trigger events.
+    calculate_package_total(frm); // Calculate the parent 'total' field and trigger refresh event
 }
 
 // todo: MATCH the new and current fields! import_price for example
