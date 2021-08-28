@@ -181,15 +181,6 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
-   "label": "Competitor",
-   "link_to": "Competitor",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
    "icon": "buying",
    "is_query_report": 0,
    "label": "Buying",
@@ -216,7 +207,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-08-27 17:04:49.971826",
+ "modified": "2021-08-27 22:40:14.708680",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
