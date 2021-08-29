@@ -1,23 +1,17 @@
 import frappe
-from cargo_management.package_management.doctype.package.utils import get_list_from_child_table, change_status
+from cargo_management.utils import get_list_from_child_table, change_status
 from frappe import _
 
 
 @frappe.whitelist()
 def update_status(source_doc_name: str, new_status: str):
-    doc = frappe.get_doc('Cargo Shipment', source_doc_name)  # Getting the Cargo Shipment Doc.
+    doc = frappe.get_cached_doc('Cargo Shipment', source_doc_name)  # Getting the Cargo Shipment Doc from db
 
-    # FIXME: This is provisional, maybe we can add packages as a child table of Cargo Shipment
-    packages_in_warehouse_receipts = []
-    for cs_line in doc.get('cargo_shipment_lines'):  # This actual lines are references for Warehouse Receipt
-        wr = frappe.get_doc('Warehouse Receipt', cs_line.warehouse_receipt)  # Getting Warehouse Receipt
-
-        packages_in_warehouse_receipts.extend(
-            get_list_from_child_table(wr.warehouse_receipt_lines, 'package')  # Getting all package names from wr
-        )
+    wrs_in_cs = get_list_from_child_table(doc.cargo_shipment_lines, 'warehouse_receipt')
+    packages_in_cs = frappe.get_all('Warehouse Receipt Line', fields='package', filters={'parent': ['in', wrs_in_cs]}, pluck='package')
 
     change_status(docs_to_update={
         'Cargo Shipment': [doc.name],
-        'Warehouse Receipt': get_list_from_child_table(doc.get('cargo_shipment_lines'), 'warehouse_receipt'),
-        'Package': packages_in_warehouse_receipts
+        'Warehouse Receipt': wrs_in_cs,
+        'Package': packages_in_cs
     }, new_status=new_status, msg_title=_('Now in Transit'), mute_emails=doc.mute_emails)

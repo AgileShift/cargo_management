@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "creation": "2021-08-28 08:57:38.889312",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cargo_shipment",
+  "content"
+ ],
+ "fields": [
+  {
+   "fieldname": "cargo_shipment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cargo Shipment",
+   "options": "Cargo Shipment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Table",
+   "label": "Content",
+   "options": "Cargo Packing List Line"
+  }
+ ],
+ "hide_toolbar": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2021-08-28 09:05:06.639180",
+ "modified_by": "Administrator",
+ "module": "Shipment Customization",
+ "name": "Cargo Packing List",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Item Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Sales User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "All",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

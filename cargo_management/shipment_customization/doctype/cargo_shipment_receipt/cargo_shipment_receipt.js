@@ -1,5 +1,4 @@
 frappe.ui.form.on('Cargo Shipment Receipt', {
-
     // TODO: On Save set customer on the package that are not set!
     // TODO: Formatter for Package item?
 
@@ -68,7 +67,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
         frm.clear_table('cargo_shipment_receipt_lines');
 
         frappe.call({
-            method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.get_packages_and_wr_in_cargo_shipment',
+            method: 'cargo_management.shipment_customization.utils.get_packages_and_wr_in_cargo_shipment',
             args: {cargo_shipment: frm.doc.cargo_shipment},
             freeze: true,
             freeze_message: __('Adding Packages...'),
@@ -107,8 +106,8 @@ frappe.ui.form.on('Cargo Shipment Receipt Line', {
     // TODO: We should allow always customer to be read not read_only?
 
     // TODO: Add a button to trigger this info!
+    // TODO ADD Extra Info: Warehouse Weight, Carrier Weight, Gross Weight:
     gross_weight: function (frm) {
         frm.set_value('gross_weight', frm.get_sum('cargo_shipment_receipt_lines', 'gross_weight'));
     }
-
 });

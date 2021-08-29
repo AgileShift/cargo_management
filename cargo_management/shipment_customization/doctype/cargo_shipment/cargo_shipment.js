@@ -1,5 +1,4 @@
 frappe.ui.form.on('Cargo Shipment', {
-
     // TODO: Formatter for warehouse receipt item?
 
     onload: function(frm) {

@@ -1,12 +1,12 @@
 from collections import defaultdict
 
 import frappe
-from cargo_management.package_management.doctype.package.utils import get_list_from_child_table, change_status
+from cargo_management.utils import get_list_from_child_table, change_status
 
 
 @frappe.whitelist()
 def update_status(source_doc_name: str, new_status: str):
-    doc = frappe.get_doc('Cargo Shipment Receipt', source_doc_name)  # Getting the Cargo Shipment Receipt Doc.
+    doc = frappe.get_cached_doc('Cargo Shipment Receipt', source_doc_name)  # Getting the Cargo Shipment Receipt Doc
 
     # We Mark the actual child tables added to the parent, because we can dynamically add
     change_status(docs_to_update={
@@ -18,45 +18,9 @@ def update_status(source_doc_name: str, new_status: str):
 
 
 @frappe.whitelist()
-@frappe.read_only()
-def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
-    """ Get all packages and warehouse receipts connected to a cargo shipment. """
-
-    # Getting all warehouse receipt in a cargo shipment
-    wrs = [cs_line.warehouse_receipt for cs_line in
-           frappe.get_all('Cargo Shipment Line', fields='warehouse_receipt', filters={'parent': cargo_shipment}, order_by='idx')]
-
-    packages = frappe.db.sql(query="""
-        SELECT
-            p.name, p.customer_name, p.customer, p.carrier_est_weight,
-            GROUP_CONCAT(DISTINCT
-                pc.description,
-                '\nMonto: $', FORMAT(pc.amount, 2),
-                '\nCodigo: ', IFNULL(pc.item_code, '')
-                SEPARATOR '\n\n'  # TODO: Add total details from package
-            ) AS content,
-            p.total
-        FROM tabPackage p
-            LEFT JOIN `tabPackage Content` pc ON pc.parent = p.name
-            INNER JOIN `tabWarehouse Receipt Line` wrl ON wrl.package = p.name
-        WHERE wrl.parent IN %(warehouse_receipts)s
-        GROUP BY p.name
-        ORDER BY p.customer_name
-    """, values={
-        'warehouse_receipts': wrs
-    }, as_dict=True)
-
-    return {
-        'packages': packages,
-        'warehouse_receipts': wrs,
-    }
-
-
-@frappe.whitelist()
 def make_sales_invoice(doc):
-    # TODO: Crear facturas - Cada Invoice Item: debe de tener package
     # TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
-    # TODO: Set customer if not set!.
+    # TODO: Set customer if not set!
 
     """ Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
     doc = frappe.parse_json(doc)
