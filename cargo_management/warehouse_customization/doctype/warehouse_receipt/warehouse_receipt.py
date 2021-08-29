@@ -1,32 +1,35 @@
-from frappe.model.document import Document
 import frappe
+from cargo_management.utils import get_list_from_child_table
+from frappe.model.document import Document
 
 
 class WarehouseReceipt(Document):
-    # TODO: Finalizar el peso por volumen por paquete y global
 
     def on_update(self):
-        """ Add the Warehouse Receipt to the Package Doc. This allow to have mutual reference WR to Pack """
-        # TODO: Set only if is not set  ?
-        # TODO: What happens if deleted - It must be some sort of cleaning method?
+        """ Add Warehouse Receipt Link to the Package. This allow to have mutual reference WR to Package. """
+        # FIXME: If Warehouse Receipt is deleted, remove link from Package
+        # TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
 
-        for wr_line in self.warehouse_receipt_lines:
-            # TODO: Add: Warehouse -> Receipt Date & Weight
-            frappe.db.set_value('Package', wr_line.get('package'), 'warehouse_receipt', self.name, update_modified=False)
+        # We only set the warehouse_receipt if it is different
+        frappe.db.sql("""
+            UPDATE tabPackage
+            SET warehouse_receipt = %(wr_name)s
+            WHERE warehouse_receipt != %(wr_name)s AND `name` IN %(packages)s
+        """, {
+            'wr_name': self.name,
+            'packages': get_list_from_child_table(self.warehouse_receipt_lines, 'package')
+        })
 
     def change_status(self, new_status):
         """ Validates the current status of the warehouse receipt and change it if it's possible. """
         # TODO: Validate this when status is changed on Form-View or List-View
 
+        # TODO: FINISH
         if self.status != new_status and \
                 (self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
                 (self.status in ['Awaiting Departure', 'In Transit'] and new_status == 'Sorting') or \
                 (self.status in ['Awaiting Departure', 'In Transit', 'Sorting'] and new_status == 'Finished'):
-            # TODO: Finish
-            print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.reference))
-
             self.status = new_status
             return True
 
-        print('FALSE. Is {} was going to {}: {}'.format(self.status, new_status, self.reference))
         return False

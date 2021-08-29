@@ -172,4 +172,3 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
-//192 - 203

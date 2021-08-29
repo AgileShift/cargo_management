@@ -6,8 +6,6 @@ from .easypost_api import EasypostAPI, EasypostAPIError
 
 class Package(Document):
     """
-    Package Doctype: a Package ;)
-
     All this are set internally hardcoded. So we can trust in the origin.
     custom flags = {
         'ignore_validate':    Frappe Core Flag if is set avoid: before_validate(), validate() and before_save()
@@ -68,26 +66,24 @@ class Package(Document):
             frappe.get_value('Package Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])  # TODO Cache
 
     def change_status(self, new_status):
-        """ Validates the current status of the package and change it if it's possible. """
-        # TODO: Validate this when status is changed on Form-View or List-View
+        """
+        Validates the current status of the package and change it if it's possible.
 
-        # Use Cases?
         # Package was waiting for receipt, now is mark as delivered. waiting for confirmation.
         # Package was waiting for receipt or confirmation and now is waiting for the departure.
-        # Package was not received, and not confirmed, but has appear on the warehouse receipt list
+        # Package was not received and not confirmed, but has appear on the warehouse receipt.
+
+        # TODO: Validate this when status is changed on Form-View or List-View
+        """
 
         if self.status != new_status and \
                 (self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
                 (self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting'):
-            # TODO: Finish
-            print('TRUE . From {0}, To {1}: {2}'.format(self.status, new_status, self.tracking_number))
-
             self.status = new_status
             return True
 
-        print('FALSE. Is {} was going to {}: {}'.format(self.status, new_status, self.tracking_number))
         return False
 
     def get_explained_status(self):

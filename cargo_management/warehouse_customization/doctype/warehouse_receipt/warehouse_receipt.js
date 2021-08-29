@@ -32,7 +32,7 @@ frappe.ui.form.on('Warehouse Receipt', {
                     method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.update_status',
                     freeze: true,
                     args: {
-                        doc: frm.doc,
+                        source_doc_name: frm.doc.name,
                         new_status: 'Awaiting Departure'
                     }
                 });
@@ -43,6 +43,7 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     before_save: function (frm) {
+        // Calculate fields from child so can be saved from client-side
         frm.set_value('warehouse_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'warehouse_est_weight'));
         frm.set_value('carrier_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'carrier_est_weight'));
     }
