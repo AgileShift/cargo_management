@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_copy": 1,
  "creation": "2021-08-28 08:57:38.889312",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -27,7 +28,7 @@
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-08-28 09:05:06.639180",
+ "modified": "2021-08-29 18:34:58.501984",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Packing List",

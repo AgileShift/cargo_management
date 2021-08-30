@@ -26,9 +26,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
         ORDER BY p.customer_name
     """, values={
         'warehouse_receipts': wrs
-    }, as_dict=True, debug=True)
-
-    # print(packages)
+    }, as_dict=True)
 
     return {
         'packages': packages,

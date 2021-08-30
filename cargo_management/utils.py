@@ -4,7 +4,6 @@ def get_list_from_child_table(child_lines: list, field: str):
     """ This takes a List of Dicts [{}] and return a List of values. """
     return list(child_line.get(field) for child_line in child_lines)  # FIXME: Performance?
 
-
 def change_status(docs_to_update: dict, new_status: str = None, msg_title: str = '', mute_emails: bool = True):
     """
     This tries to update all docs statuses, no matter what doctype is.
