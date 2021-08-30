@@ -267,7 +267,7 @@
    "collapsible_depends_on": "eval: in_list(['Sorting', 'Available to Pickup'], doc.status)",
    "fieldname": "internal_data_section",
    "fieldtype": "Section Break",
-   "label": "Internal data"
+   "label": "Internal Data"
   },
   {
    "description": "Required to fetch data after an easypost tracking number is created.",
@@ -364,7 +364,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-08-27 15:30:19.258448",
+ "modified": "2021-08-29 19:49:02.020463",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

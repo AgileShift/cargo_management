@@ -5,19 +5,74 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "wr_reference"
+  "wr_reference",
+  "package",
+  "consignee",
+  "section_break_4",
+  "customer_description",
+  "column_break_5",
+  "warehouse_description",
+  "total"
  ],
  "fields": [
   {
+   "columns": 1,
+   "description": "Internal reference code.",
    "fieldname": "wr_reference",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "WR Reference"
+  },
+  {
+   "fieldname": "package",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Package"
+  },
+  {
+   "columns": 2,
+   "fieldname": "customer_description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Customer Description"
+  },
+  {
+   "columns": 2,
+   "description": "Package description provided by the warehouse (if available).",
+   "fieldname": "warehouse_description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Warehouse Description"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "columns": 1,
+   "description": "Total Declared Amount",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total",
+   "options": "USD"
+  },
+  {
+   "columns": 2,
+   "description": "Name on the package label.",
+   "fieldname": "consignee",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Consignee"
   }
  ],
- "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-08-28 09:02:33.767896",
+ "modified": "2021-08-29 19:50:52.201051",
  "modified_by": "Administrator",
  "module": "Shipment Customization",
  "name": "Cargo Packing List Line",

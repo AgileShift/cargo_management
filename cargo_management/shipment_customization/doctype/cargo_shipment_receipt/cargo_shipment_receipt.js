@@ -73,20 +73,14 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
             freeze_message: __('Adding Packages...'),
         }).then(r => {
 
-            // Adding All packages
             r.message.packages.forEach(package_doc => {
-                let content_notes = package_doc.content;
-                if (package_doc.total) { // Have a total value calculated
-                    content_notes += '\n\nTotal: $' + package_doc.total;
-                }
-
                 frm.add_child('cargo_shipment_receipt_lines', {
                     'package': package_doc.name,
                     // 'item_code': package_doc.item_code, TODO: This is not working, because the package can have more than once item code
                     'customer': package_doc.customer,
                     'customer_name': package_doc.customer_name,
                     'carrier_est_weight': package_doc.carrier_est_weight,
-                    'content': content_notes
+                    'content': package_doc.customer_description
                 });
             });
 
