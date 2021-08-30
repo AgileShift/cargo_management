@@ -60,7 +60,7 @@ class EasypostAPI:
         self.instance.status_detail = self.normalize_status(self.instance.status_detail)
 
         # In easypost weight comes in ounces, we convert to pounds.
-        self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else 0.00
+        self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else None
 
         # Normalize Dates. Some Carriers send the data in UTC others no
         self.instance.naive_est_delivery_date = self.naive_dt_to_local_dt(self.instance.est_delivery_date, self.carrier_uses_utc)

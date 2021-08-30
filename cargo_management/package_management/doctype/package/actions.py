@@ -10,7 +10,7 @@ def update_data_from_carrier(doc):
 
     # Verify if we can track, because .save() will update doc, even if we can't track. Then we would have to reload doc.
     if package.can_track():
-        package.flags.ignore_validate = True  # Set bypass flag ON. See Package Doctype flags. Go directly to track.
+        package.flags.requested_to_track = True  # Set bypass flag ON. See Package Doctype flags. Go directly to track.
         package.save()  # Trigger before_save() who checks for the bypass flag. We avoid revalidation checks.
 
     return {}  # FIX: To prevent reload_doc being called twice by: execute_action() called if using "Server Action"
