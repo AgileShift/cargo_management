@@ -145,6 +145,15 @@
   },
   {
    "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cargo Packing List",
+   "link_to": "Cargo Packing List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "icon": "sell",
    "is_query_report": 0,
    "label": "Selling",
@@ -207,7 +216,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-08-27 22:40:14.708680",
+ "modified": "2021-08-30 08:57:59.708804",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
