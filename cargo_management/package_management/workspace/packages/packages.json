@@ -91,7 +91,7 @@
   },
   {
    "hidden": 0,
-   "icon": "map",
+   "icon": "change",
    "is_query_report": 0,
    "label": "Warehouse",
    "link_type": "DocType",
@@ -214,9 +214,27 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "map",
+   "is_query_report": 0,
+   "label": "Delivery",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Delivery Trip",
+   "link_to": "Delivery Trip",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2021-08-30 08:57:59.708804",
+ "modified": "2021-08-30 15:57:08.015309",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
