@@ -20,7 +20,7 @@ frappe.ui.form.on('Cargo Shipment', {
         if (frm.doc.status === 'Awaiting Departure') {
             frm.page.add_action_item(__('Confirm Transit'), () => {
                 frappe.call({
-                    method: 'cargo_management.shipment_customization.doctype.cargo_shipment.actions.update_status',
+                    method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
                     freeze: true,
                     args: {
                         source_doc_name: frm.doc.name,
