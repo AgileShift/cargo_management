@@ -1,5 +1,5 @@
 import frappe
-from cargo_management.utils import get_list_from_child_table, change_status
+from cargo_management.utils import get_list_from_child_table, update_status_in_bulk
 from frappe import _
 
 
@@ -10,7 +10,7 @@ def update_status(source_doc_name: str, new_status: str):
     wrs_in_cs = get_list_from_child_table(doc.cargo_shipment_lines, 'warehouse_receipt')
     packages_in_cs = frappe.get_all('Warehouse Receipt Line', fields='package', filters={'parent': ['in', wrs_in_cs]}, pluck='package')
 
-    change_status(docs_to_update={
+    update_status_in_bulk(docs_to_update={
         'Cargo Shipment': [doc.name],
         'Warehouse Receipt': wrs_in_cs,
         'Package': packages_in_cs

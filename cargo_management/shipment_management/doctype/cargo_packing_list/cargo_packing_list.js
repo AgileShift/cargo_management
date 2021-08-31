@@ -14,7 +14,7 @@ frappe.ui.form.on('Cargo Packing List', {
 		frm.clear_table('content');
 
 		frappe.call({
-			method: 'cargo_management.shipment_customization.utils.get_packages_and_wr_in_cargo_shipment',
+			method: 'cargo_management.shipment_management.utils.get_packages_and_wr_in_cargo_shipment',
             args: {cargo_shipment: frm.doc.cargo_shipment},
             freeze: true,
             freeze_message: __('Adding Packages...'),

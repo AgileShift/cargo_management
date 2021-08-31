@@ -200,9 +200,9 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-04-05 13:49:59.762539",
+ "modified": "2021-08-31 13:37:50.838395",
  "modified_by": "Administrator",
- "module": "Shipment Customization",
+ "module": "Shipment Management",
  "name": "Cargo Shipment",
  "name_case": "UPPER CASE",
  "nsm_parent_field": "parent_shipment",

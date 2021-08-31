@@ -44,6 +44,11 @@ class Package(Document):
             self._request_data_from_easypost_api()
         # TODO: When track is recently set to active!
 
+    def load_carrier_flags(self):
+        """ Loads the carrier global flags settings handling the package in the flags of the Document. """
+        self.flags.carrier_can_track, self.flags.carrier_uses_utc = \
+            frappe.get_value('Package Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])  # TODO Cache
+
     def can_track(self):
         """ This def validate if a package can be tracked by any mean using any API, also loads the carrier flags. """
         # TODO: Validate if a tracker API is enabled.
@@ -59,11 +64,6 @@ class Package(Document):
             return False
 
         return True
-
-    def load_carrier_flags(self):
-        """ Loads the carrier global flags settings handling the package in the flags of the Document. """
-        self.flags.carrier_can_track, self.flags.carrier_uses_utc = \
-            frappe.get_value('Package Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])  # TODO Cache
 
     def change_status(self, new_status):
         """

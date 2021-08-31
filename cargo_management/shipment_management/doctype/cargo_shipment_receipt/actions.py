@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 import frappe
-from cargo_management.utils import get_list_from_child_table, change_status
+from cargo_management.utils import get_list_from_child_table, update_status_in_bulk
 
 
 @frappe.whitelist()
@@ -9,7 +9,7 @@ def update_status(source_doc_name: str, new_status: str):
     doc = frappe.get_cached_doc('Cargo Shipment Receipt', source_doc_name)  # Getting the Cargo Shipment Receipt Doc
 
     # We Mark the actual child tables added to the parent, because we can dynamically add
-    change_status(docs_to_update={
+    update_status_in_bulk(docs_to_update={
         'Cargo Shipment Receipt': [doc.name],
         'Cargo Shipment': [doc.cargo_shipment],
         'Warehouse Receipt': get_list_from_child_table(doc.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'),
