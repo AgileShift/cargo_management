@@ -13,26 +13,36 @@ Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext
   - Settings
 - Warehouse Receipt
 - Cargo Shipment
+- Cargo Packing List
 - Cargo Shipment Receipt
+- Delivery
 - Reports
 
 ### Customizations to Frappe and ERPNext:
-- Package can be link in Sales Order and Sales Invoice:
+- Package can be linked in Sales Order and Sales Invoice:
   - Sales Invoice are used to invoice for Logistic services and items related to Business
   - Sales Order are the only choice to make purchases online on behalf of the customer:
     - WORKING(We must link the sales order with the package and content, later we must invoice the order and service.)
-- Package can be link in Issue:
-  - WORKING(in the movement of the status)
+- Package can be linked in Issue:
+  - WORKING(on the change of status)
+- Delivery Trip and Delivery Stops:
+  - Delivery Stops Doctype is updated to match new requirements
+  - Print Format for Delivery Trip that prints Labels(Delivery Stops)
 
 ### Description
 This app allows you to track the packages sent by our customers to our warehouse.
+Invoice and deliver them.
 
 Currently we can track all carriers supported by the Tracking API Provider [EasyPost](https://www.easypost.com/carriers):
-- eg: DHL, UPS, USPS, FedEx, and more.
+* eg: DHL, UPS, USPS, FedEx, and more.
 
-The customizations allow us to invoice a **Customer** for the Logistic Services and Products in Stock offered;
-Link the **Sales Invoice** with a Package and update its statuses,
-All while using all the core functionalities from ERPNext like Accounting, Assets and Payroll.
+
+The customizations allow us to:
+- Invoice a **Customer** for the Logistic Services and Products in Stock offered.
+- Link the **Sales Invoice** with a Package and update its statuses.
+- Deliver the linked **Packages** in **Sales Invoice** using **Delivery Note** or Send them within **Delivery Trip**.
+
+All while using all the core functionalities from ERPNext like Accounting, Stock, HR, Assets, Payroll.
 
 ### Flow
 1. **Packages** are created and can be related to a specific customer
@@ -45,22 +55,34 @@ All while using all the core functionalities from ERPNext like Accounting, Asset
 5. **Cargo Shipment** is created to export Packages in bulk:
    1. Warehouse Receipts are added in them.
    2. Related information: Transportation Type, Departure date, Est Arrival Date, Dimensions, Gross Weight
+
+# WORKING on this flow
 6. **Cargo Shipment Receipt** is created to receive the Cargo Shipment:
    1. A Receipt loads the data of all related **Packages** in the **Cargo Shipment** through the **Warehouse Receipts**
    2. All **Packages** are sorted by **Customer**, and its the moment to set all related data to Create Invoices.
    3. When all the **Packages** have been processed, the **Sales Invoices** can be created.
-      1. One **Sales invoice** will be created per customer containing all his related **Packages**. 
+      1. A **Sales invoice** will be created for the customer, it will contain all the related **Packages**.
 7. WORKING
 
-## This is work in progres. But its stable for usage
-#### WORKING
-1. Packing Slip for customs
-2. Fetching data of prices and quotations from packages to Cargo Shipment Receipt
-3. Setting data of prices in CSR to Sales Invoice
-4. Working in the Sales Orders!
+
+#### Helpers
+- **Cargo Packing List**: is a "Packing List" for the **Cargo Shipment**:
+  1. Gets all the content declared by the **Customer** and the content declared by the **Warehouse** of the packages in a **Cargo Shipment**
+  2. It allows to modify the content and amount declared only for Print.
+  3. WORKING
+- A **Delivery Trip** its used when customer(s) request delivery of his **Packages**:
+  1. Each **Delivery Stop** has optional fields for new requirements
+  2. Allows printing **Delivery Stops** as labels.
+  3. WORKING
+  
+## This is work in progress. But it's stable for usage
+- WORKING
+  1. Packing Slip for customs:
+  2. Fetching data of prices and quotations from packages to Cargo Shipment Receipt: WORKING
+- FUTURE:
+  1. Setting data of prices in CSR to Sales Invoice
+  2. Working in the Sales Orders!
+
 
 ##### Code related TODO:
 1. Add custom Doctypes to Global Search: https://github.com/frappe/erpnext/pull/24055/files
-2. Rename Modules:
-   - Shipment Customization to Cargo Shipment Management
-   - Or find a better convention
