@@ -137,8 +137,6 @@ app_include_css = ["/assets/css/package-indicator.min.css"]
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
 
-# TODO: Add 'domains' this, can be useful. Like add default data
-
 global_search_doctypes = {
 	"Default": [
 		{"doctype": "Package"},
