@@ -43,7 +43,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
             if (frm.doc.status === 'Sorting') {
                 frm.add_custom_button(__('Sales Invoice'), () => {
                     frappe.call({
-                        method: 'cargo_management.shipment_customization.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
+                        method: 'cargo_management.shipment_management.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
                         args: {doc: frm.doc},
                         freeze: true,
                         freeze_message: __('Creating Sales Invoice...')

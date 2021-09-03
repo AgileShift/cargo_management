@@ -1,6 +1,6 @@
-## Cargo Management
+## ERPNext Cargo Management
 
-Package Tracker for Local Courrier Services.
+Package Tracker for Local Courier Services.
 
 Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext](https://github.com/frappe/erpnext) for a fully fledged ERP.
 
@@ -15,8 +15,12 @@ Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext
 - Cargo Shipment
 - Cargo Packing List
 - Cargo Shipment Receipt
-- Delivery
 - Reports
+
+### Extra Addons
+- [ERPNext Delivery Management](https://github.com/AgileShift/erpnext_delivery)
+- [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud)
+- Warehouse Management
 
 ### Customizations to Frappe and ERPNext:
 - Package can be linked in Sales Order and Sales Invoice:
@@ -25,9 +29,6 @@ Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext
     - WORKING(We must link the sales order with the package and content, later we must invoice the order and service.)
 - Package can be linked in Issue:
   - WORKING(on the change of status)
-- Delivery Trip and Delivery Stops:
-  - Delivery Stops Doctype is updated to match new requirements
-  - Print Format for Delivery Trip that prints Labels(Delivery Stops)
 
 ### Description
 This app allows you to track the packages sent by our customers to our warehouse.
@@ -36,11 +37,9 @@ Invoice and deliver them.
 Currently we can track all carriers supported by the Tracking API Provider [EasyPost](https://www.easypost.com/carriers):
 * eg: DHL, UPS, USPS, FedEx, and more.
 
-
 The customizations allow us to:
 - Invoice a **Customer** for the Logistic Services and Products in Stock offered.
 - Link the **Sales Invoice** with a Package and update its statuses.
-- Deliver the linked **Packages** in **Sales Invoice** using **Delivery Note** or Send them within **Delivery Trip**.
 
 All while using all the core functionalities from ERPNext like Accounting, Stock, HR, Assets, Payroll.
 
@@ -70,10 +69,6 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
   1. Gets all the content declared by the **Customer** and the content declared by the **Warehouse** of the packages in a **Cargo Shipment**
   2. It allows to modify the content and amount declared only for Print.
   3. WORKING
-- A **Delivery Trip** its used when customer(s) request delivery of his **Packages**:
-  1. Each **Delivery Stop** has optional fields for new requirements
-  2. Allows printing **Delivery Stops** as labels.
-  3. WORKING
   
 ## This is work in progress. But it's stable for usage
 - WORKING
@@ -86,3 +81,4 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
 
 ##### Code related TODO:
 1. Add custom Doctypes to Global Search: https://github.com/frappe/erpnext/pull/24055/files
+2. Migrate SQL to QueryBuilder? usign Pypika?
