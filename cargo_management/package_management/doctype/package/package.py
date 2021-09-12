@@ -8,8 +8,8 @@ class Package(Document):
     """
     All this are set internally hardcoded. So we can trust in the origin.
     custom flags = {
-        'ignore_validate':    Frappe Core Flag if is set avoid: before_validate(), validate() and before_save()
-        'requested_to_track': If Package was requested to be tracked we bypass all validations.
+        'ignore_validate':    Frappe Core Flag if is set avoid: validate() and before_save()
+        'requested_to_track': If Package was requested to be tracked we bypass validate() and track on before_save().
         'carrier_can_track':  Carrier can track in API. Comes from related Link to "Package Carrier" Doctype.
         'carrier_uses_utc':   Carrier uses UTC date times. Comes from related Link to "Package Carrier" Doctype.
     }
@@ -37,22 +37,28 @@ class Package(Document):
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
         if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
-            self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to be tracked.
-        elif self.has_value_changed('carrier') and self.can_track():  # Already exists and the carrier has changed.
+            self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to be tracked
+        elif not self.is_new() and self.has_value_changed('carrier') and self.can_track():  # Exists and carrier has changed
             frappe.msgprint(msg='Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
             self.easypost_id = None
             self._request_data_from_easypost_api()
         # TODO: When track is recently set to active!
 
+    def save(self, requested_to_track=None, ignore_validate=None, *args, **kwargs):
+        """ Override to add custom flags. """
+        self.flags.requested_to_track = requested_to_track
+        self.flags.ignore_validate = ignore_validate
+
+        return super(Package, self).save(*args, **kwargs)
+
     def load_carrier_flags(self):
         """ Loads the carrier global flags settings handling the package in the flags of the Document. """
         self.flags.carrier_can_track, self.flags.carrier_uses_utc = \
-            frappe.get_value('Package Carrier', filters=self.carrier, fieldname=['can_track', 'uses_utc'])  # TODO Cache
+            frappe.get_cached_value('Package Carrier', self.carrier, fieldname=['can_track', 'uses_utc'])
 
     def can_track(self):
         """ This def validate if a package can be tracked by any mean using any API, also loads the carrier flags. """
         # TODO: Validate if a tracker API is enabled.
-
         if not self.track:  # Package is not configured to be tracked, no matter if easypost_id exists.
             frappe.msgprint(msg=_('Package is configured not to track.'), indicator='yellow', alert=True)
             return False
@@ -212,14 +218,14 @@ class Package(Document):
             self.change_status('Awaiting Receipt')
 
         if instance.tracking_details:
-            latest_tracking_details = instance.tracking_details[-1]
+            last_detail = instance.tracking_details[-1]
 
-            self.carrier_last_detail = "{}\n\n{}\n\n{}".format(
-                latest_tracking_details.message,
-                latest_tracking_details.description or 'Without Description',
-                '{}, {}, {}'.format(  # TODO: Work this out!
-                    latest_tracking_details.tracking_location.city,
-                    latest_tracking_details.tracking_location.state or '',
-                    latest_tracking_details.tracking_location.zip or ''
+            self.carrier_last_detail = "<b>{status}</b> <br><br> {detail} <br><br> {location}".format(
+                status=last_detail.message,
+                detail=last_detail.description or 'Without Description',
+                location="{city}, {state}, {zip}".format(
+                    city=last_detail.tracking_location.city or '',
+                    state=last_detail.tracking_location.state or '',
+                    zip=last_detail.tracking_location.zip or ''
                 )
             )

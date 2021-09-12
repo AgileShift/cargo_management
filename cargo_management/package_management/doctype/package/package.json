@@ -198,7 +198,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "bold": 1,
    "fieldname": "carrier_last_detail",
    "fieldtype": "Small Text",
    "label": "Carrier last detail",
@@ -313,7 +312,8 @@
    "in_standard_filter": 1,
    "label": "Warehouse Receipt",
    "options": "Warehouse Receipt",
-   "read_only": 1
+   "read_only": 1,
+   "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -341,7 +341,8 @@
   {
    "group": "Warehouse",
    "link_doctype": "Warehouse Receipt",
-   "link_fieldname": "package"
+   "link_fieldname": "package",
+   "parent_doctype": "Warehouse Receipt"
   },
   {
    "group": "Cargo Shipment",
@@ -364,7 +365,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-08-29 19:49:02.020463",
+ "modified": "2021-09-10 22:26:35.587536",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

@@ -61,8 +61,10 @@ frappe.ui.form.on('Package', {
     },
 
     get_detailed_status_message: function (frm) {
-        frappe.call('cargo_management.package_management.doctype.package.actions.get_explained_status', {
-            source_name: frm.doc.name
+        frappe.call({
+            method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
+            type: 'GET',
+            args: {source_name: frm.doc.name}
         }).then(r => {
             if ($.isArray(r.message.message)) { // If there are multiple messages.
                 r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
@@ -76,6 +78,7 @@ frappe.ui.form.on('Package', {
     visit_carrier_detail_page: function (doc) {
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
+            type: 'GET',
             args: {carrier: doc.carrier},
             freeze: true,
             freeze_message: __('Opening detail page...'),
