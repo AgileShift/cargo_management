@@ -3,8 +3,7 @@ import frappe
 from cargo_management.package_management.doctype.package.actions import get_carrier_detail_page_url
 
 
-@frappe.whitelist(allow_guest=True)
-@frappe.read_only()
+@frappe.whitelist(allow_guest=True, methods='GET')
 def get_package_for_customer_query(tracking_number: str):
     """ Returns the package details if was able to find it! """
 

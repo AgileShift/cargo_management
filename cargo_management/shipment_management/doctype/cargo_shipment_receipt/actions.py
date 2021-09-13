@@ -4,7 +4,7 @@ import frappe
 from cargo_management.utils import get_list_from_child_table, update_status_in_bulk
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods='POST')
 def update_status(source_doc_name: str, new_status: str):
     doc = frappe.get_cached_doc('Cargo Shipment Receipt', source_doc_name)  # Getting the Cargo Shipment Receipt Doc
 
@@ -17,7 +17,7 @@ def update_status(source_doc_name: str, new_status: str):
     }, new_status=new_status, msg_title='Marked as Sorting', mute_emails=doc.mute_emails)
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods='POST')
 def make_sales_invoice(doc):
     # TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
     # TODO: Set customer if not set!

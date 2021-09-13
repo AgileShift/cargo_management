@@ -1,13 +1,13 @@
 import frappe
 
 
-@frappe.whitelist()
-@frappe.read_only()
+@frappe.whitelist(methods='GET')
 def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
     """ Get all packages and warehouse receipts connected to a cargo shipment. """
 
     wrs = frappe.get_all('Cargo Shipment Line', fields='warehouse_receipt', filters={'parent': cargo_shipment}, order_by='idx', pluck='warehouse_receipt')
 
+    # TODO: WORKING
     packages = frappe.db.sql("""
         SELECT
             p.name, p.customer, p.customer_name, p.carrier_est_weight, p.total,
@@ -27,9 +27,6 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
     """, {
         'warehouse_receipts': wrs
     }, as_dict=True)
-
-    print(wrs)
-    print(packages[0])
 
     return {
         'packages': packages,

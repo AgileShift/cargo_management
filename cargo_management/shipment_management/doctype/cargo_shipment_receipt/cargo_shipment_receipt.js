@@ -68,6 +68,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 
         frappe.call({
             method: 'cargo_management.shipment_management.utils.get_packages_and_wr_in_cargo_shipment',
+            type: 'GET',
             args: {cargo_shipment: frm.doc.cargo_shipment},
             freeze: true,
             freeze_message: __('Adding Packages...'),

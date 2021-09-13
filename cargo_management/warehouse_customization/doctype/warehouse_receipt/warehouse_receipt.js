@@ -37,9 +37,7 @@ frappe.ui.form.on('Warehouse Receipt', {
                     }
                 });
             });
-        }// else {
-            // frm.page.clear_actions_menu();  # TODO
-        // }
+        }
     },
 
     before_save: function (frm) {

@@ -3,7 +3,7 @@ from cargo_management.utils import get_list_from_child_table, update_status_in_b
 from frappe import _
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods='POST')
 def update_status(source_doc_name: str, new_status: str):
     doc = frappe.get_cached_doc('Cargo Shipment', source_doc_name)  # Getting the Cargo Shipment Doc from db
 

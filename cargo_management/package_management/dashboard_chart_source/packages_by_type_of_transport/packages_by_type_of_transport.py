@@ -2,7 +2,7 @@ import frappe
 from frappe.desk.doctype.dashboard_chart.dashboard_chart import get as build_chart_data
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods='POST')
 def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None, to_date=None, timespan=None,
         time_interval=None, heatmap_year=None, refresh=None):
     """ Custom Chart using core Dashboard Chart Data.
@@ -38,8 +38,6 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
 
     chart_config['name'], chart_config['filters_json'][0][3] = 'AIR', 'Air'  # Change filter to 'Air'
 
-    chart['datasets'].append(
-        build_chart_data(chart=chart_config, no_cache=True)['datasets'][0]
-    ) # append only dataset
+    chart['datasets'].append(build_chart_data(chart=chart_config, no_cache=True)['datasets'][0])  # append only dataset
 
     return chart

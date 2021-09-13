@@ -10,11 +10,11 @@ class WarehouseReceipt(Document):
         # FIXME: If Warehouse Receipt is deleted, remove link from Package
         # TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
 
-        # We only set the warehouse_receipt if it is different
+        # We only change the warehouse_receipt field if it is different from current.
         frappe.db.sql("""
             UPDATE tabPackage
             SET warehouse_receipt = %(wr_name)s
-            WHERE warehouse_receipt != %(wr_name)s AND `name` IN %(packages)s
+            WHERE `name` IN %(packages)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s 
         """, {
             'wr_name': self.name,
             'packages': get_list_from_child_table(self.warehouse_receipt_lines, 'package')

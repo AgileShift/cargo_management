@@ -25,7 +25,7 @@ frappe.ui.form.on('Cargo Shipment', {
                     args: {
                         source_doc_name: frm.doc.name,
                         new_status: 'In Transit'
-                    }
+                    } // TODO: Refresh DOC in callback
                 });
             });
         } else {

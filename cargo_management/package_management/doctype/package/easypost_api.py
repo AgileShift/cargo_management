@@ -99,7 +99,7 @@ class EasypostAPI:
         return status.replace('_', ' ').title()  # We dont override if the data is empty.
 
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist(allow_guest=True, methods='POST')
 def easypost_webhook(**kwargs):
     """ POST To: {URL}/api/method/cargo_management.package_management.doctype.package.easypost_api.easypost_webhook """
     if kwargs['description'] != 'tracker.updated':

@@ -13,17 +13,6 @@ def update_data_from_carrier(doc):
         return package.save(requested_to_track=True, ignore_permissions=True)
 
 
-# @frappe.whitelist()
-# def update_data_from_carrier_bulk(names):
-# TODO: FINISH
-# names = frappe.parse_json(names)
-
-# for name in names:
-#     update_data_from_carrier({
-#         'name': name
-#     })
-
-
 @frappe.whitelist(methods='GET')
 def get_carrier_detail_page_url(carrier: str):
     """ Util: Return the carrier detail page URL to append to a tracking number. Used in a Form Action Button """

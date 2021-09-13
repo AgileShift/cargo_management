@@ -3,7 +3,7 @@ from cargo_management.utils import get_list_from_child_table, update_status_in_b
 from frappe import _
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods='POST')
 def update_status(source_doc_name: str, new_status: str):
     # It is more safe to get the doc from db that receive it from client-side as param
     doc = frappe.get_cached_doc('Warehouse Receipt', source_doc_name)  # Getting the Warehouse Receipt Doc from db
