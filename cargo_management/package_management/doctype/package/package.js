@@ -88,6 +88,7 @@ frappe.ui.form.on('Package', {
         });
     },
 
+    //https://github.com/frappe/frappe/pull/12471 and https://github.com/frappe/frappe/pull/14181/files
     sales_order_dialog: function (frm) {
         const so_dialog = new frappe.ui.form.MultiSelectDialog({
             doctype: 'Sales Order',
