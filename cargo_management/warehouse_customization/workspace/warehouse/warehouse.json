@@ -1,0 +1,78 @@
+{
+ "category": "Domains",
+ "charts": [],
+ "creation": "2021-09-29 17:18:41.959085",
+ "developer_mode_only": 0,
+ "disable_user_customization": 1,
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "icon": "change",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "Warehouse",
+ "links": [
+  {
+   "hidden": 0,
+   "icon": "change",
+   "is_query_report": 0,
+   "label": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse",
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse Receipt",
+   "link_to": "Warehouse Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2021-09-29 18:05:49.422651",
+ "modified_by": "Administrator",
+ "module": "Warehouse Customization",
+ "name": "Warehouse",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "New",
+   "label": "New Warehouse Receipt",
+   "link_to": "Warehouse Receipt",
+   "type": "DocType"
+  },
+  {
+   "color": "orange",
+   "doc_view": "List",
+   "format": "",
+   "label": "WRs Awaiting Departure",
+   "link_to": "Warehouse Receipt",
+   "stats_filter": "{\n    \"status\": \"Awaiting Departure\"\n}",
+   "type": "DocType"
+  },
+  {
+   "color": "orange",
+   "doc_view": "List",
+   "format": "",
+   "label": "WRs In Transit",
+   "link_to": "Warehouse Receipt",
+   "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
+   "type": "DocType"
+  }
+ ]
+}

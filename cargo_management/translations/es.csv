@@ -52,14 +52,14 @@ Quantity of packages in shipment.,Cantidad de paquetes en el envío.
 Visit carrier detail page,Visitar página de detalles del transportista
 Update data from carrier,Actualizar datos del transportista
 
-All active packages,Todos los paquetes activos
+Active packages,Paquetes activos
 Without carrier data,Sin datos del transportista
 Arriving today,Llegando hoy
 Arrived today,Llegaron hoy
 Arriving Late,Llegando tarde
 Available for pickup at post office,Disponible para recoger en la oficina postal
 This week pending confirmation,Pendientes de confirmación de esta semana
-All pending confirmation,Todos los pendientes de confirmación
+Pending confirmation,Pendientes de confirmación
 
 Package is configured not to track.,El paquete está configurado para no rastrear.
 Package is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.

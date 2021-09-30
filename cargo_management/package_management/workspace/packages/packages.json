@@ -234,7 +234,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-08-30 15:57:08.015309",
+ "modified": "2021-09-29 17:24:17.462322",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -245,7 +245,7 @@
   {
    "color": "lightblue",
    "doc_view": "List",
-   "label": "All active packages",
+   "label": "Active packages",
    "link_to": "Package",
    "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Receipt\", \"Awaiting Confirmation\", \"Awaiting Departure\", \"In Transit\", \"In Customs\", \"Sorting\"]]\n}",
    "type": "DocType"
@@ -325,7 +325,7 @@
    "color": "orange",
    "doc_view": "List",
    "format": "{} Pending",
-   "label": "All pending confirmation",
+   "label": "Pending confirmation",
    "link_to": "Package",
    "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Confirmation\", \"In Extraordinary Confirmation\"]]\n}",
    "type": "DocType"
