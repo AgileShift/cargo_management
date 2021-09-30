@@ -24,17 +24,15 @@ frappe.listview_settings['Package'] = {
         return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
     },
 
-    // onload: function (listview) {
-    //     listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
-            // TODO FINISH.... This is work in progress
-            // Bulk Dialog - should sent email if status is changed?
-            // Bulk show_progress. This actually reloads the form? if so. how many times?
-            // listview.call_for_selected_items(
-            //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
-            // );
-        // })
-    // },
-
+    formatters: {
+        transportation_type(val) {
+            let color = (val === 'Sea') ? 'blue' : 'red';
+            return `<span class="indicator-pill ${color} filterable ellipsis"
+                data-filter="transportation_type,=,${frappe.utils.escape_html(val)}">
+				<span class="ellipsis"> ${val} </span>
+			<span>`;
+        }
+    },
     button: {
         show(doc) {
             return doc.name;
@@ -58,4 +56,15 @@ frappe.listview_settings['Package'] = {
             });
         },
     },
+
+    // onload: function (listview) {
+    //     listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
+            // TODO FINISH.... This is work in progress
+            // Bulk Dialog - should sent email if status is changed?
+            // Bulk show_progress. This actually reloads the form? if so. how many times?
+            // listview.call_for_selected_items(
+            //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
+            // );
+        // })
+    // },
 }
