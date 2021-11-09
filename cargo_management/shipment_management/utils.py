@@ -14,8 +14,8 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
             GROUP_CONCAT(DISTINCT
                 pc.description,
                 '\nMonto: $', FORMAT(pc.amount, 2),
-                '\nCodigo: ', IFNULL(pc.item_code, '')
-                '\nTarifa: ', FORMAT(pc.import_rate, 2)
+                '\nCodigo: ', IFNULL(pc.item_code, ''),
+                '\nTarifa: ', FORMAT(pc.import_rate, 2),
                 '\nNotas: ', IFNULL(p.notes, '')
                 SEPARATOR '\n\n'
             ) AS customer_description,
