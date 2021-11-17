@@ -234,7 +234,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-09-29 17:24:17.462322",
+ "modified": "2021-11-17 10:48:24.625807",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -352,7 +352,7 @@
    "format": "{} Ready",
    "label": "Available to Pickup",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": \"Available to Pickup\"\n}",
+   "stats_filter": "{\n    \"status\": [\"in\", [\"Sorting\", \"To Bill\", \"Unpaid\", \"To Deliver Or Pickup\"]]\n}",
    "type": "DocType"
   },
   {

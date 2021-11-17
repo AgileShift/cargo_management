@@ -86,7 +86,8 @@ class Package(Document):
                 (self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
                 (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
                 (self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
-                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting'):
+                (self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting') or \
+                (self.status not in ['Unpaid', 'To Deliver Or Pickup', 'Finished'] and new_status == 'To Bill'):
             self.status = new_status
             return True
 

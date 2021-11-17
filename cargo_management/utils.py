@@ -1,14 +1,16 @@
 import frappe
 
+
 def get_list_from_child_table(child_lines: list, field: str):
     """ This takes a List of Dicts [{}] and return a List of values. """
     return list(child_line.get(field) for child_line in child_lines)  # FIXME: Performance?
+
 
 def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_title: str = '', mute_emails: bool = True):
     """
     This tries to update all docs statuses, no matter what doctype is.
 
-    @param docs_to_update: {'Doctype': [doc_names] or {'doc_names': [doc_names], 'new_status': 'string' } }
+    @param docs_to_update: {'Doctype': [names] } or { 'Doctype': {'doc_names': [names], 'new_status': 'string' } }
     @param new_status: str. To be used in doctypes where new status was not explicitly declared in docs_to_update dict
     @param msg_title: str. Title for the dialog
     @param mute_emails: bool. This activate or deactivates notifications on backend. True if not sent

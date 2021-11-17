@@ -16,7 +16,8 @@ class CargoShipmentReceipt(Document):
 
 		# TODO: Finish
 		if self.status != new_status and \
-				(self.status == 'Awaiting Receipt' and new_status == 'Sorting'):
+				(self.status == 'Awaiting Receipt' and new_status == 'Sorting') or \
+				(self.status == 'Sorting' and new_status =='Finished'):
 			self.status = new_status
 			return True
 

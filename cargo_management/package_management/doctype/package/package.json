@@ -116,7 +116,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Awaiting Receipt\nAwaiting Confirmation\nIn Extraordinary Confirmation\nAwaiting Departure\nIn Transit\nIn Customs\nSorting\nAvailable to Pickup\nFinished\nCancelled\nNever Arrived\nReturned to Sender\nfully_refunded\npartially_refunded\non_hold\nin_matra_int\nin_matra_img",
+   "options": "Awaiting Receipt\nAwaiting Confirmation\nIn Extraordinary Confirmation\nAwaiting Departure\nIn Transit\nIn Customs\nSorting\nTo Bill\nUnpaid\nTo Deliver or Pickup\nFinished\nCancelled\nNever Arrived\nReturned to Sender",
    "search_index": 1
   },
   {
@@ -365,7 +365,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-09-30 14:43:40.573167",
+ "modified": "2021-11-17 10:46:14.694238",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

@@ -21,7 +21,8 @@ class CargoShipment(Document):
         # TODO: Finish
         if self.status != new_status and \
                 (self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
-                (self.status in ['Awaiting Departure', 'In Transit'] and new_status == 'Sorting'):
+                (self.status in ['Awaiting Departure', 'In Transit'] and new_status == 'Sorting') or \
+                (self.status == 'Sorting' and new_status =='Finished'):
             self.status = new_status
             return True
 

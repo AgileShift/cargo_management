@@ -1,7 +1,7 @@
 frappe.listview_settings['Package'] = {
     add_fields: ['status', 'carrier'],
     filters: [
-        ['status', 'not in', ['Finished', 'Cancelled', 'Returned to Sender', 'fully_refunded']],
+        ['status', 'not in', ['Finished', 'Cancelled', 'Returned to Sender']],
     ],
     hide_name_column: true,
 
@@ -14,7 +14,9 @@ frappe.listview_settings['Package'] = {
             'In Transit': 'purple',
             'In Customs': 'gray',
             'Sorting': 'yellow',
-            'Available to Pickup': 'blue',
+            'To Bill': 'orange',
+            'Unpaid': 'red',
+            'To Deliver or Pickup': 'blue',
             'Finished': 'green',
             'Cancelled': 'darkgrey',
             'Never Arrived': 'red',
