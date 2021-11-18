@@ -87,7 +87,7 @@ app_include_css = ["/assets/css/package-indicator.min.css"]
 
 doc_events = {
 	"Sales Invoice": {
-		"on_update": "cargo_management.sales_customization.utils.sales_invoice_on_submit"
+		"on_submit": "cargo_management.sales_customization.utils.sales_invoice_on_submit"
 	}
 }
 
