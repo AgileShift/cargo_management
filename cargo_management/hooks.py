@@ -85,13 +85,11 @@ app_include_css = ["/assets/css/package-indicator.min.css"]
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Sales Invoice": {
+		"on_update": "cargo_management.sales_customization.utils.sales_invoice_on_submit"
+	}
+}
 
 # Scheduled Tasks
 # ---------------

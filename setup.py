@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
 with open('requirements.txt') as f:
@@ -10,7 +9,7 @@ from cargo_management import __version__ as version
 setup(
     name='cargo_management',
     version=version,
-    description='Track Packages across multiple carriers.',
+    description='Package Tracker for Local Courier Services.',
     author='Agile Shift',
     author_email='contacto@gruporeal.org',
     packages=find_packages(),
