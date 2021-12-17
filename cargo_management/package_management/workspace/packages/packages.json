@@ -234,7 +234,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-11-17 10:48:24.625807",
+ "modified": "2021-12-16 19:02:21.587217",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -247,7 +247,7 @@
    "doc_view": "List",
    "label": "Active packages",
    "link_to": "Package",
-   "stats_filter": "{\n    \"status\": [\"in\", [\"Awaiting Receipt\", \"Awaiting Confirmation\", \"Awaiting Departure\", \"In Transit\", \"In Customs\", \"Sorting\"]]\n}",
+   "stats_filter": "{\n    \"status\": [\"not in\", [\"Finished\", \"Cancelled\", \"Never Arrived\", \"Returned to Sender\"]]\n}",
    "type": "DocType"
   },
   {
