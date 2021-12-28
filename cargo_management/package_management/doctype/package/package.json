@@ -304,13 +304,12 @@
   {
    "bold": 1,
    "fieldname": "warehouse_receipt",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Warehouse Receipt",
-   "options": "Warehouse Receipt",
    "read_only": 1,
    "search_index": 1
   },
@@ -365,7 +364,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-11-17 10:46:14.694238",
+ "modified": "2021-12-28 09:17:30.594890",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

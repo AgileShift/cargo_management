@@ -28,7 +28,7 @@
    "dependencies": "Package",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Arriving Late",
+   "label": "Packages Arriving Late",
    "link_to": "Arriving Late",
    "link_type": "Report",
    "onboard": 1,
@@ -38,7 +38,7 @@
    "dependencies": "Package",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Awaiting Confirmation",
+   "label": "Packages Awaiting Confirmation",
    "link_to": "Awaiting Confirmation",
    "link_type": "Report",
    "onboard": 1,
@@ -234,7 +234,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-12-16 19:02:21.587217",
+ "modified": "2021-12-28 08:36:46.561749",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",

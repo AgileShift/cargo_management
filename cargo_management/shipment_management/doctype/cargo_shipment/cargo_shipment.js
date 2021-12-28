@@ -2,11 +2,12 @@ frappe.ui.form.on('Cargo Shipment', {
     // TODO: Formatter for warehouse receipt item?
 
     onload: function(frm) {
-        frm.set_query('cargo_shipment_lines', () => {
-            return {
-                filters: {status: 'Awaiting Departure'}
-            }
-        });
+        // Only packages on Warehouse Receipt
+        // frm.set_query('package', 'cargo_shipment_lines', () => {
+        //     return {
+        //         filters: {status: 'Awaiting Departure'}
+        //     }
+        // });
     },
 
     refresh: function(frm) {
