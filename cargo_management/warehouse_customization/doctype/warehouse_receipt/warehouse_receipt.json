@@ -2,15 +2,12 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:reference",
  "creation": "2020-06-14 12:50:41.615167",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "reference",
-  "target_warehouse",
-  "mute_emails",
+  "transportation_type",
   "column_break_3",
   "status",
   "section_break_7",
@@ -19,6 +16,10 @@
   "closing_date",
   "column_break_10",
   "departure_date",
+  "section_break_10",
+  "shipper",
+  "column_break_12",
+  "consignee",
   "sb_0",
   "warehouse_receipt_lines",
   "additional_information_section",
@@ -26,21 +27,10 @@
   "column_break_16",
   "carrier_est_gross_weight",
   "column_break_14",
-  "volumetric_weight"
+  "volumetric_weight",
+  "target_warehouse"
  ],
  "fields": [
-  {
-   "allow_in_quick_entry": 1,
-   "bold": 1,
-   "description": "Internal reference code.",
-   "fieldname": "reference",
-   "fieldtype": "Data",
-   "in_global_search": 1,
-   "in_list_view": 1,
-   "label": "Reference",
-   "reqd": 1,
-   "unique": 1
-  },
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
@@ -64,15 +54,7 @@
    "in_standard_filter": 1,
    "label": "Target Warehouse",
    "options": "Warehouse",
-   "reqd": 1,
    "search_index": 1
-  },
-  {
-   "default": "1",
-   "fieldname": "mute_emails",
-   "fieldtype": "Check",
-   "label": "Don't Send Emails",
-   "print_hide": 1
   },
   {
    "fieldname": "column_break_3",
@@ -91,8 +73,7 @@
   },
   {
    "fieldname": "sb_0",
-   "fieldtype": "Section Break",
-   "label": "Packages in Warehouse Receipt"
+   "fieldtype": "Section Break"
   },
   {
    "allow_bulk_edit": 1,
@@ -100,6 +81,7 @@
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table",
    "in_preview": 1,
+   "label": "Packages in Warehouse Receipt",
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
@@ -111,14 +93,14 @@
   },
   {
    "fieldname": "section_break_7",
-   "fieldtype": "Section Break",
-   "label": "Logistic Dates"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_8",
    "fieldtype": "Column Break"
   },
   {
+   "default": "now",
    "fieldname": "opening_date",
    "fieldtype": "Datetime",
    "in_list_view": 1,
@@ -169,6 +151,33 @@
   {
    "fieldname": "column_break_16",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transportation_type",
+   "fieldtype": "Select",
+   "label": "Transportation Type",
+   "options": "Sea\nAir"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "consignee",
+   "fieldtype": "Link",
+   "label": "Consignee",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shipper",
+   "fieldtype": "Link",
+   "label": "Shipper",
+   "options": "Brand"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -188,7 +197,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-08-31 15:47:50.780266",
+ "modified": "2021-12-27 17:30:29.294857",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
@@ -246,6 +255,5 @@
  "show_preview_popup": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "reference",
  "track_changes": 1
 }

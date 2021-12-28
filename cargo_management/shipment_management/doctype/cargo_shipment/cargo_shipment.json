@@ -10,8 +10,9 @@
  "engine": "InnoDB",
  "field_order": [
   "reference",
-  "transportation_type",
   "mute_emails",
+  "column_break_2",
+  "transportation_type",
   "column_break_4",
   "status",
   "data_6",
@@ -29,10 +30,13 @@
   "section_break_8",
   "gross_weight",
   "column_break_12",
-  "volumetric_weight",
   "pieces",
   "sb_0",
-  "cargo_shipment_lines"
+  "cargo_shipment_lines",
+  "additional_information_section",
+  "estimated_gross_weight_by_warehouse_in_pounds",
+  "estimated_gross_weight_by_carriers_in_pounds",
+  "volumetric_weight"
  ],
  "fields": [
   {
@@ -113,10 +117,10 @@
   {
    "allow_in_quick_entry": 1,
    "fieldname": "cargo_shipment_lines",
-   "fieldtype": "Table MultiSelect",
+   "fieldtype": "Table",
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Warehouse Receipts in Cargo Shipment",
+   "label": "Packing List",
    "options": "Cargo Shipment Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
@@ -144,15 +148,18 @@
    "label": "Gross Weight"
   },
   {
+   "default": "0.00",
+   "description": "Weight in pounds provided by the warehouse (if available).",
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
-   "label": "Volumetric Weight",
+   "in_preview": 1,
+   "label": "Total Volumetric Weight",
    "read_only": 1
   },
   {
    "fieldname": "dimensions_section",
    "fieldtype": "Section Break",
-   "label": "Dimensions"
+   "label": "Dimensions - por cada bulto"
   },
   {
    "fieldname": "length",
@@ -192,6 +199,31 @@
    "fieldname": "height",
    "fieldtype": "Float",
    "label": "Height (cm)"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "additional_information_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "bold": 1,
+   "description": "Estimated gross weight of the packages as measured by the warehouse (if available).",
+   "fieldname": "estimated_gross_weight_by_warehouse_in_pounds",
+   "fieldtype": "Float",
+   "label": "Estimated Gross Weight by Warehouse (in pounds)",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
+   "fieldname": "estimated_gross_weight_by_carriers_in_pounds",
+   "fieldtype": "Float",
+   "label": "Estimated Gross Weight by Carriers (in pounds)",
+   "read_only": 1
   }
  ],
  "links": [
@@ -200,7 +232,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-08-31 13:37:50.838395",
+ "modified": "2021-12-28 07:33:24.607960",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

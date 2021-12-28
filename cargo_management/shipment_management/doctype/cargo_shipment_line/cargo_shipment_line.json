@@ -5,10 +5,34 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "warehouse_receipt"
+  "warehouse_receipt",
+  "package",
+  "section_break_3",
+  "customer",
+  "column_break_5",
+  "customer_name",
+  "warehouse_details_section",
+  "received_date",
+  "description",
+  "column_break_9",
+  "warehouse_est_weight",
+  "type",
+  "carrier",
+  "dimensions_section",
+  "length",
+  "column_break_16",
+  "width",
+  "volumetric_weight",
+  "column_break_18",
+  "height",
+  "additional_data_from_carrier_section",
+  "carrier_real_delivery",
+  "column_break_22",
+  "carrier_est_weight"
  ],
  "fields": [
   {
+   "columns": 1,
    "fieldname": "warehouse_receipt",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -17,11 +41,173 @@
    "options": "Warehouse Receipt",
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Box\nEnvelope\nPallet"
+  },
+  {
+   "columns": 1,
+   "fieldname": "carrier",
+   "fieldtype": "Select",
+   "label": "Carrier",
+   "options": "Amazon\nUSPS\nUPS\nFedEx\nDHL\nLaserShip\nDrop Off\nPick Up",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "description": "Package description provided by the warehouse (if available).",
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Description"
+  },
+  {
+   "columns": 1,
+   "fieldname": "package",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Package",
+   "options": "Package",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "package.customer",
+   "fetch_if_empty": 1,
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "print_hide": 1,
+   "search_index": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "package.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse_details_section",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Details"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "default": "Today",
+   "description": "Actual Date of Receipt provided by the warehouse (if available).",
+   "fieldname": "received_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Received Date"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "description": "Estimated weight of the package as measured by the warehouse (if available).",
+   "fieldname": "warehouse_est_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Warehouse estimated weight (in pounds)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "label": "Length (cm)",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "label": "Width (cm)",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "label": "Height (cm)",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "additional_data_from_carrier_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Data from Carrier"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
+   "fetch_from": "package.carrier_real_delivery",
+   "fetch_if_empty": 1,
+   "fieldname": "carrier_real_delivery",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Carrier real delivery date",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "description": "Estimated weight of the package as measured by the carrier (if available).",
+   "fetch_from": "package.carrier_est_weight",
+   "fetch_if_empty": 1,
+   "fieldname": "carrier_est_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Carrier estimated weight (in pounds)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Dimensions"
+  },
+  {
+   "fieldname": "volumetric_weight",
+   "fieldtype": "Float",
+   "label": "Volumetric Weight",
+   "print_hide_if_no_value": 1,
+   "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-08-31 13:38:24.099411",
+ "modified": "2021-12-28 07:09:00.678906",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Line",
