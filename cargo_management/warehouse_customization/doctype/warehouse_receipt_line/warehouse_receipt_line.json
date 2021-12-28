@@ -5,7 +5,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "wr_reference",
+  "type",
+  "carrier",
   "package",
   "section_break_1",
   "customer",
@@ -15,7 +16,6 @@
   "received_date",
   "description",
   "column_break_18",
-  "warehouse_est_weight",
   "dimmensions_section",
   "length",
   "column_break_12",
@@ -23,14 +23,16 @@
   "volumetric_weight",
   "column_break_14",
   "height",
+  "warehouse_est_weight",
   "section_break_6",
   "carrier_real_delivery",
   "column_break_8",
-  "carrier_est_weight"
+  "carrier_est_weight",
+  "extra_img"
  ],
  "fields": [
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "package",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -48,7 +50,6 @@
    "fetch_if_empty": 1,
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
-   "in_list_view": 1,
    "label": "Carrier real delivery date",
    "print_hide": 1,
    "read_only": 1
@@ -70,7 +71,6 @@
    "fetch_from": "package.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Customer Name",
    "read_only": 1
   },
@@ -99,26 +99,31 @@
    "fetch_if_empty": 1,
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Carrier estimated weight (in pounds)",
    "print_hide": 1,
    "read_only": 1
   },
   {
+   "columns": 1,
    "fieldname": "length",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Length (cm)",
    "print_hide": 1
   },
   {
+   "columns": 1,
    "fieldname": "width",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Width (cm)",
    "print_hide": 1
   },
   {
+   "columns": 1,
    "fieldname": "height",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Height (cm)",
    "print_hide": 1
   },
@@ -152,16 +157,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "columns": 1,
-   "description": "Internal reference code.",
-   "fieldname": "wr_reference",
-   "fieldtype": "Data",
-   "in_global_search": 1,
-   "in_list_view": 1,
-   "label": "WR Reference"
-  },
-  {
-   "columns": 1,
+   "columns": 2,
    "description": "Package description provided by the warehouse (if available).",
    "fieldname": "description",
    "fieldtype": "Small Text",
@@ -175,7 +171,7 @@
    "fieldname": "warehouse_est_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Warehouse estimated weight (in pounds)",
+   "label": "Weight (lb)",
    "non_negative": 1
   },
   {
@@ -185,13 +181,35 @@
    "description": "Actual Date of Receipt provided by the warehouse (if available).",
    "fieldname": "received_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "label": "Received Date"
+  },
+  {
+   "columns": 1,
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Box\nEnvelope\nPallet\nMail"
+  },
+  {
+   "columns": 1,
+   "fieldname": "carrier",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Carrier",
+   "options": "Amazon\nUSPS\nUPS\nFedEx"
+  },
+  {
+   "columns": 1,
+   "fieldname": "extra_img",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Photo"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-08-31 15:47:38.278135",
+ "modified": "2021-12-28 10:25:08.499767",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

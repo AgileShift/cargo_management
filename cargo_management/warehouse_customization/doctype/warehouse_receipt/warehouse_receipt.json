@@ -23,12 +23,20 @@
   "sb_0",
   "warehouse_receipt_lines",
   "additional_information_section",
+  "hazardous",
+  "notes",
+  "column_break_19",
+  "received_by",
+  "carrier_label_img",
+  "content_inside_img",
+  "warehouse_label",
+  "target_warehouse",
+  "totals_section",
   "warehouse_est_gross_weight",
   "column_break_16",
-  "carrier_est_gross_weight",
-  "column_break_14",
   "volumetric_weight",
-  "target_warehouse"
+  "column_break_14",
+  "carrier_est_gross_weight"
  ],
  "fields": [
   {
@@ -42,7 +50,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Awaiting Departure\nIn Transit\nSorting\nFinished",
+   "options": "Open\nAwaiting Departure\nIn Transit\nSorting\nFinished",
    "reqd": 1,
    "search_index": 1
   },
@@ -130,7 +138,7 @@
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
    "in_preview": 1,
-   "label": "Total Volumetric Weight"
+   "label": "Total Vol. Weight"
   },
   {
    "bold": 1,
@@ -142,10 +150,13 @@
   },
   {
    "bold": 1,
-   "description": "Estimated gross weight of the packages as measured by the warehouse (if available).",
+   "description": "Total weight in pounds.",
    "fieldname": "warehouse_est_gross_weight",
    "fieldtype": "Float",
-   "label": "Estimated Gross Weight by Warehouse (in pounds)",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Total Weight (lb)",
+   "non_negative": 1,
    "read_only": 1
   },
   {
@@ -178,6 +189,46 @@
   {
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hazardous",
+   "fieldtype": "Select",
+   "label": "Hazardous",
+   "options": "No\nYes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "received_by",
+   "fieldtype": "Data",
+   "label": "Received By"
+  },
+  {
+   "fieldname": "carrier_label_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Carrier Label"
+  },
+  {
+   "fieldname": "content_inside_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Content Inside"
+  },
+  {
+   "fieldname": "warehouse_label",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Warehouse Label"
+  },
+  {
+   "fieldname": "totals_section",
+   "fieldtype": "Section Break",
+   "label": "Totals"
   }
  ],
  "links": [
@@ -197,7 +248,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-12-27 17:30:29.294857",
+ "modified": "2021-12-28 10:34:44.101952",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
