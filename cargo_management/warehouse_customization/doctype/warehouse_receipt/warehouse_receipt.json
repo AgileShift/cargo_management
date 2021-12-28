@@ -175,13 +175,15 @@
   },
   {
    "fieldname": "consignee",
-   "fieldtype": "Data",
-   "label": "Consignee"
+   "fieldtype": "Link",
+   "label": "Consignee",
+   "options": "Consignee"
   },
   {
    "fieldname": "shipper",
-   "fieldtype": "Data",
-   "label": "Shipper"
+   "fieldtype": "Link",
+   "label": "Shipper",
+   "options": "Shipper"
   },
   {
    "fieldname": "column_break_12",
@@ -245,7 +247,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-12-28 10:54:20.290489",
+ "modified": "2021-12-28 11:48:36.782713",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
