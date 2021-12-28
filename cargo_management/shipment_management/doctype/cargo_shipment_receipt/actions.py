@@ -91,7 +91,7 @@ def make_sales_invoice(doc):
     update_status_in_bulk(docs_to_update={
         'Cargo Shipment Receipt': {'doc_names': [cargo_shipment_receipt.name], 'new_status': 'Finished'},
         'Cargo Shipment': {'doc_names': [cargo_shipment_receipt.cargo_shipment], 'new_status': 'Finished'},
-        'Warehouse Receipt': {'doc_names': get_list_from_child_table(cargo_shipment_receipt.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'), 'new_status': 'Finished'},
+        # 'Warehouse Receipt': {'doc_names': get_list_from_child_table(cargo_shipment_receipt.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'), 'new_status': 'Finished'},
         'Package': get_list_from_child_table(doc.cargo_shipment_receipt_lines, 'package')
     }, new_status='To Bill', msg_title='Updating Packages', mute_emails=doc.mute_emails)
 
