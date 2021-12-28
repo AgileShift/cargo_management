@@ -58,7 +58,6 @@
    "description": "Warehouse where reception occurred.",
    "fieldname": "target_warehouse",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Target Warehouse",
    "options": "Warehouse",
@@ -73,7 +72,6 @@
    "description": "Real departure date of cargo shipment to his final destination.",
    "fieldname": "departure_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Departure Date",
@@ -119,7 +117,6 @@
   {
    "fieldname": "closing_date",
    "fieldtype": "Datetime",
-   "in_list_view": 1,
    "in_preview": 1,
    "label": "Closing Date"
   },
@@ -166,6 +163,7 @@
   {
    "fieldname": "transportation_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Transportation Type",
    "options": "Sea\nAir"
   },
@@ -176,6 +174,8 @@
   {
    "fieldname": "consignee",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
    "label": "Consignee",
    "options": "Consignee"
   },
@@ -247,7 +247,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-12-28 11:48:36.782713",
+ "modified": "2021-12-28 15:02:59.520072",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
