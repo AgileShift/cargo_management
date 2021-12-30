@@ -23,15 +23,14 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
             # wrl.wr_reference, wrl.description as warehouse_description
         FROM tabPackage p
             LEFT JOIN `tabPackage Content` pc ON pc.parent = p.name
-            INNER JOIN `tabCargo Shipment Line` wrl ON wrl.package = p.name
-        # WHERE wrl.parent IN %(warehouse_receipts)s
+            INNER JOIN `tabCargo Shipment Line` csl ON csl.package = p.name
+        WHERE csl.parent = %(cargo_shipment)s
         GROUP BY p.name
         ORDER BY p.customer_name
     """, {
-        'warehouse_receipts': wrs
+        'cargo_shipment': cargo_shipment
     }, as_dict=True)
 
     return {
-        'packages': packages,
-        'warehouse_receipts': wrs,
+        'packages': packages
     }

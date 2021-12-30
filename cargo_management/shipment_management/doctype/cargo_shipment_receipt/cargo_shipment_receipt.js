@@ -63,7 +63,6 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
         }
 
         // We clear the table each time to avoid duplication
-        // frm.clear_table('cargo_shipment_receipt_warehouse_lines');
         frm.clear_table('cargo_shipment_receipt_lines');
 
         frappe.call({
@@ -85,11 +84,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
                 });
             });
 
-            // Adding all Warehouse Receipts
-            // r.message.warehouse_receipts.forEach(wr => frm.add_child('cargo_shipment_receipt_warehouse_lines', {'warehouse_receipt': wr}));
-
             // Refresh the modified tables inside the callback after execution is done
-            // frm.refresh_field('cargo_shipment_receipt_warehouse_lines');
             frm.refresh_field('cargo_shipment_receipt_lines');
         });
 
