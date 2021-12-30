@@ -6,12 +6,12 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
     """ Get all packages and warehouse receipts connected to a cargo shipment. """
 
     # TODO: Delete: wrs and warehouse_receipts in sql
-    wrs = frappe.get_all('Cargo Shipment Line', fields='warehouse_receipt', filters={'parent': cargo_shipment}, order_by='idx', pluck='warehouse_receipt')
+    # wrs = frappe.get_all('Cargo Shipment Line', fields='warehouse_receipt', filters={'parent': cargo_shipment}, order_by='idx', pluck='warehouse_receipt')
 
     # TODO: WORKING: OPTIMIZE FULL
     packages = frappe.db.sql("""
         SELECT
-            p.name, p.customer, p.customer_name, p.carrier_est_weight, p.total,
+            p.name, p.customer, p.customer_name, p.carrier_est_weight,
             GROUP_CONCAT(DISTINCT
                 pc.description,
                 '\nMonto: $', FORMAT(pc.amount, 2),
@@ -19,8 +19,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
                 '\nTarifa: ', FORMAT(pc.import_rate, 2),
                 '\nNotas: ', IFNULL(p.notes, '')
                 SEPARATOR '\n\n'
-            ) AS customer_description#,
-            # wrl.wr_reference, wrl.description as warehouse_description
+            ) AS customer_description
         FROM tabPackage p
             LEFT JOIN `tabPackage Content` pc ON pc.parent = p.name
             INNER JOIN `tabCargo Shipment Line` csl ON csl.package = p.name
