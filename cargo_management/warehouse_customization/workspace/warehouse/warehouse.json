@@ -42,7 +42,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-09-29 18:05:49.422651",
+ "modified": "2022-01-10 14:33:18.078266",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse",
@@ -54,6 +54,14 @@
    "doc_view": "New",
    "label": "New Warehouse Receipt",
    "link_to": "Warehouse Receipt",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "format": "{} Open",
+   "label": "Open Warehouse Receipts",
+   "link_to": "Warehouse Receipt",
+   "stats_filter": "{\n    \"status\": \"Open\"\n}",
    "type": "DocType"
   },
   {

@@ -42,7 +42,7 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "default": "Awaiting Departure",
+   "default": "Open",
    "depends_on": "eval: !doc.__islocal",
    "description": "Current status",
    "fieldname": "status",
@@ -247,7 +247,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2021-12-28 15:02:59.520072",
+ "modified": "2022-01-10 14:31:48.827505",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
