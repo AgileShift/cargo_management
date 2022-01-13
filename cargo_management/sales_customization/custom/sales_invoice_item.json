@@ -63,6 +63,31 @@
  ],
  "custom_perms": [],
  "doctype": "Sales Invoice Item",
- "property_setters": [],
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2022-01-13 12:02:14.096466",
+   "default_value": null,
+   "doc_type": "Sales Invoice Item",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "description_section",
+   "idx": 0,
+   "modified": "2022-01-13 12:02:14.096466",
+   "modified_by": "Administrator",
+   "name": "Sales Invoice Item-description_section-collapsible",
+   "owner": "Administrator",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "collapsible",
+   "property_type": "Check",
+   "row_name": null,
+   "value": "0"
+  }
+ ],
  "sync_on_migrate": 1
 }
