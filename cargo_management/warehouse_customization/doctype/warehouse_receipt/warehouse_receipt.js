@@ -13,7 +13,7 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     onload: function (frm) {
-        // TODO: WORK THis out
+        // TODO: Work This out
 	    // frm.set_query('package', 'warehouse_receipt_lines', () => {
         //     return {
         //         filters: {
@@ -31,19 +31,8 @@ frappe.ui.form.on('Warehouse Receipt', {
             return;
         }
 
-        // TODO: Work on this: tjos will be used now?
-        if (frm.doc.status === 'Awaiting Departure') {
-            frm.page.add_action_item(__('Confirm Packages'), () => {
-                frappe.call({
-                    method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.update_status',
-                    freeze: true,
-                    args: {
-                        source_doc_name: frm.doc.name,
-                        new_status: 'Awaiting Departure'
-                    }
-                });
-            });
-        }
+        // TODO: Work on this: will be used now?
+        if (frm.doc.status === 'Awaiting Departure') {}
     },
 
     before_save: function (frm) {

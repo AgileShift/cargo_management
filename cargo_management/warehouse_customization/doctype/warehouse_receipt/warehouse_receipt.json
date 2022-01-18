@@ -58,7 +58,6 @@
    "description": "Warehouse where reception occurred.",
    "fieldname": "target_warehouse",
    "fieldtype": "Link",
-   "in_standard_filter": 1,
    "label": "Target Warehouse",
    "options": "Warehouse",
    "search_index": 1
@@ -73,7 +72,6 @@
    "fieldname": "departure_date",
    "fieldtype": "Date",
    "in_preview": 1,
-   "in_standard_filter": 1,
    "label": "Departure Date",
    "read_only": 1
   },
@@ -111,6 +109,7 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Opening Date",
    "reqd": 1
   },
@@ -164,6 +163,8 @@
    "fieldname": "transportation_type",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Transportation Type",
    "options": "Sea\nAir"
   },
@@ -176,6 +177,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Consignee",
    "options": "Consignee"
   },
@@ -247,7 +249,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-01-10 14:31:48.827505",
+ "modified": "2022-01-18 16:38:36.462641",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

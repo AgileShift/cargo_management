@@ -19,13 +19,26 @@ frappe.ui.form.on('Cargo Shipment', {
         }
 
         if (frm.doc.status === 'Awaiting Departure') {
+            frm.page.add_action_item(__('Confirm Packages'), () => {
+                frappe.call({
+                    method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
+                    freeze: true,
+                    args: {
+                        source_doc_name: frm.doc.name,
+                        new_status: 'Awaiting Departure',
+                        msg_title: __('Confirmed Packages')
+                    }
+                });
+            });
+
             frm.page.add_action_item(__('Confirm Transit'), () => {
                 frappe.call({
                     method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
                     freeze: true,
                     args: {
                         source_doc_name: frm.doc.name,
-                        new_status: 'In Transit'
+                        new_status: 'In Transit',
+                        msg_title: __('Now in Transit')
                     } // TODO: Refresh DOC in callback
                 });
             });

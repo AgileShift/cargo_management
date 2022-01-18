@@ -47,7 +47,6 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -232,7 +231,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2021-12-28 07:33:24.607960",
+ "modified": "2022-01-18 16:42:52.805933",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
