@@ -42,7 +42,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-01-10 14:33:18.078266",
+ "modified": "2022-01-19 16:19:49.633550",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse",
@@ -81,6 +81,12 @@
    "link_to": "Warehouse Receipt",
    "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
    "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Packages Awaiting Confirmation",
+   "link_to": "Awaiting Confirmation",
+   "type": "Report"
   }
  ]
 }
