@@ -16,6 +16,24 @@
  "links": [
   {
    "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "Package",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Packages Awaiting Confirmation",
+   "link_to": "Awaiting Confirmation",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "icon": "change",
    "is_query_report": 0,
    "label": "Warehouse",
@@ -42,7 +60,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-01-19 16:19:49.633550",
+ "modified": "2022-01-19 16:26:09.202490",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse",
