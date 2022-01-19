@@ -1,7 +1,7 @@
 import frappe
 
 
-def get_list_from_child_table(child_lines, field):
+def get_list_from_child_table(child_lines: list, field: str):
     """ This takes a List of Dicts [{}] and return a List of values. """
     return list(child_line.get(field) for child_line in child_lines if child_line.get(field) is not None)  # FIXME: Performance?
 

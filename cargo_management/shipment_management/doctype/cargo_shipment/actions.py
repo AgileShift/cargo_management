@@ -6,7 +6,7 @@ from cargo_management.utils import get_list_from_child_table, update_status_in_b
 def update_status(source_doc_name: str, new_status: str, msg_title: str):
     doc = frappe.get_cached_doc('Cargo Shipment', source_doc_name)  # Getting the Cargo Shipment Doc from db
 
-    wrs_in_cs = get_list_from_child_table(doc.cargo_shipment_lines, 'warehouse_receipt')
+    wrs_in_cs = get_list_from_child_table(doc.cargo_shipment_lines, 'warehouse_receipt')  # TODO: Filter Unique
     packages_in_cs = get_list_from_child_table(doc.cargo_shipment_lines, 'package')
 
     update_status_in_bulk(docs_to_update={
