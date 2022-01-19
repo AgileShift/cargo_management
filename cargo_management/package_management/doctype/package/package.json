@@ -346,6 +346,7 @@
    "in_standard_filter": 1,
    "label": "Cargo Shipment",
    "options": "Cargo Shipment",
+   "read_only": 1,
    "search_index": 1
   }
  ],
@@ -382,7 +383,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-01-19 16:39:27.192514",
+ "modified": "2022-01-19 16:53:26.337833",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
