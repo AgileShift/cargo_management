@@ -19,7 +19,8 @@
   "column_break_12",
   "item_price",
   "section_break_14",
-  "sales_invoice"
+  "sales_invoice",
+  "warehouse_receipt"
  ],
  "fields": [
   {
@@ -125,11 +126,17 @@
    "fieldname": "billable_qty_or_weight",
    "fieldtype": "Float",
    "label": "Billable Quantity or Weight"
+  },
+  {
+   "fieldname": "warehouse_receipt",
+   "fieldtype": "Link",
+   "label": "Warehouse Receipt",
+   "options": "Warehouse Receipt"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-08-31 13:38:15.587336",
+ "modified": "2022-01-18 18:31:00.894687",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt Line",

@@ -12,7 +12,7 @@ class CargoShipment(Document):
         wrs_in_cs = get_list_from_child_table(self.cargo_shipment_lines, 'warehouse_receipt')
         if wrs_in_cs:  # If empty we don't touch the DB  # FIXME: Performance?
             frappe.db.sql("UPDATE `tabWarehouse Receipt` SET departure_date = %(date)s WHERE name IN %(wrs_in_cs)s", {
-                'date': self.departure_date, 'wrs': wrs_in_cs
+                'date': self.departure_date, 'wrs_in_cs': wrs_in_cs
             })
 
     def change_status(self, new_status):
