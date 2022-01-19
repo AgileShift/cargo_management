@@ -3,6 +3,7 @@ from cargo_management.utils import get_list_from_child_table, update_status_in_b
 from frappe import _
 
 
+# TODO: Delete. this is unused.
 @frappe.whitelist(methods='POST')
 def update_status(source_doc_name: str, new_status: str):
     # It is more safe to get the doc from db that receive it from client-side as param

@@ -49,7 +49,8 @@
   "signature",
   "internal_data_section",
   "easypost_id",
-  "warehouse_receipt"
+  "warehouse_receipt",
+  "cargo_shipment"
  ],
  "fields": [
   {
@@ -304,12 +305,12 @@
   {
    "bold": 1,
    "fieldname": "warehouse_receipt",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_global_search": 1,
-   "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Warehouse Receipt",
+   "options": "Warehouse Receipt",
    "read_only": 1,
    "search_index": 1
   },
@@ -334,6 +335,18 @@
    "label": "Transportation Type",
    "options": "Sea\nAir",
    "search_index": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "cargo_shipment",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Cargo Shipment",
+   "options": "Cargo Shipment",
+   "search_index": 1
   }
  ],
  "links": [
@@ -342,6 +355,11 @@
    "link_doctype": "Warehouse Receipt",
    "link_fieldname": "package",
    "parent_doctype": "Warehouse Receipt"
+  },
+  {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment",
+   "link_fieldname": "package"
   },
   {
    "group": "Cargo Shipment",
@@ -364,7 +382,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2021-12-28 09:17:30.594890",
+ "modified": "2022-01-19 16:39:27.192514",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

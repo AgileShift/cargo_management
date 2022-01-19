@@ -9,6 +9,16 @@ class CargoShipment(Document):
         """ Add Departure Date to all Warehouse Receipt Linked """
         # TODO: What if cargo shipment is deleted?
 
+        # TODO: Validate if any problem!
+        frappe.db.sql("""
+            UPDATE tabPackage
+            SET cargo_shipment = %(cs_name)s
+            WHERE `name` IN %(packages)s AND COALESCE(cargo_shipment, '') != %(cs_name)s
+        """, {
+            'cs_name': self.name,
+            'packages': get_list_from_child_table(self.cargo_shipment_lines, 'package')
+        })
+
         wrs_in_cs = get_list_from_child_table(self.cargo_shipment_lines, 'warehouse_receipt')
         if wrs_in_cs:  # If empty we don't touch the DB  # FIXME: Performance?
             frappe.db.sql("UPDATE `tabWarehouse Receipt` SET departure_date = %(date)s WHERE name IN %(wrs_in_cs)s", {

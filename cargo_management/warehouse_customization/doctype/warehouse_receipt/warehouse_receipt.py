@@ -5,7 +5,7 @@ from frappe.model.document import Document
 
 class WarehouseReceipt(Document):
 
-    def on_update_VOID(self):
+    def on_update(self):
         """ Add Warehouse Receipt Link to the Package. This allow to have mutual reference WR to Package. """
         # FIXME: If Warehouse Receipt is deleted, remove link from Package
         # TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight

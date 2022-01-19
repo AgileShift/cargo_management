@@ -227,11 +227,17 @@
  ],
  "links": [
   {
+   "group": "Package",
+   "link_doctype": "Package",
+   "link_fieldname": "cargo_shipment"
+  },
+  {
+   "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2022-01-18 16:42:52.805933",
+ "modified": "2022-01-19 16:38:14.141576",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
