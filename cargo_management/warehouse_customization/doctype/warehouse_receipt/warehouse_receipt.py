@@ -27,7 +27,7 @@ class WarehouseReceipt(Document):
         # TODO: FINISH
         if self.status != new_status and \
                 (self.status == 'Open' and new_status == 'Awaiting Departure') or \
-                (self.status == ['Open', 'Awaiting Departure'] and new_status == 'In Transit') or \
+                (self.status in ['Open', 'Awaiting Departure'] and new_status == 'In Transit') or \
                 (self.status in ['Open', 'Awaiting Departure', 'In Transit'] and new_status == 'Sorting') or \
                 (self.status in ['Open', 'Awaiting Departure', 'In Transit', 'Sorting'] and new_status == 'Finished'):
             self.status = new_status
