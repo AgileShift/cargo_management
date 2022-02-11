@@ -40,17 +40,17 @@
  ],
  "fields": [
   {
-   "allow_in_quick_entry": 1,
    "bold": 1,
-   "default": "Open",
-   "depends_on": "eval: !doc.__islocal",
+   "default": "Draft",
    "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Open\nAwaiting Departure\nIn Transit\nSorting\nFinished",
+   "options": "Draft\nOpen\nAwaiting Departure\nIn Transit\nSorting\nFinished",
+   "read_only": 1,
    "reqd": 1,
    "search_index": 1
   },
@@ -91,11 +91,13 @@
    "reqd": 1
   },
   {
+   "depends_on": "eval: !doc.__islocal",
    "fieldname": "additional_information_section",
    "fieldtype": "Section Break",
    "label": "Additional Information"
   },
   {
+   "depends_on": "eval: !doc.__islocal",
    "fieldname": "section_break_7",
    "fieldtype": "Section Break"
   },
@@ -160,15 +162,20 @@
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
    "fieldname": "transportation_type",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Transportation Type",
-   "options": "Sea\nAir"
+   "options": "\nSea\nAir",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
   },
   {
+   "depends_on": "eval: !doc.__islocal",
    "fieldname": "section_break_10",
    "fieldtype": "Section Break"
   },
@@ -227,6 +234,7 @@
    "label": "Photo of Warehouse Label"
   },
   {
+   "depends_on": "eval: !doc.__islocal",
    "fieldname": "totals_section",
    "fieldtype": "Section Break",
    "label": "Totals"
@@ -249,7 +257,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-01-18 16:38:36.462641",
+ "modified": "2022-02-02 14:12:39.325026",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

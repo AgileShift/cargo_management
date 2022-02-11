@@ -1,7 +1,7 @@
 frappe.listview_settings['Warehouse Receipt'] = {
     add_fields: ['status', 'transportation_type'],
     filters: [
-        ['status', 'in', ['Open', 'Awaiting Departure']],
+        ['status', 'in', ['Draft', 'Open', 'Awaiting Departure']],
     ],
     hide_name_column: true,
 
@@ -11,6 +11,7 @@ frappe.listview_settings['Warehouse Receipt'] = {
 
     get_indicator(doc) {
         const status_color = {
+            'Draft': 'gray',
             'Open': 'orange',
             'Awaiting Departure': 'yellow',
             'In Transit': 'purple',
