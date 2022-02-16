@@ -6,7 +6,7 @@ from .easypost_api import EasypostAPI, EasypostAPIError
 
 class Package(Document):
     """
-    All this are set internally hardcoded. So we can trust in the origin.
+    All these are set internally hardcoded. So we can trust in the origin.
     custom flags = {
         'ignore_validate':    Frappe Core Flag if is set avoid: validate() and before_save()
         'requested_to_track': If Package was requested to be tracked we bypass validate() and track on before_save().
@@ -18,7 +18,7 @@ class Package(Document):
     def validate(self):
         """ Validate def. We try to detect a valid tracking number. """
 
-        if self.flags.requested_to_track:  # If requested: bypass. We should have validate before set this flag.
+        if self.flags.requested_to_track:  # If requested: bypass. We should have validated before set this flag.
             return
 
         self.tracking_number = self.tracking_number.upper()  # Only uppercase tracking numbers
@@ -37,7 +37,7 @@ class Package(Document):
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
         if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
-            self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to be tracked
+            self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to track
         elif not self.is_new() and self.has_value_changed('carrier') and self.can_track():  # Exists and carrier has changed
             frappe.msgprint(msg='Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
             self.easypost_id = None
@@ -57,13 +57,13 @@ class Package(Document):
             frappe.get_cached_value('Package Carrier', self.carrier, fieldname=['can_track', 'uses_utc'])
 
     def can_track(self):
-        """ This def validate if a package can be tracked by any mean using any API, also loads the carrier flags. """
+        """ This def validates if a package can be tracked by any mean using any API, also loads the carrier flags. """
         # TODO: Validate if a tracker API is enabled.
         if not self.track:  # Package is not configured to be tracked, no matter if easypost_id exists.
-            frappe.msgprint(msg=_('Package is configured not to track.'), indicator='yellow', alert=True)
+            frappe.msgprint(msg=_('Package is configured not to track.'), indicator='orange', alert=True)
             return False
 
-        self.load_carrier_flags()  # Load carrier global flags settings an attach to the document flags.
+        self.load_carrier_flags()  # Load carrier global flags settings and attach to the document flags.
 
         if not self.flags.carrier_can_track:  # Carrier is configured to not track. So we don't bother.
             frappe.msgprint(msg=_('Package is handled by a carrier we can\'t track.'), indicator='red', alert=True)
@@ -97,13 +97,13 @@ class Package(Document):
     def get_explained_status(self):
         """ This returns a detailed explanation of the current status of the Package and compatible colors. """
         # TODO: one of the best datetime format: "E d LLL yyyy 'at' h:MM a" # TODO: translate this strings.
-        color = 'lightblue'
+        color = 'lightblue'  # TODO: Add more colors? Check frappe colors
 
         # TODO: If no Track or Easypost is not set(we can't track) show the alert. If is true and no est_delivery
         if self.status == 'Awaiting Receipt':
             message = ['El transportista aún no ha entregado el paquete.']
 
-            if self.carrier_est_delivery:  # The carrier has provided a estimated delivery date
+            if self.carrier_est_delivery:  # The carrier has provided an estimated delivery date
                 est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to today
                 est_delivery_date = frappe.utils.format_date(self.carrier_est_delivery, 'medium')  # readable date
 
@@ -186,7 +186,7 @@ class Package(Document):
 
             if self.easypost_id:  # Package exists on easypost and is requested to be tracked. Request updates from API.
                 easypost_api.retrieve_package_data(self.easypost_id)
-            else:  # Package don't exists on easypost and is requested to be tracked. We create a new one and attach it.
+            else:  # Package don't exist on easypost and is requested to be tracked. We create a new one and attach it.
                 easypost_api.create_package(self.tracking_number, self.carrier)
 
                 self.easypost_id = easypost_api.instance.id  # EasyPost ID. Only on creation
@@ -195,13 +195,13 @@ class Package(Document):
             frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=False, indicator='red')
             return  # Exit because this has failed(Create or Update)  # FIXME: don't throw because we need to save
 
-        else:  # Data to parse that will be save
+        else:  # Data to parse that will be saved
             self._parse_data_from_easypost_instance(easypost_api.instance)
 
             frappe.msgprint(msg=_('Package has been updated from API.'), alert=True)
 
     def _parse_data_from_easypost_instance(self, instance):
-        """ This parses all the data from an easypost instance(with all the details) to our Package Doctype """
+        """ This parses all the data from an easypost instance(with all the details) to our Package DocType. """
         self.carrier_status = instance.status or 'Unknown'
         self.carrier_status_detail = instance.status_detail or 'Unknown'
 

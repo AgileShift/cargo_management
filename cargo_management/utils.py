@@ -29,14 +29,14 @@ def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_titl
             doc_names, doc_new_status = opts, new_status
 
         for name in doc_names:                    # Iterate all over docs to update
-            doc = frappe.get_doc(doctype, name)   # Getting Doc from current Doctype
+            doc = frappe.get_doc(doctype, name)   # Getting Doc from current DocType
 
             if doc.change_status(doc_new_status):  # If status can be changed. Prevent unnecessary updates
                 updated_docs += 1                  # Count, because this document could be updated
                 doc.flags.ignore_validate = True   # Set flag ON because Doc will be saved from bulk edit. No validations
                 doc.save(ignore_permissions=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
-            iter_doc += 1  # Count each time we iter a doc to change. We dont reset so we can count all Doctypes.
+            iter_doc += 1  # Count each time we iter a doc to change. We don't reset soo we can count all DocTypes.
             frappe.publish_progress(  # TODO: Sometimes this dont get to 100%
                 percent=(iter_doc / total_doc_names * 100), title=msg_title,  # doctype=doctype, docname=name,
                 description='Updating Status to {doctype}: {doc_name}'.format(doctype=doctype, doc_name=name)

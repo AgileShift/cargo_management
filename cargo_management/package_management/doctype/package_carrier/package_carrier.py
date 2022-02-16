@@ -4,7 +4,7 @@ from frappe.model.document import Document
 class PackageCarrier(Document):
     """
     # TODO:
-    We choose this Doctype to act as a child to PackageSettings and a Link for Package.
+    We choose this DocType to act as a child to PackageSettings and a Link for Package.
 
     Field:
     carrier_name: Is the readable carrier name for the customer

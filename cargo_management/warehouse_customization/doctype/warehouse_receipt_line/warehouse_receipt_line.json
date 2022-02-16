@@ -5,8 +5,12 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "type",
+  "warnings",
   "package",
+  "column_break_2",
+  "type",
+  "column_break_5",
+  "transportation_type",
   "section_break_1",
   "customer",
   "customer_name",
@@ -14,23 +18,27 @@
   "carrier",
   "section_break_10",
   "warehouse_description",
-  "received_date",
   "column_break_18",
   "customer_description",
   "dimmensions_section",
+  "warehouse_est_weight",
+  "volumetric_weight",
+  "column_break_8",
   "length",
   "column_break_12",
   "width",
-  "volumetric_weight",
   "column_break_14",
   "height",
-  "warehouse_est_weight",
   "section_break_6",
+  "carrier_label_img",
+  "carrier_label_img_field",
+  "column_break_27",
+  "content_inside_img",
+  "content_inside_img_field",
+  "internal_data_section",
   "carrier_real_delivery",
-  "column_break_8",
   "carrier_est_weight",
-  "extra_img",
-  "consignee"
+  "received_date"
  ],
  "fields": [
   {
@@ -49,7 +57,6 @@
    "columns": 1,
    "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
    "fetch_from": "package.carrier_real_delivery",
-   "fetch_if_empty": 1,
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
    "label": "Carrier real delivery date",
@@ -58,9 +65,10 @@
   },
   {
    "fetch_from": "package.customer",
-   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
+   "hidden": 1,
+   "ignore_user_permissions": 1,
    "in_global_search": 1,
    "label": "Customer",
    "options": "Customer",
@@ -69,12 +77,13 @@
    "search_index": 1
   },
   {
+   "bold": 1,
    "columns": 2,
    "fetch_from": "package.customer_name",
    "fieldname": "customer_name",
-   "fieldtype": "Data",
-   "label": "Customer Name",
-   "read_only": 1
+   "fieldtype": "Read Only",
+   "in_global_search": 1,
+   "label": "Customer Name"
   },
   {
    "fieldname": "section_break_2",
@@ -83,7 +92,7 @@
   {
    "fieldname": "section_break_6",
    "fieldtype": "Section Break",
-   "label": "Additional Data from Carrier"
+   "label": "Additional Information"
   },
   {
    "fieldname": "column_break_8",
@@ -91,17 +100,17 @@
   },
   {
    "fieldname": "section_break_10",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Content"
   },
   {
+   "bold": 1,
    "columns": 1,
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fetch_from": "package.carrier_est_weight",
-   "fetch_if_empty": 1,
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "label": "Carrier estimated weight (in pounds)",
-   "print_hide": 1,
    "read_only": 1
   },
   {
@@ -110,6 +119,7 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Length (cm)",
+   "precision": "2",
    "print_hide": 1
   },
   {
@@ -118,6 +128,7 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Width (cm)",
+   "precision": "2",
    "print_hide": 1
   },
   {
@@ -126,10 +137,10 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Height (cm)",
+   "precision": "2",
    "print_hide": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "dimmensions_section",
    "fieldtype": "Section Break",
    "label": "Dimensions"
@@ -149,7 +160,10 @@
   {
    "fieldname": "volumetric_weight",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Volumetric Weight",
+   "non_negative": 1,
+   "precision": "2",
    "print_hide_if_no_value": 1,
    "read_only": 1
   },
@@ -165,7 +179,8 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Weight (lb)",
-   "non_negative": 1
+   "non_negative": 1,
+   "precision": "2"
   },
   {
    "bold": 1,
@@ -174,6 +189,7 @@
    "description": "Actual Date of Receipt provided by the warehouse (if available).",
    "fieldname": "received_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Received Date",
    "read_only": 1
   },
@@ -187,24 +203,13 @@
   },
   {
    "columns": 1,
+   "fetch_from": "package.carrier",
    "fieldname": "carrier",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Carrier",
    "options": "Package Carrier",
    "read_only": 1
-  },
-  {
-   "columns": 1,
-   "fieldname": "extra_img",
-   "fieldtype": "Attach",
-   "in_list_view": 1,
-   "label": "Photo"
-  },
-  {
-   "fieldname": "consignee",
-   "fieldtype": "Data",
-   "label": "Consignee"
   },
   {
    "columns": 2,
@@ -220,11 +225,64 @@
    "fieldtype": "Small Text",
    "label": "Customer Description",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "package.transportation_type",
+   "fieldname": "transportation_type",
+   "fieldtype": "Select",
+   "label": "Transportation Type",
+   "options": "\nSea\nAir",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "carrier_label_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Carrier Label"
+  },
+  {
+   "fieldname": "content_inside_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Content Inside"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "carrier_label_img_field",
+   "fieldtype": "Image",
+   "options": "carrier_label_img"
+  },
+  {
+   "fieldname": "internal_data_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Internal Data"
+  },
+  {
+   "fieldname": "content_inside_img_field",
+   "fieldtype": "Image",
+   "options": "content_inside_img"
+  },
+  {
+   "fieldname": "warnings",
+   "fieldtype": "HTML"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-02-03 17:58:41.730560",
+ "modified": "2022-02-16 12:36:07.795266",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Line",

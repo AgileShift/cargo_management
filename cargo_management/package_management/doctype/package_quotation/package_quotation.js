@@ -1,5 +1,5 @@
 function calculate_product_total_taxes_and_import_price_per_item(frm, cdt, cdn) {
-    // This func is called on Child Doctype when: product, shipping or taxes are modified.
+    // This func is called on Child DocType when: product, shipping or taxes are modified.
     let row = locals[cdt][cdn]; // Getting Child Row
 
     row.shipping_price = row.has_shipping ? row.shipping_price : 0.00;

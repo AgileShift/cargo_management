@@ -54,12 +54,12 @@ class EasypostAPI:
         self._normalize_data()
 
     def _normalize_data(self):
-        """ This normalize all the data will correct values """
+        """ This normalizes all the data will correct values """
         # Normalize Status
         self.instance.status = self.normalize_status(self.instance.status)
         self.instance.status_detail = self.normalize_status(self.instance.status_detail)
 
-        # In easypost weight comes in ounces, we convert to pounds.
+        # In easypost weight comes in ounces, we convert to pound.
         self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else None
 
         # Normalize Dates. Some Carriers send the data in UTC others no

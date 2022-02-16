@@ -76,17 +76,13 @@ frappe.ui.form.on('Warehouse Receipt Line', {
         let row = locals[cdt][cdn];
 
         frappe.db.get_doc('Package', row.package).then(doc => {
+            row.transportation_type = doc.transportation_type;
             row.customer = doc.customer;
             row.customer_name = doc.customer_name;
-
             row.carrier = doc.carrier;
-
-            doc.content.forEach(content => {
-                console.log(content.description);
-                console.log(content.qty);
-            });
-
-            console.log(doc);
+            row.customer_description = doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n");
+            row.carrier_real_delivery = doc.carrier_real_delivery;
+            row.carrier_est_weight = doc.carrier_est_weight;
 
             frm.refresh_field('warehouse_receipt_lines');
         });

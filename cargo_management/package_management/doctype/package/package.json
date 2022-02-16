@@ -159,6 +159,8 @@
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "label": "Carrier estimated weight (in pounds)",
+   "non_negative": 1,
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -383,7 +385,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-01-19 16:53:26.337833",
+ "modified": "2022-02-16 11:34:36.056882",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
