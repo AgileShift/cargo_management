@@ -50,3 +50,17 @@ def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_titl
     frappe.flags.mute_emails = frappe.flags.in_import = False  # Core: Reset all notifications and emails.
 
     frappe.msgprint(msg=message, title=msg_title, as_list=True, indicator='green')  # Show message as dialog
+
+
+def find_carrier_from_tracking_number(tracking_number: str):
+    """ Find the carrier of a Package """
+    # TODO: Sync the "Carrier Code" with the Doctype "Package Carrier" in case we have multiple API Provider
+    print(tracking_number)
+    print('Estoy por aca xD')
+
+    if '1Z' in tracking_number:
+        return 'USPS'
+
+    return 'HELLOW'
+
+    # return tracking_number

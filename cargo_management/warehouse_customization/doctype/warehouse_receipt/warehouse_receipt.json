@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_copy": 1,
  "allow_import": 1,
  "allow_rename": 1,
  "creation": "2020-06-14 12:50:41.615167",
@@ -249,7 +250,8 @@
   {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
-   "link_fieldname": "warehouse_receipt"
+   "link_fieldname": "warehouse_receipt",
+   "parent_doctype": "Cargo Shipment"
   },
   {
    "group": "Cargo Shipment",
@@ -257,7 +259,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-02-02 14:12:39.325026",
+ "modified": "2022-02-16 16:50:57.884805",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

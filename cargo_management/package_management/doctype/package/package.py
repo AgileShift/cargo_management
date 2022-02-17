@@ -24,15 +24,10 @@ class Package(Document):
         self.tracking_number = self.tracking_number.upper()  # Only uppercase tracking numbers
         tracking_number_strip = self.tracking_number[:3]
 
-        # TODO: What if: What happens in frontend?. Translate spanish?
         if '1Z' in tracking_number_strip and self.carrier != 'UPS':
             frappe.throw('UPS Tracking')
         elif 'TBA' in tracking_number_strip and self.carrier != 'AmazonMws':
             frappe.throw('Amazon Tracking')
-        elif any(s in tracking_number_strip for s in ['LY', 'LB']) and self.carrier != 'USPS':
-            frappe.throw('Possibly a USPS Tracking')
-        elif 'JJD' in tracking_number_strip:
-            frappe.throw('Convert to DHL Tracking')
 
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """

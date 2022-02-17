@@ -25,3 +25,19 @@ def get_carrier_detail_page_url(carrier: str):
 def get_explained_status(source_name: str):
     """ Util: Return explained status message from doc object """
     return frappe.get_cached_doc('Package', source_name).get_explained_status()
+
+
+@frappe.whitelist(methods='GET')
+def find_carrier_from_tracking_number(tracking_number: str):
+
+
+    if '1Z' in tracking_number:
+        return 'UPS Tracking'
+    elif 'TBA' in tracking_number:
+        return 'Amazon Tracking'
+    elif 'JJD' in tracking_number:
+        frappe.throw('Convert to DHL Tracking')
+    elif any(s in tracking_number for s in ['LY', 'LB']):
+        return 'Possibly a USPS Tracking'
+
+    return 'HELLOW'

@@ -75,7 +75,20 @@ frappe.ui.form.on('Warehouse Receipt Line', {
     package: function (frm, cdt, cdn) {
         let row = locals[cdt][cdn];
 
-        frappe.db.get_doc('Package', row.package).then(doc => {
+// 9400108205498583611457
+// 92748902712008583188149716
+// 92612902712008583186800743
+// 4203316692612927005455000268974896
+
+        frappe.db.get_list('Package',{
+            filters: {
+                name: ["like", "%" + row.package + "%"]
+            }
+        }).then(docs => {
+            if (docs) {
+                frappe.msgprint('Hay varios opciones' + docs)
+            }
+            return;
             row.transportation_type = doc.transportation_type;
             row.customer = doc.customer;
             row.customer_name = doc.customer_name;
