@@ -21,13 +21,8 @@ class Package(Document):
         if self.flags.requested_to_track:  # If requested: bypass. We should have validated before set this flag.
             return
 
-        self.tracking_number = self.tracking_number.upper()  # Only uppercase tracking numbers
-        tracking_number_strip = self.tracking_number[:3]
-
-        if '1Z' in tracking_number_strip and self.carrier != 'UPS':
-            frappe.throw('UPS Tracking')
-        elif 'TBA' in tracking_number_strip and self.carrier != 'AmazonMws':
-            frappe.throw('Amazon Tracking')
+        # TODO: This is necessary?. Maybe only run at creation. This will work on API usage?
+        self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase tracking numbers
 
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """

@@ -50,10 +50,9 @@ frappe.ui.form.on('Package', {
     },
 
     tracking_number: function (frm) {
-        console.log(frm.doc.tracking_number);
+        frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
 
         if (!frm.doc.tracking_number) {
-            console.log(frm.doc.tracking_number);
             return;
         }
 
@@ -65,12 +64,9 @@ frappe.ui.form.on('Package', {
             args: {tracking_number: frm.doc.tracking_number},
             callback: (r) => {
                 frm.doc.carrier = r.message.carrier;
-                frm.refresh_field('carrier');
+                refresh_field(['carrier', 'tracking_number']);
 
-                console.log(r.message);
-
-                // TODO: Delete this comment?
-                frappe.show_alert('Carrier: ' + r.message.carrier);
+                frappe.show_alert('Carrier: ' + r.message.carrier);  // TODO: Delete this comment?
             }
         });
     },

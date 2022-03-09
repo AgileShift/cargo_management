@@ -95,13 +95,15 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "Unknown",
    "description": "Name of the carrier handling the shipment.",
    "fieldname": "carrier",
-   "fieldtype": "Link",
+   "fieldtype": "Select",
    "in_filter": 1,
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "Package Carrier",
+   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nCainiao\nSF Express\nYanwen\nLaserShip",
    "reqd": 1,
    "search_index": 1
   },
@@ -392,7 +394,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-03-08 13:45:21.225660",
+ "modified": "2022-03-09 12:46:12.683102",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

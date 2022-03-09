@@ -1,5 +1,3 @@
-import time
-
 import frappe
 
 
@@ -31,56 +29,54 @@ def get_explained_status(source_name: str):
 
 @frappe.whitelist(methods='GET')
 def find_carrier_by_tracking_number(tracking_number: str):
-    """
-    Find a carrier if a tracking number is passed
+    """ Find a carrier if a tracking number is passed.
 
-    https://pages.message.fedex.com/barcodescan_home/
+    - https://pages.message.fedex.com/barcodescan_home/
+
+    # TODO: Add More Carriers
+    # TODO: Python 3.10: Migrate to switch case or Improve performance?
+    # FIXME: if only TBA, 1Z, 1LS is sent it should fail
+    # FIXME: Run if tracking_number length is more than 6?
     """
     tracking_number = tracking_number.strip().upper()  # Sanitize field
-    tracking_number_len = len(tracking_number)
 
     if not tracking_number:
-        frappe.msgprint('Tracking Invalido')
-        return False
+        return {}
 
-    # Defaults. FIXME: It's more safe than using else at the end?
-    carrier, search_term = 'UNKNOWN', tracking_number
+    tracking_number_len = len(tracking_number)
+    carrier, search_term = 'Unknown', tracking_number  # TODO: search_term = 2/4 and 3/4 of the tracking. At bottom
 
-    # TODO: Python 3.10 migrate to switch case.
-    # TODO: Improve performance?
-    # TODO: Add More Carriers like the ones finishing on LY*****CN
     if 'TBA' in tracking_number:
-        carrier, search_term = 'AmazonMws', tracking_number  # Exact match
+        carrier = 'Amazon'
     elif '1Z' in tracking_number:
-        carrier, search_term = 'UPS', tracking_number        # Exact match
+        carrier = 'UPS'
+    elif '1LS' in tracking_number:
+        carrier = 'LaserShip'
+    elif tracking_number_len == 10:
+        carrier = 'DHL'
+
+    # TODO elif any(s in tracking_number for s in ['LY', 'LB']):
+    #     return 'Possibly a USPS Tracking'
 
     # FedEx or USPS. Matches starting with zipcode(420xxxxx) or with 92612. To search we will return starting with 612
     elif tracking_number_len == 22 and tracking_number[:5] == '92612':
-        carrier, search_term = '', tracking_number[2:]     # *92612*90980949456651012. Or *926129*
+        carrier, search_term = '', tracking_number[2:]      # *92612*90980949456651012. Or *926129*
     elif tracking_number_len == 30 and tracking_number[8:13] == '92612':
-        carrier, search_term = '', tracking_number[10:]    # 42033166*92612*90980949456651012. Or *926129*
+        carrier, search_term = '', tracking_number[10:]     # 42033166*92612*90980949456651012. Or *926129*
 
     elif tracking_number_len in [22, 26] and tracking_number[0] == '9':
-        carrier, search_term = 'USPS', tracking_number            # *9*400111108296364807659
+        carrier = 'USPS'                                    # *9*400111108296364807659
     elif tracking_number_len in [30, 34] and tracking_number[8] == '9':
-        carrier, search_term = 'USPS', tracking_number[8:]        # 42033165*9*274890983426386918697. First 8 digits is 420xxxxx(zipcode)
+        carrier, search_term = 'USPS', tracking_number[8:]  # 42033165*9*274890983426386918697. First 8 digits: 420xxxxx(zipcode)
 
     elif tracking_number_len == 12:
-        carrier, search_term = 'FedEx', tracking_number
+        carrier = 'FedEx',
     elif tracking_number_len == 20 and tracking_number[:3] == '612':
-        carrier, search_term = 'FedEx', tracking_number           # *612*90982157320543198. Or *6129*
+        carrier = 'FedEx',                                    # *612*90982157320543198. Or *6129*
     elif tracking_number_len == 34 and tracking_number[22] != 0:
-        carrier, search_term = 'FedEx', tracking_number[22:]      # 9622001900005105596800*5*49425980480. Last 12 digits is tracking
+        carrier, search_term = 'FedEx', tracking_number[22:]  # 9622001900005105596800*5*49425980480. Last 12 digits is tracking
 
-    elif tracking_number_len == 10:
-        carrier, search_term = 'DHLExpress', tracking_number
     elif 'JD' in tracking_number:  # or JJD
-        frappe.throw('Convert to DHL Tracking')
-
-    # elif any(s in tracking_number for s in ['LY', 'LB']):
-    #     return 'Possibly a USPS Tracking'
-
-    # else
-        # TODO: We can return the search_term for parcial numbers. maybe the lentgh of the number / 2 minus first and last char
+        frappe.throw('Convert to DHL Tracking')  # FIXME: Maybe we can convert it?
 
     return {'carrier': carrier, 'search_term': search_term, 'tracking_number': tracking_number}

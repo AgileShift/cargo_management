@@ -71,13 +71,10 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 });
 
-//95 -> 70
-
 // Child Table
 frappe.ui.form.on('Warehouse Receipt Line', {
 
     package_selector_dialog: function (frm, packages) {
-        print('HELLO XD')
         const fields = packages.map((package_doc, i) => {
             return {
                 fieldname: 'package_option_' + i, fieldtype: 'Check', label: package_doc
@@ -93,12 +90,9 @@ frappe.ui.form.on('Warehouse Receipt Line', {
     },
 
     package: function (frm, cdt, cdn) {
-        console.log(
-            'PACKAGE FUNCTION'
-        )
-        let row = locals[cdt][cdn];
+        let row_package = locals[cdt][cdn].package.trim().toUpperCase();  // Sanitize field
 
-        if (!row.package) {
+        if (!row_package) {
             return;
         }
 
@@ -107,19 +101,18 @@ frappe.ui.form.on('Warehouse Receipt Line', {
             type: 'GET',
             freeze: true,
             freeze_message: __('Searching Package...'),
-            args: {tracking_number: row.package},
-            callback: (r) => {  // # TODO: Work with python method to improve degree of success finding the coincidence.
+            args: {tracking_number: row_package},
+            callback: (r) => {
 
+                // https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
+                // MultiselectDialog with Package List -> Issue: can select multiple
+                // Dialog with a Table Field of Package List -> Issue: can select multiple and needs a select button
+                // MultiCheck Field with Package List as Options -> Issue: can select multiple. No extra data for package identification
+                // Select Field with Package List as Options -> Issue: Small extra data for package identification, and need a select button or event trigger.
+                // LinkSelector with Package List as Options -> Issue: its exactly what we need. But without search and button and configurable extra fields
                 if (r.message.coincidences) {
-                    // https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
-                    // MultiselectDialog with Package List -> Issue: can select multiple
-                    // Dialog with a Table Field of Package List -> Issue: can select multiple and needs a select button
-                    // MultiCheck Field with Package List as Options -> Issue: can select multiple. No extra data for package identification
-                    // Select Field with Package List as Options -> Issue: Small extra data for package identification, and need a select button or event trigger.
-                    // LinkSelector with Package List as Options -> Issue: its exactly what we need. But without search and button and configurable extra fields
-
                     const selector_dialog = new frappe.ui.Dialog({
-                        title: __('Coincidences found for: {0}', [row.package]),
+                        title: __('Coincidences found for: {0}', [row_package]),
                         static: true,          // Cannot cancel touching outside pop-up
                         size: 'extra-large',
                         fields: [{fieldtype: 'HTML', fieldname: 'table_html',}]
@@ -129,9 +122,9 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                         .html(frappe.render_template('package_selector', {search_term: r.message.search_term, coincidences: r.message.coincidences}))
                         .find('a').on('click', function(e) {
                             e.preventDefault();
-                            row.package = $(this).attr('data-value');
+                            row_package = $(this).attr('data-value');
 
-                            frm.refresh_field('warehouse_receipt_lines')
+                            frm.refresh_field('warehouse_receipt_lines') // TODO: Change for grid refresh!
                             selector_dialog.hide();
                     });
 
@@ -154,8 +147,6 @@ frappe.ui.form.on('Warehouse Receipt Line', {
         // row.customer_description = doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n");
         // row.carrier_real_delivery = doc.carrier_real_delivery;
         // row.carrier_est_weight = doc.carrier_est_weight;
-
-        // frm.refresh_field('warehouse_receipt_lines');
     },
 
     warehouse_est_weight: function (frm) {
