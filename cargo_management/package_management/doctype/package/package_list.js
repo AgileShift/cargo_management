@@ -1,5 +1,5 @@
 frappe.listview_settings['Package'] = {
-    add_fields: ['status', 'carrier'],
+    add_fields: ['status', 'carrier'], // TODO: Improve here. because we have extra data!. also what this is for?
     filters: [
         ['status', 'not in', ['Finished', 'Cancelled', 'Returned to Sender']],
     ],

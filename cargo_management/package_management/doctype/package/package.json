@@ -8,7 +8,7 @@
  ],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:tracking_number",
+ "autoname": "format:{tracking_number}",
  "creation": "2020-06-12 19:06:49.803202",
  "description": "DocType to save data of a package.",
  "doctype": "DocType",
@@ -16,6 +16,7 @@
  "engine": "InnoDB",
  "field_order": [
   "tracking_number",
+  "consolidated_tracking_numbers",
   "customer",
   "customer_name",
   "carrier",
@@ -55,6 +56,7 @@
  "fields": [
   {
    "allow_in_quick_entry": 1,
+   "bold": 1,
    "columns": 4,
    "description": "Tracking code provided by the carrier.",
    "fieldname": "tracking_number",
@@ -350,6 +352,11 @@
    "options": "Cargo Shipment",
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "consolidated_tracking_numbers",
+   "fieldtype": "Small Text",
+   "label": "Consolidated Tracking Numbers"
   }
  ],
  "links": [
@@ -385,7 +392,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-02-16 11:34:36.056882",
+ "modified": "2022-03-08 13:45:21.225660",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

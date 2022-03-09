@@ -15,7 +15,6 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 }
 
 // todo: MATCH the new and current fields! import_price for example
-// TODO: Tracking Validator from backend and Carrier Select helper.
 // TODO: Finish The Progress Bar -> frm.dashboard.add_progress("Status", []
 
 frappe.ui.form.on('Package', {
@@ -41,12 +40,39 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        frm.events.get_detailed_status_message(frm); // Intro Message
+        frm.add_custom_button(__('Visit carrier detail page'), () => frm.events.visit_carrier_detail_page(frm.doc));
 
         if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
             frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm) , __('Get Items From'));
         }
-        frm.add_custom_button(__('Visit carrier detail page'), () => frm.events.visit_carrier_detail_page(frm.doc));
+
+        frm.events.get_detailed_status_message(frm); // Intro Message
+    },
+
+    tracking_number: function (frm) {
+        console.log(frm.doc.tracking_number);
+
+        if (!frm.doc.tracking_number) {
+            console.log(frm.doc.tracking_number);
+            return;
+        }
+
+        frappe.call({
+            method: 'cargo_management.package_management.doctype.package.actions.find_carrier_by_tracking_number',
+            type: 'GET',
+            freeze: true,
+            freeze_message: __('Searching Carrier...'),
+            args: {tracking_number: frm.doc.tracking_number},
+            callback: (r) => {
+                frm.doc.carrier = r.message.carrier;
+                frm.refresh_field('carrier');
+
+                console.log(r.message);
+
+                // TODO: Delete this comment?
+                frappe.show_alert('Carrier: ' + r.message.carrier);
+            }
+        });
     },
 
     has_shipping: function (frm) {
@@ -60,20 +86,7 @@ frappe.ui.form.on('Package', {
         calculate_package_total(frm);
     },
 
-    get_detailed_status_message: function (frm) {
-        frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
-            type: 'GET',
-            args: {source_name: frm.doc.name}
-        }).then(r => {
-            if ($.isArray(r.message.message)) { // If there are multiple messages.
-                r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
-            }
-
-            frm.set_intro(r.message.message, ''); // FIXME: Core only allows blue & yellow: layout.js -> show_message()
-            frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // Set same color on message as on status indicator dot.
-        });
-    },
+    // Custom Functions
 
     visit_carrier_detail_page: function (doc) {
         frappe.call({
@@ -81,9 +94,25 @@ frappe.ui.form.on('Package', {
             type: 'GET',
             args: {carrier: doc.carrier},
             freeze: true,
-            freeze_message: __('Opening detail page...'),
+            freeze_message: __('Opening carrier detail page...'),
             callback: (r) => {
                 window.open(r.message + doc.tracking_number, '_blank');
+            }
+        });
+    },
+
+    get_detailed_status_message: function (frm) {
+        frappe.call({
+            method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
+            type: 'GET',
+            args: {source_name: frm.doc.name},
+            callback: (r) => {
+                if ($.isArray(r.message.message)) { // If there are multiple messages.
+                    r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
+                }
+
+                frm.set_intro(r.message.message, ''); // FIXME: Core only allows blue & yellow: layout.js -> show_message()
+                frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // Set same color on message as on status indicator dot.
             }
         });
     },
