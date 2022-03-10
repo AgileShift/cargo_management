@@ -2,15 +2,16 @@ function calculate_package_total(frm) {
     let content_amount = frm.get_sum('content', 'amount');
     frm.doc.total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_amount : content_amount;  // Calculate the 'total' field on Package Doctype(Parent)
 
-    frm.refresh_fields(); // FIXME: Maybe is not the better way..
+    frm.refresh_field('total');
 }
 
 function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     // Calculates the 'amount' field on Package Content Doctype(Child) and 'total' field on Package Doctype(Parent)
     let content_row = locals[cdt][cdn]; // Getting Child Row
 
-    content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in eddited row
+    content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in edited row
 
+    refresh_field('amount', cdn, 'content');
     calculate_package_total(frm); // Calculate the parent 'total' field and trigger refresh event
 }
 
@@ -64,7 +65,7 @@ frappe.ui.form.on('Package', {
             args: {tracking_number: frm.doc.tracking_number},
             callback: (r) => {
                 frm.doc.carrier = r.message.carrier;
-                refresh_field(['carrier', 'tracking_number']);
+                refresh_many(['carrier', 'tracking_number']);
 
                 frappe.show_alert('Carrier: ' + r.message.carrier);  // TODO: Delete this comment?
             }
@@ -91,9 +92,7 @@ frappe.ui.form.on('Package', {
             args: {carrier: doc.carrier},
             freeze: true,
             freeze_message: __('Opening carrier detail page...'),
-            callback: (r) => {
-                window.open(r.message + doc.tracking_number, '_blank');
-            }
+            callback: (r) => window.open(r.message + doc.tracking_number, '_blank')
         });
     },
 

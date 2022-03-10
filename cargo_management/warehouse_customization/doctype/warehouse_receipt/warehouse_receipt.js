@@ -96,6 +96,8 @@ frappe.ui.form.on('Warehouse Receipt Line', {
             return;
         }
 
+        console.log(row_package)
+
         frappe.call({
             method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.find_package_by_tracking_number',
             type: 'GET',
@@ -103,6 +105,8 @@ frappe.ui.form.on('Warehouse Receipt Line', {
             freeze_message: __('Searching Package...'),
             args: {tracking_number: row_package},
             callback: (r) => {
+
+                console.log(r.message)
 
                 // https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
                 // MultiselectDialog with Package List -> Issue: can select multiple
@@ -113,7 +117,7 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                 if (r.message.coincidences) {
                     const selector_dialog = new frappe.ui.Dialog({
                         title: __('Coincidences found for: {0}', [row_package]),
-                        static: true,          // Cannot cancel touching outside pop-up
+                        static: false,          // Cannot cancel touching outside pop-up
                         size: 'extra-large',
                         fields: [{fieldtype: 'HTML', fieldname: 'table_html',}]
                     });
@@ -136,6 +140,8 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                 } else { // r.message === false
                     frappe.show_alert('No hay coincidencia, es tracking sin reportar.');
                 }
+
+                refresh_field()
 
             }
         });  //177
