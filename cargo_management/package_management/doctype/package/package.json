@@ -8,7 +8,7 @@
  ],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{tracking_number}",
+ "autoname": "field:tracking_number",
  "creation": "2020-06-12 19:06:49.803202",
  "description": "DocType to save data of a package.",
  "doctype": "DocType",
@@ -16,15 +16,16 @@
  "engine": "InnoDB",
  "field_order": [
   "tracking_number",
+  "carrier",
   "consolidated_tracking_numbers",
+  "column_break_1",
   "customer",
   "customer_name",
-  "carrier",
-  "column_break_1",
-  "status",
-  "track",
-  "assisted_purchase",
+  "column_break_9",
   "transportation_type",
+  "status",
+  "extra_services_section",
+  "assisted_purchase",
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
   "carrier_real_delivery",
@@ -63,7 +64,6 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Tracking number",
    "reqd": 1,
    "unique": 1
@@ -125,14 +125,7 @@
    "search_index": 1
   },
   {
-   "default": "1",
-   "description": "Package is requested to be tracked.",
-   "fieldname": "track",
-   "fieldtype": "Check",
-   "label": "Track",
-   "reqd": 1
-  },
-  {
+   "allow_in_quick_entry": 1,
    "collapsible": 1,
    "collapsible_depends_on": "easypost_id",
    "fieldname": "additional_data_from_carrier_section",
@@ -145,7 +138,7 @@
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
    "label": "Carrier estimated delivery date",
-   "mandatory_depends_on": "eval: doc.carrier == 'AmazonMws'"
+   "mandatory_depends_on": "eval: doc.carrier == 'Amazon'"
   },
   {
    "bold": 1,
@@ -323,7 +316,7 @@
   {
    "allow_in_quick_entry": 1,
    "default": "0",
-   "description": "Package was purchased using Shopping Assistance service.",
+   "description": "Package was purchased using Shopping Assistance Service.",
    "fieldname": "assisted_purchase",
    "fieldtype": "Check",
    "in_preview": 1,
@@ -356,9 +349,22 @@
    "search_index": 1
   },
   {
+   "bold": 1,
    "fieldname": "consolidated_tracking_numbers",
    "fieldtype": "Small Text",
+   "in_global_search": 1,
    "label": "Consolidated Tracking Numbers"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "collapsible": 1,
+   "fieldname": "extra_services_section",
+   "fieldtype": "Section Break",
+   "label": "Extra Services"
   }
  ],
  "links": [
@@ -394,7 +400,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-03-09 12:46:12.683102",
+ "modified": "2022-03-11 09:50:03.852482",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
@@ -456,7 +462,7 @@
   }
  ],
  "quick_entry": 1,
- "search_fields": "customer, customer_name, status",
+ "search_fields": "consolidated_tracking_numbers,customer, customer_name, status",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
  "sort_field": "modified",

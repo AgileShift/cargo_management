@@ -27,7 +27,7 @@ class Package(Document):
     def before_save(self):
         """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
         if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
-            self._request_data_from_easypost_api()  # Track if is requested, or is new and is able to track
+            self._request_data_from_easypost_api()  # Track if is requested or is new and is able to track.
         elif not self.is_new() and self.has_value_changed('carrier') and self.can_track():  # Exists and carrier has changed
             frappe.msgprint(msg='Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
             self.easypost_id = None
@@ -49,6 +49,7 @@ class Package(Document):
     def can_track(self):
         """ This def validates if a package can be tracked by any mean using any API, also loads the carrier flags. """
         # TODO: Validate if a tracker API is enabled.
+        return False
         if not self.track:  # Package is not configured to be tracked, no matter if easypost_id exists.
             frappe.msgprint(msg=_('Package is configured not to track.'), indicator='orange', alert=True)
             return False
@@ -163,7 +164,7 @@ class Package(Document):
         return {'message': message, 'color': color}
 
     def parse_data_from_easypost_webhook(self, response):
-        """ Convert a Easypost webhook POST to a Easypost Object, then parses the data to the Document. """
+        """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
         easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
         easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
 

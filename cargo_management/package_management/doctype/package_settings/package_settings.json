@@ -1,30 +1,22 @@
 {
  "actions": [],
+ "allow_copy": 1,
  "creation": "2020-06-27 10:29:04.374462",
  "description": "Settings of the Package Management Module",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "easypost_active",
+  "default_carrier_tracking_url",
   "easypost_settings_section",
+  "easypost",
   "easypost_api_key",
   "carriers_section",
-  "default_carrier_detail_page_url",
   "carriers"
  ],
  "fields": [
   {
-   "default": "0",
-   "description": "The easypost API is going to be used.",
-   "fieldname": "easypost_active",
-   "fieldtype": "Check",
-   "label": "Easypost Active"
-  },
-  {
    "collapsible": 1,
-   "collapsible_depends_on": "eval: !doc.easypost_api_key",
-   "depends_on": "easypost_active",
    "fieldname": "easypost_settings_section",
    "fieldtype": "Section Break",
    "label": "Easypost Settings"
@@ -44,21 +36,32 @@
    "label": "Carrier Settings"
   },
   {
-   "description": "This is the default carrier page to fetch details if no carrier page is specified.",
-   "fieldname": "default_carrier_detail_page_url",
-   "fieldtype": "Data",
-   "label": "Default carrier detail page"
-  },
-  {
    "fieldname": "carriers",
    "fieldtype": "Table",
-   "label": "List of carriers available and his API code",
-   "options": "Package Carrier"
+   "label": "Carriers available to track with APIs",
+   "options": "Package Carrier",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "description": "This is the default carrier detail page to open if no carrier page is specified.",
+   "fieldname": "default_carrier_tracking_url",
+   "fieldtype": "Data",
+   "label": "Default carrier tracking URL",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "The easypost API is going to be used.",
+   "fieldname": "easypost",
+   "fieldtype": "Check",
+   "label": "Easypost"
   }
  ],
+ "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-02-16 09:14:54.330114",
+ "modified": "2022-03-10 04:55:29.199873",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Settings",
@@ -75,6 +78,5 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC",
- "track_changes": 1
+ "sort_order": "DESC"
 }

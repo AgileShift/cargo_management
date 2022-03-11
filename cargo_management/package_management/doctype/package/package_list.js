@@ -43,30 +43,50 @@ frappe.listview_settings['Package'] = {
             return __('Carrier page')
         },
         get_description() {
-            return __('Visit carrier detail page')
+            return __('Open carrier page')
         },
         action(doc) {
             frappe.call({
-                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
+                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_tracking_url',
                 type: 'GET',
                 args: {carrier: doc.carrier},
                 freeze: true,
-                freeze_message: __('Opening detail page...'),
-                callback: (r) => {
-                    window.open(r.message + doc.tracking_number, '_blank');
-                }
+                freeze_message: __('Opening carrier detail page...'),
+                callback: (r) => window.open(r.message + doc.tracking_number, '_blank')
             });
         },
     },
 
-    // onload: function (listview) {
-    //     listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
+    onload: function (listview) {
+        listview.get_args = function () {  // Override only instance method
+            let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super
+
+            args.filters.some((filter, i) => {
+                if (filter[1] === 'name') {
+                    return args.or_filters = [
+                        args.filters.splice(i, 1)[0],  // Remove and add ;)
+                        [filter[0], 'tracking_number', filter[2], filter[3]],
+                        [filter[0], 'consolidated_tracking_numbers', filter[2], filter[3]],
+                    ];
+                }
+            });
+
+            console.log(args.filters);
+            console.log(args.or_filters);
+            console.log(args);
+
+            return args;  // 82
+        }
+
+        // listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
             // TODO FINISH.... This is work in progress
             // Bulk Dialog - should sent email if status is changed?
             // Bulk show_progress. This actually reloads the form? if so. how many times?
             // listview.call_for_selected_items(
             //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
-            // );
+            //  );
+            //
         // })
-    // },
+    }
 }
+// 116

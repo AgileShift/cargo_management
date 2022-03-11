@@ -41,13 +41,19 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        frm.add_custom_button(__('Visit carrier detail page'), () => frm.events.visit_carrier_detail_page(frm.doc));
+        /*
+        Es de amazon vamos a solicitar una fecha estimada de entrega
+        es drop off, pick-up y desconocido. no pedir fecha
+        Para todo lo que se rastree pues no hacer nada, eso se va a autopoblar
+         */
+
+        frm.add_custom_button(__('Open carrier page'), () => frm.events.open_carrier_detail_page(frm.doc));
 
         if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
             frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm) , __('Get Items From'));
         }
 
-        frm.events.get_detailed_status_message(frm); // Intro Message
+        frm.events.show_explained_status(frm); // Intro Message
     },
 
     tracking_number: function (frm) {
@@ -85,9 +91,9 @@ frappe.ui.form.on('Package', {
 
     // Custom Functions
 
-    visit_carrier_detail_page: function (doc) {
+    open_carrier_detail_page: function (doc) {
         frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_carrier_detail_page_url',
+            method: 'cargo_management.package_management.doctype.package.actions.get_carrier_tracking_url',
             type: 'GET',
             args: {carrier: doc.carrier},
             freeze: true,
@@ -96,7 +102,7 @@ frappe.ui.form.on('Package', {
         });
     },
 
-    get_detailed_status_message: function (frm) {
+    show_explained_status: function (frm) {
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
             type: 'GET',

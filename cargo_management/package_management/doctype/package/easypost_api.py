@@ -18,6 +18,12 @@ class EasypostAPIError(easypost.Error):
 class EasypostAPI:
     """ Easypost methods to control class API and parse data. """
 
+    carrier_codes = {
+        'DHL': 'DHLExpress',
+        'SF Express': 'SFExpress',
+        'LaserShip': 'LaserShipV2'
+    }
+
     def __init__(self, carrier_uses_utc):
         self.instance = {}
         self.carrier_uses_utc = carrier_uses_utc

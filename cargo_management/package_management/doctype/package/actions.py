@@ -14,8 +14,8 @@ def update_data_from_carrier(doc):
 
 
 @frappe.whitelist(methods='GET')
-def get_carrier_detail_page_url(carrier: str):
-    """ Util: Return the carrier detail page URL to append to a tracking number. Used in a Form Action Button """
+def get_carrier_tracking_url(carrier: str):
+    """ Util: Return the carrier tracking URL. Used in a Form Action Button """
     return \
         frappe.get_cached_value('Package Carrier', carrier, 'carrier_detail_page_url') or \
         frappe.db.get_single_value('Package Settings', 'default_carrier_detail_page_url', cache=True)
@@ -23,7 +23,7 @@ def get_carrier_detail_page_url(carrier: str):
 
 @frappe.whitelist(methods='GET')
 def get_explained_status(source_name: str):
-    """ Util: Return explained status message from doc object """
+    """ Util: Return explained status message from Package """
     return frappe.get_cached_doc('Package', source_name).get_explained_status()
 
 
