@@ -7,19 +7,9 @@
  "field_order": [
   "carrier",
   "api",
-  "uses_utc",
-  "carrier_tracking_url"
+  "tracking_urls"
  ],
  "fields": [
-  {
-   "default": "0",
-   "description": "If date times comes in UTC format.",
-   "fieldname": "uses_utc",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "label": "Uses UTC",
-   "reqd": 1
-  },
   {
    "bold": 1,
    "columns": 1,
@@ -27,9 +17,10 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Carrier",
-   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx\nCainiao\nSF Express\nYanwen\nLaserShip",
+   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nCainiao\nSF Express\nYanwen\nLaserShip",
    "reqd": 1,
-   "search_index": 1
+   "search_index": 1,
+   "set_only_once": 1
   },
   {
    "bold": 1,
@@ -43,16 +34,17 @@
   },
   {
    "columns": 4,
-   "description": "Carrier Tracking details page URL",
-   "fieldname": "carrier_tracking_url",
-   "fieldtype": "Data",
+   "description": "Carrier Tracking details page URL.",
+   "fieldname": "tracking_urls",
+   "fieldtype": "Code",
    "in_list_view": 1,
-   "label": "Carrier tracking URL"
+   "label": "Tracking URLs",
+   "options": "JSON"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-03-10 05:32:29.995928",
+ "modified": "2022-03-16 16:06:14.922292",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Carrier",

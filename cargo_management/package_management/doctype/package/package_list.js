@@ -62,7 +62,7 @@ frappe.listview_settings['Package'] = {
             let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super
 
             args.filters.some((filter, i) => {
-                if (filter[1] === 'name') {
+                if (filter[1] === 'name') {  // If we find name move it from filters to or_filters and expand it
                     return args.or_filters = [
                         args.filters.splice(i, 1)[0],  // Remove and add ;)
                         [filter[0], 'tracking_number', filter[2], filter[3]],
@@ -71,11 +71,7 @@ frappe.listview_settings['Package'] = {
                 }
             });
 
-            console.log(args.filters);
-            console.log(args.or_filters);
-            console.log(args);
-
-            return args;  // 82
+            return args;
         }
 
         // listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
@@ -85,8 +81,6 @@ frappe.listview_settings['Package'] = {
             // listview.call_for_selected_items(
             //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
             //  );
-            //
         // })
     }
 }
-// 116

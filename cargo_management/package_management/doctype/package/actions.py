@@ -1,30 +1,25 @@
 import frappe
 
 
-@frappe.whitelist(methods='POST')  # Because this action is set from Doctype Actions, we can't control this.
-def update_data_from_carrier(doc):
-    """ Used as Action button in Doctype: Fetch new data from API if we can track then update the doc if its open """
-    doc = frappe.parse_json(doc)
-    package = frappe.get_cached_doc('Package', doc.get('name'))
-
-    # Verify if we can track, because .save() will update doc, even if we can't track. Then an extra query has been done
-    if package.can_track():
-        # Trigger before_save() who check for the flag that avoid validation checks
-        return package.save(requested_to_track=True, ignore_permissions=True)
-
-
-@frappe.whitelist(methods='GET')
-def get_carrier_tracking_url(carrier: str):
-    """ Util: Return the carrier tracking URL. Used in a Form Action Button """
-    return \
-        frappe.get_cached_value('Package Carrier', carrier, 'carrier_detail_page_url') or \
-        frappe.db.get_single_value('Package Settings', 'default_carrier_detail_page_url', cache=True)
-
-
 @frappe.whitelist(methods='GET')
 def get_explained_status(source_name: str):
-    """ Util: Return explained status message from Package """
-    return frappe.get_cached_doc('Package', source_name).get_explained_status()
+    """ Util: Return explained status message from Package Doc """
+    return frappe.get_cached_doc('Package', source_name).explained_status()
+
+
+@frappe.whitelist(methods='GET')
+def get_carrier_settings(carrier: str):
+    """ Util: Return the carrier settings. API and Tracking URLs. Used to build and config Action Buttons in Form. """
+    carrier = frappe.get_cached_value('Package Carrier', carrier, ['api', 'uses_utc', 'tracking_urls'], as_dict=True)
+    carrier.tracking_urls = frappe.parse_json(carrier.tracking_urls or [])  # URLs or empty
+
+    return carrier
+
+
+@frappe.whitelist(methods='POST')
+def get_data_from_api(source_name: str):
+    """ Returns the Package Doc with new data from API if it was possible to fetch. """
+    return frappe.get_cached_doc('Package', source_name).save(request_data_from_api=True)
 
 
 @frappe.whitelist(methods='GET')
@@ -43,8 +38,8 @@ def find_carrier_by_tracking_number(tracking_number: str):
     if not tracking_number:
         return {}
 
-    tracking_number_len = len(tracking_number)
-    carrier, search_term = 'Unknown', tracking_number  # TODO: search_term = 2/4 and 3/4 of the tracking. At bottom
+    # TODO: search_term = 2/4 and 3/4 of the tracking. At bottom?
+    carrier, search_term, tracking_number_len = 'Unknown', tracking_number, len(tracking_number)
 
     if 'TBA' in tracking_number:
         carrier = 'Amazon'

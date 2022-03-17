@@ -7,7 +7,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "default_carrier_tracking_url",
   "easypost_settings_section",
   "easypost",
   "easypost_api_key",
@@ -17,18 +16,18 @@
  "fields": [
   {
    "collapsible": 1,
+   "collapsible_depends_on": "easypost",
    "fieldname": "easypost_settings_section",
    "fieldtype": "Section Break",
    "label": "Easypost Settings"
   },
   {
-   "depends_on": "easypost_active",
+   "depends_on": "easypost",
    "description": "Easypost API Key.",
    "fieldname": "easypost_api_key",
    "fieldtype": "Password",
-   "in_list_view": 1,
-   "label": "API Key",
-   "mandatory_depends_on": "easypost_active"
+   "label": "Easypost API Key",
+   "mandatory_depends_on": "easypost"
   },
   {
    "fieldname": "carriers_section",
@@ -38,21 +37,13 @@
   {
    "fieldname": "carriers",
    "fieldtype": "Table",
-   "label": "Carriers available to track with APIs",
+   "label": "Carriers available to track with APIs and settings",
    "options": "Package Carrier",
    "reqd": 1
   },
   {
-   "bold": 1,
-   "description": "This is the default carrier detail page to open if no carrier page is specified.",
-   "fieldname": "default_carrier_tracking_url",
-   "fieldtype": "Data",
-   "label": "Default carrier tracking URL",
-   "reqd": 1
-  },
-  {
    "default": "0",
-   "description": "The easypost API is going to be used.",
+   "description": "EasyPost API is available.",
    "fieldname": "easypost",
    "fieldtype": "Check",
    "label": "Easypost"
@@ -61,7 +52,7 @@
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-03-10 04:55:29.199873",
+ "modified": "2022-03-14 16:34:32.194636",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Settings",

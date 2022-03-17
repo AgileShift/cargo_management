@@ -17,39 +17,39 @@ class EasypostAPIError(easypost.Error):
 
 class EasypostAPI:
     """ Easypost methods to control class API and parse data. """
+    # TODO: Improve this
 
+    # The Dict Keys are the actual String representation for Users, and the Dict Values are the carrier code for the API
     carrier_codes = {
         'DHL': 'DHLExpress',
         'SF Express': 'SFExpress',
         'LaserShip': 'LaserShipV2'
     }
 
-    def __init__(self, carrier_uses_utc):
+    # They Plan to return normalized dates:
+    # https://www.easypost.com/does-your-api-return-time-according-to-the-package-destinations-time-zone
+    # https://www.easypost.com/why-are-there-time-zone-discrepancies-on-trackers
+    carriers_using_utc = {
+        'FedEx': True
+    }
+
+    def __init__(self, carrier):
         self.instance = {}
-        self.carrier_uses_utc = carrier_uses_utc
-        self.api_key = frappe.get_single('Package Settings').get_password('easypost_api_key')
+        self.carrier = self.carrier_codes.get(carrier, carrier)
+        self.carrier_uses_utc = self.carriers_using_utc.get(carrier, False)
 
-    def create_package(self, tracking_number, carrier):
-        """
-        Create a Tracking Resource on Easypost API
+        # Little Hack. FIXME: Maybe next versions Will be a better way to do this.
+        easypost.api_key = frappe.get_cached_doc('Package Settings').get_password('easypost_api_key')  # .get_single()
 
-        @param tracking_number: String Tracking Number
-        @param carrier: String Code of Carrier
-        """
-        self.instance = easypost.Tracker.create(
-            tracking_code=tracking_number,
-            carrier=carrier,
-            api_key=self.api_key
-        )
-        self._normalize_data()
+    def create_package(self, tracking_number):
+        """ Create a Tracking Resource on Easypost API """
+        self.instance = easypost.Tracker.create(tracking_code=tracking_number, carrier=self.carrier)
+        return self._normalize_data()
 
     def retrieve_package_data(self, easypost_id):
         """ Retrieve from Easypost using the ID provided """
-        self.instance = easypost.Tracker.retrieve(
-            easypost_id=easypost_id,
-            api_key=self.api_key
-        )
-        self._normalize_data()
+        self.instance = easypost.Tracker.retrieve(easypost_id=easypost_id)
+        return self._normalize_data()
 
     def convert_from_webhook(self, response):
         """ Convert a dict to a Easypost Object. """
@@ -66,18 +66,21 @@ class EasypostAPI:
         self.instance.status_detail = self.normalize_status(self.instance.status_detail)
 
         # In easypost weight comes in ounces, we convert to pound.
-        self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else None
+        self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else None  # TODO: FIX
 
         # Normalize Dates. Some Carriers send the data in UTC others no
         self.instance.naive_est_delivery_date = self.naive_dt_to_local_dt(self.instance.est_delivery_date, self.carrier_uses_utc)
 
+        return self.instance
+
     @staticmethod
-    def naive_dt_to_local_dt(dt_str, uses_utc):
-        """
-        Convert string datetime to unaware naive datetime;
+    def naive_dt_to_local_dt(dt_str, uses_utc: bool):
+        """Convert string datetime to unaware naive datetime.
+
         @param dt_str: EasyPost datetime format: 2020-06-015T06:00:00Z or 2020-06-015T06:00:00+00:00
-        @param uses_utc: Boolean if time is UTC
-        @return: datetime: Return naive it not using UTC else return local datetime, both are UTC unaware
+        @param uses_utc: Boolean if time is in UTC
+
+        @return: datetime: Return naive if not using UTC else return local datetime, both are UTC unaware
 
         Some carriers already return datetime without UTC, its localized:
         https://www.easypost.com/does-your-api-return-time-according-to-the-package-destinations-time-zone
@@ -102,7 +105,7 @@ class EasypostAPI:
     @staticmethod
     def normalize_status(status):
         """ Normalize to frappe conventions. Easypost send snake_case status, we use individual words titled """
-        return status.replace('_', ' ').title()  # We dont override if the data is empty.
+        return status.replace('_', ' ').title()  # We don't override if the data is empty.
 
 
 @frappe.whitelist(allow_guest=True, methods='POST')
@@ -118,8 +121,16 @@ def easypost_webhook(**kwargs):
     except frappe.DoesNotExistError:
         return 'Package {} not found.'.format(kwargs['result']['tracking_code'])  # TODO: Add some log?
     else:
-        package.load_carrier_flags()  # This is called on def can_track(). But we avoid that validation on webhook event
-        package.parse_data_from_easypost_webhook(kwargs)
+        # package.load_carrier_flags()  # This is called on def can_track(). But we avoid that validation on webhook event
+        # package.parse_data_from_easypost_webhook(kwargs)
+
+        # def parse_data_from_easypost_webhook(self, response):
+        #     """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
+        #     easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
+        #     easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
+        #
+        #     self._parse_data_from_easypost_instance(easypost_api.instance)
+
         # Set flag ON because doc will be saved from webhook data. No validations needed.
         package.save(ignore_permissions=True, ignore_validate=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 

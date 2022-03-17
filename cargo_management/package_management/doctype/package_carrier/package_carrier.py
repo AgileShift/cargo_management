@@ -2,5 +2,5 @@ from frappe.model.document import Document
 
 
 class PackageCarrier(Document):
-    # Fixme: Choose this DocType to act as a child field to Link in Package.
+    # See PackageSettings: set_name_in_children(). That is the right method to override and set the custom name.
     pass

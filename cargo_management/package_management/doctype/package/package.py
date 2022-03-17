@@ -5,62 +5,33 @@ from .easypost_api import EasypostAPI, EasypostAPIError
 
 
 class Package(Document):
-    """
-    All these are set internally hardcoded. So we can trust in the origin.
-    custom flags = {
-        'ignore_validate':    Frappe Core Flag if is set avoid: validate() and before_save()
-        'requested_to_track': If Package was requested to be tracked we bypass validate() and track on before_save().
-        'carrier_can_track':  Carrier can track in API. Comes from related Link to "Package Carrier" Doctype.
-        'carrier_uses_utc':   Carrier uses UTC date times. Comes from related Link to "Package Carrier" Doctype.
-    }
+    """  All this are Frappe Core Flags:
+        'ignore_links':       avoid: _validate_links()
+        'ignore_validate':    avoid: validate() and before_save()
+        'ignore_mandatory':   avoid: _validate_mandatory()
+        'ignore_permissions': avoid: will not check for permissions globally.
     """
 
-    def validate(self):
-        """ Validate def. We try to detect a valid tracking number. """
-
-        if self.flags.requested_to_track:  # If requested: bypass. We should have validated before set this flag.
-            return
-
-        # TODO: This is necessary?. Maybe only run at creation. This will work on API usage?
-        self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase tracking numbers
-
-    def before_save(self):
-        """ Before is saved on DB, after is validated. Add new data and save once. On Insert(Create) or Save(Update) """
-        if self.flags.requested_to_track or (self.is_new() and self.can_track()):  # can_track can't run if is_new=False
-            self._request_data_from_easypost_api()  # Track if is requested or is new and is able to track.
-        elif not self.is_new() and self.has_value_changed('carrier') and self.can_track():  # Exists and carrier has changed
-            frappe.msgprint(msg='Carrier has changed, we\'re requesting new data from the API.', title='Carrier Change')
-            self.easypost_id = None
-            self._request_data_from_easypost_api()
-        # TODO: When track is recently set to active!
-
-    def save(self, requested_to_track=None, ignore_validate=None, *args, **kwargs):
-        """ Override to add custom flags. """
-        self.flags.requested_to_track = requested_to_track
-        self.flags.ignore_validate = ignore_validate
+    def save(self, request_data_from_api=False, *args, **kwargs):
+        """ Override def to change validation behaviour. Useful when called from outside a form. """
+        if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
+            self.flags.ignore_permissions = self.flags.ignore_validate = self.flags.ignore_mandatory = self.flags.ignore_links = True
+            self.request_data_from_api()
 
         return super(Package, self).save(*args, **kwargs)
 
-    def load_carrier_flags(self):
-        """ Loads the carrier global flags settings handling the package in the flags of the Document. """
-        self.flags.carrier_can_track, self.flags.carrier_uses_utc = \
-            frappe.get_cached_value('Package Carrier', self.carrier, fieldname=['can_track', 'uses_utc'])
+    def validate(self):
+        """ Sanitize fields """
+        self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase with no spaces
 
-    def can_track(self):
-        """ This def validates if a package can be tracked by any mean using any API, also loads the carrier flags. """
-        # TODO: Validate if a tracker API is enabled.
-        return False
-        if not self.track:  # Package is not configured to be tracked, no matter if easypost_id exists.
-            frappe.msgprint(msg=_('Package is configured not to track.'), indicator='orange', alert=True)
-            return False
-
-        self.load_carrier_flags()  # Load carrier global flags settings and attach to the document flags.
-
-        if not self.flags.carrier_can_track:  # Carrier is configured to not track. So we don't bother.
-            frappe.msgprint(msg=_('Package is handled by a carrier we can\'t track.'), indicator='red', alert=True)
-            return False
-
-        return True
+    def before_save(self):
+        """ Before saved in DB and after validated. Add new data. This runs on Insert(Create) or Save(Update)"""
+        if self.is_new():
+            self.request_data_from_api()
+        elif self.has_value_changed('carrier') or self.has_value_changed('tracking_number'):  # Exists and data has changed
+            self.easypost_id = None  # Value has changed. We reset the ID. FIXME: Move this when we have new APIs.
+            self.request_data_from_api()
+            frappe.msgprint("Carrier or Tracking Number has changed, we have requested new data.", indicator='yellow', alert=True)
 
     def change_status(self, new_status):
         """
@@ -85,10 +56,12 @@ class Package(Document):
 
         return False
 
-    def get_explained_status(self):
+    def explained_status(self):
         """ This returns a detailed explanation of the current status of the Package and compatible colors. """
+        # TODO: Python 3.10: Migrate to switch case or Improve performance?
         # TODO: one of the best datetime format: "E d LLL yyyy 'at' h:MM a" # TODO: translate this strings.
-        color = 'lightblue'  # TODO: Add more colors? Check frappe colors
+
+        message, color = [], 'lightblue'  # TODO: Add more colors? Check frappe colors
 
         # TODO: If no Track or Easypost is not set(we can't track) show the alert. If is true and no est_delivery
         if self.status == 'Awaiting Receipt':
@@ -141,21 +114,21 @@ class Package(Document):
             message = ['El paquete fue recepcionado.', 'Esperando próximo despacho de carga.']
         elif self.status == 'In Transit':
             # TODO: Add Departure date and est arrival date
-            message, color = 'El paquete esta en transito a destino.', 'purple'
+            message, color = ['El paquete esta en transito a destino.'], 'purple'
         elif self.status == 'In Customs':
-            message, color = 'El paquete se encuentra en proceso de desaduanaje.', 'gray'
-        elif self.status == 'Sorting':
-            message, color = 'El paquete se encuentra siendo clasificado en oficina.', 'blue'
-        elif self.status == 'Available to Pickup':
-            message, color = 'El paquete esta listo para ser retirado.', 'blue'
+            message, color = ['El paquete se encuentra en proceso de desaduanaje.'], 'gray'
+        elif self.status in ['Sorting', 'To Bill']:
+            message, color = ['El paquete se encuentra siendo clasificado en oficina.'], 'blue'
+        elif self.status in ['Unpaid', 'To Deliver or Pickup']:
+            message, color = ['El paquete esta listo para ser retirado.'], 'blue'
         elif self.status == 'Finished':
-            return  # No message
+            message, color = ['Paquete finalizado.'], 'green'  # TODO: Show invoice, delivery and payment details.
+        elif self.status == 'Cancelled':
+            message, color = ['Contáctese con un agente para obtener mayor información del paquete.'], 'orange'
         elif self.status == 'Never Arrived':
             message, color = ['El paquete no llego al almacén.'], 'red'
         elif self.status == 'Returned to Sender':
             message, color = ['El paquete fue devuelto por el transportista al vendedor.'], 'red'
-        else:
-            message, color = 'Contáctese con un agente para obtener mayor información del paquete.', 'orange'
 
         # Adding extra message
         if self.status in ['Never Arrived', 'Returned to Sender']:
@@ -163,55 +136,54 @@ class Package(Document):
 
         return {'message': message, 'color': color}
 
-    def parse_data_from_easypost_webhook(self, response):
-        """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
-        easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
-        easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
+    def request_data_from_api(self):
+        """ This selects the corresponding API to request data. """
+        carrier_api = frappe.get_cached_value('Package Carrier', self.carrier, 'api')
 
-        self._parse_data_from_easypost_instance(easypost_api.instance)
+        if carrier_api == 'EasyPost':
+            self._request_data_from_easypost_api()
+        else:
+            frappe.msgprint(_('Package is handled by a carrier we can\'t track.'), indicator='red', alert=True)
 
     def _request_data_from_easypost_api(self):
         """ Handles POST or GET to the Easypost API. Also parses the data. """
         try:
-            easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
-
             if self.easypost_id:  # Package exists on easypost and is requested to be tracked. Request updates from API.
-                easypost_api.retrieve_package_data(self.easypost_id)
+                api_data = EasypostAPI(carrier=self.carrier).retrieve_package_data(self.easypost_id)
             else:  # Package don't exist on easypost and is requested to be tracked. We create a new one and attach it.
-                easypost_api.create_package(self.tracking_number, self.carrier)
+                api_data = EasypostAPI(carrier=self.carrier).create_package(self.tracking_number)
 
-                self.easypost_id = easypost_api.instance.id  # EasyPost ID. Only on creation
-
+                self.easypost_id = api_data.id  # EasyPost ID. Only on creation
         except EasypostAPIError as e:
             frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=False, indicator='red')
             return  # Exit because this has failed(Create or Update)  # FIXME: don't throw because we need to save
-
         else:  # Data to parse that will be saved
-            self._parse_data_from_easypost_instance(easypost_api.instance)
+            self._parse_data_from_easypost(api_data)
 
             frappe.msgprint(msg=_('Package has been updated from API.'), alert=True)
 
-    def _parse_data_from_easypost_instance(self, instance):
-        """ This parses all the data from an easypost instance(with all the details) to our Package DocType. """
-        self.carrier_status = instance.status or 'Unknown'
-        self.carrier_status_detail = instance.status_detail or 'Unknown'
+    def _parse_data_from_easypost(self, data):
+        """ This parses all the data from an easypost Instance(with all the details) to our Package DocType. """
 
-        self.signed_by = instance.signed_by or None
+        self.carrier_status = data.status or 'Unknown'
+        self.carrier_status_detail = data.status_detail or 'Unknown'
 
-        self.carrier_est_weight = instance.weight_in_pounds
-        self.carrier_est_delivery = instance.naive_est_delivery_date
+        self.signed_by = data.signed_by or None
+
+        self.carrier_est_weight = data.weight_in_pounds
+        self.carrier_est_delivery = data.naive_est_delivery_date
 
         # If package is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
-        if instance.status == 'Delivered' or instance.status_detail == 'Arrived At Destination':
-            self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(instance.tracking_details[-1].datetime, self.flags.carrier_uses_utc)
+        if data.status == 'Delivered' or data.status_detail == 'Arrived At Destination':
+            self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(data.tracking_details[-1].datetime, EasypostAPI.carriers_using_utc.get(self.carrier, False))  # FIXME: Improve this.
             self.change_status('Awaiting Confirmation')
-        elif instance.status == 'Return To Sender' or instance.status_detail == 'Return':
+        elif data.status == 'Return To Sender' or data.status_detail == 'Return':
             self.change_status('Returned to Sender')
         else:  # TODO: Change the status when the carrier status: failure, cancelled, error
             self.change_status('Awaiting Receipt')
 
-        if instance.tracking_details:
-            last_detail = instance.tracking_details[-1]
+        if data.tracking_details:
+            last_detail = data.tracking_details[-1]
 
             self.carrier_last_detail = "<b>{status}</b> <br><br> {detail} <br><br> {location}".format(
                 status=last_detail.message,

@@ -7,11 +7,13 @@ def find_package_by_tracking_number(tracking_number: str):
     """ Tries to Find a Package Doc giving only a tracking number """
     result = find_carrier_by_tracking_number(tracking_number)  # Returns tracking_number sanitized
 
+    # ToDo: OPTIMIZE the build of query params: 1ZY853E7YW41358480
     coincidences = frappe.get_list('Package',
-        fields=['name', 'tracking_number', 'customer_name', 'transportation_type'],
+        fields=['name', 'tracking_number', 'consolidated_tracking_numbers', 'customer_name', 'transportation_type'],
         or_filters={
             'name': ['LIKE', '%{}%'.format(result['search_term'])],
-            'tracking_number': ['LIKE', '%{}%'.format(result['search_term'])]
+            'tracking_number': ['LIKE', '%{}%'.format(result['search_term'])],
+            'consolidated_tracking_numbers': ['LIKE', '%{}%'.format(result['search_term'])]
         }
     )
 

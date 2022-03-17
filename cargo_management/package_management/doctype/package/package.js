@@ -1,6 +1,5 @@
 function calculate_package_total(frm) {
-    let content_amount = frm.get_sum('content', 'amount');
-    frm.doc.total = (frm.doc.has_shipping) ? content_amount + frm.doc.shipping_amount : content_amount;  // Calculate the 'total' field on Package Doctype(Parent)
+    frm.doc.total = frm.get_sum('content', 'amount') + frm.doc.shipping_amount;  // Calculate the 'total' field on Package Doctype(Parent)
 
     frm.refresh_field('total');
 }
@@ -14,9 +13,6 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     refresh_field('amount', cdn, 'content');
     calculate_package_total(frm); // Calculate the parent 'total' field and trigger refresh event
 }
-
-// todo: MATCH the new and current fields! import_price for example
-// TODO: Finish The Progress Bar -> frm.dashboard.add_progress("Status", []
 
 frappe.ui.form.on('Package', {
 
@@ -41,19 +37,9 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        /*
-        Es de amazon vamos a solicitar una fecha estimada de entrega
-        es drop off, pick-up y desconocido. no pedir fecha
-        Para todo lo que se rastree pues no hacer nada, eso se va a autopoblar
-         */
-
-        frm.add_custom_button(__('Open carrier page'), () => frm.events.open_carrier_detail_page(frm.doc));
-
-        if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
-            frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm) , __('Get Items From'));
-        }
-
+        // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []
         frm.events.show_explained_status(frm); // Intro Message
+        frm.events.build_custom_buttons(frm);  // Adding Custom buttons
     },
 
     tracking_number: function (frm) {
@@ -65,24 +51,12 @@ frappe.ui.form.on('Package', {
 
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.find_carrier_by_tracking_number',
-            type: 'GET',
-            freeze: true,
-            freeze_message: __('Searching Carrier...'),
-            args: {tracking_number: frm.doc.tracking_number},
+            type: 'GET', freeze: true, freeze_message: __('Searching Carrier...'), args: {tracking_number: frm.doc.tracking_number},
             callback: (r) => {
                 frm.doc.carrier = r.message.carrier;
-                refresh_many(['carrier', 'tracking_number']);
-
-                frappe.show_alert('Carrier: ' + r.message.carrier);  // TODO: Delete this comment?
+                refresh_many(['tracking_number', 'carrier']);
             }
         });
-    },
-
-    has_shipping: function (frm) {
-        if (!frm.doc.has_shipping) {
-            frm.doc.shipping_amount = 0; // Empty the value of the field.
-        }
-        calculate_package_total(frm);
     },
 
     shipping_amount: function (frm) {
@@ -91,29 +65,46 @@ frappe.ui.form.on('Package', {
 
     // Custom Functions
 
-    open_carrier_detail_page: function (doc) {
-        frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_carrier_tracking_url',
-            type: 'GET',
-            args: {carrier: doc.carrier},
-            freeze: true,
-            freeze_message: __('Opening carrier detail page...'),
-            callback: (r) => window.open(r.message + doc.tracking_number, '_blank')
-        });
-    },
-
     show_explained_status: function (frm) {
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
-            type: 'GET',
-            args: {source_name: frm.doc.name},
+            type: 'GET', args: {source_name: frm.doc.name},
             callback: (r) => {
-                if ($.isArray(r.message.message)) { // If there are multiple messages.
-                    r.message.message = r.message.message.map(message => '<div>' + message + '</div>').join('');
+                r.message.message.forEach(m => frm.layout.show_message(m, ''))  // FIXME: Core overrides color
+                frm.layout.message.removeClass().addClass('form-message ' + r.message.color);
+            }
+        });
+    },
+
+    build_custom_buttons: function (frm) {
+        frappe.call({
+            method: 'cargo_management.package_management.doctype.package.actions.get_carrier_settings',
+            type: 'GET', args: {carrier: frm.doc.carrier},
+            callback: (r) => {
+                if (r.message.api) { // TODO: easypost_id or other APIs or More than N days or status.
+                    frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
                 }
 
-                frm.set_intro(r.message.message, ''); // FIXME: Core only allows blue & yellow: layout.js -> show_message()
-                frm.layout.message.removeClass().addClass('form-message ' + r.message.color); // Set same color on message as on status indicator dot.
+                switch (r.message.tracking_urls.length) {
+                    case 0: return;
+                    case 1: return frm.add_custom_button(__('Open Carrier Page'), () => window.open(r.message.tracking_urls[0].url + frm.doc.tracking_number));
+                    default: r.message.tracking_urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number), __('Open Carrier Page')));
+                }
+            }
+        });
+
+        if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
+            frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm) , __('Get Items From'));
+        }
+    },
+
+    get_data_from_api: function (frm) {
+        frappe.call({
+            method: 'cargo_management.package_management.doctype.package.actions.get_data_from_api',
+            freeze: true, freeze_message: __('Updating from Carrier...'), args: {source_name: frm.doc.name},
+            callback: (r) => {
+                frappe.model.sync(r.message);
+                frm.refresh();
             }
         });
     },
@@ -192,7 +183,6 @@ frappe.ui.form.on('Package', {
     }
 });
 
-// Children Doctype of Package
 frappe.ui.form.on('Package Content', {
     content_remove(frm) {
         calculate_package_total(frm);
