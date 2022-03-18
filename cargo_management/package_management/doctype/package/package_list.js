@@ -7,18 +7,22 @@ frappe.listview_settings['Package'] = {
 
     get_indicator(doc) {
         const status_color = {
-            'Awaiting Receipt': 'lightblue',
-            'Awaiting Confirmation': 'orange',
             'In Extraordinary Confirmation': 'pink',
-            'Awaiting Departure': 'cyan',
+
+            // cyan
+            // TODO: Range of colors
+            'Awaiting Receipt': 'blue',
+            'Awaiting Confirmation': 'orange',
+            'Awaiting Departure': 'yellow',
             'In Transit': 'purple',
             'In Customs': 'gray',
-            'Sorting': 'yellow',
-            'To Bill': 'orange',
+            'Sorting': 'green',
+            'To Bill': 'green',
             'Unpaid': 'red',
-            'To Deliver or Pickup': 'blue',
-            'Finished': 'green',
-            'Cancelled': 'darkgrey',
+            'To Deliver or Pickup': 'cyan',
+            'Finished': 'darkgrey',
+
+            'Cancelled': 'red',
             'Never Arrived': 'red',
             'Returned to Sender': 'red',
         };
@@ -58,15 +62,19 @@ frappe.listview_settings['Package'] = {
     },
 
     onload: function (listview) {
+        // Quick Hack update Placeholder from name to Custom
+        listview.page.fields_dict['name'].$wrapper.attr('data-original-title', __('Tracking Number'))
+            .find('input').attr('placeholder', __('Tracking Number'));
+
         listview.get_args = function () {  // Override only instance method
             let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super
 
-            args.filters.some((filter, i) => {
-                if (filter[1] === 'name') {  // If we find name move it from filters to or_filters and expand it
+            args.filters.some((f, i) => {
+                if (f[1] === 'name') {  // If we find name move it from filters to or_filters and expand it
                     return args.or_filters = [
                         args.filters.splice(i, 1)[0],  // Remove and add ;)
-                        [filter[0], 'tracking_number', filter[2], filter[3]],
-                        [filter[0], 'consolidated_tracking_numbers', filter[2], filter[3]],
+                        [f[0], 'tracking_number', f[2], f[3]],
+                        [f[0], 'consolidated_tracking_numbers', f[2], f[3]],
                     ];
                 }
             });

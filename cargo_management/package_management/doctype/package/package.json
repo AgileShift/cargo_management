@@ -323,7 +323,6 @@
    "search_index": 1
   },
   {
-   "bold": 1,
    "fieldname": "consolidated_tracking_numbers",
    "fieldtype": "Small Text",
    "in_global_search": 1,
@@ -379,7 +378,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-03-16 09:14:53.730084",
+ "modified": "2022-03-17 22:54:56.801898",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
