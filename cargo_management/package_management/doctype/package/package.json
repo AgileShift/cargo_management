@@ -233,6 +233,7 @@
   },
   {
    "allow_bulk_edit": 1,
+   "allow_in_quick_entry": 1,
    "fieldname": "content",
    "fieldtype": "Table",
    "label": "Content",
@@ -378,7 +379,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-03-17 22:54:56.801898",
+ "modified": "2022-03-19 12:37:43.831358",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

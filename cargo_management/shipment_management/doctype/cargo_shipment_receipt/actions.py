@@ -8,11 +8,14 @@ from cargo_management.utils import get_list_from_child_table, update_status_in_b
 def update_status(source_doc_name: str, new_status: str):
     doc = frappe.get_cached_doc('Cargo Shipment Receipt', source_doc_name)  # Getting the Cargo Shipment Receipt Doc
 
+    # HOTFIX
+    cargo_shipment = frappe.get_doc('Cargo Shipment', doc.cargo_shipment)
+
     # We Mark the actual child tables added to the parent, because we can dynamically add
     update_status_in_bulk(docs_to_update={
         'Cargo Shipment Receipt': [doc.name],
         'Cargo Shipment': [doc.cargo_shipment],
-        'Warehouse Receipt': get_list_from_child_table(doc.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'),
+        'Warehouse Receipt': get_list_from_child_table(cargo_shipment.cargo_shipment_lines, 'warehouse_receipt'),
         'Package': get_list_from_child_table(doc.cargo_shipment_receipt_lines, 'package')
     }, new_status=new_status, msg_title='Marked as Sorting', mute_emails=doc.mute_emails)
 

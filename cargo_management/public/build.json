@@ -1,5 +1,8 @@
 {
 	"css/package-indicator.min.css": [
 		"public/scss/package-indicator.scss"
+	],
+	"js/package-utils.min.js": [
+		"package_management/doctype/package/package_quick_entry.js"
 	]
 }

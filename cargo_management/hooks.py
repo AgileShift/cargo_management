@@ -16,7 +16,7 @@ source_link = "https://github.com/AgileShift/cargo_management"
 
 # include js, css files in header of desk.html
 app_include_css = ["/assets/css/package-indicator.min.css"]
-# app_include_js = "/assets/cargo_management/js/package_management.js"
+app_include_js = ["/assets/js/package-utils.min.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/cargo_management/css/package_management.css"
