@@ -132,7 +132,7 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                 if (r.message.coincidences) {
                     const selector_dialog = new frappe.ui.Dialog({
                         title: __('Coincidences found for: {0}', [row_package]),
-                        static: false,          // Cannot cancel touching outside pop-up
+                        static: true,          // Cannot cancel touching outside pop-up
                         size: 'extra-large',
                         fields: [{fieldtype: 'HTML', fieldname: 'table_html',}]
                     });
@@ -152,6 +152,7 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                     frappe.show_alert('COINCIDENCIA Exacta');
                 } else {
                     frappe.show_alert('No hay coincidencia, es tracking sin reportar.');
+                    frm.refresh_fields(); // This is to recall all evals on depends_on fields. FIXME: Its another way!
                 }
             }
         });  //177
