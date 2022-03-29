@@ -40,7 +40,8 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     onload: function (frm) {
-        // if (frm.is_new()) frm.events.ask_transportation_type(frm); // TODO: Activate
+        if (frm.is_new())
+            frm.events.ask_transportation_type(frm); // TODO: Activate
     },
 
     before_save: function (frm) {
@@ -71,6 +72,24 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 });
 
+// Improve
+function set_details(frm, row, coincidence) {
+    const doc_name = coincidence.name || coincidence;
+    frappe.db.get_doc('Package', doc_name).then(function (doc) {
+        row.package = doc.name;
+        row.transportation_type = doc.transportation_type;
+        row.customer = doc.customer;
+        row.customer_name = doc.customer_name;
+        row.carrier = doc.carrier;
+        row.customer_description = doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n");
+        row.carrier_real_delivery = doc.carrier_real_delivery;
+        row.carrier_est_weight = doc.carrier_est_weight;
+
+        frm.refresh_fields();
+        // frm.refresh_field('warehouse_receipt_lines') // TODO: Change for grid refresh!
+    });
+}
+
 // Child Table
 frappe.ui.form.on('Warehouse Receipt Line', {
 
@@ -96,8 +115,6 @@ frappe.ui.form.on('Warehouse Receipt Line', {
             return;
         }
 
-        console.log(row_package)
-
         frappe.call({
             method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.find_package_by_tracking_number',
             type: 'GET',
@@ -105,8 +122,6 @@ frappe.ui.form.on('Warehouse Receipt Line', {
             freeze_message: __('Searching Package...'),
             args: {tracking_number: row_package},
             callback: (r) => {
-
-                console.log(r.message)
 
                 // https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
                 // MultiselectDialog with Package List -> Issue: can select multiple
@@ -126,33 +141,21 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                         .html(frappe.render_template('package_selector', {search_term: r.message.search_term, coincidences: r.message.coincidences}))
                         .find('a').on('click', function(e) {
                             e.preventDefault();
-                            row_package = $(this).attr('data-value');
+                            set_details(frm, locals[cdt][cdn], $(this).attr('data-value'))
 
-                            frm.refresh_field('warehouse_receipt_lines') // TODO: Change for grid refresh!
                             selector_dialog.hide();
                     });
 
                     selector_dialog.show();
-                } else if (r.message) {
+                } else if (r.message.coincidence) {
+                    set_details(frm, locals[cdt][cdn], r.message.coincidence); // FIXME: Fetch row and row_package.
                     frappe.show_alert('COINCIDENCIA Exacta');
-                    // TODO: si es exacta asegurarse de poner el nombre siempre, si el pone el tracking y este es distinto.
-                    // TBA176022936401
-                } else { // r.message === false
+                } else {
                     frappe.show_alert('No hay coincidencia, es tracking sin reportar.');
                 }
-
-                refresh_field()
-
             }
         });  //177
 
-        // row.transportation_type = doc.transportation_type;
-        // row.customer = doc.customer;
-        // row.customer_name = doc.customer_name;
-        // row.carrier = doc.carrier;
-        // row.customer_description = doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n");
-        // row.carrier_real_delivery = doc.carrier_real_delivery;
-        // row.carrier_est_weight = doc.carrier_est_weight;
     },
 
     warehouse_est_weight: function (frm) {

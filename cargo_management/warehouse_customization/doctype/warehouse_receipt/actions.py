@@ -23,6 +23,6 @@ def find_package_by_tracking_number(tracking_number: str):
     if not coincidences:
         return {}               # No Package with similar name or tracking_number
     elif len(coincidences) == 1 and tracking_number in (coincidences[0].name, coincidences[0].tracking_number):
-        return coincidences[0]  # Only one coincidence and its equal. Exact match
+        return {'coincidence': coincidences[0]}  # Only one coincidence and its equal. Exact match
 
     return {'coincidences': coincidences, 'search_term': result['search_term']}
