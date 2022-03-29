@@ -3,7 +3,7 @@ import frappe
 
 def get_list_from_child_table(child_lines: list, field: str):
     """ This takes a List of Dicts [{}] and return a List of Uniques values. """
-    return list(set(child_line.get(field) for child_line in child_lines if child_line.get(field) is not None))  # FIXME: Performance?
+    return list(set(child_line.get(field) for child_line in child_lines if child_line.get(field)))  # FIXME: Performance?
 
 
 def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_title: str = '', mute_emails: bool = True):
