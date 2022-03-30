@@ -176,7 +176,6 @@
    "search_index": 1
   },
   {
-   "depends_on": "eval: !doc.__islocal",
    "fieldname": "section_break_10",
    "fieldtype": "Section Break"
   },
@@ -259,7 +258,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-02-16 16:50:57.884805",
+ "modified": "2022-03-30 09:35:34.961450",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

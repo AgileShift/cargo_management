@@ -68,7 +68,7 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     transportation_type: function (frm) {
-        frm.fields_dict.warehouse_receipt_lines.grid.grid_rows[0].show_form();  // frm.grids[0].grid.grid_rows[0].show_form();
+        // frm.fields_dict.warehouse_receipt_lines.grid.grid_rows[0].show_form();  // frm.grids[0].grid.grid_rows[0].show_form();
     },
 });
 
@@ -130,6 +130,7 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                 // Select Field with Package List as Options -> Issue: Small extra data for package identification, and need a select button or event trigger.
                 // LinkSelector with Package List as Options -> Issue: its exactly what we need. But without search and button and configurable extra fields
                 if (r.message.coincidences) {
+                    return;
                     const selector_dialog = new frappe.ui.Dialog({
                         title: __('Coincidences found for: {0}', [row_package]),
                         static: true,          // Cannot cancel touching outside pop-up
@@ -149,9 +150,9 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                     selector_dialog.show();
                 } else if (r.message.coincidence) {
                     set_details(frm, locals[cdt][cdn], r.message.coincidence); // FIXME: Fetch row and row_package.
-                    frappe.show_alert('COINCIDENCIA Exacta');
+                    frappe.show_alert('Paquete Pre-Alertado');
                 } else {
-                    frappe.show_alert('No hay coincidencia, es tracking sin reportar.');
+                    frappe.show_alert('Paquete sin Pre-Alerta');
                     frm.refresh_fields(); // This is to recall all evals on depends_on fields. FIXME: Its another way!
                 }
             }
