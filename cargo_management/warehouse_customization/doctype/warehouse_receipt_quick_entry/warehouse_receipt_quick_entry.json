@@ -8,6 +8,7 @@
  "field_order": [
   "tracking_number",
   "customer",
+  "customer_name",
   "shipper",
   "column_break_2",
   "type",
@@ -22,8 +23,12 @@
   "weight",
   "column_break_14",
   "length",
+  "column_break_17",
   "width",
-  "height"
+  "column_break_19",
+  "height",
+  "section_break_22",
+  "label_photo"
  ],
  "fields": [
   {
@@ -41,7 +46,7 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "Box\nEnvelope\nPallet\nMail"
+   "options": "\nBox\nEnvelope\nPallet\nMail"
   },
   {
    "default": "0",
@@ -51,8 +56,10 @@
   },
   {
    "fieldname": "customer",
-   "fieldtype": "Data",
-   "label": "Consignee"
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Customer",
+   "options": "Customer"
   },
   {
    "fieldname": "shipper",
@@ -64,14 +71,18 @@
    "fieldtype": "Section Break"
   },
   {
+   "description": "Package description provided by the warehouse (if available).",
    "fieldname": "warehouse_description",
    "fieldtype": "Small Text",
    "label": "Warehouse Description"
   },
   {
+   "bold": 1,
+   "description": "Package description provided by the customer (if available).",
    "fieldname": "customer_description",
    "fieldtype": "Small Text",
-   "label": "Customer Description"
+   "label": "Customer Description",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_9",
@@ -82,6 +93,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "description": "Estimated weight of the package as measured by the warehouse (if available).",
    "fieldname": "weight",
    "fieldtype": "Float",
    "label": "Weight (lb)",
@@ -109,7 +121,7 @@
    "fieldname": "carrier",
    "fieldtype": "Select",
    "label": "Carrier",
-   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx"
+   "options": "\nUSPS\nAmazon\nUPS\nDHL\nFedEx"
   },
   {
    "fieldname": "column_break_14",
@@ -120,13 +132,35 @@
    "fieldname": "sea",
    "fieldtype": "Check",
    "label": "SEA"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Consignee"
+  },
+  {
+   "fieldname": "section_break_22",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "label_photo",
+   "fieldtype": "Attach Image",
+   "label": "Label Photo"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-04-01 09:39:04.672262",
+ "modified": "2022-04-01 15:14:35.056537",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Quick Entry",

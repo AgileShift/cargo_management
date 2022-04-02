@@ -74,4 +74,8 @@ def find_carrier_by_tracking_number(tracking_number: str):
     elif 'JD' in tracking_number:  # or JJD
         frappe.throw('Convert to DHL Tracking')  # FIXME: Maybe we can convert it?
 
-    return {'carrier': carrier, 'search_term': search_term, 'tracking_number': tracking_number}
+    return {
+        'carrier': carrier,
+        'search_term': search_term,
+        'tracking_number': tracking_number
+    }

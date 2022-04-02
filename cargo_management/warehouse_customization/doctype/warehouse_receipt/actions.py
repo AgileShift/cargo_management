@@ -21,8 +21,11 @@ def find_package_by_tracking_number(tracking_number: str):
     # TODO: What if multiple coincidences are find and 1 of them its a exact match?
     # TODO: if search request its inside consolidated
     if not coincidences:
-        return {}               # No Package with similar name or tracking_number
+        return {}  # No Package with similar name or tracking_number
     elif len(coincidences) == 1 and tracking_number in (coincidences[0].name, coincidences[0].tracking_number):
         return {'coincidence': coincidences[0]}  # Only one coincidence and its equal. Exact match
 
-    return {'coincidences': coincidences, 'search_term': result['search_term']}
+    return {  # TODO: Return always coincidences, even if its only one? and possible a unique one
+        'coincidences': coincidences,
+        'search_term': result['search_term']
+    }
