@@ -54,9 +54,7 @@ frappe.ui.form.on('Warehouse Receipt Quick Entry', {
         frm.fields_dict.customer_description.$wrapper.find('.control-value').css('font-weight', 'bold');
         frm.fields_dict.notes.$input.css('height', 'auto');
 
-        frm.page.set_primary_action(__('Print'), () => {
-            // delete. frm.make_new()
-        });
+        frm.page.set_primary_action(__('Print'), () => frm.events.print_and_save(frm));
     },
 
     tracking_number: function (frm) {
@@ -85,7 +83,24 @@ frappe.ui.form.on('Warehouse Receipt Quick Entry', {
         });
     },
 
-    // Custom Functions
+    // Custom Save
+    print_and_save(frm) {
+        // Build data
+        frm.doc.transportation = frm.transportation.get_value()[0];
+        frm.doc.size_table = frm.size_table.get_value();
+
+        frappe.call({
+            method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt_quick_entry.warehouse_receipt_quick_entry.create_warehouse_receipt_line_from_quick_entry',
+            freeze: true,
+            freeze_message: __('Saving Warehouse Receipt...'),
+            args: {quick_entry: frm.doc},
+            callback: (r) => { // TODO: Maybe a Switch
+                console.log(r.message);
+            }
+        });
+    },
+
+    // Custom Functions if a Tracking Number is Found
     show_alerts(frm) {
         frm.dashboard.clear_headline();
 
@@ -104,7 +119,9 @@ frappe.ui.form.on('Warehouse Receipt Quick Entry', {
             frm.doc.customer_name = doc.customer_name;
             frm.doc.shipper = doc.shipper;
 
-            frm.transportation.select_options(doc.transportation);
+            //frm.transportation.select_options(doc.transportation);
+            $(frm.transportation.$wrapper.find(`:checkbox[data-unit="${doc.transportation}"]`)[0]).trigger('click');
+
             frm.doc.carrier = doc.carrier;
 
             frm.doc.customer_description = (doc.content.length > 0) ? doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n") : null;
