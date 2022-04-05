@@ -1,6 +1,6 @@
 frappe.ui.form.on('Warehouse Receipt', {
 
-    ask_transportation_type: function (frm) {
+    ask_transportation: function (frm) {
         const transport_dialog = new frappe.ui.Dialog({
             title: __('Select Transportation Type'),
             fields: [
@@ -21,7 +21,7 @@ frappe.ui.form.on('Warehouse Receipt', {
                     frappe.throw({message: 'Seleccione un tipo de transporte.', alert: true});
                 }
                 transport_dialog.hide();
-                frm.set_value('transportation_type', transport_type);  // Trigger the event that opens first row
+                frm.set_value('transportation', transport_type);  // Trigger the event that opens first row
             }
         });
         transport_dialog.show();
@@ -41,7 +41,7 @@ frappe.ui.form.on('Warehouse Receipt', {
 
     onload: function (frm) {
         if (frm.is_new())
-            frm.events.ask_transportation_type(frm); // TODO: Activate
+            frm.events.ask_transportation(frm); // TODO: Activate
     },
 
     before_save: function (frm) {
@@ -67,7 +67,7 @@ frappe.ui.form.on('Warehouse Receipt', {
         );
     },
 
-    transportation_type: function (frm) {
+    transportation: function (frm) {
         // frm.fields_dict.warehouse_receipt_lines.grid.grid_rows[0].show_form();  // frm.grids[0].grid.grid_rows[0].show_form();
     },
 });
@@ -77,7 +77,7 @@ function set_details(frm, row, coincidence) {
     const doc_name = coincidence.name || coincidence;
     frappe.db.get_doc('Package', doc_name).then(function (doc) {
         row.package = doc.name;
-        row.transportation_type = doc.transportation_type;
+        row.transportation = doc.transportation;
         row.customer = doc.customer;
         row.customer_name = doc.customer_name;
         row.carrier = doc.carrier;

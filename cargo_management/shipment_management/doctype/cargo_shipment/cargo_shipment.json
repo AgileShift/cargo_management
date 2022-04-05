@@ -12,7 +12,7 @@
   "reference",
   "mute_emails",
   "column_break_2",
-  "transportation_type",
+  "transportation",
   "column_break_4",
   "status",
   "data_6",
@@ -63,20 +63,6 @@
    "in_standard_filter": 1,
    "label": "Status",
    "options": "Awaiting Departure\nIn Transit\nSorting\nFinished",
-   "reqd": 1,
-   "search_index": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "bold": 1,
-   "default": "Ocean",
-   "fieldname": "transportation_type",
-   "fieldtype": "Select",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Transportation type",
-   "options": "Air\nOcean",
    "reqd": 1,
    "search_index": 1
   },
@@ -223,6 +209,20 @@
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Carriers (in pounds)",
    "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "Ocean",
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transportation",
+   "options": "Air\nOcean",
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "links": [
@@ -237,7 +237,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2022-01-19 16:38:14.141576",
+ "modified": "2022-04-04 18:15:26.526539",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

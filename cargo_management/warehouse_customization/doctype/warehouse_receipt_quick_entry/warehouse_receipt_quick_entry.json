@@ -11,48 +11,28 @@
   "customer_name",
   "shipper",
   "column_break_2",
-  "type",
-  "sea",
-  "transportation_type",
+  "transportation_html",
   "carrier",
   "section_break_7",
   "warehouse_description",
   "column_break_9",
   "customer_description",
   "section_break_11",
-  "weight",
-  "column_break_14",
-  "length",
-  "column_break_17",
-  "width",
+  "size_table_html",
+  "notes",
   "column_break_19",
-  "height",
-  "section_break_22",
-  "label_photo"
+  "carrier_label_img",
+  "content_inside_img"
  ],
  "fields": [
   {
    "fieldname": "tracking_number",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Tracking Number",
-   "reqd": 1
+   "label": "Tracking Number"
   },
   {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "label": "Type",
-   "options": "\nBox\nEnvelope\nPallet\nMail"
-  },
-  {
-   "default": "0",
-   "fieldname": "transportation_type",
-   "fieldtype": "Check",
-   "label": "AIR"
   },
   {
    "fieldname": "customer",
@@ -71,6 +51,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval: !doc.customer_description;",
    "description": "Package description provided by the warehouse (if available).",
    "fieldname": "warehouse_description",
    "fieldtype": "Small Text",
@@ -93,49 +74,10 @@
    "fieldtype": "Section Break"
   },
   {
-   "description": "Estimated weight of the package as measured by the warehouse (if available).",
-   "fieldname": "weight",
-   "fieldtype": "Float",
-   "label": "Weight (lb)",
-   "precision": "2"
-  },
-  {
-   "fieldname": "length",
-   "fieldtype": "Float",
-   "label": "Length (cm)",
-   "precision": "2"
-  },
-  {
-   "fieldname": "width",
-   "fieldtype": "Float",
-   "label": "Width (cm)",
-   "precision": "2"
-  },
-  {
-   "fieldname": "height",
-   "fieldtype": "Float",
-   "label": "Height (cm)",
-   "precision": "2"
-  },
-  {
    "fieldname": "carrier",
    "fieldtype": "Select",
    "label": "Carrier",
    "options": "\nUSPS\nAmazon\nUPS\nDHL\nFedEx"
-  },
-  {
-   "fieldname": "column_break_14",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "sea",
-   "fieldtype": "Check",
-   "label": "SEA"
-  },
-  {
-   "fieldname": "column_break_17",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "column_break_19",
@@ -147,20 +89,34 @@
    "label": "Consignee"
   },
   {
-   "fieldname": "section_break_22",
-   "fieldtype": "Section Break"
+   "fieldname": "size_table_html",
+   "fieldtype": "HTML"
   },
   {
-   "fieldname": "label_photo",
+   "fieldname": "carrier_label_img",
    "fieldtype": "Attach Image",
-   "label": "Label Photo"
+   "label": "Photo of Carrier Label"
+  },
+  {
+   "fieldname": "content_inside_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Content Inside"
+  },
+  {
+   "fieldname": "transportation_html",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-04-01 15:14:35.056537",
+ "modified": "2022-04-04 16:23:15.658740",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt Quick Entry",

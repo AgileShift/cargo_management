@@ -31,10 +31,10 @@ frappe.listview_settings['Package'] = {
     },
 
     formatters: {
-        transportation_type(val) {
+        transportation(val) {
             let color = (val === 'Sea') ? 'blue' : 'red';
             return `<span class="indicator-pill ${color} filterable ellipsis"
-                data-filter="transportation_type,=,${frappe.utils.escape_html(val)}">
+                data-filter="transportation,=,${frappe.utils.escape_html(val)}">
 				<span class="ellipsis"> ${val} </span>
 			<span>`;
         }

@@ -8,7 +8,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "transportation_type",
+  "transportation",
   "column_break_3",
   "status",
   "section_break_7",
@@ -27,11 +27,8 @@
   "hazardous",
   "notes",
   "column_break_19",
-  "received_by",
   "carrier_label_img",
   "content_inside_img",
-  "warehouse_label",
-  "target_warehouse",
   "totals_section",
   "warehouse_est_gross_weight",
   "column_break_16",
@@ -53,14 +50,6 @@
    "options": "Draft\nOpen\nAwaiting Departure\nIn Transit\nSorting\nFinished",
    "read_only": 1,
    "reqd": 1,
-   "search_index": 1
-  },
-  {
-   "description": "Warehouse where reception occurred.",
-   "fieldname": "target_warehouse",
-   "fieldtype": "Link",
-   "label": "Target Warehouse",
-   "options": "Warehouse",
    "search_index": 1
   },
   {
@@ -163,19 +152,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "bold": 1,
-   "fieldname": "transportation_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Transportation Type",
-   "options": "\nSea\nAir",
-   "read_only": 1,
-   "reqd": 1,
-   "search_index": 1
-  },
-  {
    "fieldname": "section_break_10",
    "fieldtype": "Section Break"
   },
@@ -214,11 +190,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "received_by",
-   "fieldtype": "Data",
-   "label": "Received By"
-  },
-  {
    "fieldname": "carrier_label_img",
    "fieldtype": "Attach Image",
    "label": "Photo of Carrier Label"
@@ -229,15 +200,23 @@
    "label": "Photo of Content Inside"
   },
   {
-   "fieldname": "warehouse_label",
-   "fieldtype": "Attach Image",
-   "label": "Photo of Warehouse Label"
-  },
-  {
    "depends_on": "eval: !doc.__islocal",
    "fieldname": "totals_section",
    "fieldtype": "Section Break",
    "label": "Totals"
+  },
+  {
+   "bold": 1,
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Transportation",
+   "options": "\nSea\nAir",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "links": [
@@ -258,7 +237,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-03-30 09:35:34.961450",
+ "modified": "2022-04-04 16:45:53.620524",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

@@ -1,31 +1,116 @@
 frappe.ui.form.on('Warehouse Receipt Quick Entry', {
 
+    setup(frm) {
+        // New Fields
+        frm.transportation = frappe.ui.form.make_control({
+            parent: frm.fields_dict.transportation_html.$wrapper.addClass('text-center'),
+            df: {
+                label: __('Transportation'),
+                fieldname: 'transportation',
+                fieldtype: 'MultiCheck',
+                options: [
+                    {label: __('SEA'), value: 'Sea'},
+                    {label: __('AIR'), value: 'Air'}
+                ],
+                columns: 2
+            }
+        });
+        frm.size_table = frappe.ui.form.make_control({
+            parent: frm.fields_dict.size_table_html.$wrapper,
+            df: {
+                fieldname: 'sizes_table',
+                fieldtype: 'Table',
+                fields: [
+                    {
+                        label: __('Type'),
+                        fieldtype: 'Select',
+                        fieldname: 'type',
+                        in_list_view: true,
+                        options: ['Box', 'Envelope', 'Pallet', 'Mail']
+                    }
+                ].concat(
+                    ['Weight (lb)', 'Length (cm)', 'Width (cm)', 'Height (cm)'].map((df) => ({
+                        label: __(df),
+                        fieldtype: 'Float',
+                        fieldname: df.split(' ')[0].toLowerCase(),
+                        in_list_view: true,
+                        precision: 2
+                    }))
+                ),
+                in_place_edit: true,
+                cannot_add_rows: false,
+            },
+            render_input: true
+        });
+    },
+
+    refresh(frm) {
+        // Customizations
+        frm.disable_save();
+        frm.page.set_title('');
+        frm.size_table.grid.add_new_row();
+        frm.fields_dict.carrier.$wrapper.css('margin-top', "var(--margin-lg)");
+        frm.fields_dict.warehouse_description.$input.css('height', 'auto');
+        frm.fields_dict.customer_description.$wrapper.find('.control-value').css('font-weight', 'bold');
+        frm.fields_dict.notes.$input.css('height', 'auto');
+
+        frm.page.set_primary_action(__('Print'), () => {
+            // delete. frm.make_new()
+        });
+    },
+
+    tracking_number: function (frm) {
+        frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
+
+        if (!frm.doc.tracking_number) {
+            return;
+        }
+
+        frappe.call({
+            method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.find_package_by_tracking_number',
+            type: 'GET',
+            freeze: true,
+            freeze_message: __('Searching Package...'),
+            args: {tracking_number: frm.doc.tracking_number},
+            callback: (r) => { // TODO: Maybe a Switch
+                if (r.message.coincidences) {
+                    frm.events.show_selector_dialog(frm, r.message);
+                } else if (r.message.coincidence) {
+                    frappe.show_alert('Paquete Pre-Alertado.');
+                    frm.events.set_package(frm, r.message.coincidence);
+                } else {
+                    frappe.show_alert('Paquete sin Pre-Alerta.');
+                }
+            }
+        });
+    },
+
+    // Custom Functions
     show_alerts(frm) {
-        console.log('Show ALerts');
+        frm.dashboard.clear_headline();
+
         if (frm.doc.customer_description) {
-            frm.set_intro('No es necesario abrir el paquete');
+            frm.layout.show_message('<b>No es necesario abrir el paquete. <br> Cliente Pre-Alerto el contenido.</b>', '');
+            frm.layout.message.removeClass().addClass('form-message ' + 'green');  // FIXME: Core overrides color
         }
     },
 
     set_package: function (frm, coincidence) {
         const doc_name = coincidence.name || coincidence;
 
-        // TODO: Improve this?
         frappe.db.get_doc('Package', doc_name).then(function (doc) {
             frm.doc.tracking_number = doc.name;
-            //frm.doc.transportation_type = doc.transportation_type;
             frm.doc.customer = doc.customer;
             frm.doc.customer_name = doc.customer_name;
+            frm.doc.shipper = doc.shipper;
+
+            frm.transportation.select_options(doc.transportation);
             frm.doc.carrier = doc.carrier;
 
-            if (doc.content.length > 0) { // Has Content
-                frm.doc.customer_description = doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n");
-                frm.set_df_property('warehouse_description', 'read_only', true);
-            }
+            frm.doc.customer_description = (doc.content.length > 0) ? doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n") : null;
 
             frm.refresh_fields();
-
-
+            frm.events.show_alerts(frm);
         });
     },
 
@@ -56,32 +141,5 @@ frappe.ui.form.on('Warehouse Receipt Quick Entry', {
             });
 
         selector_dialog.show();
-    },
-
-    tracking_number: function (frm) {
-        frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
-
-        if (!frm.doc.tracking_number) {
-            return;
-        }
-
-        frappe.call({
-            method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt.actions.find_package_by_tracking_number',
-            type: 'GET',
-            freeze: true,
-            freeze_message: __('Searching Package...'),
-            args: {tracking_number: frm.doc.tracking_number},
-            callback: (r) => {
-                if (r.message.coincidences) {
-                    frm.events.show_selector_dialog(frm, r.message);
-                } else if (r.message.coincidence) {
-                    frappe.show_alert('Paquete Pre-Alertado.');
-                    frm.events.set_package(frm, r.message.coincidence);
-                } else {
-                    frappe.show_alert('Paquete sin Pre-Alerta.');
-                    // frm.refresh_fields(); // This is to recall all evals on depends_on fields. FIXME: Its another way!
-                }
-            }
-        });
     }
 });

@@ -15,7 +15,7 @@
   "customer",
   "customer_name",
   "column_break_9",
-  "transportation_type",
+  "transportation",
   "status",
   "extra_services_section",
   "assisted_purchase",
@@ -299,18 +299,6 @@
    "label": "Assisted Purchase"
   },
   {
-   "allow_in_quick_entry": 1,
-   "default": "Sea",
-   "fieldname": "transportation_type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Transportation Type",
-   "options": "Sea\nAir",
-   "search_index": 1
-  },
-  {
    "bold": 1,
    "fieldname": "cargo_shipment",
    "fieldtype": "Link",
@@ -344,6 +332,18 @@
    "depends_on": "total",
    "fieldname": "totals_section",
    "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "Sea",
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Transportation",
+   "options": "Sea\nAir",
+   "search_index": 1
   }
  ],
  "links": [
@@ -379,7 +379,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-03-19 12:37:43.831358",
+ "modified": "2022-04-04 16:46:05.738192",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

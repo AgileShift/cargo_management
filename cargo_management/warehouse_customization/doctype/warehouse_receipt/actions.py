@@ -9,7 +9,7 @@ def find_package_by_tracking_number(tracking_number: str):
 
     # ToDo: OPTIMIZE the build of query params: 1ZY853E7YW41358480
     coincidences = frappe.get_list('Package',
-        fields=['name', 'tracking_number', 'consolidated_tracking_numbers', 'customer_name', 'transportation_type'],
+        fields=['name', 'tracking_number', 'consolidated_tracking_numbers', 'customer_name', 'transportation'],
         or_filters={
             'name': ['LIKE', '%{}%'.format(result['search_term'])],
             'tracking_number': ['LIKE', '%{}%'.format(result['search_term'])],

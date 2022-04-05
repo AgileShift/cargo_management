@@ -6,7 +6,7 @@ from frappe.desk.doctype.dashboard_chart.dashboard_chart import get as build_cha
 def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None, to_date=None, timespan=None,
         time_interval=None, heatmap_year=None, refresh=None):
     """ Custom Chart using core Dashboard Chart Data.
-    We need a Count Chart for each transportation_type. We request each data and create a single Cross Chart.
+    We need a Count Chart for each transportation. We request each data and create a single Cross Chart.
     If we @cache_source in core we get a trouble because Core tries to find a Dashboard Chart from Database.
 
     # TODO: Make this with some dynamic variable.
@@ -28,7 +28,7 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
         'group_by_type': 'Count',  # Unnecessary
         # TODO: Append filters Dynamically
         'filters_json': [
-            ['Package', 'transportation_type', '=', 'Sea', False],
+            ['Package', 'transportation', '=', 'Sea', False],
             ['Package', 'assisted_purchase', '=', filters['assisted_purchase'], False],
         ],
         'name': 'SEA'  # Readable label name
