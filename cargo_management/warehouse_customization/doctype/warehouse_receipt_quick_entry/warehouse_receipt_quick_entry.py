@@ -12,7 +12,7 @@ def create_warehouse_receipt_line_from_quick_entry(quick_entry):
 	quick_entry = frappe.parse_json(quick_entry)
 
 	lines = []
-	for line in quick_entry.size_table:
+	for line in quick_entry.pieces:
 		line = frappe.parse_json(line)
 		lines.append({
 			'package': quick_entry.tracking_number,

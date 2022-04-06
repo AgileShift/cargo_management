@@ -1,47 +1,58 @@
 frappe.ui.form.on('Warehouse Receipt', {
 
-    ask_transportation: function (frm) {
-        const transport_dialog = new frappe.ui.Dialog({
-            title: __('Select Transportation Type'),
-            fields: [
-                {
-                    fieldname: 'sea_transport', fieldtype: 'Check', label: __('Sea Transport'),
-                    change: () => cur_dialog.fields_dict.air_transport.input.checked = !cur_dialog.get_value('sea_transport')
-                }, {fieldtype: 'Column Break'}, {
-                    fieldname: 'air_transport', fieldtype: 'Check', label: __('Air Transport'),
-                    onchange: () => cur_dialog.fields_dict.sea_transport.input.checked = !cur_dialog.get_value('air_transport')
-                }
-            ],
-            static: true,          // Cannot cancel touching outside pop-up
-            no_cancel_flag: true,  // Cannot cancel with keyboard
-            primary_action_label: __('Select'),
-            primary_action: (response) => {
-                const transport_type = response.sea_transport ? 'Sea' : response.air_transport ? 'Air' : false;
-                if (!transport_type) {
-                    frappe.throw({message: 'Seleccione un tipo de transporte.', alert: true});
-                }
-                transport_dialog.hide();
-                frm.set_value('transportation', transport_type);  // Trigger the event that opens first row
+    transportation_multi_check: function (frm) {
+        frm.transportation_multicheck = frappe.ui.form.make_control({
+            parent: frm.fields_dict.transportation_multicheck_html.$wrapper.addClass('text-center'),
+            df: {
+                label: __('Transportation Method'),
+                fieldtype: 'MultiCheck',
+                reqd: true,
+                columns: 2,
+                options: [{label: __('SEA'), value: 'Sea'}, {label: __('AIR'), value: 'Air'}],
+                on_change: () => frm.doc.transportation = frm.transportation_multicheck.get_value().at(-1)
             }
         });
-        transport_dialog.show();
-    }, // 28 TODO: Make this more ussable
+        frm.transportation_multicheck.$label.addClass('reqd');
+    },
 
-    setup: function () {
+    setup: function (frm) {
         $('.layout-side-section').hide(); // Little Trick to work better
 
-        // https://stackoverflow.com/a/1977126/3172310
-        $(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +
-            "input[data-fieldname='length'], input[data-fieldname='width'], input[data-fieldname='height']", (event) => {
-            if (event.key === 'Enter') {  // Enter key is sent if field is set from barcode scanner.
-                event.preventDefault(); // We prevent the button 'Attach Image' opens a pop-up.
-            }
-        });
+        if (frm.is_new()) {
+            frm.events.transportation_multi_check(frm);
+        }
+
+        frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
     },
 
     onload: function (frm) {
-        if (frm.is_new())
-            frm.events.ask_transportation(frm); // TODO: Activate
+        //frm.grids[0].df.in_place_edit = true;
+        frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
+    },
+
+    refresh: function (frm) {
+        if (frm.is_new()) {
+            frm.page.set_title('');
+        }
+
+        frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
+
+
+
+        frm.grids[0].df.reqd = true;
+
+        //frm.grids[0].grid.add_new_row();
+        //frm.fields_dict.warehouse_receipt_lines.grid.add_new_row();
+
+        // Customizations
+        frm.fields_dict.warehouse_description.$input.css('height', 'auto');
+        frm.fields_dict.customer_description.$wrapper.find('.control-value').css('font-weight', 'bold');
+        frm.fields_dict.carrier_label_img.$wrapper.css('margin-top', 'var(--margin-xl)')
+        frm.fields_dict.notes.$input.css('height', 'auto');
+    },
+
+    onload_post_render: function (frm) {
+          frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
     },
 
     before_save: function (frm) {
@@ -67,9 +78,6 @@ frappe.ui.form.on('Warehouse Receipt', {
         );
     },
 
-    transportation: function (frm) {
-        // frm.fields_dict.warehouse_receipt_lines.grid.grid_rows[0].show_form();  // frm.grids[0].grid.grid_rows[0].show_form();
-    },
 });
 
 // Improve
@@ -156,7 +164,7 @@ frappe.ui.form.on('Warehouse Receipt Line', {
                     frm.refresh_fields(); // This is to recall all evals on depends_on fields. FIXME: Its another way!
                 }
             }
-        });  //177
+        });  //177 -> 156
 
     },
 
@@ -164,11 +172,12 @@ frappe.ui.form.on('Warehouse Receipt Line', {
         // TODO: Work this?
         frm.set_value('warehouse_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'warehouse_est_weight'));
     }
-});
+}); // FIXME: 167 . Improve and remove code!
 
 //106 -> 123 -> 196
 
-// TODO: Work This out: onload()
+// Unused Utils
+
 // frm.set_query('package', 'warehouse_receipt_lines', () => {
 //     return {
 //         filters: {
@@ -176,3 +185,38 @@ frappe.ui.form.on('Warehouse Receipt Line', {
 //         }
 //     };
 // });
+
+//ask_transportation: function (frm) {
+//    const transport_dialog = new frappe.ui.Dialog({
+//        title: __('Select Transportation Type'),
+//        fields: [
+//            {
+//                fieldname: 'sea_transport', fieldtype: 'Check', label: __('Sea Transport'),
+//                change: () => cur_dialog.fields_dict.air_transport.input.checked = !cur_dialog.get_value('sea_transport')
+//            }, {fieldtype: 'Column Break'}, {
+//                fieldname: 'air_transport', fieldtype: 'Check', label: __('Air Transport'),
+//                 onchange: () => cur_dialog.fields_dict.sea_transport.input.checked = !cur_dialog.get_value('air_transport')
+//             }
+//         ],
+//         static: true,          // Cannot cancel touching outside pop-up
+//         no_cancel_flag: true,  // Cannot cancel with keyboard
+//         primary_action_label: __('Select'),
+//         primary_action: (response) => {
+//             const transport_type = response.sea_transport ? 'Sea' : response.air_transport ? 'Air' : false;
+//             if (!transport_type) {
+//                 frappe.throw({message: 'Seleccione un tipo de transporte.', alert: true});
+//             }
+//             transport_dialog.hide();
+//             frm.set_value('transportation', transport_type);  // Trigger the event that opens first row
+//         }
+//     });
+//     transport_dialog.show();
+// },
+
+// https://stackoverflow.com/a/1977126/3172310 -> When a Button is in a Table
+//$(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +
+//    "input[data-fieldname='length'], input[data-fieldname='width'], input[data-fieldname='height']", (event) => {
+//    if (event.key === 'Enter') {  // Enter key is sent if field is set from barcode scanner.
+//        event.preventDefault(); // We prevent the button 'Attach Image' opens a pop-up.
+//    }
+//});

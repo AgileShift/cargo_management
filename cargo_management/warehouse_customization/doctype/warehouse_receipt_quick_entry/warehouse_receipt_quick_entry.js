@@ -1,60 +1,21 @@
 frappe.ui.form.on('Warehouse Receipt Quick Entry', {
 
-    setup(frm) {
-        // New Fields
-        frm.transportation = frappe.ui.form.make_control({
-            parent: frm.fields_dict.transportation_html.$wrapper.addClass('text-center'),
-            df: {
-                label: __('Transportation'),
-                fieldname: 'transportation',
-                fieldtype: 'MultiCheck',
-                options: [
-                    {label: __('SEA'), value: 'Sea'},
-                    {label: __('AIR'), value: 'Air'}
-                ],
-                columns: 2
-            }
-        });
-        frm.size_table = frappe.ui.form.make_control({
-            parent: frm.fields_dict.size_table_html.$wrapper,
-            df: {
-                fieldname: 'sizes_table',
-                fieldtype: 'Table',
-                fields: [
-                    {
-                        label: __('Type'),
-                        fieldtype: 'Select',
-                        fieldname: 'type',
-                        in_list_view: true,
-                        options: ['Box', 'Envelope', 'Pallet', 'Mail']
-                    }
-                ].concat(
-                    ['Weight (lb)', 'Length (cm)', 'Width (cm)', 'Height (cm)'].map((df) => ({
-                        label: __(df),
-                        fieldtype: 'Float',
-                        fieldname: df.split(' ')[0].toLowerCase(),
-                        in_list_view: true,
-                        precision: 2
-                    }))
-                ),
-                in_place_edit: true,
-                cannot_add_rows: false,
-            },
-            render_input: true
-        });
-    },
-
     refresh(frm) {
+        // Cleaning Data
+        frm.grids[0].grid.remove_all();  //frm.clear_table('table_field_name')
+        frm.grids[0].grid.add_new_row();
+
+        frm.doc.notes = '';
+        frm.doc.carrier_label_img = frm.doc.content_inside_img = '';
+
+        frm.refresh_fields();
+
         // Customizations
-        frm.disable_save();
-        frm.page.set_title('');
-        frm.size_table.grid.add_new_row();
+
         frm.fields_dict.carrier.$wrapper.css('margin-top', "var(--margin-lg)");
         frm.fields_dict.warehouse_description.$input.css('height', 'auto');
         frm.fields_dict.customer_description.$wrapper.find('.control-value').css('font-weight', 'bold');
         frm.fields_dict.notes.$input.css('height', 'auto');
-
-        frm.page.set_primary_action(__('Print'), () => frm.events.print_and_save(frm));
     },
 
     tracking_number: function (frm) {
@@ -87,7 +48,6 @@ frappe.ui.form.on('Warehouse Receipt Quick Entry', {
     print_and_save(frm) {
         // Build data
         frm.doc.transportation = frm.transportation.get_value()[0];
-        frm.doc.size_table = frm.size_table.get_value();
 
         frappe.call({
             method: 'cargo_management.warehouse_customization.doctype.warehouse_receipt_quick_entry.warehouse_receipt_quick_entry.create_warehouse_receipt_line_from_quick_entry',
@@ -160,3 +120,4 @@ frappe.ui.form.on('Warehouse Receipt Quick Entry', {
         selector_dialog.show();
     }
 });
+// 179

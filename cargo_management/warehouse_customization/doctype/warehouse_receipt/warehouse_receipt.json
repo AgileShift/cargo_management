@@ -8,28 +8,34 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "transportation",
+  "tracking_number",
+  "carrier",
   "column_break_3",
+  "transportation_multicheck_html",
+  "transportation",
   "status",
-  "section_break_7",
+  "section_break_10",
+  "shipper",
+  "column_break_12",
+  "consignee",
+  "section_description",
+  "warehouse_description",
+  "column_break_9",
+  "customer_description",
+  "section_timestamps",
   "opening_date",
   "column_break_8",
   "closing_date",
   "column_break_10",
   "departure_date",
-  "section_break_10",
-  "shipper",
-  "column_break_12",
-  "consignee",
   "sb_0",
   "warehouse_receipt_lines",
-  "additional_information_section",
-  "hazardous",
   "notes",
-  "column_break_19",
+  "column_break_23",
+  "hazardous",
   "carrier_label_img",
   "content_inside_img",
-  "totals_section",
+  "section_totals",
   "warehouse_est_gross_weight",
   "column_break_16",
   "volumetric_weight",
@@ -40,6 +46,7 @@
   {
    "bold": 1,
    "default": "Draft",
+   "depends_on": "eval: !doc.__islocal",
    "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
@@ -70,26 +77,13 @@
    "fieldtype": "Section Break"
   },
   {
-   "allow_bulk_edit": 1,
-   "columns": 10,
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table",
    "in_preview": 1,
-   "label": "Packages in Warehouse Receipt",
+   "label": "test",
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
-  },
-  {
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "additional_information_section",
-   "fieldtype": "Section Break",
-   "label": "Additional Information"
-  },
-  {
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "section_break_7",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_8",
@@ -186,10 +180,6 @@
    "label": "Notes"
   },
   {
-   "fieldname": "column_break_19",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "carrier_label_img",
    "fieldtype": "Attach Image",
    "label": "Photo of Carrier Label"
@@ -198,12 +188,6 @@
    "fieldname": "content_inside_img",
    "fieldtype": "Attach Image",
    "label": "Photo of Content Inside"
-  },
-  {
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "totals_section",
-   "fieldtype": "Section Break",
-   "label": "Totals"
   },
   {
    "bold": 1,
@@ -217,6 +201,57 @@
    "read_only": 1,
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Tracking Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "carrier",
+   "fieldtype": "Select",
+   "label": "Carrier",
+   "options": "\nUSPS\nUPS\nAmazon\nDHL\nFedEx\nUnknown\nDrop-Off\nPick-Up"
+  },
+  {
+   "fieldname": "transportation_multicheck_html",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "section_description",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval: !doc.__islocal",
+   "fieldname": "section_timestamps",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Description provided by the warehouse (if available).",
+   "fieldname": "warehouse_description",
+   "fieldtype": "Small Text",
+   "label": "Warehouse Description"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Description provided by the customer (if available).",
+   "fieldname": "customer_description",
+   "fieldtype": "Small Text",
+   "label": "Customer Description",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval: !doc.__islocal",
+   "fieldname": "section_totals",
+   "fieldtype": "Section Break"
   }
  ],
  "links": [
@@ -237,7 +272,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-04-04 16:45:53.620524",
+ "modified": "2022-04-06 08:45:45.832269",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
