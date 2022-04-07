@@ -5,63 +5,35 @@ frappe.ui.form.on('Warehouse Receipt', {
             parent: frm.fields_dict.transportation_multicheck_html.$wrapper.addClass('text-center'),
             df: {
                 label: __('Transportation Method'),
-                fieldtype: 'MultiCheck',
+                fieldtype: 'MultiCheckUnique',
                 reqd: true,
                 columns: 2,
                 options: [{label: __('SEA'), value: 'Sea'}, {label: __('AIR'), value: 'Air'}],
-                on_change: () => frm.doc.transportation = frm.transportation_multicheck.get_value().at(-1)
+                on_change: (selected) => frm.doc.transportation = selected
             }
         });
-        frm.transportation_multicheck.$label.addClass('reqd');
     },
 
     setup: function (frm) {
         $('.layout-side-section').hide(); // Little Trick to work better
 
-        if (frm.is_new()) {
+        if (frm.is_new())
             frm.events.transportation_multi_check(frm);
-        }
-
-        frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
     },
 
     onload: function (frm) {
-        //frm.grids[0].df.in_place_edit = true;
-        frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
     },
 
     refresh: function (frm) {
-        if (frm.is_new()) {
-            frm.page.set_title('');
-        }
-
-        frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
-
-
-
-        frm.grids[0].df.reqd = true;
-
-        //frm.grids[0].grid.add_new_row();
-        //frm.fields_dict.warehouse_receipt_lines.grid.add_new_row();
-
-        // Customizations
-        frm.fields_dict.warehouse_description.$input.css('height', 'auto');
-        frm.fields_dict.customer_description.$wrapper.find('.control-value').css('font-weight', 'bold');
-        frm.fields_dict.carrier_label_img.$wrapper.css('margin-top', 'var(--margin-xl)')
-        frm.fields_dict.notes.$input.css('height', 'auto');
     },
 
     onload_post_render: function (frm) {
-          frm.set_df_property('warehouse_receipt_lines', 'reqd', false);
+        if (frm.is_new())
+            frm.grids[0].grid.add_new_row();
     },
 
     before_save: function (frm) {
-        // TODO: Recalculate this fields!
-        // Calculate fields from child so can be saved from client-side
-        frm.set_value('warehouse_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'warehouse_est_weight'));
-        frm.set_value('carrier_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'carrier_est_weight'));
-
-        frm.print_label = frm.is_new(); // If new true else undefined.
+        frm.print_label = frm.is_new(); // If new true else undefined
     },
 
     after_save: function (frm) {
@@ -174,7 +146,7 @@ frappe.ui.form.on('Warehouse Receipt Line', {
     }
 }); // FIXME: 167 . Improve and remove code!
 
-//106 -> 123 -> 196
+//106 -> 123 -> 196 -> 177 -> 160 -> 154
 
 // Unused Utils
 

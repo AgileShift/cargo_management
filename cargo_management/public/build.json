@@ -1,8 +1,11 @@
 {
-	"css/package-indicator.min.css": [
-		"public/scss/package-indicator.scss"
+	"css/cargo_management.min.css": [
+		"public/scss/colors.scss",
+		"public/scss/overrides.scss"
 	],
-	"js/package-utils.min.js": [
-		"package_management/doctype/package/package_quick_entry.js"
+
+	"js/cargo_management.min.js": [
+		"public/js/utils/package_quick_entry.js",
+		"public/js/controls/overrides.js"
 	]
 }

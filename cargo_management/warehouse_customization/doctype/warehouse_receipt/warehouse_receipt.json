@@ -80,10 +80,8 @@
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table",
    "in_preview": 1,
-   "label": "test",
    "options": "Warehouse Receipt Line",
-   "read_only_depends_on": "eval: doc.status == 'Finished';",
-   "reqd": 1
+   "read_only_depends_on": "eval: doc.status == 'Finished';"
   },
   {
    "fieldname": "column_break_8",
@@ -238,6 +236,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
    "description": "Description provided by the customer (if available).",
    "fieldname": "customer_description",
    "fieldtype": "Small Text",
@@ -272,7 +271,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-04-06 08:45:45.832269",
+ "modified": "2022-04-07 08:40:22.451525",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
