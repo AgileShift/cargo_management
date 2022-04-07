@@ -94,7 +94,7 @@ frappe.ui.form.on('Warehouse Receipt', {
             .find('a').on('click', e => {
                 e.preventDefault();
                 selector_dialog.hide();
-                frm.events.set_package(frm, $(this).attr('data-value'));
+                frm.events.set_package(frm, $(e.target).attr('data-value'));
             });
 
         selector_dialog.show();
@@ -103,27 +103,26 @@ frappe.ui.form.on('Warehouse Receipt', {
     set_package: function (frm, coincidence) {
         const doc_name = coincidence.name || coincidence;
 
-        frappe.db.get_doc('Package', doc_name).then(function (doc) {
+        frappe.db.get_doc('Package', doc_name).then(doc => {
             frm.doc.tracking_number = doc.name;
             frm.doc.carrier = doc.carrier;
 
-            frm.doc.customer = doc.customer;
-            frm.doc.customer_name = doc.customer_name;
-            frm.doc.shipper = doc.shipper;
+            frm.transportation.$checkbox_area.find(`:checkbox[data-unit="${doc.transportation}"]`).trigger('click'); // This Trigger on_change
 
-            //frm.transportation.select_options(doc.transportation);
-            $(frm.transportation.$wrapper.find(`:checkbox[data-unit="${doc.transportation}"]`)[0]).trigger('click');
+            // FIXME: Join this fields?
+            frm.doc.shipper = doc.shipper;
+            frm.doc.consignee = doc.customer_name;
 
             frm.doc.customer_description = (doc.content.length > 0) ? doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n") : null;
 
             frm.refresh_fields();
-            //frm.events.show_alerts(frm);
+            frm.events.show_alerts(frm); // FIXME: Work on this
         });
     },
 
     show_alerts(frm) {
+        // TODO: Make this come from API?
         frm.dashboard.clear_headline();
-        // Make this come from API?
 
         if (frm.doc.customer_description) {
             frm.layout.show_message('<b>No es necesario abrir el paquete. <br> Cliente Pre-Alerto el contenido.</b>', '');
@@ -132,20 +131,11 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 });
 
-// Child Table
 frappe.ui.form.on('Warehouse Receipt Line', {});
 
 //106 -> 123 -> 196 -> 177 -> 160 -> 154 -> 125
 
 // Unused Utils
-
-// frm.set_query('package', 'warehouse_receipt_lines', () => {
-//     return {
-//         filters: {
-//             status: ['not in', ['Awaiting Departure', 'In Transit', 'In Customs', 'Sorting', 'Available to Pickup', 'Finished']]
-//         }
-//     };
-// });
 
 // https://stackoverflow.com/a/1977126/3172310 -> When a Button is in a Table
 //$(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +

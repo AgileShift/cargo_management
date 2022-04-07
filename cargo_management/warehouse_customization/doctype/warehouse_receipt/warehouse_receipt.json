@@ -189,6 +189,7 @@
   },
   {
    "bold": 1,
+   "depends_on": "eval: !doc.__islocal",
    "fieldname": "transportation",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -272,7 +273,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-04-07 10:53:52.665708",
+ "modified": "2022-04-07 11:32:10.710812",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

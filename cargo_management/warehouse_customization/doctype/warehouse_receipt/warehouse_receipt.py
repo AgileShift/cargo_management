@@ -11,14 +11,22 @@ class WarehouseReceipt(Document):
         # TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
 
         # We only change the warehouse_receipt field if it is different from current.
+        packages = get_list_from_child_table(self.warehouse_receipt_lines, 'package')
+
+        if not packages:
+            return
+
         frappe.db.sql("""
             UPDATE tabPackage
             SET warehouse_receipt = %(wr_name)s
-            WHERE `name` IN %(packages)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s 
+            WHERE name IN %(packages)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s 
         """, {
             'wr_name': self.name,
-            'packages': get_list_from_child_table(self.warehouse_receipt_lines, 'package')
+            'packages': packages
         })
+
+        # TODO: Actually change the status after the package is validated and creadted. maybe at status change from draft to open?
+
 
     def change_status(self, new_status):
         """ Validates the current status of the warehouse receipt and change it if it's possible. """
