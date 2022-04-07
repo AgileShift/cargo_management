@@ -16,6 +16,10 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 
 frappe.ui.form.on('Package', {
 
+    setup: function (frm) {
+        $('.layout-side-section').hide(); // Little Trick to work better
+    },
+
     onload: function(frm) {
         // Setting custom queries
         frm.set_query('item_code', 'content', () => {

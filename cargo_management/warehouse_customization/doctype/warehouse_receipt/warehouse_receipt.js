@@ -1,7 +1,7 @@
 frappe.ui.form.on('Warehouse Receipt', {
 
     transportation_multi_check: function (frm) {
-        frm.transportation_multicheck = frappe.ui.form.make_control({
+        frm.transportation = frappe.ui.form.make_control({
             parent: frm.fields_dict.transportation_multicheck_html.$wrapper.addClass('text-center'),
             df: {
                 label: __('Transportation Method'),
@@ -21,12 +21,6 @@ frappe.ui.form.on('Warehouse Receipt', {
             frm.events.transportation_multi_check(frm);
     },
 
-    onload: function (frm) {
-    },
-
-    refresh: function (frm) {
-    },
-
     onload_post_render: function (frm) {
         if (frm.is_new())
             frm.grids[0].grid.add_new_row();
@@ -37,7 +31,6 @@ frappe.ui.form.on('Warehouse Receipt', {
     },
 
     after_save: function (frm) {
-        // TODO CHECK THIS IS VALID!
         if (!frm.print_label) {
             return;
         }
@@ -50,48 +43,10 @@ frappe.ui.form.on('Warehouse Receipt', {
         );
     },
 
-});
+    tracking_number: function (frm) {
+        frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
 
-// Improve
-function set_details(frm, row, coincidence) {
-    const doc_name = coincidence.name || coincidence;
-    frappe.db.get_doc('Package', doc_name).then(function (doc) {
-        row.package = doc.name;
-        row.transportation = doc.transportation;
-        row.customer = doc.customer;
-        row.customer_name = doc.customer_name;
-        row.carrier = doc.carrier;
-        row.customer_description = doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n");
-        row.carrier_real_delivery = doc.carrier_real_delivery;
-        row.carrier_est_weight = doc.carrier_est_weight;
-
-        frm.refresh_fields();
-        // frm.refresh_field('warehouse_receipt_lines') // TODO: Change for grid refresh!
-    });
-}
-
-// Child Table
-frappe.ui.form.on('Warehouse Receipt Line', {
-
-    package_selector_dialog: function (frm, packages) {
-        const fields = packages.map((package_doc, i) => {
-            return {
-                fieldname: 'package_option_' + i, fieldtype: 'Check', label: package_doc
-            }
-        });
-
-        const selector_dialog = new frappe.ui.Dialog({
-            title: __('Coincidences found. Please select one.'),
-            fields: fields
-        })
-
-        selector_dialog.show();
-    },
-
-    package: function (frm, cdt, cdn) {
-        let row_package = locals[cdt][cdn].package.trim().toUpperCase();  // Sanitize field
-
-        if (!row_package) {
+        if (!frm.doc.tracking_number) {
             return;
         }
 
@@ -100,53 +55,87 @@ frappe.ui.form.on('Warehouse Receipt Line', {
             type: 'GET',
             freeze: true,
             freeze_message: __('Searching Package...'),
-            args: {tracking_number: row_package},
-            callback: (r) => {
-
-                // https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
-                // MultiselectDialog with Package List -> Issue: can select multiple
-                // Dialog with a Table Field of Package List -> Issue: can select multiple and needs a select button
-                // MultiCheck Field with Package List as Options -> Issue: can select multiple. No extra data for package identification
-                // Select Field with Package List as Options -> Issue: Small extra data for package identification, and need a select button or event trigger.
-                // LinkSelector with Package List as Options -> Issue: its exactly what we need. But without search and button and configurable extra fields
+            args: {tracking_number: frm.doc.tracking_number},
+            callback: (r) => { // TODO: Maybe a Switch
                 if (r.message.coincidences) {
-                    return;
-                    const selector_dialog = new frappe.ui.Dialog({
-                        title: __('Coincidences found for: {0}', [row_package]),
-                        static: true,          // Cannot cancel touching outside pop-up
-                        size: 'extra-large',
-                        fields: [{fieldtype: 'HTML', fieldname: 'table_html',}]
-                    });
-
-                    selector_dialog.fields_dict.table_html.$wrapper
-                        .html(frappe.render_template('package_selector', {search_term: r.message.search_term, coincidences: r.message.coincidences}))
-                        .find('a').on('click', function(e) {
-                            e.preventDefault();
-                            set_details(frm, locals[cdt][cdn], $(this).attr('data-value'))
-
-                            selector_dialog.hide();
-                    });
-
-                    selector_dialog.show();
+                    frm.events.show_selector_dialog(frm, r.message);
                 } else if (r.message.coincidence) {
-                    set_details(frm, locals[cdt][cdn], r.message.coincidence); // FIXME: Fetch row and row_package.
-                    frappe.show_alert('Paquete Pre-Alertado');
+                    frappe.show_alert('Paquete Pre-Alertado.');
+                    frm.events.set_package(frm, r.message.coincidence);
                 } else {
-                    frappe.show_alert('Paquete sin Pre-Alerta');
-                    frm.refresh_fields(); // This is to recall all evals on depends_on fields. FIXME: Its another way!
+                    frappe.show_alert('Paquete sin Pre-Alerta.');
                 }
             }
-        });  //177 -> 156
-
+        });
     },
 
-    warehouse_est_weight: function (frm) {
-        // TODO: Work this?
-        frm.set_value('warehouse_est_gross_weight', frm.get_sum('warehouse_receipt_lines', 'warehouse_est_weight'));
-    }
-}); // FIXME: 167 . Improve and remove code!
+    // Custom Functions
+    show_selector_dialog: function (frm, opts) {
+        // https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
+        // MultiselectDialog with Package List -> Issue: can select multiple
+        // Dialog with a Table Field of Package List -> Issue: can select multiple and needs a select button
+        // MultiCheck Field with Package List as Options -> Issue: can select multiple. No extra data for package identification
+        // Select Field with Package List as Options -> Issue: Small extra data for package identification, and need a select button or event trigger.
+        // LinkSelector with Package List as Options -> Issue: its exactly what we need. But without search and button and configurable extra fields
 
-//106 -> 123 -> 196 -> 177 -> 160 -> 154
+        const selector_dialog = new frappe.ui.Dialog({
+            title: __('Coincidences found for: {0}', [frm.doc.tracking_number]),
+            static: true,          // Cannot cancel touching outside pop-up
+            no_cancel_flag: true,  // Cannot cancel with keyboard
+            size: 'extra-large',
+            fields: [{fieldtype: 'HTML', fieldname: 'table_html'}]
+        });
+
+        selector_dialog.fields_dict.table_html.$wrapper
+            .html(frappe.render_template('package_selector', {
+                search_term: opts.search_term,
+                coincidences: opts.coincidences
+            }))
+            .find('a').on('click', e => {
+                e.preventDefault();
+                selector_dialog.hide();
+                frm.events.set_package(frm, $(this).attr('data-value'));
+            });
+
+        selector_dialog.show();
+    },
+
+    set_package: function (frm, coincidence) {
+        const doc_name = coincidence.name || coincidence;
+
+        frappe.db.get_doc('Package', doc_name).then(function (doc) {
+            frm.doc.tracking_number = doc.name;
+            frm.doc.carrier = doc.carrier;
+
+            frm.doc.customer = doc.customer;
+            frm.doc.customer_name = doc.customer_name;
+            frm.doc.shipper = doc.shipper;
+
+            //frm.transportation.select_options(doc.transportation);
+            $(frm.transportation.$wrapper.find(`:checkbox[data-unit="${doc.transportation}"]`)[0]).trigger('click');
+
+            frm.doc.customer_description = (doc.content.length > 0) ? doc.content.map(c => 'Item: ' + c.description + '\nCantidad: ' + c.qty).join("\n\n") : null;
+
+            frm.refresh_fields();
+            //frm.events.show_alerts(frm);
+        });
+    },
+
+    show_alerts(frm) {
+        frm.dashboard.clear_headline();
+        // Make this come from API?
+
+        if (frm.doc.customer_description) {
+            frm.layout.show_message('<b>No es necesario abrir el paquete. <br> Cliente Pre-Alerto el contenido.</b>', '');
+            frm.layout.message.removeClass().addClass('form-message ' + 'green');  // FIXME: Core overrides color
+        }
+    },
+});
+
+// Child Table
+frappe.ui.form.on('Warehouse Receipt Line', {});
+
+//106 -> 123 -> 196 -> 177 -> 160 -> 154 -> 125
 
 // Unused Utils
 
@@ -157,33 +146,6 @@ frappe.ui.form.on('Warehouse Receipt Line', {
 //         }
 //     };
 // });
-
-//ask_transportation: function (frm) {
-//    const transport_dialog = new frappe.ui.Dialog({
-//        title: __('Select Transportation Type'),
-//        fields: [
-//            {
-//                fieldname: 'sea_transport', fieldtype: 'Check', label: __('Sea Transport'),
-//                change: () => cur_dialog.fields_dict.air_transport.input.checked = !cur_dialog.get_value('sea_transport')
-//            }, {fieldtype: 'Column Break'}, {
-//                fieldname: 'air_transport', fieldtype: 'Check', label: __('Air Transport'),
-//                 onchange: () => cur_dialog.fields_dict.sea_transport.input.checked = !cur_dialog.get_value('air_transport')
-//             }
-//         ],
-//         static: true,          // Cannot cancel touching outside pop-up
-//         no_cancel_flag: true,  // Cannot cancel with keyboard
-//         primary_action_label: __('Select'),
-//         primary_action: (response) => {
-//             const transport_type = response.sea_transport ? 'Sea' : response.air_transport ? 'Air' : false;
-//             if (!transport_type) {
-//                 frappe.throw({message: 'Seleccione un tipo de transporte.', alert: true});
-//             }
-//             transport_dialog.hide();
-//             frm.set_value('transportation', transport_type);  // Trigger the event that opens first row
-//         }
-//     });
-//     transport_dialog.show();
-// },
 
 // https://stackoverflow.com/a/1977126/3172310 -> When a Button is in a Table
 //$(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +

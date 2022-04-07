@@ -6,7 +6,7 @@ frappe.listview_settings['Warehouse Receipt'] = {
     hide_name_column: true,
 
     before_render() {
-        localStorage.show_sidebar = "false"
+        localStorage.show_sidebar = false;
     },
 
     get_indicator(doc) {

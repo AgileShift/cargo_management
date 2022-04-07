@@ -104,7 +104,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "bold": 1,
    "columns": 2,
    "description": "Current status",
    "fieldname": "status",
@@ -233,7 +232,6 @@
   },
   {
    "allow_bulk_edit": 1,
-   "allow_in_quick_entry": 1,
    "fieldname": "content",
    "fieldtype": "Table",
    "label": "Content",
@@ -379,7 +377,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-04-04 16:46:05.738192",
+ "modified": "2022-04-07 10:03:25.309675",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
