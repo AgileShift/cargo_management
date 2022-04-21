@@ -40,7 +40,9 @@
   "column_break_16",
   "volumetric_weight",
   "column_break_14",
-  "carrier_est_gross_weight"
+  "carrier_est_gross_weight",
+  "tracking_barcode",
+  "name_barcode"
  ],
  "fields": [
   {
@@ -202,10 +204,15 @@
    "search_index": 1
   },
   {
+   "bold": 1,
    "fieldname": "tracking_number",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Tracking Number",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "carrier",
@@ -253,6 +260,14 @@
    "depends_on": "eval: !doc.__islocal",
    "fieldname": "section_totals",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tracking_barcode",
+   "fieldtype": "Barcode"
+  },
+  {
+   "fieldname": "name_barcode",
+   "fieldtype": "Barcode"
   }
  ],
  "links": [
@@ -273,7 +288,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-04-07 11:32:10.710812",
+ "modified": "2022-04-12 16:21:28.372983",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",

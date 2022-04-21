@@ -24,6 +24,8 @@ frappe.ui.form.on('Warehouse Receipt', {
     onload_post_render: function (frm) {
         if (frm.is_new())
             frm.grids[0].grid.add_new_row();
+
+        frm.events.print_iframe(frm); // todo delete
     },
 
     before_save: function (frm) {
@@ -35,11 +37,31 @@ frappe.ui.form.on('Warehouse Receipt', {
             return;
         }
 
+        //http://localhost:8000/printview?doctype=Warehouse%20Receipt&name=ae547156cc&trigger_print=1&format=Standard&no_letterhead=1&letterhead=No%20Letterhead&settings=%7B%7D&_lang=en-US
+
         window.open(
             frappe.urllib.get_full_url(
                 'printview?doctype=Warehouse%20Receipt&name=' + frm.doc.name +
                 '&trigger_print=1&format=Warehouse%20Receipt%20Labels&no_letterhead=1&letterhead=No%20Letterhead&settings=%7B%7D&_lang=es'
             ) // Emulating print.js inside frappe/printing/page/print/print.js
+        );
+    },
+
+    print_iframe: function (frm) {
+        // Improve Print Format
+        // No more JSBarcode or better to embeed?
+        // After save call in frame!
+        // New doc after print
+        // https://stackoverflow.com/questions/2578052/printing-contents-of-another-page
+        // https://discuss.erpnext.com/t/how-to-generate-barcodes-in-erpnext-using-jsbarcode-library/45573/3
+        /*
+            5. Mejoras solicitadas por Joshua
+              Para crear el warehouse - para imprimir
+              para imprimir el warehouse en fisico: cuando hace una entrega
+              que le abra a nueva pantalla
+         */
+        frm.$wrapper.append(
+            "<iframe name='print_frame' src='http://localhost:8000/printview?doctype=Warehouse%20Receipt&name=WR-14569&format=Warehouse%20Receipt%20Labels&no_letterhead=1'></iframe>"
         );
     },
 
@@ -132,10 +154,6 @@ frappe.ui.form.on('Warehouse Receipt', {
 });
 
 frappe.ui.form.on('Warehouse Receipt Line', {});
-
-//106 -> 123 -> 196 -> 177 -> 160 -> 154 -> 125
-
-// Unused Utils
 
 // https://stackoverflow.com/a/1977126/3172310 -> When a Button is in a Table
 //$(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +
