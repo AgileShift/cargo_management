@@ -111,10 +111,29 @@ class Package(Document):
                 message.append('El paquete se encuentra siendo verificado de forma extraordinaria.')
         elif self.status == 'Awaiting Departure':
             # TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
-            message = ['El paquete fue recepcionado.', 'Esperando próximo despacho de carga.']
+            cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
+
+            # TODO: Add Warehouse Reception date
+            message = [
+                'El paquete fue recepcionado.',
+                'Fecha esperada de despacho: {}'.format(cargo_shipment.departure_date),
+                'Fecha esperada de recepcion: {}'.format(cargo_shipment.expected_arrival_date),
+                'Embarque: {}'.format(self.cargo_shipment)
+            ]
+
         elif self.status == 'In Transit':
             # TODO: Add Departure date and est arrival date
-            message, color = ['El paquete esta en transito a destino.'], 'purple'
+            cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
+
+            color = 'purple'
+
+            message = [
+                'El paquete esta en transito a destino.',
+                'Fecha de despacho: {}'.format(cargo_shipment.departure_date),
+                'Fecha esperada de recepcion: {}'.format(cargo_shipment.expected_arrival_date),
+                'Embarque: {}'.format(self.cargo_shipment)
+            ]
+
         elif self.status == 'In Customs':
             message, color = ['El paquete se encuentra en proceso de desaduanaje.'], 'gray'
         elif self.status in ['Sorting', 'To Bill']:
