@@ -115,9 +115,8 @@ class Package(Document):
 
             # TODO: Add Warehouse Reception date
             message = [
-                'El paquete fue recepcionado.',
-                'Fecha esperada de despacho: {}'.format(cargo_shipment.departure_date),
-                'Fecha esperada de recepcion: {}'.format(cargo_shipment.expected_arrival_date),
+                # 'El paquete fue recepcionado.',
+                # 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
                 'Embarque: {}'.format(self.cargo_shipment)
             ]
 
@@ -130,7 +129,7 @@ class Package(Document):
             message = [
                 'El paquete esta en transito a destino.',
                 'Fecha de despacho: {}'.format(cargo_shipment.departure_date),
-                'Fecha esperada de recepcion: {}'.format(cargo_shipment.expected_arrival_date),
+                'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
                 'Embarque: {}'.format(self.cargo_shipment)
             ]
 
