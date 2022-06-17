@@ -111,7 +111,7 @@ class Package(Document):
                 ]
 
             if self.signed_by:
-                message.append('Firmado Por: '.format(self.signed_by))
+                message.append('Firmado Por: {}'.format(self.signed_by))
 
             if self.status == 'In Extraordinary Confirmation':
                 color = 'pink'
