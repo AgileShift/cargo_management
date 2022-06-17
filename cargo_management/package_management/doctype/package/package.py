@@ -92,19 +92,26 @@ class Package(Document):
                     )
                 ]
 
+                # TODO: Dias
                 delivered_since = frappe.utils.time_diff_in_seconds(None, self.carrier_real_delivery)  # datetime is UTC
 
                 # Package has exceeded the 24 hours timespan to be confirmed. TODO: check against current user tz.
                 if round(float(delivered_since) / 3600, 2) >= 24.00:  # Same as: time_diff_in_hours() >= 24.00
                     color = 'red'
-                    message.append('Ha pasado: {} y el paquete aun no ha sido recibido por el almacén.'.format(
+                    message.append('Ha pasado: {} y el no ha sido confirmado por el almacén.'.format(
                         frappe.utils.format_duration(delivered_since)
                     ))
                 else:
                     message.append('Por favor espera 24 horas hábiles para que el almacén confirme la recepción.')
             else:
                 color = 'yellow'
-                message = ['El transportista no índico una fecha de entrega.']
+                message = [
+                    'El transportista índico una fecha de entrega aproximada: {}'.format(
+                        frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
+                ]
+
+            if self.signed_by:
+                message.append('Firmado Por: '.format(self.signed_by))
 
             if self.status == 'In Extraordinary Confirmation':
                 color = 'pink'
@@ -113,11 +120,15 @@ class Package(Document):
             # TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
             cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
-            # TODO: Add Warehouse Reception date
+            # TODO: What if we dont have real delivery date. Or signature
             message = [
-                'El paquete fue recepcionado.',
+                'El transportista indica que entrego el paquete el: {}.'.format(
+                    frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
+                ),
+                'Firmado por {}'.format(self.carrier_real_delivery, self.signed_by),
                 # 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
-                'Embarque: {}'.format(self.cargo_shipment)
+
+                #'Embarque: {}'.format(self.cargo_shipment)
             ]
 
         elif self.status == 'In Transit':
