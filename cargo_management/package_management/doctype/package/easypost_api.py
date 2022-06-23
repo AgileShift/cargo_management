@@ -132,7 +132,7 @@ def easypost_webhook(**kwargs):
         #     self._parse_data_from_easypost_instance(easypost_api.instance)
 
         # Set flag ON because doc will be saved from webhook data. No validations needed.
-        package.save(ignore_permissions=True, ignore_validate=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
+        package.save(ignore_permissions=True)#, ignore_validate=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
         # TODO: Translate: alert message and button
         package_route = "frappe.set_route('Form', 'Package', '{}')".format(package.tracking_number)

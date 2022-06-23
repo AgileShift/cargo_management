@@ -65,9 +65,9 @@ def find_carrier_by_tracking_number(tracking_number: str):
         carrier, search_term = 'USPS', tracking_number[8:]  # 42033165*9*274890983426386918697. First 8 digits: 420xxxxx(zipcode)
 
     elif tracking_number_len == 12:
-        carrier = 'FedEx',
+        carrier = 'FedEx'
     elif tracking_number_len == 20 and tracking_number[:3] == '612':
-        carrier = 'FedEx',                                    # *612*90982157320543198. Or *6129*
+        carrier = 'FedEx'                                     # *612*90982157320543198. Or *6129*
     elif tracking_number_len == 34 and tracking_number[22] != 0:
         carrier, search_term = 'FedEx', tracking_number[22:]  # 9622001900005105596800*5*49425980480. Last 12 digits is tracking
 
