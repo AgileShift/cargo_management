@@ -1,7 +1,7 @@
 frappe.listview_settings['Package'] = {
-    add_fields: ['status', 'carrier'], // TODO: Improve here. because we have extra data!. also what this is for?
+    //add_fields: ['status', 'carrier'], // TODO: Improve here. because we have extra data!. also what this is for?
     filters: [
-        ['status', 'not in', ['Finished', 'Cancelled', 'Returned to Sender']],
+        ['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']],
     ],
     hide_name_column: true,
 
@@ -62,17 +62,22 @@ frappe.listview_settings['Package'] = {
     },
 
     onload: function (listview) {
-        // Quick Hack update Placeholder from name to Custom
-        listview.page.fields_dict['name'].$wrapper.attr('data-original-title', __('Tracking Number'))
-            .find('input').attr('placeholder', __('Tracking Number'));
+        const name_field = listview.page.fields_dict['name'];
+
+        // Update placeholder and help-text
+        name_field.$wrapper.attr('data-original-title', __('Tracking Number'));
+        name_field.$input.attr('placeholder', __('Tracking Number'));
 
         listview.get_args = function () {  // Override only instance method
-            let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super
+            // Removing '%' added when the listview loads and trimming whitespaces
+            name_field.input.value = name_field.get_value().replaceAll('%', '').trim(); // Makes the UI change
 
-            args.filters.some((f, i) => {
-                if (f[1] === 'name') {  // If we find name move it from filters to or_filters and expand it
+            let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args.
+
+            args.filters.some((f, i) => { // f -> ['Doctype', 'field', 'sql_search_term', 'value']
+                if (f[1] === 'name') {  // If we find 'name' field move it from 'filters' to 'or_filters' and expand it
                     return args.or_filters = [
-                        args.filters.splice(i, 1)[0],  // Remove and add ;)
+                        args.filters.splice(i, 1)[0],  // We remove 'name' filter from 'filters' and add to 'or_filters'
                         [f[0], 'tracking_number', f[2], f[3]],
                         [f[0], 'consolidated_tracking_numbers', f[2], f[3]],
                     ];

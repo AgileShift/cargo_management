@@ -59,13 +59,12 @@ class Package(Document):
     def explained_status(self):
         """ This returns a detailed explanation of the current status of the Package and compatible colors. """
         # TODO: Python 3.10: Migrate to switch case or Improve performance?
-        # TODO: one of the best datetime format: "E d LLL yyyy 'at' h:MM a" # TODO: translate this strings.
 
         message, color = [], 'lightblue'  # TODO: Add more colors? Check frappe colors
+        frappe.local.lang = 'es'  # Little Hack
 
-        # TODO: If no Track or Easypost is not set(we can't track) show the alert. If is true and no est_delivery
         if self.status == 'Awaiting Receipt':
-            message = ['El transportista aún no ha entregado el paquete.']
+            message = ['El transporte aún no ha entregado el paquete.']
 
             if self.carrier_est_delivery:  # The carrier has provided an estimated delivery date
                 est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to today
@@ -87,31 +86,33 @@ class Package(Document):
         elif self.status in ['Awaiting Confirmation', 'In Extraordinary Confirmation']:
             if self.carrier_real_delivery:
                 message = [
-                    'El transportista indica que entrego el paquete el: {}.'.format(
-                        frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
+                    'El transporte indica que entregó: {}'.format(
+                        frappe.utils.format_datetime(self.carrier_real_delivery, "EEEE, d 'de' MMMM yyyy 'a las' h:mm a").capitalize()
                     )
                 ]
 
-                # TODO: Dias
-                delivered_since = frappe.utils.time_diff_in_seconds(None, self.carrier_real_delivery)  # datetime is UTC
+                if self.signed_by:
+                    message.append('Firmado por: {}'.format(self.signed_by))
 
-                # Package has exceeded the 24 hours timespan to be confirmed. TODO: check against current user tz.
-                if round(float(delivered_since) / 3600, 2) >= 24.00:  # Same as: time_diff_in_hours() >= 24.00
+                # TODO: check against current user tz: Change None to now in local delivery place timezone
+                delivered_since = frappe.utils.time_diff(None, self.carrier_real_delivery)  # datetime is UTC
+
+                # TODO: Compare Against Workable days
+                # Package has exceeded the 24 hours timespan to be confirmed. Same as: time_diff_in_hours() >= 24.00
+                if delivered_since.days >= 1:  # The day starts counting after 1-minute difference
                     color = 'red'
-                    message.append('Ha pasado: {} y el no ha sido confirmado por el almacén.'.format(
-                        frappe.utils.format_duration(delivered_since)
-                    ))
+                    delivered_since_str = 'Ha pasado 1 día' if delivered_since.days == 1 else 'Han pasado {} días'
+
+                    message.append(delivered_since_str.format(delivered_since.days))
                 else:
                     message.append('Por favor espera 24 horas hábiles para que el almacén confirme la recepción.')
+
             else:
                 color = 'yellow'
                 message = [
                     'El transportista índico una fecha de entrega aproximada: {}'.format(
                         frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
                 ]
-
-            if self.signed_by:
-                message.append('Firmado Por: {}'.format(self.signed_by))
 
             if self.status == 'In Extraordinary Confirmation':
                 color = 'pink'
@@ -223,3 +224,4 @@ class Package(Document):
                     zip=last_detail.tracking_location.zip or ''
                 )
             )
+#228 DELETE
