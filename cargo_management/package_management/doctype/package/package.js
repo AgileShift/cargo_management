@@ -41,9 +41,17 @@ frappe.ui.form.on('Package', {
             return;
         }
 
+        frappe.require("assets/cargo_management/carriers.json")
+
+        // Loading Carriers settings in the form
+        fetch('/assets/cargo_management/carriers.json')
+            .then(r => r.json())
+            .then(data => frm.carriers = data);
+        console.log('loading carriers')
+
         // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []
-        frm.events.show_explained_status(frm); // Intro Message
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
+        frm.events.show_explained_status(frm); // Intro Message
     },
 
     tracking_number: function (frm) {
@@ -81,12 +89,14 @@ frappe.ui.form.on('Package', {
     },
 
     build_custom_buttons: function (frm) {
+        console.log(frm.carriers);
+
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.get_carrier_settings',
             type: 'GET', args: {carrier: frm.doc.carrier},
             callback: (r) => {
                 if (r.message.api) { // TODO: easypost_id or other APIs or More than N days or status.
-                    frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
+                    //frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
                 }
 
                 switch (r.message.tracking_urls.length) {
@@ -200,3 +210,4 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
+//202 -> 12 XHR Request on new - 4 on reload

@@ -1,9 +1,8 @@
 {
 	"css/cargo_management.min.css": [
-		"public/scss/colors.scss",
-		"public/scss/overrides.scss"
+		"public/css/colors.scss",
+		"public/css/overrides.scss"
 	],
-
 	"js/cargo_management.min.js": [
 		"public/js/utils/package_quick_entry.js",
 		"public/js/controls/overrides.js"

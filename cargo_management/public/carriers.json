@@ -1,7 +1,7 @@
-const carriers = {
-    'USPS': {
-        api: 'EasyPost',
-        tracking_urls: [
+{
+    "USPS": {
+        "api": "EasyPost",
+        "tracking_urls": [
             {
                 "title": "USPS",
                 "url": "https://tools.usps.com/go/TrackConfirmAction?tLabels="
@@ -16,5 +16,5 @@ const carriers = {
             }
         ]
     },
-    'FedEx': []
+    "FedEx": []
 }

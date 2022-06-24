@@ -192,6 +192,13 @@ class Package(Document):
 
             frappe.msgprint(msg=_('Package has been updated from API.'), alert=True)
 
+    def parse_data_from_easypost_webhook(self, response):
+        """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
+        easypost_api = EasypostAPI(carrier=self.carrier)  # TODO
+        easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
+
+        self._parse_data_from_easypost(easypost_api.instance)
+
     def _parse_data_from_easypost(self, data):
         """ This parses all the data from an easypost Instance(with all the details) to our Package DocType. """
 

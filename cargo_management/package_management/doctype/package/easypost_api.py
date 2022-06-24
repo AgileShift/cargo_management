@@ -53,9 +53,9 @@ class EasypostAPI:
 
     def convert_from_webhook(self, response):
         """ Convert a dict to a Easypost Object. """
-        self.instance = easypost.convert_to_easypost_object(
+        self.instance = easypost.event.convert_to_easypost_object(
             response=response,
-            api_key=self.api_key
+            #api_key=self.api_key
         )
         self._normalize_data()
 
@@ -122,14 +122,7 @@ def easypost_webhook(**kwargs):
         return 'Package {} not found.'.format(kwargs['result']['tracking_code'])  # TODO: Add some log?
     else:
         # package.load_carrier_flags()  # This is called on def can_track(). But we avoid that validation on webhook event
-        # package.parse_data_from_easypost_webhook(kwargs)
-
-        # def parse_data_from_easypost_webhook(self, response):
-        #     """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
-        #     easypost_api = EasypostAPI(carrier_uses_utc=self.flags.carrier_uses_utc)
-        #     easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
-        #
-        #     self._parse_data_from_easypost_instance(easypost_api.instance)
+        package.parse_data_from_easypost_webhook(kwargs)
 
         # Set flag ON because doc will be saved from webhook data. No validations needed.
         package.save(ignore_permissions=True)#, ignore_validate=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
