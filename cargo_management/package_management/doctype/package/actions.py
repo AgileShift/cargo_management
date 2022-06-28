@@ -7,6 +7,7 @@ def get_explained_status(source_name: str):
     return frappe.get_cached_doc('Package', source_name).explained_status()
 
 
+# FIXME: DELETE?
 @frappe.whitelist(methods='GET')
 def get_carrier_settings(carrier: str):
     """ Util: Return the carrier settings. API and Tracking URLs. Used to build and config Action Buttons in Form. """
@@ -22,9 +23,13 @@ def get_data_from_api(source_name: str):
     return frappe.get_cached_doc('Package', source_name).save(request_data_from_api=True)
 
 
-@frappe.whitelist(methods='GET')
+# @frappe.whitelist(methods='GET') FIXME: DELETE?
 def find_carrier_by_tracking_number(tracking_number: str):
-    """ Find a carrier if a tracking number is passed.
+    """ LINKED WITH: public/js/package.js -> find_carrier_by_tracking_number
+
+    Problem is, we need to find 'carrier' or 'search_term' and await for a response to make the final db call
+    But, in many parts of frappe we cannot make the function async to await frappe.call.
+    So we have to call frappe.call(async=False) raising a warning and damaging User UI
 
     - https://pages.message.fedex.com/barcodescan_home/
 
@@ -53,7 +58,7 @@ def find_carrier_by_tracking_number(tracking_number: str):
     # TODO elif any(s in tracking_number for s in ['LY', 'LB']):
     #     return 'Possibly a USPS Tracking'
 
-    # FedEx or USPS. Matches starting with zipcode(420xxxxx) or with 92612. To search we will return starting with 612
+    # FedEx or USPS. Matches starting with: 92612 or with zipcode(420xxxxx). To search we will return starting with 612
     elif tracking_number_len == 22 and tracking_number[:5] == '92612':
         carrier, search_term = '', tracking_number[2:]      # *92612*90980949456651012. Or *926129*
     elif tracking_number_len == 30 and tracking_number[8:13] == '92612':
@@ -71,7 +76,7 @@ def find_carrier_by_tracking_number(tracking_number: str):
     elif tracking_number_len == 34 and tracking_number[22] != 0:
         carrier, search_term = 'FedEx', tracking_number[22:]  # 9622001900005105596800*5*49425980480. Last 12 digits is tracking
 
-    elif 'JD' in tracking_number:  # or JJD
+    elif 'JD' in tracking_number:  # or JJD ?
         frappe.throw('Convert to DHL Tracking')  # FIXME: Maybe we can convert it?
 
     return {

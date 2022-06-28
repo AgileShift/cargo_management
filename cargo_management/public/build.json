@@ -4,7 +4,8 @@
 		"public/css/overrides.scss"
 	],
 	"js/cargo_management.min.js": [
-		"public/js/utils/package_quick_entry.js",
-		"public/js/controls/overrides.js"
+		"public/js/package.js",
+		"public/js/controls/overrides.js",
+		"public/js/utils/package_quick_entry.js"
 	]
 }

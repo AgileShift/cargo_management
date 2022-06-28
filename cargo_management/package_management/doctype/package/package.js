@@ -41,7 +41,8 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        frappe.require("assets/cargo_management/carriers.json")
+        // Custom Page Indicator with icon -> see package_list.js -> formatters
+        frm.page.indicator.children().append(` <i class="fa fa-${frm.doc.transportation === 'Sea' ? 'ship' : 'plane'}"></i>`);
 
         // Loading Carriers settings in the form
         fetch('/assets/cargo_management/carriers.json')

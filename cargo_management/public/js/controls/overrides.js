@@ -1,9 +1,8 @@
-frappe.provide('frappe.ui.form');
-
+// Override default height on SmallText Field -> See: frappe/form/controls/text.js
 frappe.ui.form.ControlSmallText = frappe.ui.form.ControlSmallText.extend({
     make_input: function () {
         this._super();
-        this.$input.css('height', '');  // No inline height property in all ControlSmallText -> See: frappe/form/controls/text.js
+        this.$input.css('height', '');  // No inline height property in all ControlSmallText
     }
 });
 

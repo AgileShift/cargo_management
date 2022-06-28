@@ -1,12 +1,14 @@
 frappe.provide('frappe.ui.form');
 
-frappe.ui.form.PackaasdgeQuickEntryForma = frappe.ui.form.QuickEntryForm.extend({
+frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 
     init: function (doctype, after_insert, init_callback, doc, force) {
         this._super(doctype, after_insert, init_callback, doc, true)
+
+        console.log('WORK');
     },
 
-    asdset_meta_and_mandatory_fields: function () {
+    add_meta_and_mandatory_fields: function () {
         this._super();
 
         let table_meta = frappe.get_meta('Package Content')

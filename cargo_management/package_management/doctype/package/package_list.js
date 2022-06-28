@@ -32,10 +32,11 @@ frappe.listview_settings['Package'] = {
 
     formatters: {
         transportation(val) {
-            let color = (val === 'Sea') ? 'blue' : 'red';
+            let [icon, color] = (val === 'Sea') ? ['ship', 'blue'] : ['plane', 'red'];
+
             return `<span class="indicator-pill ${color} filterable ellipsis"
                 data-filter="transportation,=,${frappe.utils.escape_html(val)}">
-				<span class="ellipsis"> ${val} </span>
+				<span class="ellipsis">${val} <i class="fa fa-${icon}"></i></span>
 			<span>`;
         }
     },
@@ -65,24 +66,30 @@ frappe.listview_settings['Package'] = {
         const name_field = listview.page.fields_dict['name'];
 
         // Update placeholder and help-text
-        name_field.$wrapper.attr('data-original-title', __('Tracking Number'));
-        name_field.$input.attr('placeholder', __('Tracking Number'));
+        name_field.$wrapper.attr('data-original-title', __('Tracking Numbers'));
+        name_field.$input.attr('placeholder', __('Tracking Numbers'));
 
+        // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
+        // TODO: listview.list_sidebar.get_stats() => This call frappe.desk.reportview.get_sidebar_stats using 'filters' not 'or_filters'
         listview.get_args = function () {  // Override only instance method
-            // Removing '%' added when the listview loads and trimming whitespaces
-            name_field.input.value = name_field.get_value().replaceAll('%', '').trim(); // Makes the UI change
+            let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args
 
-            let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args.
+            const name_filter = args.filters.findIndex(f => f[1] === 'name');  // f -> ['Doctype', 'field', 'sql_search_term', 'value']
 
-            args.filters.some((f, i) => { // f -> ['Doctype', 'field', 'sql_search_term', 'value']
-                if (f[1] === 'name') {  // If we find 'name' field move it from 'filters' to 'or_filters' and expand it
-                    return args.or_filters = [
-                        args.filters.splice(i, 1)[0],  // We remove 'name' filter from 'filters' and add to 'or_filters'
-                        [f[0], 'tracking_number', f[2], f[3]],
-                        [f[0], 'consolidated_tracking_numbers', f[2], f[3]],
-                    ];
-                }
-            });
+            if (name_filter >= 0) {  // We have 'name' filter being filtered. -> Will return index if found
+                args.filters.splice(name_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
+
+                // Removing '%' added when the listview loads first time & trim spaces when values are pasted
+                name_field.input.value = name_field.get_value().replaceAll('%', '').trim().toUpperCase(); // Makes the UI change
+
+                const data = cargo_management.find_carrier_by_tracking_number(name_field.get_value());
+
+                args.or_filters = [
+                    ['Package', 'name', 'like', '%' + data.search_term + '%'],
+                    ['Package', 'tracking_number', 'like', '%' + data.search_term + '%'],
+                    ['Package', 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%'],
+                ];
+            }
 
             return args;
         }
