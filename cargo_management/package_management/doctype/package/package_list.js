@@ -5,63 +5,6 @@ frappe.listview_settings['Package'] = {
     ],
     hide_name_column: true,
 
-    get_indicator(doc) {
-        const status_color = {
-            'In Extraordinary Confirmation': 'pink',
-
-            // cyan
-            // TODO: Range of colors
-            'Awaiting Receipt': 'blue',
-            'Awaiting Confirmation': 'orange',
-            'Awaiting Departure': 'yellow',
-            'In Transit': 'purple',
-            'In Customs': 'gray',
-            'Sorting': 'green',
-            'To Bill': 'green',
-            'Unpaid': 'red',
-            'To Deliver or Pickup': 'cyan',
-            'Finished': 'darkgrey',
-
-            'Cancelled': 'red',
-            'Never Arrived': 'red',
-            'Returned to Sender': 'red',
-        };
-
-        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
-    },
-
-    formatters: {
-        transportation(val) {
-            let [icon, color] = (val === 'Sea') ? ['ship', 'blue'] : ['plane', 'red'];
-
-            return `<span class="indicator-pill ${color} filterable ellipsis"
-                data-filter="transportation,=,${frappe.utils.escape_html(val)}">
-				<span class="ellipsis">${val} <i class="fa fa-${icon}"></i></span>
-			<span>`;
-        }
-    },
-    button: {
-        show(doc) {
-            return doc.name;
-        },
-        get_label() {
-            return __('Carrier page')
-        },
-        get_description() {
-            return __('Open carrier page')
-        },
-        action(doc) {
-            frappe.call({
-                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_tracking_url',
-                type: 'GET',
-                args: {carrier: doc.carrier},
-                freeze: true,
-                freeze_message: __('Opening carrier detail page...'),
-                callback: (r) => window.open(r.message + doc.tracking_number, '_blank')
-            });
-        },
-    },
-
     onload: function (listview) {
         const name_field = listview.page.fields_dict['name'];
 
@@ -71,7 +14,7 @@ frappe.listview_settings['Package'] = {
 
         // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
         // TODO: listview.list_sidebar.get_stats() => This call frappe.desk.reportview.get_sidebar_stats using 'filters' not 'or_filters'
-        listview.get_args = function () {  // Override only instance method
+        listview.get_args = () => {  // Override only instance method
             let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args
 
             const name_filter = args.filters.findIndex(f => f[1] === 'name');  // f -> ['Doctype', 'field', 'sql_search_term', 'value']
@@ -102,5 +45,56 @@ frappe.listview_settings['Package'] = {
             //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
             //  );
         // })
+    },
+
+    get_indicator: function (doc) {
+        const status_color = {
+            'In Extraordinary Confirmation': 'pink',
+
+            // cyan
+            // TODO: Range of colors
+            'Awaiting Receipt': 'blue',
+            'Awaiting Confirmation': 'orange',
+            'Awaiting Departure': 'yellow',
+            'In Transit': 'purple',
+            'In Customs': 'gray',
+            'Sorting': 'green',
+            'To Bill': 'green',
+            'Unpaid': 'red',
+            'To Deliver or Pickup': 'cyan',
+            'Finished': 'darkgrey',
+
+            'Cancelled': 'red',
+            'Never Arrived': 'red',
+            'Returned to Sender': 'red',
+        };
+
+        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
+    },
+
+    button: {
+        show(doc) {
+            return doc.name;
+        },
+        get_label() {
+            return __('Carrier page')
+        },
+        get_description() {
+            return __('Open carrier page')
+        },
+        action(doc) {
+            frappe.call({
+                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_tracking_url',
+                type: 'GET',
+                args: {carrier: doc.carrier},
+                freeze: true,
+                freeze_message: __('Opening carrier detail page...'),
+                callback: (r) => window.open(r.message + doc.tracking_number, '_blank')
+            });
+        },
+    },
+
+    formatters: {
+        transportation: (value) => cargo_management.transportation_formatter(value)
     }
-}
+};

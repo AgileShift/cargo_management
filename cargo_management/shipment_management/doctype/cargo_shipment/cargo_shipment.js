@@ -18,6 +18,9 @@ frappe.ui.form.on('Cargo Shipment', {
             return;
         }
 
+        // Add Icon to the Page Indicator
+        frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
+
         if (frm.doc.status === 'Awaiting Departure') {
             frm.page.add_action_item(__('Confirm Packages'), () => {
                 frappe.call({

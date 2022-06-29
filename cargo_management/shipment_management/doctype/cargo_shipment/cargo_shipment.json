@@ -213,14 +213,14 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "default": "Ocean",
+   "default": "Sea",
    "fieldname": "transportation",
    "fieldtype": "Select",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Transportation",
-   "options": "Air\nOcean",
+   "options": "Sea\nAir",
    "reqd": 1,
    "search_index": 1
   }
@@ -237,7 +237,7 @@
    "link_fieldname": "cargo_shipment"
   }
  ],
- "modified": "2022-04-04 18:15:26.526539",
+ "modified": "2022-06-29 07:54:13.457119",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

@@ -77,7 +77,8 @@ def find_carrier_by_tracking_number(tracking_number: str):
         carrier, search_term = 'FedEx', tracking_number[22:]  # 9622001900005105596800*5*49425980480. Last 12 digits is tracking
 
     elif 'JD' in tracking_number:  # or JJD ?
-        frappe.throw('Convert to DHL Tracking')  # FIXME: Maybe we can convert it?
+        carrier = 'DHL'  # FIXME: Maybe we can convert it?
+        frappe.msgprint('Convert to DHL Tracking', alert=True)
 
     return {
         'carrier': carrier,

@@ -41,8 +41,8 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        // Custom Page Indicator with icon -> see package_list.js -> formatters
-        frm.page.indicator.children().append(` <i class="fa fa-${frm.doc.transportation === 'Sea' ? 'ship' : 'plane'}"></i>`);
+        // Add Icon to the Page Indicator
+        frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
         // Loading Carriers settings in the form
         fetch('/assets/cargo_management/carriers.json')
@@ -90,7 +90,7 @@ frappe.ui.form.on('Package', {
     },
 
     build_custom_buttons: function (frm) {
-        console.log(frm.carriers);
+
 
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.get_carrier_settings',
