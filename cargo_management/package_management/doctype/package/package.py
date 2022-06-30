@@ -168,6 +168,7 @@ class Package(Document):
 
     def request_data_from_api(self):
         """ This selects the corresponding API to request data. """
+        # TODO: Update this after Package Carrier Doctype is deleted. See whathappens
         carrier_api = frappe.get_cached_value('Package Carrier', self.carrier, 'api')
 
         if carrier_api == 'EasyPost':

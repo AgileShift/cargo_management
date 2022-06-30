@@ -17,7 +17,7 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
 frappe.ui.form.on('Package', {
 
     setup: function (frm) {
-        $('.layout-side-section').hide(); // Little Trick to work better
+        $('.layout-side-section').hide(); // Little Trick to work better FIXME use frm.page.layout
     },
 
     onload: function(frm) {
@@ -43,12 +43,6 @@ frappe.ui.form.on('Package', {
 
         // Add Icon to the Page Indicator
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
-
-        // Loading Carriers settings in the form
-        fetch('/assets/cargo_management/carriers.json')
-            .then(r => r.json())
-            .then(data => frm.carriers = data);
-        console.log('loading carriers')
 
         // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
@@ -90,30 +84,20 @@ frappe.ui.form.on('Package', {
     },
 
     build_custom_buttons: function (frm) {
+        cargo_management.load_carrier_settings(frm.doc.carrier).then((settings) => {
+            if (settings.api)  // TODO: easypost_id or other APIs?
+                frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
 
-
-        frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_carrier_settings',
-            type: 'GET', args: {carrier: frm.doc.carrier},
-            callback: (r) => {
-                if (r.message.api) { // TODO: easypost_id or other APIs or More than N days or status.
-                    //frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
-                }
-
-                switch (r.message.tracking_urls.length) {
-                    case 0: return;
-                    case 1: return frm.add_custom_button(__('Open Carrier Page'), () => window.open(r.message.tracking_urls[0].url + frm.doc.tracking_number));
-                    default: r.message.tracking_urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number), __('Open Carrier Page')));
-                }
-            }
+            settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
         });
 
         if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
-            frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm) , __('Get Items From'));
+            frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm), __('Get Items From'));
         }
     },
 
     get_data_from_api: function (frm) {
+        // WORK ON THIS. We have to delete some data
         frappe.call({
             method: 'cargo_management.package_management.doctype.package.actions.get_data_from_api',
             freeze: true, freeze_message: __('Updating from Carrier...'), args: {source_name: frm.doc.name},
@@ -122,6 +106,7 @@ frappe.ui.form.on('Package', {
                 frm.refresh();
             }
         });
+
     },
 
     //https://github.com/frappe/frappe/pull/12471 and https://github.com/frappe/frappe/pull/14181/files
@@ -211,4 +196,3 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
-//202 -> 12 XHR Request on new - 4 on reload

@@ -63,6 +63,22 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
       1. A **Sales invoice** will be created for the customer, it will contain all the related **Packages**.
 7. WORKING
 
+#### List of Carriers:
+- USPS(EasyPost)
+- Amazon
+- UPS(EasyPost)
+- DHL(EasyPost)
+- FedEx(EasyPost with carrier account)
+
+- Drop Off
+- Pick Up
+- Unknown
+- 
+- Cainiao
+- SF Express
+- Yanwen
+- LaserShip
+
 
 #### Helpers
 - **Cargo Packing List**: is a "Packing List" for the **Cargo Shipment**:
@@ -77,6 +93,7 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
 - FUTURE:
   1. Setting data of prices in CSR to Sales Invoice
   2. Working in the Sales Orders!
+
 
 
 ##### Code related TODO:

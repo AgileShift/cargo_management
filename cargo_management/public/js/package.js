@@ -20,18 +20,31 @@ cargo_management = {
         // TODO: search_term = 2/4 and 3/4 of the tracking. At bottom?
         let carrier = 'Unknown', search_term = tracking_number, tracking_number_len = tracking_number.length;
 
-        if (tracking_number.includes('TBA')) {
+        if (tracking_number.slice(0, 3) === 'TBA') {
             carrier = 'Amazon';
-        } else if (tracking_number.includes('1Z')) {
+        } else if (tracking_number.slice(0, 2) === '1Z') {
             carrier = 'UPS';
-        } else if (tracking_number.includes('1LS')) {
+        } else if (tracking_number.slice(0, 3) === '1LS') {
             carrier = 'LaserShip';
-        } else if (tracking_number_len === 10) {
-            carrier = 'DHL';
+        } else if (tracking_number.slice(0, 4) === 'LP00') {
+            carrier = 'Cainaio'; // Sometimes Cainaio can track 'Yanwen' and 'SunYou'
+        } else if (tracking_number.slice(0, 2) === 'SF') {
+            carrier = 'SF Express';
+        } else if (tracking_number.slice(0 ,5) === 'ALS00' || tracking_number.slice(0 , 3) === 'S00' || tracking_number.slice(0, 2) === 'UY') {
+            carrier = 'Yanwen';
+        } else if (tracking_number.slice(0, 2) === 'SY') { //  SYUS && SYAE
+            carrier = 'SunYou';
         }
 
-        // TODO: else if ( any(s in tracking_number for s in ['LY', 'LB']) )
-        //     return 'Possibly a USPS Tracking'
+        else if (tracking_number_len === 10) {
+            carrier = 'DHL';
+        } else if (tracking_number.slice(0, 2) === 'JD') {  // or JJD ?
+            carrier = 'DHL';  // FIXME: Maybe we can convert it?
+            frappe.show_alert({indicator: 'orange', message: __('Convert to DHL Tracking')});
+        }
+
+        // TODO: else if ( any(s in tracking_number for s in ['LY', 'LB', 'LW']) )
+        //     return 'Possibly a USPS Tracking' || Can be tracked with Cainaio and USPS
 
         // FedEx or USPS. Matches starting with: 92612 or with zipcode(420xxxxx). To search we will return starting with 612
         else if (tracking_number_len === 22 && tracking_number.slice(0, 5) === '92612') {
@@ -54,11 +67,6 @@ cargo_management = {
             carrier = 'FedEx'; search_term = tracking_number.slice(22);  // 9622001900005105596800*5*49425980480. Last 12 digits is tracking
         }
 
-        else if (tracking_number.includes('JD')) {  // or JJD ?
-            carrier = 'DHL';  // FIXME: Maybe we can convert it?
-            frappe.show_alert({indicator: 'orange', message: __('Convert to DHL Tracking')});
-        }
-
         return {
             'carrier': carrier,
             'search_term': search_term,
@@ -73,6 +81,20 @@ cargo_management = {
             data-filter="transportation,=,${frappe.utils.escape_html(transportation)}">
             <span class="ellipsis">${transportation}${this.transportation_icon_html(transportation)}</span>
         <span>`;
+    },
+    load_carrier_settings: function (carrier_id) {
+        // Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
+        return fetch('/assets/cargo_management/carriers.json', {headers: {'Accept': 'application/json'}})
+            .then(r => r.json()).then(data => {
+                const {
+                    default_carriers = {},
+                    carriers: {[carrier_id]: {api, tracking_url: main_url, default_carriers: extra_urls = []} = {}}
+                } = data;
+
+                let urls = (main_url) ? [{'title': carrier_id, 'url': main_url}] : [];
+                extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': default_carriers[url_id]}));
+
+                return {api: api, urls: urls};
+            });
     }
 };
-//78

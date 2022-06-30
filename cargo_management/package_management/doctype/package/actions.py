@@ -7,16 +7,6 @@ def get_explained_status(source_name: str):
     return frappe.get_cached_doc('Package', source_name).explained_status()
 
 
-# FIXME: DELETE?
-@frappe.whitelist(methods='GET')
-def get_carrier_settings(carrier: str):
-    """ Util: Return the carrier settings. API and Tracking URLs. Used to build and config Action Buttons in Form. """
-    carrier = frappe.get_cached_value('Package Carrier', carrier, ['api', 'uses_utc', 'tracking_urls'], as_dict=True)
-    carrier.tracking_urls = frappe.parse_json(carrier.tracking_urls or [])  # URLs or empty
-
-    return carrier
-
-
 @frappe.whitelist(methods='POST')
 def get_data_from_api(source_name: str):
     """ Returns the Package Doc with new data from API if it was possible to fetch. """
