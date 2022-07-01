@@ -3,16 +3,24 @@ frappe.provide('frappe.ui.form');
 frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 
     init: function (doctype, after_insert, init_callback, doc, force) {
-        this._super(doctype, after_insert, init_callback, doc, true)
+        this._super(doctype, after_insert, init_callback, doc, false)
 
         console.log('WORK');
     },
 
-    add_meta_and_mandatory_fields: function () {
+    set_meta_and_mandatory_fields: function () {
         this._super();
 
-        let table_meta = frappe.get_meta('Package Content')
-        let table_fields = table_meta.fields;
+        // Add onchange event to 'tracking_number' field
+        // let tochange = this.mandatory.findIndex((f) => f.fieldname === 'tracking_number');
+
+        // this.mandatory[tochange].onchange = function (e) {
+            // console.log(this.dialog)
+            //cargo_management.find_carrier_by_tracking_number();
+        // };
+
+        //let table_meta = frappe.get_meta('Package Content')
+        //let table_fields = table_meta.fields;
 
         console.log('set_meta_and_mandatory_fields');
         //console.log(this.mandatory[10]);
@@ -36,10 +44,21 @@ frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
     // },
 
     // TODO: make large dialog
-    asdrender_dialog: function () {
-        console.log('render_dialog');
+    render_dialog: function () {
         this._super();
-        this.render_edit_in_full_page_link();
+        this.init_post_render_dialog_operations();
+    },
+
+    init_post_render_dialog_operations: function () {
+        let {carrier: carrier_field, tracking_number: tracking_number_field} = this.dialog.fields_dict;
+
+        tracking_number_field.df.onchange = function () {  // Override onchange to clean field and set carrier
+            const data = cargo_management.find_carrier_by_tracking_number(this.get_input_value());
+
+            this.set_input(data.tracking_number);  // Tracking Number returned is sanitized
+            carrier_field.set_input(data.carrier); // Update the carrier
+        };
+
     },
 
     asdget_variant_fields: function () {

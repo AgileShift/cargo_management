@@ -6,15 +6,28 @@ frappe.listview_settings['Package'] = {
     hide_name_column: true,
 
     onload: function (listview) {
-        const name_field = listview.page.fields_dict['name'];
+        const {name: name_field, customer_name: customer_name_field} = listview.page.fields_dict;
 
         // Update placeholder and help-text
         name_field.$wrapper.attr('data-original-title', __('Tracking Numbers'));
         name_field.$input.attr('placeholder', __('Tracking Numbers'));
 
+        // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed
+        name_field.df.onchange = customer_name_field.df.onchange = function () {
+            this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change UI and internal value
+
+            if (this.value !== this.last_value)
+                listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
+        };
+
         // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
         // TODO: listview.list_sidebar.get_stats() => This call frappe.desk.reportview.get_sidebar_stats using 'filters' not 'or_filters'
-        listview.get_args = () => {  // Override only instance method
+        // Override: Use the 'search_term' of the 'name' field in the 'or_filters', remove '%' added in get_standard_filters()
+        listview.get_args = () => {
+            // Removing '%' added when the listview loads first time
+            name_field.value = name_field.input.value = name_field.get_input_value().replaceAll('%', '');
+            customer_name_field.input.value = customer_name_field.get_input_value().replaceAll('%', '');
+
             let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args
 
             const name_filter = args.filters.findIndex(f => f[1] === 'name');  // f -> ['Doctype', 'field', 'sql_search_term', 'value']
@@ -22,10 +35,7 @@ frappe.listview_settings['Package'] = {
             if (name_filter >= 0) {  // We have 'name' filter being filtered. -> Will return index if found
                 args.filters.splice(name_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
 
-                // Removing '%' added when the listview loads first time & trim spaces when values are pasted
-                name_field.input.value = name_field.get_value().replaceAll('%', '').trim().toUpperCase(); // Makes the UI change
-
-                const data = cargo_management.find_carrier_by_tracking_number(name_field.get_value());
+                const data = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value());
 
                 args.or_filters = [
                     ['Package', 'name', 'like', '%' + data.search_term + '%'],
