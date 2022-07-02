@@ -1,9 +1,9 @@
 frappe.listview_settings['Package'] = {
-    //add_fields: ['status', 'carrier'], // TODO: Improve here. because we have extra data!. also what this is for?
+    add_fields: ['carrier', 'tracking_number'], // Eye watch this. If fields in list is modified this makes no sense.
     filters: [
         ['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']],
     ],
-    hide_name_column: true,
+    hide_name_column: true, // TODO: Ask for this?
 
     onload: function (listview) {
         const {name: name_field, customer_name: customer_name_field} = listview.page.fields_dict;
@@ -93,15 +93,9 @@ frappe.listview_settings['Package'] = {
             return __('Open carrier page')
         },
         action(doc) {
-            // TODO: WORK ON THIS
-            frappe.call({
-                method: 'cargo_management.package_management.doctype.package.actions.get_carrier_tracking_url',
-                type: 'GET',
-                args: {carrier: doc.carrier},
-                freeze: true,
-                freeze_message: __('Opening carrier detail page...'),
-                callback: (r) => window.open(r.message + doc.tracking_number, '_blank')
-            });
+            // TODO: Make this a List of buttons
+            cargo_management.load_carrier_settings(doc.carrier)
+                .then(settings => window.open(settings.urls[0].url + doc.tracking_number, '_blank'));
         },
     },
 

@@ -377,7 +377,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-06-29 11:31:52.291185",
+ "modified": "2022-07-01 23:55:52.627266",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",
@@ -439,7 +439,7 @@
   }
  ],
  "quick_entry": 1,
- "search_fields": "tracking_number,consolidated_tracking_numbers,customer, customer_name, status",
+ "search_fields": "tracking_number,consolidated_tracking_numbers,customer_name",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
  "sort_field": "modified",
