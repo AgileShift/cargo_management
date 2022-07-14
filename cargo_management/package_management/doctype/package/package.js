@@ -56,14 +56,10 @@ frappe.ui.form.on('Package', {
             return;
         }
 
-        frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.find_carrier_by_tracking_number',
-            type: 'GET', freeze: true, freeze_message: __('Searching Carrier...'), args: {tracking_number: frm.doc.tracking_number},
-            callback: (r) => {
-                frm.doc.carrier = r.message.carrier;
-                refresh_many(['tracking_number', 'carrier']);
-            }
-        });
+        const data = cargo_management.find_carrier_by_tracking_number(frm.doc.tracking_number);
+
+        frm.doc.carrier = data.carrier;
+        refresh_many(['tracking_number', 'carrier']);
     },
 
     shipping_amount: function (frm) {
