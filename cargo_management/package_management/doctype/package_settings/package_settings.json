@@ -35,11 +35,11 @@
    "label": "Carrier Settings"
   },
   {
+   "default": "JSON FILE",
+   "description": "TODO: MAKE THIS A VIRTUAL DOCTYPE TO READ JSON FILE",
    "fieldname": "carriers",
-   "fieldtype": "Table",
-   "label": "Carriers available to track with APIs and settings",
-   "options": "Package Carrier",
-   "reqd": 1
+   "fieldtype": "HTML",
+   "label": "Carriers available to track with APIs and settings"
   },
   {
    "default": "0",
@@ -52,7 +52,7 @@
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-03-14 16:34:32.194636",
+ "modified": "2022-07-16 13:09:00.165848",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package Settings",
