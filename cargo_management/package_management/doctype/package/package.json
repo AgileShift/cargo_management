@@ -95,7 +95,7 @@
    "in_filter": 1,
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nLaserShip\nCainiao\nSF Express\nYanwen\nSunYou",
+   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
    "reqd": 1,
    "search_index": 1
   },
@@ -377,7 +377,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-07-01 23:55:52.627266",
+ "modified": "2022-07-15 18:11:49.846171",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Package",

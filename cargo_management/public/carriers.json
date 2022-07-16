@@ -46,6 +46,10 @@
       "default_carriers": ["LOGTRA", "Parcels"],
       "tracking_url": "https://track.yw56.com.cn/en/querydel?nums="
     },
+    "YunExpress": {
+      "default_carriers": ["LOGTRA", "Parcels"],
+      "tracking_url": "https://www.yuntrack.com/parcelTracking?id="
+    },
     "SunYou": {
       "default_carriers": ["LOGTRA", "Parcels"],
       "tracking_url": "https://www.sypost.net/search?orderNo="

@@ -32,6 +32,8 @@ cargo_management = {
             carrier = 'SF Express';
         } else if (tracking_number.slice(0 ,5) === 'ALS00' || tracking_number.slice(0 , 3) === 'S00' || tracking_number.slice(0, 2) === 'UY') {
             carrier = 'Yanwen';
+        } else if (tracking_number.slice(0, 2) === 'YT') {
+            carrier = 'YunExpress';
         } else if (tracking_number.slice(0, 2) === 'SY') { //  SYUS && SYAE
             carrier = 'SunYou';
         }
@@ -45,6 +47,7 @@ cargo_management = {
 
         // TODO: else if ( any(s in tracking_number for s in ['LY', 'LB', 'LW']) )
         //     return 'Possibly a USPS Tracking' || Can be tracked with Cainaio and USPS
+        // TODO: YT: eg: YT2219421236038447
 
         // FedEx or USPS. Matches starting with: 92612 or with zipcode(420xxxxx). To search we will return starting with 612
         else if (tracking_number_len === 22 && tracking_number.slice(0, 5) === '92612') {
