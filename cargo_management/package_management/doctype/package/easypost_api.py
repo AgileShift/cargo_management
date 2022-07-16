@@ -62,8 +62,8 @@ class EasypostAPI:
     def _normalize_data(self):
         """ This normalizes all the data will correct values """
         # Normalize Status
-        self.instance.status = self.normalize_status(self.instance.status)
-        self.instance.status_detail = self.normalize_status(self.instance.status_detail)
+        self.instance.status = frappe.unscrub(self.instance.status)
+        self.instance.status_detail = frappe.unscrub(self.instance.status_detail)
 
         # In easypost weight comes in ounces, we convert to pound.
         self.instance.weight_in_pounds = self.instance.weight / 16 if self.instance.weight else None  # TODO: FIX
@@ -101,11 +101,6 @@ class EasypostAPI:
 
         # Return unaware local datetime: Converts unaware UTC datetime to aware UTC and then delete the timezone info.
         return naive_datetime.astimezone(tz=local_tz).replace(tzinfo=None)
-
-    @staticmethod
-    def normalize_status(status):
-        """ Normalize to frappe conventions. Easypost send snake_case status, we use individual words titled """
-        return status.replace('_', ' ').title()  # We don't override if the data is empty.
 
 
 @frappe.whitelist(allow_guest=True, methods='POST')
