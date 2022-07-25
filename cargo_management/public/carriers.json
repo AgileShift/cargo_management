@@ -1,57 +1,57 @@
 {
   "default_carriers": {
-    "LOGTRA": "http://logtra.cargotrack.net/m/track.asp?track=",
+    "EVEREST": "http://everest.cargotrack.net/m/track.asp?track=",
     "Parcels": "https://parcelsapp.com/en/tracking/"
   },
   "carriers": {
     "Amazon": {
-      "default_carriers": ["LOGTRA"]
+      "default_carriers": ["EVEREST"]
     },
     "Unknown": {
-      "default_carriers": ["LOGTRA", "Parcels"]
+      "default_carriers": ["EVEREST", "Parcels"]
     },
     "USPS": {
       "api": ["EasyPost"],
-      "default_carriers": ["LOGTRA", "Parcels"],
+      "default_carriers": ["EVEREST", "Parcels"],
       "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?tLabels="
     },
     "UPS": {
       "api": ["EasyPost"],
-      "default_carriers": ["LOGTRA"],
+      "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.ups.com/track?tracknum="
     },
     "DHL": {
       "api": ["EasyPost"],
-      "default_carriers": ["LOGTRA"],
+      "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.dhl.com/en/express/tracking.shtml?AWB="
     },
     "FedEx": {
       "api": ["EasyPost"],
-      "default_carriers": ["LOGTRA"],
+      "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.fedex.com/apps/fedextrack/?trackingnumber="
     },
     "LaserShip": {
-      "default_carriers": ["LOGTRA"],
+      "default_carriers": ["EVEREST"],
       "tracking_url": "https://lasership.com/track.php?track_number_input="
     },
     "Cainiao": {
-      "default_carriers": ["LOGTRA", "Parcels"],
+      "default_carriers": ["EVEREST", "Parcels"],
       "tracking_url": "https://global.cainiao.com/detail.htm?mailNoList="
     },
     "SF Express": {
-      "default_carriers": ["LOGTRA", "Parcels"],
+      "default_carriers": ["EVEREST", "Parcels"],
       "tracking_url": "https://www.sf-express.com/cn/en/dynamic_function/waybill/#search/bill-number/"
     },
     "Yanwen": {
-      "default_carriers": ["LOGTRA", "Parcels"],
+      "default_carriers": ["EVEREST", "Parcels"],
       "tracking_url": "https://track.yw56.com.cn/en/querydel?nums="
     },
     "YunExpress": {
-      "default_carriers": ["LOGTRA", "Parcels"],
+      "default_carriers": ["EVEREST", "Parcels"],
       "tracking_url": "https://www.yuntrack.com/parcelTracking?id="
     },
     "SunYou": {
-      "default_carriers": ["LOGTRA", "Parcels"],
+      "default_carriers": ["EVEREST", "Parcels"],
       "tracking_url": "https://www.sypost.net/search?orderNo="
     }
   }

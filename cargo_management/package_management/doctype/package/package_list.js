@@ -14,7 +14,7 @@ frappe.listview_settings['Package'] = {
 
         // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed
         name_field.df.onchange = customer_name_field.df.onchange = function () {
-            this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change UI and internal value
+            this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change internal and UI value
 
             if (this.value !== this.last_value)
                 listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
