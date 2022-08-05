@@ -1,8 +1,6 @@
-frappe.listview_settings['Package'] = {
+frappe.listview_settings['Parcel'] = {
     add_fields: ['carrier', 'tracking_number'], // Eye watch this. If fields in list is modified this makes no sense.
-    filters: [
-        ['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']],
-    ],
+    filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],
     hide_name_column: true, // TODO: Ask for this?
 
     onload: function (listview) {
@@ -16,8 +14,7 @@ frappe.listview_settings['Package'] = {
         name_field.df.onchange = customer_name_field.df.onchange = function () {
             this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change internal and UI value
 
-            if (this.value !== this.last_value)
-                listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
+            if (this.value !== this.last_value) listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
         };
 
         // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
@@ -37,34 +34,30 @@ frappe.listview_settings['Package'] = {
 
                 const data = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value());
 
-                args.or_filters = [
-                    ['Package', 'name', 'like', '%' + data.search_term + '%'],
-                    ['Package', 'tracking_number', 'like', '%' + data.search_term + '%'],
-                    ['Package', 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%'],
-                ];
+                args.or_filters = [['Parcel', 'name', 'like', '%' + data.search_term + '%'], ['Parcel', 'tracking_number', 'like', '%' + data.search_term + '%'], ['Parcel', 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%'],];
             }
 
             return args;
         }
 
         // listview.page.add_actions_menu_item(__('Update data from carrier'), function () {
-            // TODO FINISH.... This is work in progress
-            // Bulk Dialog - should sent email if status is changed?
-            // Bulk show_progress. This actually reloads the form? if so. how many times?
-            // listview.call_for_selected_items(
-            //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
-            //  );
+        // TODO FINISH.... This is work in progress
+        // Bulk Dialog - should sent email if status is changed?
+        // Bulk show_progress. This actually reloads the form? if so. how many times?
+        // listview.call_for_selected_items(
+        //     'cargo_management.package_management.doctype.package.actions.update_data_from_carrier_bulk'
+        //  );
         // })
     },
 
     get_indicator: function (doc) {
+        //Unused: Light Blue
         const status_color = {
+            'Awaiting Receipt': 'blue',
+
+            'Awaiting Confirmation': 'orange',
             'In Extraordinary Confirmation': 'pink',
 
-            // cyan
-            // TODO: Range of colors
-            'Awaiting Receipt': 'blue',
-            'Awaiting Confirmation': 'orange',
             'Awaiting Departure': 'yellow',
             'In Transit': 'purple',
             'In Customs': 'gray',

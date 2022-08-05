@@ -1,11 +1,11 @@
 function calculate_package_total(frm) {
-    frm.doc.total = frm.get_sum('content', 'amount') + frm.doc.shipping_amount;  // Calculate the 'total' field on Package Doctype(Parent)
+    frm.doc.total = frm.get_sum('content', 'amount') + frm.doc.shipping_amount;  // Calculate the 'total' field on Parcel Doctype(Parent)
 
     frm.refresh_field('total');
 }
 
 function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
-    // Calculates the 'amount' field on Package Content Doctype(Child) and 'total' field on Package Doctype(Parent)
+    // Calculates the 'amount' field on Parcel Content Doctype(Child) and 'total' field on Parcel Doctype(Parent)
     let content_row = locals[cdt][cdn]; // Getting Child Row
 
     content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in edited row
@@ -14,7 +14,7 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     calculate_package_total(frm); // Calculate the parent 'total' field and trigger refresh event
 }
 
-frappe.ui.form.on('Package', {
+frappe.ui.form.on('Parcel', {
 
     setup: function (frm) {
         $('.layout-side-section').hide(); // Little Trick to work better FIXME use frm.page.layout
@@ -70,7 +70,7 @@ frappe.ui.form.on('Package', {
 
     show_explained_status: function (frm) {
         frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_explained_status',
+            method: 'cargo_management.package_management.doctype.parcel.actions.get_explained_status',
             type: 'GET', args: {source_name: frm.doc.name},
             callback: (r) => {
                 r.message.message.forEach(m => frm.layout.show_message(m, ''))  // FIXME: Core overrides color
@@ -95,7 +95,7 @@ frappe.ui.form.on('Package', {
     get_data_from_api: function (frm) {
         // WORK ON THIS. We have to delete some data
         frappe.call({
-            method: 'cargo_management.package_management.doctype.package.actions.get_data_from_api',
+            method: 'cargo_management.package_management.doctype.parcel.actions.get_data_from_api',
             freeze: true, freeze_message: __('Updating from Carrier...'), args: {source_name: frm.doc.name},
             callback: (r) => {
                 frappe.model.sync(r.message);
@@ -179,7 +179,7 @@ frappe.ui.form.on('Package', {
     }
 });
 
-frappe.ui.form.on('Package Content', {
+frappe.ui.form.on('Parcel Content', {
     content_remove(frm) {
         calculate_package_total(frm);
     },

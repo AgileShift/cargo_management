@@ -4,7 +4,7 @@ from frappe.model.document import Document
 from .easypost_api import EasypostAPI, EasypostAPIError
 
 
-class Package(Document):
+class Parcel(Document):
     """  All this are Frappe Core Flags:
         'ignore_links':       avoid: _validate_links()
         'ignore_validate':    avoid: validate() and before_save()
@@ -18,7 +18,7 @@ class Package(Document):
             self.flags.ignore_permissions = self.flags.ignore_validate = self.flags.ignore_mandatory = self.flags.ignore_links = True
             self.request_data_from_api()
 
-        return super(Package, self).save(*args, **kwargs)
+        return super(Parcel, self).save(*args, **kwargs)
 
     def validate(self):
         """ Sanitize fields """
@@ -35,11 +35,11 @@ class Package(Document):
 
     def change_status(self, new_status):
         """
-        Validates the current status of the package and change it if it's possible.
+        Validates the current status of the parcel and change it if it's possible.
 
-        # Package was waiting for receipt, now is mark as delivered. waiting for confirmation.
-        # Package was waiting for receipt or confirmation and now is waiting for the departure.
-        # Package was not received and not confirmed, but has appear on the warehouse receipt.
+        # Parcel was waiting for receipt, now is mark as delivered. waiting for confirmation.
+        # Parcel was waiting for receipt or confirmation and now is waiting for the departure.
+        # Parcel was not received and not confirmed, but has appear on the warehouse receipt.
 
         # TODO: Validate this when status is changed on Form-View or List-View
         """
@@ -57,7 +57,7 @@ class Package(Document):
         return False
 
     def explained_status(self):
-        """ This returns a detailed explanation of the current status of the Package and compatible colors. """
+        """ This returns a detailed explanation of the current status of the Parcel and compatible colors. """
         # TODO: Python 3.10: Migrate to switch case or Improve performance?
 
         message, color = [], 'lightblue'  # TODO: Add more colors? Check frappe colors
@@ -98,7 +98,7 @@ class Package(Document):
                 delivered_since = frappe.utils.time_diff(None, self.carrier_real_delivery)  # datetime is UTC
 
                 # TODO: Compare Against Workable days
-                # Package has exceeded the 24 hours timespan to be confirmed. Same as: time_diff_in_hours() >= 24.00
+                # Parcel has exceeded the 24 hours timespan to be confirmed. Same as: time_diff_in_hours() >= 24.00
                 if delivered_since.days >= 1:  # The day starts counting after 1-minute difference
                     color = 'red'
                     delivered_since_str = 'Ha pasado 1 día' if delivered_since.days == 1 else 'Han pasado {} días'
@@ -173,15 +173,15 @@ class Package(Document):
         if carrier_api and carrier_api[0] == 'EasyPost':
             self._request_data_from_easypost_api()
         else:
-            frappe.msgprint(_('Package is handled by a carrier we can\'t track.'), indicator='red', alert=True)
+            frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
 
     def _request_data_from_easypost_api(self):
         """ Handles POST or GET to the Easypost API. Also parses the data. """
         try:
-            if self.easypost_id:  # Package exists on easypost and is requested to be tracked. Request updates from API.
-                api_data = EasypostAPI(carrier=self.carrier).retrieve_package_data(self.easypost_id)
-            else:  # Package don't exist on easypost and is requested to be tracked. We create a new one and attach it.
-                api_data = EasypostAPI(carrier=self.carrier).create_package(self.tracking_number)
+            if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
+                api_data = EasypostAPI(carrier=self.carrier).retrieve_parcel_data(self.easypost_id)
+            else:  # Parcel don't exist on easypost and is requested to be tracked. We create a new one and attach it.
+                api_data = EasypostAPI(carrier=self.carrier).create_parcel(self.tracking_number)
 
                 self.easypost_id = api_data.id  # EasyPost ID. Only on creation
         except EasypostAPIError as e:
@@ -190,7 +190,7 @@ class Package(Document):
         else:  # Data to parse that will be saved
             self._parse_data_from_easypost(api_data)
 
-            frappe.msgprint(msg=_('Package has been updated from API.'), alert=True)
+            frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
 
     def parse_data_from_easypost_webhook(self, response):
         """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
@@ -200,7 +200,7 @@ class Package(Document):
         self._parse_data_from_easypost(easypost_api.instance)
 
     def _parse_data_from_easypost(self, data):
-        """ This parses all the data from an easypost Instance(with all the details) to our Package DocType. """
+        """ This parses all the data from an easypost Instance(with all the details) to our Parcel DocType. """
 
         self.carrier_status = data.status or 'Unknown'
         self.carrier_status_detail = data.status_detail or 'Unknown'
@@ -210,7 +210,7 @@ class Package(Document):
         self.carrier_est_weight = data.weight_in_pounds
         self.carrier_est_delivery = data.naive_est_delivery_date
 
-        # If package is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
+        # If parcel is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
         if data.status == 'Delivered' or data.status_detail == 'Arrived At Destination':
             self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(data.tracking_details[-1].datetime, EasypostAPI.carriers_using_utc.get(self.carrier, False))  # FIXME: Improve this.
             self.change_status('Awaiting Confirmation')

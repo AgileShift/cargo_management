@@ -35,16 +35,16 @@
   "shipping_amount",
   "column_break_22",
   "total",
-  "section_break_6",
+  "links_section",
+  "warehouse_receipt",
+  "cargo_shipment",
+  "tab_break_99",
   "shipper",
   "notes",
   "column_break_21",
   "order_number",
   "signature",
-  "internal_data_section",
-  "easypost_id",
-  "warehouse_receipt",
-  "cargo_shipment"
+  "easypost_id"
  ],
  "fields": [
   {
@@ -192,13 +192,6 @@
    "read_only": 1
   },
   {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: !in_list(['Sorting', 'Available to Pickup', 'Finished'], doc.status)",
-   "fieldname": "section_break_6",
-   "fieldtype": "Section Break",
-   "label": "Additional Information"
-  },
-  {
    "description": "Store that sends the package.",
    "fieldname": "shipper",
    "fieldtype": "Data",
@@ -245,13 +238,6 @@
    "label": "Total(Amt)",
    "options": "USD",
    "read_only": 1
-  },
-  {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: in_list(['Sorting', 'Available to Pickup'], doc.status)",
-   "fieldname": "internal_data_section",
-   "fieldtype": "Section Break",
-   "label": "Internal Data"
   },
   {
    "description": "Required to fetch data after an easypost tracking number is created.",
@@ -342,6 +328,20 @@
    "label": "Transportation",
    "options": "Sea\nAir",
    "search_index": 1
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval: !in_list(['Sorting', 'Available to Pickup', 'Finished'], doc.status)",
+   "fieldname": "tab_break_99",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval: in_list(['Sorting', 'Available to Pickup'], doc.status)",
+   "fieldname": "links_section",
+   "fieldtype": "Section Break",
+   "label": "Links"
   }
  ],
  "links": [
@@ -354,7 +354,8 @@
   {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
-   "link_fieldname": "package"
+   "link_fieldname": "package",
+   "parent_doctype": "Cargo Shipment"
   },
   {
    "group": "Cargo Shipment",
@@ -377,11 +378,12 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-07-15 18:11:49.846171",
+ "modified": "2022-08-05 16:13:55.710091",
  "modified_by": "Administrator",
  "module": "Package Management",
- "name": "Package",
+ "name": "Parcel",
  "name_case": "UPPER CASE",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -444,6 +446,7 @@
  "show_preview_popup": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "timeline_field": "customer",
  "track_changes": 1
 }

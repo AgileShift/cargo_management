@@ -1,22 +1,22 @@
 frappe.provide('frappe.ui.form');
 
-frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
+frappe.ui.form.PackageQuickEntryForm = class PackageQuickEntryForm extends frappe.ui.form.QuickEntryForm {
 
-    init: function (doctype, after_insert, init_callback, doc, force) {
+    init(doctype, after_insert, init_callback, doc, force) {
         this._super(doctype, after_insert, init_callback, doc, true)
 
         console.log('WORK');
-    },
+    }
 
-    set_meta_and_mandatory_fields: function () {
+    set_meta_and_mandatory_fields() {
         this._super();
 
         // Add onchange event to 'tracking_number' field
         // let tochange = this.mandatory.findIndex((f) => f.fieldname === 'tracking_number');
 
         // this.mandatory[tochange].onchange = function (e) {
-            // console.log(this.dialog)
-            //cargo_management.find_carrier_by_tracking_number();
+        // console.log(this.dialog)
+        //cargo_management.find_carrier_by_tracking_number();
         // };
 
         //let table_meta = frappe.get_meta('Package Content')
@@ -30,13 +30,13 @@ frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
         //this.mandatory[10].fields = table_fields.filter(df => {
         //    if ((df.reqd || df.bold || df.allow_in_quick_entry) && !df.read_only) {
 
-                //console.log(df);
-                //return true;
-            //}
+        //console.log(df);
+        //return true;
+        //}
         //});
 
 
-    },
+    }
 
     // setup: function () {
     //     this.force = true;
@@ -44,12 +44,12 @@ frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
     // },
 
     // TODO: make large dialog
-    render_dialog: function () {
+    render_dialog() {
         this._super();
         this.init_post_render_dialog_operations();
-    },
+    }
 
-    init_post_render_dialog_operations: function () {
+    init_post_render_dialog_operations() {
         let {carrier: carrier_field, tracking_number: tracking_number_field} = this.dialog.fields_dict;
 
         tracking_number_field.df.onchange = function () {  // Override onchange to clean field and set carrier
@@ -59,9 +59,9 @@ frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
             carrier_field.set_input(data.carrier); // Update the carrier
         };
 
-    },
+    }
 
-    asdget_variant_fields: function () {
+    asdget_variant_fields() {
         console.log(this);
 
         return [
@@ -130,4 +130,4 @@ frappe.ui.form.PackageQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 
     }
 
-});
+}

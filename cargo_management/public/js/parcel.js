@@ -2,7 +2,7 @@ frappe.provide('cargo_management');
 
 cargo_management = {
     find_carrier_by_tracking_number: function (tracking_number) {
-        /* LINKED WITH: package_management/doctype/package/actions.py -> find_carrier_by_tracking_number
+        /* LINKED WITH: package_management/doctype/parcel/actions.py -> find_carrier_by_tracking_number
 
         Its specially made to avoid a call the server(API) to get a response that's does not have database data
 

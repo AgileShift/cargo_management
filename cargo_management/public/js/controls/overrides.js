@@ -1,18 +1,18 @@
 // Override default height on SmallText Field -> See: frappe/form/controls/text.js
-frappe.ui.form.ControlSmallText = frappe.ui.form.ControlSmallText.extend({
-    make_input: function () {
-        this._super();
-        this.$input.css('height', '');  // No inline height property in all ControlSmallText
+frappe.ui.form.ControlSmallText = class ControlSmallText extends frappe.ui.form.ControlSmallText {
+    make_input() {
+        super.make_input();
+        this.$input.css('height', 'auto');  // No inline height property in all ControlSmallText
     }
-});
+};
 
-frappe.ui.form.ControlMultiCheckUnique = frappe.ui.form.ControlMultiCheck.extend({
+frappe.ui.form.ControlMultiCheckUnique = class ControlMultiCheckUnique extends frappe.ui.form.ControlMultiCheck {
     make() {
-        this._super();
+        super.make();
 
         this.$label.toggleClass('reqd', Boolean(this.df.reqd)); // See: /form/controls/base_input.js -> set_required();
         this.$checkbox_area.css('margin-top', 'var(--margin-xs)');  // FIXME: We can set this by CSS?
-    },
+    }
 
     bind_checkboxes() {
         // We Override this def to be able to make Check Unique and return the selected option on change
@@ -29,4 +29,4 @@ frappe.ui.form.ControlMultiCheckUnique = frappe.ui.form.ControlMultiCheck.extend
             this.df.on_change && this.df.on_change(option_name);
         });
     }
-});
+}

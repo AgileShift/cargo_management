@@ -8,7 +8,6 @@
 
 // HINT: In core, colors are set only for .indicator-pill Used in: Workspace(shortcut), List-View(row status field) and Form-View(status indicator))
 // This is for the List-View(row status indicator dot) shown in mobile, see: list_view.js -> get_indicator_dot()
-// TODO: Add Missing Colors?
 .indicator {
   &.purple {
     @include indicator-color('purple');

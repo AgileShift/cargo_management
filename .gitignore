@@ -4,4 +4,8 @@
 *.swp
 tags
 cargo_management/docs/current
+node_modules/
 *.vcf
+
+dist/
+__pycache__/
