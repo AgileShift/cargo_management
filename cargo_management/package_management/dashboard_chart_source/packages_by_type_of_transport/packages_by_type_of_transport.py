@@ -1,8 +1,10 @@
 import frappe
 from frappe.desk.doctype.dashboard_chart.dashboard_chart import get as build_chart_data
+from frappe.utils.dashboard import cache_source
 
 
 @frappe.whitelist(methods='POST')
+@cache_source
 def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None, to_date=None, timespan=None,
         time_interval=None, heatmap_year=None, refresh=None):
     """ Custom Chart using core Dashboard Chart Data.
@@ -24,12 +26,12 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
         # We request a count of packages and time series based on creation (This data is stored in Doc)
         'chart_type': 'Count',     # Unnecessary
         'based_on': 'creation',
-        'document_type': 'Package',
+        'document_type': 'Parcel',
         'group_by_type': 'Count',  # Unnecessary
         # TODO: Append filters Dynamically
         'filters_json': [
-            ['Package', 'transportation', '=', 'Sea', False],
-            ['Package', 'assisted_purchase', '=', filters['assisted_purchase'], False],
+            ['Parcel', 'transportation', '=', 'Sea', False],
+            ['Parcel', 'assisted_purchase', '=', filters['assisted_purchase'], False],
         ],
         'name': 'SEA'  # Readable label name
     }
