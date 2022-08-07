@@ -2,14 +2,14 @@ frappe.provide('frappe.ui.form');
 
 frappe.ui.form.PackageQuickEntryForm = class PackageQuickEntryForm extends frappe.ui.form.QuickEntryForm {
 
-    init(doctype, after_insert, init_callback, doc, force) {
-        this._super(doctype, after_insert, init_callback, doc, true)
+    constructor(doctype, after_insert, init_callback, doc, force) {
+        super(doctype, after_insert, init_callback, doc, true)
 
         console.log('WORK');
     }
 
     set_meta_and_mandatory_fields() {
-        this._super();
+        super.set_meta_and_mandatory_fields();
 
         // Add onchange event to 'tracking_number' field
         // let tochange = this.mandatory.findIndex((f) => f.fieldname === 'tracking_number');
@@ -34,8 +34,6 @@ frappe.ui.form.PackageQuickEntryForm = class PackageQuickEntryForm extends frapp
         //return true;
         //}
         //});
-
-
     }
 
     // setup: function () {
@@ -45,7 +43,7 @@ frappe.ui.form.PackageQuickEntryForm = class PackageQuickEntryForm extends frapp
 
     // TODO: make large dialog
     render_dialog() {
-        this._super();
+        super.render_dialog();
         this.init_post_render_dialog_operations();
     }
 

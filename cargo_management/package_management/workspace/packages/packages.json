@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Awaiting<br></b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active packages\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>At Office</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available to Pickup\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Parcel\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Cargo Shipment\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Selling\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Buying\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Delivery\",\"col\":4}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>With Carrier<br></b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active packages\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Office</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available to Pickup\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Parcel\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Cargo Shipment\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Selling\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Buying\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Delivery\",\"col\":4}}]",
  "creation": "2020-07-05 15:49:07.860880",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -12,38 +12,48 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
-   "link_count": 17,
+   "label": "Purchase Order",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "map",
+   "is_query_report": 0,
+   "label": "Delivery",
+   "link_count": 1,
    "onboard": 0,
    "type": "Card Break"
   },
   {
-   "dependencies": "Package",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Packages Arriving Late",
+   "label": "Delivery Trip",
    "link_count": 0,
-   "link_to": "Arriving Late",
-   "link_type": "Report",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "Package",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Packages Awaiting Confirmation",
-   "link_count": 0,
-   "link_to": "Awaiting Confirmation",
-   "link_type": "Report",
-   "onboard": 1,
+   "link_to": "Delivery Trip",
+   "link_type": "DocType",
+   "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
+   "icon": "stock",
    "is_query_report": 0,
    "label": "Parcel",
-   "link_count": 1,
+   "link_count": 4,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -89,9 +99,10 @@
   },
   {
    "hidden": 0,
+   "icon": "change",
    "is_query_report": 0,
    "label": "Warehouse",
-   "link_count": 1,
+   "link_count": 2,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -117,9 +128,10 @@
   },
   {
    "hidden": 0,
+   "icon": "branch",
    "is_query_report": 0,
    "label": "Cargo Shipment",
-   "link_count": 1,
+   "link_count": 3,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -155,9 +167,10 @@
   },
   {
    "hidden": 0,
+   "icon": "sell",
    "is_query_report": 0,
    "label": "Selling",
-   "link_count": 1,
+   "link_count": 3,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -193,9 +206,10 @@
   },
   {
    "hidden": 0,
+   "icon": "buying",
    "is_query_report": 0,
    "label": "Buying",
-   "link_count": 1,
+   "link_count": 2,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -218,27 +232,9 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Delivery",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Delivery Trip",
-   "link_count": 0,
-   "link_to": "Delivery Trip",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
   }
  ],
- "modified": "2022-08-05 11:54:54.896016",
+ "modified": "2022-08-06 08:40:19.730797",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Packages",
@@ -250,64 +246,12 @@
  "sequence_id": 1.0,
  "shortcuts": [
   {
-   "color": "lightblue",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "icon": "",
-   "label": "Arriving Today",
-   "link_to": "Parcel",
-   "stats_filter": "{\"carrier_status\":[\"!=\",\"Delivered\"],\"carrier_est_delivery\":[\"Timespan\",\"today\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
+   "color": "Cyan",
    "doc_view": "List",
    "format": "{} Waiting",
    "label": "Awaiting Departure",
    "link_to": "Parcel",
-   "type": "DocType"
-  },
-  {
-   "color": "Pink",
-   "doc_view": "List",
-   "label": "Without Carrier Data",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"easypost_id\":[\"is\",\"not set\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "format": "{} Delivered",
-   "label": "Arrived Today",
-   "link_to": "Parcel",
-   "stats_filter": "{\"carrier_status\":[\"=\",\"Delivered\"],\"carrier_real_delivery\":[\"Timespan\",\"today\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "format": "{} Ready",
-   "label": "Available to Pickup",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"Sorting\",\"To Bill\",\"Unpaid\",\"To Deliver Or Pickup\"]]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Cyan",
-   "doc_view": "List",
-   "label": "In Transit",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"In Transit\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Orange",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "label": "This week pending confirmation",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"carrier_real_delivery\":[\"Timespan\",\"this week\"]}",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Departure\"]}",
    "type": "DocType"
   },
   {
@@ -319,12 +263,47 @@
    "type": "DocType"
   },
   {
-   "color": "Orange",
+   "color": "Blue",
+   "doc_view": "List",
+   "format": "{} Ready",
+   "label": "Available to Pickup",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"in\",[\"Sorting\",\"To Bill\",\"Unpaid\",\"To Deliver or Pickup\"]]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Without Carrier Data",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"easypost_id\":[\"is\",\"not set\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Light-Blue",
    "doc_view": "List",
    "format": "{} Pending",
-   "label": "Awaiting Confirmation",
+   "icon": "",
+   "label": "Arriving Today",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]]}",
+   "stats_filter": "{\"carrier_status\":[\"!=\",\"Delivered\"],\"carrier_est_delivery\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Late",
+   "label": "Arriving Late",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_est_delivery\":[\"Timespan\",\"this quarter\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "label": "Available for pickup at post office",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Available For Pickup\"]}",
    "type": "DocType"
   },
   {
@@ -337,11 +316,30 @@
    "type": "DocType"
   },
   {
-   "color": "Grey",
+   "color": "Green",
    "doc_view": "List",
-   "label": "Available for pickup at post office",
+   "format": "{} Delivered",
+   "label": "Arrived Today",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Available For Pickup\"]}",
+   "stats_filter": "{\"carrier_status\":[\"=\",\"Delivered\"],\"carrier_real_delivery\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "This week pending confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"carrier_real_delivery\":[\"Timespan\",\"this week\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "Awaiting Confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]]}",
    "type": "DocType"
   },
   {
@@ -354,12 +352,11 @@
    "type": "DocType"
   },
   {
-   "color": "Red",
+   "color": "Purple",
    "doc_view": "List",
-   "format": "{} Late",
-   "label": "Arriving Late",
+   "label": "In Transit",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_est_delivery\":[\"Timespan\",\"this quarter\"]}",
+   "stats_filter": "{\"status\":[\"=\",\"In Transit\"]}",
    "type": "DocType"
   }
  ],

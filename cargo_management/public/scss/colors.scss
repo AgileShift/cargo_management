@@ -22,21 +22,20 @@
 }
 
 // This is for the "frm.layout.show_message()", see: frappe/form/layout.js -> show_message()
-// TODO: We can convert to a @each $class, $color in ('lightblue': 'light-blue') and also delete the mixing
 .form-message {
-  &.lightblue {
-    @include form-message-background('light-blue')
+  &.light-blue {
+    @include form-message-background('light-blue');
   }
 
   &.gray {
-    @include form-message-background('light-gray')
+    @include form-message-background('light-gray');
   }
 
   &.purple {
-    @include form-message-background('purple')
+    @include form-message-background('purple');
   }
 
   &.pink {
-    @include form-message-background('pink')
+    @include form-message-background('pink');
   }
 }

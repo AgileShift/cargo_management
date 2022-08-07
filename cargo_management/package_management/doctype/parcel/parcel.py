@@ -60,7 +60,7 @@ class Parcel(Document):
         """ This returns a detailed explanation of the current status of the Parcel and compatible colors. """
         # TODO: Python 3.10: Migrate to switch case or Improve performance?
 
-        message, color = [], 'lightblue'  # TODO: Add more colors? Check frappe colors
+        message, color = [], 'light-blue'  # TODO: Add more colors? Check frappe colors
         frappe.local.lang = 'es'  # Little Hack
 
         if self.status == 'Awaiting Receipt':
