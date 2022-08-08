@@ -2,7 +2,7 @@
 frappe.ui.form.ControlSmallText = class ControlSmallText extends frappe.ui.form.ControlSmallText {
     make_input() {
         super.make_input();
-        this.$input.css('height', 'auto');  // No inline height property in all ControlSmallText
+        this.$input.css('height', '');  // No inline height property in all ControlSmallText
     }
 };
 

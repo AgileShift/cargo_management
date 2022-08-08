@@ -44,7 +44,8 @@
   "column_break_21",
   "order_number",
   "signature",
-  "easypost_id"
+  "easypost_id",
+  "explained_status"
  ],
  "fields": [
   {
@@ -342,6 +343,12 @@
    "fieldname": "links_section",
    "fieldtype": "Section Break",
    "label": "Links"
+  },
+  {
+   "fieldname": "explained_status",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Explained Status"
   }
  ],
  "links": [
@@ -378,7 +385,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-08-05 16:13:55.710091",
+ "modified": "2022-08-08 07:55:31.810149",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",

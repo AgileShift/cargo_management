@@ -1,12 +1,6 @@
 import frappe
 
 
-@frappe.whitelist(methods='GET')
-def get_explained_status(source_name: str):
-    """ Util: Return explained status message from Parcel Doc """
-    return frappe.get_cached_doc('Parcel', source_name).explained_status()
-
-
 @frappe.whitelist(methods='POST')
 def get_data_from_api(source_name: str):
     """ Returns the Parcel Doc with new data from API if it was possible to fetch. """

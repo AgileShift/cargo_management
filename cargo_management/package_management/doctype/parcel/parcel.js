@@ -44,9 +44,12 @@ frappe.ui.form.on('Parcel', {
         // Add Icon to the Page Indicator
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
+        // Show Explained Status as Intro Message
+        frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, ''));  // FIXME: Core overrides color
+        frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
+
         // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
-        frm.events.show_explained_status(frm); // Intro Message
     },
 
     tracking_number: function (frm) {
@@ -67,17 +70,6 @@ frappe.ui.form.on('Parcel', {
     },
 
     // Custom Functions
-
-    show_explained_status: function (frm) {
-        frappe.call({
-            method: 'cargo_management.package_management.doctype.parcel.actions.get_explained_status',
-            type: 'GET', args: {source_name: frm.doc.name},
-            callback: (r) => {
-                r.message.message.forEach(m => frm.layout.show_message(m, ''))  // FIXME: Core overrides color
-                frm.layout.message.removeClass().addClass('form-message ' + r.message.color);
-            }
-        });
-    },
 
     build_custom_buttons: function (frm) {
         cargo_management.load_carrier_settings(frm.doc.carrier).then((settings) => {

@@ -1,20 +1,17 @@
 // First we remove the inline property. See: cargo_management/public/js/controls/overrides.js -> make_input()
 // Setting height for ControlSmallText in Some Doctype
 textarea.form-control[data-fieldtype="Small Text"] {
-  @each $doctype in "Package", "Package Content", "Warehouse Receipt" {
+  @each $doctype in "Parcel", "Package Content", "Warehouse Receipt" {
     &[data-doctype='#{$doctype}'] {
       height: auto;
     }
   }
 }
 
-// This is to add bold css in ControlText if they are ReadOnly(No-Editable) Field
-// See: frappe/form/controls/text.js -> make_wrapper(); where the classes are added
+// This is to add bold css in ControlText and ControlData if they are ReadOnly(No-Editable) Field
 // See: frappe/scss/form.scss -> Where the properties are not selected properly
 .like-disabled-input {
-  &.for-description {
-    &.bold {
-      font-weight: bold;
-    }
+  &.bold {
+    font-weight: bold;
   }
 }

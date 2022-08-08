@@ -56,6 +56,7 @@ class Parcel(Document):
 
         return False
 
+    @property
     def explained_status(self):
         """ This returns a detailed explanation of the current status of the Parcel and compatible colors. """
         # TODO: Python 3.10: Migrate to switch case or Improve performance?

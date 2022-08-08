@@ -10,11 +10,12 @@ frappe.listview_settings['Parcel'] = {
         name_field.$wrapper.attr('data-original-title', __('Tracking Numbers'));
         name_field.$input.attr('placeholder', __('Tracking Numbers'));
 
-        // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed
+        // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed.
         name_field.df.onchange = customer_name_field.df.onchange = function () {
             this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change internal and UI value
 
-            if (this.value !== this.last_value) listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
+            //if (this.value !== this.last_value)  // FIXME: Issue in v14: https://github.com/frappe/frappe/issues/17183 -> last_value same as value
+            listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
         };
 
         // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
@@ -34,7 +35,11 @@ frappe.listview_settings['Parcel'] = {
 
                 const data = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value());
 
-                args.or_filters = [['Parcel', 'name', 'like', '%' + data.search_term + '%'], ['Parcel', 'tracking_number', 'like', '%' + data.search_term + '%'], ['Parcel', 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%'],];
+                args.or_filters = [
+                    ['Parcel', 'name', 'like', '%' + data.search_term + '%'],
+                    ['Parcel', 'tracking_number', 'like', '%' + data.search_term + '%'],
+                    ['Parcel', 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%']
+                ];
             }
 
             return args;
@@ -54,10 +59,8 @@ frappe.listview_settings['Parcel'] = {
         //Unused: Light Blue
         const status_color = {
             'Awaiting Receipt': 'blue',
-
             'Awaiting Confirmation': 'orange',
             'In Extraordinary Confirmation': 'pink',
-
             'Awaiting Departure': 'yellow',
             'In Transit': 'purple',
             'In Customs': 'gray',
@@ -66,7 +69,6 @@ frappe.listview_settings['Parcel'] = {
             'Unpaid': 'red',
             'To Deliver or Pickup': 'cyan',
             'Finished': 'darkgrey',
-
             'Cancelled': 'red',
             'Never Arrived': 'red',
             'Returned to Sender': 'red',
