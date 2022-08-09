@@ -180,9 +180,9 @@ class Parcel(Document):
         """ Handles POST or GET to the Easypost API. Also parses the data. """
         try:
             if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
-                api_data = EasypostAPI(carrier=self.carrier).retrieve_parcel_data(self.easypost_id)
+                api_data = EasypostAPI(carrier=self.carrier).retrieve_package_data(self.easypost_id)
             else:  # Parcel don't exist on easypost and is requested to be tracked. We create a new one and attach it.
-                api_data = EasypostAPI(carrier=self.carrier).create_parcel(self.tracking_number)
+                api_data = EasypostAPI(carrier=self.carrier).create_package(self.tracking_number)
 
                 self.easypost_id = api_data.id  # EasyPost ID. Only on creation
         except EasypostAPIError as e:

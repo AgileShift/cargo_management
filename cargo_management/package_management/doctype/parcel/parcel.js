@@ -1,4 +1,4 @@
-function calculate_package_total(frm) {
+function calculate_parcel_total(frm) {
     frm.doc.total = frm.get_sum('content', 'amount') + frm.doc.shipping_amount;  // Calculate the 'total' field on Parcel Doctype(Parent)
 
     frm.refresh_field('total');
@@ -11,12 +11,12 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in edited row
 
     refresh_field('amount', cdn, 'content');
-    calculate_package_total(frm); // Calculate the parent 'total' field and trigger refresh event
+    calculate_parcel_total(frm); // Calculate the parent 'total' field and trigger refresh event
 }
 
 frappe.ui.form.on('Parcel', {
 
-    setup: function (frm) {
+    setup: function () {
         $('.layout-side-section').hide(); // Little Trick to work better FIXME use frm.page.layout
     },
 
@@ -40,8 +40,6 @@ frappe.ui.form.on('Parcel', {
         if (frm.is_new()) {
             return;
         }
-
-        // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []?
 
         // Add Icon to the Page Indicator(Status)
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
@@ -67,7 +65,7 @@ frappe.ui.form.on('Parcel', {
     },
 
     shipping_amount: function (frm) {
-        calculate_package_total(frm);
+        calculate_parcel_total(frm);
     },
 
     // Custom Functions
@@ -86,7 +84,7 @@ frappe.ui.form.on('Parcel', {
     },
 
     get_data_from_api: function (frm) {
-        // WORK ON THIS. We have to delete some data
+        // TODO: WORK ON THIS. We have to delete some data
         frappe.call({
             method: 'cargo_management.package_management.doctype.parcel.actions.get_data_from_api',
             freeze: true, freeze_message: __('Updating from Carrier...'), args: {source_name: frm.doc.name},
@@ -172,9 +170,9 @@ frappe.ui.form.on('Parcel', {
     }
 });
 
-frappe.ui.form.on('Parcel Content', {
+frappe.ui.form.on('Package Content', {
     content_remove(frm) {
-        calculate_package_total(frm);
+        calculate_parcel_total(frm);
     },
 
     rate: function(frm, cdt, cdn) {

@@ -34,9 +34,9 @@ frappe.listview_settings['Parcel'] = {
                 const data = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value());
 
                 args.or_filters = [
-                    ['Parcel', 'name', 'like', '%' + data.search_term + '%'],
-                    ['Parcel', 'tracking_number', 'like', '%' + data.search_term + '%'],
-                    ['Parcel', 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%']
+                    [args.doctype, 'name', 'like', '%' + data.search_term + '%'],
+                    [args.doctype, 'tracking_number', 'like', '%' + data.search_term + '%'],
+                    [args.doctype, 'consolidated_tracking_numbers', 'like', '%' + data.search_term + '%']
                 ];
             }
 
