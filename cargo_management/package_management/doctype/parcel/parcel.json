@@ -137,7 +137,6 @@
    "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
-   "in_list_view": 1,
    "in_preview": 1,
    "label": "Carrier real delivery date",
    "read_only": 1
@@ -178,7 +177,6 @@
    "description": "The name of the person who signed for the package (if available).",
    "fieldname": "signed_by",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Signed by",
    "read_only": 1
   },
@@ -346,9 +344,12 @@
   },
   {
    "fieldname": "explained_status",
-   "fieldtype": "Data",
+   "fieldtype": "Read Only",
+   "hidden": 1,
    "is_virtual": 1,
-   "label": "Explained Status"
+   "label": "Explained Status",
+   "print_hide": 1,
+   "report_hide": 1
   }
  ],
  "links": [
@@ -385,7 +386,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-08-08 07:55:31.810149",
+ "modified": "2022-08-08 21:53:29.302250",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",
@@ -455,5 +456,6 @@
  "sort_order": "DESC",
  "states": [],
  "timeline_field": "customer",
+ "title_field": "tracking_number",
  "track_changes": 1
 }

@@ -41,14 +41,15 @@ frappe.ui.form.on('Parcel', {
             return;
         }
 
-        // Add Icon to the Page Indicator
+        // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []?
+
+        // Add Icon to the Page Indicator(Status)
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
         // Show Explained Status as Intro Message
         frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, ''));  // FIXME: Core overrides color
         frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
 
-        // TODO: Make a Progress Bar -> frm.dashboard.add_progress("Status", []
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
     },
 
