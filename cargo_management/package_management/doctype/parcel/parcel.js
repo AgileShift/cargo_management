@@ -1,18 +1,3 @@
-function calculate_total(frm) {
-    // Calculate the 'total' field on Parcel Doctype(Parent)
-    frm.set_value('total', frm.get_sum('content', 'amount') + frm.doc.shipping_amount);
-}
-
-function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
-    // Calculates the 'amount' field on Parcel Content Doctype(Child) and 'total' field on Parcel Doctype(Parent)
-    let content_row = locals[cdt][cdn]; // Getting Child Row
-
-    content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in edited row
-
-    refresh_field('amount', cdn, 'content');
-    calculate_total(frm); // Calculate the parent 'total' field
-}
-
 frappe.ui.form.on('Parcel', {
 
     setup: function () {
@@ -43,7 +28,7 @@ frappe.ui.form.on('Parcel', {
         // Add Icon to the Page Indicator(Status)
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
-        //frm.events.show_explained_status(frm);  // Show Explained Status as Intro Message
+        frm.events.show_explained_status(frm);  // Show Explained Status as Intro Message
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
     },
 
@@ -60,7 +45,7 @@ frappe.ui.form.on('Parcel', {
     },
 
     shipping_amount: function (frm) {
-        calculate_total(frm);
+        frm.events.calculate_total(frm);
     },
 
     // Custom Functions
@@ -170,19 +155,31 @@ frappe.ui.form.on('Parcel', {
             primary_action_label: __('Select')
         });
 
+    },
+
+    calculate_total: function (frm) {
+        frm.set_value('total', frm.get_sum('content', 'amount') + frm.doc.shipping_amount);
+    },
+    calculate_content_amounts_and_total: function (frm, cdt, cdn) {
+        let row = locals[cdt][cdn]; // Getting Content Child Row being edited
+
+        row.amount = row.qty * row.rate;
+        refresh_field('amount', cdn, 'content');
+
+        frm.events.calculate_total(frm); // Calculate the parent 'total' field
     }
 });
 
 frappe.ui.form.on('Parcel Content', {
     content_remove(frm) {
-        calculate_total(frm);
-    },
-
-    rate: function(frm, cdt, cdn) {
-        calculate_package_content_amount_and_package_total(frm, cdt, cdn);
+        frm.events.calculate_total(frm);
     },
 
     qty: function(frm, cdt, cdn) {
-        calculate_package_content_amount_and_package_total(frm, cdt, cdn);
-    }
+        frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
+    },
+
+    rate: function(frm, cdt, cdn) {
+        frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
+    },
 });
