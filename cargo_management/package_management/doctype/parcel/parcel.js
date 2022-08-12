@@ -43,7 +43,7 @@ frappe.ui.form.on('Parcel', {
         // Add Icon to the Page Indicator(Status)
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
-        frm.events.show_explained_status(frm);  // Show Explained Status as Intro Message
+        //frm.events.show_explained_status(frm);  // Show Explained Status as Intro Message
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
     },
 
@@ -90,6 +90,9 @@ frappe.ui.form.on('Parcel', {
             method: 'cargo_management.package_management.doctype.parcel.actions.get_data_from_api',
             freeze: true, freeze_message: __('Updating from Carrier...'), args: {source_name: frm.doc.name},
             callback: (r) => {
+                // FIXME: "Not Saved" indicator cannot be changed.
+                console.log('Need to work in here. problems in v14');
+
                 frappe.model.sync(r.message);
                 frm.refresh();
             }
@@ -170,7 +173,7 @@ frappe.ui.form.on('Parcel', {
     }
 });
 
-frappe.ui.form.on('Package Content', {
+frappe.ui.form.on('Parcel Content', {
     content_remove(frm) {
         calculate_total(frm);
     },
@@ -183,6 +186,3 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
-
-// TODO: REMOVE PARCEL AND PACKAGE
-// https://www.youtube.com/watch?v=Q0OhmGD-4-E M14

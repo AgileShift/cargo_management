@@ -26,7 +26,6 @@
       "tracking_url": "https://www.dhl.com/en/express/tracking.shtml?AWB="
     },
     "FedEx": {
-      "api": ["EasyPost"],
       "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.fedex.com/apps/fedextrack/?trackingnumber="
     },

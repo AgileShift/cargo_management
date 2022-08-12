@@ -227,7 +227,7 @@
    "fieldname": "content",
    "fieldtype": "Table",
    "label": "Content",
-   "options": "Package Content"
+   "options": "Parcel Content"
   },
   {
    "bold": 1,
@@ -386,7 +386,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-08-08 21:53:29.302250",
+ "modified": "2022-08-12 08:02:47.442867",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",

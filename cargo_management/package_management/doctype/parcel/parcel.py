@@ -14,8 +14,6 @@ class Parcel(Document):
 
     def save(self, request_data_from_api=False, *args, **kwargs):
         """ Override def to change validation behaviour. Useful when called from outside a form. """
-        print('request_data_from_api')
-        print(request_data_from_api)
         if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
             self.flags.ignore_permissions = self.flags.ignore_validate = self.flags.ignore_mandatory = self.flags.ignore_links = True
             self.request_data_from_api()
@@ -24,11 +22,9 @@ class Parcel(Document):
 
     def validate(self):
         """ Sanitize fields """
-        print('validate')
         self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase with no spaces
 
     def before_save(self):
-        print('before_save')
         """ Before saved in DB and after validated. Add new data. This runs on Insert(Create) or Save(Update)"""
         if self.is_new():
             self.request_data_from_api()
@@ -236,4 +232,3 @@ class Parcel(Document):
                     zip=last_detail.tracking_location.zip or ''
                 )
             )
-#228 DELETE

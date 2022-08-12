@@ -1,5 +1,5 @@
 from frappe.model.document import Document
 
 
-class PackageContent(Document):
+class ParcelContent(Document):
 	pass
