@@ -14,6 +14,8 @@ class Parcel(Document):
 
     def save(self, request_data_from_api=False, *args, **kwargs):
         """ Override def to change validation behaviour. Useful when called from outside a form. """
+        print('request_data_from_api')
+        print(request_data_from_api)
         if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
             self.flags.ignore_permissions = self.flags.ignore_validate = self.flags.ignore_mandatory = self.flags.ignore_links = True
             self.request_data_from_api()
@@ -22,9 +24,11 @@ class Parcel(Document):
 
     def validate(self):
         """ Sanitize fields """
+        print('validate')
         self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase with no spaces
 
     def before_save(self):
+        print('before_save')
         """ Before saved in DB and after validated. Add new data. This runs on Insert(Create) or Save(Update)"""
         if self.is_new():
             self.request_data_from_api()
@@ -169,7 +173,7 @@ class Parcel(Document):
 
     def request_data_from_api(self):
         """ This selects the corresponding API to request data. """
-        carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['carriers'][self.carrier].get('api')
+        carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'][self.carrier].get('api')
 
         if carrier_api and carrier_api[0] == 'EasyPost':
             self._request_data_from_easypost_api()

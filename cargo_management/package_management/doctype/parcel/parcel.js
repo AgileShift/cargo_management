@@ -1,7 +1,6 @@
-function calculate_parcel_total(frm) {
-    frm.doc.total = frm.get_sum('content', 'amount') + frm.doc.shipping_amount;  // Calculate the 'total' field on Parcel Doctype(Parent)
-
-    frm.refresh_field('total');
+function calculate_total(frm) {
+    // Calculate the 'total' field on Parcel Doctype(Parent)
+    frm.set_value('total', frm.get_sum('content', 'amount') + frm.doc.shipping_amount);
 }
 
 function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
@@ -11,7 +10,7 @@ function calculate_package_content_amount_and_package_total(frm, cdt, cdn) {
     content_row.amount = content_row.qty * content_row.rate;  // Calculating amount in edited row
 
     refresh_field('amount', cdn, 'content');
-    calculate_parcel_total(frm); // Calculate the parent 'total' field and trigger refresh event
+    calculate_total(frm); // Calculate the parent 'total' field
 }
 
 frappe.ui.form.on('Parcel', {
@@ -44,10 +43,7 @@ frappe.ui.form.on('Parcel', {
         // Add Icon to the Page Indicator(Status)
         frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
-        // Show Explained Status as Intro Message
-        frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, ''));  // FIXME: Core overrides color
-        frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
-
+        frm.events.show_explained_status(frm);  // Show Explained Status as Intro Message
         frm.events.build_custom_buttons(frm);  // Adding Custom buttons
     },
 
@@ -58,27 +54,32 @@ frappe.ui.form.on('Parcel', {
             return;
         }
 
-        const data = cargo_management.find_carrier_by_tracking_number(frm.doc.tracking_number);
+        frm.doc.carrier = cargo_management.find_carrier_by_tracking_number(frm.doc.tracking_number).carrier;
 
-        frm.doc.carrier = data.carrier;
         refresh_many(['tracking_number', 'carrier']);
     },
 
     shipping_amount: function (frm) {
-        calculate_parcel_total(frm);
+        calculate_total(frm);
     },
 
     // Custom Functions
 
+    show_explained_status: function (frm) {
+        frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, ''));  // FIXME: Core overrides color
+        frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
+    },
+
     build_custom_buttons: function (frm) {
-        cargo_management.load_carrier_settings(frm.doc.carrier).then((settings) => {
-            if (settings.api)  // TODO: easypost_id or other APIs?
-                frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
+        const carriers_settings = cargo_management.load_carrier_settings(frm.doc.carrier);
 
-            settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
-        });
+        if (carriers_settings.api) {  // TODO: easypost_id or other APIs?
+            frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
+        }
 
-        if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item.
+        carriers_settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
+
+        if (frm.doc.assisted_purchase) {    // If is Assisted Purchase will have related Sales Order and Sales Order Item.
             frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm), __('Get Items From'));
         }
     },
@@ -93,7 +94,6 @@ frappe.ui.form.on('Parcel', {
                 frm.refresh();
             }
         });
-
     },
 
     //https://github.com/frappe/frappe/pull/12471 and https://github.com/frappe/frappe/pull/14181/files
@@ -172,7 +172,7 @@ frappe.ui.form.on('Parcel', {
 
 frappe.ui.form.on('Package Content', {
     content_remove(frm) {
-        calculate_parcel_total(frm);
+        calculate_total(frm);
     },
 
     rate: function(frm, cdt, cdn) {
@@ -183,3 +183,6 @@ frappe.ui.form.on('Package Content', {
         calculate_package_content_amount_and_package_total(frm, cdt, cdn);
     }
 });
+
+// TODO: REMOVE PARCEL AND PACKAGE
+// https://www.youtube.com/watch?v=Q0OhmGD-4-E M14

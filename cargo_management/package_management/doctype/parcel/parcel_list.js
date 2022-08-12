@@ -45,8 +45,9 @@ frappe.listview_settings['Parcel'] = {
     },
 
     get_indicator: function (doc) {
+        // TODO: Migrate to Document States?
         //Unused: Light Blue
-        const status_color = {
+        return [__(doc.status), {
             'Awaiting Receipt': 'blue',
             'Awaiting Confirmation': 'orange',
             'In Extraordinary Confirmation': 'pink',
@@ -61,9 +62,7 @@ frappe.listview_settings['Parcel'] = {
             'Cancelled': 'red',
             'Never Arrived': 'red',
             'Returned to Sender': 'red',
-        };
-
-        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
+        }[doc.status], 'status,=,' + doc.status];
     },
 
     button: {
@@ -78,8 +77,7 @@ frappe.listview_settings['Parcel'] = {
         },
         action(doc) {
             // TODO: Make this a List of buttons
-            cargo_management.load_carrier_settings(doc.carrier)
-                .then(settings => window.open(settings.urls[0].url + doc.tracking_number, '_blank'));
+            window.open(cargo_management.load_carrier_settings(doc.carrier).urls[0].url + doc.tracking_number, '_blank');
         },
     },
 

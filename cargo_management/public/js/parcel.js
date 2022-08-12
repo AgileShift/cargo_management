@@ -1,3 +1,5 @@
+import {CARRIERS, DEFAULT_CARRIERS} from '../carriers.json' assert {type: 'json'};
+
 frappe.provide('cargo_management');
 
 cargo_management = {
@@ -87,17 +89,11 @@ cargo_management = {
     },
     load_carrier_settings: function (carrier_id) {
         // Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
-        return fetch('/assets/cargo_management/carriers.json', {headers: {'Accept': 'application/json'}})
-            .then(r => r.json()).then(data => {
-                const {
-                    default_carriers = {},
-                    carriers: {[carrier_id]: {api, tracking_url: main_url, default_carriers: extra_urls = []} = {}}
-                } = data;
+        const {api, tracking_url: main_url, default_carriers: extra_urls = []} = CARRIERS[carrier_id] || {};
 
-                let urls = (main_url) ? [{'title': carrier_id, 'url': main_url}] : [];
-                extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': default_carriers[url_id]}));
+        let urls = (main_url) ? [{'title': carrier_id, 'url': main_url}] : [];
+        extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': DEFAULT_CARRIERS[url_id]}));
 
-                return {api: api, urls: urls};
-            });
+        return {api, urls};
     }
 };

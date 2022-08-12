@@ -1,9 +1,9 @@
 {
-  "default_carriers": {
+  "DEFAULT_CARRIERS": {
     "EVEREST": "http://everest.cargotrack.net/m/track.asp?track=",
     "Parcels": "https://parcelsapp.com/en/tracking/"
   },
-  "carriers": {
+  "CARRIERS": {
     "Amazon": {
       "default_carriers": ["EVEREST"]
     },

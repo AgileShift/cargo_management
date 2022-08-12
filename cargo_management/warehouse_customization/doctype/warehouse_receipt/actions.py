@@ -1,5 +1,5 @@
 import frappe
-from cargo_management.package_management.doctype.package.actions import find_carrier_by_tracking_number
+from cargo_management.package_management.doctype.parcel.actions import find_carrier_by_tracking_number
 
 
 @frappe.whitelist(methods='GET')
@@ -8,7 +8,7 @@ def find_package_by_tracking_number(tracking_number: str):
     result = find_carrier_by_tracking_number(tracking_number)  # Returns tracking_number sanitized
 
     # ToDo: OPTIMIZE the build of query params: 1ZY853E7YW41358480
-    coincidences = frappe.get_list('Package',
+    coincidences = frappe.get_list('Parcel',
         fields=['name', 'tracking_number', 'consolidated_tracking_numbers', 'customer_name', 'transportation'],
         or_filters={
             'name': ['LIKE', '%{}%'.format(result['search_term'])],
