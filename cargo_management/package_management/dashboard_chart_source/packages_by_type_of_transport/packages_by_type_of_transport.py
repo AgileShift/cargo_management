@@ -23,7 +23,7 @@ def get(chart_name=None, chart=None, no_cache=None, filters=None, from_date=None
         'timespan': timespan or 'Last Quarter',
         'time_interval': time_interval or 'Weekly',
         'refresh': refresh,
-        # We request a count of packages and time series based on creation (This data is stored in Doc)
+        # We request a count of parcels and time series based on creation (This data is stored in Doc)
         'chart_type': 'Count',     # Unnecessary
         'based_on': 'creation',
         'document_type': 'Parcel',

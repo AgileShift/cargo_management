@@ -1,40 +1,29 @@
 {
- "category": "Domains",
  "charts": [],
+ "content": "[{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Shipments In Transit\",\"col\":5}}]",
  "creation": "2021-09-29 19:52:39.419496",
- "developer_mode_only": 0,
- "disable_user_customization": 0,
  "docstatus": 0,
  "doctype": "Workspace",
- "extends_another_page": 0,
  "hide_custom": 0,
  "icon": "branch",
  "idx": 0,
- "is_default": 0,
- "is_standard": 1,
  "label": "Shipments",
  "links": [],
- "modified": "2021-09-29 19:55:20.865595",
+ "modified": "2022-08-12 08:52:08.291218",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipments",
  "owner": "Administrator",
- "pin_to_bottom": 0,
- "pin_to_top": 1,
- "shortcuts": [
+ "public": 1,
+ "quick_lists": [
   {
-   "color": "purple",
-   "doc_view": "List",
-   "label": "Cargo Shipment In Transit",
-   "link_to": "Cargo Shipment",
-   "stats_filter": "{\n    \"status\": \"In Transit\"\n}",
-   "type": "DocType"
-  },
-  {
-   "doc_view": "List",
-   "label": "To Receive this Week",
-   "link_to": "Cargo Shipment",
-   "type": "DocType"
+   "document_type": "Cargo Shipment",
+   "label": "Shipments In Transit",
+   "quick_list_filter": "{\"status\":[\"=\",\"In Transit\"]}"
   }
- ]
+ ],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [],
+ "title": "Shipments"
 }

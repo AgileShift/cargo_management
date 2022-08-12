@@ -11,7 +11,7 @@ class CargoShipment(Document):
 
         # TODO: Validate if any problem!
         frappe.db.sql("""
-            UPDATE tabPackage
+            UPDATE tabParcel
             SET cargo_shipment = %(cs_name)s
             WHERE `name` IN %(packages)s AND COALESCE(cargo_shipment, '') != %(cs_name)s
         """, {
