@@ -20,7 +20,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
                 '\nNotas: ', IFNULL(p.notes, '')
                 SEPARATOR '\n\n'
             ) AS customer_description
-        FROM tabPackage p
+        FROM tabParcel p
             LEFT JOIN `tabParcel Content` pc ON pc.parent = p.name
             INNER JOIN `tabCargo Shipment Line` csl ON csl.package = p.name
         WHERE csl.parent = %(cargo_shipment)s
