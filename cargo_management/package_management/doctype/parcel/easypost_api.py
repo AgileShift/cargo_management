@@ -112,9 +112,9 @@ def easypost_webhook(**kwargs):
     frappe.session.user = 'Easypost API'  # Quick Hack. Very useful
 
     try:
-        package = frappe.get_doc('Package', kwargs['result']['tracking_code'])  # Trying to fetch the Package Document
+        package = frappe.get_doc('Parcel', kwargs['result']['tracking_code'])  # Trying to fetch the Parcel Document
     except frappe.DoesNotExistError:
-        return 'Package {} not found.'.format(kwargs['result']['tracking_code'])  # TODO: Add some log?
+        return 'Parcel {} not found.'.format(kwargs['result']['tracking_code'])  # TODO: Add some log?
     else:
         # package.load_carrier_flags()  # This is called on def can_track(). But we avoid that validation on webhook event
         package.parse_data_from_easypost_webhook(kwargs)
@@ -123,8 +123,8 @@ def easypost_webhook(**kwargs):
         package.save(ignore_permissions=True)#, ignore_validate=True)  # Trigger before_save() who checks for the flag. We avoid all checks.
 
         # TODO: Translate: alert message and button
-        package_route = "frappe.set_route('Form', 'Package', '{}')".format(package.tracking_number)
-        alert_message = 'Package <a onclick="{0}">{1}</a> is {2}.'.format(package_route, package.tracking_number, package.carrier_status)
+        package_route = "frappe.set_route('Form', 'Parcel', '{}')".format(package.tracking_number)
+        alert_message = 'Parcel <a onclick="{0}">{1}</a> is {2}.'.format(package_route, package.tracking_number, package.carrier_status)
         alert_body = '''
             <div class="next-action-container">
                 <button onclick="{}" class="next-action"><span>{}</span></button>
@@ -140,4 +140,4 @@ def easypost_webhook(**kwargs):
             })
         )
 
-    return 'Package {} updated.'.format(package.tracking_number)
+    return 'Parcel {} updated.'.format(package.tracking_number)
