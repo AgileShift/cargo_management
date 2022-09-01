@@ -13,16 +13,21 @@ frappe.listview_settings['Parcel'] = {
         name_field.$wrapper.attr('data-original-title', __('Tracking numbers'));
         name_field.$input.attr('placeholder', __('Tracking numbers'));
 
-        // FIXME: Issue in v14: https://github.com/frappe/frappe/issues/17183 -> last_value same as value
-        // Override: name_field & customer_name_field -> df.onchange() method set in make_standard_filters(). Call refresh_list_view() if value has changed
+        // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed
+        name_field.df.onchange = customer_name_field.df.onchange = function () {
+            this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change internal and UI value
+            if (this.value !== this.last_value) {
+                listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
+            }
+        }
 
         // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
         // TODO: listview.list_sidebar.get_stats() => This call frappe.desk.reportview.get_sidebar_stats using 'filters' not 'or_filters'
         // Override: Use the 'search_term' of the 'name' field in the 'or_filters', remove '%' added in get_standard_filters()
         listview.get_args = () => {
             // Removing '%' added when the listview loads first time. Also sanitize field and change UI
-            name_field.value = name_field.input.value = name_field.get_input_value().replaceAll('%', '').trim().toUpperCase();
-            customer_name_field.input.value = customer_name_field.get_input_value().replaceAll('%', '').trim().toUpperCase();
+            name_field.value = name_field.input.value = name_field.get_input_value().replaceAll('%', '');
+            customer_name_field.value = customer_name_field.input.value = customer_name_field.get_input_value().replaceAll('%', '');
 
             let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args
 
