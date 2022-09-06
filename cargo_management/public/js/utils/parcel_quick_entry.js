@@ -1,6 +1,6 @@
 frappe.provide('frappe.ui.form');
 
-frappe.ui.form.PackageQuickEntryForm = class PackageQuickEntryForm extends frappe.ui.form.QuickEntryForm {
+frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.ui.form.QuickEntryForm {
 
     constructor(doctype, after_insert, init_callback, doc, force) {
         super(doctype, after_insert, init_callback, doc, true)
@@ -19,7 +19,7 @@ frappe.ui.form.PackageQuickEntryForm = class PackageQuickEntryForm extends frapp
         //cargo_management.find_carrier_by_tracking_number();
         // };
 
-        //let table_meta = frappe.get_meta('Package Content')
+        //let table_meta = frappe.get_meta('Parcel Content')
         //let table_fields = table_meta.fields;
 
         console.log('set_meta_and_mandatory_fields');
