@@ -1,18 +1,18 @@
 {
   "DEFAULT_CARRIERS": {
-    "EVEREST": "http://everest.cargotrack.net/m/track.asp?track=",
-    "Parcels": "https://parcelsapp.com/en/tracking/"
+    "Parcels": "https://parcelsapp.com/en/tracking/",
+    "EVEREST": "http://everest.cargotrack.net/m/track.asp?track="
   },
   "CARRIERS": {
+    "Unknown": {
+      "default_carriers": ["Parcels", "EVEREST"]
+    },
     "Amazon": {
       "default_carriers": ["EVEREST"]
     },
-    "Unknown": {
-      "default_carriers": ["EVEREST", "Parcels"]
-    },
     "USPS": {
       "api": ["EasyPost"],
-      "default_carriers": ["EVEREST", "Parcels"],
+      "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?tLabels="
     },
     "UPS": {
@@ -34,23 +34,23 @@
       "tracking_url": "https://lasership.com/track.php?track_number_input="
     },
     "Cainiao": {
-      "default_carriers": ["EVEREST", "Parcels"],
+      "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://global.cainiao.com/detail.htm?mailNoList="
     },
     "SF Express": {
-      "default_carriers": ["EVEREST", "Parcels"],
+      "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://www.sf-express.com/cn/en/dynamic_function/waybill/#search/bill-number/"
     },
     "Yanwen": {
-      "default_carriers": ["EVEREST", "Parcels"],
+      "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://track.yw56.com.cn/en/querydel?nums="
     },
     "YunExpress": {
-      "default_carriers": ["EVEREST", "Parcels"],
+      "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://www.yuntrack.com/parcelTracking?id="
     },
     "SunYou": {
-      "default_carriers": ["EVEREST", "Parcels"],
+      "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://www.sypost.net/search?orderNo="
     }
   }

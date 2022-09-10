@@ -15,8 +15,8 @@ source_link = "https://github.com/AgileShift/cargo_management"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = ["cargo_management.bundle.css"]
-app_include_js = ["cargo_management.bundle.js"]
+app_include_css = "cargo_management.bundle.css"
+app_include_js = "cargo_management.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/cargo_management/css/package_management.css"
@@ -79,10 +79,7 @@ app_include_js = ["cargo_management.bundle.js"]
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
-# Document Events
-# ---------------
-# Hook on document methods and events
-
+# Document Events: Hook on document methods and events
 doc_events = {
 	"Sales Invoice": {
 		"on_submit": "cargo_management.sales_customization.utils.sales_invoice_on_submit"
@@ -90,25 +87,11 @@ doc_events = {
 }
 
 # Scheduled Tasks
-# ---------------
-
-# scheduler_events = {
-# 	"all": [
-# 		"cargo_management.tasks.all"
-# 	],
-# 	"daily": [
-# 		"cargo_management.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"cargo_management.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"cargo_management.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"cargo_management.tasks.monthly"
-# 	]
-# }
+scheduler_events = {
+	"all": [
+		"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
+	],
+}
 
 # Testing
 # -------
