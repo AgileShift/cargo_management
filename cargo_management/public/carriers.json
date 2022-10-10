@@ -9,7 +9,7 @@
       "default_carriers": ["Parcels", "17Track", "EVEREST"]
     },
     "Amazon": {
-      "default_carriers": ["EVEREST"]
+      "default_carriers": ["17Track", "EVEREST"]
     },
     "USPS": {
       "api": "EasyPost",

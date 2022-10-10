@@ -88,9 +88,9 @@ doc_events = {
 
 # Scheduled Tasks
 scheduler_events = {
-	"all": [
-		"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
-	],
+	#"all": [
+	#	"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
+	#],
 }
 
 # Testing
