@@ -3,6 +3,7 @@ import frappe
 
 def check_parcel_delivery():
     pass
+    #carriers = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS']
 
     #parcel = frappe.get_doc('Parcel', 'TESTING')
 

@@ -1,56 +1,60 @@
 {
   "DEFAULT_CARRIERS": {
     "Parcels": "https://parcelsapp.com/en/tracking/",
+    "17Track": "https://t.17track.net/en#nums=",
     "EVEREST": "http://everest.cargotrack.net/m/track.asp?track="
   },
   "CARRIERS": {
     "Unknown": {
-      "default_carriers": ["Parcels", "EVEREST"]
+      "default_carriers": ["Parcels", "17Track", "EVEREST"]
     },
     "Amazon": {
       "default_carriers": ["EVEREST"]
     },
     "USPS": {
-      "api": ["EasyPost"],
+      "api": "EasyPost",
       "default_carriers": ["Parcels", "EVEREST"],
       "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?tLabels="
     },
     "UPS": {
-      "api": ["EasyPost"],
+      "api": "EasyPost",
       "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.ups.com/track?tracknum="
     },
     "DHL": {
-      "api": ["EasyPost"],
+      "api": "EasyPost",
       "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.dhl.com/en/express/tracking.shtml?AWB="
     },
     "FedEx": {
+      "api": "17Track",
       "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.fedex.com/apps/fedextrack/?trackingnumber="
     },
     "LaserShip": {
+      "api": "17Track",
       "default_carriers": ["EVEREST"],
       "tracking_url": "https://lasership.com/track.php?track_number_input="
     },
     "Cainiao": {
-      "default_carriers": ["Parcels", "EVEREST"],
+      "api": "17Track",
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://global.cainiao.com/detail.htm?mailNoList="
     },
     "SF Express": {
-      "default_carriers": ["Parcels", "EVEREST"],
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.sf-express.com/cn/en/dynamic_function/waybill/#search/bill-number/"
     },
     "Yanwen": {
-      "default_carriers": ["Parcels", "EVEREST"],
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://track.yw56.com.cn/en/querydel?nums="
     },
     "YunExpress": {
-      "default_carriers": ["Parcels", "EVEREST"],
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.yuntrack.com/parcelTracking?id="
     },
     "SunYou": {
-      "default_carriers": ["Parcels", "EVEREST"],
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.sypost.net/search?orderNo="
     }
   }

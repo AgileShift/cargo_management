@@ -17,6 +17,7 @@
   "column_break_9",
   "transportation",
   "status",
+  "substatus",
   "extra_services_section",
   "assisted_purchase",
   "additional_data_from_carrier_section",
@@ -350,6 +351,12 @@
    "label": "Explained Status",
    "print_hide": 1,
    "report_hide": 1
+  },
+  {
+   "fieldname": "substatus",
+   "fieldtype": "Select",
+   "label": "Substatus",
+   "options": "\nIn Origin\nDelayed At Origin\nDelayed In Transit\nIn time"
   }
  ],
  "links": [
@@ -386,7 +393,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-09-10 11:34:26.013112",
+ "modified": "2022-09-28 10:03:07.725129",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",

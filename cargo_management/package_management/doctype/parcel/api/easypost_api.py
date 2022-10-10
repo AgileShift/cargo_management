@@ -7,7 +7,7 @@ import frappe
 from frappe import _
 
 
-class EasypostAPIError(easypost.Error):
+class EasyPostAPIError(easypost.Error):
     """
     Child Class to personalize API Error
     https://www.easypost.com/errors-guide/python
@@ -15,7 +15,7 @@ class EasypostAPIError(easypost.Error):
     pass
 
 
-class EasypostAPI:
+class EasyPostAPI:
     """ Easypost methods to control class API and parse data. """
     # TODO: Improve this
 
@@ -42,17 +42,17 @@ class EasypostAPI:
         easypost.api_key = frappe.get_cached_doc('Package Settings').get_password('easypost_api_key')  # .get_single()
 
     def create_package(self, tracking_number):
-        """ Create a Tracking Resource on Easypost API """
+        """ Create a Tracking on Easypost API """
         self.instance = easypost.Tracker.create(tracking_code=tracking_number, carrier=self.carrier)
         return self._normalize_data()
 
     def retrieve_package_data(self, easypost_id):
-        """ Retrieve from Easypost using the ID provided """
+        """ Retrieve data from Easypost using the ID provided. """
         self.instance = easypost.Tracker.retrieve(easypost_id=easypost_id)
         return self._normalize_data()
 
     def convert_from_webhook(self, response):
-        """ Convert a dict to a Easypost Object. """
+        """ Convert a dict to Easypost Object. """
         self.instance = easypost.event.convert_to_easypost_object(
             response=response,
             #api_key=self.api_key
