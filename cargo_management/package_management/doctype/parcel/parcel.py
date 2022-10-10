@@ -1,7 +1,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from .easypost_api import EasypostAPI, EasypostAPIError
+from cargo_management.package_management.doctype.parcel.api.easypost_api import EasyPostAPI, EasyPostAPIError
 
 
 class Parcel(Document):
@@ -171,21 +171,24 @@ class Parcel(Document):
         """ This selects the corresponding API to request data. """
         carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'][self.carrier].get('api')
 
-        if carrier_api and carrier_api[0] == 'EasyPost':
-            self._request_data_from_easypost_api()
-        else:
-            frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
+        match carrier_api:
+            case 'EasyPost':
+                self._request_data_from_easypost_api()
+            case '17Track':
+                frappe.msgprint('17track.net', indicator='red', alert=True)
+            case _:
+                frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
 
     def _request_data_from_easypost_api(self):
         """ Handles POST or GET to the Easypost API. Also parses the data. """
         try:
             if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
-                api_data = EasypostAPI(carrier=self.carrier).retrieve_package_data(self.easypost_id)
+                api_data = EasyPostAPI(carrier=self.carrier).retrieve_package_data(self.easypost_id)
             else:  # Parcel don't exist on easypost and is requested to be tracked. We create a new one and attach it.
-                api_data = EasypostAPI(carrier=self.carrier).create_package(self.tracking_number)
+                api_data = EasyPostAPI(carrier=self.carrier).create_package(self.tracking_number)
 
                 self.easypost_id = api_data.id  # EasyPost ID. Only on creation
-        except EasypostAPIError as e:
+        except EasyPostAPIError as e:
             frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=False, indicator='red')
             return  # Exit because this has failed(Create or Update)  # FIXME: don't throw because we need to save
         else:  # Data to parse that will be saved
@@ -193,9 +196,12 @@ class Parcel(Document):
 
             frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
 
+    def _request_data_from_17track_api(self):
+        pass  # TODO: Working
+
     def parse_data_from_easypost_webhook(self, response):
         """ Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
-        easypost_api = EasypostAPI(carrier=self.carrier)  # TODO
+        easypost_api = EasyPostAPI(carrier=self.carrier)  # TODO
         easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
 
         self._parse_data_from_easypost(easypost_api.instance)
@@ -213,7 +219,7 @@ class Parcel(Document):
 
         # If parcel is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
         if data.status == 'Delivered' or data.status_detail == 'Arrived At Destination':
-            self.carrier_real_delivery = EasypostAPI.naive_dt_to_local_dt(data.tracking_details[-1].datetime, EasypostAPI.carriers_using_utc.get(self.carrier, False))  # FIXME: Improve this.
+            self.carrier_real_delivery = EasyPostAPI.naive_dt_to_local_dt(data.tracking_details[-1].datetime, EasyPostAPI.carriers_using_utc.get(self.carrier, False))  # FIXME: Improve this.
             self.change_status('Awaiting Confirmation')
         elif data.status == 'Return To Sender' or data.status_detail == 'Return':
             self.change_status('Returned to Sender')

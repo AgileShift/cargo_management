@@ -35,7 +35,7 @@
    "insert_after": "item_name",
    "is_system_generated": 1,
    "is_virtual": 0,
-   "label": "Package",
+   "label": "Parcel",
    "length": 0,
    "mandatory_depends_on": null,
    "modified": "2020-12-13 22:52:19.543665",

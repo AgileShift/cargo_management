@@ -17,6 +17,7 @@
   "column_break_9",
   "transportation",
   "status",
+  "substatus",
   "extra_services_section",
   "assisted_purchase",
   "additional_data_from_carrier_section",
@@ -96,7 +97,7 @@
    "in_filter": 1,
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "USPS\nAmazon\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
+   "options": "Amazon\nUSPS\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
    "reqd": 1,
    "search_index": 1
   },
@@ -113,7 +114,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Awaiting Receipt\nAwaiting Confirmation\nIn Extraordinary Confirmation\nAwaiting Departure\nIn Transit\nIn Customs\nSorting\nTo Bill\nUnpaid\nTo Deliver or Pickup\nFinished\nCancelled\nNever Arrived\nReturned to Sender",
+   "options": "Awaiting Receipt\nIn Extraordinary Confirmation\nAwaiting Confirmation\nException\nAwaiting Departure\nIn Transit\nIn Customs\nSorting\nTo Bill\nUnpaid\nTo Deliver or Pickup\nFinished\nCancelled\nNever Arrived\nReturned to Sender",
    "search_index": 1
   },
   {
@@ -350,6 +351,12 @@
    "label": "Explained Status",
    "print_hide": 1,
    "report_hide": 1
+  },
+  {
+   "fieldname": "substatus",
+   "fieldtype": "Select",
+   "label": "Substatus",
+   "options": "\nIn Origin\nDelayed At Origin\nDelayed In Transit\nIn time"
   }
  ],
  "links": [
@@ -386,7 +393,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-08-12 08:02:47.442867",
+ "modified": "2022-09-28 10:03:07.725129",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",
