@@ -105,7 +105,7 @@ class EasyPostAPI:
 
 @frappe.whitelist(allow_guest=True, methods='POST')
 def easypost_webhook(**kwargs):
-    """ POST To: {URL}/api/method/cargo_management.package_management.doctype.package.easypost_api.easypost_webhook """
+    """ POST To: {URL}/api/method/cargo_management.package_management.doctype.parcel.api.easypost_api.easypost_webhook """
     if kwargs['description'] != 'tracker.updated':
         return 'Post is not update.'  # This returns a 200 status.
 
