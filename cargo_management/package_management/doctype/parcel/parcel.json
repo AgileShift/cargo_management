@@ -369,8 +369,7 @@
   {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
-   "link_fieldname": "package",
-   "parent_doctype": "Cargo Shipment"
+   "link_fieldname": "package"
   },
   {
    "group": "Cargo Shipment",
@@ -393,7 +392,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-09-28 10:03:07.725129",
+ "modified": "2022-10-31 13:09:53.150245",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",

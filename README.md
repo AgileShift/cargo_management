@@ -7,15 +7,18 @@ Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext
 [EasyPost](https://www.easypost.com/) as Tracking API([Source Code](https://github.com/EasyPost/easypost-python))
 
 ### App Includes:
-- Package
+- Parcel
   - Workspace
-  - Dashboard view
-  - Settings
+  - Dashboard View
+  - Settings(Global Settings)
 - Warehouse Receipt
 - Cargo Shipment
 - Cargo Packing List
 - Cargo Shipment Receipt
 - Reports
+- Selling:
+  - Custom Quotation
+  - Settings(For Advance Selling Customizations)
 
 ### Extra Addons
 - [ERPNext Delivery Management](https://github.com/AgileShift/erpnext_delivery)
@@ -23,13 +26,14 @@ Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext
 - Warehouse Management
 
 ### Customizations to Frappe and ERPNext:
-- Package can be linked in Sales Order and Sales Invoice:
+- Selling:
+  - Quotation
   - Sales Invoice are used to invoice for Logistic services and items related to Business
   - Sales Order are the only choice to make purchases online on behalf of the customer:
     - WORKING(We must link the sales order with the package and content, later we must invoice the order and service.)
 - Package can be linked in Issue:
   - WORKING(on the change of status)
-
+    
 ### Description
 This app allows you to track the packages sent by our customers to our warehouse.
 Invoice and deliver them.
