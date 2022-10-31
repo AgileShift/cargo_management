@@ -87,10 +87,6 @@ doc_events = {
 }
 
 # Scheduled Tasks
-<<<<<<< HEAD
-# ---------------
-=======
->>>>>>> b5414a3ea878c272a12bf084eb1ed9e7cd44ed84
 scheduler_events = {
 	#"all": [
 	#	"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
