@@ -15,8 +15,8 @@ source_link = "https://github.com/AgileShift/cargo_management"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = ["cargo_management.bundle.css"]
-app_include_js = ["cargo_management.bundle.js"]
+app_include_css = "cargo_management.bundle.css"
+app_include_js = "cargo_management.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/cargo_management/css/package_management.css"
@@ -87,7 +87,10 @@ doc_events = {
 }
 
 # Scheduled Tasks
+<<<<<<< HEAD
 # ---------------
+=======
+>>>>>>> b5414a3ea878c272a12bf084eb1ed9e7cd44ed84
 scheduler_events = {
 	#"all": [
 	#	"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
