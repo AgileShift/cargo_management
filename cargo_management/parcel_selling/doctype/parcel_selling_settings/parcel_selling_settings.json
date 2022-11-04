@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-10-31 15:00:25.645934",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "air_section",
+  "transit_days_air_1",
+  "transit_days_air_2",
+  "column_break_4",
+  "air_departure_days",
+  "sea_section",
+  "transit_days_sea_1",
+  "transit_days_sea_2",
+  "column_break_7",
+  "sea_departure_days"
+ ],
+ "fields": [
+  {
+   "fieldname": "transit_days_air_1",
+   "fieldtype": "Int",
+   "label": "Closest Transit Day"
+  },
+  {
+   "fieldname": "transit_days_air_2",
+   "fieldtype": "Int",
+   "label": "Longest Transit Day"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transit_days_sea_1",
+   "fieldtype": "Int",
+   "label": "Closest Transit Day"
+  },
+  {
+   "fieldname": "transit_days_sea_2",
+   "fieldtype": "Int",
+   "label": "Longest Transit Day"
+  },
+  {
+   "fieldname": "air_section",
+   "fieldtype": "Section Break",
+   "label": "Transit Time & Dispatch Days - AIR"
+  },
+  {
+   "fieldname": "sea_section",
+   "fieldtype": "Section Break",
+   "label": "Transit Time & Dispatch Days - AIR"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "air_departure_days",
+   "fieldtype": "Data",
+   "label": "Departure Days"
+  },
+  {
+   "fieldname": "sea_departure_days",
+   "fieldtype": "Data",
+   "label": "Departure Days"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-10-31 15:36:19.779259",
+ "modified_by": "Administrator",
+ "module": "Parcel Selling",
+ "name": "Parcel Selling Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
