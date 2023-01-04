@@ -4,12 +4,8 @@ app_name = "cargo_management"
 app_title = "Cargo Management"
 app_publisher = "Agile Shift"
 app_description = "Track Packages across multiple carriers."
-app_icon = "icon-paper-clip"
-app_color = "red"
 app_email = "contacto@gruporeal.org"
 app_license = "MIT"
-source_link = "https://github.com/AgileShift/cargo_management"
-# app_logo_url = '/assets/cargo_management/images/app-logo.svg'
 
 # Includes in <head>
 # ------------------
