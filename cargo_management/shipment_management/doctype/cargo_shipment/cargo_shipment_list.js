@@ -3,7 +3,7 @@ frappe.listview_settings['Cargo Shipment'] = {
     filters: [
         ['status', '!=', 'Finished'],
     ],
-    hide_name_column: true,
+    hide_name_column: false,
 
     get_indicator: function (doc) {
         const status_color = {
