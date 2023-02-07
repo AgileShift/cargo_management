@@ -28,7 +28,7 @@ cargo_management = {
             carrier = 'Amazon';
         } else if (tracking_number.slice(0, 2) === '1Z') {
             carrier = 'UPS';
-        } else if (tracking_number.slice(0, 3) === '1LS') {
+        } else if (tracking_number.slice(0, 3) === '1LS' || tracking_number.slice(0, 2) === 'D10') {
             carrier = 'LaserShip';
         } else if (tracking_number.slice(0, 4) === 'LP00') {
             carrier = 'Cainiao'; // Sometimes Cainiao can track 'Yanwen' and 'SunYou'

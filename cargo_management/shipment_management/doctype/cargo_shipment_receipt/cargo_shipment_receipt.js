@@ -11,10 +11,17 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 	    frm.set_query('package', 'cargo_shipment_receipt_lines', () => {
             return {
                 filters: {
-                    status: ['not in', ['In Customs', 'Sorting', 'Available to Pickup', 'Finished']]
+                    status: ['not in', ['In Customs', 'Sorting', 'Available to Pickup', 'Finished']],
                 }
             };
         });
+        frm.set_query('item_code', 'cargo_shipment_receipt_lines', () => {
+            return {
+                filters: {
+                    name: ['not like', '%ASIS%']
+                }
+            }
+        })
     },
 
     refresh: function (frm) {
