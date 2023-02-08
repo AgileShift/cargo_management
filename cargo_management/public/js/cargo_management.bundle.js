@@ -5,7 +5,7 @@ import './controls/overrides';
 frappe.provide('cargo_management');
 
 cargo_management = {
-    find_carrier_by_tracking_number: function (tracking_number) {
+	find_carrier_by_tracking_number: function (tracking_number) {
         /* LINKED WITH: package_management/doctype/parcel/actions.py -> find_carrier_by_tracking_number
 
         Its specially made to avoid a call the server(API) to get a response that's does not have database data
@@ -34,7 +34,7 @@ cargo_management = {
             carrier = 'Cainiao'; // Sometimes Cainiao can track 'Yanwen' and 'SunYou'
         } else if (tracking_number.slice(0, 2) === 'SF') {
             carrier = 'SF Express';
-        } else if (tracking_number.slice(0 ,5) === 'ALS00' || tracking_number.slice(0 , 3) === 'S00' || tracking_number.slice(0, 2) === 'UY') {
+        } else if (tracking_number.slice(0 ,5) === 'ALS00' || tracking_number.slice(0, 3) === 'S00' || tracking_number.slice(0, 2) === 'UY') {
             carrier = 'Yanwen';
         } else if (tracking_number.slice(0, 2) === 'YT') {
             carrier = 'YunExpress';
