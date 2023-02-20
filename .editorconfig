@@ -1,11 +1,14 @@
 root = true
 
 [*]
+charset = utf-8
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
-charset = utf-8
 
-# python, js indentation settings
-[{*.py,*.js,*.vue,*.css,*.scss,*.html}]
+[*.md]
+trim_trailing_whitespace = false
+
+[{*.py,*.js}]
 indent_style = tab
 indent_size = 4

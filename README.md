@@ -33,7 +33,7 @@ Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext
     - WORKING(We must link the sales order with the package and content, later we must invoice the order and service.)
 - Package can be linked in Issue:
   - WORKING(on the change of status)
-    
+
 ### Description
 This app allows you to track the packages sent by our customers to our warehouse.
 Invoice and deliver them.
@@ -77,7 +77,7 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
 - Drop Off
 - Pick Up
 - Unknown
-- 
+-
 - Cainiao
 - SF Express
 - Yanwen
@@ -89,7 +89,7 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
   1. Gets all the content declared by the **Customer** and the content declared by the **Warehouse** of the packages in a **Cargo Shipment**
   2. It allows to modify the content and amount declared only for Print.
   3. WORKING
-  
+
 ## This is work in progress. But it's stable for usage
 - WORKING
   1. Packing Slip for customs:
