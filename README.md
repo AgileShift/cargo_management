@@ -1,53 +1,57 @@
 ## ERPNext Cargo Management
+***
 
-Package Tracker for Local Courier Services.
+**ERPNext Cargo Management is a fully-fledged ERPNext solution designed for freight forwarding companies.**
 
-Made in [Frappe Framework v13](https://github.com/frappe/frappe/) using [ERPNext](https://github.com/frappe/erpnext) for a fully fledged ERP.
+It streamlines logistics processes, including **package tracking**, **invoicing**, and **warehouse management**,
+providing a seamless, efficient, and user-friendly experience.
 
-[EasyPost](https://www.easypost.com/) as Tracking API([Source Code](https://github.com/EasyPost/easypost-python))
+Built on [Frappe Framework v14](https://github.com/frappe/frappe/) and [ERPNext](https://github.com/frappe/erpnext),
+this solution is designed to meet the unique needs of businesses in the freight forwarding industry.
+It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, Assets, Payroll and more.
 
-### App Includes:
-- Parcel
-  - Workspace
-  - Dashboard View
-  - Settings(Global Settings)
-- Warehouse Receipt
-- Cargo Shipment
-- Cargo Packing List
-- Cargo Shipment Receipt
-- Reports
-- Selling:
-  - Custom Quotation
-  - Settings(For Advance Selling Customizations)
+
+## Key Features
+- **Parcel Management**: Manages the packages, integrates tracking APIs and handles notifications.
+- **Warehouse Management:** Handles the receipt of packages in warehouses.
+- **Shipment Management:** Manages shipments and receipts, also generates packing lists for each shipment.
+- **Selling Management:** Customizes ERPNext modules for invoicing packages and managing customer import orders.
+- **Support Management**: Customizes ERPNext modules for customer support related to packages and orders.
+- **Custom Views**:
+  - **Workspaces, Dashboard Views, Settings**
+  - **Reports**: Provides insightful reports for better decision-making and business analysis.
+- **External APIs For Tracking Packages**:
+  - [EasyPost](https://www.easypost.com/)([Source Code](https://github.com/EasyPost/easypost-python))
+  - [17Track](https://api.17track.net/en)
 
 ### Extra Addons
-- [ERPNext Delivery Management](https://github.com/AgileShift/erpnext_delivery)
-- [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud)
-- Warehouse Management
+- [ERPNext Delivery Management](https://github.com/AgileShift/erpnext_delivery) - WORK on Progress
+- [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud) - WORK on Progress
 
-### Customizations to Frappe and ERPNext:
-- Selling:
-  - Quotation
-  - Sales Invoice are used to invoice for Logistic services and items related to Business
-  - Sales Order are the only choice to make purchases online on behalf of the customer:
-    - WORKING(We must link the sales order with the package and content, later we must invoice the order and service.)
-- Package can be linked in Issue:
-  - WORKING(on the change of status)
 
-### Description
-This app allows you to track the packages sent by our customers to our warehouse.
-Invoice and deliver them.
+### List of Carriers Currently Supported:
+| Carrier    | EasyPost     | 17Track |
+|------------|--------------|---------|
+| USPS       | ☑️           | ☑️      |
+| UPS        | ☑️           | ☑️      |
+| DHL        | ☑️           | ☑️      |
+| FedEx      | With Account | ☑️      |
+| LaserShip  | With Account | ☑️      |
+| Amazon     |              | ☑️      |
+| Cainiao    | ️            | ☑️      |
+| SF Express | ☑️           | ☑️      |
+| Yanwen     | ☑️           | ️       |
+| YunExpress |              | ☑️      |
+| SunYou     |              | ☑️      |
+| Drop Off   |              | ️       |
+| Pick Up    |              | ️       |
+| Unknown    |              | ️       |
 
-Currently we can track all carriers supported by the Tracking API Provider [EasyPost](https://www.easypost.com/carriers):
-* eg: DHL, UPS, USPS, FedEx, and more.
 
-The customizations allow us to:
-- Invoice a **Customer** for the Logistic Services and Products in Stock offered.
-- Link the **Sales Invoice** with a Package and update its statuses.
 
-All while using all the core functionalities from ERPNext like Accounting, Stock, HR, Assets, Payroll.
+# TODO: WORKING
 
-### Flow
+### Parcel Flow
 1. **Packages** are created and can be related to a specific customer
    1. Content of the package can be added and its related Item for invoice Purposes.
    2. It can be tracked by the API or not.
@@ -67,21 +71,22 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
       1. A **Sales invoice** will be created for the customer, it will contain all the related **Packages**.
 7. WORKING
 
-#### List of Carriers:
-- USPS(EasyPost)
-- Amazon
-- UPS(EasyPost)
-- DHL(EasyPost)
-- FedEx(EasyPost with carrier account)
 
-- Drop Off
-- Pick Up
-- Unknown
--
-- Cainiao
-- SF Express
-- Yanwen
-- LaserShip
+
+
+
+### Customizations to Frappe and ERPNext:
+# WORK ON PROGRESS
+- Selling:
+  - Quotation
+  - Sales Invoice are used to invoice for Logistic services and items related to Business
+  - Sales Order are the only choice to make purchases online on behalf of the customer:
+    - WORKING(We must link the sales order with the package and content, later we must invoice the order and service.)
+- Package can be linked in Issue:
+  - WORKING(on the change of status)
+- The customizations allow us to:
+  - Invoice a **Customer** for the Logistic Services and Products in Stock offered.
+  - Link the **Sales Invoice** with a Package and update its statuses.
 
 
 #### Helpers
@@ -103,3 +108,6 @@ All while using all the core functionalities from ERPNext like Accounting, Stock
 ##### Code related TODO:
 1. Add custom Doctypes to Global Search: https://github.com/frappe/erpnext/pull/24055/files
 2. Migrate SQL to QueryBuilder? usign Pypika?
+3. Migrate:
+   1. package_management to parcel_management
+   2. package_settings to parcel_settings

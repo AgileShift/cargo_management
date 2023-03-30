@@ -5,7 +5,7 @@ readme = "README.md"
 license = {file = "LICENSE.txt"}
 dynamic = ["version"]
 
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 authors = [
     { name = "Agile Shift", email = "contacto@gruporeal.org" }
