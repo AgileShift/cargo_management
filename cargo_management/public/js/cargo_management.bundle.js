@@ -15,7 +15,7 @@ cargo_management = {
 		if (!tracking_number || tracking_number.length <= 4)
 			return {};
 
-		const carrierRegex = [
+		const carrierRegex = [ // USPS and FedEx the order matters!
 			{carrier: 'UPS',        regex: /^1Z/},
 			{carrier: 'SunYou',     regex: /^SY/},       // SYUS & SYAE & SYBA
 			{carrier: 'SF Express', regex: /^SF/},
@@ -28,13 +28,13 @@ cargo_management = {
 			{carrier: 'Unknown',    regex: /^92(612.{17})$|^420.{5}92(612.{17})$/},       // *92612*90980949456651012 | 42033166*926129*0980949456651012. Start with: 92612 or with zipcode(420xxxxx) can be handled by FedEx or USPS. search_term starts at 612
 			{carrier: 'USPS',       regex: /^9(?:.{21}|.{25})$|^420.{5}(9(?:.{21}|.{25}))$/}, // *9*400111108296364807659 | 42033165*9*274890983426386918697. First 8 digits: 420xxxxx(zipcode)
 			{carrier: 'FedEx',      regex: /^.{12}$|^612.{17}$|^.{22}([1-9].{11})$/},    // *612*90982157320543198 | 9622001900005105596800*5*49425980480. Last 12 digits is tracking
-		]; // FIXME: Sort by the most used Carrier | Add More Carriers: 'LY', 'LB', 'LW'
+		]; // FIXME: Sort by the most used Carrier | Add More Carriers: 'LY', 'LB', 'LW'.
 
 		const result = carrierRegex.find(carrier => {
 			const match = tracking_number.match(carrier.regex);
 
-			if (match) {  // We add the capture group if any and exit the loop.
-				carrier.search_term = match[1] || match[2];
+			if (match) {
+				carrier.search_term = match[1] || match[2];  // We add the capture group if any and exit the loop.
 				return true;
 			}
 		});
@@ -64,4 +64,3 @@ cargo_management = {
         return {api, urls};
     }
 };
-//102 - Optimizing code -> 96
