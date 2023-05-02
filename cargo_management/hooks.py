@@ -3,7 +3,7 @@ from . import __version__ as app_version
 app_name = "cargo_management"
 app_title = "Cargo Management"
 app_publisher = "Agile Shift"
-app_description = "Track Packages across multiple carriers."
+app_description = "ERPNext Cargo Management for freight forwarders"
 app_email = "contacto@gruporeal.org"
 app_license = "MIT"
 
@@ -27,7 +27,7 @@ app_include_js = "cargo_management.bundle.js"
 
 # Include js in doctype views: override/extend Standard Form Scripts.
 doctype_js = {
-	"Quotation": "public/js/quotation.js"
+	"Quotation": "public/js/quotation.js"  # TODO: WORKING HERE
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -79,16 +79,16 @@ doctype_js = {
 
 # Document Events: Hook on document methods and events
 doc_events = {
-	"Sales Invoice": {
+	"Sales Invoice": {  # TODO: WORKING
 		"on_submit": "cargo_management.parcel_selling.utils.sales_invoice_on_submit"
 	}
 }
 
 # Scheduled Tasks
 scheduler_events = {
-	#"all": [
+	# "all": [
 	#	"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
-	#],
+	# ],
 }
 
 # Testing
@@ -116,7 +116,7 @@ scheduler_events = {
 
 global_search_doctypes = {
 	"Default": [
-		{"doctype": "Package"},
+		{"doctype": "Parcel"},
 		{"doctype": "Warehouse Receipt"},
 		{"doctype": "Cargo Shipment"},
 		{"doctype": "Cargo Shipment Receipt"},
