@@ -39,7 +39,7 @@
   "links_section",
   "warehouse_receipt",
   "cargo_shipment",
-  "tab_break_99",
+  "extra_info_tab",
   "shipper",
   "notes",
   "column_break_21",
@@ -53,7 +53,6 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "columns": 4,
-   "description": "Tracking code provided by the carrier.",
    "fieldname": "tracking_number",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -91,10 +90,8 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "Unknown",
-   "description": "Name of the carrier handling the shipment.",
    "fieldname": "carrier",
    "fieldtype": "Select",
-   "in_filter": 1,
    "in_standard_filter": 1,
    "label": "Carrier",
    "options": "Amazon\nUSPS\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
@@ -118,7 +115,6 @@
    "search_index": 1
   },
   {
-   "allow_in_quick_entry": 1,
    "collapsible": 1,
    "collapsible_depends_on": "easypost_id",
    "fieldname": "additional_data_from_carrier_section",
@@ -126,7 +122,6 @@
    "label": "Additional Data from Carrier"
   },
   {
-   "bold": 1,
    "description": "Estimated delivery date provided by the carrier (if available).",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
@@ -138,12 +133,12 @@
    "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
+   "in_list_view": 1,
    "in_preview": 1,
    "label": "Carrier real delivery date",
    "read_only": 1
   },
   {
-   "bold": 1,
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
@@ -274,6 +269,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "bold": 1,
    "default": "0",
    "description": "Package was purchased using Shopping Assistance Service.",
    "fieldname": "assisted_purchase",
@@ -307,6 +303,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "bold": 1,
    "collapsible": 1,
    "fieldname": "extra_services_section",
    "fieldtype": "Section Break",
@@ -319,6 +316,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "bold": 1,
    "default": "Sea",
    "fieldname": "transportation",
    "fieldtype": "Select",
@@ -327,14 +325,8 @@
    "in_standard_filter": 1,
    "label": "Transportation",
    "options": "Sea\nAir",
+   "reqd": 1,
    "search_index": 1
-  },
-  {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: !in_list(['Sorting', 'Available to Pickup', 'Finished'], doc.status)",
-   "fieldname": "tab_break_99",
-   "fieldtype": "Tab Break",
-   "label": "Additional Information"
   },
   {
    "collapsible": 1,
@@ -357,6 +349,11 @@
    "fieldtype": "Select",
    "label": "Substatus",
    "options": "\nIn Origin\nDelayed At Origin\nDelayed In Transit\nIn time"
+  },
+  {
+   "fieldname": "extra_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
   }
  ],
  "links": [
@@ -392,7 +389,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2022-10-31 13:09:53.150245",
+ "modified": "2023-05-02 17:40:15.799267",
  "modified_by": "Administrator",
  "module": "Package Management",
  "name": "Parcel",

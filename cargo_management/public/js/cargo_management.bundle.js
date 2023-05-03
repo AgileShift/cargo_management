@@ -13,7 +13,7 @@ cargo_management = {
         tracking_number = tracking_number.trim().toUpperCase();  // Sanitize field
 
 		if (!tracking_number || tracking_number.length <= 4)
-			return {};
+			return {}; // FIXME: We should return something? or avoid this validation.
 
 		const carrierRegex = [ // USPS and FedEx the order matters!
 			{carrier: 'UPS',        regex: /^1Z/},

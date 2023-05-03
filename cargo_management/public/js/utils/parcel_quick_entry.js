@@ -1,131 +1,50 @@
 frappe.provide('frappe.ui.form');
 
 frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.ui.form.QuickEntryForm {
+	constructor(doctype, after_insert, init_callback, doc, force) {
+		super(doctype, after_insert, init_callback, doc, force);
+	}
 
-    constructor(doctype, after_insert, init_callback, doc, force) {
-        super(doctype, after_insert, init_callback, doc, true)
+	set_meta_and_mandatory_fields() {
+		super.set_meta_and_mandatory_fields();
 
-        console.log('WORK');
-    }
+		// FIXME: Changes fields before calling render_dialog(); This approach can fail miserably and is not recommended
+		[this.mandatory[1], this.mandatory[2], this.mandatory[3]] = [this.mandatory[2],  this.mandatory[3], this.mandatory[1]]; // Swap Order
+		this.mandatory.splice(3, 0, {fieldtype: "Column Break"}); // Insert new field on custom index
+	}
 
-    set_meta_and_mandatory_fields() {
-        super.set_meta_and_mandatory_fields();
+	render_dialog() {
+		this.mandatory.push(...this.get_extra_fields());  // Adding a Table Field after executing is_quick_entry()
+		super.render_dialog();
+		this.init_post_render_dialog_operations(); // Custom function to modify DOM properties after the dialog has been rendered
+	}
 
-        // Add onchange event to 'tracking_number' field
-        // let tochange = this.mandatory.findIndex((f) => f.fieldname === 'tracking_number');
+	init_post_render_dialog_operations() {
+		let {carrier, tracking_number, extra_services_section, content_section, content} = this.dialog.fields_dict;
 
-        // this.mandatory[tochange].onchange = function (e) {
-        // console.log(this.dialog)
-        //cargo_management.find_carrier_by_tracking_number();
-        // };
+		tracking_number.df.onchange = function () {  // Override onchange to sanitize field and set carrier
+			const data = cargo_management.find_carrier_by_tracking_number(this.get_input_value());
 
-        //let table_meta = frappe.get_meta('Parcel Content')
-        //let table_fields = table_meta.fields;
+			this.set_input(data.tracking_number);  // Tracking Number returned is sanitized
+			carrier.set_input(data.carrier);       // Update the carrier field
+		};
 
-        console.log('set_meta_and_mandatory_fields');
-        //console.log(this.mandatory[10]);
+		this.dialog.$wrapper.find('.modal-dialog').addClass('modal-lg'); // Making the Dialog large
+		extra_services_section.wrapper.insertAfter(carrier.parent).removeClass('row visible-section'); // Moving an entire section within a column
 
-        // Quick hack: form/grid.js -> add_new_row() push data to meta_fields
-        //this.mandatory[10].data = null;
-        //this.mandatory[10].fields = table_fields.filter(df => {
-        //    if ((df.reqd || df.bold || df.allow_in_quick_entry) && !df.read_only) {
+		// Styling the content section
+		content_section.wrapper.css({'padding-top': 0, 'border': 'none'});
+		content_section.body.css('margin-top', 0);
+		content.$wrapper.find('.control-label').hide(); // Hiding Label of Content Table
+	}
 
-        //console.log(df);
-        //return true;
-        //}
-        //});
-    }
-
-    // setup: function () {
-    //     this.force = true;
-    //     return this._super();
-    // },
-
-    // TODO: make large dialog
-    render_dialog() {
-        super.render_dialog();
-        this.init_post_render_dialog_operations();
-    }
-
-    init_post_render_dialog_operations() {
-        let {carrier: carrier_field, tracking_number: tracking_number_field} = this.dialog.fields_dict;
-
-        tracking_number_field.df.onchange = function () {  // Override onchange to clean field and set carrier
-            const data = cargo_management.find_carrier_by_tracking_number(this.get_input_value());
-
-            this.set_input(data.tracking_number);  // Tracking Number returned is sanitized
-            carrier_field.set_input(data.carrier); // Update the carrier
-        };
-
-    }
-
-    asdget_variant_fields() {
-        console.log(this);
-
-        return [
-            {
-                label: __("Content"),
-                fieldtype: "Section Break",
-                collapsible: 1
-            },
-            {
-                fieldtype: "Table",
-                fieldname: "content",
-                in_place_edit: false,
-                fields: [
-                    {
-                        label: __("Description"),
-                        fieldtype: "Data",
-                        fieldname: "description",
-                        in_list_view: true
-                    },
-                    {
-                        label: __("Quantity"),
-                        fieldtype: "Float",
-                        fieldname: "qty",
-                        in_list_view: true,
-                        onchange: () => {
-                            console.log(this.dialog)
-                        }
-                    },
-                    {
-                        label: __("Rate"),
-                        fieldtype: "Currency",
-                        fieldname: "rate",
-                        options: "USD",
-                        in_list_view: true,
-                    },
-                    {
-                        label: __("Amount"),
-                        fieldtype: "Currency",
-                        fieldname: "amount",
-                        options: "USD",
-                        in_list_view: true,
-                        read_only: 1
-                    }
-                ]
-            },
-            {
-                fieldname: "totals_section",
-                fieldtype: "Section Break",
-            },
-            {
-                fieldname: "shipping_amount",
-                label: __("Shipping Amount"),
-                fieldtype: "Currency",
-                options: "USD",
-            },
-            {
-                fieldtype: "Column Break"
-            },
-            {
-                fieldname: "total",
-                label: __("Total(Amt)"),
-                fieldtype: "Currency",
-                options: "USD"
-            }
-        ];
-
-    }
-
+	get_extra_fields() {
+		// TODO: // Item code with filters. Maybe we can filter if its is by the service Type?
+		return [
+			{fieldtype: 'Section Break', fieldname: 'content_section'},
+			{fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
+				{label: __('Description'), fieldtype: 'Data', fieldname: 'description', in_list_view: true},
+				{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true}]}
+		];
+	}
 }
