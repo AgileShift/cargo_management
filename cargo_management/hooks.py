@@ -15,8 +15,8 @@ app_include_css = "cargo_management.bundle.css"
 app_include_js = "cargo_management.bundle.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/cargo_management/css/package_management.css"
-# web_include_js = "/assets/cargo_management/js/package_management.js"
+# web_include_css = "/assets/cargo_management/css/parcel_management.css"
+# web_include_js = "/assets/cargo_management/js/parcel_management.js"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -87,7 +87,7 @@ doc_events = {
 # Scheduled Tasks
 scheduler_events = {
 	# "all": [
-	#	"cargo_management.package_management.doctype.parcel.events.check_parcel_delivery"
+	#	"cargo_management.parcel_management.doctype.parcel.events.check_parcel_delivery"
 	# ],
 }
 

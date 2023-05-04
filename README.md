@@ -21,7 +21,7 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
   - **Workspaces, Dashboard Views, Settings**
   - **Reports**: Provides insightful reports for better decision-making and business analysis.
 - **External APIs For Tracking Packages**:
-  - [EasyPost](https://www.easypost.com/)([Source Code](https://github.com/EasyPost/easypost-python))
+  - [EasyPost](https://www.easypost.com/) ([Source Code](https://github.com/EasyPost/easypost-python))
   - [17Track](https://api.17track.net/en)
 
 ### Extra Addons
@@ -47,9 +47,14 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 | Pick Up    |              | ️       |
 | Unknown    |              | ️       |
 
-
-
 # TODO: WORKING
+
+### Webhook URLs
+* Easypost: PENDING
+* 17Track:  PENDING
+
+
+
 
 ### Parcel Flow
 1. **Packages** are created and can be related to a specific customer

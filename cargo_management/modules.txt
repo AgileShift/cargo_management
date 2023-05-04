@@ -1,4 +1,4 @@
-Package Management
+Parcel Management
 Support Customization
 Shipment Management
 Warehouse Customization
