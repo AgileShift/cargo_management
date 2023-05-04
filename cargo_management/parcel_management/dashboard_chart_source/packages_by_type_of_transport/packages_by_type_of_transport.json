@@ -1,0 +1,13 @@
+{
+ "creation": "2021-05-31 22:18:33.863304",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart Source",
+ "idx": 0,
+ "modified": "2022-08-06 23:46:15.884520",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Packages by Type of Transport",
+ "owner": "Administrator",
+ "source_name": "Packages by Type of Transport",
+ "timeseries": 1
+}

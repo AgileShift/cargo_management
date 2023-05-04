@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "creation": "2020-06-27 10:29:04.374462",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "easypost_api_tab",
+  "easypost",
+  "easypost_api_key",
+  "asdsad_tab",
+  "17track_api",
+  "17track_api_key"
+ ],
+ "fields": [
+  {
+   "depends_on": "easypost",
+   "documentation_url": "https://www.easypost.com/docs/api#authentication",
+   "fieldname": "easypost_api_key",
+   "fieldtype": "Password",
+   "label": "EasyPost API Key",
+   "mandatory_depends_on": "easypost"
+  },
+  {
+   "default": "0",
+   "documentation_url": "https://www.easypost.com/tracking-guide",
+   "fieldname": "easypost",
+   "fieldtype": "Check",
+   "label": "EasyPost API"
+  },
+  {
+   "default": "0",
+   "documentation_url": "https://api.17track.net/en/doc",
+   "fieldname": "17track_api",
+   "fieldtype": "Check",
+   "label": "17Track API"
+  },
+  {
+   "fieldname": "asdsad_tab",
+   "fieldtype": "Tab Break",
+   "label": "17Track"
+  },
+  {
+   "fieldname": "17track_api_key",
+   "fieldtype": "Password",
+   "label": "17Track API Key"
+  },
+  {
+   "fieldname": "easypost_api_tab",
+   "fieldtype": "Tab Break",
+   "label": "EasyPost"
+  }
+ ],
+ "hide_toolbar": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-02-06 20:40:49.149039",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Package Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

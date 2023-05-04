@@ -1,0 +1,36 @@
+{
+ "cards": [
+  {
+   "card": "New Packages - SEA"
+  },
+  {
+   "card": "New Packages - AIR"
+  },
+  {
+   "card": "New Customers"
+  }
+ ],
+ "chart_options": "",
+ "charts": [
+  {
+   "chart": "Packages by Type of Transport",
+   "width": "Full"
+  },
+  {
+   "chart": "Package Summary",
+   "width": "Full"
+  }
+ ],
+ "creation": "2020-08-08 01:06:33.573822",
+ "dashboard_name": "Parcel",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 1,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2023-05-03 19:33:13.130237",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "Parcel",
+ "owner": "Administrator"
+}

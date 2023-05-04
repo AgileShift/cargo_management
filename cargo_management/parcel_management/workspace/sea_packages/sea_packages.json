@@ -1,0 +1,142 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"F0-z7B_aPo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>With Carrier<br></b></span>\",\"col\":12}},{\"id\":\"U3iso8eyY2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Packages\",\"col\":3}},{\"id\":\"zHdMHgTXxv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"id\":\"JLzIPTCf-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"id\":\"7OZD9x9rW2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"id\":\"XzBg0ulqDC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":3}},{\"id\":\"j3ARpnU2rV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"id\":\"uD1-MUZTHJ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"vYfDpROFCu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"id\":\"doNgIoZ-2a\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"id\":\"_fgR67d1ZX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"id\":\"eu13kdMYC6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"id\":\"Igv9L4XU3C\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"id\":\"ZCe3tXy3MT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"id\":\"Frki2am9Jo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"id\":\"HAVm3a2rQo\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Xbtoc93C8n\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Office</b></span>\",\"col\":12}},{\"id\":\"cLYQ1qbGaB\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available to Pickup\",\"col\":3}}]",
+ "creation": "2022-08-05 18:55:41.182011",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "dialpad",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "SEA Packages",
+ "links": [],
+ "modified": "2023-05-03 11:50:31.515580",
+ "modified_by": "Administrator",
+ "module": "Parcel Management",
+ "name": "SEA Packages",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "All Packages",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Active Packages",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"not in\",[\"Finished\",\"Cancelled\",\"Never Arrived\",\"Returned to Sender\"]],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "label": "Available for pickup at post office",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Available For Pickup\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "format": "{} Ready",
+   "label": "Available to Pickup",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"in\",[\"Sorting\",\"To Bill\",\"Unpaid\",\"To Deliver or Pickup\"]],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Without Carrier Data",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"easypost_id\":[\"is\",\"not set\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Returned",
+   "label": "Returned to Sender",
+   "link_to": "Parcel",
+   "stats_filter": "{\"creation\":[\"Timespan\",\"this month\"],\"carrier_status\":[\"=\",\"Return To Sender\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Light-Blue",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "icon": "",
+   "label": "Arriving Today",
+   "link_to": "Parcel",
+   "stats_filter": "{\"carrier_status\":[\"!=\",\"Delivered\"],\"carrier_est_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Late",
+   "label": "Arriving Late",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_est_delivery\":[\"Timespan\",\"this quarter\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "format": "{} Delivered",
+   "label": "Arrived Today",
+   "link_to": "Parcel",
+   "stats_filter": "{\"carrier_status\":[\"=\",\"Delivered\"],\"carrier_real_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "This week pending confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"carrier_real_delivery\":[\"Timespan\",\"this week\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "Awaiting Confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "In Extraordinary Confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"In Extraordinary Confirmation\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "List",
+   "format": "{} Waiting",
+   "label": "Awaiting Departure",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Departure\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
+   "label": "In Transit",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"In Transit\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  }
+ ],
+ "title": "SEA Packages"
+}
