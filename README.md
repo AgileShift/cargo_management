@@ -57,28 +57,21 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 
 * Learn how to Get Your [EasyPost API Key](https://www.easypost.com/docs/api#authentication)
 * To set your API Key: run `$ bench set-config easypost_api_key KEY`
-* Set up the webhook on EasyPost: `` 
+* Set up the webhook on EasyPost: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.easypost_api.easypost_webhook`
 
 #### 17Track Configuration
 
 * Learn how to Get Your [17Track Security Key](https://api.17track.net/en/doc?anchor=get-security-key)
 * To set your API Key: run `$ bench set-config 17track_api_key KEY`
-* Set up the webhook: add the 17Track webhook URL: `17TRACK_WEBHOOK_URL`
+* Set up the webhook: add the 17Track webhook URL: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.17track_api.17track_webhook`
 
 
 
 
 # TODO: WORKING
 
-### Webhook URLs
-* Easypost: PENDING
-* 17Track:  PENDING
-
-
-
-
 ### Parcel Flow
-1. **Packages** are created and can be related to a specific customer
+1. **Parcels** are created and can be related to a specific customer
    1. Content of the package can be added and its related Item for invoice Purposes.
    2. It can be tracked by the API or not.
 2. As the carrier updates the details the Tracking API send it via a webhook, we gather and update.
@@ -132,5 +125,4 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 
 
 ##### Code related TODO:
-1. Add custom Doctypes to Global Search: https://github.com/frappe/erpnext/pull/24055/files
 2. Migrate SQL to QueryBuilder? usign Pypika?

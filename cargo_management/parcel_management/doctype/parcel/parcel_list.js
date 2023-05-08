@@ -6,19 +6,19 @@ frappe.listview_settings['Parcel'] = {
     onload: function (listview) {
         const {name: name_field, tracking_number: tracking_number_fields, customer_name: customer_name_field} = listview.page.fields_dict;
 
-        // Remove tracking_number field from Standard Filter(Is set because field is the Title of the Doctype)
+        // Remove tracking_number field from Standard Filter (it's set because the field is the title of the Doctype)
         tracking_number_fields.$wrapper.remove();
 
-        // Update placeholder and help-text
-        name_field.$wrapper.attr('data-original-title', __('Tracking numbers'));
-        name_field.$input.attr('placeholder', __('Tracking numbers'));
+        // Update placeholder and help-text for Name field
+        name_field.$wrapper.attr('data-original-title', __('Tracking Number'));
+        name_field.$input.attr('placeholder', __('Tracking Number'));
 
-        // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed
+        // Override: onchange() method set in make_standard_filters(). We call refresh_list_view() if value has changed.
         name_field.df.onchange = customer_name_field.df.onchange = function () {
             this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change internal and UI value
-            if (this.value !== this.last_value) {
+            //if (this.value !== this.last_value) {
                 listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
-            }
+            //}
         }
 
         // TODO: listview.get_count_str() => This call frappe.db.count() using 'filters' not 'or_filters'
