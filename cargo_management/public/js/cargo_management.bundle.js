@@ -6,13 +6,9 @@ frappe.provide('cargo_management');
 
 cargo_management = {
 	find_carrier_by_tracking_number: function (tracking_number) {
-        /* This JavaScript function replicates the corresponding Python function to prevent unnecessary API calls.
-        By duplicating the functionality in JS, we can avoid making extra calls to the Python API.
-        LINKED WITH: package_management/doctype/parcel/actions.py -> find_carrier_by_tracking_number */
-
         tracking_number = tracking_number.trim().toUpperCase();  // Sanitize field
 
-		if (!tracking_number || tracking_number.length <= 4)
+		if (!tracking_number || tracking_number.length <= 3)
 			return {}; // FIXME: We should return something? or avoid this validation.
 
 		const carrierRegex = [ // USPS and FedEx the order matters!
@@ -28,7 +24,7 @@ cargo_management = {
 			{carrier: 'Unknown',    regex: /^92(612.{17})$|^420.{5}92(612.{17})$/},       // *92612*90980949456651012 | 42033166*926129*0980949456651012. Start with: 92612 or with zipcode(420xxxxx) can be handled by FedEx or USPS. search_term starts at 612
 			{carrier: 'USPS',       regex: /^9(?:.{21}|.{25})$|^420.{5}(9(?:.{21}|.{25}))$/}, // *9*400111108296364807659 | 42033165*9*274890983426386918697. First 8 digits: 420xxxxx(zipcode)
 			{carrier: 'FedEx',      regex: /^.{12}$|^612.{17}$|^.{22}([1-9].{11})$/},    // *612*90982157320543198 | 9622001900005105596800*5*49425980480. Last 12 digits is tracking
-		]; // FIXME: Sort by the most used Carrier | Add More Carriers: 'LY', 'LB', 'LW'.
+		]; // FIXME: Sort by the most used Carrier | FIXME: Add More Carriers: 'LY', 'LB', 'LW'
 
 		const result = carrierRegex.find(carrier => {
 			const match = tracking_number.match(carrier.regex);

@@ -1,5 +1,5 @@
 import frappe
-from cargo_management.package_management.doctype.parcel.actions import find_carrier_by_tracking_number
+from cargo_management.parcel_management.doctype.parcel.actions import find_carrier_by_tracking_number
 
 
 @frappe.whitelist(methods='GET')

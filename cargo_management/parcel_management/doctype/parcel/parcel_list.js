@@ -18,6 +18,8 @@ frappe.listview_settings['Parcel'] = {
             this.value = this.input.value = this.get_input_value().trim().toUpperCase();  // Change internal and UI value
             //if (this.value !== this.last_value) {
                 listview.filter_area.refresh_list_view(); // Same as make_standard_filters()
+
+			console.log('on change event!');
             //}
         }
 
@@ -37,6 +39,9 @@ frappe.listview_settings['Parcel'] = {
                 args.filters.splice(name_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
 
                 const data = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value());
+
+				console.log('Name filter is being touched!????');
+				console.log(data);
 
                 args.or_filters = [
                     [args.doctype, 'name', 'like', '%' + data.search_term + '%'],
