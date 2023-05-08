@@ -1,5 +1,6 @@
 ## ERPNext Cargo Management
-***
+
+---
 
 **ERPNext Cargo Management is a fully-fledged ERPNext solution designed for freight forwarding companies.**
 
@@ -7,45 +8,65 @@ It streamlines logistics processes, including **package tracking**, **invoicing*
 providing a seamless, efficient, and user-friendly experience.
 
 Built on [Frappe Framework v14](https://github.com/frappe/frappe/) and [ERPNext](https://github.com/frappe/erpnext),
-this solution is designed to meet the unique needs of businesses in the freight forwarding industry.
+this solution is designed to meet the unique needs of businesses in the freight forwarding industry.  
 It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, Assets, Payroll and more.
 
-
 ## Key Features
+
 - **Parcel Management**: Manages the packages, integrates tracking APIs and handles notifications.
 - **Warehouse Management:** Handles the receipt of packages in warehouses.
 - **Shipment Management:** Manages shipments and receipts, also generates packing lists for each shipment.
 - **Selling Management:** Customizes ERPNext modules for invoicing packages and managing customer import orders.
 - **Support Management**: Customizes ERPNext modules for customer support related to packages and orders.
 - **Custom Views**:
-  - **Workspaces, Dashboard Views, Settings**
-  - **Reports**: Provides insightful reports for better decision-making and business analysis.
+    - **Workspaces, Dashboard Views, Settings**
+    - **Reports**: Provides insightful reports for better decision-making and business analysis.
 - **External APIs For Tracking Packages**:
-  - [EasyPost](https://www.easypost.com/) ([Source Code](https://github.com/EasyPost/easypost-python))
-  - [17Track](https://api.17track.net/en)
+    - [EasyPost](https://www.easypost.com/tracking-guide) ([Source Code](https://github.com/EasyPost/easypost-python))
+    - [17Track](https://api.17track.net)
 
 ### Extra Addons
+
 - [ERPNext Delivery Management](https://github.com/AgileShift/erpnext_delivery) - WORK on Progress
 - [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud) - WORK on Progress
 
-
 ### List of Carriers Currently Supported:
-| Carrier    | EasyPost     | 17Track |
-|------------|--------------|---------|
-| USPS       | ☑️           | ☑️      |
-| UPS        | ☑️           | ☑️      |
-| DHL        | ☑️           | ☑️      |
-| FedEx      | With Account | ☑️      |
-| LaserShip  | With Account | ☑️      |
-| Amazon     |              | ☑️      |
-| Cainiao    | ️            | ☑️      |
-| SF Express | ☑️           | ☑️      |
-| Yanwen     | ☑️           | ️       |
-| YunExpress |              | ☑️      |
-| SunYou     |              | ☑️      |
-| Drop Off   |              | ️       |
-| Pick Up    |              | ️       |
-| Unknown    |              | ️       |
+
+| Carrier     |   EasyPost   | 17Track |
+|:------------|:------------:|:-------:|
+| USPS        |      ☑️      |   ☑️    |
+| UPS         |      ☑️      |   ☑️    |
+| DHL         |      ☑️      |   ☑️    |
+| FedEx       | With Account |   ☑️    |
+| LaserShip   | With Account |   ☑️    |
+| Amazon      |              |   ☑️    |
+| Cainiao     |      ️       |   ☑️    |
+| SF Express  |      ☑️      |   ☑️    |
+| Yanwen      |      ☑️      |    ️    |
+| YunExpress  |              |   ☑️    |
+| SunYou      |              |   ☑️    |
+| Drop Off    |              |    ️    |
+| Pick Up     |              |    ️    |
+| Unknown     |              |    ️    |
+
+---
+
+### Configuration of API Keys and Webhooks for EasyPost and 17Track
+
+#### EasyPost Configuration
+
+* Learn how to Get Your [EasyPost API Key](https://www.easypost.com/docs/api#authentication)
+* To set your API Key: run `$ bench set-config easypost_api_key KEY`
+* Set up the webhook: add the EasyPost webhook URL: `EASYPOST_WEBHOOK_URL`
+
+#### 17Track Configuration
+
+* Learn how to Get Your [17Track Security Key](https://api.17track.net/en/doc?anchor=get-security-key)
+* To set your API Key: run `$ bench set-config 17track_api_key KEY`
+* Set up the webhook: add the 17Track webhook URL: `17TRACK_WEBHOOK_URL`
+
+
+
 
 # TODO: WORKING
 
