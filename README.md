@@ -57,7 +57,7 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 
 * Learn how to Get Your [EasyPost API Key](https://www.easypost.com/docs/api#authentication)
 * To set your API Key: run `$ bench set-config easypost_api_key KEY`
-* Set up the webhook: add the EasyPost webhook URL: `EASYPOST_WEBHOOK_URL`
+* Set up the webhook on EasyPost: `` 
 
 #### 17Track Configuration
 
@@ -134,6 +134,3 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 ##### Code related TODO:
 1. Add custom Doctypes to Global Search: https://github.com/frappe/erpnext/pull/24055/files
 2. Migrate SQL to QueryBuilder? usign Pypika?
-3. Migrate:
-   1. package_management to parcel_management
-   2. package_settings to parcel_settings
