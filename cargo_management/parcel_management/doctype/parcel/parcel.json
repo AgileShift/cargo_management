@@ -94,7 +94,7 @@
    "fieldtype": "Select",
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "Amazon\nUSPS\nUPS\nDHL\nFedEx\nDrop Off\nPick Up\nUnknown\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
+   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
    "reqd": 1,
    "search_index": 1
   },
@@ -389,7 +389,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-05-08 12:25:14.002156",
+ "modified": "2023-05-10 18:11:32.638674",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
