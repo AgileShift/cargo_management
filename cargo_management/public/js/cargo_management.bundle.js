@@ -5,7 +5,7 @@ import './controls/overrides';
 frappe.provide('cargo_management');
 
 cargo_management = {
-	find_carrier_by_tracking_number: function (tracking_number) {
+	find_carrier_by_tracking_number(tracking_number) {
 		tracking_number = tracking_number.trim().toUpperCase(); // Sanitize field
 
 		let response = {carrier: 'Unknown', search_term: tracking_number, tracking_number};
@@ -39,22 +39,20 @@ cargo_management = {
 
 		return response; // If no match is found, default values will be returned.
 	},
-    transportation_icon_html: function (transportation) {
-        return ` <i class="fa fa-${transportation === 'Sea' ? 'ship' : 'plane'}"></i>`; // Watch the first whitespace.
-    },
-    transportation_formatter: function (transportation) {
-        return `<span class="indicator-pill ${transportation === 'Sea' ? 'blue' : 'red'} filterable ellipsis"
+	transportation_icon_html: (transportation) => ` <i class="fa fa-${transportation === 'Sea' ? 'ship' : 'plane'}"></i>`, // Watch the first whitespace
+	transportation_formatter(transportation) {
+		return `<span class="indicator-pill ${transportation === 'Sea' ? 'blue' : 'red'} filterable ellipsis"
             data-filter="transportation,=,${frappe.utils.escape_html(transportation)}">
             <span class="ellipsis">${transportation}${this.transportation_icon_html(transportation)}</span>
-        <span>`;
-    },
-    load_carrier_settings: function (carrier_id) {
-        // Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
-        const {api, tracking_url: main_url, default_carriers: extra_urls = []} = CARRIERS[carrier_id] || {};
+        <span>`; // Check get_indicator_html in list_view.js
+	},
+	load_carrier_settings(carrier_id) {
+		// Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
+		const {api, tracking_url: main_url, default_carriers: extra_urls = []} = CARRIERS[carrier_id] || {};
 
-        let urls = (main_url) ? [{'title': carrier_id, 'url': main_url}] : [];
-        extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': DEFAULT_CARRIERS[url_id]}));
+		let urls = (main_url) ? [{'title': carrier_id, 'url': main_url}] : [];
+		extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': DEFAULT_CARRIERS[url_id]}));
 
-        return {api, urls};
-    }
+		return {api, urls};
+	}
 };
