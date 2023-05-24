@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"7V-jIAYV_d\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>With Carrier<br></b></span>\",\"col\":12}},{\"id\":\"2sqnnByhjn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Packages\",\"col\":3}},{\"id\":\"MBiBxt15BK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"id\":\"M6G1DYT0U9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"id\":\"zOquxYWAFu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"id\":\"_2c2iektl2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":3}},{\"id\":\"TB2bu-s2aL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"id\":\"RcMs3rrZVL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"nfliPJae5E\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"id\":\"Au-Xm7vSc_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"id\":\"2UJ6wXIres\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"id\":\"kc_c0i29Gc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"id\":\"aNXQTupHGW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"id\":\"XSeqC_UlzO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"id\":\"AgddDw7mcO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"id\":\"Fgw2fF5P6C\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LG4R5S9fqb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Office</b></span>\",\"col\":12}},{\"id\":\"xvfgskbacG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available to Pickup\",\"col\":3}}]",
+ "content": "[{\"id\":\"7V-jIAYV_d\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>With Carrier<br></b></span>\",\"col\":12}},{\"id\":\"2sqnnByhjn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Parcels\",\"col\":3}},{\"id\":\"MBiBxt15BK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"id\":\"M6G1DYT0U9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"id\":\"zOquxYWAFu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"id\":\"_2c2iektl2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":3}},{\"id\":\"TB2bu-s2aL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"id\":\"RcMs3rrZVL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"nfliPJae5E\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"id\":\"Au-Xm7vSc_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"id\":\"2UJ6wXIres\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"id\":\"kc_c0i29Gc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"id\":\"aNXQTupHGW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"id\":\"XSeqC_UlzO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"id\":\"AgddDw7mcO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"id\":\"Fgw2fF5P6C\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LG4R5S9fqb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Office</b></span>\",\"col\":12}},{\"id\":\"xvfgskbacG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available to Pickup\",\"col\":3}}]",
  "creation": "2022-08-05 17:51:56.344103",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -9,15 +9,15 @@
  "icon": "arrow-up-right",
  "idx": 0,
  "is_hidden": 0,
- "label": "AIR Packages",
+ "label": "AIR Parcels",
  "links": [],
- "modified": "2023-05-03 11:50:39.823908",
+ "modified": "2023-05-24 11:28:17.235015",
  "modified_by": "Administrator",
  "module": "Parcel Management",
- "name": "AIR Packages",
+ "name": "AIR Parcels",
  "number_cards": [],
  "owner": "Administrator",
- "parent_page": "All Packages",
+ "parent_page": "Parcels",
  "public": 1,
  "quick_lists": [],
  "roles": [],
@@ -52,7 +52,7 @@
   {
    "color": "Blue",
    "doc_view": "List",
-   "label": "Active Packages",
+   "label": "Active Parcels",
    "link_to": "Parcel",
    "stats_filter": "{\"status\":[\"not in\",[\"Finished\",\"Cancelled\",\"Never Arrived\",\"Returned to Sender\"]],\"transportation\":[\"=\",\"Air\"]}",
    "type": "DocType"
@@ -138,5 +138,5 @@
    "type": "DocType"
   }
  ],
- "title": "AIR Packages"
+ "title": "AIR Parcels"
 }
