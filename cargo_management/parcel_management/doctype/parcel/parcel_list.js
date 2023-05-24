@@ -62,7 +62,6 @@ frappe.listview_settings['Parcel'] = {
 					<div class="dropdown-menu dropdown-menu-right">${urls}</div>
 				</div>
 			`);
-			console.log($html.prop('outerHTML'));
 
 			return $html.prop('outerHTML');
 		}
