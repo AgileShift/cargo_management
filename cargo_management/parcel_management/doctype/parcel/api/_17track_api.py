@@ -1,9 +1,10 @@
 import requests
 
+import frappe
+
 
 class API17Track:
     """ 17Track methods to control class API and parse data. """
-    api_key = None
     api_base = "https://api.17track.net/track/v2/"
 
     # The Dict Keys are the actual String representation for Users, and the Dict Values are the carrier code for the API
@@ -15,7 +16,10 @@ class API17Track:
         'Yanwen': 190012
     }
 
-    def build_request(self, endpoint, payload):
+    def __init__(self):
+        self.api_key = frappe.conf.api_17_track_key
+
+    def _build_request(self, endpoint, payload):
         url = self.api_base + endpoint
 
         return requests.request('POST', url=url, json=payload, headers={
@@ -25,7 +29,7 @@ class API17Track:
 
     def create_package(self, tracking_number):
         """ Create a Tracking on 17Track """
-        request = self.build_request('register', payload=[{
+        request = self._build_request('register', payload=[{
             "number": tracking_number,
             "auto_detection": True,
         }])
@@ -34,7 +38,7 @@ class API17Track:
 
     def retrieve_package_data(self, tracking_number):
         """ Retrieve data from 17Track """
-        request = self.build_request('gettrackinfo', payload=[{
+        request = self._build_request('gettrackinfo', payload=[{
             "number": tracking_number
         }])
 

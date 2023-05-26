@@ -57,7 +57,8 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_preview": 1,
-   "label": "Tracking number",
+   "label": "Tracking Number",
+   "no_copy": 1,
    "reqd": 1,
    "unique": 1
   },
@@ -111,7 +112,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Awaiting Receipt\nIn Extraordinary Confirmation\nAwaiting Confirmation\nException\nAwaiting Departure\nIn Transit\nIn Customs\nSorting\nTo Bill\nUnpaid\nTo Deliver or Pickup\nFinished\nCancelled\nNever Arrived\nReturned to Sender",
+   "options": "Awaiting Receipt\nAwaiting Confirmation\nIn Extraordinary Confirmation\nAwaiting Departure\nIn Transit\nIn Customs\nSorting\nTo Bill\nUnpaid\nFor Delivery or Pickup\nFinished\nCancelled\nNever Arrived\nReturned to Sender",
    "search_index": 1
   },
   {
@@ -389,7 +390,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-05-10 18:11:32.638674",
+ "modified": "2023-05-24 11:40:37.907862",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -458,7 +459,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "timeline_field": "customer",
  "title_field": "tracking_number",
  "track_changes": 1
 }
