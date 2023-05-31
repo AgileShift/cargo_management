@@ -11,7 +11,7 @@
  "is_hidden": 0,
  "label": "AIR Parcels",
  "links": [],
- "modified": "2023-05-24 15:49:07.280812",
+ "modified": "2023-05-24 15:54:43.411450",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "AIR Parcels",
@@ -40,15 +40,6 @@
    "type": "DocType"
   },
   {
-   "color": "Green",
-   "doc_view": "List",
-   "format": "{} Delivered",
-   "label": "Arrived Today",
-   "link_to": "Parcel",
-   "stats_filter": "{\"carrier_status\":[\"=\",\"Delivered\"],\"carrier_real_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Air\"]}",
-   "type": "DocType"
-  },
-  {
    "color": "Light-Blue",
    "doc_view": "List",
    "format": "{} Pending",
@@ -56,6 +47,15 @@
    "label": "Arriving Today",
    "link_to": "Parcel",
    "stats_filter": "{\"carrier_est_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "format": "{} Delivered",
+   "label": "Arrived Today",
+   "link_to": "Parcel",
+   "stats_filter": "{\"carrier_real_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Air\"]}",
    "type": "DocType"
   },
   {

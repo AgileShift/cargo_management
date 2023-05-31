@@ -11,7 +11,7 @@
  "is_hidden": 0,
  "label": "SEA Parcels",
  "links": [],
- "modified": "2023-05-24 15:49:21.699397",
+ "modified": "2023-05-24 15:54:36.284436",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "SEA Parcels",
@@ -48,6 +48,15 @@
    "label": "Available for pickup at post office",
    "link_to": "Parcel",
    "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Available For Pickup\"],\"transportation\":[\"=\",\"Sea\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "format": "{} Delivered",
+   "label": "Arrived Today",
+   "link_to": "Parcel",
+   "stats_filter": "{\"carrier_real_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Sea\"]}",
    "type": "DocType"
   },
   {
@@ -117,15 +126,6 @@
    "label": "In Transit",
    "link_to": "Parcel",
    "stats_filter": "{\"status\":[\"in\",[\"In Transit\",\"In Customs\"]],\"transportation\":[\"=\",\"Sea\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Green",
-   "doc_view": "List",
-   "format": "{} Delivered",
-   "label": "Arrived Today",
-   "link_to": "Parcel",
-   "stats_filter": "{\"carrier_status\":[\"=\",\"Delivered\"],\"carrier_real_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Sea\"]}",
    "type": "DocType"
   },
   {
