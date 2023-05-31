@@ -56,4 +56,4 @@ class _17TrackAPI:
 		elif response['data']['rejected']:
 			raise Exception(response['data']['rejected'][0]['error'])
 
-		print(response)
+		return response

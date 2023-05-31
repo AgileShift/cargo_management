@@ -213,12 +213,11 @@ class Parcel(Document):
 				api_data = _17TrackAPI().register_package(self.tracking_number, self.carrier)
 				self._request_data_from_17track_api()
 			elif e.args[0]['code'] == -18019901:  # has been registered on 17track but not created on our System
-				# FIXME: HOTFIx
+				# FIXME: HotFix
 				frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
 			return
 		else:
-			# parse and save data!
-			print(self._parse_data_from_17track(api_data['track_info']))
+			self._parse_data_from_17track(api_data['track_info'])
 			frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
 
 	def parse_data_from_easypost_webhook(self, response):
@@ -265,12 +264,15 @@ class Parcel(Document):
 		""" Parse data """
 		print(data)
 
+		if data['latest_status']['status'] == 'InfoReceived':
+			data['latest_status']['status'] = 'Pre Transit'
+
 		self.carrier_status = data['latest_status']['status']
 		self.carrier_status_detail = data['latest_status']['sub_status']
 
 		# self.signed_by ?
 
-		self.carrier_est_weight = float(data['misc_info']['weight_kg']) * 2.20  # FIXME: CHECK
+		self.carrier_est_weight = float(data['misc_info']['weight_kg']) * 2.20 if data['misc_info']['weight_kg'] else 0.00  # FIXME: CHECK
 		# self.carrier_est_delivery = data.time_metrics.estimated_delivery_date
 
 		self.carrier_last_detail = data['latest_event']['description']
@@ -279,4 +281,4 @@ class Parcel(Document):
 			self.carrier_real_delivery = datetime.datetime.strptime(data['latest_event']['time_iso'], '%Y-%m-%dT%H:%M:%S%z').replace(tzinfo=None)
 			self.change_status('Awaiting Confirmation')
 		else:
-			self.carrier_status('Awaiting Receipt')
+			self.change_status('Awaiting Receipt')
