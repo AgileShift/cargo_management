@@ -1,6 +1,7 @@
 import {CARRIERS, DEFAULT_CARRIERS} from '../carriers.json' assert {type: 'json'};
 import './utils/parcel_quick_entry';
 import './controls/overrides';
+import './controls/multichecksingle';
 
 frappe.provide('cargo_management');
 
