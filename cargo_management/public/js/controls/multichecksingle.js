@@ -3,7 +3,7 @@ frappe.ui.form.ControlMultiCheckSingle = class ControlMultiCheckUnique extends f
 
 	refresh_input() {
 		// Override this method, We drew inspiration from: /form/controls/base_input.js -> refresh_input();
-		this.set_mandatory(this.selected_options);
+		this.set_mandatory();
 		this.set_required();
 	}
 
@@ -20,14 +20,21 @@ frappe.ui.form.ControlMultiCheckSingle = class ControlMultiCheckUnique extends f
 				this.selected_options = ''; // If unchecked, set to empty
 			}
 
+			if (this.df.reqd) {
+				this.set_invalid(); // If required, mark or unmark field as invalid
+			}
+
 			// Call the on_change function with the selected option. This is useful for binding to other fields.
             this.df.on_change && this.df.on_change(this.selected_options);
         });
     }
 
-	set_mandatory(value) {
+	set_mandatory() {
 		// Calling a core method to avoid DRY. This is necessary because MultiCheck inherits from Control rather than ControlInput(parent)
-		frappe.ui.form.ControlInput.prototype.set_mandatory.call(this, value); // Refer to: /form/controls/base_input.js -> set_mandatory();
+		frappe.ui.form.ControlInput.prototype.set_mandatory.call(this, this.selected_options); // Refer to: /form/controls/base_input.js -> set_mandatory();
+	}
+	set_invalid() {
+		this.$wrapper.toggleClass("has-error", !this.selected_options); // Refer to: /form/controls/base_input.js -> set_invalid();
 	}
 	set_required() {
 		this.$label.toggleClass('reqd', Boolean(this.df.reqd)); // Refer to: /form/controls/base_input.js -> set_required();
