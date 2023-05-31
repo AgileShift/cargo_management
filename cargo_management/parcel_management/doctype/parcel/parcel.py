@@ -266,6 +266,10 @@ class Parcel(Document):
 
 		if data['latest_status']['status'] == 'InfoReceived':
 			data['latest_status']['status'] = 'Pre Transit'
+		elif data['latest_status']['status'] == 'InTransit':
+			data['latest_status']['status'] = 'In Transit'
+		elif data['latest_status']['status'] == 'OutForDelivery':
+			data['latest_status']['status'] = 'Out For Delivery'
 
 		self.carrier_status = data['latest_status']['status']
 		self.carrier_status_detail = data['latest_status']['sub_status']
