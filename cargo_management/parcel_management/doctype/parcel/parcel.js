@@ -1,36 +1,38 @@
 frappe.ui.form.on('Parcel', {
 
-    setup: function () {
-        $('.layout-side-section').hide(); // Little Trick to work better FIXME use frm.page.layout
-    },
+	setup(frm) {
+		frm.page.sidebar.toggle(false); // Hide Sidebar to focus better on the doc
+	},
 
-    onload: function(frm) {
-        // Setting custom queries
-        frm.set_query('item_code', 'content', () => {
-            return {
-                filters: {
-                    'is_sales_item': true,
-                    'has_variants': false
-                }
-            }
-        });
+	onload(frm) {
+		// Setting custom queries
+		frm.set_query('item_code', 'content', () => {
+			return {
+				filters: {
+					'is_sales_item': true,
+					'has_variants': false
+				}
+			}
+		});
 
-        // Setting Currency Labels
-        frm.set_currency_labels(['total', 'shipping_amount'], 'USD');
-        frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
-    },
+		// Setting Currency Labels
+		frm.set_currency_labels(['total', 'shipping_amount'], 'USD');
+		frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
+	},
 
-    refresh: function(frm) {
-        if (frm.is_new()) {
-            return;
-        }
+	refresh(frm) {
+		if (frm.is_new()) {
+			return;
+		}
 
-        // Add Icon to the Page Indicator(Status)
-        frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
+		// Add Icon to the Page Indicator(Status)
+		frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
 
-        frm.events.show_explained_status(frm);  // Show Explained Status as Intro Message
-        frm.events.build_custom_buttons(frm);  // Adding Custom buttons
-    },
+		// TODO: Make a more responsive indicator please!
+
+		frm.events.show_explained_status(frm); // Show Explained Status as Intro Message
+		frm.events.build_custom_buttons(frm);  // Adding Custom buttons
+	},
 
     tracking_number: function (frm) {
         frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
