@@ -1,8 +1,10 @@
-Package Settings,Configuraciones de paquete
-
 Parcel,Paquete
 Parcels,Paquetes
-Tracking number,Número de rastreo
+
+SEA Parcels, Paquetes Marítimos
+AIR Parcels, Paquetes Aéreos
+
+Tracking Number,Número de Rastreo
 Carrier,Transportista
 
 Awaiting Receipt,Esperando Recepción
@@ -11,12 +13,10 @@ In Extraordinary Confirmation,En Confirmación Extraordinaria
 Awaiting Departure,Esperando Despacho
 In Customs,En Aduana
 Sorting,Clasificando
-Available to Pickup,Disponible para Retirar
+For Delivery or Pickup,Para Entrega o Retiro
 Never Arrived,Nunca Llegó
 Returned to Sender,Devuelto al Remitente
 
-Track,Rastrear
-Package is requested to be tracked.,Se solicita el seguimiento del paquete.
 Additional Data from Carrier,Datos Adicionales del Transportista
 Carrier estimated delivery date,Fecha de entrega estimada del transportista
 Estimated delivery date provided by the carrier (if available).,Fecha de entrega estimada proporcionada por el transportista (si está disponible).
