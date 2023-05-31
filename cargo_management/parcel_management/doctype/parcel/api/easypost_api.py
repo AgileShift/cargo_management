@@ -17,7 +17,6 @@ class EasyPostAPIError(easypost.Error):
 
 class EasyPostAPI:
     """ Easypost methods to control class API and parse data. """
-    # TODO: Improve this
 
     # The Dict Keys are the actual String representation for Users, and the Dict Values are the carrier code for the API
     carrier_codes = {
@@ -38,8 +37,7 @@ class EasyPostAPI:
         self.carrier = self.carrier_codes.get(carrier, carrier)
         self.carrier_uses_utc = self.carriers_using_utc.get(carrier, False)
 
-        # Little Hack. FIXME: Maybe next versions Will be a better way to do this.
-        easypost.api_key = frappe.get_cached_doc('Package Settings').get_password('easypost_api_key')  # .get_single()
+        easypost.api_key = frappe.conf.easypost_api_key  # FIXME: A more Pythonic Way to do it?
 
     def create_package(self, tracking_number):
         """ Create a Tracking on Easypost API """
