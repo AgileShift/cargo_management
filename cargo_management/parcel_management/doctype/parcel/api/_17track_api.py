@@ -36,7 +36,12 @@ class _17TrackAPI:
 			"auto_detection": True,  # So we avoid sending the carrier?
 		}])
 
-		return response.json()
+		response = response.json()  # IMPROVE THIS
+
+		if response['data']['accepted']:
+			return response['data']['accepted'][0]
+		elif response['data']['rejected']:
+			raise Exception(response['data']['rejected'][0]['error'])
 
 	def retrieve_package_data(self, tracking_number):
 		""" Retrieve data from 17Track """
@@ -51,4 +56,4 @@ class _17TrackAPI:
 		elif response['data']['rejected']:
 			raise Exception(response['data']['rejected'][0]['error'])
 
-		return response.json()
+		print(response)

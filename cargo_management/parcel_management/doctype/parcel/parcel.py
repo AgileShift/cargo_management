@@ -209,11 +209,12 @@ class Parcel(Document):
 			else:
 				api_data = _17TrackAPI().retrieve_package_data(self.tracking_number)
 		except Exception as e:
-			if e.args[0]['code'] == -18019902:
+			if e.args[0]['code'] == -18019902:  # Has not been registered on 17track
 				api_data = _17TrackAPI().register_package(self.tracking_number, self.carrier)
 				self._request_data_from_17track_api()
-
-			frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
+			elif e.args[0]['code'] == -18019901:  # has been registered on 17track but not created on our System
+				# FIXME: HOTFIx
+				frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
 			return
 		else:
 			# parse and save data!
