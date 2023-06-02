@@ -1,7 +1,16 @@
 frappe.ui.form.on('Parcel', {
 
 	setup(frm) {
-		frm.page.sidebar.toggle(false); // Hide Sidebar to focus better on the doc
+		frm.page.sidebar.toggle(false); // Hide Sidebar to better focus on the doc
+
+		// FIXME: Observe if the indicator changes. This is useful for the 'Not Saved' status aka is_dirty(). We cannot read that from the events available
+		const observer = new MutationObserver(() => {
+			frm.layout.show_message('');     // Clear Message because it's possible that data changes!
+			frm.page.clear_custom_actions(); // Clear Custom buttons
+			frm.page.indicator.next().remove(); // Remove the extra indicator if the indicator changes
+		});
+
+		observer.observe(frm.page.indicator.get(0), {childList: true}); // Observe the indicator for changes
 	},
 
 	onload(frm) {
@@ -25,10 +34,7 @@ frappe.ui.form.on('Parcel', {
 			return;
 		}
 
-		// Add Icon to the Page Indicator(Status)
-		frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
-
-		// TODO: Make a more responsive indicator please!
+		frm.page.indicator.parent().append(cargo_management.transportation_indicator(frm.doc.transportation)); // Add Extra Indicator
 
 		frm.events.show_explained_status(frm); // Show Explained Status as Intro Message
 		frm.events.build_custom_buttons(frm);  // Adding Custom buttons
@@ -60,15 +66,15 @@ frappe.ui.form.on('Parcel', {
     build_custom_buttons: function (frm) {
         const carriers_settings = cargo_management.load_carrier_settings(frm.doc.carrier);
 
-        if (carriers_settings.api) {  // TODO: easypost_id or other APIs?
+        if (carriers_settings.api) {
             frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
         }
 
-        carriers_settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
-
-        if (frm.doc.assisted_purchase) {    // If is Assisted Purchase will have related Sales Order and Sales Order Item.
+		if (frm.doc.assisted_purchase) { // If is Assisted Purchase will have related Sales Order and Sales Order Item
             frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm), __('Get Items From'));
         }
+
+        carriers_settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
     },
 
     get_data_from_api: function (frm) {
