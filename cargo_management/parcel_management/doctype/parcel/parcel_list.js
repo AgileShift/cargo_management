@@ -3,8 +3,6 @@ frappe.listview_settings['Parcel'] = {
 	filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],
 
 	onload(listview) {
-		//frappe.ui.form.make_quick_entry('Parcel') // TODO: DELETE THIS. It's just for testing
-
 		const {name: name_field, tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
 
 		// The 'tracking_number' field is set because is the title field of the Doctype. So we remove from the 'standard_filters'
