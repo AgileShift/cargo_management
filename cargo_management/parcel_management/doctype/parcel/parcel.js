@@ -40,30 +40,30 @@ frappe.ui.form.on('Parcel', {
 		frm.events.build_custom_buttons(frm);  // Adding Custom buttons
 	},
 
-    tracking_number: function (frm) {
-        frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
+	tracking_number(frm) {
+		frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
 
-        if (!frm.doc.tracking_number) {
-            return;
-        }
+		if (!frm.doc.tracking_number) {
+			return;
+		}
 
-        frm.doc.carrier = cargo_management.find_carrier_by_tracking_number(frm.doc.tracking_number).carrier;
+		frm.doc.carrier = cargo_management.find_carrier_by_tracking_number(frm.doc.tracking_number).carrier;
 
-        refresh_many(['tracking_number', 'carrier']);
-    },
+		refresh_many(['tracking_number', 'carrier']);
+	},
 
-    shipping_amount: function (frm) {
-        frm.events.calculate_total(frm);
-    },
+	shipping_amount(frm) {
+		frm.events.calculate_total(frm);
+	},
 
     // Custom Functions
 
-    show_explained_status: function (frm) {
+    show_explained_status(frm) {
         frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, ''));  // FIXME: Core overrides color
         frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
     },
 
-    build_custom_buttons: function (frm) {
+    build_custom_buttons(frm) {
         const carriers_settings = cargo_management.load_carrier_settings(frm.doc.carrier);
 
         if (carriers_settings.api) {
@@ -77,7 +77,7 @@ frappe.ui.form.on('Parcel', {
         carriers_settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
     },
 
-    get_data_from_api: function (frm) {
+    get_data_from_api(frm) {
         // TODO: WORK ON THIS. We have to delete some data
         frappe.call({
             method: 'cargo_management.parcel_management.doctype.parcel.actions.get_data_from_api',
@@ -93,7 +93,7 @@ frappe.ui.form.on('Parcel', {
     },
 
     //https://github.com/frappe/frappe/pull/12471 and https://github.com/frappe/frappe/pull/14181/files
-    sales_order_dialog: function (frm) {
+    sales_order_dialog(frm) {
         const so_dialog = new frappe.ui.form.MultiSelectDialog({
             doctype: 'Sales Order',
             target: frm,
@@ -165,29 +165,29 @@ frappe.ui.form.on('Parcel', {
 
     },
 
-    calculate_total: function (frm) {
-        frm.set_value('total', frm.get_sum('content', 'amount') + frm.doc.shipping_amount);
-    },
-    calculate_content_amounts_and_total: function (frm, cdt, cdn) {
-        let row = locals[cdt][cdn]; // Getting Content Child Row being edited
+	calculate_total(frm) {
+		frm.set_value('total', frm.get_sum('content', 'amount') + frm.doc.shipping_amount);
+	},
+	calculate_content_amounts_and_total(frm, cdt, cdn) {
+		let row = locals[cdt][cdn]; // Getting Content Child Row being edited
 
-        row.amount = row.qty * row.rate;
-        refresh_field('amount', cdn, 'content');
+		row.amount = row.qty * row.rate;
+		refresh_field('amount', cdn, 'content');
 
-        frm.events.calculate_total(frm); // Calculate the parent 'total' field
-    }
+		frm.events.calculate_total(frm); // Calculate the parent 'total' field
+	}
 });
 
 frappe.ui.form.on('Parcel Content', {
-    content_remove(frm) {
-        frm.events.calculate_total(frm);
-    },
+	content_remove(frm) {
+		frm.events.calculate_total(frm);
+	},
 
-    qty: function(frm, cdt, cdn) {
-        frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
-    },
+	qty(frm, cdt, cdn) {
+		frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
+	},
 
-    rate: function(frm, cdt, cdn) {
-        frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
-    },
+	rate(frm, cdt, cdn) {
+		frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
+	},
 });
