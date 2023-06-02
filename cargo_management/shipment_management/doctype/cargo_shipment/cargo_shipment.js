@@ -3,6 +3,10 @@ frappe.ui.form.on('Cargo Shipment', {
 
 	setup(frm) {
 		frm.page.sidebar.toggle(false); // Hide Sidebar to focus better on the doc
+
+		//frm.set_indicator_formatter("package", function(doc) {
+	    //	return 'orange';
+		//});
 	},
 
 	onload(frm) {

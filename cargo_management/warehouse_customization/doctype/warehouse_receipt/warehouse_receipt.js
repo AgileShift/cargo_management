@@ -5,7 +5,7 @@ frappe.ui.form.on('Warehouse Receipt', {
             parent: frm.fields_dict.transportation_multicheck_html.$wrapper.addClass('text-center'),
             df: {
                 label: __('Transportation Method'),
-                fieldtype: 'MultiCheckUnique',
+                fieldtype: 'MultiCheckSingle',
                 reqd: true,
                 columns: 2,
                 options: [{label: __('SEA'), value: 'Sea'}, {label: __('AIR'), value: 'Air'}],

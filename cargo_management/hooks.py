@@ -70,7 +70,7 @@ doctype_js = {
 # Permissions evaluated in scripted ways
 
 # permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
+# 	"Parcel": "cargo_management.parcel_management.doctype.parcel.events.get_permission_query_conditions",
 # }
 #
 # has_permission = {

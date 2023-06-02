@@ -6,6 +6,11 @@ import './controls/multichecksingle';
 frappe.provide('cargo_management');
 
 cargo_management = {
+	transportations: {
+		'Sea': {icon: 'ship', color: 'blue'},
+		'Air': {icon: 'plane', color: 'red'}
+	},
+
 	find_carrier_by_tracking_number(tracking_number) {
 		tracking_number = tracking_number.trim().toUpperCase(); // Sanitize field
 
@@ -40,13 +45,24 @@ cargo_management = {
 
 		return response; // If no match is found, default values will be returned.
 	},
-	transportation_icon_html: (transportation) => ` <i class="fa fa-${transportation === 'Sea' ? 'ship' : 'plane'}"></i>`, // Watch the first whitespace
+
+	icon_html: (icon) => ` <i class="fa fa-${icon}"></i>`, // Watch the first whitespace
+
 	transportation_formatter(transportation) {
-		return `<span class="indicator-pill ${transportation === 'Sea' ? 'blue' : 'red'} filterable ellipsis"
-            data-filter="transportation,=,${frappe.utils.escape_html(transportation)}">
-            <span class="ellipsis">${transportation}${this.transportation_icon_html(transportation)}</span>
-        <span>`; // Check get_indicator_html in list_view.js
+		const opts = this.transportations[transportation];
+
+		return `<span class="indicator-pill ${opts.color} filterable ellipsis" data-filter="transportation,=,${transportation}">
+            <span class="ellipsis">${transportation}${this.icon_html(opts.icon)}</span>
+        </span>`; // See more of this on list/list_view.js -> get_indicator_html();
 	},
+	transportation_indicator(transportation) {
+		const opts = this.transportations[transportation];
+
+		return `<span class="indicator-pill whitespace-nowrap ${opts.color}" style="margin-left: 10px">
+			<span>${transportation}${this.icon_html(opts.icon)}</span>
+		</span>`; // See more of this on ui/page.js -> set_indicator() and clear_indicator()
+	},
+
 	load_carrier_settings(carrier_id) {
 		// Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
 		const {api, tracking_url: main_url, default_carriers: extra_urls = []} = CARRIERS[carrier_id] || {};
