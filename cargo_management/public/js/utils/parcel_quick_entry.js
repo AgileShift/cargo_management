@@ -35,10 +35,10 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 		// FIXME: This approach can fail miserably and is not recommended
 		[this.mandatory[1], this.mandatory[2]] = [this.mandatory[2], this.mandatory[1]]; // Swap Order: Customer with Carrier
 
-		// Insert New Fields in between Customer and Carrier
+		// Insert New Fields in between Customer and Carrier. FIXME: better options?
 		this.mandatory.splice(2, 0,{
-			fieldtype: 'MultiCheckSingle', fieldname: 'transportation_options', label: __('Transportation'), reqd: true, columns: 2,
-			options: [{label: __('SEA'), value: 'Sea'}, {label: __('AIR'), value: 'Air'}],
+			fieldtype: 'MultiCheckSingle', fieldname: 'transportation_options', label: __('Transportation'), reqd: true, bold: true, columns: 2,
+			options: ['Sea', 'Air'].map(t => ({value: t, description: __(t), label: __(t).toUpperCase() + cargo_management.icon_html(cargo_management.transportations[t].icon)})),
 			on_change: (selected) => this.doc.transportation = selected // Bind the selected checkbox with the doc field
 		}, {fieldtype: "Column Break"});
 
