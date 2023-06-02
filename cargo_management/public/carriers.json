@@ -2,7 +2,7 @@
   "DEFAULT_CARRIERS": {
     "Parcels": "https://parcelsapp.com/en/tracking/",
     "17Track": "https://t.17track.net/en#nums=",
-    "EVEREST": "http://everest.forwardex.com/m/track.asp?track="
+    "EVEREST": "http://everest.cargotrack.net/m/track.asp?track="
   },
   "CARRIERS": {
     "Unknown": {
