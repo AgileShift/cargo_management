@@ -3,6 +3,12 @@ import requests
 import frappe
 
 
+class _17TrackAPIError(Exception):
+	""" Child Class to personalize API Error """
+	# https://api.17track.net/en/doc?anchor=list-of-error-codes&version=v2
+	pass
+
+
 class _17TrackAPI:
 	""" 17Track methods to control class API and parse data. """
 	api_base = "https://api.17track.net/track/v2/"
@@ -23,10 +29,15 @@ class _17TrackAPI:
 	def _build_request(self, endpoint, payload):
 		url = self.api_base + endpoint
 
-		return requests.request('POST', url=url, json=payload, headers={
+		response = requests.request('POST', url=url, json=payload, headers={
 			"content-type": "application/json",
 			"17token": self.api_key
-		})
+		}).json()
+
+		if response['data']['rejected']:
+			raise Exception(response['data']['rejected'][0]['error'])
+
+
 
 	def register_package(self, tracking_number, carrier):
 		""" Create a Tracking on 17Track """

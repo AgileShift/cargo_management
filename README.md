@@ -55,15 +55,17 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 
 #### EasyPost Configuration
 
-* Learn how to Get Your [EasyPost API Key](https://www.easypost.com/docs/api#authentication)
-* To set your API Key: run `$ bench set-config easypost_api_key KEY`
-* Set up the webhook on EasyPost: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.easypost_api.easypost_webhook`
+1. Get Your [EasyPost API Key](https://www.easypost.com/docs/api#authentication)
+2. Set the **API Key**: `$ bench set-config easypost_api_key API_KEY`
+3. Create and set your **Webhook Secret**(hmac): `$ bench set-config easypost_webhook_secret SECRET`
+4. Set up your **Webhook Secret** and the **Webhook URL** on EasyPost: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.easypost_api.easypost_webhook`
+
 
 #### 17Track Configuration
 
-* Learn how to Get Your [17Track Security Key](https://api.17track.net/en/doc?anchor=get-security-key)
-* To set your API Key: run `$ bench set-config 17track_api_key KEY`
-* Set up the webhook: add the 17Track webhook URL: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.17track_api.17track_webhook`
+1. Get Your [17Track Security Key](https://api.17track.net/en/doc?anchor=get-security-key)
+2. Set the **API Key**: `$ bench set-config 17track_api_key API_KEY`
+3. Set up the **Webhook URL** on 17Track: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.17track_api.17track_webhook`
 
 
 

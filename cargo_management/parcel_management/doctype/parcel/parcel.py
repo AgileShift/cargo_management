@@ -1,10 +1,10 @@
 import datetime
 
 import frappe
+from cargo_management.parcel_management.doctype.parcel.api._17track_api import _17TrackAPI
+from cargo_management.parcel_management.doctype.parcel.api.easypost_api import EasyPostAPI, EasyPostAPIError
 from frappe import _
 from frappe.model.document import Document
-from cargo_management.parcel_management.doctype.parcel.api.easypost_api import EasyPostAPI, EasyPostAPIError
-from cargo_management.parcel_management.doctype.parcel.api._17track_api import _17TrackAPI
 
 
 class Parcel(Document):
@@ -31,6 +31,7 @@ class Parcel(Document):
 		""" Before saved in DB and after validated. Add new data. This runs on Insert(Create) or Save(Update)"""
 		if self.is_new():
 			self.request_data_from_api()
+			# TODO: WORK ON THIS CHANGE!
 		elif self.has_value_changed('carrier') or self.has_value_changed('tracking_number'):  # Exists and data has changed
 			self.easypost_id = None  # Value has changed. We reset the ID. FIXME: Move this when we have new APIs.
 			self.request_data_from_api()
@@ -173,34 +174,32 @@ class Parcel(Document):
 
 	def request_data_from_api(self):
 		""" This selects the corresponding API to request data. """
-		carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'][self.carrier].get('api')
+		carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'].get(self.carrier, {}).get('api')
 
 		match carrier_api:
 			case 'EasyPost':
 				self._request_data_from_easypost_api()
-				frappe.msgprint(_('Handling by EasyPost'), indicator='blue', alert=True)
 			case '17Track':
 				self._request_data_from_17track_api()
-				frappe.msgprint(_('Handling by 17 Track'), indicator='blue', alert=True)
 			case _:
 				frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
 
 	def _request_data_from_easypost_api(self):
 		""" Handles POST or GET to the Easypost API. Also parses the data. """
 		try:
-			if self.easypost_id:  # Parcel exists on easypost and is requested to be tracked. Request updates from API.
-				api_data = EasyPostAPI(carrier=self.carrier).retrieve_package_data(self.easypost_id)
-			else:  # Parcel don't exist on easypost and is requested to be tracked. We create a new one and attach it.
-				api_data = EasyPostAPI(carrier=self.carrier).create_package(self.tracking_number)
+			if self.easypost_id:  # Parcel exists on easypost. Request updates from API.
+				api_data = EasyPostAPI(self.carrier).retrieve_package_data(self.easypost_id)
+			else:  # Parcel don't exist on easypost. We create a new one and attach it.
+				api_data = EasyPostAPI(self.carrier).create_package(self.tracking_number)
 
 				self.easypost_id = api_data.id  # EasyPost ID. Only on creation
 		except EasyPostAPIError as e:
-			frappe.msgprint(msg=str(e), title='EasyPost API Error', raise_exception=False, indicator='red')
-			return  # Exit because this has failed(Create or Update)  # FIXME: don't throw because we need to save
+			frappe.msgprint(str(e), 'EasyPost API Error', raise_exception=False, indicator='red')
+			return
 		else:  # Data to parse that will be saved
 			self._parse_data_from_easypost(api_data)
 
-			frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
+			frappe.msgprint(_('Parcel has been updated from API.'), indicator='green', alert=True)
 
 	def _request_data_from_17track_api(self):
 		try:
@@ -220,45 +219,26 @@ class Parcel(Document):
 			self._parse_data_from_17track(api_data['track_info'])
 			frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
 
-	def parse_data_from_easypost_webhook(self, response):
-		""" Convert an Easypost webhook POST to an Easypost Object, then parses the data to the Document. """
-		easypost_api = EasyPostAPI(carrier=self.carrier)  # TODO
-		easypost_api.convert_from_webhook(response['result'])  # This convert and normalizes the data
-
-		self._parse_data_from_easypost(easypost_api.instance)
-
 	def _parse_data_from_easypost(self, data):
-		""" This parses all the data from an easypost Instance(with all the details) to our Parcel DocType. """
+		""" This parses all the data from an easypost Object(with all the details) to our Parcel DocType. """
 
-		self.carrier_status = data.status or 'Unknown'
-		self.carrier_status_detail = data.status_detail or 'Unknown'
-
-		self.signed_by = data.signed_by or None
-
+		self.signed_by = data.signed_by
+		self.carrier_status = data.status
+		self.carrier_status_detail = data.status_detail
 		self.carrier_est_weight = data.weight_in_pounds
 		self.carrier_est_delivery = data.naive_est_delivery_date
+		self.carrier_last_detail = data.latest_event
 
 		# If parcel is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
 		if data.status == 'Delivered' or data.status_detail == 'Arrived At Destination':
-			self.carrier_real_delivery = EasyPostAPI.naive_dt_to_local_dt(data.tracking_details[-1].datetime, EasyPostAPI.carriers_using_utc.get(self.carrier, False))  # FIXME: Improve this.
+			self.carrier_real_delivery = EasyPostAPI.naive_dt_to_local_dt(
+				data.tracking_details[-1].datetime, EasyPostAPI.carriers_using_utc.get(self.carrier, False)
+			)  # FIXME: Improve this.
 			self.change_status('Awaiting Confirmation')
 		elif data.status == 'Return To Sender' or data.status_detail == 'Return':
 			self.change_status('Returned to Sender')
 		else:  # TODO: Change the status when the carrier status: failure, cancelled, error
 			self.change_status('Awaiting Receipt')
-
-		if data.tracking_details:
-			last_detail = data.tracking_details[-1]
-
-			self.carrier_last_detail = "<b>{status}</b> <br><br> {detail} <br><br> {location}".format(
-				status=last_detail.message,
-				detail=last_detail.description or 'Without Description',
-				location="{city}, {state}, {zip}".format(
-					city=last_detail.tracking_location.city or '',
-					state=last_detail.tracking_location.state or '',
-					zip=last_detail.tracking_location.zip or ''
-				)
-			)
 
 	def _parse_data_from_17track(self, data):
 		""" Parse data """
@@ -286,3 +266,4 @@ class Parcel(Document):
 			self.change_status('Awaiting Confirmation')
 		else:
 			self.change_status('Awaiting Receipt')
+# 294 FIXME: Optimize and then Delete
