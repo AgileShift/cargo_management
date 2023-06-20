@@ -117,6 +117,7 @@ def easypost_webhook(**kwargs):
 	kwargs.pop('cmd')  # Remove extra data added by Frappe
 	frappe.session.user = 'EasyPost API'  # Quick Hack. Very useful
 
+	reference_name = kwargs.get('result', {}).get('tracking_code', None)  # FIXME: We haven't validated the webhook data
 	try:
 		data = easypost.util.validate_webhook(
 			event_body=json.dumps(kwargs, separators=(",", ":")).encode(),  # frappe.as_json() adds params and wont work
@@ -124,14 +125,17 @@ def easypost_webhook(**kwargs):
 		)
 
 		if data['description'] != 'tracker.updated':
-			return 'Not for update'
+			return 'Not a Tracker Update'
 
-		parcel = frappe.get_doc('Parcel', data['result']['tracking_code'])
+		parcel = frappe.get_doc('Parcel', data['result']['tracking_code'])  # Search Parcel using 'name' only
+	except KeyError as e:
+		frappe.log_error('EasyPost Webhook: KeyError {}'.format(e), reference_doctype='Parcel', reference_name=reference_name)
+		return 'KeyError: {}'.format(e)
 	except easypost.errors.SignatureVerificationError as e:
-		frappe.log_error('EasyPost Webhook: {}'.format(e), reference_doctype='Parcel', reference_name=kwargs['result']['tracking_code'])
+		frappe.log_error('EasyPost Webhook: {}'.format(e), reference_doctype='Parcel', reference_name=reference_name)
 		return 'HMAC Error: {}'.format(e)
 	except frappe.DoesNotExistError as e:
-		frappe.log_error('EasyPost Webhook: {}'.format(e), reference_doctype='Parcel', reference_name=kwargs['result']['tracking_code'])
+		frappe.log_error('EasyPost Webhook: {}'.format(e), reference_doctype='Parcel', reference_name=reference_name)
 		return '{}'.format(e)
 	else:
 		data = EasyPostAPI(carrier=parcel.carrier).convert_from_webhook(response=data['result'])
