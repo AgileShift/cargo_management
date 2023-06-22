@@ -1,5 +1,5 @@
 frappe.listview_settings['Parcel'] = {
-	add_fields: ['carrier'],
+	add_fields: ['status', 'carrier'],
 	filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],
 
 	onload(listview) {

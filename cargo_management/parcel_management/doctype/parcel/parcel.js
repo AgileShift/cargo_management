@@ -36,8 +36,8 @@ frappe.ui.form.on('Parcel', {
 
 		frm.page.indicator.parent().append(cargo_management.transportation_indicator(frm.doc.transportation)); // Add Extra Indicator
 
-		frm.events.show_explained_status(frm); // Show Explained Status as Intro Message
-		frm.events.build_custom_buttons(frm);  // Adding Custom buttons
+		frm.events.show_explained_status(frm); // Show 'Explained Status' as Intro Message
+		frm.events.build_custom_actions(frm);  // Adding custom buttons
 	},
 
 	tracking_number(frm) {
@@ -63,7 +63,7 @@ frappe.ui.form.on('Parcel', {
         frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
     },
 
-    build_custom_buttons(frm) {
+    build_custom_actions(frm) {
         const carriers_settings = cargo_management.load_carrier_settings(frm.doc.carrier);
 
         if (carriers_settings.api) {

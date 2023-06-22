@@ -14,7 +14,7 @@
   "column_break_1",
   "customer",
   "customer_name",
-  "column_break_9",
+  "column_break_2",
   "transportation",
   "status",
   "substatus",
@@ -24,17 +24,17 @@
   "carrier_est_delivery",
   "carrier_real_delivery",
   "carrier_est_weight",
-  "column_break_2",
+  "column_break_3",
   "carrier_status",
   "carrier_status_detail",
   "signed_by",
-  "section_break_17",
+  "section_break_1",
   "carrier_last_detail",
   "content_section",
   "content",
   "totals_section",
   "shipping_amount",
-  "column_break_22",
+  "column_break_4",
   "total",
   "links_section",
   "warehouse_receipt",
@@ -42,7 +42,7 @@
   "extra_info_tab",
   "shipper",
   "notes",
-  "column_break_21",
+  "column_break_5",
   "order_number",
   "signature",
   "easypost_id",
@@ -73,9 +73,7 @@
    "search_index": 1
   },
   {
-   "allow_in_quick_entry": 1,
    "bold": 1,
-   "columns": 3,
    "depends_on": "customer",
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
@@ -95,7 +93,7 @@
    "fieldtype": "Select",
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nLaserShip\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
+   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
    "reqd": 1,
    "search_index": 1
   },
@@ -124,7 +122,7 @@
    "label": "Additional Data from Carrier"
   },
   {
-   "description": "Estimated delivery date provided by the carrier (if available).",
+   "description": "Estimated delivery date provided by the carrier.",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
    "label": "Carrier estimated delivery date",
@@ -132,7 +130,7 @@
   },
   {
    "bold": 1,
-   "description": "Delivery date time (timezone aware) provided by the carrier (if available).",
+   "description": "Delivery date time (timezone aware).",
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
    "in_list_view": 1,
@@ -141,29 +139,35 @@
    "read_only": 1
   },
   {
-   "description": "Estimated weight of the package as measured by the carrier (if available).",
+   "bold": 1,
+   "depends_on": "eval: doc.carrier_est_weight > 0.00;",
+   "description": "Estimated weight of the package as measured by the carrier.",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "label": "Carrier estimated weight (in pounds)",
    "non_negative": 1,
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval: !doc.__islocal",
-   "description": "The current status of the package provided by the carrier (if available)",
+   "bold": 1,
+   "depends_on": "eval: !doc.__islocal;",
+   "description": "The current status of the package.",
    "fieldname": "carrier_status",
    "fieldtype": "Select",
    "in_standard_filter": 1,
    "label": "Carrier status",
-   "options": "Unknown\nPre Transit\nIn Transit\nOut For Delivery\nDelivered\nAvailable For Pickup\nReturn To Sender\nFailure\nCancelled\nError",
+   "options": "Unknown\nPre Transit\nIn Transit\nOut For Delivery\nAvailable For Pickup\nDelivered\nReturn To Sender\nFailure\nCancelled\nError",
    "read_only": 1,
    "search_index": 1
   },
   {
+   "bold": 1,
+   "description": "Additional details about the current status.",
    "fieldname": "carrier_status_detail",
    "fieldtype": "Data",
    "label": "Carrier status detail",
@@ -171,16 +175,11 @@
   },
   {
    "bold": 1,
-   "columns": 1,
-   "description": "The name of the person who signed for the package (if available).",
+   "description": "The name of the person who signed for the package.",
    "fieldname": "signed_by",
    "fieldtype": "Data",
    "label": "Signed by",
    "read_only": 1
-  },
-  {
-   "fieldname": "section_break_17",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "carrier_last_detail",
@@ -199,10 +198,6 @@
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes"
-  },
-  {
-   "fieldname": "column_break_21",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "order_number",
@@ -246,10 +241,6 @@
    "print_hide": 1,
    "report_hide": 1,
    "unique": 1
-  },
-  {
-   "fieldname": "column_break_22",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "shipping_amount",
@@ -302,10 +293,6 @@
    "label": "Consolidated Tracking Numbers"
   },
   {
-   "fieldname": "column_break_9",
-   "fieldtype": "Column Break"
-  },
-  {
    "allow_in_quick_entry": 1,
    "bold": 1,
    "collapsible": 1,
@@ -355,6 +342,22 @@
    "fieldname": "extra_info_tab",
    "fieldtype": "Tab Break",
    "label": "Additional Information"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -390,7 +393,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-05-31 12:08:16.233230",
+ "modified": "2023-06-22 14:36:04.184202",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
