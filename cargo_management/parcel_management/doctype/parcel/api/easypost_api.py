@@ -18,59 +18,54 @@ class EasyPostAPI:
 
 	# The Dict Keys are the actual String representation for Users, and the Dict Values are the carrier code for the API
 	# See more: https://www.easypost.com/docs/api#carrier-tracking-strings
-	carrier_codes = {
+	CARRIER_CODES: dict = {
 		'DHL': 'DHLExpress',
 		'SF Express': 'SFExpress',
-		'LaserShip': 'LaserShipV2'
 	}
 
 	# They Plan to return normalized dates:
 	# https://www.easypost.com/does-your-api-return-time-according-to-the-package-destinations-time-zone
 	# https://www.easypost.com/why-are-there-time-zone-discrepancies-on-trackers
-	carriers_using_utc = {
+	CARRIER_USING_UTC: dict = {
 		'FedEx': True
 	}
 
-	def __init__(self, carrier):
+	def __init__(self, carrier: str) -> None:
 		self.data = {}
-		self.carrier = self.carrier_codes.get(carrier, carrier)
-		self.carrier_uses_utc = self.carriers_using_utc.get(carrier, False)
+		self.carrier = self.CARRIER_CODES.get(carrier, carrier)
+		self.carrier_uses_utc = self.CARRIER_USING_UTC.get(carrier, False)
 		self.client = easypost.EasyPostClient(api_key=frappe.conf['easypost_api_key'])  # New EasyPost Client
 
-	def create_package(self, tracking_number):
+	def create_package(self, tracking_number: str) -> dict:
 		""" Create a Tracking on Easypost API """
-		self.data = self.client.tracker.create(tracking_code=tracking_number, carrier=self.carrier)
-		return self._normalize_data()
+		easypost_obj = self.client.tracker.create(tracking_code=tracking_number, carrier=self.carrier)
+		return self._build_parcel_obj(easypost_obj)
 
-	def retrieve_package_data(self, easypost_id):
+	def retrieve_package_data(self, easypost_id: str) -> dict:
 		""" Retrieve data from Easypost using the ID provided. """
-		self.data = self.client.tracker.retrieve(id=easypost_id)
-		return self._normalize_data()
+		easypost_obj = self.client.tracker.retrieve(id=easypost_id)
+		return self._build_parcel_obj(easypost_obj)
 
-	def convert_from_webhook(self, response):
+	def convert_from_webhook(self, response) -> dict:
 		""" Convert a dict to Easypost Object. """
-		self.data = easypost.util.convert_to_easypost_object(response=response)
-		return self._normalize_data()
+		easypost_obj = easypost.util.convert_to_easypost_object(response=response)
+		return self._build_parcel_obj(easypost_obj)
 
-	def _normalize_data(self):
-		""" This normalizes the data will correct values """
-		self.data._unsaved_values = set()  # FIXME: EasyPost 8.0.0 is giving some sort of errors if this is not set.
+	def _build_parcel_obj(self, easypost_obj) -> dict:
+		""" Build our Object(Parcel Document) from Easypost Data. """
+		self.data: dict = {
+			'id': easypost_obj.id,
+			'signed_by': easypost_obj.signed_by,
+			'carrier_status': frappe.unscrub(easypost_obj.status),                # Normalize Status
+			'carrier_status_detail': frappe.unscrub(easypost_obj.status_detail),  # Normalize Status
+			'carrier_est_weight': (easypost_obj.weight or 0.00) / 16.00,  # Weight comes in ounces, we convert to pounds
+			'carrier_est_delivery': self.naive_dt_to_local_dt(easypost_obj.est_delivery_date, self.carrier_uses_utc)  # Some Carriers give dates in UTC others no
+		}
 
-		# Normalize Status
-		self.data.status = frappe.unscrub(self.data.status)
-		self.data.status_detail = frappe.unscrub(self.data.status_detail)
+		if easypost_obj.tracking_details:  # Build the latest event detail
+			last_event = easypost_obj.tracking_details[-1]
 
-		# In easypost weight comes in ounces, we convert to pound.
-		self.data.weight_in_pounds = self.data.weight / 16 if self.data.weight else 0.00
-
-		# Normalize Dates. Some Carriers send the data in UTC others no. FIXME: EasyPost now gives us: est_delivery_date_local
-		self.data.naive_est_delivery_date = self.naive_dt_to_local_dt(self.data.est_delivery_date, self.carrier_uses_utc)
-
-		# Build the latest event detail
-		if self.data.tracking_details:
-			last_event = self.data.tracking_details[-1]
-
-			self.data.latest_event = "<b>{status}</b><br><br>{desc}<br><br>{location}".format(
+			self.data['carrier_last_detail'] = "<b>{status}</b><br><br>{desc}<br><br>{location}".format(
 				status=last_event.message, desc=last_event.description or 'Without Description',
 				location="{city} {state} {zip}".format(
 					city=last_event.tracking_location.city or '',
@@ -79,10 +74,14 @@ class EasyPostAPI:
 				)
 			)
 
+			# If parcel is Delivered we get the 'real_delivery_date' from the Latest Event datetime
+			if self.data['carrier_status'] == 'Delivered' or self.data['carrier_status_detail'] == 'Arrived At Destination':
+				self.data['carrier_real_delivery'] = self.naive_dt_to_local_dt(last_event.datetime, self.carrier_uses_utc)
+
 		return self.data
 
 	@staticmethod
-	def naive_dt_to_local_dt(dt_str, uses_utc: bool):
+	def naive_dt_to_local_dt(dt_str: str, uses_utc: bool):
 		"""Convert string datetime to unaware naive datetime.
 
 		@param dt_str: EasyPost datetime format: 2020-06-015T06:00:00Z or 2020-06-015T06:00:00+00:00
@@ -101,7 +100,7 @@ class EasyPostAPI:
 		# Parse datetime from string; At this moment we don't know if it's in UTC or local.
 		naive_datetime = datetime.datetime.strptime(dt_str, '%Y-%m-%dT%H:%M:%S%z')
 
-		if not uses_utc:  # API already give us local datetime. So no need to convert to local from UTC
+		if not uses_utc:  # API already give us local datetime. So no need to convert from UTC to local
 			return naive_datetime.replace(tzinfo=None)
 
 		# TODO: Make this conversion warehouse location aware!. For now we're pretending only Miami is local timezone
@@ -117,7 +116,6 @@ def easypost_webhook(**kwargs):
 	kwargs.pop('cmd')  # Remove extra data added by Frappe
 	frappe.session.user = 'EasyPost API'  # Quick Hack. Very useful
 
-	reference_name = kwargs.get('result', {}).get('tracking_code', None)  # FIXME: We haven't validated the webhook data
 	try:
 		data = easypost.util.validate_webhook(
 			event_body=json.dumps(kwargs, separators=(",", ":")).encode(),  # frappe.as_json() adds params and wont work
@@ -125,18 +123,16 @@ def easypost_webhook(**kwargs):
 		)
 
 		if data['description'] != 'tracker.updated':
-			return 'Not a Tracker Update'
+			return 'Not a Tracker Update Webhook Event'
 
-		parcel = frappe.get_doc('Parcel', data['result']['tracking_code'])  # Search Parcel using 'name' only
-	except KeyError as e:
-		frappe.log_error('EasyPost Webhook: KeyError {}'.format(e), reference_doctype='Parcel', reference_name=reference_name)
-		return 'KeyError: {}'.format(e)
-	except easypost.errors.SignatureVerificationError as e:
-		frappe.log_error('EasyPost Webhook: {}'.format(e), reference_doctype='Parcel', reference_name=reference_name)
-		return 'HMAC Error: {}'.format(e)
-	except frappe.DoesNotExistError as e:
-		frappe.log_error('EasyPost Webhook: {}'.format(e), reference_doctype='Parcel', reference_name=reference_name)
-		return '{}'.format(e)
+		parcel = frappe.get_doc('Parcel', data['result']['status'])  # Search Parcel using 'name' only
+	except (KeyError, easypost.errors.SignatureVerificationError, frappe.DoesNotExistError) as e:
+		error_detail = '{} -> {}'.format(type(e).__name__, e)
+		frappe.log_error(
+			'EasyPost Webhook: {}'.format(error_detail),
+			reference_doctype='Parcel', reference_name=kwargs.get('result', {}).get('tracking_code', None)
+		)
+		return error_detail
 	else:
 		data = EasyPostAPI(carrier=parcel.carrier).convert_from_webhook(response=data['result'])
 
@@ -146,3 +142,4 @@ def easypost_webhook(**kwargs):
 		parcel.save(ignore_permissions=True)
 
 		return 'Parcel {} updated.'.format(parcel.tracking_number)
+# FIXME: 149(Production) -> 166(New Way) -> 150 Production Again -> 145 Best Producttion!

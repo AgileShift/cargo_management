@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 import requests
 
 import frappe
@@ -9,7 +11,7 @@ class _17TrackAPIError(Exception):
 	pass
 
 
-class _17TrackAPI:
+class API17Track:
 	""" 17Track methods to control class API and parse data. """
 	api_base = "https://api.17track.net/track/v2/"
 
@@ -20,24 +22,23 @@ class _17TrackAPI:
 		'FedEx': 100003,
 		'LaserShip': 100052,
 		'Cainiao': 190271,
-		'Yanwen': 190012
+		'Yanwen': 190012,
+		'YunExpress': 190008
 	}
 
 	def __init__(self):
+		self.data = {}
 		self.api_key = frappe.conf['17track_api_key']
 
 	def _build_request(self, endpoint, payload):
-		url = self.api_base + endpoint
-
-		response = requests.request('POST', url=url, json=payload, headers={
+		self.data = requests.request('POST', url=self.api_base + endpoint, json=payload, headers={
 			"content-type": "application/json",
 			"17token": self.api_key
-		}).json()
+		}).json(object_hook=lambda d: SimpleNamespace(**d)).data
 
-		if response['data']['rejected']:
-			raise Exception(response['data']['rejected'][0]['error'])
-
-
+		if self.data.rejected:
+			if self.data.rejected[0].error.code == -18019901:
+				raise _17TrackAPIError(self.data.rejected[0]['error']['message'])
 
 	def register_package(self, tracking_number, carrier):
 		""" Create a Tracking on 17Track """
