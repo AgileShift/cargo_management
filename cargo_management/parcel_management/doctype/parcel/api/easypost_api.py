@@ -7,12 +7,6 @@ import pytz
 import frappe
 
 
-class EasyPostAPIError(easypost.errors.EasyPostError):
-	""" Child Class to personalize API Error """
-	# https://www.easypost.com/errors-guide/python
-	pass
-
-
 class EasyPostAPI:
 	""" Easypost methods to control class API and parse data. """
 
@@ -23,9 +17,8 @@ class EasyPostAPI:
 		'SF Express': 'SFExpress',
 	}
 
-	# They Plan to return normalized dates:
 	# https://www.easypost.com/does-your-api-return-time-according-to-the-package-destinations-time-zone
-	# https://www.easypost.com/why-are-there-time-zone-discrepancies-on-trackers
+	# https://support.easypost.com/hc/en-us/articles/360044353091#h_5ee616bd-5e42-4090-a6b3-44f8a54190cf
 	CARRIER_USING_UTC: dict = {
 		'FedEx': True
 	}
@@ -54,7 +47,7 @@ class EasyPostAPI:
 	def _build_parcel_obj(self, easypost_obj) -> dict:
 		""" Build our Object(Parcel Document) from Easypost Data. """
 		self.data: dict = {
-			'id': easypost_obj.id,
+			'easypost_id': easypost_obj.id,
 			'signed_by': easypost_obj.signed_by,
 			'carrier_status': frappe.unscrub(easypost_obj.status),                # Normalize Status
 			'carrier_status_detail': frappe.unscrub(easypost_obj.status_detail),  # Normalize Status
@@ -140,7 +133,8 @@ def easypost_webhook(**kwargs):
 
 		parcel._parse_data_from_easypost(data)  # FIXME: avoid using a private method
 
-		parcel.flags.ignore_validate = True  # Set because doc will be saved from webhook data. No validations needed.
+		# Set because doc will be saved from webhook data. No validations needed.
+		parcel.flags.ignore_validate = parcel.flags.ignore_mandatory = parcel.flags.ignore_links = True
 		parcel.save(ignore_permissions=True)
 
 		return 'Parcel {} updated.'.format(parcel.tracking_number)
