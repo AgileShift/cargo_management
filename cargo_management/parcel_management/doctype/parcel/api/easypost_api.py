@@ -59,7 +59,9 @@ class EasyPostAPI:
 			'carrier_status': frappe.unscrub(easypost_obj.status),                # Normalize Status
 			'carrier_status_detail': frappe.unscrub(easypost_obj.status_detail),  # Normalize Status
 			'carrier_est_weight': (easypost_obj.weight or 0.00) / 16.00,  # Weight comes in ounces, we convert to pounds
-			'carrier_est_delivery': self.naive_dt_to_local_dt(easypost_obj.est_delivery_date, self.carrier_uses_utc)  # Some Carriers give dates in UTC others no
+
+			# Some Carriers give dates in UTC others no
+			'carrier_est_delivery': self.naive_dt_to_local_dt(easypost_obj.est_delivery_date, self.carrier_uses_utc)
 		}
 
 		if easypost_obj.tracking_details:  # Build the latest event detail
@@ -131,7 +133,7 @@ def easypost_webhook(**kwargs):
 		frappe.log_error(
 			'EasyPost Webhook: {}'.format(error_detail),
 			reference_doctype='Parcel', reference_name=kwargs.get('result', {}).get('tracking_code', None)
-		)
+		)  # FIXME: What about other exceptions?: Will have to test it. Do we really need to handle them differently?
 		return error_detail
 	else:
 		data = EasyPostAPI(carrier=parcel.carrier).convert_from_webhook(response=data['result'])
@@ -142,4 +144,4 @@ def easypost_webhook(**kwargs):
 		parcel.save(ignore_permissions=True)
 
 		return 'Parcel {} updated.'.format(parcel.tracking_number)
-# FIXME: 149(Production) -> 166(New Way) -> 150 Production Again -> 145 Best Producttion!
+# FIXME: 149(Production) -> 166(New Way) -> 150 Production Again -> 145 Best Production!
