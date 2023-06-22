@@ -32,10 +32,10 @@
       "default_carriers": ["EVEREST"],
       "tracking_url": "https://www.fedex.com/apps/fedextrack/?trackingnumber="
     },
-    "LaserShip": {
+    "OnTrac": {
       "api": "17Track",
       "default_carriers": ["EVEREST"],
-      "tracking_url": "https://lasership.com/track.php?track_number_input="
+      "tracking_url": "https://www.ontrac.com/tracking/?number="
     },
     "Cainiao": {
       "api": "17Track",
@@ -43,18 +43,22 @@
       "tracking_url": "https://global.cainiao.com/detail.htm?mailNoList="
     },
     "SF Express": {
+      "api": "17Track",
       "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.sf-express.com/cn/en/dynamic_function/waybill/#search/bill-number/"
     },
     "Yanwen": {
+      "api": "17Track",
       "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://track.yw56.com.cn/en/querydel?nums="
     },
     "YunExpress": {
+      "api": "17Track",
       "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.yuntrack.com/parcelTracking?id="
     },
     "SunYou": {
+      "api": "17Track",
       "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.sypost.net/search?orderNo="
     }
