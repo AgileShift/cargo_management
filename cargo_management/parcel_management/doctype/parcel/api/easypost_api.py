@@ -66,13 +66,10 @@ class EasyPostAPI:
 		if easypost_obj.tracking_details:  # Build the latest event detail
 			last_event = easypost_obj.tracking_details[-1]
 
-			self.data['carrier_last_detail'] = "<b>{status}</b><br><br>{desc}<br><br>{location}".format(
-				status=last_event.message, desc=last_event.description or 'Without Description',
-				location="{city} {state} {zip}".format(
-					city=last_event.tracking_location.city or '',
-					state=last_event.tracking_location.state or '',
-					zip=last_event.tracking_location.zip or ''
-				)
+			self.data['carrier_last_detail'] = (
+				f"<b>{last_event.message}</b><br><br>"
+				f"{last_event.description or 'Without Description'}<br><br>"
+				f"{last_event.tracking_location.city or ''} {last_event.tracking_location.state or ''} {last_event.tracking_location.zip or ''}"
 			)
 
 			# If parcel is Delivered we get the 'real_delivery_date' from the Latest Event Timestamp
@@ -100,7 +97,7 @@ def easypost_webhook(**kwargs):
 		parcel = frappe.get_doc('Parcel', data['result']['tracking_code'])  # Search Parcel using 'name' only
 	except (KeyError, easypost.errors.SignatureVerificationError, frappe.DoesNotExistError) as e:
 		frappe.log_error(
-			'EasyPost Webhook: {} -> {}'.format(type(e).__name__, e),
+			f"EasyPost Webhook: {type(e).__name__} -> {e}",
 			reference_doctype='Parcel', reference_name=kwargs.get('result', {}).get('tracking_code', None)
 		)
 
@@ -114,4 +111,5 @@ def easypost_webhook(**kwargs):
 		parcel.flags.ignore_validate = parcel.flags.ignore_mandatory = parcel.flags.ignore_links = True
 		parcel.save(ignore_permissions=True)
 
-		return 'Parcel {} updated.'.format(parcel.tracking_number)
+		return f"Parcel {parcel.tracking_number} updated."
+#117
