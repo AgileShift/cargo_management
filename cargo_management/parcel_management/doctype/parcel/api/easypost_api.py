@@ -1,5 +1,5 @@
 import json
-from datetime import time, datetime as dt
+from datetime import datetime as dt
 
 import easypost
 from easypost.errors import SignatureVerificationError
@@ -50,9 +50,10 @@ class EasyPostAPI:
 			'signed_by': easypost_obj.signed_by,
 			'carrier_status': frappe.unscrub(easypost_obj.status),                # Normalize Status
 			'carrier_status_detail': frappe.unscrub(easypost_obj.status_detail),  # Normalize Status
-			'carrier_est_weight': (easypost_obj.weight or 0.00) / 16.00,  # Weight comes in ounces, we convert to pounds
+			'carrier_est_weight': (easypost_obj.weight or 0.00) / 16.00,  # Weight comes in Ounces, we convert to Pounds
 		}
 
+		# Searching for the carrier_est_delivery. If it comes in local time or comes generalized
 		if (detail := easypost_obj.carrier_detail) and (
 			(date_local := detail.est_delivery_date_local) and (time_local := detail.est_delivery_time_local)
 		):
@@ -60,21 +61,21 @@ class EasyPostAPI:
 		elif easypost_obj.est_delivery_date:
 			self.data['carrier_est_delivery'] = dt.fromisoformat(easypost_obj.est_delivery_date).replace(tzinfo=None)
 
-			if self.data['carrier_est_delivery'].time() == time():  # if its midnight, change it to end of the day!
+			if self.data['carrier_est_delivery'].time() == dt.min.time():  # If midnight, set to end of the day!
 				self.data['carrier_est_delivery'] = self.data['carrier_est_delivery'].replace(hour=23, minute=59)
 
-		if easypost_obj.tracking_details:  # Build the latest event detail
-			last_event = easypost_obj.tracking_details[-1]
+		if easypost_obj.tracking_details:  # Build the latest event detail. If 'Delivered', get the real delivery date
+			latest = easypost_obj.tracking_details[-1]
 
 			self.data['carrier_last_detail'] = (
-				f"<b>{last_event.message}</b><br><br>"
-				f"{last_event.description or 'Without Description'}<br><br>"
-				f"{last_event.tracking_location.city or ''} {last_event.tracking_location.state or ''} {last_event.tracking_location.zip or ''}"
+				f"<b>{latest.message}</b><br><br>"
+				f"{latest.description or 'Without Description'}<br><br>"
+				f"{latest.tracking_location.city or ''} {latest.tracking_location.state or ''} {latest.tracking_location.zip or ''}"
 			)
 
 			# If parcel is Delivered we get the 'real_delivery_date' from the Latest Event Timestamp
-			if self.data['carrier_status'] == 'Delivered' or self.data['carrier_status_detail'] == 'Arrived At Destination':
-				self.data['carrier_real_delivery'] = dt.fromisoformat(last_event.datetime).replace(tzinfo=None)
+			if self.data['carrier_status'] == 'Delivered':
+				self.data['carrier_real_delivery'] = dt.fromisoformat(latest.datetime).replace(tzinfo=None)
 
 		return self.data
 
@@ -112,4 +113,3 @@ def easypost_webhook(**kwargs):
 		parcel.save(ignore_permissions=True)
 
 		return f"Parcel {parcel.tracking_number} updated."
-#117
