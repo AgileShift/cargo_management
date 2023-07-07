@@ -1,19 +1,30 @@
-import datetime
+from datetime import datetime
+
+from easypost.errors.api import ApiError as EasyPostAPIError
 
 import frappe
-from cargo_management.parcel_management.doctype.parcel.api._17track_api import _17TrackAPI
-from cargo_management.parcel_management.doctype.parcel.api.easypost_api import EasyPostAPI, EasyPostAPIError
 from frappe import _
 from frappe.model.document import Document
+from .api.api_17track import API17Track
+from .api.easypost_api import EasyPostAPI
 
 
 class Parcel(Document):
-	"""  All this are Frappe Core Flags:
+	"""  All these are Frappe Core Flags:
 		'ignore_links':       avoid: _validate_links()
 		'ignore_validate':    avoid: validate() and before_save()
 		'ignore_mandatory':   avoid: _validate_mandatory()
 		'ignore_permissions': avoid: will not check for permissions globally.
 	"""
+	# TODO: Add Type Hints
+	status: str
+	carrier: str
+	signed_by: str
+	cargo_shipment: str  # FIXME: This can be deleted?
+	tracking_number: str
+	carrier_status_detail: str
+	carrier_est_delivery: datetime
+	carrier_real_delivery: datetime
 
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behaviour. Useful when called from outside a form. """
@@ -125,7 +136,7 @@ class Parcel(Document):
 				message.append('El paquete se encuentra siendo verificado de forma extraordinaria.')
 		elif self.status == 'Awaiting Departure':
 			# TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
-			cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
+			#cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
 			# TODO: What if we dont have real delivery date. Or signature
 			message = [
@@ -140,6 +151,9 @@ class Parcel(Document):
 
 		elif self.status == 'In Transit':
 			# TODO: Add Departure date and est arrival date
+			if not self.cargo_shipment:
+				return {'message': ['No hay envio de carga'], color: 'red'}
+
 			cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
 			color = 'purple'
@@ -176,94 +190,54 @@ class Parcel(Document):
 		""" This selects the corresponding API to request data. """
 		carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'].get(self.carrier, {}).get('api')
 
+		print('TRY: MATCHING THE CARRIER_API')
 		match carrier_api:
 			case 'EasyPost':
-				self._request_data_from_easypost_api()
+				api_data = self._request_data_from_easypost_api()
 			case '17Track':
-				self._request_data_from_17track_api()
+				api_data = self._request_data_from_17track_api()
 			case _:
 				frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
+				return
+
+		print('ELSE: UPDATING FROM API DATA')
+		self.update_from_api_data(api_data)  # Data from API that will be saved
+		frappe.msgprint(_('Parcel has been updated from {} API.').format(carrier_api), indicator='green', alert=True)
+
+		print('OUTSIDE TRY: Saliendo del TRY')
 
 	def _request_data_from_easypost_api(self):
 		""" Handles POST or GET to the Easypost API. Also parses the data. """
 		try:
-			if self.easypost_id:  # Parcel exists on easypost. Request updates from API.
-				api_data = EasyPostAPI(self.carrier).retrieve_package_data(self.easypost_id)
-			else:  # Parcel don't exist on easypost. We create a new one and attach it.
-				api_data = EasyPostAPI(self.carrier).create_package(self.tracking_number)
-
-				self.easypost_id = api_data.id  # EasyPost ID. Only on creation
+			if self.easypost_id:  # Parcel exists on Database. Request updates from API.
+				return EasyPostAPI(self.carrier).retrieve_package_data(self.easypost_id)
+			else:  # Parcel don't exist on System or EasyPost. We create a new one and attach it.
+				return EasyPostAPI(self.carrier).register_package(self.tracking_number)
 		except EasyPostAPIError as e:
-			frappe.msgprint(str(e), 'EasyPost API Error', raise_exception=False, indicator='red')
-			return
-		else:  # Data to parse that will be saved
-			self._parse_data_from_easypost(api_data)
+			print('EXCEPT: Catching inside the requestor')
+			frappe.msgprint(msg=str(e.__dict__), title='EasyPost API Error', raise_exception=False, indicator='red')
 
-			frappe.msgprint(_('Parcel has been updated from API.'), indicator='green', alert=True)
-
+	# FIXME: 6 - 10 - 81
 	def _request_data_from_17track_api(self):
 		try:
 			if self.is_new():
-				api_data = _17TrackAPI().register_package(self.tracking_number, self.carrier)
+				return API17Track(self.carrier).register_package(self.tracking_number)
 			else:
-				api_data = _17TrackAPI().retrieve_package_data(self.tracking_number)
+				return API17Track(self.carrier).register_package(self.tracking_number)
 		except Exception as e:
-			if e.args[0]['code'] == -18019902:  # Has not been registered on 17track
-				api_data = _17TrackAPI().register_package(self.tracking_number, self.carrier)
-				self._request_data_from_17track_api()
-			elif e.args[0]['code'] == -18019901:  # has been registered on 17track but not created on our System
-				# FIXME: HotFix
-				frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
-			return
-		else:
-			self._parse_data_from_17track(api_data['track_info'])
-			frappe.msgprint(msg=_('Parcel has been updated from API.'), alert=True)
+			frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
 
-	def _parse_data_from_easypost(self, data):
-		""" This parses all the data from an easypost Object(with all the details) to our Parcel DocType. """
+	def update_from_api_data(self, api_data: dict) -> None:
+		""" This updates the parcel with the data from the API. """
+		print(api_data)
+		self.__dict__.update(api_data)  # Updating all the DICT to the Parcel DocType
 
-		self.signed_by = data.signed_by
-		self.carrier_status = data.status
-		self.carrier_status_detail = data.status_detail
-		self.carrier_est_weight = data.weight_in_pounds
-		self.carrier_est_delivery = data.naive_est_delivery_date
-		self.carrier_last_detail = data.latest_event
-
-		# If parcel is delivered we get the last update details to lookup for the delivery datetime(real delivery date)
-		if data.status == 'Delivered' or data.status_detail == 'Arrived At Destination':
-			self.carrier_real_delivery = EasyPostAPI.naive_dt_to_local_dt(
-				data.tracking_details[-1].datetime, EasyPostAPI.carriers_using_utc.get(self.carrier, False)
-			)  # FIXME: Improve this.
+		if api_data['carrier_status'] == 'Delivered':  # or api_data['carrier_status_detail'] == 'Arrived At Destination':
 			self.change_status('Awaiting Confirmation')
-		elif data.status == 'Return To Sender' or data.status_detail == 'Return':
+		elif api_data['carrier_status'] == 'Return To Sender' or self.carrier_status_detail == 'Return':
 			self.change_status('Returned to Sender')
 		else:  # TODO: Change the status when the carrier status: failure, cancelled, error
 			self.change_status('Awaiting Receipt')
 
-	def _parse_data_from_17track(self, data):
-		""" Parse data """
-		print(data)
-
-		if data['latest_status']['status'] == 'InfoReceived':
-			data['latest_status']['status'] = 'Pre Transit'
-		elif data['latest_status']['status'] == 'InTransit':
-			data['latest_status']['status'] = 'In Transit'
-		elif data['latest_status']['status'] == 'OutForDelivery':
-			data['latest_status']['status'] = 'Out For Delivery'
-
-		self.carrier_status = data['latest_status']['status']
-		self.carrier_status_detail = data['latest_status']['sub_status']
-
-		# self.signed_by ?
-
-		self.carrier_est_weight = float(data['misc_info']['weight_kg']) * 2.20 if data['misc_info']['weight_kg'] else 0.00  # FIXME: CHECK
-		# self.carrier_est_delivery = data.time_metrics.estimated_delivery_date
-
-		self.carrier_last_detail = data['latest_event']['description']
-
-		if data['latest_status']['status'] == 'Delivered':
-			self.carrier_real_delivery = datetime.datetime.strptime(data['latest_event']['time_iso'], '%Y-%m-%dT%H:%M:%S%z').replace(tzinfo=None)
-			self.change_status('Awaiting Confirmation')
-		else:
-			self.change_status('Awaiting Receipt')
-# 294 FIXME: Optimize and then Delete
+# 294(HOTFIX) -> 250(WORKING) FIXME: Better way to update the doc: create some core method that returns a Object that we can concat :D
+#248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
