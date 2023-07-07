@@ -223,7 +223,7 @@ class Parcel(Document):
 			if self.is_new():
 				return API17Track(self.carrier).register_package(self.tracking_number)
 			else:
-				return API17Track(self.carrier).register_package(self.tracking_number)
+				return API17Track(self.carrier).retrieve_package_data(self.tracking_number)
 		except Exception as e:
 			frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
 
