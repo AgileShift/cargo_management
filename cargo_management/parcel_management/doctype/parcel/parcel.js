@@ -85,9 +85,8 @@ frappe.ui.form.on('Parcel', {
             callback: (r) => {
                 // FIXME: "Not Saved" indicator cannot be changed.
                 console.log('Need to work in here. problems in v14');
-
-                frappe.model.sync(r.message);
-                frm.refresh();
+                //frappe.model.sync(r.message);
+                //frm.refresh();
             }
         });
     },
