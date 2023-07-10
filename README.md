@@ -31,21 +31,21 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 - [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud) - WORK on Progress
 
 ### List of Carriers Currently Supported:
-Last checked: 20 Jun 2023
+Last checked: 11 July 2023
 
-| Carrier    |   EasyPost   | 17Track |
-|:-----------|:------------:|:-------:|
-| Amazon     |              |   ☑️    |
-| USPS       |      ☑️      |   ☑️    |
-| UPS        |      ☑️      |   ☑️    |
-| DHL        |      ☑️      |   ☑️    |
-| FedEx      | With Account |   ☑️    |
-| OnTrac     | With Account |   ☑️    |
-| Cainiao    |  Deprecated  |   ☑️    |
-| SF Express | With Account |   ☑️    |
-| Yanwen     |      ☑️      |   ☑️    |
-| YunExpress |  Deprecated  |   ☑️    |
-| SunYou     |              |   ☑️    |
+| Carrier    |    EasyPost    | 17Track |
+|:-----------|:--------------:|:-------:|
+| Amazon     |       ❌️       |   ✅️    |
+| USPS       |       ✅️       |   ✅️    |
+| UPS        |       ✅️       |   ✅️    |
+| DHL        |       ✅️       |   ✅️    |
+| FedEx      | ❗️With Account |   ✅️    |
+| OnTrac     | ❗️With Account |   ✅️    |
+| SF Express | ❗️With Account |   ✅️    |
+| Yanwen     |   ⁉️ Limited   |   ✅️    |
+| Cainiao    | ❌️ Deprecated  |   ✅️    |
+| YunExpress | ❌️ Deprecated  |   ✅️    |
+| SunYou     |       ❌️       |   ✅️    |
 
 ---
 
