@@ -48,6 +48,9 @@ Last checked: 11 July 2023
 | SunYou     |       ❌️       |   ✅️    |
 
 ---
+✅
+
+:white_check_mark:
 
 ### Configuration of API Keys and Webhooks for EasyPost and 17Track
 
