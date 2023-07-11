@@ -95,7 +95,7 @@ def easypost_webhook(**kwargs):
 		if data['description'] != 'tracker.updated':
 			return 'Not a Tracker Update Webhook Event'
 
-		parcel = frappe.get_doc('Parcel', data['result']['tracking_code'])  # Search Parcel using 'name' only
+		parcel = frappe.get_doc('Parcel', {'tracking_number': data['result']['tracking_code']})  # Search Parcel
 	except (KeyError, easypost.errors.SignatureVerificationError, frappe.DoesNotExistError) as e:
 		frappe.log_error(
 			f"EasyPost Webhook: {type(e).__name__} -> {e}",
