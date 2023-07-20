@@ -125,8 +125,7 @@
    "description": "Estimated delivery date provided by the carrier.",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
-   "label": "Carrier estimated delivery date",
-   "mandatory_depends_on": "eval: doc.carrier == 'Amazon'"
+   "label": "Carrier estimated delivery date"
   },
   {
    "bold": 1,
@@ -393,7 +392,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-06-22 14:36:04.184202",
+ "modified": "2023-07-20 08:25:48.368782",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
