@@ -1,6 +1,6 @@
 frappe.listview_settings['Parcel'] = {
-	add_fields: ['status', 'carrier'],
-	filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],
+	add_fields: ['carrier', 'consolidated_tracking_numbers'],
+	filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],  // aka 'Active Parcels'
 
 	onload(listview) {
 		const {name: name_field, tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
@@ -44,25 +44,6 @@ frappe.listview_settings['Parcel'] = {
 
 			return args;
 		};
-
-		// Override to add a dropdown. If the 'show' function within the 'button' property is null or returns False it won't create the 'settings_button'
-		listview.get_meta_html = function (doc) {
-			let $html = $(frappe.views.ListView.prototype.get_meta_html.call(listview, doc)); // Calling his super for the html string value
-
-			const urls_html = cargo_management.load_carrier_settings(doc.carrier).urls.reduce((acc, url) => {
-				return acc + `<a class="dropdown-item" href="${url.url + doc.tracking_number}" target="_blank">${url.title}</a>`;
-			}, ''); // Loading the Carrier URLs then return a single string of items for the dropdown
-
-			// Find the parent element of 'settings_button' and 'assigned_to', then replace with our custom 'button'. Check the core function on list_view.js
-			$html.find('.hidden-md.hidden-xs').html(`
-				<div class="list-actions dropdown">
-					<a class="btn btn-default btn-xs dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${__('Carriers')}</a>
-					<div class="dropdown-menu dropdown-menu-right">${urls_html}</div>
-				</div>
-			`);
-
-			return $html.prop('outerHTML');
-		};
     },
 
 	// Unused: Light Blue. // TODO: Migrate to Document States? Maybe when frappe core starts using it.
@@ -82,6 +63,46 @@ frappe.listview_settings['Parcel'] = {
 		'Never Arrived': 'red',
 		'Returned to Sender': 'red',
 	}[doc.status], 'status,=,' + doc.status],
+
+	button: {
+		show: () => true,
+		get_label: () => __('Search'),
+		get_description: () => '',
+		action(doc) {
+			let fields = [...this.build_carrier_urls(__('Tracking Number'), doc.tracking_number, doc.carrier)];
+
+			if (doc.name !== doc.tracking_number) {
+				fields.unshift(...this.build_carrier_urls(__('Name'), doc.name));
+			}
+
+			if (doc.consolidated_tracking_numbers) {
+				doc.consolidated_tracking_numbers.split('\n').forEach((tracking_number) => {
+					fields.push(...this.build_carrier_urls(__('Consolidated'), tracking_number));
+				});
+			}
+
+			new frappe.ui.Dialog({animate: false, size: 'small', indicator: 'green', title: this.get_label, fields: fields}).show();
+		},
+		build_carrier_urls(section_label, lookup_field, carrier = null) {
+			carrier = carrier || cargo_management.find_carrier_by_tracking_number(lookup_field).carrier;
+
+			let fields = [{fieldtype: 'Section Break', label: `${section_label}(${carrier}): ${lookup_field}`}];
+			const urls = cargo_management.load_carrier_settings(carrier).urls;
+
+			urls.forEach((url, i) => {
+				fields.push({
+					fieldtype: 'Button', label: url.title, input_class: "btn-block btn-primary",  // FIXME: btn-default
+					click: () => window.open(url.url + lookup_field)
+				});
+
+				if (i < urls.length - 1) {
+					fields.push({fieldtype: 'Column Break'});
+				}
+			});
+
+			return fields;
+		}
+	},
 
 	formatters: {
 		transportation: (value) => cargo_management.transportation_formatter(value),
