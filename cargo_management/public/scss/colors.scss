@@ -1,20 +1,3 @@
-// frappe/public/scss/common/indicator.scss -> Duplicated Mixing
-@mixin indicator-color($color) {
-  &::before,
-  &::after {
-    background: var(--text-on-#{$color});
-  }
-}
-
-// HINT: In core, colors are set only for .indicator-pill Used in: Workspace(shortcut), List-View(row status field) and Form-View(status indicator))
-// This is for the List-View(row status indicator dot) shown in mobile, see: list_view.js -> get_indicator_dot()
-.indicator {
-  &.purple {
-    @include indicator-color('purple');
-  }
-}
-
-
 // frappe/public/scss/desk/form.scss -> Duplicated Mixing
 @mixin form-message-background($color) {
   background: var(--bg-#{$color});
@@ -23,12 +6,8 @@
 
 // This is for the "frm.layout.show_message()", see: frappe/form/layout.js -> show_message()
 .form-message {
-  &.light-blue {
-    @include form-message-background('light-blue');
-  }
-
   &.gray {
-    @include form-message-background('light-gray');
+    @include form-message-background('gray');
   }
 
   &.purple {
