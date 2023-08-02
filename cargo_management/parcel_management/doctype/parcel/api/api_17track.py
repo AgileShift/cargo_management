@@ -21,7 +21,8 @@ class API17Track:
 		'SF Express': 190766,  # or: 100012 for intl
 		'Yanwen': 190012,
 		'YunExpress': 190008,
-		'SunYou': 190072
+		'SunYou': 190072,
+		'Pitney Bowes': 100036,
 	}
 
 	# See List of status at: https://api.17track.net/en/doc?anchor=main-status-of-the-shipping-process&version=v2
@@ -71,12 +72,16 @@ class API17Track:
 		""" Register a Tracking on 17Track """
 		unique_tag = frappe.generate_hash(tracking_number, length=15)
 
-		return self._build_request('register', payload=[{
+		creation = self._build_request('register', payload=[{
 			"number": tracking_number,
 			"carrier": self.carrier,
 			"tag": unique_tag,  # CUSTOM: With this we know if the Parcel has been created on 17Track API
 			"auto_detection": False,  # So we avoid sending the carrier?
 		}])
+
+		# FIXME: QUICK HACK!, maybe will not work
+
+		return self.retrieve_package_data(tracking_number)  # Update the Parcel Data (Status, etc
 
 	def retrieve_package_data(self, tracking_number: str) -> dict:
 		""" Retrieve data from 17Track Tracking """
@@ -105,7 +110,7 @@ class API17Track:
 			'carrier_est_weight': round(float(obj_17track.misc_info.weight_kg or 0.00) * 2.20462, 1),  # From KG to Pounds
 		}
 
-		# Change Status if the status_detail gives us more information about it!
+		# Change 'status' if the 'status_detail' gives us more information about it!
 		if self.data['carrier_status'] == 'Error':  # Originally 'Exception'. See STATUS_MAP
 			self.data['carrier_status'] = self.SUB_STATUS_TO_STATUS.get(self.data['carrier_status_detail'], self.data['carrier_status'])
 
@@ -145,7 +150,7 @@ def webhook_17track(**kwargs):
 			return 'Not a Tracker Update Webhook Event'  # TODO: Make something with this?
 
 		parcel = frappe.get_doc('Parcel', {'tracking_number': kwargs['data']['number']})  # Search Parcel
-	except (KeyError, frappe.DoesNotExistError) as e:
+	except (KeyError, frappe.DoesNotExistError, Exception) as e:
 		frappe.log_error(
 			f"17Track Webhook: {type(e).__name__} -> {e}",
 			reference_doctype='Parcel', reference_name=kwargs.get('data', {}).get('number', None)

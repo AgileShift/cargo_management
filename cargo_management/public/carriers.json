@@ -10,7 +10,7 @@
     },
     "Amazon": {
       "api": "17Track",
-      "default_carriers": ["EVEREST"]
+      "default_carriers": ["17Track", "EVEREST"]
     },
     "USPS": {
       "api": "EasyPost",
@@ -61,6 +61,11 @@
       "api": "17Track",
       "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://www.sypost.net/search?orderNo="
+    },
+    "Pitney Bowes": {
+      "api": "17Track",
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
+      "tracking_url": "https://trackpb.shipment.co/track/"
     }
   }
 }

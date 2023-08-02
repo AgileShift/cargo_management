@@ -33,8 +33,10 @@
   "content_section",
   "content",
   "totals_section",
-  "shipping_amount",
   "column_break_4",
+  "column_break_5tood",
+  "shipping_amount",
+  "has_taxes",
   "total",
   "links_section",
   "warehouse_receipt",
@@ -46,7 +48,8 @@
   "order_number",
   "signature",
   "easypost_id",
-  "explained_status"
+  "explained_status",
+  "connections_tab"
  ],
  "fields": [
   {
@@ -93,7 +96,7 @@
    "fieldtype": "Select",
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou",
+   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes",
    "reqd": 1,
    "search_index": 1
   },
@@ -103,7 +106,6 @@
   },
   {
    "columns": 2,
-   "description": "Current status",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -196,7 +198,8 @@
    "description": "Notes or instructions.",
    "fieldname": "notes",
    "fieldtype": "Small Text",
-   "label": "Notes"
+   "label": "Notes",
+   "max_height": "6rem"
   },
   {
    "fieldname": "order_number",
@@ -212,7 +215,8 @@
   },
   {
    "fieldname": "content_section",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hide_border": 1
   },
   {
    "allow_bulk_edit": 1,
@@ -245,6 +249,7 @@
    "fieldname": "shipping_amount",
    "fieldtype": "Currency",
    "label": "Shipping Amount",
+   "non_negative": 1,
    "options": "USD"
   },
   {
@@ -289,7 +294,9 @@
    "fieldname": "consolidated_tracking_numbers",
    "fieldtype": "Small Text",
    "in_global_search": 1,
-   "label": "Consolidated Tracking Numbers"
+   "label": "Consolidated Tracking Numbers",
+   "max_height": "3.2rem",
+   "no_copy": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -300,7 +307,6 @@
    "label": "Extra Services"
   },
   {
-   "depends_on": "total",
    "fieldname": "totals_section",
    "fieldtype": "Section Break"
   },
@@ -324,11 +330,12 @@
   },
   {
    "fieldname": "explained_status",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "hidden": 1,
    "is_virtual": 1,
    "label": "Explained Status",
    "print_hide": 1,
+   "read_only": 1,
    "report_hide": 1
   },
   {
@@ -357,6 +364,22 @@
   {
    "fieldname": "column_break_5",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_taxes",
+   "fieldtype": "Check",
+   "label": "Has Taxes"
+  },
+  {
+   "fieldname": "column_break_5tood",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
   }
  ],
  "links": [
@@ -392,7 +415,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-07-20 08:25:48.368782",
+ "modified": "2023-08-02 08:54:06.569610",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
