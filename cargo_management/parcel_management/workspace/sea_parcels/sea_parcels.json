@@ -2,6 +2,7 @@
  "charts": [],
  "content": "[{\"id\":\"F0-z7B_aPo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>With Carrier<br></b></span>\",\"col\":12}},{\"id\":\"U3iso8eyY2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Receipt\",\"col\":3}},{\"id\":\"zHdMHgTXxv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"id\":\"7OZD9x9rW2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"id\":\"JLzIPTCf-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"id\":\"XzBg0ulqDC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":3}},{\"id\":\"j3ARpnU2rV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"id\":\"uD1-MUZTHJ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"vYfDpROFCu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"id\":\"eu13kdMYC6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"id\":\"_fgR67d1ZX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"id\":\"Igv9L4XU3C\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"id\":\"doNgIoZ-2a\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"id\":\"ZCe3tXy3MT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"id\":\"Frki2am9Jo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"id\":\"HAVm3a2rQo\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Xbtoc93C8n\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Office</b></span>\",\"col\":12}},{\"id\":\"cLYQ1qbGaB\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available at Office\",\"col\":3}},{\"id\":\"KdGqP0er-O\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"To Bill and Unpaid\",\"col\":3}}]",
  "creation": "2022-08-05 18:55:41.182011",
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
@@ -11,7 +12,7 @@
  "is_hidden": 0,
  "label": "SEA Parcels",
  "links": [],
- "modified": "2023-05-24 15:54:36.284436",
+ "modified": "2023-08-21 15:10:08.124985",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "SEA Parcels",
@@ -40,6 +41,14 @@
    "label": "Arriving Today",
    "link_to": "Parcel",
    "stats_filter": "{\"carrier_est_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Sea\"],\"status\":[\"=\",\"Awaiting Receipt\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Without Carrier Data",
+   "link_to": "Parcel",
+   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"transportation\":[\"=\",\"Sea\"],\"carrier_status\":[\"=\",\"Unknown\"]}",
    "type": "DocType"
   },
   {
@@ -83,14 +92,6 @@
    "label": "Available at Office",
    "link_to": "Parcel",
    "stats_filter": "{\"status\":[\"in\",[\"Sorting\",\"To Bill\",\"Unpaid\",\"For Delivery or Pickup\"]],\"transportation\":[\"=\",\"Sea\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Red",
-   "doc_view": "List",
-   "label": "Without Carrier Data",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"easypost_id\":[\"is\",\"not set\"],\"transportation\":[\"=\",\"Sea\"]}",
    "type": "DocType"
   },
   {
