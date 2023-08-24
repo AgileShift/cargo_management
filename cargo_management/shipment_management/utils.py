@@ -14,10 +14,15 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
             p.name, p.customer, p.customer_name, p.carrier_est_weight,
             GROUP_CONCAT(DISTINCT
                 pc.description,
-                '\nMonto: $', FORMAT(pc.amount, 2),
-                '\nCodigo: ', IFNULL(pc.item_code, ''),
-                '\nTarifa: ', FORMAT(pc.import_rate, 2),
-                '\nNotas: ', IFNULL(p.notes, '')
+                CONCAT('\nVia: ',      IF(p.transportation = 'Air', 'Aereo', 'Maritimo')),
+
+                IF(pc.amount > 0,      CONCAT('\nValor Declarado: $', FORMAT(pc.amount, 2)), ''),
+                IF(pc.item_code > '',  CONCAT('\nCodigo: ', pc.item_code), ''),
+                IF(pc.import_rate > 0, CONCAT('\nTarifa: $', FORMAT(pc.import_rate, 2)), ''),
+
+                IF(p.name != p.tracking_number, CONCAT('\nNumero de Rastreo: ', p.tracking_number), ''),
+                IF(p.consolidated_tracking_numbers > '', CONCAT('\nConsolidados: ', p.consolidated_tracking_numbers), '')
+
                 SEPARATOR '\n\n'
             ) AS customer_description
         FROM tabParcel p
