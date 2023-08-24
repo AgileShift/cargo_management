@@ -87,6 +87,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 			r.message.packages.forEach(package_doc => {
 				frm.add_child('cargo_shipment_receipt_lines', {
 					'package': package_doc.name,
+					'package_2': package_doc.tracking_number,
 					// 'item_code': package_doc.item_code, TODO: This is not working, because the package can have more than once item code
 					'customer': package_doc.customer,
 					'customer_name': package_doc.customer_name,
