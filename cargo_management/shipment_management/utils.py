@@ -26,7 +26,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 					ORDER BY pc.idx SEPARATOR '\n\n'
 				),
 				IF(COUNT(pc.tracking_number) = 0, CONCAT('\n\n', {via_sql}), ''),
-				IF(p.name != p.tracking_number, CONCAT('\nNumero de Rastreo: ', p.tracking_number), '')
+				IF(p.name != p.tracking_number, CONCAT(IF(COUNT(pc.tracking_number) > 0, '\n', ''), '\nNumero de Rastreo FINAL: ', p.tracking_number), '')
 			) AS customer_description
 		FROM tabParcel p
 			LEFT JOIN `tabParcel Content` pc ON pc.parent = p.name
