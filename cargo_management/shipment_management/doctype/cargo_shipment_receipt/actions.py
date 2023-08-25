@@ -58,6 +58,8 @@ def make_sales_invoice(doc):
 		# Extra Work on this. for more Personalization and Help to User!
 		sales_invoice.set_posting_time = True
 		sales_invoice.language = 'es'
+		sales_invoice.allocate_advances_automatically = True  # Fetch advanced received from sales order or older invoices
+		sales_invoice.due_date = frappe.utils.add_days(None, 7)  # 7 Days "Credit" by default
 
 		# Iterate over customer items to invoice
 		# csrl_invoiced_items = []
