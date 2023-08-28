@@ -1,20 +1,14 @@
 frappe.listview_settings['Cargo Shipment'] = {
-    //add_fields: ['status'],  // TODO: Improve here. because we have extra data!. also what this is for?
-    filters: [
-        ['status', '!=', 'Finished'],
-    ],
-    hide_name_column: false,
+    add_fields: ['status'],
+    filters: [['status', '!=', 'Finished']],
 
-    get_indicator: function (doc) {
-        const status_color = {
-            'Awaiting Departure': 'yellow',
-            'In Transit': 'purple',
-            'Sorting': 'orange',
-            'Finished': 'green',
-        };
-
-        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
-    },
+	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
+	get_indicator: (doc) => [__(doc.status), {
+		'Awaiting Departure': 'yellow',
+		'In Transit': 'purple',
+		'Sorting': 'green',
+		'Finished': 'darkgrey',
+	}[doc.status], 'status,=,' + doc.status],
 
     formatters: {
         transportation: (value) => cargo_management.transportation_formatter(value)

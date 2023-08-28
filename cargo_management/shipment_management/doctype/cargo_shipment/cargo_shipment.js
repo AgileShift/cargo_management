@@ -2,10 +2,10 @@ frappe.ui.form.on('Cargo Shipment', {
 	// TODO: Formatter for warehouse receipt item?
 
 	setup(frm) {
-		frm.page.sidebar.toggle(false); // Hide Sidebar to focus better on the doc
+		frm.page.sidebar.toggle(false); // Hide Sidebar to better focus on the doc
 
 		//frm.set_indicator_formatter("package", function(doc) {
-	    //	return 'orange';
+		//	return 'orange';
 		//});
 	},
 
@@ -18,6 +18,7 @@ frappe.ui.form.on('Cargo Shipment', {
 		// });
 	},
 
+
 	refresh: function (frm) {
 		// TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
 		// TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
@@ -26,9 +27,12 @@ frappe.ui.form.on('Cargo Shipment', {
 			return;
 		}
 
-		// Add Icon to the Page Indicator
-		frm.page.indicator.children().append(cargo_management.transportation_icon_html(frm.doc.transportation));
+		frm.page.indicator.parent().append(cargo_management.transportation_indicator(frm.doc.transportation));
 
+		frm.events.build_custom_action_items(frm); // Adding Custom Action Items
+	},
+
+	build_custom_action_items(frm) {
 		if (frm.doc.status === 'Awaiting Departure') {
 			frm.page.add_action_item(__('Confirm Packages'), () => {
 				frappe.call({
@@ -47,9 +51,7 @@ frappe.ui.form.on('Cargo Shipment', {
 					method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
 					freeze: true,
 					args: {
-						source_doc_name: frm.doc.name,
-						new_status: 'In Transit',
-						msg_title: __('Now in Transit')
+						source_doc_name: frm.doc.name, new_status: 'In Transit', msg_title: __('Now in Transit')
 					} // TODO: Refresh DOC in callback
 				});
 			});
