@@ -43,6 +43,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference",
    "reqd": 1,
    "unique": 1
@@ -207,14 +208,9 @@
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "cargo_shipment"
-  },
-  {
-   "group": "Purchase",
-   "link_doctype": "Purchase Invoice",
-   "link_fieldname": "bill_no"
   }
  ],
- "modified": "2023-08-29 15:42:43.668775",
+ "modified": "2023-08-29 16:10:55.403862",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
