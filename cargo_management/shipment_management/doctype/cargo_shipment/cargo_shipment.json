@@ -13,8 +13,6 @@
   "transportation",
   "column_break_4",
   "reference",
-  "gross_weight",
-  "pieces",
   "column_break_2",
   "status",
   "mute_emails",
@@ -23,17 +21,16 @@
   "column_break_8",
   "expected_arrival_date",
   "column_break_10",
+  "section_break_n2zav",
+  "warehouse_lines",
   "arrival_date",
-  "dimensions_section",
-  "length",
-  "column_break_15",
-  "width",
-  "column_break_17",
-  "height",
   "sb_0",
   "cargo_shipment_lines",
   "additional_information_section",
+  "pieces",
+  "section_break_mukh7",
   "estimated_gross_weight_by_warehouse_in_pounds",
+  "column_break_sd4xs",
   "estimated_gross_weight_by_carriers_in_pounds",
   "volumetric_weight"
  ],
@@ -122,12 +119,6 @@
    "read_only": 1
   },
   {
-   "description": "Gross Weight (in pounds) provided by the warehouse (if available).",
-   "fieldname": "gross_weight",
-   "fieldtype": "Float",
-   "label": "Gross Weight"
-  },
-  {
    "default": "0.00",
    "description": "Weight in pounds provided by the warehouse (if available).",
    "fieldname": "volumetric_weight",
@@ -135,25 +126,6 @@
    "in_preview": 1,
    "label": "Total Volumetric Weight",
    "read_only": 1
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "dimensions_section",
-   "fieldtype": "Section Break",
-   "label": "Dimensions - por cada bulto"
-  },
-  {
-   "fieldname": "length",
-   "fieldtype": "Float",
-   "label": "Length (cm)"
-  },
-  {
-   "fieldname": "column_break_15",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_17",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "data_6",
@@ -168,16 +140,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "width",
-   "fieldtype": "Float",
-   "label": "Width (cm)"
-  },
-  {
-   "fieldname": "height",
-   "fieldtype": "Float",
-   "label": "Height (cm)"
-  },
-  {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
   },
@@ -188,7 +150,7 @@
   },
   {
    "bold": 1,
-   "description": "Estimated gross weight of the packages as measured by the warehouse (if available).",
+   "description": "Estimated gross weight (in pounds) of the packages provided by the warehouse (if available).",
    "fieldname": "estimated_gross_weight_by_warehouse_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Warehouse (in pounds)",
@@ -215,6 +177,24 @@
    "options": "Sea\nAir",
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "warehouse_lines",
+   "fieldtype": "Table",
+   "label": "Cargo Shipment Warehouse",
+   "options": "Cargo Shipment Warehouse"
+  },
+  {
+   "fieldname": "section_break_n2zav",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_sd4xs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mukh7",
+   "fieldtype": "Section Break"
   }
  ],
  "links": [
@@ -227,9 +207,14 @@
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "cargo_shipment"
+  },
+  {
+   "group": "Purchase",
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "bill_no"
   }
  ],
- "modified": "2023-01-05 15:40:38.160016",
+ "modified": "2023-08-29 15:42:43.668775",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
