@@ -41,7 +41,7 @@ doctype_js = {
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+#    "Role": "home_page"
 # }
 
 # Website user home page (by function)
@@ -85,11 +85,7 @@ doc_events = {
 }
 
 # Scheduled Tasks
-scheduler_events = {
-	# "all": [
-	#	"cargo_management.parcel_management.doctype.parcel.events.check_parcel_delivery"
-	# ],
-}
+# scheduler_events = {}
 
 # Testing
 # -------

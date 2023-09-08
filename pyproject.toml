@@ -12,7 +12,7 @@ authors = [
 ]
 
 dependencies = [
-    "easypost==8.0.0"
+    "easypost==8.1.0"
 ]
 
 [build-system]
