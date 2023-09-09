@@ -1,19 +1,22 @@
 {
  "charts": [],
- "content": "[{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Open Warehouse Receipt\",\"col\":6}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WRs Awaiting Departure\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WRs In Transit\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Warehouse Receipt\",\"col\":3}}]",
+ "content": "[{\"id\":\"9q0kCfQXH1\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Open Warehouse Receipt\",\"col\":6}},{\"id\":\"2g4E-ilq0P\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WRs Awaiting Departure\",\"col\":3}},{\"id\":\"DaUCtUKhn1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WRs In Transit\",\"col\":3}},{\"id\":\"xPYEzvybNn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Warehouse Receipt\",\"col\":3}}]",
  "creation": "2021-09-29 17:18:41.959085",
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
  "hide_custom": 0,
  "icon": "change",
  "idx": 0,
+ "is_hidden": 0,
  "label": "Warehouse",
  "links": [],
- "modified": "2022-08-12 08:50:06.792554",
+ "modified": "2023-06-13 15:53:54.534356",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse",
+ "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
@@ -25,7 +28,7 @@
   }
  ],
  "roles": [],
- "sequence_id": 3.0,
+ "sequence_id": 4.0,
  "shortcuts": [
   {
    "color": "Orange",

@@ -1,9 +1,10 @@
 // First we remove the inline property. See: cargo_management/public/js/controls/overrides.js -> make_input()
-// Setting height for ControlSmallText in Some Doctype
+// Setting custom height for ControlSmallText in Our Doctype
 textarea.form-control[data-fieldtype="Small Text"] {
-  @each $doctype in "Parcel", "Package Content", "Warehouse Receipt" {
+  @each $doctype in "Parcel", "Parcel Content", "Warehouse Receipt", "Cargo Shipment Receipt Line" {
     &[data-doctype='#{$doctype}'] {
       height: auto;
+      background: red;
     }
   }
 }

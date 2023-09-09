@@ -10,7 +10,6 @@
  "field_order": [
   "tracking_number",
   "carrier",
-  "consolidated_tracking_numbers",
   "column_break_1",
   "customer",
   "customer_name",
@@ -291,14 +290,6 @@
    "search_index": 1
   },
   {
-   "fieldname": "consolidated_tracking_numbers",
-   "fieldtype": "Small Text",
-   "in_global_search": 1,
-   "label": "Consolidated Tracking Numbers",
-   "max_height": "3.2rem",
-   "no_copy": 1
-  },
-  {
    "allow_in_quick_entry": 1,
    "bold": 1,
    "collapsible": 1,
@@ -415,7 +406,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-08-02 08:54:06.569610",
+ "modified": "2023-09-08 21:09:06.792265",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -478,7 +469,7 @@
   }
  ],
  "quick_entry": 1,
- "search_fields": "tracking_number,consolidated_tracking_numbers,customer_name",
+ "search_fields": "tracking_number,customer_name",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
  "sort_field": "modified",

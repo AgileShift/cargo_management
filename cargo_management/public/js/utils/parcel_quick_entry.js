@@ -38,14 +38,14 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 		// Insert New Fields in between Customer and Carrier. FIXME: better options?
 		this.mandatory.splice(2, 0,{
 			fieldtype: 'MultiCheckSingle', fieldname: 'transportation_options', label: __('Transportation'), reqd: true, bold: true, columns: 2,
-			options: ['Sea', 'Air'].map(t => ({value: t, description: __(t), label: __(t).toUpperCase() + cargo_management.icon_html(cargo_management.transportations[t].icon)})),
+			options: ['Sea', 'Air'].map(t => ({value: t, description: __(t), label: __(t).toUpperCase() + cargo_management.icon_html(cargo_management.TRANSPORTATIONS[t].icon)})),
 			on_change: (selected) => this.doc.transportation = selected // Bind the selected checkbox with the doc field
 		}, {fieldtype: "Column Break"});
 
 		this.mandatory.push(
 			{fieldtype: 'Section Break', fieldname: 'content_section'},
 			{fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
-				{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true},
+				{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true, max_height: '4rem'},
 				{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true}
 			]}
 		); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?

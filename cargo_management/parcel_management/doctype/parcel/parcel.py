@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from easypost.errors.api import ApiError as EasyPostAPIError
 
 import frappe
@@ -8,6 +6,7 @@ from frappe.model.document import Document
 from .api.api_17track import API17Track
 from .api.easypost_api import EasyPostAPI
 
+# TODO: Consolidated Tracking Numbers able to look up in search field on linked doctypes!
 
 class Parcel(Document):
 	"""  All these are Frappe Core Flags:
@@ -19,12 +18,12 @@ class Parcel(Document):
 	# TODO: Add Type Hints
 	status: str
 	carrier: str
-	signed_by: str
-	cargo_shipment: str  # FIXME: This can be deleted?
-	tracking_number: str
-	carrier_status_detail: str
-	carrier_est_delivery: datetime
-	carrier_real_delivery: datetime
+	#signed_by: str
+	#cargo_shipment: str  # FIXME: This can be deleted?
+	#tracking_number: str
+	#carrier_status_detail: str
+	#carrier_est_delivery: datetime
+	#carrier_real_delivery: datetime
 
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behaviour. Useful when called from outside a form. """
@@ -47,6 +46,8 @@ class Parcel(Document):
 			self.easypost_id = None  # Value has changed. We reset the ID. FIXME: Move this when we have new APIs.
 			self.request_data_from_api()
 			frappe.msgprint("Carrier or Tracking Number has changed, we have requested new data.", indicator='yellow', alert=True)
+
+		# TODO: We can make the consolidated_tracking_numbers field get populated automatically from the content table
 
 	def change_status(self, new_status):
 		"""
@@ -76,7 +77,7 @@ class Parcel(Document):
 		""" This returns a detailed explanation of the current status of the Parcel and compatible colors. """
 		# TODO: Python 3.10: Migrate to switch case or Improve performance?
 
-		message, color = [], 'light-blue'  # TODO: Add more colors? Check frappe colors
+		message, color = [], 'blue'  # TODO: Add more colors? Check frappe colors
 
 		frappe.local.lang = 'es'  # Little Hack
 
@@ -187,7 +188,7 @@ class Parcel(Document):
 		return {'message': message, 'color': color}
 
 	def request_data_from_api(self):
-		""" This selects the corresponding API to request data. """
+		""" This selects the corresponding API to request data. Using Polymorphism. """
 		carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'].get(self.carrier, {}).get('api')
 
 		print('TRY: MATCHING THE CARRIER_API')
@@ -200,13 +201,16 @@ class Parcel(Document):
 				frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
 				return
 
-		print('ELSE: UPDATING FROM API DATA')
-		self.update_from_api_data(api_data)  # Data from API that will be saved
-		frappe.msgprint(_('Parcel has been updated from {} API.').format(carrier_api), indicator='green', alert=True)
+		try:
+			print('ELSE: UPDATING FROM API DATA')
+			self.update_from_api_data(api_data)  # Data from API that will be saved
+			frappe.msgprint(_('Parcel has been updated from {} API.').format(carrier_api), indicator='green', alert=True)
+		except Exception as e:
+			frappe.log_error(f"17Track API: {type(e).__name__} -> {e}", reference_doctype='Parcel', reference_name=api_data.get('data', {}).get('number', None))
 
 		print('OUTSIDE TRY: Saliendo del TRY')
 
-	def _request_data_from_easypost_api(self):
+	def _request_data_from_easypost_api(self) :
 		""" Handles POST or GET to the Easypost API. Also parses the data. """
 		try:
 			if self.easypost_id:  # Parcel exists on Database. Request updates from API.
@@ -220,10 +224,12 @@ class Parcel(Document):
 	# FIXME: 6 - 10 - 81
 	def _request_data_from_17track_api(self):
 		try:
-			if self.is_new():
-				return API17Track(self.carrier).register_package(self.tracking_number)
-			else:
+			if self.easypost_id:
 				return API17Track(self.carrier).retrieve_package_data(self.tracking_number)
+			else:
+				api_data = API17Track(self.carrier).register_package(self.tracking_number)
+				self.easypost_id = api_data['tag']  # api_data.get('tag', frappe.generate_hash(length=10))
+				return api_data
 		except Exception as e:
 			frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
 
@@ -241,3 +247,4 @@ class Parcel(Document):
 
 # 294(HOTFIX) -> 250(WORKING) FIXME: Better way to update the doc: create some core method that returns a Object that we can concat :D
 #248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
+# 241: Retornanos data normalizada desde las API, ahora debemos de hacer Polymorphism to select the API's

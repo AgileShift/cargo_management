@@ -10,7 +10,7 @@ frappe.ui.form.on('Parcel', {
 			frm.page.indicator.next().remove(); // Remove the extra indicator if the indicator changes
 		});
 
-		observer.observe(frm.page.indicator.get(0), {childList: true}); // Observe the indicator for changes
+		observer.observe(frm.page.indicator.get(0), {childList: true}); // Observe the 'indicator' for changes
 	},
 
 	onload(frm) {
@@ -190,3 +190,4 @@ frappe.ui.form.on('Parcel Content', {
 		frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
 	},
 });
+//201 - FIXME: Giving PROBLEMS

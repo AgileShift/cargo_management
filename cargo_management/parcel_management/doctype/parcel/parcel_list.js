@@ -1,5 +1,8 @@
 frappe.listview_settings['Parcel'] = {
-	add_fields: ['carrier', 'consolidated_tracking_numbers'],
+
+	// TODO DELETE: 'consolidated_tracking_numbers' 12 Matches
+
+	add_fields: ['carrier'],
 	filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],  // aka 'Active Parcels'
 
 	onload(listview) {
@@ -37,9 +40,11 @@ frappe.listview_settings['Parcel'] = {
 
 				const search_term = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value()).search_term;
 
-				args.or_filters = ['name', 'tracking_number', 'consolidated_tracking_numbers'].map(field => [
+				// TODO: WORK -> We will not use the main field from now on
+				args.or_filters = ['name', 'tracking_number'].map(field => [
 					args.doctype, field, 'like', '%' + search_term + '%'
 				]); // Mapping each field to 'or_filters' for the necessary fields to search
+				args.or_filters.push(['Parcel Content', 'tracking_number', 'like', '%' + search_term + '%'])  // This acts as a consolidated tracking number
 			}
 
 			return args;
@@ -76,8 +81,8 @@ frappe.listview_settings['Parcel'] = {
 			}
 
 			if (doc.consolidated_tracking_numbers) {
-				doc.consolidated_tracking_numbers.split('\n').forEach((tracking_number) => {
-					fields.push(...this.build_carrier_urls(__('Consolidated'), tracking_number));
+				doc.consolidated_tracking_numbers.split('\n').forEach((tracking_number, i) => {
+					fields.push(...this.build_carrier_urls(__('Consolidated #{0}', [i + 1]), tracking_number));
 				});
 			}
 
@@ -109,3 +114,4 @@ frappe.listview_settings['Parcel'] = {
 		name: (value, df, doc) => (value !== doc.tracking_number) ? `<b>${value}</b>` : ''
 	}
 };
+// 111

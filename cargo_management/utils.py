@@ -1,3 +1,7 @@
+import datetime
+
+import pytz
+
 import frappe
 
 
@@ -50,3 +54,21 @@ def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_titl
 	frappe.flags.mute_emails = frappe.flags.in_import = False  # Core: Reset all notifications and emails.
 
 	frappe.msgprint(msg=message, title=msg_title, as_list=True, indicator='green')  # Show message as dialog
+
+
+# TODO: Validate if needed
+def naive_dt_to_local_dt(dt_str: str, uses_utc: bool):
+	if not dt_str:  # Sometimes datetime string if empty for some values, so return None value.
+		return
+
+	# Parse datetime from string; At this moment we don't know if it's in UTC or local.
+	naive_datetime = datetime.datetime.strptime(dt_str, '%Y-%m-%dT%H:%M:%S%z')
+
+	if not uses_utc:  # API already give us local datetime. So no need to convert from UTC to local
+		return naive_datetime.replace(tzinfo=None)
+
+	# TODO: Make this conversion warehouse location aware!. For now we're pretending only Miami is local timezone
+	local_tz = pytz.timezone('America/New_York')  # https://stackoverflow.com/a/32313111/3172310
+
+	# Return unaware local datetime: Converts unaware UTC datetime to aware UTC and then delete the timezone info.
+	return naive_datetime.astimezone(tz=local_tz).replace(tzinfo=None)
