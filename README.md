@@ -7,7 +7,7 @@
 It streamlines logistics processes, including **package tracking**, **invoicing**, and **warehouse management**,
 providing a seamless, efficient, and user-friendly experience.
 
-Built on [Frappe Framework v14](https://github.com/frappe/frappe/) and [ERPNext](https://github.com/frappe/erpnext),
+Built on [Frappe Framework v15](https://github.com/frappe/frappe/) and [ERPNext](https://github.com/frappe/erpnext),
 this solution is designed to meet the unique needs of businesses in the freight forwarding industry.  
 It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, Assets, Payroll and more.
 
@@ -31,7 +31,7 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 - [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud) - WORK on Progress
 
 ### List of Carriers Currently Supported:
-Last checked: 11 July 2023
+Last checked: 8 September 2023
 
 | Carrier    |    EasyPost    | 17Track |
 |:-----------|:--------------:|:-------:|
