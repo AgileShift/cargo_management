@@ -1,19 +1,6 @@
 import frappe
 
 
-def check_parcel_delivery():
-	# carriers = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS']
-
-	# parcel = frappe.get_doc('Parcel', 'TESTING')
-
-	# parcel.consolidated_tracking_numbers = frappe.utils.random_string(20)
-
-	# parcel.flags.ignore_permissions = True
-	# parcel.flags.ignore_mandatory = True
-	# parcel.save()
-	pass
-
-
 def get_permission_query_conditions(user):
 	# Problem is permission_query_conditions is called after the get() method
 	# and the get_methods calls the frappe.form_dict, so its too late to change it!
