@@ -6,24 +6,49 @@ from frappe.model.document import Document
 from .api.api_17track import API17Track
 from .api.easypost_api import EasyPostAPI
 
-# TODO: Consolidated Tracking Numbers able to look up in search field on linked doctypes!
 
 class Parcel(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from cargo_management.parcel_management.doctype.parcel_content.parcel_content import ParcelContent
+		from frappe.types import DF
+
+		assisted_purchase: DF.Check
+		cargo_shipment: DF.Link | None
+		carrier: DF.Literal['Drop Off', 'Pick Up', 'Unknown', 'Amazon', 'USPS', 'UPS', 'DHL', 'FedEx', 'OnTrac', 'Cainiao', 'SF Express', 'Yanwen', 'YunExpress', 'SunYou', 'Pitney Bowes']
+		carrier_est_delivery: DF.Datetime | None
+		carrier_est_weight: DF.Float
+		carrier_last_detail: DF.SmallText | None
+		carrier_real_delivery: DF.Datetime | None
+		carrier_status: DF.Literal['Unknown', 'Pre Transit', 'In Transit', 'Out For Delivery', 'Available For Pickup', 'Delivered', 'Return To Sender', 'Failure', 'Cancelled', 'Error']
+		carrier_status_detail: DF.Data | None
+		content: DF.Table[ParcelContent]
+		customer: DF.Link | None
+		customer_name: DF.Data | None
+		easypost_id: DF.Data | None
+		explained_status: DF.Data | None
+		has_taxes: DF.Check
+		notes: DF.SmallText | None
+		order_number: DF.Data | None
+		shipper: DF.Data | None
+		shipping_amount: DF.Currency
+		signed_by: DF.Data | None
+		status: DF.Literal['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'In Customs', 'Sorting', 'To Bill', 'Unpaid', 'For Delivery or Pickup', 'Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']
+		total: DF.Currency
+		tracking_number: DF.Data
+		transportation: DF.Literal['Sea', 'Air']
+		warehouse_receipt: DF.Link | None
+	# end: auto-generated types
 	"""  All these are Frappe Core Flags:
 		'ignore_links':       avoid: _validate_links()
 		'ignore_validate':    avoid: validate() and before_save()
 		'ignore_mandatory':   avoid: _validate_mandatory()
 		'ignore_permissions': avoid: will not check for permissions globally.
 	"""
-	# TODO: Add Type Hints
-	status: str
-	carrier: str
-	#signed_by: str
-	#cargo_shipment: str  # FIXME: This can be deleted?
-	#tracking_number: str
-	#carrier_status_detail: str
-	#carrier_est_delivery: datetime
-	#carrier_real_delivery: datetime
 
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behaviour. Useful when called from outside a form. """
@@ -46,8 +71,6 @@ class Parcel(Document):
 			self.easypost_id = None  # Value has changed. We reset the ID. FIXME: Move this when we have new APIs.
 			self.request_data_from_api()
 			frappe.msgprint("Carrier or Tracking Number has changed, we have requested new data.", indicator='yellow', alert=True)
-
-		# TODO: We can make the consolidated_tracking_numbers field get populated automatically from the content table
 
 	def change_status(self, new_status):
 		"""
@@ -248,3 +271,6 @@ class Parcel(Document):
 # 294(HOTFIX) -> 250(WORKING) FIXME: Better way to update the doc: create some core method that returns a Object that we can concat :D
 #248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
 # 241: Retornanos data normalizada desde las API, ahora debemos de hacer Polymorphism to select the API's
+
+#FIXME: 19 warning, 20 w warning, 83 typos -> 287
+#FIXME: 2 warning, 20 w warning, 85 typos -> 276
