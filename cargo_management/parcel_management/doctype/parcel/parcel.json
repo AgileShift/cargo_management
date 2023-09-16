@@ -16,7 +16,6 @@
   "column_break_2",
   "transportation",
   "status",
-  "substatus",
   "extra_services_section",
   "assisted_purchase",
   "additional_data_from_carrier_section",
@@ -330,12 +329,6 @@
    "report_hide": 1
   },
   {
-   "fieldname": "substatus",
-   "fieldtype": "Select",
-   "label": "Substatus",
-   "options": "\nIn Origin\nDelayed At Origin\nDelayed In Transit\nIn time"
-  },
-  {
    "fieldname": "extra_info_tab",
    "fieldtype": "Tab Break",
    "label": "Additional Information"
@@ -406,11 +399,10 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-09-08 21:09:06.792265",
+ "modified": "2023-09-15 14:04:09.501205",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
- "name_case": "UPPER CASE",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
@@ -435,7 +427,6 @@
    "read": 1,
    "report": 1,
    "role": "Sales Manager",
-   "set_user_permissions": 1,
    "share": 1,
    "write": 1
   },
@@ -460,11 +451,10 @@
   {
    "email": 1,
    "export": 1,
-   "permlevel": 1,
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "All",
+   "role": "Desk User",
    "share": 1
   }
  ],

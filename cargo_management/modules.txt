@@ -3,3 +3,4 @@ Support Customization
 Shipment Management
 Warehouse Customization
 Parcel Selling
+Purchase Management
