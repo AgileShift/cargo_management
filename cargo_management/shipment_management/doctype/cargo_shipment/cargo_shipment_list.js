@@ -1,6 +1,9 @@
 frappe.listview_settings['Cargo Shipment'] = {
-    add_fields: ['status'],
-    filters: [['status', '!=', 'Finished']],
+	filters: [['status', '!=', 'Finished']],
+
+	onload(listview) {
+		listview.page.sidebar.toggle(false); // Hide Sidebar to better focus on the doc
+	},
 
 	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
 	get_indicator: (doc) => [__(doc.status), {
@@ -10,7 +13,7 @@ frappe.listview_settings['Cargo Shipment'] = {
 		'Finished': 'darkgrey',
 	}[doc.status], 'status,=,' + doc.status],
 
-    formatters: {
-        transportation: (value) => cargo_management.transportation_formatter(value)
-    }
+	formatters: {
+		transportation: (value) => cargo_management.transportation_formatter(value)
+	}
 }

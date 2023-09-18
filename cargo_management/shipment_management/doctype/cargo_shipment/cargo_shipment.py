@@ -4,6 +4,28 @@ from frappe.model.document import Document
 
 
 class CargoShipment(Document):
+    # begin: auto-generated types
+    # This code is auto-generated. Do not modify anything in this block.
+
+    from typing import TYPE_CHECKING
+
+    if TYPE_CHECKING:
+        from cargo_management.shipment_management.doctype.cargo_shipment_line.cargo_shipment_line import CargoShipmentLine
+        from cargo_management.shipment_management.doctype.cargo_shipment_warehouse.cargo_shipment_warehouse import CargoShipmentWarehouse
+        from frappe.types import DF
+
+        arrival_date: DF.Date | None
+        cargo_shipment_lines: DF.Table[CargoShipmentLine]
+        departure_date: DF.Date
+        estimated_gross_weight_by_carriers_in_pounds: DF.Float
+        estimated_gross_weight_by_warehouse_in_pounds: DF.Float
+        expected_arrival_date: DF.Date | None
+        mute_emails: DF.Check
+        pieces: DF.Int
+        status: DF.Literal['Awaiting Departure', 'In Transit', 'Sorting', 'Finished']
+        transportation: DF.Literal['Sea', 'Air']
+        warehouse_lines: DF.Table[CargoShipmentWarehouse]
+    # end: auto-generated types
 
     def on_update(self):
         """ Add Departure Date to all Warehouse Receipt Linked """
