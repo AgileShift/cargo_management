@@ -2,6 +2,24 @@ from frappe.model.document import Document
 
 
 class CargoShipmentReceipt(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from cargo_management.shipment_management.doctype.cargo_shipment_receipt_line.cargo_shipment_receipt_line import CargoShipmentReceiptLine
+		from frappe.types import DF
+
+		arrival_date: DF.Date | None
+		cargo_shipment: DF.Link
+		cargo_shipment_receipt_lines: DF.Table[CargoShipmentReceiptLine]
+		departure_date: DF.Date | None
+		gross_weight: DF.Float
+		mute_emails: DF.Check
+		status: DF.Literal['Awaiting Receipt', 'Sorting', 'Finished']
+	# end: auto-generated types
+
 	# TODO: Set customer on update!
 
 	def validate(self):

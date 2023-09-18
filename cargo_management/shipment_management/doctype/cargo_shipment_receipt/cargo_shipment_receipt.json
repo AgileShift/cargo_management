@@ -1,39 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:reference",
+ "autoname": "field:cargo_shipment",
  "creation": "2020-11-03 16:50:04.125725",
- "description": "Cargo Shipment Receipt",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "cargo_shipment",
-  "reference",
-  "mute_emails",
-  "c_column",
-  "status",
-  "column_break_3",
   "departure_date",
-  "column_break_8",
   "arrival_date",
+  "c_column",
+  "column_break_p4gz",
+  "cargo_shipment",
+  "status",
+  "mute_emails",
   "section_break_6",
   "cargo_shipment_receipt_lines",
   "gross_weight"
  ],
  "fields": [
-  {
-   "columns": 3,
-   "fetch_from": "cargo_shipment.reference",
-   "fieldname": "reference",
-   "fieldtype": "Data",
-   "in_global_search": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Reference",
-   "reqd": 1,
-   "unique": 1
-  },
   {
    "allow_in_quick_entry": 1,
    "columns": 2,
@@ -61,10 +46,6 @@
    "label": "Status",
    "options": "Awaiting Receipt\nSorting\nFinished",
    "reqd": 1
-  },
-  {
-   "fieldname": "column_break_3",
-   "fieldtype": "Section Break"
   },
   {
    "columns": 2,
@@ -117,16 +98,16 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_8",
+   "fieldname": "column_break_p4gz",
    "fieldtype": "Column Break"
   }
  ],
  "links": [],
- "modified": "2021-12-28 09:17:50.689199",
+ "modified": "2023-09-18 07:44:29.895463",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",
- "name_case": "UPPER CASE",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -140,14 +121,22 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Desk User",
+   "share": 1
   }
  ],
- "quick_entry": 1,
  "search_fields": "cargo_shipment,status",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "timeline_field": "cargo_shipment",
- "title_field": "reference",
  "track_changes": 1
 }
