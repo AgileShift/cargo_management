@@ -31,7 +31,7 @@ class EasyPostAPI:
 	def register_package(self, tracking_number: str) -> dict:
 		""" Register a Tracking on EasyPost API """
 		easypost_obj = self.client.tracker.create(tracking_code=tracking_number, carrier=self.carrier)
-		self.client.subscribe_to_request_hook(id=easypost_obj.id, url=frappe.conf['easypost_webhook_url'])
+		#FIXME: PATCH self.client.subscribe_to_request_hook(id=easypost_obj.id, url=frappe.conf['easypost_webhook_url'])
 		return self._build_parcel_data(easypost_obj)
 
 	def retrieve_package_data(self, easypost_id: str) -> dict:
