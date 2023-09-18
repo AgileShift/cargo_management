@@ -102,8 +102,14 @@
    "fieldtype": "Column Break"
   }
  ],
- "links": [],
- "modified": "2023-09-18 07:44:29.895463",
+ "links": [
+  {
+   "group": "Purchase",
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "custom_cargo_shipment_receipt"
+  }
+ ],
+ "modified": "2023-09-18 07:51:25.410653",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",

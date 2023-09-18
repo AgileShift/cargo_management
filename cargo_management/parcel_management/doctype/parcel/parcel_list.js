@@ -51,7 +51,7 @@ frappe.listview_settings['Parcel'] = {
 		};
     },
 
-	// Unused: Light Blue. // TODO: Migrate to Document States? Maybe when frappe core starts using it.
+	// Unused: light-blue. // TODO: Migrate to Document States? Maybe when frappe core starts using it.
 	get_indicator: (doc) => [__(doc.status), {
 		'Awaiting Receipt': 'blue',
 		'Awaiting Confirmation': 'orange',
