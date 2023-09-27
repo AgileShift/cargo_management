@@ -24,7 +24,13 @@ class CargoShipmentReceipt(Document):
 
 	def validate(self):
 		# TODO: make this sort function refresh the table
-		sorted_list = sorted(self.cargo_shipment_receipt_lines, key=lambda item: item.customer_name if item.customer_name else '')
+		sorted_list = sorted(
+			self.cargo_shipment_receipt_lines,
+			key=lambda item: (
+				item.customer_name if item.customer_name else '',
+				-float(item.gross_weight) if item.gross_weight else 0.00
+			)
+		)
 		for i, item in enumerate(sorted_list, start=1):
 			item.idx = i
 
