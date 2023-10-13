@@ -4,41 +4,70 @@ from frappe.model.document import Document
 
 
 class WarehouseReceipt(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
 
-    def on_update(self):
-        """ Add Warehouse Receipt Link to the Package. This allows to have mutual reference WR to Package. """
-        # FIXME: If Warehouse Receipt is deleted, remove link from Package
-        # TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
+	from typing import TYPE_CHECKING
 
-        # We only change the warehouse_receipt field if it is different from current.
-        packages = get_list_from_child_table(self.warehouse_receipt_lines, 'package')
+	if TYPE_CHECKING:
+		from cargo_management.warehouse_customization.doctype.warehouse_receipt_line.warehouse_receipt_line import \
+			WarehouseReceiptLine
+		from frappe.types import DF
 
-        if not packages:
-            return
+		carrier_est_gross_weight: DF.Float
+		carrier_label_img: DF.AttachImage | None
+		closing_date: DF.Datetime | None
+		content_inside_img: DF.AttachImage | None
+		customer_description: DF.SmallText | None
+		departure_date: DF.Date | None
+		hazardous: DF.Literal["No", "Yes"]
+		name_barcode: DF.Barcode | None
+		notes: DF.SmallText | None
+		opening_date: DF.Datetime
+		status: DF.Literal["Draft", "Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
+		tracking_barcode: DF.Barcode | None
+		transportation: DF.Literal["", "Sea", "Air"]
+		volumetric_weight: DF.Float
+		warehouse_description: DF.SmallText | None
+		warehouse_est_gross_weight: DF.Float
+		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
 
-        frappe.db.sql("""
-            UPDATE tabPackage
-            SET warehouse_receipt = %(wr_name)s
-            WHERE name IN %(packages)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s 
-        """, {
-            'wr_name': self.name,
-            'packages': packages
-        })
+	# end: auto-generated types
 
-        # TODO: Actually change the status after the package is validated and creadted. maybe at status change from draft to open?
+	def on_update(self):
+		""" Add Warehouse Receipt Link to the Package. This allows to have mutual reference WR to Package. """
+		# FIXME: If Warehouse Receipt is deleted, remove link from Package
+		# TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
 
+		# We only change the warehouse_receipt field if it is different from current.
+		packages = get_list_from_child_table(self.warehouse_receipt_lines, 'package')
 
-    def change_status(self, new_status):
-        """ Validates the current status of the warehouse receipt and change it if it's possible. """
-        # TODO: Validate this when status is changed on Form-View or List-View
+		if not packages:
+			return
 
-        # TODO: FINISH
-        if self.status != new_status and \
-                (self.status == 'Open' and new_status == 'Awaiting Departure') or \
-                (self.status in ['Open', 'Awaiting Departure'] and new_status == 'In Transit') or \
-                (self.status in ['Open', 'Awaiting Departure', 'In Transit'] and new_status == 'Sorting') or \
-                (self.status in ['Open', 'Awaiting Departure', 'In Transit', 'Sorting'] and new_status == 'Finished'):
-            self.status = new_status
-            return True
+		frappe.db.sql("""
+		UPDATE tabPackage
+		SET warehouse_receipt = %(wr_name)s
+		WHERE name IN %(packages)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s
+		""", {
+			'wr_name': self.name,
+			'packages': packages
+		})
 
-        return False
+	# TODO: Actually change the status after the package is validated and creadted. maybe at status change from draft to open?
+
+	def change_status(self, new_status):
+		""" Validates the current status of the warehouse receipt and change it if it's possible. """
+
+		# TODO: Validate this when status is changed on Form-View or List-View
+
+		# TODO: FINISH
+		if self.status != new_status and \
+			(self.status == 'Open' and new_status == 'Awaiting Departure') or \
+			(self.status in ['Open', 'Awaiting Departure'] and new_status == 'In Transit') or \
+			(self.status in ['Open', 'Awaiting Departure', 'In Transit'] and new_status == 'Sorting') or \
+			(self.status in ['Open', 'Awaiting Departure', 'In Transit', 'Sorting'] and new_status == 'Finished'):
+			self.status = new_status
+			return True
+
+		return False

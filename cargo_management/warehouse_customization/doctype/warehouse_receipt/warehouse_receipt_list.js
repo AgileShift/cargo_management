@@ -1,33 +1,30 @@
 frappe.listview_settings['Warehouse Receipt'] = {
-    add_fields: ['status', 'transportation'],
-    filters: [
-        ['status', 'in', ['Draft', 'Open', 'Awaiting Departure']],
-    ],
-    hide_name_column: true,
+	filters: [['status', 'not in', ['Sorting', 'Finished']]], hide_name_column: true,
 
-    before_render() {
-        localStorage.show_sidebar = false;
-    },
+	onload(listview) {
+		listview.page.sidebar.toggle(false); // Hide Sidebar
+	},
 
-    get_indicator(doc) {
-        const status_color = {
-            'Draft': 'gray',
-            'Open': 'orange',
-            'Awaiting Departure': 'yellow',
-            'In Transit': 'purple',
-            'Sorting': 'orange',
-            'Finished': 'green',
-        };
+	before_render() {
+	},
 
-        return [__(doc.status), status_color[doc.status], 'status,=,' + doc.status];
-    },
-    formatters: {
-        transportation(val) {
-            let color = (val === 'Sea') ? 'blue' : 'red';
-            return `<span class="indicator-pill ${color} filterable ellipsis"
+	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
+	get_indicator: (doc) => [__(doc.status), {
+		'Draft': 'gray',
+		'Open': 'orange',
+		'Awaiting Departure': 'yellow',
+		'In Transit': 'purple',
+		'Sorting': 'green',
+		'Finished': 'darkgrey',
+	}[doc.status], 'status,=,' + doc.status],
+
+	formatters: {
+		transportation(val) {
+			let color = (val === 'Sea') ? 'blue' : 'red';
+			return `<span class="indicator-pill ${color} filterable ellipsis"
                 data-filter="transportation,=,${frappe.utils.escape_html(val)}">
 				<span class="ellipsis"> ${val} </span>
 			<span>`;
-        }
-    }
+		}
+	}
 }

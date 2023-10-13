@@ -1,21 +1,23 @@
 <table class="table table-bordered">
     <thead>
-        <tr>
-            <td>Tracking Number</td>
-            <td>Customer</td>
-            <td>Transportation Type</td>
-        </tr>
+    <tr>
+        <td>Tracking Number</td>
+        <td>Customer</td>
+        <td>Transportation Type</td>
+    </tr>
     </thead>
     <tbody>
-        {% for c in coincidences %}
-            <tr>
-                <td>
-                    {% let full_name = (c.name === c.tracking_number) ? c.name : `${c.name} o ${c.tracking_number}` %}
-                    <a href="#" data-value="{{ c.name }}">{{ full_name.replace(new RegExp(search_term, "g"), `<b>${search_term}</b>`) }}</a>
-                </td>
-                <td>{{ c.customer_name }}</td>
-                <td><b>{{ c.transportation }}</b></td>
-            </tr>
-        {% endfor %}
+    {% for c in coincidences %}
+        <tr>
+            <td>
+                {% let full_name = (c.name === c.tracking_number) ? c.name : `${c.name} o ${c.tracking_number}` %}
+                <a href="#" data-value="{{ c.name }}">
+                    {{ full_name.replace(new RegExp(search_term, "g"), `<b>${search_term}</b>`) }}
+                </a>
+            </td>
+            <td>{{ c.customer_name }}</td>
+            <td><b>{{ c.transportation }}</b></td>
+        </tr>
+    {% endfor %}
     </tbody>
 </table>

@@ -8,16 +8,11 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "tracking_number",
-  "carrier",
+  "column_break_hnxe",
   "column_break_3",
   "transportation_multicheck_html",
   "transportation",
   "status",
-  "section_break_10",
-  "shipper",
-  "column_break_12",
-  "consignee",
   "section_description",
   "warehouse_description",
   "column_break_9",
@@ -146,29 +141,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_10",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "consignee",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Consignee",
-   "options": "Consignee"
-  },
-  {
-   "fieldname": "shipper",
-   "fieldtype": "Link",
-   "label": "Shipper",
-   "options": "Shipper"
-  },
-  {
-   "fieldname": "column_break_12",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "hazardous",
    "fieldtype": "Select",
    "label": "Hazardous",
@@ -202,23 +174,6 @@
    "read_only": 1,
    "reqd": 1,
    "search_index": 1
-  },
-  {
-   "bold": 1,
-   "fieldname": "tracking_number",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Tracking Number",
-   "reqd": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "carrier",
-   "fieldtype": "Select",
-   "label": "Carrier",
-   "options": "\nUSPS\nUPS\nAmazon\nDHL\nFedEx\nUnknown\nDrop-Off\nPick-Up"
   },
   {
    "fieldname": "transportation_multicheck_html",
@@ -268,14 +223,13 @@
   {
    "fieldname": "name_barcode",
    "fieldtype": "Barcode"
+  },
+  {
+   "fieldname": "column_break_hnxe",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
-  {
-   "group": "Package",
-   "link_doctype": "Package",
-   "link_fieldname": "warehouse_receipt"
-  },
   {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
@@ -288,11 +242,10 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2022-04-12 16:21:28.372983",
+ "modified": "2023-10-13 14:52:48.564742",
  "modified_by": "Administrator",
  "module": "Warehouse Customization",
  "name": "Warehouse Receipt",
- "name_case": "UPPER CASE",
  "owner": "Administrator",
  "permissions": [
   {
@@ -305,7 +258,6 @@
    "read": 1,
    "report": 1,
    "role": "Item Manager",
-   "set_user_permissions": 1,
    "share": 1,
    "write": 1
   },
@@ -346,5 +298,6 @@
  "show_preview_popup": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
