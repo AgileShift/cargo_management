@@ -15,55 +15,17 @@ frappe.ui.form.on('Warehouse Receipt', {
 	},
 
 	setup: function (frm) {
-		$('.layout-side-section').hide(); // Little Trick to work better
+		frm.page.sidebar.toggle(false); // Hide Sidebar
 
 		if (frm.is_new())
 			frm.events.transportation_multi_check(frm);
 	},
 
-	onload_post_render: function (frm) {
-		if (frm.is_new())
-			frm.grids[0].grid.add_new_row();
+	onload_post_render: function (frm) {},
 
-		frm.events.print_iframe(frm); // todo delete
-	},
+	before_save: function (frm) {},
 
-	before_save: function (frm) {
-		frm.print_label = frm.is_new(); // If new true else undefined
-	},
-
-	after_save: function (frm) {
-		if (!frm.print_label) {
-			return;
-		}
-
-		//http://localhost:8000/printview?doctype=Warehouse%20Receipt&name=ae547156cc&trigger_print=1&format=Standard&no_letterhead=1&letterhead=No%20Letterhead&settings=%7B%7D&_lang=en-US
-
-		window.open(
-			frappe.urllib.get_full_url(
-				'printview?doctype=Warehouse%20Receipt&name=' + frm.doc.name +
-				'&trigger_print=1&format=Warehouse%20Receipt%20Labels&no_letterhead=1&letterhead=No%20Letterhead&settings=%7B%7D&_lang=es'
-			) // Emulating print.js inside frappe/printing/page/print/print.js
-		);
-	},
-
-	print_iframe: function (frm) {
-		// Improve Print Format
-		// No more JSBarcode or better to embeed?
-		// After save call in frame!
-		// New doc after print
-		// https://stackoverflow.com/questions/2578052/printing-contents-of-another-page
-		// https://discuss.erpnext.com/t/how-to-generate-barcodes-in-erpnext-using-jsbarcode-library/45573/3
-		/*
-			5. Mejoras solicitadas por Joshua
-			  Para crear el warehouse - para imprimir
-			  para imprimir el warehouse en fisico: cuando hace una entrega
-			  que le abra a nueva pantalla
-		 */
-		frm.$wrapper.append(
-			"<iframe name='print_frame' src='http://localhost:8000/printview?doctype=Warehouse%20Receipt&name=WR-14569&format=Warehouse%20Receipt%20Labels&no_letterhead=1'></iframe>"
-		);
-	},
+	after_save: function (frm) {},
 
 	tracking_number: function (frm) {
 		frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
@@ -153,7 +115,9 @@ frappe.ui.form.on('Warehouse Receipt', {
 	},
 });
 
-frappe.ui.form.on('Warehouse Receipt Line', {});
+frappe.ui.form.on('Warehouse Receipt Line', {
+
+});
 
 // https://stackoverflow.com/a/1977126/3172310 -> When a Button is in a Table
 //$(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +

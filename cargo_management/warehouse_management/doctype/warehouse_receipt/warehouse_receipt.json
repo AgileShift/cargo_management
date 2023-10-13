@@ -13,10 +13,6 @@
   "transportation_multicheck_html",
   "transportation",
   "status",
-  "section_description",
-  "warehouse_description",
-  "column_break_9",
-  "customer_description",
   "section_timestamps",
   "opening_date",
   "column_break_8",
@@ -25,19 +21,12 @@
   "departure_date",
   "sb_0",
   "warehouse_receipt_lines",
-  "notes",
-  "column_break_23",
-  "hazardous",
-  "carrier_label_img",
-  "content_inside_img",
   "section_totals",
   "warehouse_est_gross_weight",
   "column_break_16",
   "volumetric_weight",
   "column_break_14",
-  "carrier_est_gross_weight",
-  "tracking_barcode",
-  "name_barcode"
+  "carrier_est_gross_weight"
  ],
  "fields": [
   {
@@ -54,7 +43,6 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval: !doc.__islocal",
    "fieldname": "transportation",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -62,7 +50,6 @@
    "in_standard_filter": 1,
    "label": "Transportation",
    "options": "\nSea\nAir",
-   "read_only": 1,
    "reqd": 1,
    "search_index": 1
   },
@@ -81,29 +68,6 @@
    "read_only": 1,
    "reqd": 1,
    "search_index": 1
-  },
-  {
-   "fieldname": "section_description",
-   "fieldtype": "Section Break"
-  },
-  {
-   "depends_on": "eval: !doc.customer_description;",
-   "description": "Description provided by the warehouse (if available).",
-   "fieldname": "warehouse_description",
-   "fieldtype": "Small Text",
-   "label": "Warehouse Description"
-  },
-  {
-   "fieldname": "column_break_9",
-   "fieldtype": "Column Break"
-  },
-  {
-   "bold": 1,
-   "description": "Description provided by the customer (if available).",
-   "fieldname": "customer_description",
-   "fieldtype": "Small Text",
-   "label": "Customer Description",
-   "read_only": 1
   },
   {
    "depends_on": "eval: !doc.__islocal",
@@ -152,32 +116,8 @@
    "fieldtype": "Table",
    "in_preview": 1,
    "options": "Warehouse Receipt Line",
-   "read_only_depends_on": "eval: doc.status == 'Finished';"
-  },
-  {
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
-  },
-  {
-   "fieldname": "column_break_23",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "hazardous",
-   "fieldtype": "Select",
-   "label": "Hazardous",
-   "options": "No\nYes"
-  },
-  {
-   "fieldname": "carrier_label_img",
-   "fieldtype": "Attach Image",
-   "label": "Photo of Carrier Label"
-  },
-  {
-   "fieldname": "content_inside_img",
-   "fieldtype": "Attach Image",
-   "label": "Photo of Content Inside"
+   "read_only_depends_on": "eval: doc.status == 'Finished';",
+   "reqd": 1
   },
   {
    "depends_on": "eval: !doc.__islocal",
@@ -219,14 +159,6 @@
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Carriers (in pounds)",
    "read_only": 1
-  },
-  {
-   "fieldname": "tracking_barcode",
-   "fieldtype": "Barcode"
-  },
-  {
-   "fieldname": "name_barcode",
-   "fieldtype": "Barcode"
   }
  ],
  "links": [
@@ -242,7 +174,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2023-10-13 15:18:51.200303",
+ "modified": "2023-10-13 15:55:58.303848",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",

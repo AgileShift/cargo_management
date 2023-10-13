@@ -10,26 +10,20 @@ class WarehouseReceipt(Document):
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
-		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import WarehouseReceiptLine
+		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import \
+			WarehouseReceiptLine
 		from frappe.types import DF
 
 		carrier_est_gross_weight: DF.Float
-		carrier_label_img: DF.AttachImage | None
 		closing_date: DF.Datetime | None
-		content_inside_img: DF.AttachImage | None
-		customer_description: DF.SmallText | None
 		departure_date: DF.Date | None
-		hazardous: DF.Literal["No", "Yes"]
-		name_barcode: DF.Barcode | None
-		notes: DF.SmallText | None
 		opening_date: DF.Datetime
 		status: DF.Literal["Draft", "Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
-		tracking_barcode: DF.Barcode | None
 		transportation: DF.Literal["", "Sea", "Air"]
 		volumetric_weight: DF.Float
-		warehouse_description: DF.SmallText | None
 		warehouse_est_gross_weight: DF.Float
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
+
 	# end: auto-generated types
 
 	def on_update(self):
@@ -44,7 +38,7 @@ class WarehouseReceipt(Document):
 			return
 
 		frappe.db.sql("""
-		UPDATE tabPackage
+		UPDATE tabParcel
 		SET warehouse_receipt = %(wr_name)s
 		WHERE name IN %(packages)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s
 		""", {
