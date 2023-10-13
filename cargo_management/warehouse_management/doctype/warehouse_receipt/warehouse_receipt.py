@@ -10,8 +10,7 @@ class WarehouseReceipt(Document):
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
-		from cargo_management.warehouse_customization.doctype.warehouse_receipt_line.warehouse_receipt_line import \
-			WarehouseReceiptLine
+		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import WarehouseReceiptLine
 		from frappe.types import DF
 
 		carrier_est_gross_weight: DF.Float
@@ -31,7 +30,6 @@ class WarehouseReceipt(Document):
 		warehouse_description: DF.SmallText | None
 		warehouse_est_gross_weight: DF.Float
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
-
 	# end: auto-generated types
 
 	def on_update(self):

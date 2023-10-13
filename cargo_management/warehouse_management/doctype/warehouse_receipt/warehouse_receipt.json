@@ -41,6 +41,32 @@
  ],
  "fields": [
   {
+   "fieldname": "column_break_hnxe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transportation_multicheck_html",
+   "fieldtype": "HTML"
+  },
+  {
+   "bold": 1,
+   "depends_on": "eval: !doc.__islocal",
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Transportation",
+   "options": "\nSea\nAir",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
    "bold": 1,
    "default": "Draft",
    "depends_on": "eval: !doc.__islocal",
@@ -57,7 +83,55 @@
    "search_index": 1
   },
   {
-   "fieldname": "column_break_3",
+   "fieldname": "section_description",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval: !doc.customer_description;",
+   "description": "Description provided by the warehouse (if available).",
+   "fieldname": "warehouse_description",
+   "fieldtype": "Small Text",
+   "label": "Warehouse Description"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "description": "Description provided by the customer (if available).",
+   "fieldname": "customer_description",
+   "fieldtype": "Small Text",
+   "label": "Customer Description",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: !doc.__islocal",
+   "fieldname": "section_timestamps",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "now",
+   "fieldname": "opening_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Opening Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "closing_date",
+   "fieldtype": "Datetime",
+   "in_preview": 1,
+   "label": "Closing Date"
+  },
+  {
+   "fieldname": "column_break_10",
    "fieldtype": "Column Break"
   },
   {
@@ -81,49 +155,34 @@
    "read_only_depends_on": "eval: doc.status == 'Finished';"
   },
   {
-   "fieldname": "column_break_8",
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_23",
    "fieldtype": "Column Break"
   },
   {
-   "default": "now",
-   "fieldname": "opening_date",
-   "fieldtype": "Datetime",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Opening Date",
-   "reqd": 1
+   "fieldname": "hazardous",
+   "fieldtype": "Select",
+   "label": "Hazardous",
+   "options": "No\nYes"
   },
   {
-   "fieldname": "closing_date",
-   "fieldtype": "Datetime",
-   "in_preview": 1,
-   "label": "Closing Date"
+   "fieldname": "carrier_label_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Carrier Label"
   },
   {
-   "fieldname": "column_break_10",
-   "fieldtype": "Column Break"
+   "fieldname": "content_inside_img",
+   "fieldtype": "Attach Image",
+   "label": "Photo of Content Inside"
   },
   {
-   "fieldname": "column_break_14",
-   "fieldtype": "Column Break"
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "default": "0.00",
-   "description": "Weight in pounds provided by the warehouse (if available).",
-   "fieldname": "volumetric_weight",
-   "fieldtype": "Float",
-   "in_preview": 1,
-   "label": "Total Vol. Weight"
-  },
-  {
-   "bold": 1,
-   "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
-   "fieldname": "carrier_est_gross_weight",
-   "fieldtype": "Float",
-   "label": "Estimated Gross Weight by Carriers (in pounds)",
-   "read_only": 1
+   "depends_on": "eval: !doc.__islocal",
+   "fieldname": "section_totals",
+   "fieldtype": "Section Break"
   },
   {
    "bold": 1,
@@ -141,80 +200,25 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "hazardous",
-   "fieldtype": "Select",
-   "label": "Hazardous",
-   "options": "No\nYes"
-  },
-  {
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
-  },
-  {
-   "fieldname": "carrier_label_img",
-   "fieldtype": "Attach Image",
-   "label": "Photo of Carrier Label"
-  },
-  {
-   "fieldname": "content_inside_img",
-   "fieldtype": "Attach Image",
-   "label": "Photo of Content Inside"
-  },
-  {
-   "bold": 1,
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "transportation",
-   "fieldtype": "Select",
-   "in_list_view": 1,
+   "allow_in_quick_entry": 1,
+   "default": "0.00",
+   "description": "Weight in pounds provided by the warehouse (if available).",
+   "fieldname": "volumetric_weight",
+   "fieldtype": "Float",
    "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Transportation",
-   "options": "\nSea\nAir",
-   "read_only": 1,
-   "reqd": 1,
-   "search_index": 1
+   "label": "Total Vol. Weight"
   },
   {
-   "fieldname": "transportation_multicheck_html",
-   "fieldtype": "HTML"
-  },
-  {
-   "fieldname": "section_description",
-   "fieldtype": "Section Break"
-  },
-  {
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "section_timestamps",
-   "fieldtype": "Section Break"
-  },
-  {
-   "depends_on": "eval: !doc.customer_description;",
-   "description": "Description provided by the warehouse (if available).",
-   "fieldname": "warehouse_description",
-   "fieldtype": "Small Text",
-   "label": "Warehouse Description"
-  },
-  {
-   "fieldname": "column_break_9",
+   "fieldname": "column_break_14",
    "fieldtype": "Column Break"
   },
   {
    "bold": 1,
-   "description": "Description provided by the customer (if available).",
-   "fieldname": "customer_description",
-   "fieldtype": "Small Text",
-   "label": "Customer Description",
+   "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
+   "fieldname": "carrier_est_gross_weight",
+   "fieldtype": "Float",
+   "label": "Estimated Gross Weight by Carriers (in pounds)",
    "read_only": 1
-  },
-  {
-   "fieldname": "column_break_23",
-   "fieldtype": "Column Break"
-  },
-  {
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "section_totals",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "tracking_barcode",
@@ -223,10 +227,6 @@
   {
    "fieldname": "name_barcode",
    "fieldtype": "Barcode"
-  },
-  {
-   "fieldname": "column_break_hnxe",
-   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -242,9 +242,9 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2023-10-13 14:52:48.564742",
+ "modified": "2023-10-13 15:18:51.200303",
  "modified_by": "Administrator",
- "module": "Warehouse Customization",
+ "module": "Warehouse Management",
  "name": "Warehouse Receipt",
  "owner": "Administrator",
  "permissions": [
@@ -299,5 +299,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "track_seen": 1
 }
