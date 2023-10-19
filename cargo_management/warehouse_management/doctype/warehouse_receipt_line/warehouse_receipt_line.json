@@ -5,7 +5,10 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "package",
+  "parcel",
+  "parcel_transportation",
+  "parcel_customer",
+  "parcel_customer_name",
   "type",
   "dimmensions_section",
   "warehouse_est_weight",
@@ -31,6 +34,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "columns": 1,
    "description": "Estimated weight as measured by the warehouse (if available).",
    "fieldname": "warehouse_est_weight",
    "fieldtype": "Float",
@@ -52,6 +56,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "columns": 1,
    "fieldname": "length",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -63,6 +68,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "columns": 1,
    "fieldname": "width",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -75,6 +81,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "columns": 1,
    "fieldname": "height",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -85,7 +92,7 @@
   {
    "bold": 1,
    "columns": 2,
-   "fieldname": "package",
+   "fieldname": "parcel",
    "fieldtype": "Link",
    "in_global_search": 1,
    "in_list_view": 1,
@@ -93,11 +100,37 @@
    "options": "Parcel",
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "parcel.transportation",
+   "fieldname": "parcel_transportation",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Transportation"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "parcel.customer_name",
+   "fieldname": "parcel_customer_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Customer Name"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "parcel.customer",
+   "fieldname": "parcel_customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-10-13 15:53:41.352964",
+ "modified": "2023-10-13 17:21:53.331524",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt Line",
