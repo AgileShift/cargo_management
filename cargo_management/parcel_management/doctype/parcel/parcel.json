@@ -18,6 +18,8 @@
   "status",
   "extra_services_section",
   "assisted_purchase",
+  "column_break_xquh",
+  "residential_address",
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
   "carrier_real_delivery",
@@ -32,22 +34,19 @@
   "content",
   "totals_section",
   "column_break_4",
+  "shipper",
+  "order_number",
+  "notes",
   "column_break_5tood",
+  "column_break_5",
   "shipping_amount",
   "has_taxes",
   "total",
   "links_section",
-  "warehouse_receipt",
   "cargo_shipment",
-  "extra_info_tab",
-  "shipper",
-  "notes",
-  "column_break_5",
-  "order_number",
-  "signature",
-  "easypost_id",
   "explained_status",
-  "connections_tab"
+  "easypost_id",
+  "warehouse_receipt_test"
  ],
  "fields": [
   {
@@ -205,13 +204,6 @@
    "label": "Number of Order"
   },
   {
-   "depends_on": "eval: !doc.__islocal",
-   "description": "Customer signature.",
-   "fieldname": "signature",
-   "fieldtype": "Signature",
-   "label": "Signature"
-  },
-  {
    "fieldname": "content_section",
    "fieldtype": "Section Break",
    "hide_border": 1
@@ -249,18 +241,6 @@
    "label": "Shipping Amount",
    "non_negative": 1,
    "options": "USD"
-  },
-  {
-   "bold": 1,
-   "fieldname": "warehouse_receipt",
-   "fieldtype": "Link",
-   "in_global_search": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Warehouse Receipt",
-   "options": "Warehouse Receipt",
-   "read_only": 1,
-   "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -329,11 +309,6 @@
    "report_hide": 1
   },
   {
-   "fieldname": "extra_info_tab",
-   "fieldtype": "Tab Break",
-   "label": "Additional Information"
-  },
-  {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
   },
@@ -360,46 +335,55 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "connections_tab",
-   "fieldtype": "Tab Break",
-   "label": "Connections",
-   "show_dashboard": 1
+   "bold": 1,
+   "default": "0",
+   "description": "Package was sent to a Residential Address(Non Freight Forward)",
+   "fieldname": "residential_address",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Residential Address"
+  },
+  {
+   "fieldname": "column_break_xquh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse_receipt_test",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "is_virtual": 1,
+   "label": "link for test",
+   "options": "Warehouse Receipt"
   }
  ],
  "links": [
   {
    "group": "Warehouse",
    "link_doctype": "Warehouse Receipt",
-   "link_fieldname": "package",
-   "parent_doctype": "Warehouse Receipt"
+   "link_fieldname": "parcel"
   },
   {
-   "group": "Cargo Shipment",
+   "group": "Shipment",
    "link_doctype": "Cargo Shipment",
    "link_fieldname": "package"
   },
   {
-   "group": "Cargo Shipment",
+   "group": "Shipment",
    "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "package"
   },
   {
-   "group": "Sell",
+   "group": "Selling",
    "link_doctype": "Sales Order",
    "link_fieldname": "package"
   },
   {
-   "group": "Sell",
+   "group": "Selling",
    "link_doctype": "Sales Invoice",
-   "link_fieldname": "package"
-  },
-  {
-   "group": "Support",
-   "link_doctype": "Issue",
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-09-15 14:04:09.501205",
+ "modified": "2023-10-19 07:23:16.368861",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

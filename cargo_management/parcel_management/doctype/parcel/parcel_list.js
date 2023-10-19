@@ -1,9 +1,10 @@
 frappe.listview_settings['Parcel'] = {
+	add_fields: ['carrier'],
+	filters: [
+		['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']] // aka 'Active Parcels'
+	],
 
 	// TODO DELETE: 'consolidated_tracking_numbers' 12 Matches
-
-	add_fields: ['carrier'],
-	filters: [['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']]],  // aka 'Active Parcels'
 
 	onload(listview) {
 		const {name: name_field, tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
@@ -49,7 +50,7 @@ frappe.listview_settings['Parcel'] = {
 
 			return args;
 		};
-    },
+	},
 
 	// Unused: light-blue. // TODO: Migrate to Document States? Maybe when frappe core starts using it.
 	get_indicator: (doc) => [__(doc.status), {
