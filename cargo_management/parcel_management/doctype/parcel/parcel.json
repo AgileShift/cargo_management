@@ -45,8 +45,7 @@
   "links_section",
   "cargo_shipment",
   "explained_status",
-  "easypost_id",
-  "warehouse_receipt_test"
+  "easypost_id"
  ],
  "fields": [
   {
@@ -346,14 +345,6 @@
   {
    "fieldname": "column_break_xquh",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "warehouse_receipt_test",
-   "fieldtype": "Link",
-   "in_standard_filter": 1,
-   "is_virtual": 1,
-   "label": "link for test",
-   "options": "Warehouse Receipt"
   }
  ],
  "links": [
@@ -383,7 +374,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-10-19 07:23:16.368861",
+ "modified": "2023-10-19 07:31:05.092194",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
