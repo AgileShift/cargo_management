@@ -1,18 +1,18 @@
 [project]
 name = "cargo_management"
-description = "ERPNext Cargo Management for freight forwarders"
-readme = "README.md"
-license = { file = "LICENSE.txt" }
-dynamic = ["version"]
-
-requires-python = ">=3.11"
-
+description = "ERPNext Cargo Management for Freight Forwarders"
 authors = [
     { name = "Agile Shift", email = "contacto@gruporeal.org" }
 ]
 
+requires-python = ">=3.12"
+
+readme = "README.md"
+license = { file = "LICENSE.txt" }
+dynamic = ["version"]
+
 dependencies = [
-    "easypost==8.1.1"
+    "easypost==8.2.1"
 ]
 
 [build-system]

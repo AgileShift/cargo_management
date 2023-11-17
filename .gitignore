@@ -1,12 +1,11 @@
 .DS_Store
 *.pyc
-*.py~
 *.egg-info
 *.swp
 tags
-cargo_management/docs/current
-node_modules/
-*.vcf
+node_modules
 
-dist/
-__pycache__/
+dist
+__pycache__
+
+*.vcf

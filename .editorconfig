@@ -9,6 +9,12 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[{*.py,*.js}]
+[{*.py,*.js,*.vue,*.css,*.scss,*.html}]
 indent_style = tab
 indent_size = 4
+max_line_length = 99
+
+[*.json]
+insert_final_newline = false
+indent_style = space
+indent_size = 2
