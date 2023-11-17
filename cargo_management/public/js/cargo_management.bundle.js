@@ -11,6 +11,20 @@ cargo_management = {
 		'Air': {icon: 'plane', color: 'red'}
 	},
 
+
+	// TODO: WORK IN PROGRESS
+
+	make_transportation_multicheck_control(parent, frm) {
+		frappe.ui.form.make_control()
+	},
+
+	// With this we can handle all our App Status Indicator Colors
+	get_indicator: (status) => [__(doc.status), {
+
+	}[status], 'status,=,' + status],
+
+	// TODO: WORK IN PROGRESS
+
 	find_carrier_by_tracking_number(tracking_number) {
 		tracking_number = tracking_number.trim().toUpperCase(); // Sanitize field
 
@@ -76,4 +90,4 @@ cargo_management = {
 		return {api, urls};
 	}
 };
-// TODO DELETE: asdasd
+// TODO DELETE: asdasd 79 WORKING!
