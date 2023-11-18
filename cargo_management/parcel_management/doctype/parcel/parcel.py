@@ -19,12 +19,12 @@ class Parcel(Document):
 
 		assisted_purchase: DF.Check
 		cargo_shipment: DF.Link | None
-		carrier: DF.Literal['Drop Off', 'Pick Up', 'Unknown', 'Amazon', 'USPS', 'UPS', 'DHL', 'FedEx', 'OnTrac', 'Cainiao', 'SF Express', 'Yanwen', 'YunExpress', 'SunYou', 'Pitney Bowes']
+		carrier: DF.Literal["Drop Off", "Pick Up", "Unknown", "Amazon", "USPS", "UPS", "DHL", "FedEx", "OnTrac", "Cainiao", "SF Express", "Yanwen", "YunExpress", "SunYou", "Pitney Bowes"]
 		carrier_est_delivery: DF.Datetime | None
 		carrier_est_weight: DF.Float
 		carrier_last_detail: DF.SmallText | None
 		carrier_real_delivery: DF.Datetime | None
-		carrier_status: DF.Literal['Unknown', 'Pre Transit', 'In Transit', 'Out For Delivery', 'Available For Pickup', 'Delivered', 'Return To Sender', 'Failure', 'Cancelled', 'Error']
+		carrier_status: DF.Literal["Unknown", "Pre Transit", "In Transit", "Out For Delivery", "Available For Pickup", "Delivered", "Return To Sender", "Failure", "Cancelled", "Error"]
 		carrier_status_detail: DF.Data | None
 		content: DF.Table[ParcelContent]
 		customer: DF.Link | None
@@ -34,14 +34,14 @@ class Parcel(Document):
 		has_taxes: DF.Check
 		notes: DF.SmallText | None
 		order_number: DF.Data | None
+		residential_address: DF.Check
 		shipper: DF.Data | None
 		shipping_amount: DF.Currency
 		signed_by: DF.Data | None
-		status: DF.Literal['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'In Customs', 'Sorting', 'To Bill', 'Unpaid', 'For Delivery or Pickup', 'Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']
+		status: DF.Literal["Awaiting Receipt", "Awaiting Confirmation", "In Extraordinary Confirmation", "Awaiting Departure", "In Transit", "In Customs", "Sorting", "To Bill", "Unpaid", "For Delivery or Pickup", "Finished", "Cancelled", "Never Arrived", "Returned to Sender"]
 		total: DF.Currency
 		tracking_number: DF.Data
-		transportation: DF.Literal['Sea', 'Air']
-		warehouse_receipt: DF.Link | None
+		transportation: DF.Literal["Sea", "Air"]
 	# end: auto-generated types
 	"""  All these are Frappe Core Flags:
 		'ignore_links':       avoid: _validate_links()
@@ -50,6 +50,8 @@ class Parcel(Document):
 		'ignore_permissions': avoid: will not check for permissions globally.
 	"""
 
+	# TODO: Add Override Decorator for python 3.12
+	#@override
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behaviour. Useful when called from outside a form. """
 		if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
@@ -223,6 +225,9 @@ class Parcel(Document):
 			case _:
 				frappe.msgprint(_('Parcel is handled by a carrier we can\'t track.'), indicator='red', alert=True)
 				return
+
+		if not api_data:  # HOTFIX: We should always return something?
+			return  # If we don't return, the try will fail, and api_data.get will raise a big error(None has not .get())
 
 		try:
 			print('ELSE: UPDATING FROM API DATA')

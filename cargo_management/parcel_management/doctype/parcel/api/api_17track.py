@@ -95,8 +95,12 @@ class API17Track:
 		""" Convert a dict from 17Track to our Parcel Object. """
 		obj_17track = SimpleNamespace(**response)
 		obj_17track.latest_status = SimpleNamespace(**response['latest_status'])
+
 		obj_17track.latest_event = SimpleNamespace(**response['latest_event'])
+		obj_17track.latest_event.address = SimpleNamespace(**response['latest_event']['address'])
+
 		obj_17track.misc_info = SimpleNamespace(**response['misc_info'])
+
 		obj_17track.time_metrics = SimpleNamespace(**response['time_metrics'])
 		obj_17track.time_metrics.estimated_delivery_date = SimpleNamespace(**response['time_metrics']['estimated_delivery_date'])
 
@@ -149,7 +153,8 @@ def webhook_17track(**kwargs):
 		if kwargs['event'] != 'TRACKING_UPDATED':
 			return 'Not a Tracker Update Webhook Event'  # TODO: Make something with this?
 
-		parcel = frappe.get_doc('Parcel', {'tracking_number': kwargs['data']['number']})  # Search Parcel
+		from cargo_management.parcel_management.doctype.parcel.parcel import Parcel
+		parcel = Parcel({'tracking_number': kwargs['data']['number']})  # frappe.get_doc('Parcel', )  # Search Parcel
 	except (KeyError, frappe.DoesNotExistError, Exception) as e:
 		frappe.log_error(
 			f"17Track Webhook: {type(e).__name__} -> {e}",

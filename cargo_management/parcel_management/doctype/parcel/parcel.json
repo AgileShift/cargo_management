@@ -334,11 +334,13 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "0",
    "description": "Package was sent to a Residential Address(Non Freight Forward)",
    "fieldname": "residential_address",
    "fieldtype": "Check",
+   "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Residential Address"
   },
@@ -374,7 +376,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-10-19 07:31:05.092194",
+ "modified": "2023-11-17 14:00:34.682486",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
