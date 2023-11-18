@@ -51,6 +51,8 @@ class Parcel(Document):
 	"""
 
 	# TODO: Add Override Decorator for python 3.12
+	# TODO: Replace frappe.get_doc for DoctypeClass import. for Typing Completion
+
 	#@override
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behaviour. Useful when called from outside a form. """

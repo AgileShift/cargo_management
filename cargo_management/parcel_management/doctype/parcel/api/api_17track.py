@@ -153,8 +153,9 @@ def webhook_17track(**kwargs):
 		if kwargs['event'] != 'TRACKING_UPDATED':
 			return 'Not a Tracker Update Webhook Event'  # TODO: Make something with this?
 
-		from cargo_management.parcel_management.doctype.parcel.parcel import Parcel
-		parcel = Parcel({'tracking_number': kwargs['data']['number']})  # frappe.get_doc('Parcel', )  # Search Parcel
+		#from cargo_management.parcel_management.doctype.parcel.parcel import Parcel
+		#parcel = Parcel({'tracking_number': kwargs['data']['number']})  # This Wont Work for now!
+		frappe.get_doc('Parcel', {'tracking_number': kwargs['data']['number']})  # Search Parcel
 	except (KeyError, frappe.DoesNotExistError, Exception) as e:
 		frappe.log_error(
 			f"17Track Webhook: {type(e).__name__} -> {e}",
