@@ -260,6 +260,7 @@ class Parcel(Document):
 				return api_data
 		except Exception as e:
 			frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
+			return None  # HOTFIX for "if not api_data:"
 
 	def update_from_api_data(self, api_data: dict) -> None:
 		""" This updates the parcel with the data from the API. """
