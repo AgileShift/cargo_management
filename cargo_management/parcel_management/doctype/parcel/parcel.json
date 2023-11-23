@@ -92,7 +92,7 @@
    "fieldtype": "Select",
    "in_standard_filter": 1,
    "label": "Carrier",
-   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes",
+   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes\nVeho",
    "reqd": 1,
    "search_index": 1
   },
@@ -376,7 +376,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-11-17 14:00:34.682486",
+ "modified": "2023-11-17 22:48:50.169088",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
