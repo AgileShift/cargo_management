@@ -88,9 +88,11 @@
    "label": "Expected Arrival Date"
   },
   {
+   "bold": 1,
    "description": "Real arrival date of cargo shipment to his final destination.",
    "fieldname": "arrival_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Arrival Date",
    "read_only": 1
   },
@@ -176,7 +178,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2023-09-18 07:28:53.688013",
+ "modified": "2023-10-13 13:41:46.635641",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

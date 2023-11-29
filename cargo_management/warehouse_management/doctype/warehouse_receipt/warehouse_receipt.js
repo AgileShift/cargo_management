@@ -3,15 +3,18 @@ frappe.ui.form.on('Warehouse Receipt', {
 	transportation_multi_check: function (frm) {
 		frm.transportation = frappe.ui.form.make_control({
 			parent: frm.fields_dict.transportation_multicheck_html.$wrapper.addClass('text-center'),
+			render_input: true,
 			df: {
-				label: __('Transportation Method'),
+				placeholder: __('Select item group'),
+				fieldname: 'transportation_options',
 				fieldtype: 'MultiCheckSingle',
-				reqd: true,
-				columns: 2,
-				options: [{label: __('SEA'), value: 'Sea'}, {label: __('AIR'), value: 'Air'}],
+				label: __('Transportation'),
+				reqd: true, bold: true, columns: 2,
+				options: [{label: __('SEA'), value: 'Sea'}, {label: __('AIR'), value: 'Air', description: 'Air'}],
 				on_change: (selected) => frm.doc.transportation = selected
 			}
 		});
+
 	},
 
 	setup: function (frm) {
@@ -115,14 +118,4 @@ frappe.ui.form.on('Warehouse Receipt', {
 	},
 });
 
-frappe.ui.form.on('Warehouse Receipt Line', {
-
-});
-
-// https://stackoverflow.com/a/1977126/3172310 -> When a Button is in a Table
-//$(document).on('keydown', "input[data-fieldname='tracking_number'], input[data-fieldname='weight'], " +
-//    "input[data-fieldname='length'], input[data-fieldname='width'], input[data-fieldname='height']", (event) => {
-//    if (event.key === 'Enter') {  // Enter key is sent if field is set from barcode scanner.
-//        event.preventDefault(); // We prevent the button 'Attach Image' opens a pop-up.
-//    }
-//});
+frappe.ui.form.on('Warehouse Receipt Line', {}); // FIXME 134

@@ -22,8 +22,8 @@ class CargoShipment(Document):
         expected_arrival_date: DF.Date | None
         mute_emails: DF.Check
         pieces: DF.Int
-        status: DF.Literal['Awaiting Departure', 'In Transit', 'Sorting', 'Finished']
-        transportation: DF.Literal['Sea', 'Air']
+        status: DF.Literal["Awaiting Departure", "In Transit", "Sorting", "Finished"]
+        transportation: DF.Literal["Sea", "Air"]
         warehouse_lines: DF.Table[CargoShipmentWarehouse]
     # end: auto-generated types
 

@@ -10,20 +10,16 @@ class WarehouseReceipt(Document):
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
-		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import \
-			WarehouseReceiptLine
+		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import WarehouseReceiptLine
 		from frappe.types import DF
 
 		carrier_est_gross_weight: DF.Float
-		closing_date: DF.Datetime | None
 		departure_date: DF.Date | None
-		opening_date: DF.Datetime
 		status: DF.Literal["Draft", "Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
 		transportation: DF.Literal["", "Sea", "Air"]
 		volumetric_weight: DF.Float
 		warehouse_est_gross_weight: DF.Float
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
-
 	# end: auto-generated types
 
 	def on_update(self):
@@ -32,7 +28,7 @@ class WarehouseReceipt(Document):
 		# TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
 
 		# We only change the warehouse_receipt field if it is different from current.
-		packages = get_list_from_child_table(self.warehouse_receipt_lines, 'package')
+		packages = get_list_from_child_table(self.warehouse_receipt_lines, 'parcel')
 
 		if not packages:
 			return

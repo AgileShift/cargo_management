@@ -1,12 +1,12 @@
 frappe.listview_settings['Warehouse Receipt'] = {
-	filters: [['status', 'not in', ['Sorting', 'Finished']]], hide_name_column: true,
+	filters: [['status', 'not in', ['Sorting', 'Finished']]],
+	hide_name_column: true,
 
 	onload(listview) {
 		listview.page.sidebar.toggle(false); // Hide Sidebar
 	},
 
-	before_render() {
-	},
+	before_render() {},
 
 	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
 	get_indicator: (doc) => [__(doc.status), {
