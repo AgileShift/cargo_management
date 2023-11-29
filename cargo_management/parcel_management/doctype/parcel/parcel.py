@@ -5,7 +5,7 @@ from frappe import _
 from frappe.model.document import Document
 from .api.api_17track import API17Track
 from .api.easypost_api import EasyPostAPI
-from .constants import Status, MessageColor, LocaleLanguage, StatusMessage
+from .constants import Status, MessageColor, StatusMessage
 
 
 class Parcel(Document):
@@ -104,12 +104,11 @@ class Parcel(Document):
 	def explained_status(self):
 		""" This returns a detailed explanation of the current status of the Parcel and compatible colors. """
 		# TODO: Python 3.10: Migrate to switch case or Improve performance?
+		# frappe.local.lang = LocaleLanguage.SPANISH  # Little Hack
 
 		message, color = [], MessageColor.BLUE  # TODO: Add more colors? Check frappe colors
 
-		frappe.local.lang = LocaleLanguage.SPANISH  # Little Hack
-
-		if self.status == Status.AWAIT_RECEIPT:
+		if self.status == Status.AWAITING_RECEIPT:
 			message = [StatusMessage.TRANSPORTATION_NOT_DELIVERED_YET]
 
 			if self.carrier_est_delivery:  # The carrier has provided an estimated delivery date
@@ -131,7 +130,8 @@ class Parcel(Document):
 			else:
 				color = MessageColor.YELLOW
 				message.append(StatusMessage.NOT_DELIVERY_DATE_ESTIMATED)
-		elif self.status in [Status.AWAIT_CONFIRM, Status.IN_EXTRA_CONFIRMATION]:
+
+		elif self.status in [Status.AWAITING_CONFIRMATION, Status.IN_EXTRAORDINARY_CONFIRMATION]:
 			if self.carrier_real_delivery:
 				message = [
 					StatusMessage.TRANSPORTATION_DELIVERED_DATE.value.replace(
@@ -164,10 +164,10 @@ class Parcel(Document):
 						frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
 				]
 
-			if self.status == Status.IN_EXTRA_CONFIRMATION:
+			if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
 				color = MessageColor.PINK
 				message.append(StatusMessage.PACKAGE_IN_EXTRAORDINARY_REVISION)
-		elif self.status == Status.AWAIT_DEPARTURE:
+		elif self.status == Status.AWAITING_DEPARTURE:
 			# TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
 			#cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
@@ -200,11 +200,11 @@ class Parcel(Document):
 				StatusMessage.CARGO_SHIPMENT.value.replace('[SHIPMENT]', self.cargo_shipment)
 			]
 
-		elif self.status == Status.IN_CUSTOM:
+		elif self.status == Status.IN_CUSTOMS:
 			message, color = [StatusMessage.PACKAGE_IN_CUSTOMS], MessageColor.GRAY
 		elif self.status in [Status.SORTING, Status.TO_BILL]:
 			message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], MessageColor.BLUE
-		elif self.status in [Status.UNPAID, Status.DELIVERY_OR_PICKUP]:
+		elif self.status in [Status.UNPAID, Status.FOR_DELIVERY_OR_PICKUP]:
 			message, color = [StatusMessage.PACKAGE_READY], MessageColor.BLUE
 		elif self.status == Status.FINISHED:
 			message, color = [StatusMessage.PACKAGE_FINISHED], MessageColor.GREEN  # TODO: Show invoice, delivery and payment details.
@@ -212,11 +212,11 @@ class Parcel(Document):
 			message, color = [StatusMessage.CONTACT_AGENT_FOR_PACKAGE_INFO], MessageColor.ORANGE
 		elif self.status == Status.NEVER_ARRIVED:
 			message, color = [StatusMessage.PACKAGE_NEVER_ARRIVED], MessageColor.RED
-		elif self.status == Status.RETURN_TO_SENDER:
+		elif self.status == Status.RETURNED_TO_SENDER:
 			message, color = [StatusMessage.PACKAGE_RETURNED], MessageColor.RED
 
 		# Adding extra message
-		if self.status in [Status.NEVER_ARRIVED, Status.RETURN_TO_SENDER]:
+		if self.status in [Status.NEVER_ARRIVED, Status.RETURNED_TO_SENDER]:
 			message.append(StatusMessage.CONTACT_FOR_MORE_INFO)
 
 		return {'message': message, 'color': color}
@@ -289,3 +289,4 @@ class Parcel(Document):
 
 #FIXME: 19 warning, 20 w warning, 83 typos -> 287
 #FIXME: 2 warning, 20 w warning, 85 typos -> 276
+# 292 Refactor de constantes y estados
