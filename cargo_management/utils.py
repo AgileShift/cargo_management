@@ -10,6 +10,7 @@ def get_list_from_child_table(child_lines: list, field: str):
 	return list(set(child_line.get(field) for child_line in child_lines if child_line.get(field)))  # FIXME: Performance?
 
 
+# https://github.com/frappe/frappe/pull/23414
 def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_title: str = '', mute_emails: bool = True):
 	"""
 	This tries to update all docs statuses, no matter what doctype is.

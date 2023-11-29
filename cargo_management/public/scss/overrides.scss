@@ -13,6 +13,6 @@ textarea.form-control[data-fieldtype="Small Text"] {
 // See: frappe/scss/form.scss -> Where the properties are not selected properly
 .like-disabled-input {
   &.bold {
-    font-weight: bold;
+    font-weight: var(--weight-bold); // FIXME: Maybe this will be fixed!
   }
 }

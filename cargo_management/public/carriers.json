@@ -66,6 +66,10 @@
       "api": "17Track",
       "default_carriers": ["Parcels", "17Track", "EVEREST"],
       "tracking_url": "https://trackpb.shipment.co/track/"
+    },
+    "Veho": {
+      "default_carriers": ["Parcels", "17Track", "EVEREST"],
+      "tracking_url": "https://track.shipveho.com/#/trackingId/"
     }
   }
 }

@@ -37,6 +37,7 @@ cargo_management = {
 			{carrier: 'UPS',        regex: /^1Z/},
 			{carrier: 'SunYou',     regex: /^SY/},       // SYUS & SYAE & SYBA
 			{carrier: 'SF Express', regex: /^SF/},
+			{carrier: 'Veho',       regex: /^1V/},  // FIXME: We can enforce length?
 			{carrier: 'Amazon',     regex: /^TBA/},
 			//{carrier: 'UniUni',     regex: /^UUS0/},     // 'YunExpress' -> YT, sometimes delivers to UniUni
 			{carrier: 'Cainiao',    regex: /^LP00/},     // Cainiao can sometimes track 'Yanwen' and 'SunYou'
