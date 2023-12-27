@@ -185,6 +185,8 @@
    "read_only": 1
   },
   {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
    "description": "Store that sends the package.",
    "fieldname": "shipper",
    "fieldtype": "Data",
@@ -376,7 +378,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-11-17 22:48:50.169088",
+ "modified": "2023-12-27 15:01:30.523994",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
