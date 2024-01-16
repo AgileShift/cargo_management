@@ -16,3 +16,64 @@ textarea.form-control[data-fieldtype="Small Text"] {
     font-weight: var(--weight-bold); // FIXME: Maybe this will be fixed!
   }
 }
+
+
+// Overriding MulticheckSingle
+div.frappe-control[data-fieldtype="MultiCheckSingle"] {
+  .checkbox {
+    &.unit-checkbox {
+      display: flex;
+      label[title="Sea"] {
+        display: block;
+        width: 100%;
+        border: 1px solid blue;
+        border-radius: 5px;
+
+        * {
+          color: blue !important;
+        }
+
+        &:has(input:checked) {
+
+          background-color: blue;
+
+          * {
+            color: white !important;
+          }
+          
+        }
+
+        input {
+          position: absolute;
+          visibility: hidden;
+        }
+      }
+
+      label[title="Air"] {
+        display: block;
+        width: 100%;
+        border: 1px solid red;
+        border-radius: 5px;
+
+        * {
+          color: red !important;
+        }
+
+        &:has(input:checked) {
+
+          background-color: red !important;
+
+          * {
+            color: white !important;
+          }
+          
+        }
+
+        input {
+          position: absolute;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}

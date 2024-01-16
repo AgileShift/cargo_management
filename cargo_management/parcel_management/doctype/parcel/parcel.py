@@ -1,3 +1,4 @@
+from .utils import ParcelStateMachine
 from easypost.errors.api import ApiError as EasyPostAPIError
 
 import frappe
@@ -87,18 +88,21 @@ class Parcel(Document):
 
 		# TODO: Validate this when status is changed on Form-View or List-View
 		"""
+		psm = ParcelStateMachine(status=self.status)
 
-		if self.status != new_status and \
-			(self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
-			(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
-			(self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
-			(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting') or \
-			(self.status not in ['Unpaid', 'For Delivery or Pickup', 'Finished'] and new_status == 'To Bill') or \
-			(self.status == 'To Bill' and new_status == 'Unpaid'):
-			self.status = new_status
-			return True
+		psm.transition(new_status)
 
-		return False
+		# if self.status != new_status and \
+		# 	(self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
+		# 	(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
+		# 	(self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
+		# 	(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting') or \
+		# 	(self.status not in ['Unpaid', 'For Delivery or Pickup', 'Finished'] and new_status == 'To Bill') or \
+		# 	(self.status == 'To Bill' and new_status == 'Unpaid'):
+		# 	self.status = new_status
+		# 	return True
+
+		# return False
 
 	@property
 	def explained_status(self):
@@ -108,72 +112,41 @@ class Parcel(Document):
 
 		message, color = [], MessageColor.BLUE  # TODO: Add more colors? Check frappe colors
 
-		if self.status == Status.AWAITING_RECEIPT:
-			message = [StatusMessage.TRANSPORTATION_NOT_DELIVERED_YET]
+		match self.status:
+			case Status.AWAITING_RECEIPT:
+				message = [StatusMessage.TRANSPORTATION_NOT_DELIVERED_YET]
 
-			if self.carrier_est_delivery:  # The carrier has provided an estimated delivery date
-				est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to today
-				est_delivery_date = frappe.utils.format_date(self.carrier_est_delivery, 'medium')  # readable date
+				if self.carrier_est_delivery:  # The carrier has provided an estimated delivery date
+					est_delivery_diff = frappe.utils.date_diff(None, self.carrier_est_delivery)  # Diff from estimated to today
+					est_delivery_date = frappe.utils.format_date(self.carrier_est_delivery, 'medium')  # readable date
 
-				if est_delivery_diff == 0:  # Delivery is today
-					message.append(StatusMessage.ESTIMATED_DELIVERY_DATE_TODAY)
-				elif est_delivery_diff == -1:  # Delivery is tomorrow
-					message.append(StatusMessage.ESTIMATED_DELIVERY_DATE_TOMORROW)
-				elif est_delivery_diff < 0:  # Delivery is in the next days
-					# message.append('La fecha programada es: {}'.format(est_delivery_date))
-					message.append(StatusMessage.ESTIMATED_DELIVERY_DATE.value.replace('[DATE]', est_delivery_date))
-				else:  # Delivery is late
-					color = MessageColor.PINK
-					# message.append('Esta retrasado. Debio de ser entregado el: {}'.format(est_delivery_date))
-					message.append(StatusMessage.DELAYED_DELIVERY_DATE.value.replace('[DATE]', est_delivery_date))
-					message.append(StatusMessage.CONTACT_YOUR_PROVIDER_FOR_INFO)
-			else:
-				color = MessageColor.YELLOW
-				message.append(StatusMessage.NOT_DELIVERY_DATE_ESTIMATED)
-
-		elif self.status in [Status.AWAITING_CONFIRMATION, Status.IN_EXTRAORDINARY_CONFIRMATION]:
-			if self.carrier_real_delivery:
-				message = [
-					StatusMessage.TRANSPORTATION_DELIVERED_DATE.value.replace(
-						'[DATE]',
-						frappe.utils.format_datetime(self.carrier_real_delivery, "EEEE, d 'de' MMMM yyyy 'a las' h:mm a").capitalize()
-					)
-				]
-
-				if self.signed_by:
-					message.append(StatusMessage.SIGNED_BY.value.replace('[SIGNER]', self.signed_by))
-
-				# TODO: check against current user tz: Change None to now in local delivery place timezone
-				delivered_since = frappe.utils.time_diff(None, self.carrier_real_delivery)  # datetime is UTC
-
-				# TODO: Compare Against Workable days
-				# Parcel has exceeded the 24 hours timespan to be confirmed. Same as: time_diff_in_hours() >= 24.00
-				if delivered_since.days >= 1:  # The day starts counting after 1-minute difference
-					color = MessageColor.RED
-					delivered_since_str = StatusMessage.HAS_BEEN_1_DAY if delivered_since.days == 1 else StatusMessage.HAS_BEEN_X_DAYS
-
-					message.append(delivered_since_str.value.replace('[DAYS]', delivered_since.days))
+					if est_delivery_diff == 0:  # Delivery is today
+						message.append(StatusMessage.ESTIMATED_DELIVERY_DATE_TODAY)
+					elif est_delivery_diff == -1:  # Delivery is tomorrow
+						message.append(StatusMessage.ESTIMATED_DELIVERY_DATE_TOMORROW)
+					elif est_delivery_diff < 0:  # Delivery is in the next days
+						# message.append('La fecha programada es: {}'.format(est_delivery_date))
+						message.append(StatusMessage.ESTIMATED_DELIVERY_DATE.value.replace('[DATE]', est_delivery_date))
+					else:  # Delivery is late
+						color = MessageColor.PINK
+						# message.append('Esta retrasado. Debio de ser entregado el: {}'.format(est_delivery_date))
+						message.append(StatusMessage.DELAYED_DELIVERY_DATE.value.replace('[DATE]', est_delivery_date))
+						message.append(StatusMessage.CONTACT_YOUR_PROVIDER_FOR_INFO)
 				else:
-					message.append(StatusMessage.WAIT_FOR_24_HOURS_CONFIRMATION)
+					color = MessageColor.YELLOW
+					message.append(StatusMessage.NOT_DELIVERY_DATE_ESTIMATED)
 
-			else:
-				color = MessageColor.YELLOW
+			case Status.AWAITING_CONFIRMATION:
+				_awaiting_confirmation_or_in_extraordinary_confirmation(self)
+			case Status.IN_EXTRAORDINARY_CONFIRMATION:
+				_awaiting_confirmation_or_in_extraordinary_confirmation(self)
+			case Status.AWAITING_DEPARTURE:
+				# TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
+				#cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
+
+				# TODO: What if we dont have real delivery date. Or signature
 				message = [
-					StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace(
-						'[DATE]',
-						frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
-				]
-
-			if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
-				color = MessageColor.PINK
-				message.append(StatusMessage.PACKAGE_IN_EXTRAORDINARY_REVISION)
-		elif self.status == Status.AWAITING_DEPARTURE:
-			# TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
-			#cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
-
-			# TODO: What if we dont have real delivery date. Or signature
-			message = [
-				StatusMessage.TRANSPORTER_DELIVERY_DATE.value.replace(
+					StatusMessage.TRANSPORTER_DELIVERY_DATE.value.replace(
 					'[DATE]',
 					frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
 				),
@@ -182,42 +155,47 @@ class Parcel(Document):
 				# 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
 
 				# 'Embarque: {}'.format(self.cargo_shipment)
-			]
+				]
+			case Status.IN_TRANSIT:
+				# TODO: Add Departure date and est arrival date
+				if not self.cargo_shipment:
+					return {'message': [StatusMessage.NO_CARGO_SHIPPING], color: MessageColor.RED}
 
-		elif self.status == Status.IN_TRANSIT:
-			# TODO: Add Departure date and est arrival date
-			if not self.cargo_shipment:
-				return {'message': [StatusMessage.NO_CARGO_SHIPPING], color: MessageColor.RED}
+				cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
-			cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
+				color = MessageColor.PURPLE
 
-			color = MessageColor.PURPLE
+				message = [
+					StatusMessage.PACKAGE_IN_TRANSIT_TO_DESTINATION,
+					StatusMessage.DEPARTURE_DATE.value.replace('[DATE]', cargo_shipment.departure_date),
+					StatusMessage.ESTIMATED_RECEPTION_DATE.value.replace('[DATE]', cargo_shipment.expected_arrival_date),
+					StatusMessage.CARGO_SHIPMENT.value.replace('[SHIPMENT]', self.cargo_shipment)
+				]
+			case Status.IN_CUSTOMS:
+				message, color = [StatusMessage.PACKAGE_IN_CUSTOMS], MessageColor.GRAY
+			case Status.SORTING:
+				message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], MessageColor.BLUE
+			case Status.TO_BILL:
+				message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], MessageColor.BLUE
 
-			message = [
-				StatusMessage.PACKAGE_IN_TRANSIT_TO_DESTINATION,
-				StatusMessage.DEPARTURE_DATE.value.replace('[DATE]', cargo_shipment.departure_date),
-				StatusMessage.ESTIMATED_RECEPTION_DATE.value.replace('[DATE]', cargo_shipment.expected_arrival_date),
-				StatusMessage.CARGO_SHIPMENT.value.replace('[SHIPMENT]', self.cargo_shipment)
-			]
+			case Status.UNPAID:
+				message, color = [StatusMessage.PACKAGE_READY], MessageColor.BLUE
+			case  Status.FOR_DELIVERY_OR_PICKUP:
+				message, color = [StatusMessage.PACKAGE_READY], MessageColor.BLUE
 
-		elif self.status == Status.IN_CUSTOMS:
-			message, color = [StatusMessage.PACKAGE_IN_CUSTOMS], MessageColor.GRAY
-		elif self.status in [Status.SORTING, Status.TO_BILL]:
-			message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], MessageColor.BLUE
-		elif self.status in [Status.UNPAID, Status.FOR_DELIVERY_OR_PICKUP]:
-			message, color = [StatusMessage.PACKAGE_READY], MessageColor.BLUE
-		elif self.status == Status.FINISHED:
-			message, color = [StatusMessage.PACKAGE_FINISHED], MessageColor.GREEN  # TODO: Show invoice, delivery and payment details.
-		elif self.status == Status.CANCELLED:
-			message, color = [StatusMessage.CONTACT_AGENT_FOR_PACKAGE_INFO], MessageColor.ORANGE
-		elif self.status == Status.NEVER_ARRIVED:
-			message, color = [StatusMessage.PACKAGE_NEVER_ARRIVED], MessageColor.RED
-		elif self.status == Status.RETURNED_TO_SENDER:
-			message, color = [StatusMessage.PACKAGE_RETURNED], MessageColor.RED
+			case Status.FINISHED:
+				message, color = [StatusMessage.PACKAGE_FINISHED], MessageColor.GREEN  # TODO: Show invoice, delivery and payment details.
+			case Status.CANCELLED:
+				message, color = [StatusMessage.CONTACT_AGENT_FOR_PACKAGE_INFO], MessageColor.ORANGE
+			case Status.NEVER_ARRIVED:
+				message, color = [StatusMessage.PACKAGE_NEVER_ARRIVED], MessageColor.RED
+				message.append(StatusMessage.CONTACT_FOR_MORE_INFO)
+			case Status.RETURNED_TO_SENDER:
+				message, color = [StatusMessage.PACKAGE_RETURNED], MessageColor.RED
+				message.append(StatusMessage.CONTACT_FOR_MORE_INFO)
 
-		# Adding extra message
-		if self.status in [Status.NEVER_ARRIVED, Status.RETURNED_TO_SENDER]:
-			message.append(StatusMessage.CONTACT_FOR_MORE_INFO)
+			case _:
+				...
 
 		return {'message': message, 'color': color}
 
@@ -282,6 +260,44 @@ class Parcel(Document):
 			self.change_status('Returned to Sender')
 		else:  # TODO: Change the status when the carrier status: failure, cancelled, error
 			self.change_status('Awaiting Receipt')
+
+
+def _awaiting_confirmation_or_in_extraordinary_confirmation(self) -> None:
+	if self.carrier_real_delivery:
+			message = [
+				StatusMessage.TRANSPORTATION_DELIVERED_DATE.value.replace(
+					'[DATE]',
+					frappe.utils.format_datetime(self.carrier_real_delivery, "EEEE, d 'de' MMMM yyyy 'a las' h:mm a").capitalize()
+				)
+			]
+
+			if self.signed_by:
+				message.append(StatusMessage.SIGNED_BY.value.replace('[SIGNER]', self.signed_by))
+
+				# TODO: check against current user tz: Change None to now in local delivery place timezone
+				delivered_since = frappe.utils.time_diff(None, self.carrier_real_delivery)  # datetime is UTC
+
+				# TODO: Compare Against Workable days
+				# Parcel has exceeded the 24 hours timespan to be confirmed. Same as: time_diff_in_hours() >= 24.00
+				if delivered_since.days >= 1:  # The day starts counting after 1-minute difference
+					color = MessageColor.RED
+					delivered_since_str = StatusMessage.HAS_BEEN_1_DAY if delivered_since.days == 1 else StatusMessage.HAS_BEEN_X_DAYS
+
+					message.append(delivered_since_str.value.replace('[DAYS]', delivered_since.days))
+				else:
+					message.append(StatusMessage.WAIT_FOR_24_HOURS_CONFIRMATION)
+
+			else:
+				color = MessageColor.YELLOW
+				message = [
+					StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace(
+						'[DATE]',
+						frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
+				]
+
+			if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
+				color = MessageColor.PINK
+				message.append(StatusMessage.PACKAGE_IN_EXTRAORDINARY_REVISION)
 
 # 294(HOTFIX) -> 250(WORKING) FIXME: Better way to update the doc: create some core method that returns a Object that we can concat :D
 #248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
