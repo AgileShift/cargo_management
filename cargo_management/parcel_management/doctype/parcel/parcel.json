@@ -17,9 +17,12 @@
   "transportation",
   "status",
   "extra_services_section",
+  "column_break_mpgh",
+  "column_break_uyaz",
   "assisted_purchase",
   "column_break_xquh",
   "residential_address",
+  "column_break_loiy",
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
   "carrier_real_delivery",
@@ -33,11 +36,13 @@
   "content_section",
   "content",
   "totals_section",
+  "column_break_5tood",
+  "est_delivery_1",
+  "est_delivery_2",
   "column_break_4",
   "shipper",
   "order_number",
   "notes",
-  "column_break_5tood",
   "column_break_5",
   "shipping_amount",
   "has_taxes",
@@ -272,7 +277,6 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "collapsible": 1,
    "fieldname": "extra_services_section",
    "fieldtype": "Section Break",
    "label": "Extra Services"
@@ -349,6 +353,28 @@
   {
    "fieldname": "column_break_xquh",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "est_delivery_1",
+   "fieldtype": "Date",
+   "label": "Estimated Delivery Date (Earliest)"
+  },
+  {
+   "fieldname": "est_delivery_2",
+   "fieldtype": "Date",
+   "label": "Estimated Delivery Date(Latest)"
+  },
+  {
+   "fieldname": "column_break_mpgh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_uyaz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_loiy",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -378,7 +404,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2023-12-27 15:01:30.523994",
+ "modified": "2024-01-17 15:12:26.678330",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

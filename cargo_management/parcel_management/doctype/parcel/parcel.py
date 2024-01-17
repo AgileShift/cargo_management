@@ -32,6 +32,8 @@ class Parcel(Document):
 		customer: DF.Link | None
 		customer_name: DF.Data | None
 		easypost_id: DF.Data | None
+		est_delivery_1: DF.Date | None
+		est_delivery_2: DF.Date | None
 		explained_status: DF.Data | None
 		has_taxes: DF.Check
 		notes: DF.SmallText | None
@@ -92,17 +94,17 @@ class Parcel(Document):
 
 		psm.transition(new_status)
 
-		# if self.status != new_status and \
-		# 	(self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
-		# 	(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
-		# 	(self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
-		# 	(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting') or \
-		# 	(self.status not in ['Unpaid', 'For Delivery or Pickup', 'Finished'] and new_status == 'To Bill') or \
-		# 	(self.status == 'To Bill' and new_status == 'Unpaid'):
-		# 	self.status = new_status
-		# 	return True
+		if self.status != new_status and \
+			(self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
+			(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
+			(self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
+			(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting') or \
+			(self.status not in ['Unpaid', 'For Delivery or Pickup', 'Finished'] and new_status == 'To Bill') or \
+			(self.status == 'To Bill' and new_status == 'Unpaid'):
+			self.status = new_status
+			return True
 
-		# return False
+		return False
 
 	@property
 	def explained_status(self):
