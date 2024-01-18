@@ -22,11 +22,10 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 		};
 
 		this.dialog.$wrapper.find('.modal-dialog').addClass('modal-lg'); // Making the Dialog large
-		extra_services_section.wrapper.insertAfter(carrier.wrapper).removeClass('row visible-section'); // Moving an entire section within a column
+		extra_services_section.wrapper.insertAfter(carrier.wrapper).removeClass('row visible-section'); // Moving an entire section within a column(Done with DOM because a 'section break' will always create a new row)
 
 		// Styling the content section
-		transportation_options.$wrapper.addClass('text-center');
-		content_section.wrapper.css({'padding-top': 0, 'border': 'none'});
+		transportation_options.$wrapper.addClass('text-center pt-4');
 		content_section.body.css('margin-top', 0);
 		content.$wrapper.find('.control-label').hide(); // Hiding Label of Content Table
 	}
@@ -45,12 +44,13 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 			on_change: (selected) => this.doc.transportation = selected // Bind the selected checkbox with the doc field
 		}, {fieldtype: "Column Break"});
 
-		this.mandatory.push(
-			{fieldtype: 'Section Break', fieldname: 'content_section'},
-			{fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
-				{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true, max_height: '4rem'},
-				{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true}
-			]}
-		); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?
+		this.mandatory.splice(8, 0, {fieldtype: 'Section Break', fieldname: 'content_section', hide_border: true}, {
+			fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
+				{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true, max_height: '4rem', columns: 6},
+				{label: __('Tracking Number'), fieldtype: 'Data', fieldname: 'tracking_number', in_list_view: true, columns: 2},
+				{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true, columns: 2}
+			]}, {fieldtype: 'Section Break', hide_border: true}); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?
+
+		this.mandatory.splice(12, 0, {fieldtype: 'Column Break'}); // Split Shipper and Number of Order
 	}
 };
