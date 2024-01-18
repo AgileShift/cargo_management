@@ -139,9 +139,9 @@ class Parcel(Document):
 					message.append(StatusMessage.NOT_DELIVERY_DATE_ESTIMATED)
 
 			case Status.AWAITING_CONFIRMATION:
-				_awaiting_confirmation_or_in_extraordinary_confirmation(self)
+				message, color = self._awaiting_confirmation_or_in_extraordinary_confirmation()
 			case Status.IN_EXTRAORDINARY_CONFIRMATION:
-				_awaiting_confirmation_or_in_extraordinary_confirmation(self)
+				message, color = self._awaiting_confirmation_or_in_extraordinary_confirmation()
 			case Status.AWAITING_DEPARTURE:
 				# TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
 				#cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
@@ -263,15 +263,10 @@ class Parcel(Document):
 		else:  # TODO: Change the status when the carrier status: failure, cancelled, error
 			self.change_status('Awaiting Receipt')
 
-
-def _awaiting_confirmation_or_in_extraordinary_confirmation(self) -> None:
-	if self.carrier_real_delivery:
-			message = [
-				StatusMessage.TRANSPORTATION_DELIVERED_DATE.value.replace(
-					'[DATE]',
-					frappe.utils.format_datetime(self.carrier_real_delivery, "EEEE, d 'de' MMMM yyyy 'a las' h:mm a").capitalize()
-				)
-			]
+	def _awaiting_confirmation_or_in_extraordinary_confirmation(self):
+		if self.carrier_real_delivery:
+			color = 'blue'
+			message = [StatusMessage.TRANSPORTATION_DELIVERED_DATE.value.replace('[DATE]', frappe.utils.format_datetime(self.carrier_real_delivery,"EEEE, d 'de' MMMM yyyy 'a las' h:mm a").capitalize())]
 
 			if self.signed_by:
 				message.append(StatusMessage.SIGNED_BY.value.replace('[SIGNER]', self.signed_by))
@@ -285,21 +280,19 @@ def _awaiting_confirmation_or_in_extraordinary_confirmation(self) -> None:
 					color = 'red'
 					delivered_since_str = StatusMessage.HAS_BEEN_1_DAY if delivered_since.days == 1 else StatusMessage.HAS_BEEN_X_DAYS
 
-					message.append(delivered_since_str.value.replace('[DAYS]', delivered_since.days))
+					message.append(delivered_since_str.value.replace('[DAYS]', str(delivered_since.days)))
 				else:
 					message.append(StatusMessage.WAIT_FOR_24_HOURS_CONFIRMATION)
 
-			else:
-				color = 'yellow'
-				message = [
-					StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace(
-						'[DATE]',
-						frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))
-				]
+		else:
+			color = 'yellow'
+			message = [StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace('[DATE]',frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))]
 
-			if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
-				color = 'pink'
-				message.append(StatusMessage.PACKAGE_IN_EXTRAORDINARY_REVISION)
+		if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
+			color = 'pink'
+			message.append(StatusMessage.PACKAGE_IN_EXTRAORDINARY_REVISION)
+
+		return message, color
 
 # 294(HOTFIX) -> 250(WORKING) FIXME: Better way to update the doc: create some core method that returns a Object that we can concat :D
 # 248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
