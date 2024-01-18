@@ -1,7 +1,7 @@
 app_name = "cargo_management"
 app_title = "Cargo Management"
 app_publisher = "Agile Shift"
-app_description = "ERPNext Cargo Management for freight forwarders"
+app_description = "ERPNext Cargo Management for Freight Forwarders"
 app_email = "contacto@gruporeal.org"
 app_license = "MIT"
 # required_apps = []
