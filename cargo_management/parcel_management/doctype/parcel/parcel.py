@@ -90,17 +90,17 @@ class Parcel(Document):
 
 		# TODO: Validate this when status is changed on Form-View or List-View
 		"""
-		psm = ParcelStateMachine(status=self.status)
+		# psm = ParcelStateMachine(status=self.status)
+		# psm.transition(new_status)
 
-		psm.transition(new_status)
-
-		if self.status != new_status and \
+		if (self.status != new_status and \
 			(self.status == 'Awaiting Receipt' and new_status in ['Awaiting Confirmation', 'Returned to Sender']) or \
 			(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Cancelled'] and new_status == 'Awaiting Departure') or \
 			(self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
 			(self.status in ['Awaiting Receipt', 'Awaiting Confirmation', 'In Extraordinary Confirmation', 'Awaiting Departure', 'In Transit', 'Cancelled'] and new_status == 'Sorting') or \
 			(self.status not in ['Unpaid', 'For Delivery or Pickup', 'Finished'] and new_status == 'To Bill') or \
-			(self.status == 'To Bill' and new_status == 'Unpaid'):
+			(self.status in ['Sorting', 'To Bill'] and new_status == 'Unpaid') or \
+			(self.status == 'Unpaid' and new_status == 'For Delivery or Pickup')):
 			self.status = new_status
 			return True
 

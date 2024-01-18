@@ -124,7 +124,8 @@ doctype_js = {
 
 doc_events = {
 	"Sales Invoice": {  # TODO: WORKING
-		"on_submit": "cargo_management.parcel_selling.utils.sales_invoice_on_submit"
+		"on_submit": "cargo_management.parcel_selling.utils.sales_invoice_on_submit",
+		"on_change": "cargo_management.parcel_selling.utils.sales_invoice_on_update_after_submit"
 	}
 }
 
