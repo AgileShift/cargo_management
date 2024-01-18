@@ -13,7 +13,7 @@ class Status(StrEnum):
 	SORTING = 'Sorting'
 	TO_BILL = 'To Bill'
 	UNPAID = 'Unpaid'
-	FOR_DELIVERY_OR_PICKUP = 'Delivery or Pickup'  # FIXME, we can make to DELIVERY_OR_PICKUP
+	FOR_DELIVERY_OR_PICKUP = 'For Delivery or Pickup'  # FIXME, we can make to DELIVERY_OR_PICKUP
 	FINISHED = 'Finished'
 	CANCELLED = 'Cancelled'
 	NEVER_ARRIVED = 'Never Arrived'

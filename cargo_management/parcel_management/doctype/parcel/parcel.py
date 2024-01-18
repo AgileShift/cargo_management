@@ -144,19 +144,19 @@ class Parcel(Document):
 				message, color = self._awaiting_confirmation_or_in_extraordinary_confirmation()
 			case Status.AWAITING_DEPARTURE:
 				# TODO: Add Warehouse Receipt date, # TODO: Add cargo shipment calendar
-				#cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
+				# cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
 				# TODO: What if we dont have real delivery date. Or signature
 				message = [
 					StatusMessage.TRANSPORTER_DELIVERY_DATE.value.replace(
-					'[DATE]',
-					frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
-				),
-				StatusMessage.SIGNED_BY.value.replace('[SIGNER]', self.signed_by)
-				# 'Firmado por {}'.format(self.carrier_real_delivery, self.signed_by),
-				# 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
+						'[DATE]',
+						frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
+					),
+					StatusMessage.SIGNED_BY.value.replace('[SIGNER]', self.signed_by)
+					# 'Firmado por {}'.format(self.carrier_real_delivery, self.signed_by),
+					# 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
 
-				# 'Embarque: {}'.format(self.cargo_shipment)
+					# 'Embarque: {}'.format(self.cargo_shipment)
 				]
 			case Status.IN_TRANSIT:
 				# TODO: Add Departure date and est arrival date
@@ -169,8 +169,8 @@ class Parcel(Document):
 
 				message = [
 					StatusMessage.PACKAGE_IN_TRANSIT_TO_DESTINATION,
-					StatusMessage.DEPARTURE_DATE.value.replace('[DATE]', cargo_shipment.departure_date),
-					StatusMessage.ESTIMATED_RECEPTION_DATE.value.replace('[DATE]', cargo_shipment.expected_arrival_date),
+					StatusMessage.DEPARTURE_DATE.value.replace('[DATE]', str(cargo_shipment.departure_date)),
+					StatusMessage.ESTIMATED_RECEPTION_DATE.value.replace('[DATE]', str(cargo_shipment.expected_arrival_date)),
 					StatusMessage.CARGO_SHIPMENT.value.replace('[SHIPMENT]', self.cargo_shipment)
 				]
 			case Status.IN_CUSTOMS:
