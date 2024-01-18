@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "SEA Parcels",
  "links": [],
- "modified": "2024-01-17 18:01:33.116759",
+ "modified": "2024-01-18 08:41:38.615316",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "SEA Parcels",
@@ -22,7 +22,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 3.0,
+ "sequence_id": 2.0,
  "shortcuts": [
   {
    "color": "Orange",

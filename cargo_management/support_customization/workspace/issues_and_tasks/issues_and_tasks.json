@@ -1,0 +1,35 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"SKkcAg9nig\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Issues and Tasks</span>\",\"col\":12}},{\"id\":\"XjOPvSShqa\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LiYyEqdcg6\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Sin QUICKBOX\",\"col\":4}}]",
+ "creation": "2024-01-18 08:41:23.477058",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "list-alt",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Issues and Tasks",
+ "links": [],
+ "modified": "2024-01-18 08:44:32.255102",
+ "modified_by": "Administrator",
+ "module": "Support Customization",
+ "name": "Issues and Tasks",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Issue",
+   "label": "Sin QUICKBOX",
+   "quick_list_filter": "[]"
+  }
+ ],
+ "roles": [],
+ "sequence_id": 4.0,
+ "shortcuts": [],
+ "title": "Issues and Tasks"
+}
