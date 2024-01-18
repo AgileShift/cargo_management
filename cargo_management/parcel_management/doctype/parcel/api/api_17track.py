@@ -9,7 +9,7 @@ from frappe.app import handle_exception
 
 
 class API17Track:
-	API_BASE: str = "https://api.17track.net/track/v2/"
+	API_BASE: str = "https://api.17track.net/track/v2.2/"
 
 	# The Dict Keys are the actual String representation for Users, and the Dict Values are the carrier code for the API
 	# See More at: https://res.17track.net/asset/carrier/info/apicarrier.all.json
