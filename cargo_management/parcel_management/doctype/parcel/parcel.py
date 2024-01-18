@@ -1,4 +1,3 @@
-from .utils import ParcelStateMachine
 from easypost.errors.api import ApiError as EasyPostAPIError
 
 import frappe
@@ -6,7 +5,8 @@ from frappe import _
 from frappe.model.document import Document
 from .api.api_17track import API17Track
 from .api.easypost_api import EasyPostAPI
-from .constants import Status, MessageColor, StatusMessage
+from .constants import Status, StatusMessage
+from .utils import ParcelStateMachine
 
 
 class Parcel(Document):
@@ -39,7 +39,7 @@ class Parcel(Document):
 		notes: DF.SmallText | None
 		order_number: DF.Data | None
 		residential_address: DF.Check
-		shipper: DF.Data | None
+		shipper: DF.Autocomplete | None
 		shipping_amount: DF.Currency
 		signed_by: DF.Data | None
 		status: DF.Literal["Awaiting Receipt", "Awaiting Confirmation", "In Extraordinary Confirmation", "Awaiting Departure", "In Transit", "In Customs", "Sorting", "To Bill", "Unpaid", "For Delivery or Pickup", "Finished", "Cancelled", "Never Arrived", "Returned to Sender"]
@@ -112,7 +112,7 @@ class Parcel(Document):
 		# TODO: Python 3.10: Migrate to switch case or Improve performance?
 		# frappe.local.lang = LocaleLanguage.SPANISH  # Little Hack
 
-		message, color = [], MessageColor.BLUE  # TODO: Add more colors? Check frappe colors
+		message, color = [], 'blue'  # TODO: Add more colors? Check frappe colors
 
 		match self.status:
 			case Status.AWAITING_RECEIPT:
@@ -130,12 +130,12 @@ class Parcel(Document):
 						# message.append('La fecha programada es: {}'.format(est_delivery_date))
 						message.append(StatusMessage.ESTIMATED_DELIVERY_DATE.value.replace('[DATE]', est_delivery_date))
 					else:  # Delivery is late
-						color = MessageColor.PINK
+						color = 'pink'
 						# message.append('Esta retrasado. Debio de ser entregado el: {}'.format(est_delivery_date))
 						message.append(StatusMessage.DELAYED_DELIVERY_DATE.value.replace('[DATE]', est_delivery_date))
 						message.append(StatusMessage.CONTACT_YOUR_PROVIDER_FOR_INFO)
 				else:
-					color = MessageColor.YELLOW
+					color = 'yellow'
 					message.append(StatusMessage.NOT_DELIVERY_DATE_ESTIMATED)
 
 			case Status.AWAITING_CONFIRMATION:
@@ -161,11 +161,11 @@ class Parcel(Document):
 			case Status.IN_TRANSIT:
 				# TODO: Add Departure date and est arrival date
 				if not self.cargo_shipment:
-					return {'message': [StatusMessage.NO_CARGO_SHIPPING], color: MessageColor.RED}
+					return {'message': [StatusMessage.NO_CARGO_SHIPPING], color: 'red'}
 
 				cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
-				color = MessageColor.PURPLE
+				color = 'purple'
 
 				message = [
 					StatusMessage.PACKAGE_IN_TRANSIT_TO_DESTINATION,
@@ -174,26 +174,26 @@ class Parcel(Document):
 					StatusMessage.CARGO_SHIPMENT.value.replace('[SHIPMENT]', self.cargo_shipment)
 				]
 			case Status.IN_CUSTOMS:
-				message, color = [StatusMessage.PACKAGE_IN_CUSTOMS], MessageColor.GRAY
+				message, color = [StatusMessage.PACKAGE_IN_CUSTOMS], 'gray'
 			case Status.SORTING:
-				message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], MessageColor.BLUE
+				message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], 'blue'
 			case Status.TO_BILL:
-				message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], MessageColor.BLUE
+				message, color = [StatusMessage.PACKAGE_IN_OFFICE_SORTING], 'blue'
 
 			case Status.UNPAID:
-				message, color = [StatusMessage.PACKAGE_READY], MessageColor.BLUE
+				message, color = [StatusMessage.PACKAGE_READY], 'blue'
 			case  Status.FOR_DELIVERY_OR_PICKUP:
-				message, color = [StatusMessage.PACKAGE_READY], MessageColor.BLUE
+				message, color = [StatusMessage.PACKAGE_READY], 'blue'
 
 			case Status.FINISHED:
-				message, color = [StatusMessage.PACKAGE_FINISHED], MessageColor.GREEN  # TODO: Show invoice, delivery and payment details.
+				message, color = [StatusMessage.PACKAGE_FINISHED], 'green'  # TODO: Show invoice, delivery and payment details.
 			case Status.CANCELLED:
-				message, color = [StatusMessage.CONTACT_AGENT_FOR_PACKAGE_INFO], MessageColor.ORANGE
+				message, color = [StatusMessage.CONTACT_AGENT_FOR_PACKAGE_INFO], 'orange'
 			case Status.NEVER_ARRIVED:
-				message, color = [StatusMessage.PACKAGE_NEVER_ARRIVED], MessageColor.RED
+				message, color = [StatusMessage.PACKAGE_NEVER_ARRIVED], 'red'
 				message.append(StatusMessage.CONTACT_FOR_MORE_INFO)
 			case Status.RETURNED_TO_SENDER:
-				message, color = [StatusMessage.PACKAGE_RETURNED], MessageColor.RED
+				message, color = [StatusMessage.PACKAGE_RETURNED], 'red'
 				message.append(StatusMessage.CONTACT_FOR_MORE_INFO)
 
 			case _:
@@ -282,7 +282,7 @@ def _awaiting_confirmation_or_in_extraordinary_confirmation(self) -> None:
 				# TODO: Compare Against Workable days
 				# Parcel has exceeded the 24 hours timespan to be confirmed. Same as: time_diff_in_hours() >= 24.00
 				if delivered_since.days >= 1:  # The day starts counting after 1-minute difference
-					color = MessageColor.RED
+					color = 'red'
 					delivered_since_str = StatusMessage.HAS_BEEN_1_DAY if delivered_since.days == 1 else StatusMessage.HAS_BEEN_X_DAYS
 
 					message.append(delivered_since_str.value.replace('[DAYS]', delivered_since.days))
@@ -290,7 +290,7 @@ def _awaiting_confirmation_or_in_extraordinary_confirmation(self) -> None:
 					message.append(StatusMessage.WAIT_FOR_24_HOURS_CONFIRMATION)
 
 			else:
-				color = MessageColor.YELLOW
+				color = 'yellow'
 				message = [
 					StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace(
 						'[DATE]',
@@ -298,13 +298,14 @@ def _awaiting_confirmation_or_in_extraordinary_confirmation(self) -> None:
 				]
 
 			if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
-				color = MessageColor.PINK
+				color = 'pink'
 				message.append(StatusMessage.PACKAGE_IN_EXTRAORDINARY_REVISION)
 
 # 294(HOTFIX) -> 250(WORKING) FIXME: Better way to update the doc: create some core method that returns a Object that we can concat :D
-#248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
+# 248 EasyPost DONE, Now 17 Track -> 238(Production | We need to avoid extra 'try')
 # 241: Retornanos data normalizada desde las API, ahora debemos de hacer Polymorphism to select the API's
 
-#FIXME: 19 warning, 20 w warning, 83 typos -> 287
-#FIXME: 2 warning, 20 w warning, 85 typos -> 276
+# FIXME: 19 warning, 20 w warning, 83 typos -> 287
+# FIXME: 2 warning, 20 w warning, 85 typos -> 276
 # 292 Refactor de constantes y estados
+# FIXM:E 311: 2 warning, 29 w warning, 21 typos -> 276 | Corregir State Machine y COLOR usage!
