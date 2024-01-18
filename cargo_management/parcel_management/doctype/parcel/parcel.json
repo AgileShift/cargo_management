@@ -196,7 +196,7 @@
    "fieldname": "shipper",
    "fieldtype": "Autocomplete",
    "label": "Shipper",
-   "options": "Amazon\neBay\nWalmart\nTarget\nBest Buy\nNewegg\n6PM\nCarters\nShein\nAliexpress\nAlibaba\nHomeDepot\nSephora\nELF\nThe Ordinary\nAOA\nFossil\nNike\nAdidas\nPuma\nCrocs\nKeds\nSperry\nLevis\nGAP\nOld Navy\nTommy Hilfiger\nStockX\nVictoria's Secret\nBath and Body Works"
+   "options": "Amazon\neBay\nWalmart\nTarget\nBest Buy\nNewegg\n6PM\nCarters\nShein\nAliExpress\nAlibaba\nThe Home Depot\nSephora\nELF\nThe Ordinary\nAOA\nFossil\nNike\nAdidas\nPuma\nCrocs\nKeds\nSperry\nLevi's\nGAP\nOld Navy\nTommy Hilfiger\nStockX\nVictoria's Secret\nBath & Body Works"
   },
   {
    "description": "Notes or instructions.",
@@ -406,7 +406,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2024-01-17 21:37:05.296479",
+ "modified": "2024-01-17 22:36:24.849976",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
