@@ -194,8 +194,9 @@
    "bold": 1,
    "description": "Store that sends the package.",
    "fieldname": "shipper",
-   "fieldtype": "Data",
-   "label": "Shipper"
+   "fieldtype": "Autocomplete",
+   "label": "Shipper",
+   "options": "Amazon\neBay\nWalmart\nTarget\nBest Buy\nNewegg\n6PM\nCarters\nShein\nAliexpress\nAlibaba\nHomeDepot\nSephora\nELF\nThe Ordinary\nAOA\nFossil\nNike\nAdidas\nPuma\nCrocs\nKeds\nSperry\nLevis\nGAP\nOld Navy\nTommy Hilfiger\nStockX\nVictoria's Secret\nBath and Body Works"
   },
   {
    "description": "Notes or instructions.",
@@ -205,6 +206,7 @@
    "max_height": "6rem"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "order_number",
    "fieldtype": "Data",
    "label": "Number of Order"
@@ -404,7 +406,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2024-01-17 15:12:26.678330",
+ "modified": "2024-01-17 21:37:05.296479",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
