@@ -20,17 +20,6 @@ class Status(StrEnum):
 	RETURNED_TO_SENDER = 'Returned to Sender'
 
 
-class MessageColor(StrEnum):
-	BLUE = 'blue'
-	RED = 'red'
-	GREEN = 'green'
-	PURPLE = 'purple'
-	PINK = 'pink'
-	YELLOW = 'yellow'
-	GRAY = 'gray'
-	ORANGE = 'orange'
-
-
 class StatusMessage(StrEnum):
 	# Awaiting Receipt Explanations
 	TRANSPORTATION_NOT_DELIVERED_YET = 'El transporte aún no ha entregado el paquete.'
