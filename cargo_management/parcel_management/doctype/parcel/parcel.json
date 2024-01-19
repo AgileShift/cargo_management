@@ -37,6 +37,7 @@
   "content",
   "totals_section",
   "column_break_5tood",
+  "est_departure",
   "est_delivery_1",
   "est_delivery_2",
   "column_break_4",
@@ -377,6 +378,12 @@
   {
    "fieldname": "column_break_loiy",
    "fieldtype": "Column Break"
+  },
+  {
+   "description": "Date on which it will be shipped.",
+   "fieldname": "est_departure",
+   "fieldtype": "Date",
+   "label": "Estimated Departure Date"
   }
  ],
  "links": [
@@ -406,7 +413,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2024-01-18 17:40:48.511246",
+ "modified": "2024-01-19 08:46:21.028947",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

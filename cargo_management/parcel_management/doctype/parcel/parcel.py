@@ -34,6 +34,7 @@ class Parcel(Document):
 		easypost_id: DF.Data | None
 		est_delivery_1: DF.Date | None
 		est_delivery_2: DF.Date | None
+		est_departure: DF.Date | None
 		explained_status: DF.Data | None
 		has_taxes: DF.Check
 		notes: DF.SmallText | None
@@ -152,12 +153,14 @@ class Parcel(Document):
 						'[DATE]',
 						frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
 					),
-					StatusMessage.SIGNED_BY.value.replace('[SIGNER]', self.signed_by)
 					# 'Firmado por {}'.format(self.carrier_real_delivery, self.signed_by),
 					# 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
 
 					# 'Embarque: {}'.format(self.cargo_shipment)
 				]
+				if self.signed_by:
+					message.append(StatusMessage.SIGNED_BY.value.replace('[SIGNER]', str(self.signed_by)))
+
 			case Status.IN_TRANSIT:
 				# TODO: Add Departure date and est arrival date
 				if not self.cargo_shipment:
