@@ -287,9 +287,12 @@ class Parcel(Document):
 				else:
 					message.append(StatusMessage.WAIT_FOR_24_HOURS_CONFIRMATION)
 
+		if self.carrier_est_delivery:
+			color = 'yellow'
+			message = [StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace('[DATE]', frappe.utils.format_datetime(self.carrier_est_delivery,'medium'))]
 		else:
 			color = 'yellow'
-			message = [StatusMessage.TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE.value.replace('[DATE]',frappe.utils.format_datetime(self.carrier_est_delivery, 'medium'))]
+			message = [StatusMessage.NOT_DELIVERY_DATE_ESTIMATED, StatusMessage.CONTACT_FOR_MORE_INFO]
 
 		if self.status == Status.IN_EXTRAORDINARY_CONFIRMATION:
 			color = 'pink'
