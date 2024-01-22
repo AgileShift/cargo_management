@@ -74,6 +74,8 @@ frappe.ui.form.on('Parcel', {
 			frm.add_custom_button(__('Sales Order'), () => frm.events.sales_order_dialog(frm), __('Get Items From'));
 		}
 
+		frm.add_custom_button(__('Previsualization'), () => frm.events.parcel_preview_dialog(frm));
+
 		carriers_settings.urls.forEach(url => frm.add_custom_button(url.title, () => window.open(url.url + frm.doc.tracking_number)));
 	},
 
@@ -89,6 +91,12 @@ frappe.ui.form.on('Parcel', {
 				//frm.refresh();
 			}
 		});
+	},
+
+	parcel_preview_dialog(frm) {
+		const preview_dialog = new frappe.ui.form.Dialog({
+
+		})
 	},
 
 	//https://github.com/frappe/frappe/pull/12471 and https://github.com/frappe/frappe/pull/14181/files

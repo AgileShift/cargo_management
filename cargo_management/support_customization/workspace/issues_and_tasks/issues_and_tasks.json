@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"SKkcAg9nig\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Issues and Tasks</span>\",\"col\":12}},{\"id\":\"XjOPvSShqa\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LiYyEqdcg6\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Sin QUICKBOX\",\"col\":4}}]",
+ "content": "[{\"id\":\"SKkcAg9nig\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Issues and Tasks</span>\",\"col\":12}},{\"id\":\"XjOPvSShqa\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LiYyEqdcg6\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Package without Instructions\",\"col\":6}},{\"id\":\"oU7VPnt4Ha\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Service Change\",\"col\":6}},{\"id\":\"u64_W_iuWU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1cSKlZwclb\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Needs: Receipt Confirmation\",\"col\":4}},{\"id\":\"MybEu1et1s\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"oe85Dlc69Q\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Needs: Follow Up\",\"col\":4}}]",
  "creation": "2024-01-18 08:41:23.477058",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Issues and Tasks",
  "links": [],
- "modified": "2024-01-18 08:44:32.255102",
+ "modified": "2024-01-22 13:11:48.360331",
  "modified_by": "Administrator",
  "module": "Support Customization",
  "name": "Issues and Tasks",
@@ -24,8 +24,23 @@
  "quick_lists": [
   {
    "document_type": "Issue",
-   "label": "Sin QUICKBOX",
-   "quick_list_filter": "[]"
+   "label": "Needs: Receipt Confirmation",
+   "quick_list_filter": "[[\"Issue\",\"issue_type\",\"=\",\"Needs: Receipt Confirmation\",false]]"
+  },
+  {
+   "document_type": "Issue",
+   "label": "Package without Instructions",
+   "quick_list_filter": "[[\"Issue\",\"issue_type\",\"=\",\"Package without Instructions\",false]]"
+  },
+  {
+   "document_type": "Issue",
+   "label": "Service Change",
+   "quick_list_filter": "[[\"Issue\",\"issue_type\",\"like\",\"%Service Change%\",false]]"
+  },
+  {
+   "document_type": "Issue",
+   "label": "Needs: Follow Up",
+   "quick_list_filter": "[[\"Issue\",\"issue_type\",\"=\",\"Needs: Follow Up\",false]]"
   }
  ],
  "roles": [],

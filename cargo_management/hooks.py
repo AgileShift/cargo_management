@@ -229,4 +229,8 @@ global_search_doctypes = {
 	]
 }
 
+fixtures = [
+	{'dt': 'Issue Type'}
+]
+
 export_python_type_annotations = True
