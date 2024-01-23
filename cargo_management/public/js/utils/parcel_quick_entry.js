@@ -44,13 +44,14 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 			on_change: (selected) => this.doc.transportation = selected // Bind the selected checkbox with the doc field
 		}, {fieldtype: "Column Break"});
 
-		this.mandatory.splice(8, 0, {fieldtype: 'Section Break', fieldname: 'content_section', hide_border: true}, {
+		this.mandatory.splice(8, 0, {fieldtype: 'Section Break', hide_border: true});
+		this.mandatory.splice(10, 0, {fieldtype: 'Column Break'}); // Split Shipper and Number of Order
+
+		this.mandatory.splice(12, 0, {fieldtype: 'Section Break', fieldname: 'content_section', hide_border: true}, {
 			fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
 				{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true, max_height: '4rem', columns: 6},
 				{label: __('Tracking Number'), fieldtype: 'Data', fieldname: 'tracking_number', in_list_view: true, columns: 2},
 				{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true, columns: 2}
-			]}, {fieldtype: 'Section Break', hide_border: true}); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?
-
-		this.mandatory.splice(12, 0, {fieldtype: 'Column Break'}); // Split Shipper and Number of Order
+			]}); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?
 	}
 };
