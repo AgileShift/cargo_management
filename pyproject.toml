@@ -12,7 +12,7 @@ license = { file = "LICENSE.txt" }
 dynamic = ["version"]
 
 dependencies = [
-    "easypost==8.2.1"
+    "easypost==9.1.0"
 ]
 
 [build-system]
