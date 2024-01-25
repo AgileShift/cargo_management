@@ -1,4 +1,5 @@
 frappe.listview_settings['Parcel'] = {
+	hide_name_filter: true,
 	add_fields: ['carrier'],
 	filters: [
 		['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']] // aka 'Active Parcels'
@@ -7,17 +8,10 @@ frappe.listview_settings['Parcel'] = {
 	// TODO DELETE: 'consolidated_tracking_numbers' 12 Matches
 
 	onload(listview) {
-		const {name: name_field, tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
-
-		// The 'tracking_number' field is set because is the title field of the Doctype. So we remove from the 'standard_filters'
-		tracking_number_field.wrapper.remove();
-
-		// Set 'name' field tooltip and placeholder to match 'tracking_number' field
-		name_field.wrapper.setAttribute('data-original-title', tracking_number_field.df.label);
-		name_field.input.setAttribute('placeholder', tracking_number_field.df.placeholder);
+		const {tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
 
 		// Override: onchange() method set in frappe/list/base_list.js -> make_standard_filters()
-		name_field.df.onchange = customer_name_field.df.onchange = function () {
+		tracking_number_field.df.onchange = customer_name_field.df.onchange = function () {
 			// Remove '%' added in frappe/list/base_list.js -> get_standard_filters() when the listview loads and update both UI and internal values
 			this.value = this.input.value = this.get_input_value().replaceAll('%', '').trim().toUpperCase(); // this.set_input() is not working
 
@@ -34,12 +28,12 @@ frappe.listview_settings['Parcel'] = {
 		listview.get_args = function () {
 			let args = frappe.views.ListView.prototype.get_args.call(listview);  // Calling his super for the args
 
-			const name_filter = args.filters.findIndex(f => f[1] === 'name');  // f -> ['Doctype', 'field', 'sql_search_term', 'value']
+			const tracking_number_filter = args.filters.findIndex(f => f[1] === 'tracking_number');  // f -> ['Doctype', 'field', 'sql_search_term', 'value']
 
-			if (name_filter >= 0) {  // We have 'name' filter being filtered. -> name_filter will contain index if found
-				args.filters.splice(name_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
+			if (tracking_number_filter >= 0) {  // We have 'tracking_name' filter being filtered. -> tracking_number_filter will contain index if found
+				args.filters.splice(tracking_number_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
 
-				const search_term = cargo_management.find_carrier_by_tracking_number(name_field.get_input_value()).search_term;
+				const search_term = cargo_management.find_carrier_by_tracking_number(tracking_number_field.get_input_value()).search_term;
 
 				// TODO: WORK -> We will not use the main field from now on
 				args.or_filters = ['name', 'tracking_number'].map(field => [
@@ -115,4 +109,5 @@ frappe.listview_settings['Parcel'] = {
 		name: (value, df, doc) => (value !== doc.tracking_number) ? `<b>${value}</b>` : ''
 	}
 };
-// 111
+// 119 FIXME: Create more functions, and move them to cargo_management.js
+// 6 warning, 1 typo
