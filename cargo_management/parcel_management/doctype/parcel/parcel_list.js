@@ -10,6 +10,8 @@ frappe.listview_settings['Parcel'] = {
 	onload(listview) {
 		const {tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
 
+		listview.page.sidebar.toggle(false);
+
 		// Override: onchange() method set in frappe/list/base_list.js -> make_standard_filters()
 		tracking_number_field.df.onchange = customer_name_field.df.onchange = function () {
 			// Remove '%' added in frappe/list/base_list.js -> get_standard_filters() when the listview loads and update both UI and internal values
