@@ -230,7 +230,13 @@ global_search_doctypes = {
 }
 
 fixtures = [
-	{'dt': 'Issue Type'}
+	#'Issue Type',
+	#{'dt': 'Workspace', 'filters': {'name': 'Support'}}
+	{'dt': 'System Settings'}
 ]
+
+after_install = 'cargo_management.jeans.after_install'
+after_migrate = 'cargo_management.jeans.after_migrate'
+
 
 export_python_type_annotations = True

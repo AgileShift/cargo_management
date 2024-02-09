@@ -38,6 +38,8 @@ frappe.ui.form.on('Parcel', {
 
 		frm.events.show_explained_status(frm); // Show 'Explained Status' as Intro Message
 		frm.events.build_custom_actions(frm);  // Adding custom buttons
+
+		frm.trigger('parcel_preview_dialog');
 	},
 
 	tracking_number(frm) {
@@ -94,9 +96,59 @@ frappe.ui.form.on('Parcel', {
 	},
 
 	parcel_preview_dialog(frm) {
-		const preview_dialog = new frappe.ui.form.Dialog({
+		const preview_dialog = new frappe.ui.Dialog({
+			title: 'General Overview', size: 'extra-large',
+			fields: [
+				{fieldtype: 'HTML', fieldname: 'preview'},
+			]
+		});
 
-		})
+		preview_dialog.show()
+
+		preview_dialog.fields_dict.preview.$wrapper.html(`
+		<div class="container">
+			<h3 class="text-center">${frm.doc.carrier} - ${frm.doc.tracking_number} ${cargo_management.transportation_indicator(frm.doc.transportation)}</h3>
+
+			<div class="row">
+				<div class="col-6">
+					<div class="card">
+						<div class="card-header">Información General</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Shipper: <strong>${frm.doc.shipper}</strong></li>
+							<li class="list-group-item"># de Orden: <strong>${frm.doc.order_number}</strong></li>
+							<li class="list-group-item">Fecha de Compra: <strong>${frm.doc.order_date}</strong></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="card">
+						<div class="card-header">Descripcion</div>
+						<ul class="list-group list-group-flush">
+							${frm.doc.content.map((c) => {
+								return (`<li class="list-group-item">Descripcion: <strong>${c.description}</strong> | Tracking: <strong>${c.tracking_number}</strong></li>`);
+							}).join('') }
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-flex flex-row justify-content-between align-items-start border rounded p-3 my-3">
+				<div>
+					<div class="mb-2"><span class="badge badge-primary">Fecha de Orden</span> <strong>${frm.doc.order_date}</strong></div>
+				</div>
+				<div class="d-flex flex-column">
+					<div class="mb-2"><span class="badge badge-secondary">Fecha Estimada de Llegada 1</span> <strong>${frm.doc.est_delivery_1}</strong></div>
+					<div><span class="badge badge-secondary">Fecha Estimada de Llegada 2</span> <strong>${frm.doc.est_delivery_2}</strong></div>
+				</div>
+				<div>
+					<div><span class="badge badge-success">Fecha Estimada de Despacho</span> <strong>${frm.doc.est_departure}</strong></div>
+				</div>
+				<div>
+					<div><span class="badge badge-success">Fecha Estimada de Entrega</span> <strong>${frm.doc.est_departure}</strong></div>
+				</div>
+			</div>
+
+		</div>`);
 	},
 
 	//https://github.com/frappe/frappe/pull/12471 and https://github.com/frappe/frappe/pull/14181/files

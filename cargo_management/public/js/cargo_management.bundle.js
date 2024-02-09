@@ -11,7 +11,6 @@ cargo_management = {
 		'Air': {icon: 'plane', color: 'red'}
 	},
 
-
 	// TODO: WORK IN PROGRESS
 
 	make_transportation_multicheck_control(parent, frm) {

@@ -38,6 +38,7 @@ class Parcel(Document):
 		explained_status: DF.Data | None
 		has_taxes: DF.Check
 		notes: DF.SmallText | None
+		order_date: DF.Date | None
 		order_number: DF.Data | None
 		residential_address: DF.Check
 		shipper: DF.Autocomplete | None
@@ -307,4 +308,4 @@ class Parcel(Document):
 # FIXME: 19 warning, 20 w warning, 83 typos -> 287
 # FIXME: 2 warning, 20 w warning, 85 typos -> 276
 # 292 Refactor de constantes y estados
-# FIXM:E 311: 2 warning, 29 w warning, 21 typos -> 276 | Corregir State Machine y COLOR usage!
+# FIXME 311: 2 warning, 29 w warning, 21 typos -> 276 | Corregir State Machine y COLOR usage!
