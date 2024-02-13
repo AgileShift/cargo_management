@@ -1,11 +1,14 @@
 Parcel,Paquete
 Parcels,Paquetes
 
-SEA Parcels, Paquetes Marítimos
-AIR Parcels, Paquetes Aéreos
+SEA Parcels,Paquetes MARÍTIMOS
+AIR Parcels,Paquetes AÉREOS
 
 Tracking Number,Número de Rastreo
 Carrier,Transportista
+
+Air,Aéreo
+Sea,Marítimo
 
 Awaiting Receipt,Esperando Recepción
 Awaiting Confirmation,Esperando Confirmación
@@ -17,53 +20,65 @@ For Delivery or Pickup,Para Entrega o Retiro
 Never Arrived,Nunca Llegó
 Returned to Sender,Devuelto al Remitente
 
+Assisted Purchase,Asistencia de Compra
+Package was purchased using Shopping Assistance Service,El paquete fue comprado usando el Servicio de Asistencia de Compras
+Residential Address,Dirección Residencial
+Package was sent to a Residential Address(Non Freight Forwarder),El paquete fue enviado a una Dirección Residencial(Non Freight Forwarder)
+
 Additional Data from Carrier,Datos Adicionales del Transportista
+
 Carrier estimated delivery date,Fecha de entrega estimada del transportista
-Estimated delivery date provided by the carrier (if available).,Fecha de entrega estimada proporcionada por el transportista (si está disponible).
+Estimated delivery date provided by the carrier,Fecha de entrega estimada proporcionada por el transportista
 Carrier real delivery date,Fecha de entrega real del transportista
-Delivery date time (timezone aware) provided by the carrier (if available).,Fecha y hora de entrega (consciente de la zona horaria) proporcionada por el transportista (si está disponible).
+Delivery date time (timezone aware) provided by the carrier,Fecha y hora de entrega (consciente de la zona horaria) proporcionada por el transportista
+
 Carrier estimated weight (in pounds),Peso estimado según el transportista (en libras)
-Estimated weight of the package as measured by the carrier (if available).,Peso estimado del paquete medido por el transportista (si está disponible).
+Estimated weight of the package as measured by the carrier,Peso estimado del paquete medido por el transportista
+Signed by,Firmado por
+The name of the person who signed for the package,El nombre de la persona que firmó el paquete
 
 Carrier status,Estado según el transportista
-The current status of the package provided by the carrier (if available),El estado actual del paquete proporcionado por el transportista (si está disponible)
+Current status of the package,Estado actual del paquete
 Available For Pickup,Disponible para recoger
 Delivered,Entregado
 
 Carrier status detail,Detalle del estado según el transportista
+Additional details about the current status,Detalles adicionales sobre el estado actual
 Arrived At Pickup Location,Llegó al lugar de recogida
 Arrived At Destination,Llegó al destino
 
-Signed by,Firmado por
-The name of the person who signed for the package (if available).,El nombre de la persona que firmó el paquete (si está disponible).
 Carrier last detail, Última actualización del transportista
 
-Has shipping cost,Tiene costo de envío
+Estimated Departure Date,Fecha Estimada de Despacho
+Estimated Delivery Date (Earliest),Fecha Estimada de Entrega (Más Pronta)
+Estimated Delivery Date (Latest),Fecha Estimada de Entrega (Más Lejana)
 
 Shipper,Vendedor
-Store that sends the package.,Tienda que envía el paquete.
-Notes or instructions.,Notas o instrucciones.
-Internal Data,Datos Internos
-
-Quantity of packages in shipment.,Cantidad de paquetes en el envío.
+Store that sends the package,Tienda que envía el paquete
+Number of Order,Número de Orden
 
 Visit carrier detail page,Visitar página de detalles del transportista
 Update data from carrier,Actualizar datos del transportista
 
-Active packages,Paquetes activos
-Without carrier data,Sin datos del transportista
-Arriving today,Llegando hoy
-Arrived today,Llegaron hoy
-Arriving Late,Llegando tarde
+Active Parcels,Paquetes Activos
+
+With Carrier,Con El Transportista
+Without Carrier Data,Sin Datos del Transportista
+Arriving Late,Llegando Tarde
+Arriving Today,Llegando Hoy
 Available for pickup at post office,Disponible para recoger en la oficina postal
+
+In Warehouse,En Almacén
 This week pending confirmation,Pendientes de confirmación de esta semana
-Pending confirmation,Pendientes de confirmación
+Arrived Today,Llegaron Hoy
 
-Package is configured not to track.,El paquete está configurado para no rastrear.
-Package is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.
-Package has been updated from API.,El paquete se ha actualizado desde el API.
+In Office,En Oficina
+Available at Office,Disponible en Oficina
+To Bill and Unpaid,Por Cobrar y Sin Pagar
+-----,------
+Parcel is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.
+Parcel has been updated from {} API.,El paquete se ha actualizado desde el {} API.
 
-Package Quotation,Cotización de paquete
 Transit days,Días de tránsito
 Approximate days taken from departure to arrival.,Días aproximados tomados desde el despacho hasta el arribo.
 Detail pricing,Precios detallados
@@ -73,8 +88,7 @@ Total import cost,Costo total de importación
 
 Render Quotation,Visualizar Cotización
 
-Warehouse Receipt,Recibo de almacén
-Target Warehouse,Almacén de destino
+Warehouse Receipt,Recibo de Almacén
 Warehouse where reception occurred.,Almacén donde se produjo la recepción.
 Packages in Warehouse Receipt,Paquetes en el recibo de almacén
 Estimated Gross Weight by Warehouse (in pounds),Peso Bruto estimado según el almacén (en libras)
@@ -86,7 +100,7 @@ Warehouse Receipts in Cargo Shipment,Recibos de almacén en el envío de carga
 Gross Weight (in pounds) provided by the warehouse (if available).,Peso bruto (en libras) proporcionado por el almacén (si está disponible).
 Count of pieces(boxes) provided by the warehouse (if available).,Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible).
 
-Cargo Shipment Receipt,Recibo de envío de carga
+Cargo Shipment Receipt,Recibo de Envío de Carga
 Reference of the cargo shipment to be received.,Referencia del envío de carga a recibir.
 Warehouse Receipts in Cargo Shipment Receipt,Recibos de almacén en el recibo de envío de carga
 Packages in Cargo Shipment Receipt,Paquetes en el recibo de envío de carga
