@@ -1,14 +1,11 @@
 [project]
 name = "cargo_management"
-description = "ERPNext Cargo Management for Freight Forwarders"
 authors = [
     { name = "Agile Shift", email = "contacto@gruporeal.org" }
 ]
-
+description = "ERPNext Cargo Management for Freight Forwarders"
 requires-python = ">=3.11"
-
 readme = "README.md"
-license = { file = "LICENSE.txt" }
 dynamic = ["version"]
 
 dependencies = [
@@ -20,4 +17,3 @@ requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
 [tool.bench.dev-dependencies]
-# package_name = "~=1.1.0"

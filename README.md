@@ -4,12 +4,12 @@
 
 **ERPNext Cargo Management is a fully-fledged ERPNext solution designed for freight forwarding companies.**
 
-It streamlines logistics processes, including **package tracking**, **invoicing**, and **warehouse management**,
+Streamlines logistics processes, including **package tracking**, **invoicing**, and **warehouse management**,
 providing a seamless, efficient, and user-friendly experience.
 
 Built on [Frappe Framework v15](https://github.com/frappe/frappe/) and [ERPNext](https://github.com/frappe/erpnext),
 this solution is designed to meet the unique needs of businesses in the freight forwarding industry.  
-It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, Assets, Payroll and more.
+It leverages core functionalities from **ERPNext**, such as **Accounting, Stock, HR, Assets, Payroll** and more.
 
 ## Key Features
 
@@ -31,7 +31,7 @@ It leverages core functionalities from ERPNext, such as Accounting, Stock, HR, A
 - [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud) - WORK on Progress
 
 ### List of Carriers Currently Supported:
-Last checked: 22 November 2023
+Last checked: 14 February 2024
 
 | Carrier    |    EasyPost    | 17Track |
 |:-----------|:--------------:|:-------:|
@@ -126,4 +126,4 @@ Last checked: 22 November 2023
 
 
 ##### Code related TODO:
-2. Migrate SQL to QueryBuilder? usign Pypika?
+1. Migrate SQL to QueryBuilder? using Pypika?
