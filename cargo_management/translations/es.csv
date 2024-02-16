@@ -4,11 +4,27 @@ Parcels,Paquetes
 SEA Parcels,Paquetes MARÍTIMOS
 AIR Parcels,Paquetes AÉREOS
 
-Tracking Number,Número de Rastreo
-Carrier,Transportista
-
 Air,Aéreo
 Sea,Marítimo
+
+Active Parcels,Paquetes Activos
+
+With Carrier,Con El Transportista
+Without Carrier Data,Sin Datos del Transportista
+Arriving Late,Llegando Tarde
+Arriving Today,Llegando Hoy
+Available for pickup at post office,Disponible para recoger en la oficina postal
+
+In Warehouse,En Almacén
+This week pending confirmation,Pendientes de confirmación de esta semana
+Arrived Today,Llegaron Hoy
+
+In Office,En Oficina
+Available at Office,Disponible en Oficina
+To Bill and Unpaid,Por Cobrar y Sin Pagar
+
+Tracking Number,Número de Rastreo
+Carrier,Transportista
 
 Awaiting Receipt,Esperando Recepción
 Awaiting Confirmation,Esperando Confirmación
@@ -57,25 +73,10 @@ Shipper,Vendedor
 Store that sends the package,Tienda que envía el paquete
 Number of Order,Número de Orden
 
-Visit carrier detail page,Visitar página de detalles del transportista
-Update data from carrier,Actualizar datos del transportista
-
-Active Parcels,Paquetes Activos
-
-With Carrier,Con El Transportista
-Without Carrier Data,Sin Datos del Transportista
-Arriving Late,Llegando Tarde
-Arriving Today,Llegando Hoy
-Available for pickup at post office,Disponible para recoger en la oficina postal
-
-In Warehouse,En Almacén
-This week pending confirmation,Pendientes de confirmación de esta semana
-Arrived Today,Llegaron Hoy
-
-In Office,En Oficina
-Available at Office,Disponible en Oficina
-To Bill and Unpaid,Por Cobrar y Sin Pagar
 -----,------
+Visit carrier detail page,Visitar página de detalles del transportista
+Get Updates from Carrier,Actualizar datos del transportista
+
 Parcel is handled by a carrier we can't track.,El paquete lo maneja un transportista que no podemos rastrear.
 Parcel has been updated from {} API.,El paquete se ha actualizado desde el {} API.
 
