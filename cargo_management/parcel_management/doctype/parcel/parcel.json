@@ -26,12 +26,12 @@
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
   "carrier_real_delivery",
-  "carrier_est_weight",
   "column_break_3",
-  "carrier_status",
-  "carrier_status_detail",
+  "carrier_est_weight",
   "signed_by",
   "section_break_1",
+  "carrier_status",
+  "carrier_status_detail",
   "carrier_last_detail",
   "content_section",
   "content",
@@ -127,14 +127,14 @@
    "label": "Additional Data from Carrier"
   },
   {
-   "description": "Estimated delivery date provided by the carrier.",
+   "description": "Estimated delivery date provided by the carrier",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
    "label": "Carrier estimated delivery date"
   },
   {
    "bold": 1,
-   "description": "Delivery date time (timezone aware).",
+   "description": "Delivery date time (timezone aware) provided by the carrier",
    "fieldname": "carrier_real_delivery",
    "fieldtype": "Datetime",
    "in_list_view": 1,
@@ -145,7 +145,7 @@
   {
    "bold": 1,
    "depends_on": "eval: doc.carrier_est_weight > 0.00;",
-   "description": "Estimated weight of the package as measured by the carrier.",
+   "description": "Estimated weight of the package as measured by the carrier",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "label": "Carrier estimated weight (in pounds)",
@@ -160,7 +160,7 @@
   {
    "bold": 1,
    "depends_on": "eval: !doc.__islocal;",
-   "description": "The current status of the package.",
+   "description": "Current status of the package",
    "fieldname": "carrier_status",
    "fieldtype": "Select",
    "in_standard_filter": 1,
@@ -171,7 +171,7 @@
   },
   {
    "bold": 1,
-   "description": "Additional details about the current status.",
+   "description": "Additional details about the current status",
    "fieldname": "carrier_status_detail",
    "fieldtype": "Data",
    "label": "Carrier status detail",
@@ -179,7 +179,7 @@
   },
   {
    "bold": 1,
-   "description": "The name of the person who signed for the package.",
+   "description": "The name of the person who signed for the package",
    "fieldname": "signed_by",
    "fieldtype": "Data",
    "label": "Signed by",
@@ -194,14 +194,14 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "description": "Store that sends the package.",
+   "description": "Store that sends the package",
    "fieldname": "shipper",
    "fieldtype": "Autocomplete",
    "label": "Shipper",
    "options": "Amazon\neBay\nWalmart\nTarget\nBest Buy\nNewegg\n6pm\nJomashop\nCarter's\nShein\nAliExpress\nAlibaba\nTemu\nThe Home Depot\nSephora\nELF\nThe Ordinary\nAOA\nFossil\nNike\nAdidas\nPuma\nCrocs\nKeds\nSperry\nLevi's\nGAP\nOld Navy\nTommy Hilfiger\nStockX\nVictoria's Secret\nBath & Body Works\nGymshark\nNautica"
   },
   {
-   "description": "Notes or instructions.",
+   "description": "Additional Notes",
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes",
@@ -227,7 +227,7 @@
   },
   {
    "bold": 1,
-   "description": "Total Declared Amount",
+   "description": "Total Order Value",
    "fieldname": "total",
    "fieldtype": "Currency",
    "label": "Total(Amt)",
@@ -235,7 +235,7 @@
    "read_only": 1
   },
   {
-   "description": "Required to fetch data after an easypost tracking number is created.",
+   "description": "Required to fetch data after an easypost tracking number is created",
    "fieldname": "easypost_id",
    "fieldtype": "Data",
    "hidden": 1,
@@ -256,7 +256,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "0",
-   "description": "Package was purchased using Shopping Assistance Service.",
+   "description": "Package was purchased using Shopping Assistance Service",
    "fieldname": "assisted_purchase",
    "fieldtype": "Check",
    "in_preview": 1,
@@ -283,7 +283,7 @@
    "bold": 1,
    "fieldname": "extra_services_section",
    "fieldtype": "Section Break",
-   "label": "Extra Services"
+   "label": "Services"
   },
   {
    "fieldname": "totals_section",
@@ -337,7 +337,7 @@
    "default": "0",
    "fieldname": "has_taxes",
    "fieldtype": "Check",
-   "label": "Has Taxes"
+   "label": "Taxes"
   },
   {
    "fieldname": "column_break_5tood",
@@ -347,7 +347,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "0",
-   "description": "Package was sent to a Residential Address(Non Freight Forward)",
+   "description": "Package was sent to a Residential Address(Non Freight Forwarder)",
    "fieldname": "residential_address",
    "fieldtype": "Check",
    "in_preview": 1,
@@ -366,7 +366,7 @@
   {
    "fieldname": "est_delivery_2",
    "fieldtype": "Date",
-   "label": "Estimated Delivery Date(Latest)"
+   "label": "Estimated Delivery Date (Latest)"
   },
   {
    "fieldname": "column_break_mpgh",
@@ -381,7 +381,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "description": "Date on which it will be shipped.",
+   "description": "Date on which it will be shipped",
    "fieldname": "est_departure",
    "fieldtype": "Date",
    "label": "Estimated Departure Date"
@@ -389,7 +389,7 @@
   {
    "fieldname": "order_date",
    "fieldtype": "Date",
-   "label": "Order Date"
+   "label": "Purchase Date"
   }
  ],
  "links": [
@@ -399,12 +399,12 @@
    "link_fieldname": "parcel"
   },
   {
-   "group": "Shipment",
+   "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
    "link_fieldname": "package"
   },
   {
-   "group": "Shipment",
+   "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment Receipt",
    "link_fieldname": "package"
   },
@@ -419,7 +419,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2024-01-24 18:48:48.943423",
+ "modified": "2024-02-15 18:20:14.804376",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

@@ -1,7 +1,7 @@
 frappe.ui.form.on('Parcel', {
 
 	setup(frm) {
-		frm.page.sidebar.toggle(false); // Hide Sidebar
+		frm.page.sidebar.toggle(false);
 
 		// FIXME: Observe if the indicator changes. This is useful for the 'Not Saved' status aka is_dirty(). We cannot read that from the events available
 		const observer = new MutationObserver(() => {

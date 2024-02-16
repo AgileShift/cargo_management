@@ -3,7 +3,7 @@ app_title = "Cargo Management"
 app_publisher = "Agile Shift"
 app_description = "ERPNext Cargo Management for Freight Forwarders"
 app_email = "contacto@gruporeal.org"
-app_license = "MIT"
+app_license = "agpl-3.0"
 # required_apps = []
 
 # Includes in <head>
@@ -219,7 +219,6 @@ doc_events = {
 #   "v15.auth.validate"
 # ]
 
-
 global_search_doctypes = {
 	"Default": [
 		{"doctype": "Parcel"},
@@ -230,13 +229,9 @@ global_search_doctypes = {
 }
 
 fixtures = [
-	#'Issue Type',
-	#{'dt': 'Workspace', 'filters': {'name': 'Support'}}
-	{'dt': 'System Settings'}
+	'Issue Type',
+	{'dt': 'Workspace', 'filters': {'name': 'Support'}}
 ]
 
-after_install = 'cargo_management.jeans.after_install'
-after_migrate = 'cargo_management.jeans.after_migrate'
-
-
+# Automatically update python controller files with type annotations for this app.
 export_python_type_annotations = True
