@@ -68,15 +68,15 @@ cargo_management = {
 	transportation_formatter(transportation) {
 		const opts = this.TRANSPORTATIONS[transportation];
 
-		return `<span class="indicator-pill ${opts.color} filterable ellipsis" data-filter="transportation,=,${transportation}">
-            <span class="ellipsis">${transportation}${this.icon_html(opts.icon)}</span>
+		return `<span class="indicator-pill ${opts.color} filterable no-indicator-dot ellipsis" data-filter="transportation,=,${transportation}">
+            <span class="ellipsis">${__(transportation)}${this.icon_html(opts.icon)}</span>
         </span>`; // See more of this on list/list_view.js -> get_indicator_html();
 	},
 	transportation_indicator(transportation) {
 		const opts = this.TRANSPORTATIONS[transportation];
 
-		return `<span class="indicator-pill whitespace-nowrap ${opts.color}" style="margin-left: 10px">
-			<span>${transportation}${this.icon_html(opts.icon)}</span>
+		return `<span class="indicator-pill no-indicator-dot whitespace-nowrap ${opts.color}" style="margin-left: 10px">
+			<span>${__(transportation)}${this.icon_html(opts.icon)}</span>
 		</span>`; // See more of this on ui/page.js -> set_indicator() and clear_indicator()
 	},
 
