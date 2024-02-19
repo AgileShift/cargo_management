@@ -39,7 +39,7 @@ frappe.ui.form.on('Parcel', {
 		frm.events.show_explained_status(frm); // Show 'Explained Status' as Intro Message
 		frm.events.build_custom_actions(frm);  // Adding custom buttons
 
-		frm.trigger('parcel_preview_dialog');
+		//frm.trigger('parcel_preview_dialog');
 	},
 
 	tracking_number(frm) {
