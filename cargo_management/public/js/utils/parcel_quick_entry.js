@@ -6,52 +6,44 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 	}
 
 	render_dialog() {
-		this.add_extra_fields(); // Adding Table Field after executing is_quick_entry()
+		this.add_extra_fields(); // Adding Table Field after executing super.is_quick_entry();
 		super.render_dialog();
 		this.init_post_render_dialog_operations(); // Custom method to modify DOM properties after the dialog has been rendered
 	}
 
+	add_extra_fields() {
+		// Swap Order: [Carrier, Customer, Transportation] to [Customer, Transportation, Carrier]. FIXME: This approach can fail miserably
+		[this.mandatory[1], this.mandatory[2], this.mandatory[3]] = [this.mandatory[2], this.mandatory[3], this.mandatory[1]];
+
+		this.mandatory.splice(3, 0, {fieldtype: "Column Break"}); // Split 'Transportation' and 'Carrier'
+		this.mandatory.splice(8, 0, {fieldtype: 'Section Break', hide_border: true}); // Split 'Services' and 'Shipper'
+		this.mandatory.splice(10, 0, {fieldtype: 'Column Break'}); // Split 'Shipper' and [Number of Order, Purchase Date]
+
+		this.mandatory.splice(13, 0, {fieldtype: 'Section Break', fieldname: 'content_section', hide_border: true}, {
+		 	fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
+		 		{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true, max_height: '4rem', columns: 6},
+		 		{label: __('Tracking Number'), fieldtype: 'Data', fieldname: 'tracking_number', in_list_view: true, columns: 2},
+		 		{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true, columns: 2}
+		 	]}); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?
+
+	}
+
 	init_post_render_dialog_operations() {
-		let {carrier, tracking_number, extra_services_section, content_section, content, transportation_options} = this.dialog.fields_dict;
+		let {carrier, tracking_number, extra_services_section, content_section, content, transportation} = this.dialog.fields_dict;
 
 		tracking_number.df.onchange = function () {  // Override onchange to sanitize field and set carrier
 			const data = cargo_management.find_carrier_by_tracking_number(this.get_input_value());
 
+			carrier.set_input(data.carrier);       // Update the Carrier field
 			this.set_input(data.tracking_number);  // Tracking Number returned is sanitized
-			carrier.set_input(data.carrier);       // Update the carrier field
 		};
 
 		this.dialog.$wrapper.find('.modal-dialog').addClass('modal-lg'); // Making the Dialog large
-		extra_services_section.wrapper.insertAfter(carrier.wrapper).removeClass('row visible-section'); // Moving an entire section within a column(Done with DOM because a 'section break' will always create a new row)
 
 		// Styling the content section
-		transportation_options.$wrapper.addClass('text-center pt-4');
 		content_section.body.css('margin-top', 0);
 		content.$wrapper.find('.control-label').hide(); // Hiding Label of Content Table
-	}
-
-	add_extra_fields() {
-		// FIXME: This approach can fail miserably and is not recommended
-		[this.mandatory[1], this.mandatory[2]] = [this.mandatory[2], this.mandatory[1]]; // Swap Order: Customer with Carrier
-
-		// Insert New Fields in between Customer and Carrier. FIXME: better options?
-		this.mandatory.splice(2, 0, {
-			fieldtype: 'MultiCheckSingle', fieldname: 'transportation_options', label: __('Transportation'),
-			reqd: true, bold: true, columns: 2,
-			options: ['Sea', 'Air'].map(t => ({
-				value: t, description: __(t), label: __(t).toUpperCase() + cargo_management.icon_html(cargo_management.TRANSPORTATIONS[t].icon)
-			})),
-			on_change: (selected) => this.doc.transportation = selected // Bind the selected checkbox with the doc field
-		}, {fieldtype: "Column Break"});
-
-		this.mandatory.splice(8, 0, {fieldtype: 'Section Break', hide_border: true});
-		this.mandatory.splice(10, 0, {fieldtype: 'Column Break'}); // Split Shipper and Number of Order
-
-		this.mandatory.splice(12, 0, {fieldtype: 'Section Break', fieldname: 'content_section', hide_border: true}, {
-			fieldtype: 'Table', fieldname: 'content', options: 'Parcel Content', in_place_edit: false, fields: [
-				{label: __('Description'), fieldtype: 'Small Text', fieldname: 'description', in_list_view: true, max_height: '4rem', columns: 6},
-				{label: __('Tracking Number'), fieldtype: 'Data', fieldname: 'tracking_number', in_list_view: true, columns: 2},
-				{label: __('Item Code'), fieldtype: 'Link', fieldname: 'item_code', options: 'Item', in_list_view: true, columns: 2}
-			]}); // TODO: Item code with filters. Maybe we can filter if its is by the service Type?
+		transportation.$wrapper.addClass('text-center pt-4');
+		extra_services_section.wrapper.insertAfter(carrier.wrapper).removeClass('row visible-section'); // Moving entire section within a column(Done with DOM because a 'section break' will always create a new row)
 	}
 };
