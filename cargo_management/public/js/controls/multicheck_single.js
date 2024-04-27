@@ -30,6 +30,13 @@ frappe.ui.form.ControlMultiCheckSingle = class ControlMultiCheckSingle extends f
 		});
 	}
 
+	set_input(value) {
+		console.log('set_input')
+		// Extend to set the selected option
+		// Refer to: /form/controls/multicheck.js -> set_checked_options();
+		this.set_checked_options();
+	}
+
 	// Refer to: /form/controls/base_input.js -> set_mandatory() & set_invalid() & set_required() & set_bold()
 	set_mandatory() {
 		// Calling a core method to avoid DRY. This is necessary because MultiCheck inherits from Control rather than ControlInput(parent)

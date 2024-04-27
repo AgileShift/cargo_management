@@ -4,12 +4,12 @@ authors = [
     { name = "Agile Shift", email = "contacto@gruporeal.org" }
 ]
 description = "ERPNext Cargo Management for Freight Forwarders"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 readme = "README.md"
 dynamic = ["version"]
 
 dependencies = [
-    "easypost==9.1.0"
+    "easypost==9.2.0"
 ]
 
 [build-system]
@@ -17,3 +17,5 @@ requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
 [tool.bench.dev-dependencies]
+
+typing-modules = ["frappe.types.DF"]
