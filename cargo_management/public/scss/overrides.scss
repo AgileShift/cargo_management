@@ -1,79 +1,37 @@
 // First we remove the inline property. See: cargo_management/public/js/controls/overrides.js -> make_input()
 // Setting custom height for ControlSmallText in Our Doctype
 textarea.form-control[data-fieldtype="Small Text"] {
-  @each $doctype in "Parcel", "Parcel Content", "Warehouse Receipt", "Cargo Shipment Receipt Line" {
-    &[data-doctype='#{$doctype}'] {
-      height: auto;
-      background: red;
-    }
-  }
+	@each $doctype in "Parcel", "Parcel Content", "Warehouse Receipt", "Cargo Shipment Receipt Line" {
+		&[data-doctype='#{$doctype}'] {
+			height: auto;
+			background: red;  // TODO: Work in Progress.
+		}
+	}
 }
 
-// This is to add bold css in ControlText and ControlData if they are ReadOnly(No-Editable) Field
-// See: frappe/scss/form.scss -> Where the properties are not selected properly
-.like-disabled-input {
-  &.bold {
-    font-weight: var(--weight-bold); // FIXME: Maybe this will be fixed!
-  }
-}
+// Transportation MultiCheck
+div.frappe-control[data-fieldtype="TransportationMultiCheck"] {
+	.checkbox.unit-checkbox {
+		border-radius: 5px;
 
+		input {
+			display: none;
+		}
 
-// Overriding MulticheckSingle
-div.frappe-control[data-fieldtype="MultiCheckSingle"] {
-  .checkbox {
-    &.unit-checkbox {
-      display: flex;
-      label[title="Sea"] {
-        display: block;
-        width: 100%;
-        border: 1px solid blue;
-        border-radius: 5px;
+		label {
+			display: block;
 
-        * {
-          color: blue !important;
-        }
+			.label-area {
+				color: currentColor;
+			}
 
-        &:has(input:checked) {
+			&:has(input:checked) {
+				background-color: currentColor;
 
-          background-color: blue;
-
-          * {
-            color: white !important;
-          }
-          
-        }
-
-        input {
-          position: absolute;
-          visibility: hidden;
-        }
-      }
-
-      label[title="Air"] {
-        display: block;
-        width: 100%;
-        border: 1px solid red;
-        border-radius: 5px;
-
-        * {
-          color: red !important;
-        }
-
-        &:has(input:checked) {
-
-          background-color: red !important;
-
-          * {
-            color: white !important;
-          }
-          
-        }
-
-        input {
-          position: absolute;
-          visibility: hidden;
-        }
-      }
-    }
-  }
+				.label-area {
+					color: white !important;
+				}
+			}
+		}
+	}
 }
