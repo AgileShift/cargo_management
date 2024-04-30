@@ -55,17 +55,21 @@ The name of the person who signed for the package,El nombre de la persona que fi
 
 Carrier status,Estado según el transportista
 Current status of the package,Estado actual del paquete
+
 Available For Pickup,Disponible para recoger
 Delivered,Entregado
 
 Carrier status detail,Detalle del estado según el transportista
 Additional details about the current status,Detalles adicionales sobre el estado actual
+
 Arrived At Pickup Location,Llegó al lugar de recogida
 Arrived At Destination,Llegó al destino
 
-Carrier last detail, Última actualización del transportista
+Carrier last detail,Última actualización del transportista
 
 Estimated Departure Date,Fecha Estimada de Despacho
+Date on which it will be shipped,Fecha en la que será enviado
+
 Estimated Delivery Date (Earliest),Fecha Estimada de Entrega (Más Pronta)
 Estimated Delivery Date (Latest),Fecha Estimada de Entrega (Más Lejana)
 

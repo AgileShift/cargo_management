@@ -9,18 +9,18 @@ app_license = "agpl-3.0"
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
+# include JS, CSS files in header of desk.html
 app_include_css = "cargo_management.bundle.css"
 app_include_js = "cargo_management.bundle.js"
 
-# include js, css files in header of web template
+# include JS, CSS files in header of web template
 # web_include_css = "/assets/cargo_management/css/parcel_management.css"
 # web_include_js = "/assets/cargo_management/js/parcel_management.js"
 
-# include custom scss in every website theme (without file extension ".scss")
+# include custom SCSS in every website theme (without file extension ".scss")
 # website_theme_scss = "v15/public/scss/website"
 
-# include js, css files in header of web form
+# include JS, CSS files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
@@ -28,9 +28,9 @@ app_include_js = "cargo_management.bundle.js"
 # page_js = {"page" : "public/js/file.js"}
 
 # Include js in doctype views: override/extend Standard Form Scripts.
-doctype_js = {
-	"Quotation": "public/js/quotation.js"  # TODO: WORKING HERE
-}
+# doctype_js = {
+# 	"Quotation": "public/js/quotation.js"  # TODO: WORKING HERE
+# }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -105,7 +105,7 @@ doctype_js = {
 # permission_query_conditions = {
 # 	"Parcel": "cargo_management.parcel_management.doctype.parcel.events.get_permission_query_conditions",
 # }
-#
+
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
@@ -121,6 +121,10 @@ doctype_js = {
 # Document Events
 # ---------------
 # Hook on document methods and events
+
+# standard_queries = {
+# 	"Parcel": "cargo_management.parcel_management.doctype.parcel.events.get_parcel_query",
+# }
 
 doc_events = {
 	"Sales Invoice": {  # TODO: WORKING
@@ -235,3 +239,5 @@ fixtures = [
 
 # Automatically update python controller files with type annotations for this app.
 export_python_type_annotations = True
+
+# extend_bootinfo = "cargo_management.utils.extend_bootinfo"
