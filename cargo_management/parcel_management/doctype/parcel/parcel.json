@@ -1,9 +1,11 @@
 {
  "actions": [],
+ "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:{tracking_number}",
  "creation": "2020-06-12 19:06:49.803202",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -62,7 +64,9 @@
    "fieldname": "tracking_number",
    "fieldtype": "Data",
    "in_global_search": 1,
+   "in_list_view": 1,
    "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Tracking Number",
    "no_copy": 1,
    "reqd": 1,
@@ -70,7 +74,6 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "bold": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_standard_filter": 1,
@@ -93,12 +96,12 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "bold": 1,
    "default": "Unknown",
    "fieldname": "carrier",
    "fieldtype": "Select",
    "in_standard_filter": 1,
    "label": "Carrier",
+   "no_copy": 1,
    "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes\nVeho",
    "reqd": 1,
    "search_index": 1
@@ -108,6 +111,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
    "columns": 2,
    "fieldname": "status",
    "fieldtype": "Select",
@@ -196,9 +200,9 @@
    "bold": 1,
    "description": "Store that sends the package",
    "fieldname": "shipper",
-   "fieldtype": "Autocomplete",
+   "fieldtype": "Link",
    "label": "Shipper",
-   "options": "Amazon\neBay\nWalmart\nTarget\nBest Buy\nNewegg\n6pm\nJomashop\nCarter's\nShein\nAliExpress\nAlibaba\nTemu\nThe Home Depot\nSephora\nELF\nThe Ordinary\nAOA\nFossil\nNike\nAdidas\nPuma\nCrocs\nKeds\nSperry\nLevi's\nGAP\nOld Navy\nTommy Hilfiger\nStockX\nVictoria's Secret\nBath & Body Works\nGymshark\nNautica"
+   "options": "Brand"
   },
   {
    "description": "Additional Notes",
@@ -290,6 +294,9 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "columns": 2,
    "default": "Sea",
    "fieldname": "transportation",
    "fieldtype": "Select",
@@ -298,6 +305,7 @@
    "in_standard_filter": 1,
    "label": "Transportation",
    "options": "Sea\nAir",
+   "reqd": 1,
    "search_index": 1
   },
   {
@@ -387,6 +395,7 @@
    "label": "Estimated Departure Date"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "order_date",
    "fieldtype": "Date",
    "label": "Purchase Date"
@@ -419,7 +428,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2024-02-15 18:20:14.804376",
+ "modified": "2024-04-27 06:05:32.669711",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
