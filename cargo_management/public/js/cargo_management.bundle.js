@@ -1,7 +1,7 @@
 import {CARRIERS, DEFAULT_CARRIERS} from '../carriers.json' assert {type: 'json'};
+import './controls/transportation_multicheck';
 import './utils/parcel_quick_entry';
 import './controls/overrides';
-import './controls/multichecksingle';
 
 frappe.provide('cargo_management');
 
@@ -11,20 +11,13 @@ cargo_management = {
 		'Air': {icon: 'plane', color: 'red'}
 	},
 
-	// TODO: WORK IN PROGRESS
-
-	make_transportation_multicheck_control(parent, frm) {
-		frappe.ui.form.make_control()
-	},
-
 	// With this we can handle all our App Status Indicator Colors
 	get_indicator: (status) => [__(doc.status), {
-
+		// TODO: WORK IN PROGRESS
 	}[status], 'status,=,' + status],
 
-	// TODO: WORK IN PROGRESS
-
 	find_carrier_by_tracking_number(tracking_number) {
+		console.log('find_carrier_by_tracking_number', tracking_number);
 		tracking_number = tracking_number.trim().toUpperCase(); // Sanitize field
 
 		let response = {carrier: 'Unknown', search_term: tracking_number, tracking_number}; // Default values
@@ -81,6 +74,8 @@ cargo_management = {
 	},
 
 	load_carrier_settings(carrier_id) {
+		console.log(carrier_id);
+
 		// Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
 		const {api, tracking_url: main_url, default_carriers: extra_urls = []} = CARRIERS[carrier_id] || {};
 
@@ -88,6 +83,46 @@ cargo_management = {
 		extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': DEFAULT_CARRIERS[url_id]}));
 
 		return {api, urls};
+	},
+
+	build_carrier_url_dialog(doc) {
+		let fields = [...this.build_carrier_section_for_dialog(__('Tracking Number'), doc.tracking_number, doc.carrier)];
+
+		if (doc.name !== doc.tracking_number) {
+			fields.unshift(...this.build_carrier_section_for_dialog(__('Name'), doc.name));
+		}
+
+		// TODO DELETE: 'consolidated_tracking_numbers' 12 Matches -> Migrate to doc.content[].tracking_number
+		if (doc.consolidated_tracking_numbers) {
+			doc.consolidated_tracking_numbers.split('\n').forEach((tracking_number, i) => {
+				fields.push(...this.build_carrier_section_for_dialog(__('Consolidated #{0}', [i + 1]), tracking_number));
+			});
+		}
+
+		new frappe.ui.Dialog({animate: false, size: 'small', indicator: 'green', title: this.get_label, fields: fields}).show();
+	},
+
+	build_carrier_section_for_dialog(label, tracking_number, carrier = null) {
+		carrier = carrier || this.find_carrier_by_tracking_number(tracking_number).carrier;
+
+		let fields = [{fieldtype: 'Section Break', label: `${label} (${carrier}): ${tracking_number}`}];
+		const urls = this.load_carrier_settings(carrier).urls;
+
+		urls.forEach((url, i) => {
+			fields.push({
+				fieldtype: 'Button', label: url.title, input_class: "btn-block btn-primary",  // FIXME: btn-default
+				click: () => window.open(url.url + tracking_number)
+			});
+
+			if (i < urls.length - 1) {
+				fields.push({fieldtype: 'Column Break'});
+			}
+		});
+
+		return fields;
 	}
+
 };
-// TODO DELETE: asdasd 79 WORKING!
+// TODO 98: Working on Frappe Boot Info!
+// TODO: 135(Bracket) WORKING on TransportationMultiSelect Single Control
+// 1 error, 5 warning, 2 warning, 8 typos

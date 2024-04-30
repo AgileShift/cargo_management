@@ -2,6 +2,7 @@ frappe.ui.form.ControlTransportationMultiCheck = class ControlTransportationMult
 	// Extends from ControlMultiCheckSingle to create a 'TransportationMultiCheck'
 	// TODO: Create a Control from scratch to use Radio Buttons instead of Checkboxes
 
+	// See: https://frappeframework.com/docs/user/en/guides/app-development/how-to-improve-a-standard-control
 	parse_df_options() {
 		// No need to call -> super(). See: /form/controls/multicheck.js -> parse_df_options(); From the parent class
 

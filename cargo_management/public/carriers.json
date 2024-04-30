@@ -5,6 +5,12 @@
     "EVEREST": "http://everest.cargotrack.net/m/track.asp?track="
   },
   "CARRIERS": {
+    "Drop Off": {
+      "default_carriers": ["EVEREST"]
+    },
+    "Pick Up": {
+      "default_carriers": ["EVEREST"]
+    },
     "Unknown": {
       "default_carriers": ["Parcels", "17Track", "EVEREST"]
     },
