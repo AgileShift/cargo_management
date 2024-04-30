@@ -8,7 +8,7 @@ frappe.ui.form.ControlTransportationMultiCheck = class ControlTransportationMult
 
 		// 'checked': Gives Error if a value not the default is selected in quickEntry. It shows selected the default always
 		this.options = this.df.options.split('\n').map(t => ({
-			value: t, description: __(t), checked: t === this.df.default,
+			value: t, description: __(t), //checked: t === this.df.default,
 			label: __(t).toUpperCase() + cargo_management.icon_html(cargo_management.TRANSPORTATIONS[t].icon),
 			color: cargo_management.TRANSPORTATIONS[t].color
 		}));
