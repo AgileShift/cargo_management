@@ -1,3 +1,5 @@
+from typing import override
+
 from easypost.errors.api import ApiError as EasyPostAPIError
 
 import frappe
@@ -41,7 +43,7 @@ class Parcel(Document):
 		order_date: DF.Date | None
 		order_number: DF.Data | None
 		residential_address: DF.Check
-		shipper: DF.Autocomplete | None
+		shipper: DF.Link | None
 		shipping_amount: DF.Currency
 		signed_by: DF.Data | None
 		status: DF.Literal["Awaiting Receipt", "Awaiting Confirmation", "In Extraordinary Confirmation", "Awaiting Departure", "In Transit", "In Customs", "Sorting", "To Bill", "Unpaid", "For Delivery or Pickup", "Finished", "Cancelled", "Never Arrived", "Returned to Sender"]
@@ -59,7 +61,7 @@ class Parcel(Document):
 	# TODO: Add Override Decorator for python 3.12
 	# TODO: Replace frappe.get_doc for DoctypeClass import. for Typing Completion
 
-	#@override
+	@override
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behaviour. Useful when called from outside a form. """
 		if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
@@ -149,18 +151,19 @@ class Parcel(Document):
 				# cargo_shipment = frappe.get_cached_doc('Cargo Shipment', self.cargo_shipment)
 
 				# TODO: What if we dont have real delivery date. Or signature
-				message = [
-					StatusMessage.TRANSPORTER_DELIVERY_DATE.value.replace(
-						'[DATE]',
-						frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
-					),
+				if self.carrier_real_delivery:
+					message = [
+						StatusMessage.TRANSPORTER_DELIVERY_DATE.value.replace(
+							'[DATE]',
+							frappe.utils.format_datetime(self.carrier_real_delivery, 'medium')
+						),
+					]
+				if self.signed_by:
+					message.append(StatusMessage.SIGNED_BY.value.replace('[SIGNER]', str(self.signed_by)))
 					# 'Firmado por {}'.format(self.carrier_real_delivery, self.signed_by),
 					# 'Fecha esperada de recepcion en Managua: {}'.format(cargo_shipment.expected_arrival_date),
 
-					# 'Embarque: {}'.format(self.cargo_shipment)
-				]
-				if self.signed_by:
-					message.append(StatusMessage.SIGNED_BY.value.replace('[SIGNER]', str(self.signed_by)))
+				message.append('Embarque: {}'.format(self.cargo_shipment))
 
 			case Status.IN_TRANSIT:
 				# TODO: Add Departure date and est arrival date
@@ -309,3 +312,4 @@ class Parcel(Document):
 # FIXME: 2 warning, 20 w warning, 85 typos -> 276
 # 292 Refactor de constantes y estados
 # FIXME 311: 2 warning, 29 w warning, 21 typos -> 276 | Corregir State Machine y COLOR usage!
+# FIXME 313: 9 Warning, 29 w warning, 22 typos -> 303 | Corregir State Machine y Color Usage!
