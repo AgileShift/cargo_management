@@ -17,6 +17,7 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 	}
 
 	add_extra_fields() {
+		// TODO: Convert to this.dialog fields_dict
 		// Swap Order: [Carrier, Customer, Transportation] to [Customer, Transportation, Carrier]. FIXME: This approach can fail miserably
 		[this.mandatory[1], this.mandatory[2], this.mandatory[3]] = [this.mandatory[2], this.mandatory[3], this.mandatory[1]];
 

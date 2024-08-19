@@ -1,19 +1,18 @@
 frappe.ui.form.on('Parcel', {
 
-	setup(frm) {
-		frm.page.sidebar.toggle(false);
-
-		// FIXME: Observe if the indicator changes. This is useful for the 'Not Saved' status aka is_dirty(). We cannot read that from the events available
-		const observer = new MutationObserver(() => {
-			frm.layout.show_message('');     // Clear Message because it's possible that data changes!
-			frm.page.clear_custom_actions(); // Clear Custom buttons
-			frm.page.indicator.next().remove(); // Remove the extra indicator if the indicator changes
-		});
-
-		observer.observe(frm.page.indicator.get(0), {childList: true}); // Observe the 'indicator' for changes
-	},
+	setup(frm) {},
 
 	onload(frm) {
+		// Moving this piece of code outside setup. because it's not working inside "setup"
+		frm.page.sidebar.toggle(false);
+		// FIXME: Observe if the indicator changes. This is useful for the 'Not Saved' status aka is_dirty(). We cannot read that from the events available
+		const observer = new MutationObserver(() => {
+			frm.layout.show_message('');      // Clear Message because it's possible that data changes!
+			frm.page.clear_custom_actions();  // Clear Custom buttons
+			frm.page.indicator.next().remove(); // Remove the extra indicator if the indicator changes
+		});
+		observer.observe(frm.page.indicator.get(0), {childList: true}); // Observe the 'indicator' for changes
+
 		// Setting custom queries
 		frm.set_query('item_code', 'content', () => {
 			return {
@@ -206,7 +205,7 @@ frappe.ui.form.on('Parcel', {
 				{
 					fieldname: 'item_code',
 					fieldtype: 'Data',
-					label: __('Item sshhshsh')
+					label: __('Item Code')
 				}],
 			get_query: () => {
 				return {
@@ -251,3 +250,4 @@ frappe.ui.form.on('Parcel Content', {
 	},
 });
 //201 - FIXME: Giving PROBLEMS
+// 254 -> Working on Frappe Boot Info for Carriers!
