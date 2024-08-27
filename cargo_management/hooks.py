@@ -28,12 +28,15 @@ app_include_js = "cargo_management.bundle.js"
 # page_js = {"page" : "public/js/file.js"}
 
 # Include js in doctype views: override/extend Standard Form Scripts.
-# doctype_js = {
-# 	"Quotation": "public/js/quotation.js"  # TODO: WORKING HERE
-# }
+# doctype_js = {"Quotation": "public/js/quotation.js"}  # TODO: WORKING HERE
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
+# Svg Icons
+# ------------------
+# include app icons in desk
+# app_include_icons = "freight_management/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -130,6 +133,7 @@ doc_events = {
 	"Sales Invoice": {  # TODO: WORKING
 		"on_submit": "cargo_management.parcel_selling.utils.sales_invoice_on_submit",
 		"on_change": "cargo_management.parcel_selling.utils.sales_invoice_on_update_after_submit"
+		# "on_cancel"
 	}
 }
 
@@ -137,21 +141,21 @@ doc_events = {
 # ---------------
 
 # scheduler_events = {
-#   "all": [
-#      "v15.tasks.all"
-#   ],
-#   "daily": [
-#   "v15.tasks.daily"
-#   ],
-#   "hourly": [
-#      "v15.tasks.hourly"
-#   ],
-#   "weekly": [
-#      "v15.tasks.weekly"
-#   ],
-#   "monthly": [
-#      "v15.tasks.monthly"
-#   ],
+# 	"all": [
+# 		"cargo_management.tasks.all"
+# 	],
+# 	"daily": [
+# 		"cargo_management.tasks.daily"
+# 	],
+# 	"hourly": [
+# 		"cargo_management.tasks.hourly"
+# 	],
+# 	"weekly": [
+# 		"cargo_management.tasks.weekly"
+# 	],
+# 	"monthly": [
+# 		"cargo_management.tasks.monthly"
+# 	],
 # }
 
 # Testing
@@ -220,8 +224,17 @@ doc_events = {
 # --------------------------------
 
 # auth_hooks = [
-#   "v15.auth.validate"
+# 	"cargo_management.auth.validate"
 # ]
+
+# Automatically update python controller files with type annotations for this app.
+export_python_type_annotations = True
+
+# default_log_clearing_doctypes = {
+# 	"Logging DocType Name": 30  # days to retain logs
+# }
+
+# extend_bootinfo = "cargo_management.utils.extend_bootinfo"
 
 global_search_doctypes = {
 	"Default": [
@@ -236,8 +249,3 @@ fixtures = [
 	'Issue Type',
 	{'dt': 'Workspace', 'filters': {'name': 'Support'}}
 ]
-
-# Automatically update python controller files with type annotations for this app.
-export_python_type_annotations = True
-
-# extend_bootinfo = "cargo_management.utils.extend_bootinfo"

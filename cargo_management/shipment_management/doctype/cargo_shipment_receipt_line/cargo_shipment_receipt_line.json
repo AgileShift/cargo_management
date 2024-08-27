@@ -5,27 +5,32 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "package",
-  "package_2",
+  "section_break_bhmz",
+  "content",
+  "column_break_5",
   "item_code",
   "customer",
   "customer_name",
-  "carrier_est_weight",
-  "column_break_5",
-  "content",
-  "section_break_7",
   "gross_weight",
-  "column_break_9",
   "billable_qty_or_weight",
-  "column_break_12",
-  "item_price",
-  "section_break_14",
+  "section_break_wljv",
+  "package",
+  "package_2",
+  "carrier_est_weight",
+  "column_break_yudf",
+  "transportation",
+  "assisted_purchase",
+  "shipper",
+  "section_break_7",
   "sales_invoice",
-  "warehouse_receipt"
+  "column_break_9",
+  "warehouse_receipt",
+  "column_break_12",
+  "item_price"
  ],
  "fields": [
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "package",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -36,6 +41,8 @@
   },
   {
    "columns": 2,
+   "fetch_from": "customer.customer_name",
+   "fetch_if_empty": 1,
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -44,8 +51,10 @@
   },
   {
    "fieldname": "content",
-   "fieldtype": "Text",
-   "label": "Content"
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Content",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_5",
@@ -69,8 +78,11 @@
    "non_negative": 1
   },
   {
+   "collapsible": 1,
+   "collapsible_depends_on": "sales_invoice",
    "fieldname": "section_break_7",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_9",
@@ -78,8 +90,6 @@
   },
   {
    "description": "TODO: Validate this rule: eval: doc.package == null || doc.customer_name != null",
-   "fetch_from": "package.customer",
-   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -95,10 +105,10 @@
    "options": "Sales Invoice"
   },
   {
+   "bold": 1,
    "columns": 1,
    "description": "Estimated weight of the package as measured by the carrier (if available).",
    "fetch_from": "package.carrier_est_weight",
-   "fetch_if_empty": 1,
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -108,10 +118,6 @@
   {
    "fieldname": "column_break_12",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_14",
-   "fieldtype": "Section Break"
   },
   {
    "columns": 1,
@@ -135,16 +141,59 @@
    "options": "Warehouse Receipt"
   },
   {
+   "columns": 1,
+   "depends_on": "eval: doc.package != doc.package_2;",
    "fetch_from": "package.tracking_number",
    "fieldname": "package_2",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Package 2"
+   "label": "Package 2",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "package.transportation",
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "label": "Transportation",
+   "options": "Air\nSea",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.assisted_purchase == true;",
+   "fetch_from": "package.assisted_purchase",
+   "fieldname": "assisted_purchase",
+   "fieldtype": "Check",
+   "label": "Assisted Purchase",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "package.shipper",
+   "fieldname": "shipper",
+   "fieldtype": "Link",
+   "label": "Shipper",
+   "options": "Brand",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_wljv",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_yudf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_bhmz",
+   "fieldtype": "Section Break",
+   "hide_border": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-10-13 15:10:25.859738",
+ "modified": "2024-08-27 08:55:16.323612",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt Line",

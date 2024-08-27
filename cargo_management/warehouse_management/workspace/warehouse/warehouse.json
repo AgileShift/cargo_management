@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "Warehouse",
  "links": [],
- "modified": "2024-01-18 08:41:38.752612",
+ "modified": "2024-04-19 13:22:01.355756",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse",
@@ -28,7 +28,7 @@
   }
  ],
  "roles": [],
- "sequence_id": 5.0,
+ "sequence_id": 11.0,
  "shortcuts": [
   {
    "color": "Orange",
