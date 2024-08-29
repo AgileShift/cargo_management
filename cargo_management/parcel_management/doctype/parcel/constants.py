@@ -36,7 +36,7 @@ class StatusMessage(StrEnum):
 	WAIT_FOR_24_HOURS_CONFIRMATION = 'Por favor espera 24 horas hábiles para que el almacén confirme la recepción.'
 	TRANSPORTER_INDICATE_ESTIMATE_DELIVERY_DATE = 'El transportista índico una fecha de entrega aproximada: [DATE]'
 	PACKAGE_IN_EXTRAORDINARY_REVISION = 'El paquete se encuentra siendo verificado de forma extraordinaria.'
-	TRANSPORTER_DELIVERY_DATE = 'El transportista indica que entrego el paquete el: [DATE].'
+	TRANSPORTER_DELIVERY_DATE = 'El transportista indica que entrego el paquete el: {fecha}'
 	NO_CARGO_SHIPPING = 'No hay envio de carga'
 	PACKAGE_IN_TRANSIT_TO_DESTINATION = 'El paquete esta en transito a destino.'
 	DEPARTURE_DATE = 'Fecha de despacho: [DATE]'

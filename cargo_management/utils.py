@@ -5,6 +5,10 @@ import pytz
 import frappe
 
 
+def extend_bootinfo(bootinfo):
+	bootinfo.carriers = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS']
+
+
 def get_list_from_child_table(child_lines: list, field: str):
 	""" This takes a List of Dicts [{}] and return a List of Uniques values. """
 	return list(set(child_line.get(field) for child_line in child_lines if child_line.get(field)))  # FIXME: Performance?

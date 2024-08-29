@@ -6,6 +6,9 @@ def sales_invoice_on_submit(doc, method):
 
 	# TODO: Avoid duplicate tracking
 	for item in doc.items:  # Iter over all items on sales invoice
+		if item.package is None:
+			return
+
 		parcel = frappe.get_doc('Parcel', item.package)
 
 		if parcel.change_status('Unpaid'):  # If it can change status
@@ -20,8 +23,11 @@ def sales_invoice_on_update_after_submit(doc, method):
 		return
 
 	for item in doc.items:  # Iter over all items on sales invoice
-		package = frappe.get_doc('Parcel', item.package)
+		if item.package is None:
+			return
 
-		if package.change_status('For Delivery or Pickup'):  # If it can change status
+		parcel = frappe.get_doc('Parcel', item.package)
+
+		if parcel.change_status('For Delivery or Pickup'):  # If it can change status
 			# Set flag ON because Doc will be saved from bulk edit. No validations
-			package.save(ignore_permissions=True)  # , ignore_validate=True)  # Trigger before_save() who checks for the flag
+			parcel.save(ignore_permissions=True)  # , ignore_validate=True)  # Trigger before_save() who checks for the flag

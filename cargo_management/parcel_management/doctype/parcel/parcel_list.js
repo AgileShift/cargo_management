@@ -5,8 +5,6 @@ frappe.listview_settings['Parcel'] = {
 		['status', 'not in', ['Finished', 'Cancelled', 'Never Arrived', 'Returned to Sender']] // aka 'Active Parcels'
 	],
 
-	// TODO DELETE: 'consolidated_tracking_numbers' 12 Matches
-
 	onload(listview) {
 		const {tracking_number: tracking_number_field, customer_name: customer_name_field} = listview.page.fields_dict;
 
@@ -18,7 +16,7 @@ frappe.listview_settings['Parcel'] = {
 			this.value = this.input.value = this.get_input_value().replaceAll('%', '').trim().toUpperCase(); // this.set_input() is not working
 
 			if (this.value !== this.last_value) {
-				listview.filter_area.refresh_list_view(); // refresh_list_view() if the value has changed
+				listview.filter_area.refresh_list_view(); // refresh_list_view() if value has changed. TODO: debounced_refresh_list_view?
 			}
 		};
 
@@ -46,6 +44,8 @@ frappe.listview_settings['Parcel'] = {
 
 			return args;
 		};
+
+		//FIXME: Delete after Finish! frappe.ui.form.make_quick_entry('Parcel', null, null, '');
 	},
 
 	// Unused: light-blue. // TODO: Migrate to Document States? Maybe when frappe core starts using it.
@@ -70,40 +70,7 @@ frappe.listview_settings['Parcel'] = {
 		show: () => true,
 		get_label: () => __('Search'),
 		get_description: () => '',
-		action(doc) {
-			let fields = [...this.build_carrier_urls(__('Tracking Number'), doc.tracking_number, doc.carrier)];
-
-			if (doc.name !== doc.tracking_number) {
-				fields.unshift(...this.build_carrier_urls(__('Name'), doc.name));
-			}
-
-			if (doc.consolidated_tracking_numbers) {
-				doc.consolidated_tracking_numbers.split('\n').forEach((tracking_number, i) => {
-					fields.push(...this.build_carrier_urls(__('Consolidated #{0}', [i + 1]), tracking_number));
-				});
-			}
-
-			new frappe.ui.Dialog({animate: false, size: 'small', indicator: 'green', title: this.get_label, fields: fields}).show();
-		},
-		build_carrier_urls(section_label, lookup_field, carrier = null) {
-			carrier = carrier || cargo_management.find_carrier_by_tracking_number(lookup_field).carrier;
-
-			let fields = [{fieldtype: 'Section Break', label: `${section_label}(${carrier}): ${lookup_field}`}];
-			const urls = cargo_management.load_carrier_settings(carrier).urls;
-
-			urls.forEach((url, i) => {
-				fields.push({
-					fieldtype: 'Button', label: url.title, input_class: "btn-block btn-primary",  // FIXME: btn-default
-					click: () => window.open(url.url + lookup_field)
-				});
-
-				if (i < urls.length - 1) {
-					fields.push({fieldtype: 'Column Break'});
-				}
-			});
-
-			return fields;
-		}
+		action: (doc) => cargo_management.build_carrier_url_dialog(doc)
 	},
 
 	formatters: {
@@ -112,4 +79,5 @@ frappe.listview_settings['Parcel'] = {
 	}
 };
 // 119 FIXME: Create more functions, and move them to cargo_management.js
-// 6 warning, 1 typo
+// 6 warning, 4 typo // TODO: 115 -> Working on frappe boot info
+// 83 TODO: listview.get_args WE NEED TO MOVE THIS. To Work on the backend
