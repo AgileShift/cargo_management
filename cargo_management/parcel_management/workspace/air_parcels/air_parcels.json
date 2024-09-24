@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"7V-jIAYV_d\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>With Carrier<br></b></span>\",\"col\":12}},{\"id\":\"2sqnnByhjn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Receipt\",\"col\":3}},{\"id\":\"MBiBxt15BK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":3}},{\"id\":\"zOquxYWAFu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"id\":\"M6G1DYT0U9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"id\":\"_2c2iektl2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":3}},{\"id\":\"TB2bu-s2aL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"id\":\"RcMs3rrZVL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"nfliPJae5E\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Warehouse <br></b></span>\",\"col\":12}},{\"id\":\"kc_c0i29Gc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":3}},{\"id\":\"2UJ6wXIres\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":3}},{\"id\":\"aNXQTupHGW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":3}},{\"id\":\"Au-Xm7vSc_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"id\":\"XSeqC_UlzO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":3}},{\"id\":\"AgddDw7mcO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"id\":\"Fgw2fF5P6C\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LG4R5S9fqb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>In Office</b></span>\",\"col\":12}},{\"id\":\"xvfgskbacG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available at Office\",\"col\":3}},{\"id\":\"VEiX9BIwBG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"To Bill and Unpaid\",\"col\":3}}]",
+ "content": "[{\"id\":\"7V-jIAYV_d\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">With Carrier</span>\",\"col\":9}},{\"id\":\"2sqnnByhjn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Receipt\",\"col\":4}},{\"id\":\"MBiBxt15BK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":4}},{\"id\":\"zOquxYWAFu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":3}},{\"id\":\"_2c2iektl2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":4}},{\"id\":\"TB2bu-s2aL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":4}},{\"id\":\"M6G1DYT0U9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":3}},{\"id\":\"RcMs3rrZVL\",\"type\":\"spacer\",\"data\":{\"col\":3}},{\"id\":\"nfliPJae5E\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">In Warehouse</span>\",\"col\":10}},{\"id\":\"kc_c0i29Gc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":4}},{\"id\":\"2UJ6wXIres\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":4}},{\"id\":\"Au-Xm7vSc_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":3}},{\"id\":\"XSeqC_UlzO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":4}},{\"id\":\"aNXQTupHGW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":4}},{\"id\":\"AgddDw7mcO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":3}},{\"id\":\"Fgw2fF5P6C\",\"type\":\"spacer\",\"data\":{\"col\":3}},{\"id\":\"LG4R5S9fqb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">In Office</span>\",\"col\":10}},{\"id\":\"xvfgskbacG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available at Office\",\"col\":4}},{\"id\":\"VEiX9BIwBG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"To Bill and Unpaid\",\"col\":3}}]",
  "creation": "2022-08-05 17:51:56.344103",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "AIR Parcels",
  "links": [],
- "modified": "2024-04-19 13:22:00.536552",
+ "modified": "2024-09-23 21:56:24.325406",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "AIR Parcels",
@@ -27,28 +27,10 @@
   {
    "color": "Blue",
    "doc_view": "List",
+   "format": "{} Waiting",
    "label": "Awaiting Receipt",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"transportation\":[\"=\",\"Air\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Light-Blue",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "icon": "",
-   "label": "Arriving Today",
-   "link_to": "Parcel",
-   "stats_filter": "{\"carrier_est_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Green",
-   "doc_view": "List",
-   "format": "{} Delivered",
-   "label": "Arrived Today",
-   "link_to": "Parcel",
-   "stats_filter": "{\"carrier_real_delivery\":[\"Timespan\",\"today\"],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"]}",
    "type": "DocType"
   },
   {
@@ -56,52 +38,16 @@
    "doc_view": "List",
    "label": "Without Carrier Data",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"transportation\":[\"=\",\"Air\"],\"carrier_status\":[\"=\",\"Unknown\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Orange",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "label": "Awaiting Confirmation",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Unknown\"]}",
    "type": "DocType"
   },
   {
    "color": "Pink",
    "doc_view": "List",
-   "format": "{} Late",
+   "format": "{} Delayed",
    "label": "Arriving Late",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\":[\"=\",\"Awaiting Receipt\"],\n    \"transportation\":[\"=\",\"Air\"],\n    \"carrier_est_delivery\":[\"Between\",[moment().add(-2, 'months').format(), moment().add(-1, 'days').format()]]\n}",
-   "type": "DocType"
-  },
-  {
-   "color": "Orange",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "label": "This week pending confirmation",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"carrier_real_delivery\":[\"Timespan\",\"this week\"],\"transportation\":[\"=\",\"Air\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Pink",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "label": "In Extraordinary Confirmation",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"In Extraordinary Confirmation\"],\"transportation\":[\"=\",\"Air\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Yellow",
-   "doc_view": "List",
-   "format": "{} Waiting",
-   "label": "Awaiting Departure",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Departure\"],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\n    \"transportation\":[\"=\",\"Air\"],\n    \"status\":[\"=\",\"Awaiting Receipt\"],\n    \"carrier_est_delivery\": [\"Between\", [moment().add(-2, 'months').format(), moment().add(-1, 'days').format()]]\n}",
    "type": "DocType"
   },
   {
@@ -109,15 +55,7 @@
    "doc_view": "List",
    "label": "Available for pickup at post office",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Available For Pickup\"],\"transportation\":[\"=\",\"Air\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Purple",
-   "doc_view": "List",
-   "label": "In Transit",
-   "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"In Transit\",\"In Customs\"]],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Available For Pickup\"]}",
    "type": "DocType"
   },
   {
@@ -126,16 +64,77 @@
    "format": "{} Returned",
    "label": "Returned to Sender",
    "link_to": "Parcel",
-   "stats_filter": "{\"creation\":[\"Timespan\",\"this month\"],\"carrier_status\":[\"=\",\"Return To Sender\"],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"creation\":[\"Timespan\",\"this month\"],\"carrier_status\":[\"=\",\"Return To Sender\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Light-Blue",
+   "doc_view": "List",
+   "format": "{} Waiting",
+   "label": "Arriving Today",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_est_delivery\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "Awaiting Confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "This week pending confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]],\"carrier_real_delivery\":[\"Timespan\",\"this week\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "format": "{} Delivered",
+   "label": "Arrived Today",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"carrier_real_delivery\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "format": "{} Waiting",
+   "label": "Awaiting Departure",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Departure\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "In Extraordinary Confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"In Extraordinary Confirmation\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
+   "label": "In Transit",
+   "link_to": "Parcel",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"In Transit\",\"In Customs\"]]}",
    "type": "DocType"
   },
   {
    "color": "Blue",
    "doc_view": "List",
-   "format": "{}",
    "label": "Available at Office",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"Sorting\",\"To Bill\",\"Unpaid\",\"For Delivery or Pickup\"]],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"Sorting\",\"To Bill\",\"Unpaid\",\"For Delivery or Pickup\"]]}",
    "type": "DocType"
   },
   {
@@ -144,7 +143,7 @@
    "format": "{} Pending",
    "label": "To Bill and Unpaid",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"To Bill\",\"Unpaid\"]],\"transportation\":[\"=\",\"Air\"]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"To Bill\",\"Unpaid\"]]}",
    "type": "DocType"
   }
  ],
