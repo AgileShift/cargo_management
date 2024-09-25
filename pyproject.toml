@@ -9,7 +9,7 @@ readme = "README.md"
 dynamic = ["version"]
 
 [project.urls]
-Homepage = ""
+Homepage = "https://github.com/AgileShift/cargo_management"
 Repository = "https://github.com/AgileShift/cargo_management.git"
 "Bug Reports" = "https://github.com/AgileShift/cargo_management/issues"
 

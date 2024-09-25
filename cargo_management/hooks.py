@@ -247,5 +247,6 @@ global_search_doctypes = {
 
 fixtures = [
 	'Issue Type',
-	{'dt': 'Workspace', 'filters': {'name': 'Support'}}
+	{'dt': 'Workspace', 'filters': {'name': 'Support'}},
+	{'dt': 'Custom HTML Block', 'filters': {'name': 'BR'}}
 ]
