@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "AIR Parcels",
  "links": [],
- "modified": "2024-09-27 22:44:23.975554",
+ "modified": "2024-09-27 22:54:13.801689",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "AIR Parcels",
@@ -126,7 +126,7 @@
    "doc_view": "List",
    "label": "In Transit",
    "link_to": "Parcel",
-   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"In Transit\",\"In Customs\"]]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"In Transit\"]}",
    "type": "DocType"
   },
   {

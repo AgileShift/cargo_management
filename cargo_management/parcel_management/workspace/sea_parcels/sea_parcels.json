@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "SEA Parcels",
  "links": [],
- "modified": "2024-09-27 20:29:39.265455",
+ "modified": "2024-09-27 22:53:14.664779",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "SEA Parcels",
@@ -126,7 +126,7 @@
    "doc_view": "List",
    "label": "In Transit",
    "link_to": "Parcel",
-   "stats_filter": "{\"transportation\":[\"=\",\"Sea\"],\"status\":[\"in\",[\"In Transit\",\"In Customs\"]]}",
+   "stats_filter": "{\"transportation\":[\"=\",\"Sea\"],\"status\":[\"=\",\"In Transit\"]}",
    "type": "DocType"
   },
   {

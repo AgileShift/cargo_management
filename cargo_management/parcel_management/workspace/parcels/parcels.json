@@ -206,7 +206,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-09-27 20:30:07.611930",
+ "modified": "2024-09-27 22:52:08.841519",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcels",
@@ -336,7 +336,7 @@
    "doc_view": "List",
    "label": "In Transit",
    "link_to": "Parcel",
-   "stats_filter": "{\"status\":[\"in\",[\"In Transit\",\"In Customs\"]]}",
+   "stats_filter": "{\"status\":[\"=\",\"In Transit\"]}",
    "type": "DocType"
   },
   {
