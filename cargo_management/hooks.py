@@ -4,7 +4,7 @@ app_publisher = "Agile Shift"
 app_description = "ERPNext Cargo Management for Freight Forwarders"
 app_email = "contacto@gruporeal.org"
 app_license = "agpl-3.0"
-# required_apps = []
+# required_apps = [] # TODO: Put gr Tools in here!
 
 # Includes in <head>
 # ------------------
