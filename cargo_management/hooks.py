@@ -248,5 +248,5 @@ global_search_doctypes = {
 fixtures = [
 	'Issue Type',
 	{'dt': 'Workspace', 'filters': {'name': 'Support'}},
-	{'dt': 'Custom HTML Block', 'filters': {'name': 'BR'}}
+	{'dt': 'Custom HTML Block', 'filters': {'name': 'BR'}}  # TODO: Delete on v16?(On the new Dashboard)
 ]
