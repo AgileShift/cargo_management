@@ -57,7 +57,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "in_preview": 1,
-   "label": "Departure date",
+   "label": "Departure Date",
    "reqd": 1
   },
   {
@@ -178,7 +178,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2023-10-13 13:41:46.635641",
+ "modified": "2024-10-01 17:16:11.592628",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
