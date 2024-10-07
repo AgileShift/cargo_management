@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: contacto@gruporeal.org\n"
-"POT-Creation-Date: 2024-10-01 16:45-0615\n"
-"PO-Revision-Date: 2024-10-01 16:45-0615\n"
+"POT-Creation-Date: 2024-10-01 17:16-0615\n"
+"PO-Revision-Date: 2024-10-01 17:16-0615\n"
 "Last-Translator: contacto@gruporeal.org\n"
 "Language-Team: contacto@gruporeal.org\n"
 "MIME-Version: 1.0\n"
@@ -503,18 +503,17 @@ msgstr ""
 
 #. Description of the 'Carrier real delivery date' (Datetime) field in DocType
 #. 'Parcel'
+#. Description of the 'Carrier real delivery date' (Datetime) field in DocType
+#. 'Cargo Shipment Line'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 msgid "Delivery date time (timezone aware) provided by the carrier"
 msgstr ""
 
-#. Description of the 'Carrier real delivery date' (Datetime) field in DocType
-#. 'Cargo Shipment Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "Delivery date time (timezone aware) provided by the carrier (if available)."
-msgstr ""
-
+#. Label of a Date field in DocType 'Cargo Shipment'
 #. Label of a Date field in DocType 'Cargo Shipment Receipt'
 #. Label of a Date field in DocType 'Warehouse Receipt'
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Departure Date"
@@ -523,11 +522,6 @@ msgstr ""
 #. Label of a Data field in DocType 'Parcel Selling Settings'
 #: cargo_management/parcel_selling/doctype/parcel_selling_settings/parcel_selling_settings.json
 msgid "Departure Days"
-msgstr ""
-
-#. Label of a Date field in DocType 'Cargo Shipment'
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
-msgid "Departure date"
 msgstr ""
 
 #. Label of a Small Text field in DocType 'Parcel Content'
@@ -643,17 +637,14 @@ msgstr ""
 
 #. Description of the 'Carrier estimated weight (in pounds)' (Float) field in
 #. DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Estimated weight of the package as measured by the carrier"
-msgstr ""
-
 #. Description of the 'Carrier estimated weight (in pounds)' (Float) field in
 #. DocType 'Cargo Shipment Line'
 #. Description of the 'Carrier estimated weight (in pounds)' (Float) field in
 #. DocType 'Cargo Shipment Receipt Line'
+#: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Estimated weight of the package as measured by the carrier (if available)."
+msgid "Estimated weight of the package as measured by the carrier"
 msgstr ""
 
 #. Description of the 'Warehouse estimated weight (in pounds)' (Float) field in
@@ -1078,7 +1069,7 @@ msgstr ""
 msgid "Real arrival date of cargo shipment to his final destination."
 msgstr ""
 
-#. Description of the 'Departure date' (Date) field in DocType 'Cargo Shipment'
+#. Description of the 'Departure Date' (Date) field in DocType 'Cargo Shipment'
 #. Description of the 'Departure Date' (Date) field in DocType 'Cargo Shipment
 #. Receipt'
 #. Description of the 'Departure Date' (Date) field in DocType 'Warehouse
