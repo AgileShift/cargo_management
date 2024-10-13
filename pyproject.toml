@@ -7,15 +7,14 @@ description = "ERPNext Cargo Management for Freight Forwarders"
 requires-python = ">=3.10,<3.13"
 readme = "README.md"
 dynamic = ["version"]
+dependencies = [
+    "easypost~=9.4.1"
+]
 
 [project.urls]
 Homepage = "https://github.com/AgileShift/cargo_management"
 Repository = "https://github.com/AgileShift/cargo_management.git"
 "Bug Reports" = "https://github.com/AgileShift/cargo_management/issues"
-
-dependencies = [
-    "easypost==9.4.1"
-]
 
 [build-system]
 requires = ["flit_core >=3.4,<4"]
