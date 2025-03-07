@@ -122,6 +122,16 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 frappe.ui.form.on('Cargo Shipment Receipt Line', {
 	// TODO: We should allow always customer to be read not read_only?
 
+	item_code: function (frm, cdt, cdn) {
+		const item = locals[cdt][cdn];
+
+		if (item.item_code.includes('FIJO')) { // FIXME: HOTFIX -> 7 March 2025 # Employee added 1 to the billable qty
+			frm.fields_dict['cargo_shipment_receipt_lines'].grid.update_docfield_property('billable_qty_or_weight', 'hidden', false);
+		} else {
+			frm.fields_dict['cargo_shipment_receipt_lines'].grid.update_docfield_property('billable_qty_or_weight', 'hidden', true);
+		}
+	},
+
 	// TODO: Add a button to trigger this info!
 	// TODO ADD Extra Info: Warehouse Weight, Carrier Weight, Gross Weight:
 	gross_weight: function (frm) {
