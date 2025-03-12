@@ -60,8 +60,8 @@ frappe.ui.form.on('Parcel', {
 	// Custom Functions
 
 	show_explained_status(frm) {
-		frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, ''));  // FIXME: Core overrides color
-		frm.layout.message.removeClass().addClass('form-message ' + frm.doc.explained_status.color);
+		frm.doc.explained_status.message.forEach(m => frm.layout.show_message(m, frm.doc.explained_status.color, true));  // FIXME: Core overrides color
+		frm.layout.message.addClass('form-message ' + frm.doc.explained_status.color);
 	},
 
 	build_custom_actions(frm) {

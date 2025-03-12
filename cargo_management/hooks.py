@@ -4,7 +4,22 @@ app_publisher = "Agile Shift"
 app_description = "ERPNext Cargo Management for Freight Forwarders"
 app_email = "contacto@gruporeal.org"
 app_license = "agpl-3.0"
+
+# Apps
+# ------------------
+
 # required_apps = [] # TODO: Put gr Tools in here!
+
+# Each item in the list will be shown as an app in the apps page
+# add_to_apps_screen = [
+# 	{
+# 		"name": "hooks_test",
+# 		"logo": "/assets/hooks_test/logo.png",
+# 		"title": "app title",
+# 		"route": "/hooks_test",
+# 		"has_permission": "hooks_test.api.permission.has_app_permission"
+# 	}
+# ]
 
 # Includes in <head>
 # ------------------
@@ -18,7 +33,7 @@ app_include_js = "cargo_management.bundle.js"
 # web_include_js = "/assets/cargo_management/js/parcel_management.js"
 
 # include custom SCSS in every website theme (without file extension ".scss")
-# website_theme_scss = "v15/public/scss/website"
+# website_theme_scss = "cargo_management/public/scss/website"
 
 # include JS, CSS files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -28,7 +43,10 @@ app_include_js = "cargo_management.bundle.js"
 # page_js = {"page" : "public/js/file.js"}
 
 # Include js in doctype views: override/extend Standard Form Scripts.
-# doctype_js = {"Quotation": "public/js/quotation.js"}  # TODO: WORKING HERE
+doctype_js = {
+	# "Quotation": "public/js/doctype/quotation.js"  # TODO: WORKING HERE
+	"Sales Invoice": "public/js/doctype/sales_invoice.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -36,7 +54,7 @@ app_include_js = "cargo_management.bundle.js"
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "freight_management/public/icons.svg"
+# app_include_icons = "cargo_management/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -84,16 +102,16 @@ app_include_js = "cargo_management.bundle.js"
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "v15.utils.before_app_install"
-# after_app_install = "v15.utils.after_app_install"
+# before_app_install = "cargo_management.utils.before_app_install"
+# after_app_install = "cargo_management.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "v15.utils.before_app_uninstall"
-# after_app_uninstall = "v15.utils.after_app_uninstall"
+# before_app_uninstall = "cargo_management.utils.before_app_uninstall"
+# after_app_uninstall = "cargo_management.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
