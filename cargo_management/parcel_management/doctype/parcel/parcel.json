@@ -105,7 +105,7 @@
    "in_standard_filter": 1,
    "label": "Carrier",
    "no_copy": 1,
-   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nCainiao\nSpeedX\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes\nVeho",
+   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nGOFO Express\nCainiao\nSpeedX\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes\nVeho",
    "reqd": 1,
    "search_index": 1
   },
@@ -434,6 +434,7 @@
    "search_index": 1
   }
  ],
+ "grid_page_length": 50,
  "links": [
   {
    "group": "Warehouse",
@@ -461,7 +462,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2025-01-14 19:42:35.743775",
+ "modified": "2025-10-23 01:04:50.560708",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
@@ -521,6 +522,7 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "search_fields": "tracking_number,customer_name",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,

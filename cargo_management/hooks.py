@@ -252,6 +252,7 @@ export_python_type_annotations = True
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+# TODO: WORKING! -> WORK THIS ON!
 # extend_bootinfo = "cargo_management.utils.extend_bootinfo"
 
 global_search_doctypes = {

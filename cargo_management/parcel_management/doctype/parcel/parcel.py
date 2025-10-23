@@ -22,7 +22,7 @@ class Parcel(Document):
 
 		assisted_purchase: DF.Check
 		cargo_shipment: DF.Link | None
-		carrier: DF.Literal["Drop Off", "Pick Up", "Unknown", "Amazon", "USPS", "UPS", "DHL", "FedEx", "OnTrac", "Cainiao", "SpeedX", "SF Express", "Yanwen", "YunExpress", "SunYou", "Pitney Bowes", "Veho"]
+		carrier: DF.Literal["Drop Off", "Pick Up", "Unknown", "Amazon", "USPS", "UPS", "DHL", "FedEx", "OnTrac", "GOFO Express", "Cainiao", "SpeedX", "SF Express", "Yanwen", "YunExpress", "SunYou", "Pitney Bowes", "Veho"]
 		carrier_est_delivery: DF.Datetime | None
 		carrier_est_weight: DF.Float
 		carrier_last_detail: DF.SmallText | None
@@ -36,7 +36,6 @@ class Parcel(Document):
 		est_delivery_1: DF.Date | None
 		est_delivery_2: DF.Date | None
 		est_departure: DF.Date | None
-		explained_status: DF.Data | None
 		has_taxes: DF.Check
 		notes: DF.SmallText | None
 		order_date: DF.Date | None
