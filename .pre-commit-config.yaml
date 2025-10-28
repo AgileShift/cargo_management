@@ -8,7 +8,7 @@ repos:
     rev: v5.0.0
     hooks:
       - id: trailing-whitespace
-        files: "tr_tools.*"
+        files: "cargo_management.*"
         exclude: ".*json$|.*txt$|.*csv|.*md|.*svg"
       - id: check-merge-conflict
       - id: check-ast
@@ -38,11 +38,11 @@ repos:
         # Ignore any files that might contain jinja / bundles
         exclude: |
             (?x)^(
-                tr_tools/public/dist/.*|
+                cargo_management/public/dist/.*|
                 .*node_modules.*|
                 .*boilerplate.*|
-                tr_tools/templates/includes/.*|
-                tr_tools/public/js/lib/.*
+                cargo_management/templates/includes/.*|
+                cargo_management/public/js/lib/.*
             )$
 
 
@@ -55,12 +55,12 @@ repos:
         # Ignore any files that might contain jinja / bundles
         exclude: |
             (?x)^(
-                tr_tools/public/dist/.*|
+                cargo_management/public/dist/.*|
                 cypress/.*|
                 .*node_modules.*|
                 .*boilerplate.*|
-                tr_tools/templates/includes/.*|
-                tr_tools/public/js/lib/.*
+                cargo_management/templates/includes/.*|
+                cargo_management/public/js/lib/.*
             )$
 
 ci:

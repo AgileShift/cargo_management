@@ -4,8 +4,6 @@
 *.swp
 tags
 node_modules
-
-dist
 __pycache__
-
+dist/
 *.vcf

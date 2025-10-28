@@ -414,7 +414,7 @@
    "in_standard_filter": 1,
    "label": "Sub Status",
    "no_copy": 1,
-   "options": "At Origin\nDelayed"
+   "options": "\nAt Origin\nDelayed"
   },
   {
    "fieldname": "column_break_fkrx",
@@ -462,7 +462,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2025-10-23 01:04:50.560708",
+ "modified": "2025-10-28 08:21:55.629110",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

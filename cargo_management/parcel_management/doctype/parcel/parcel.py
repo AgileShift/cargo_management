@@ -45,7 +45,7 @@ class Parcel(Document):
 		shipping_amount: DF.Currency
 		signed_by: DF.Data | None
 		status: DF.Literal["Awaiting Receipt", "Awaiting Confirmation", "In Extraordinary Confirmation", "Awaiting Departure", "In Transit", "In Customs", "Sorting", "To Bill", "Unpaid", "For Delivery or Pickup", "Finished", "Cancelled", "Never Arrived", "Returned to Sender"]
-		sub_status: DF.Literal["At Origin", "Delayed"]
+		sub_status: DF.Literal["", "At Origin", "Delayed"]
 		total: DF.Currency
 		tracking_number: DF.Data
 		transportation: DF.Literal["Sea", "Air"]

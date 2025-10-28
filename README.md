@@ -33,20 +33,21 @@ It leverages core functionalities from **ERPNext**, such as **Accounting, Stock,
 ### List of Carriers Currently Supported:
 Last checked: 14 February 2024
 
-| Carrier    |    EasyPost    | 17Track |
-|:-----------|:--------------:|:-------:|
-| Amazon     |       ❌️       |   ✅️    |
-| USPS       |       ✅️       |   ✅️    |
-| UPS        |       ✅️       |   ✅️    |
-| DHL        |       ✅️       |   ✅️    |
-| FedEx      | ❗️With Account |   ✅️    |
-| OnTrac     | ❗️With Account |   ✅️    |
-| SF Express | ❗️With Account |   ✅️    |
-| Yanwen     |   ⁉️ Limited   |   ✅️    |
-| Cainiao    | ❌️ Deprecated  |   ✅️    |
-| YunExpress | ❌️ Deprecated  |   ✅️    |
-| SunYou     |       ❌️       |   ✅️    |
-| Veho       | ❗️With Account |   ❌️    |
+| Carrier      |    EasyPost    | 17Track |
+|:-------------|:--------------:|:-------:|
+| Amazon       |       ❌️       |   ✅️    |
+| USPS         |       ✅️       |   ✅️    |
+| UPS          |       ✅️       |   ✅️    |
+| DHL          |       ✅️       |   ✅️    |
+| FedEx        | ❗️With Account |   ✅️    |
+| OnTrac       | ❗️With Account |   ✅️    |
+| SF Express   | ❗️With Account |   ✅️    |
+| Yanwen       |   ⁉️ Limited   |   ✅️    |
+| Cainiao      | ❌️ Deprecated  |   ✅️    |
+| YunExpress   | ❌️ Deprecated  |   ✅️    |
+| SunYou       |       ❌️       |   ✅️    |
+| Veho         | ❗️With Account |   ❌️    |
+| GOFO Express |    Pending     |         |
 
 ---
 

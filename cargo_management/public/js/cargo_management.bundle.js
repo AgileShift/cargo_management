@@ -31,13 +31,14 @@ cargo_management = {
 			{carrier: 'SF Express', regex: /^SF/},
 			{carrier: 'Veho', 		regex: /^1V/},         // FIXME: We can enforce length?
 			{carrier: 'Amazon', 	regex: /^TBA/},
+			{carrier: 'GOFO Express', regex: /^GFUS010/},
 			{carrier: 'UniUni',     regex: /^UUS/},     // 'YunExpress' -> YT, sometimes delivers to UniUni
 			{carrier: 'Cainiao', 	regex: /^LP00|^CNUSUP/},          // Cainiao can sometimes track 'Yanwen' and 'SunYou'
 			{carrier: 'SpeedX', 	regex: /^SPX/},          // TODO: COMPLETE
 			{carrier: 'DHL', 		regex: /^.{10}$/},
 			{carrier: 'YunExpress', regex: /^YT|^YU00/},   // These are sometimes delivered by 'USPS' and 'OnTrac'
 			{carrier: 'OnTrac', 	regex: /^1LS|^D100/},
-			{carrier: 'Yanwen', 	regex: /^ALS00|^S000|^UY/}, // ALS00 is sometimes delivered by 'USPS'. UY ends with 'CZ'
+			{carrier: 'Yanwen', 	regex: /^ALS00|^S000|^UY|^YWMIA0100/}, // ALS00 is sometimes delivered by 'USPS'. UY ends with 'CZ'
 			{carrier: 'Unknown', 	regex: /^92(612.{17})$|^420.{5}92(612.{17})$/},       // *92612*90980949456651012 | 42033166*926129*0980949456651012. Start with: 92612 or with zipcode(420xxxxx) can be handled by FedEx or USPS. search_term starts at 612
 			{carrier: 'USPS', 		regex: /^9(?:.{21}|.{25})$|^420.{5}(9(?:.{21}|.{25}))$/}, // *9*400111108296364807659 | 42033165*9*274890983426386918697. First 8 digits: 420xxxxx(zipcode)
 			{carrier: 'FedEx', 		regex: /^.{12}$|^612.{17}$|^.{22}([1-9].{11})$/},     // *612*90982157320543198 | 9622001900005105596800*5*49425980480. Last 12 digits is tracking
