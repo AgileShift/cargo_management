@@ -51,6 +51,7 @@ class Parcel(Document):
 		transportation: DF.Literal["Sea", "Air"]
 		warehouse_receipt: DF.Link | None
 	# end: auto-generated types
+
 	"""  All these are Frappe Core Flags:
 		'ignore_links':       avoid: _validate_links()
 		'ignore_validate':    avoid: validate() and before_save()

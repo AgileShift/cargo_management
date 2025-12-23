@@ -73,7 +73,9 @@
    "label": "Tracking Number",
    "no_copy": 1,
    "reqd": 1,
-   "unique": 1
+   "sticky": 1,
+   "unique": 1,
+   "width": "10px"
   },
   {
    "allow_in_quick_entry": 1,
@@ -95,7 +97,8 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Customer Name",
-   "read_only": 1
+   "read_only": 1,
+   "sticky": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -462,7 +465,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2025-10-28 08:21:55.629110",
+ "modified": "2025-12-10 21:35:09.894511",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
