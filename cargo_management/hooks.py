@@ -13,11 +13,11 @@ app_license = "agpl-3.0"
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "hooks_test",
-# 		"logo": "/assets/hooks_test/logo.png",
-# 		"title": "app title",
-# 		"route": "/hooks_test",
-# 		"has_permission": "hooks_test.api.permission.has_app_permission"
+# 		"name": "cargo_management",
+# 		"logo": "/assets/cargo_management/logo.png",
+# 		"title": "Cargo Management",
+# 		"route": "/cargo_management",
+# 		"has_permission": "cargo_management.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -76,6 +76,10 @@ doctype_js = {
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
 
+# automatically load and sync documents of this doctype from downstream apps
+# importable_doctypes = [doctype_1]
+
+
 # Jinja
 # ----------
 
@@ -131,14 +135,6 @@ doctype_js = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-#   "ToDo": "custom_app.overrides.CustomToDo"
-# }
-
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -180,6 +176,22 @@ doc_events = {
 # -------
 
 # before_tests = "cargo_management.install.before_tests"
+
+# DocType Class
+# ---------------
+# Override standard doctype classes
+
+# override_doctype_class = {
+#   "ToDo": "custom_app.overrides.CustomToDo"
+# }
+
+# Extend DocType Class
+# ------------------------------
+#
+# Specify custom mixins to extend the standard doctype controller.
+# extend_doctype_class = {
+# 	"Task": "cargo_management.custom.task.CustomTaskMixin"
+# }
 
 # Overriding Methods
 # ------------------------------
@@ -251,6 +263,11 @@ export_python_type_annotations = True
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+
+# Translation
+# ------------
+# List of apps whose translatable strings should be excluded from this app's translations.
+# ignore_translatable_strings_from = []
 
 # TODO: WORKING! -> WORK THIS ON!
 # extend_bootinfo = "cargo_management.utils.extend_bootinfo"
