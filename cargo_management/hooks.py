@@ -269,9 +269,7 @@ export_python_type_annotations = True
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
-# TODO: WORKING! -> WORK THIS ON!
-# extend_bootinfo = "cargo_management.utils.extend_bootinfo"
-
+# Doctypes for Global Search
 global_search_doctypes = {
 	"Default": [
 		{"doctype": "Parcel"},
@@ -281,8 +279,11 @@ global_search_doctypes = {
 	]
 }
 
+# TODO: WORKING! -> WORK THIS ON!
+# Because now the Link field is foking faster, we can easily convert the Carrier to a Doctype
+# extend_bootinfo = "cargo_management.utils.extend_bootinfo"
+
+# TODO: Please Work on the Issues and Tasks Management for v16
 fixtures = [
 	'Issue Type',
-	{'dt': 'Workspace', 'filters': {'name': 'Support'}},
-	{'dt': 'Custom HTML Block', 'filters': {'name': 'BR'}}  # TODO: Delete on v16?(On the new Dashboard)
 ]
