@@ -72,6 +72,11 @@ Last checked: 25 December 2025
 
 # TODO: WORKING
 
+TODO: WORK HEAVILY ON THE TRANSLATIONS
+bench generate-pot-file --app cargo_management
+bench update-po-files --app cargo_management --locale es
+
+
 ### Parcel Flow
 1. **Parcels** are created and can be related to a specific customer
    1. Content of the package can be added and its related Item for invoice Purposes.

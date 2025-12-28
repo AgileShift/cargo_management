@@ -267,7 +267,7 @@ export_python_type_annotations = True
 # Translation
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
-# ignore_translatable_strings_from = []
+ignore_translatable_strings_from = ['frappe', 'erpnext', 'hrms']
 
 # Doctypes for Global Search
 global_search_doctypes = {
