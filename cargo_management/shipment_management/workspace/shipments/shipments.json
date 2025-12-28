@@ -1,4 +1,5 @@
 {
+ "app": "cargo_management",
  "charts": [],
  "content": "[{\"id\":\"iQokFeO2DK\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Awaiting Departure\",\"col\":4}},{\"id\":\"4gBPNDHr0o\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"2pIs8gCGbv\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"In Transit\",\"col\":4}}]",
  "creation": "2021-09-29 19:52:39.419496",
@@ -11,13 +12,13 @@
  "is_hidden": 0,
  "label": "Shipments",
  "links": [],
- "modified": "2024-04-19 13:22:01.409446",
+ "modified": "2025-12-28 14:00:03.190638",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Shipments",
  "number_cards": [],
  "owner": "Administrator",
- "parent_page": "",
+ "parent_page": "Parcels",
  "public": 1,
  "quick_lists": [
   {
@@ -32,7 +33,8 @@
   }
  ],
  "roles": [],
- "sequence_id": 12.0,
+ "sequence_id": 0.0,
  "shortcuts": [],
- "title": "Shipments"
+ "title": "Shipments",
+ "type": "Workspace"
 }

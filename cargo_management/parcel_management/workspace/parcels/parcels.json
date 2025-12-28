@@ -1,212 +1,19 @@
 {
+ "app": "cargo_management",
  "charts": [],
- "content": "[{\"id\":\"2cVngv2bY_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Parcels\",\"col\":8}},{\"id\":\"DvJXH-tJD-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add Parcel\",\"col\":3}},{\"id\":\"3xRgSxTWSX\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"uDYJXKif2m\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">With Carrier</span>\",\"col\":9}},{\"id\":\"FrbBkaN6Zu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":4}},{\"id\":\"Cz15gOTC_M\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Receipt\",\"col\":4}},{\"id\":\"aNY112G6J5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":4}},{\"id\":\"vTj3c2P3YO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":4}},{\"id\":\"oaYm1eohaf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":4}},{\"id\":\"xSqPbN8wqw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":3}},{\"id\":\"acERk1EAVH\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"UgMlKCx7jx\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">In Warehouse</span>\",\"col\":9}},{\"id\":\"moteQqojsu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":4}},{\"id\":\"8mmyR6rij1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":4}},{\"id\":\"15er7f2IU0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":4}},{\"id\":\"N4TAMrIe0p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":4}},{\"id\":\"Rw_djJRypo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":4}},{\"id\":\"JDGa6al6bH\",\"type\":\"spacer\",\"data\":{\"col\":9}},{\"id\":\"Gw-91G-HuG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":4}},{\"id\":\"cA5pzx2Q4B\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Customs\",\"col\":3}},{\"id\":\"-GxAZZMeXe\",\"type\":\"spacer\",\"data\":{\"col\":6}},{\"id\":\"SS9qi12M-f\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">In Office</span>\",\"col\":9}},{\"id\":\"T7nctNamml\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available at Office\",\"col\":4}},{\"id\":\"o4L83Vge2k\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"To Bill and Unpaid\",\"col\":3}},{\"id\":\"vBtPVj3fdN\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"BR\",\"col\":12}},{\"id\":\"jbvNJ8Yszp\",\"type\":\"card\",\"data\":{\"card_name\":\"Parcels\",\"col\":3}},{\"id\":\"HZ7j612Snb\",\"type\":\"card\",\"data\":{\"card_name\":\"Warehouse\",\"col\":3}},{\"id\":\"908tOGGHYg\",\"type\":\"card\",\"data\":{\"card_name\":\"Cargo Shipment\",\"col\":3}},{\"id\":\"oL4nK8JYbg\",\"type\":\"card\",\"data\":{\"card_name\":\"Delivery\",\"col\":3}},{\"id\":\"g2FRamogk6\",\"type\":\"spacer\",\"data\":{\"col\":3}},{\"id\":\"mKq3oe2kJ3\",\"type\":\"card\",\"data\":{\"card_name\":\"Selling\",\"col\":3}},{\"id\":\"S94omDcW48\",\"type\":\"card\",\"data\":{\"card_name\":\"Buying\",\"col\":3}}]",
+ "content": "[{\"id\":\"2cVngv2bY_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Parcels\",\"col\":3}},{\"id\":\"3xRgSxTWSX\",\"type\":\"spacer\",\"data\":{\"col\":6}},{\"id\":\"DvJXH-tJD-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add Parcel\",\"col\":3}},{\"id\":\"vXyN9NLXQV\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"uDYJXKif2m\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">With Carrier</span>\",\"col\":9}},{\"id\":\"FrbBkaN6Zu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Late\",\"col\":4}},{\"id\":\"Cz15gOTC_M\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Receipt\",\"col\":4}},{\"id\":\"aNY112G6J5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available for pickup at post office\",\"col\":4}},{\"id\":\"vTj3c2P3YO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arriving Today\",\"col\":4}},{\"id\":\"oaYm1eohaf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Without Carrier Data\",\"col\":4}},{\"id\":\"xSqPbN8wqw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Returned to Sender\",\"col\":4}},{\"id\":\"acERk1EAVH\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"UgMlKCx7jx\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">In Warehouse</span>\",\"col\":9}},{\"id\":\"moteQqojsu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Arrived Today\",\"col\":4}},{\"id\":\"8mmyR6rij1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Confirmation\",\"col\":4}},{\"id\":\"15er7f2IU0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Extraordinary Confirmation\",\"col\":4}},{\"id\":\"N4TAMrIe0p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Awaiting Departure\",\"col\":4}},{\"id\":\"Rw_djJRypo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"This week pending confirmation\",\"col\":4}},{\"id\":\"JDGa6al6bH\",\"type\":\"spacer\",\"data\":{\"col\":9}},{\"id\":\"Gw-91G-HuG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Transit\",\"col\":4}},{\"id\":\"cA5pzx2Q4B\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"In Customs\",\"col\":4}},{\"id\":\"-GxAZZMeXe\",\"type\":\"spacer\",\"data\":{\"col\":5}},{\"id\":\"SS9qi12M-f\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">In Office</span>\",\"col\":9}},{\"id\":\"T7nctNamml\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Available at Office\",\"col\":4}},{\"id\":\"o4L83Vge2k\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"To Bill and Unpaid\",\"col\":4}}]",
  "creation": "2020-07-05 15:49:07.860880",
- "custom_blocks": [
-  {
-   "custom_block_name": "BR",
-   "label": "BR"
-  }
- ],
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
  "hide_custom": 0,
  "icon": "stock",
- "idx": 0,
+ "idx": 9,
  "is_hidden": 0,
  "label": "Parcels",
- "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Parcels",
-   "link_count": 3,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Parcels",
-   "link_count": 0,
-   "link_to": "Parcel",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Quotation",
-   "link_count": 0,
-   "link_to": "Quotation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Issues",
-   "link_count": 0,
-   "link_to": "Issue",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse",
-   "link_count": 0,
-   "link_to": "Warehouse",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Warehouse Receipt",
-   "link_count": 0,
-   "link_to": "Warehouse Receipt",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cargo Shipment",
-   "link_count": 3,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cargo Shipment",
-   "link_count": 0,
-   "link_to": "Cargo Shipment",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cargo Shipment Receipt",
-   "link_count": 0,
-   "link_to": "Cargo Shipment Receipt",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cargo Packing List",
-   "link_count": 0,
-   "link_to": "Cargo Packing List",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Delivery",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Delivery Trip",
-   "link_count": 0,
-   "link_to": "Delivery Trip",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Selling",
-   "link_count": 3,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Customers",
-   "link_count": 0,
-   "link_to": "Customer",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Sales Order",
-   "link_count": 0,
-   "link_to": "Sales Order",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Sales Invoice",
-   "link_count": 0,
-   "link_to": "Sales Invoice",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Buying",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Purchase Order",
-   "link_count": 0,
-   "link_to": "Purchase Order",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Purchase Invoice",
-   "link_count": 0,
-   "link_to": "Purchase Invoice",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  }
- ],
- "modified": "2024-10-01 20:04:45.922235",
+ "links": [],
+ "modified": "2025-12-28 16:31:28.865441",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcels",
@@ -216,7 +23,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 1.0,
+ "sequence_id": 0.0,
  "shortcuts": [
   {
    "color": "Green",
@@ -365,5 +172,6 @@
    "type": "DocType"
   }
  ],
- "title": "Parcels"
+ "title": "Parcels",
+ "type": "Workspace"
 }
