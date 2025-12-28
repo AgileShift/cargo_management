@@ -1,0 +1,21 @@
+{
+ "app": "cargo_management",
+ "creation": "2025-12-10 20:08:34.368710",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "stock",
+ "icon_type": "App",
+ "idx": 0,
+ "label": "Parcels",
+ "link_to": "Parcels",
+ "link_type": "Workspace",
+ "logo_url": "/assets/erpnext/desktop_icons/stock.svg",
+ "modified": "2025-12-28 13:45:29.524018",
+ "modified_by": "Administrator",
+ "name": "Parcels",
+ "owner": "Administrator",
+ "roles": [],
+ "sidebar": "",
+ "standard": 1
+}
