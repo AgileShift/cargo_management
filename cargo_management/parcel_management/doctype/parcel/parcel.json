@@ -465,11 +465,11 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2025-12-10 21:35:09.894511",
+ "modified": "2025-12-28 23:40:40.391250",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
