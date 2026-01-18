@@ -136,7 +136,7 @@ bench update-po-files --app cargo_management --locale es
 
 
 
-### Contributing TODO:
+### Contributing
 
 This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
 
@@ -151,7 +151,6 @@ Pre-commit is configured to use the following tools for checking and formatting 
 - eslint
 - prettier
 - pyupgrade
-- 
 
 ### License
 
