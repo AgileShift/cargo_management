@@ -1,4 +1,3 @@
-import {CARRIERS, DEFAULT_CARRIERS} from '../carriers.json' assert {type: 'json'};
 import './controls/transportation_multicheck';
 import './utils/parcel_quick_entry';
 import './controls/overrides';
@@ -75,18 +74,6 @@ cargo_management = {
 		</span>`; // See more of this on ui/page.js -> set_indicator() and clear_indicator()
 	},
 
-	load_carrier_settings(carrier_id) {
-		console.log(carrier_id);
-
-		// Returns Carrier Settings from carrier.json -> Used to build and config Action Buttons in Form
-		const {api, tracking_url: main_url, default_carriers: extra_urls = []} = CARRIERS[carrier_id] || {};
-
-		let urls = (main_url) ? [{'title': carrier_id, 'url': main_url}] : [];
-		extra_urls.forEach(url_id => urls.push({'title': url_id, 'url': DEFAULT_CARRIERS[url_id]}));
-
-		return {api, urls};
-	},
-
 	open_carriers_dialog(doc) {
 		// This function creates a dialog with all possible carriers where a parcel can be tracked
 		let fields = [...this._carrier_section_for_dialog(__('Tracking Number'), doc.tracking_number, doc.carrier)];
@@ -109,12 +96,12 @@ cargo_management = {
 	_carrier_section_for_dialog(label, tracking_number, carrier = null) {
 		carrier = carrier || this.find_carrier_by_tracking_number(tracking_number).carrier;
 
+		const urls = frappe.boot.carriers[carrier]['tracking_urls'];
 		let fields = [{fieldtype: 'Section Break', label: `${label} (${carrier}): ${tracking_number}`}];
-		const urls = this.load_carrier_settings(carrier).urls;
 
 		urls.forEach((url, i) => {
 			fields.push({
-				fieldtype: 'Button', label: url.title, input_class: "btn-block btn-primary",  // FIXME: btn-default
+				fieldtype: 'Button', label: url.label, input_class: "btn-block btn-primary",  // FIXME: btn-default
 				click: () => window.open(url.url + tracking_number)
 			});
 

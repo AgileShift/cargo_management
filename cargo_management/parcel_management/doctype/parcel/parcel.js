@@ -1,4 +1,4 @@
-frappe.ui.form.on('Parcel', {
+frappe.ui.form.on("Parcel", {
 
 	setup(frm) {},
 
@@ -65,9 +65,7 @@ frappe.ui.form.on('Parcel', {
 	},
 
 	build_custom_actions(frm) {
-		const carriers_settings = cargo_management.load_carrier_settings(frm.doc.carrier);
-
-		if (carriers_settings.api) {
+		if (frappe.boot.carriers[frm.doc.carrier].api) {
 			frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
 		}
 
