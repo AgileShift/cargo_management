@@ -3,8 +3,10 @@
   "api": "",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 20:53:28.492030",
+  "modified": "2026-01-27 13:27:43.371841",
   "name": "Unknown",
+  "regex": "",
+  "regex_notes": "",
   "tracking_urls": [
    {
     "label": "Parcels",
@@ -24,8 +26,10 @@
   "api": "",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 20:53:41.257102",
+  "modified": "2026-01-22 12:29:26.481970",
   "name": "Drop Off",
+  "regex": null,
+  "regex_notes": null,
   "tracking_urls": [
    {
     "label": "EVEREST",
@@ -39,6 +43,8 @@
   "doctype": "Carrier",
   "modified": "2026-01-18 20:53:55.904246",
   "name": "Pick Up",
+  "regex": null,
+  "regex_notes": null,
   "tracking_urls": [
    {
     "label": "EVEREST",
@@ -50,8 +56,10 @@
   "api": "",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:15:38.537789",
+  "modified": "2026-01-25 20:26:20.723367",
   "name": "Amazon",
+  "regex": "^TBA",
+  "regex_notes": "Amazon tracking numbers usually start with TBA.",
   "tracking_urls": [
    {
     "label": "EVEREST",
@@ -63,8 +71,10 @@
   "api": "EasyPost",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:29:59.289104",
+  "modified": "2026-01-25 20:46:02.512970",
   "name": "USPS",
+  "regex": "^9(?:.{21}|.{25})$|^420.{5}(9(?:.{21}|.{25}))$",
+  "regex_notes": "USPS tracking numbers may start with 9: **9** 400111108296364807659  \nor  \nincludes ZIP code prefix as first 8 digits(420xxxxx): 42033165 **9** 274890983426386918697",
   "tracking_urls": [
    {
     "label": "USPS",
@@ -80,8 +90,10 @@
   "api": "EasyPost",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:30:26.130876",
+  "modified": "2026-01-25 20:24:32.979690",
   "name": "UPS",
+  "regex": "^1Z",
+  "regex_notes": "UPS tracking numbers usually start with 1Z.",
   "tracking_urls": [
    {
     "label": "UPS",
@@ -97,8 +109,10 @@
   "api": "EasyPost",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:30:47.007125",
+  "modified": "2026-01-25 20:36:32.943178",
   "name": "DHL",
+  "regex": "^.{10}$",
+  "regex_notes": "DHL tracking numbers are typically 10 characters long.",
   "tracking_urls": [
    {
     "label": "DHL",
@@ -114,8 +128,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:31:22.027300",
+  "modified": "2026-01-27 13:27:33.076230",
   "name": "FedEx",
+  "regex": "^.{12}$|^.{22}([1-9].{11})$|^612.{17}$|^92(612.{17})$|^420.{5}92(612.{17})$",
+  "regex_notes": "FedEx tracking numbers are often 12 digits or embedded in longer strings.\n* 9622001900005105596800 **5**49425980480 (Last 12 digits is tracking)\n* **612**90982157320543198: Starts with 612 Is a FedEx Tracking\n\nAlso If Starts with: 92612 or with zipcode(420xxxxx) can be handled by FedEx or USPS. \n\n* **92612**90980949456651012\n* 42033166**926129**0980949456651012\n\nsearch_term needs to starts at 612.",
   "tracking_urls": [
    {
     "label": "FedEx",
@@ -131,8 +147,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:32:33.128261",
+  "modified": "2026-01-25 20:38:11.433581",
   "name": "OnTrac",
+  "regex": "^1LS|^D100",
+  "regex_notes": "OnTrac(Formely LaserShip) tracking numbers usually start with 1LS or D100.\n\n",
   "tracking_urls": [
    {
     "label": "OnTrac",
@@ -148,8 +166,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:33:44.472038",
+  "modified": "2026-01-27 13:33:22.193155",
   "name": "Cainiao",
+  "regex": "^LP00|^CNUSUP000",
+  "regex_notes": "Cainiao can overlap with Yanwen and SunYou tracking numbers.",
   "tracking_urls": [
    {
     "label": "Cainiao",
@@ -173,8 +193,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:34:30.448124",
+  "modified": "2026-01-27 18:40:21.362702",
   "name": "SpeedX",
+  "regex": "^SPX|^SPXMIA|^SPX[0-9]EG",
+  "regex_notes": "SpeedX tracking numbers usually start with SPX.",
   "tracking_urls": [
    {
     "label": "SpeedX",
@@ -198,8 +220,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:35:03.486680",
+  "modified": "2026-01-25 20:25:40.180849",
   "name": "SF Express",
+  "regex": "^SF",
+  "regex_notes": "SF Express tracking numbers usually start with SF.",
   "tracking_urls": [
    {
     "label": "SF Express",
@@ -223,8 +247,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:36:35.313803",
+  "modified": "2026-01-25 20:39:32.643255",
   "name": "Yanwen",
+  "regex": "^ALS00|^S000|^UY|^YWMIA0100",
+  "regex_notes": "Some Yanwen shipments are delivered by USPS.\n\nUY numbers usually end with CZ.",
   "tracking_urls": [
    {
     "label": "Yanwen",
@@ -248,8 +274,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:36:48.197523",
+  "modified": "2026-01-25 20:37:29.366460",
   "name": "YunExpress",
+  "regex": "^YT|^YU00",
+  "regex_notes": "Some shipments are handed over to USPS or OnTrac for final delivery.",
   "tracking_urls": [
    {
     "label": "YunExpress",
@@ -273,8 +301,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:37:00.317111",
+  "modified": "2026-01-25 20:25:20.834253",
   "name": "SunYou",
+  "regex": "^SY",
+  "regex_notes": "Tracking numbers usually start with:\n* SYUS\n* SYAE\n* SYBA",
   "tracking_urls": [
    {
     "label": "SunYou",
@@ -298,33 +328,10 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 21:38:14.644187",
-  "name": "Pitney Bowes",
-  "tracking_urls": [
-   {
-    "label": "Pitney Bowes",
-    "url": "https://trackpb.shipment.co/track/"
-   },
-   {
-    "label": "Parcels",
-    "url": "https://parcelsapp.com/en/tracking/"
-   },
-   {
-    "label": "17Track",
-    "url": "https://t.17track.net/en#nums="
-   },
-   {
-    "label": "EVEREST",
-    "url": "https://everest.cargotrack.net/m/track.asp?track="
-   }
-  ]
- },
- {
-  "api": "",
-  "docstatus": 0,
-  "doctype": "Carrier",
-  "modified": "2026-01-18 21:48:32.573845",
+  "modified": "2026-01-29 09:54:40.492090",
   "name": "Veho",
+  "regex": "^1V",
+  "regex_notes": "Tracking numbers usually start with 1V.\n\nLength validation may be required.",
   "tracking_urls": [
    {
     "label": "Veho",
@@ -348,12 +355,95 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 22:17:50.615776",
-  "name": "GOFO Express",
+  "modified": "2026-01-27 13:54:38.855342",
+  "name": "GOFO",
+  "regex": "^GFUS010",
+  "regex_notes": "GOFO Express tracking numbers start with GFUS010.",
   "tracking_urls": [
    {
-    "label": "GOFO Express",
-    "url": "https://track.shipveho.com/#/trackingId/"
+    "label": "GOFO",
+    "url": "https://www.gofo.com/us/track?searchID="
+   },
+   {
+    "label": "Parcels",
+    "url": "https://parcelsapp.com/en/tracking/"
+   },
+   {
+    "label": "17Track",
+    "url": "https://t.17track.net/en#nums="
+   },
+   {
+    "label": "EVEREST",
+    "url": "https://everest.cargotrack.net/m/track.asp?track="
+   }
+  ]
+ },
+ {
+  "api": "17Track",
+  "docstatus": 0,
+  "doctype": "Carrier",
+  "modified": "2026-01-29 09:54:43.407431",
+  "name": "UniUni",
+  "regex": "^UUS|^UUSC0000",
+  "regex_notes": "Some YunExpress and Cainiao shipments are delivered by UniUni\n",
+  "tracking_urls": [
+   {
+    "label": "UniUni",
+    "url": "https://www.uniuni.com/tracking/?no="
+   },
+   {
+    "label": "Cainiao",
+    "url": "https://global.cainiao.com/detail.htm?mailNoList="
+   },
+   {
+    "label": "17Track",
+    "url": "https://t.17track.net/en#nums="
+   },
+   {
+    "label": "Parcels",
+    "url": "https://parcelsapp.com/en/tracking/"
+   },
+   {
+    "label": "EVEREST",
+    "url": "https://everest.cargotrack.net/m/track.asp?track="
+   }
+  ]
+ },
+ {
+  "api": "17Track",
+  "docstatus": 0,
+  "doctype": "Carrier",
+  "modified": "2026-01-27 14:00:08.461495",
+  "name": "SwiftX",
+  "regex": "^SWX",
+  "regex_notes": null,
+  "tracking_urls": [
+   {
+    "label": "SwiftX",
+    "url": "https://swiftx-express.com/track?trackingNumber="
+   },
+   {
+    "label": "Parcels",
+    "url": "https://parcelsapp.com/en/tracking/"
+   },
+   {
+    "label": "EVEREST",
+    "url": "https://everest.cargotrack.net/m/track.asp?track="
+   }
+  ]
+ },
+ {
+  "api": "17Track",
+  "docstatus": 0,
+  "doctype": "Carrier",
+  "modified": "2026-01-29 09:53:51.278795",
+  "name": "ShipGlobal India",
+  "regex": "^SG",
+  "regex_notes": null,
+  "tracking_urls": [
+   {
+    "label": "ShipGlobal.in",
+    "url": "https://shipglobal.in/tracking/?awb="
    },
    {
     "label": "Parcels",
