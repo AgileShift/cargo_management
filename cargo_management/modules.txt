@@ -4,3 +4,4 @@ Purchase Management
 Shipment Management
 Support Management
 Warehouse Management
+Cargo Core

@@ -8,32 +8,63 @@
  "engine": "InnoDB",
  "field_order": [
   "api",
+  "column_break_regex",
+  "regex",
+  "regex_notes",
+  "section_break_urls",
   "tracking_urls"
  ],
  "fields": [
   {
    "bold": 1,
+   "description": "External API used for automated tracking updates (if applicable)",
    "fieldname": "api",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "API",
+   "label": "Tracking API",
    "length": 10,
-   "options": "\n17Track\nEasyPost"
+   "options": "\n17Track\nAfterShip\nEasyPost"
   },
   {
    "fieldname": "tracking_urls",
    "fieldtype": "Table",
    "label": "Tracking URLs",
-   "options": "Carrier Tracking URL",
-   "reqd": 1
+   "options": "Carrier Tracking URL"
+  },
+  {
+   "bold": 1,
+   "description": "Regular expression used to detect the carrier from a tracking number",
+   "fieldname": "regex",
+   "fieldtype": "Code",
+   "in_list_view": 1,
+   "label": "Regex",
+   "max_height": "70px",
+   "options": "JS"
+  },
+  {
+   "fieldname": "column_break_regex",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_urls",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "regex_notes",
+   "fieldtype": "Markdown Editor",
+   "label": "Regex Notes",
+   "max_height": "120px"
   }
  ],
  "force_re_route_to_default_view": 1,
- "hide_toolbar": 1,
- "in_create": 1,
- "links": [],
- "modified": "2026-01-19 09:08:17.904183",
+ "links": [
+  {
+   "link_doctype": "Parcel",
+   "link_fieldname": "carrier"
+  }
+ ],
+ "modified": "2026-01-29 11:34:33.203709",
  "modified_by": "Administrator",
  "module": "Cargo Core",
  "name": "Carrier",
