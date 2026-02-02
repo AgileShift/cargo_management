@@ -11,13 +11,13 @@ app_license = "agpl-3.0"
 # required_apps = [] # TODO: Put gr Tools in here!
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
+add_to_apps_screen = [{}]
 # 	{
-# 		"name": "cargo_management",
+# 		"name": app_name,
 # 		"logo": "/assets/cargo_management/logo.png",
-# 		"title": "Cargo Management",
+# 		"title": app_title,
 # 		"route": "/cargo_management",
-# 		"has_permission": "cargo_management.api.permission.has_app_permission"
+# 		#"has_permission": "erpnext.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -279,11 +279,10 @@ global_search_doctypes = {
 	]
 }
 
-# TODO: WORKING! -> WORK THIS ON!
-# Because now the Link field is foking faster, we can easily convert the Carrier to a Doctype
-# extend_bootinfo = "cargo_management.utils.extend_bootinfo"
+extend_bootinfo = "cargo_management.boot.boot_session"
 
 # TODO: Please Work on the Issues and Tasks Management for v16
 fixtures = [
-	'Issue Type',
+	"Carrier",
+	"Issue Type",
 ]

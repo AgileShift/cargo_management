@@ -1,7 +1,7 @@
+Cargo Core
 Parcel Management
 Parcel Selling
 Purchase Management
 Shipment Management
 Support Management
 Warehouse Management
-Cargo Core
