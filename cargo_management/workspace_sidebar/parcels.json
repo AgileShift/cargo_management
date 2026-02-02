@@ -328,10 +328,11 @@
    "type": "Link"
   }
  ],
- "modified": "2025-12-28 16:34:43.910302",
+ "modified": "2026-02-02 14:59:28.800538",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcels",
  "owner": "Administrator",
+ "standard": 1,
  "title": "Parcels"
 }
