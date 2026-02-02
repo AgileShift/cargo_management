@@ -16,7 +16,6 @@ cargo_management = {
 	}[status], 'status,=,' + status],
 
 	find_carrier_by_tracking_number(tracking_number) {
-		console.log('find_carrier_by_tracking_number', tracking_number);
 		tracking_number = tracking_number.trim().toUpperCase(); // Sanitize field
 
 		let response = {carrier: 'Unknown', search_term: tracking_number, tracking_number}; // Default values
@@ -24,32 +23,16 @@ cargo_management = {
 		if (!tracking_number || tracking_number.length <= 6)
 			return response; // If data is not returned, fields will be erased. Affected Views: List, Form and QuickEntry
 
-		const carrierRegex = [ // The order matters for USPS and FedEx!
-			{carrier: 'UPS', 		regex: /^1Z/},
-			{carrier: 'SunYou', 	regex: /^SY/},       // SYUS & SYAE & SYBA
-			{carrier: 'SF Express', regex: /^SF/},
-			{carrier: 'Veho', 		regex: /^1V/},         // FIXME: We can enforce length?
-			{carrier: 'Amazon', 	regex: /^TBA/},
-			{carrier: 'GOFO Express', regex: /^GFUS010/},
-			{carrier: 'UniUni',     regex: /^UUS/},     // 'YunExpress' -> YT, sometimes delivers to UniUni
-			{carrier: 'Cainiao', 	regex: /^LP00|^CNUSUP/},          // Cainiao can sometimes track 'Yanwen' and 'SunYou'
-			{carrier: 'SpeedX', 	regex: /^SPX/},          // TODO: COMPLETE
-			{carrier: 'DHL', 		regex: /^.{10}$/},
-			{carrier: 'YunExpress', regex: /^YT|^YU00/},   // These are sometimes delivered by 'USPS' and 'OnTrac'
-			{carrier: 'OnTrac', 	regex: /^1LS|^D100/},
-			{carrier: 'Yanwen', 	regex: /^ALS00|^S000|^UY|^YWMIA0100/}, // ALS00 is sometimes delivered by 'USPS'. UY ends with 'CZ'
-			{carrier: 'Unknown', 	regex: /^92(612.{17})$|^420.{5}92(612.{17})$/},       // *92612*90980949456651012 | 42033166*926129*0980949456651012. Start with: 92612 or with zipcode(420xxxxx) can be handled by FedEx or USPS. search_term starts at 612
-			{carrier: 'USPS', 		regex: /^9(?:.{21}|.{25})$|^420.{5}(9(?:.{21}|.{25}))$/}, // *9*400111108296364807659 | 42033165*9*274890983426386918697. First 8 digits: 420xxxxx(zipcode)
-			{carrier: 'FedEx', 		regex: /^.{12}$|^612.{17}$|^.{22}([1-9].{11})$/},     // *612*90982157320543198 | 9622001900005105596800*5*49425980480. Last 12 digits is tracking
-		]; // FIXME: Sort by the most used Carrier? | FIXME: Add More Carriers: 'LY', 'LB', 'LW' | # FIXME: Move to carriers.json
-		// AQ are china Post, LW are USPS
-		// 00310202207521313709 for Pitney Bowes
-
-		carrierRegex.find(({carrier, regex}) => {
+		// FIXME: Add More Carriers: 'LY', 'LB', 'LW'
+		// TODO: AQ are china Post, LW are USPS => Check if new need to added
+		Object.entries(frappe.boot['carriers']).find(([carrier, {regex}]) => {
+			if (!regex) return false;
 			const match = tracking_number.match(regex);
 
+			// TODO: Create a Multiselect Control for Carriers
 			if (match) {
-				Object.assign(response, {carrier, search_term: match[1] || match[2] || tracking_number}); // If a captured group exists add it
+				console.log(match);
+				Object.assign(response, {carrier, search_term: match[1] || match[2] || match[3] || tracking_number}); // If a captured group exists add it
 				return true;
 			}
 		});
@@ -96,7 +79,7 @@ cargo_management = {
 	_carrier_section_for_dialog(label, tracking_number, carrier = null) {
 		carrier = carrier || this.find_carrier_by_tracking_number(tracking_number).carrier;
 
-		const urls = frappe.boot.carriers[carrier]['tracking_urls'];
+		const urls = frappe.boot['carriers'][carrier]['tracking_urls'];
 		let fields = [{fieldtype: 'Section Break', label: `${label} (${carrier}): ${tracking_number}`}];
 
 		urls.forEach((url, i) => {
@@ -116,4 +99,5 @@ cargo_management = {
 };
 // TODO 98: Working on Frappe Boot Info!
 // TODO: 135(Bracket) WORKING on TransportationMultiSelect Single Control
-// 127 -> 1 error, 5 warning, 2 warning, 8 typos - 29 Octubre
+// 127 -> 1 error, 5 warning, 2 warning, 8 typos - 29 October 2025
+// 120 -> 22 January 2026 -> Refactor for v16 Carrier Info on Frappe Boot(Already deleted some dead code)
