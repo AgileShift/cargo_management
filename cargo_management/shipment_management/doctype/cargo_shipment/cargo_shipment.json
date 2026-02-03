@@ -179,7 +179,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2025-12-31 09:22:00.124687",
+ "modified": "2026-02-02 20:18:17.105846",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
@@ -234,6 +234,7 @@
  "row_format": "Dynamic",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
+ "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

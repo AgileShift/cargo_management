@@ -23,7 +23,7 @@ cargo_management = {
 		if (!tracking_number || tracking_number.length <= 6)
 			return response; // If data is not returned, fields will be erased. Affected Views: List, Form and QuickEntry
 
-		// FIXME: Add More Carriers: 'LY', 'LB', 'LW'
+		// TODO: Add More Carriers: 'LY', 'LB', 'LW'
 		// TODO: AQ are china Post, LW are USPS => Check if new need to added
 		Object.entries(frappe.boot['carriers']).find(([carrier, {regex}]) => {
 			if (!regex) return false;

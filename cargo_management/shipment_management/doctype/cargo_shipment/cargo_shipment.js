@@ -2,8 +2,10 @@ frappe.ui.form.on('Cargo Shipment', {
 	// TODO: Formatter for warehouse receipt item?
 
 	setup(frm) {
+		// TODO: Delete this on v16?
 		frm.page.sidebar.toggle(false); // Hide Sidebar to better focus on the doc
 
+		// TODO: add dot Indicator
 		//frm.set_indicator_formatter("package", function(doc) {
 		//	return 'orange';
 		//});
@@ -72,11 +74,4 @@ frappe.ui.form.on('Cargo Shipment', {
 });
 
 
-frappe.ui.form.on('Cargo Shipment Warehouse', {
-
-	button: function (frm, cdt, cdn) {
-		let row = locals[cdt][cdn];
-
-		window.open('https://everest.cargotrack.net/m/track.asp?track=' + row.reference);
-	}
-});
+frappe.ui.form.on('Cargo Shipment Warehouse', {});
