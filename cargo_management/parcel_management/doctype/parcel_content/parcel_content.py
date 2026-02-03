@@ -21,4 +21,5 @@ class ParcelContent(Document):
 		rate: DF.Currency
 		tracking_number: DF.Data | None
 	# end: auto-generated types
+
 	pass

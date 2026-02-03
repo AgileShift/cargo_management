@@ -24,4 +24,5 @@ class WarehouseReceiptLine(Document):
 		warehouse_est_weight: DF.Float
 		width: DF.Float
 	# end: auto-generated types
+
 	pass

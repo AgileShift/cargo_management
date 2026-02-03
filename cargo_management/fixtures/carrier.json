@@ -150,7 +150,7 @@
   "modified": "2026-01-25 20:38:11.433581",
   "name": "OnTrac",
   "regex": "^1LS|^D100",
-  "regex_notes": "OnTrac(Formely LaserShip) tracking numbers usually start with 1LS or D100.\n\n",
+  "regex_notes": "OnTrac(Formerly LaserShip) tracking numbers usually start with 1LS or D100.\n\n",
   "tracking_urls": [
    {
     "label": "OnTrac",

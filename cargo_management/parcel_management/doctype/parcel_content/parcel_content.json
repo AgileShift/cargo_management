@@ -92,17 +92,17 @@
    "label": "Tracking Number"
   }
  ],
+ "grid_page_length": 20,
  "istable": 1,
  "links": [],
- "modified": "2025-01-31 09:18:11.845970",
+ "modified": "2026-02-02 21:11:36.975348",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel Content",
  "owner": "Administrator",
  "permissions": [],
  "quick_entry": 1,
- "sort_field": "modified",
+ "row_format": "Dynamic",
  "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+ "states": []
 }
