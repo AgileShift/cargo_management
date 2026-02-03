@@ -1,14 +1,14 @@
 # Translations template for Cargo Management.
-# Copyright (C) 2025 Agile Shift
+# Copyright (C) 2026 Agile Shift
 # This file is distributed under the same license as the Cargo Management project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: contacto@gruporeal.org\n"
-"POT-Creation-Date: 2025-12-28 16:51-0615\n"
-"PO-Revision-Date: 2025-12-28 16:51-0615\n"
+"POT-Creation-Date: 2026-02-02 20:31-0615\n"
+"PO-Revision-Date: 2026-02-02 20:31-0615\n"
 "Last-Translator: contacto@gruporeal.org\n"
 "Language-Team: contacto@gruporeal.org\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,11 @@ msgstr ""
 #. Receipt Line'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
 msgid "1 Libra"
+msgstr ""
+
+#. Option for the 'Tracking API' (Select) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "17Track"
 msgstr ""
 
 #. Header text in the AIR Parcels Workspace
@@ -93,6 +98,11 @@ msgstr ""
 msgid "Additional details about the current status"
 msgstr ""
 
+#. Option for the 'Tracking API' (Select) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "AfterShip"
+msgstr ""
+
 #. Option for the 'Transportation' (Select) field in DocType 'Parcel'
 #. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment'
 #. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
@@ -107,13 +117,6 @@ msgstr ""
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Air"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "Amazon"
 msgstr ""
 
 #. Label of the arrival_date (Date) field in DocType 'Cargo Shipment'
@@ -239,11 +242,6 @@ msgstr ""
 msgid "Billable gross weight of the cargo shipment receipt"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Cainiao"
-msgstr ""
-
 #. Name of a DocType
 #: cargo_management/shipment_management/doctype/cargo_packing_list/cargo_packing_list.json
 msgid "Cargo Packing List"
@@ -291,6 +289,11 @@ msgstr ""
 #. Name of a DocType
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 msgid "Cargo Shipment Warehouse"
+msgstr ""
+
+#. Name of a DocType
+#: cargo_management/cargo_core/doctype/carrier_tracking_url/carrier_tracking_url.json
+msgid "Carrier Tracking URL"
 msgstr ""
 
 #. Label of the carrier_est_delivery (Datetime) field in DocType 'Parcel'
@@ -354,15 +357,15 @@ msgstr ""
 msgid "Coincidences found for: {0}"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:45
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:47
 msgid "Confirm Packages"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:57
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:59
 msgid "Confirm Transit"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:52
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:54
 msgid "Confirmed Packages"
 msgstr ""
 
@@ -371,7 +374,7 @@ msgstr ""
 msgid "Consignee"
 msgstr ""
 
-#: cargo_management/public/js/cargo_management.bundle.js:101
+#: cargo_management/public/js/cargo_management.bundle.js:71
 msgid "Consolidated #{0}"
 msgstr ""
 
@@ -405,13 +408,6 @@ msgstr ""
 #. Packing List Line'
 #: cargo_management/shipment_management/doctype/cargo_packing_list_line/cargo_packing_list_line.json
 msgid "Customer Description"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "DHL"
 msgstr ""
 
 #. Description of the 'Estimated Departure Date' (Date) field in DocType
@@ -456,11 +452,9 @@ msgstr ""
 msgid "Detail Pricing"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "Drop Off"
+#. Option for the 'Tracking API' (Select) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "EasyPost"
 msgstr ""
 
 #. Label of the easypost_id (Data) field in DocType 'Parcel'
@@ -561,11 +555,9 @@ msgstr ""
 msgid "Explained Status"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "FedEx"
+#. Description of the 'Tracking API' (Select) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "External API used for automated tracking updates (if applicable)"
 msgstr ""
 
 #. Option for the 'Status' (Select) field in DocType 'Parcel'
@@ -573,12 +565,7 @@ msgstr ""
 msgid "For Delivery or Pickup"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "GOFO Express"
-msgstr ""
-
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:71
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:69
 msgid "Get Updates from Carrier"
 msgstr ""
 
@@ -642,11 +629,6 @@ msgstr ""
 msgid "Juguetes - PESO"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "LaserShip"
-msgstr ""
-
 #. Label of the longest_arrival_date (Date) field in DocType 'Quotation Item'
 #: cargo_management/parcel_selling/custom/quotation_item.json
 msgid "Longest Arrival Date"
@@ -701,13 +683,8 @@ msgstr ""
 msgid "New Warehouse Receipt"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:64
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:66
 msgid "Now in Transit"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "OnTrac"
 msgstr ""
 
 #. Label of a quick_list in the Warehouse Operations Workspace
@@ -765,12 +742,14 @@ msgstr ""
 #. Name of a DocType
 #. Label of the package (Link) field in DocType 'Sales Invoice Item'
 #. Group in Cargo Shipment's connections
+#. Label of the package (Link) field in DocType 'Cargo Shipment Line'
 #. Label of the package (Link) field in DocType 'Issue'
 #. Group in Warehouse Receipt's connections
 #. Label of the parcel (Link) field in DocType 'Warehouse Receipt Line'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/parcel_selling/custom/sales_invoice_item.json
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/support_management/custom/issue.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
@@ -807,21 +786,9 @@ msgstr ""
 msgid "Perfumes - PESO"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "Pick Up"
-msgstr ""
-
 #. Label of the pieces (Int) field in DocType 'Cargo Shipment'
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 msgid "Pieces"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Pitney Bowes"
 msgstr ""
 
 #. Option for the 'Carrier status' (Select) field in DocType 'Parcel'
@@ -829,7 +796,7 @@ msgstr ""
 msgid "Pre Transit"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:78
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:76
 msgid "Previsualization"
 msgstr ""
 
@@ -872,6 +839,21 @@ msgstr ""
 #. Receipt'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
 msgid "Reference of the cargo shipment to be received."
+msgstr ""
+
+#. Label of the regex (Code) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "Regex"
+msgstr ""
+
+#. Label of the regex_notes (Markdown Editor) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "Regex Notes"
+msgstr ""
+
+#. Description of the 'Regex' (Code) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "Regular expression used to detect the carrier from a tracking number"
 msgstr ""
 
 #. Label of the most_used_item_code_9 (Button) field in DocType 'Cargo Shipment
@@ -933,16 +915,6 @@ msgstr ""
 #. Name of a Workspace
 #: cargo_management/parcel_management/workspace/sea_parcels/sea_parcels.json
 msgid "SEA Parcels"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "SF Express"
-msgstr ""
-
-#. Label of the button (Button) field in DocType 'Cargo Shipment Warehouse'
-#: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
-msgid "SISTEMA"
 msgstr ""
 
 #. Label of the most_used_item_code_11 (Button) field in DocType 'Cargo
@@ -1016,11 +988,6 @@ msgstr ""
 msgid "Specific Data 2"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "SpeedX"
-msgstr ""
-
 #. Description of the 'Shipper' (Link) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Store that sends the package"
@@ -1029,11 +996,6 @@ msgstr ""
 #. Label of the sub_status (Select) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Sub Status"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "SunYou"
 msgstr ""
 
 #. Description of the 'Customer' (Link) field in DocType 'Cargo Shipment
@@ -1088,13 +1050,23 @@ msgstr ""
 msgid "Total weight in pounds."
 msgstr ""
 
+#. Label of the api (Select) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "Tracking API"
+msgstr ""
+
 #. Label of the tracking_number (Data) field in DocType 'Parcel'
 #. Label of the tracking_number (Data) field in DocType 'Parcel Content'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/parcel_management/doctype/parcel_content/parcel_content.json
-#: cargo_management/public/js/cargo_management.bundle.js:92
+#: cargo_management/public/js/cargo_management.bundle.js:62
 #: cargo_management/public/js/utils/parcel_quick_entry.js:31
 msgid "Tracking Number"
+msgstr ""
+
+#. Label of the tracking_urls (Table) field in DocType 'Carrier'
+#: cargo_management/cargo_core/doctype/carrier/carrier.json
+msgid "Tracking URLs"
 msgstr ""
 
 #. Label of the transit_days_air (Int) field in DocType 'Quotation'
@@ -1117,21 +1089,7 @@ msgstr ""
 msgid "Transit Time & Dispatch Days - AIR"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "UPS"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#. Option for the 'Carrier' (Select) field in DocType 'Cargo Shipment Line'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "USPS"
-msgstr ""
-
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:88
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:86
 msgid "Updating from Carrier..."
 msgstr ""
 
@@ -1139,11 +1097,6 @@ msgstr ""
 #. Receipt Line'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
 msgid "Varios - PESO"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Veho"
 msgstr ""
 
 #. Label of the most_used_item_code_12 (Button) field in DocType 'Cargo
@@ -1242,16 +1195,6 @@ msgstr ""
 msgid "Without Carrier Data"
 msgstr ""
 
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Yanwen"
-msgstr ""
-
-#. Option for the 'Carrier' (Select) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "YunExpress"
-msgstr ""
-
 #. Label of the most_used_item_code_3 (Button) field in DocType 'Cargo Shipment
 #. Receipt Line'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
@@ -1274,6 +1217,15 @@ msgstr ""
 #: cargo_management/parcel_management/workspace/parcels/parcels.json
 #: cargo_management/parcel_management/workspace/sea_parcels/sea_parcels.json
 msgid "{} Delivered"
+msgstr ""
+
+#. Count format of shortcut in the AIR Parcels Workspace
+#. Count format of shortcut in the Parcels Workspace
+#. Count format of shortcut in the SEA Parcels Workspace
+#: cargo_management/parcel_management/workspace/air_parcels/air_parcels.json
+#: cargo_management/parcel_management/workspace/parcels/parcels.json
+#: cargo_management/parcel_management/workspace/sea_parcels/sea_parcels.json
+msgid "{} Pending"
 msgstr ""
 
 #. Count format of shortcut in the AIR Parcels Workspace
