@@ -20,35 +20,35 @@
   "status",
   "sub_status",
   "extra_services_section",
-  "column_break_mpgh",
-  "column_break_uyaz",
+  "column_break_3",
+  "column_break_4",
   "assisted_purchase",
-  "column_break_xquh",
+  "column_break_5",
   "residential_address",
-  "column_break_loiy",
+  "column_break_6",
   "additional_data_from_carrier_section",
   "carrier_est_delivery",
   "carrier_real_delivery",
-  "column_break_3",
+  "column_break_7",
   "carrier_est_weight",
   "signed_by",
-  "section_break_1",
+  "column_break_8",
   "carrier_status",
   "carrier_status_detail",
   "carrier_last_detail",
   "content_section",
   "content",
   "totals_section",
-  "column_break_5tood",
+  "column_break_9",
   "est_departure",
   "est_delivery_1",
   "est_delivery_2",
-  "column_break_4",
+  "column_break_10",
   "shipper",
   "order_number",
   "order_date",
   "notes",
-  "column_break_5",
+  "column_break_11",
   "shipping_amount",
   "has_taxes",
   "total",
@@ -56,7 +56,7 @@
   "cargo_shipment",
   "explained_status",
   "easypost_id",
-  "column_break_fkrx",
+  "column_break_12",
   "warehouse_receipt"
  ],
  "fields": [
@@ -87,6 +87,7 @@
    "search_index": 1
   },
   {
+   "alignment": "Center",
    "bold": 1,
    "depends_on": "customer",
    "fetch_from": "customer.customer_name",
@@ -102,13 +103,15 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "bold": 1,
    "default": "Unknown",
    "fieldname": "carrier",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Carrier",
    "no_copy": 1,
-   "options": "Drop Off\nPick Up\nUnknown\nAmazon\nUSPS\nUPS\nDHL\nFedEx\nOnTrac\nGOFO Express\nCainiao\nSpeedX\nSF Express\nYanwen\nYunExpress\nSunYou\nPitney Bowes\nVeho",
+   "not_nullable": 1,
+   "options": "Carrier",
    "reqd": 1,
    "search_index": 1
   },
@@ -162,10 +165,6 @@
    "non_negative": 1,
    "precision": "2",
    "read_only": 1
-  },
-  {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
   },
   {
    "bold": 1,
@@ -250,7 +249,7 @@
    "fieldname": "easypost_id",
    "fieldtype": "Data",
    "hidden": 1,
-   "label": "Easypost ID",
+   "label": "EasyPost ID",
    "no_copy": 1,
    "print_hide": 1,
    "report_hide": 1,
@@ -337,10 +336,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_1",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
   },
@@ -355,10 +350,6 @@
    "label": "Taxes"
   },
   {
-   "fieldname": "column_break_5tood",
-   "fieldtype": "Column Break"
-  },
-  {
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "0",
@@ -370,10 +361,6 @@
    "label": "Residential Address"
   },
   {
-   "fieldname": "column_break_xquh",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "est_delivery_1",
    "fieldtype": "Date",
    "label": "Estimated Delivery Date (Earliest)"
@@ -382,18 +369,6 @@
    "fieldname": "est_delivery_2",
    "fieldtype": "Date",
    "label": "Estimated Delivery Date (Latest)"
-  },
-  {
-   "fieldname": "column_break_mpgh",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_uyaz",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_loiy",
-   "fieldtype": "Column Break"
   },
   {
    "description": "Date on which it will be shipped",
@@ -420,10 +395,6 @@
    "options": "\nAt Origin\nDelayed"
   },
   {
-   "fieldname": "column_break_fkrx",
-   "fieldtype": "Column Break"
-  },
-  {
    "bold": 1,
    "fieldname": "warehouse_receipt",
    "fieldtype": "Link",
@@ -435,6 +406,38 @@
    "options": "Warehouse Receipt",
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
@@ -465,7 +468,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2025-12-28 23:40:40.391250",
+ "modified": "2026-02-02 21:16:32.437724",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

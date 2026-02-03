@@ -13,8 +13,10 @@ class API17Track:
 
 	# The Dict Keys are the actual String representation for Users, and the Dict Values are the carrier code for the API
 	# See More at: https://res.17track.net/asset/carrier/info/apicarrier.all.json
+
+	# FIXME: VALIDATE PLEASE
 	CARRIER_CODES: dict = {
-		'Amazon': 100143,  # Swiship it works
+		'Amazon': 100143,  # Swiship it works =? DISABLE IT PLEASE
 		'FedEx': 100003,
 		'OnTrac': 100049,
 		'Cainiao': 190271,
@@ -22,9 +24,11 @@ class API17Track:
 		'Yanwen': 190012,
 		'YunExpress': 190008,
 		'SunYou': 190072,
-		'Pitney Bowes': 100036,
 		'SpeedX': 190844,
-		'GOFO Express': 100996,
+		'SwiftX': 101228,
+		'GOFO': 100996,
+		'UniUni': 100134,
+		'ShipGlobal India': 101086
 	}
 
 	# See List of status at: https://api.17track.net/en/doc?anchor=main-status-of-the-shipping-process&version=v2
@@ -111,7 +115,7 @@ class API17Track:
 	def _build_parcel_data(self, obj_17track) -> dict:
 		""" Build our Object(Parcel Document) from 17Track Data. """
 		self.data: dict = {
-			'carrier_status': self.STATUSES.get(stat := self.unscrub(obj_17track.latest_status.status), stat),  # Unscrub
+			'carrier_status': self.STATUSES.get(stat := self.unscrub(obj_17track.latest_status.status), stat),  # unscrub
 			'carrier_status_detail': self.unscrub(obj_17track.latest_status.sub_status),               # Normalize SubStatus
 			'carrier_est_weight': round(float(obj_17track.misc_info.weight_kg or 0.00) * 2.20462, 1),  # From KG to Pounds
 		}

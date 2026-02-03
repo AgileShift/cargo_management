@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 
 
 def scrape_tracking_status(tracking_number):
-	url = f"http://everest.cargotrack.net/m/track.asp?track={tracking_number}"
+	url = f"https://everest.cargotrack.net/m/track.asp?track={tracking_number}"
 
 	response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
 
 	if response.status_code == 200:
 		soup = BeautifulSoup(response.content, 'html.parser')
 
-		# Encontrar la tabla con clase 'ntextbig'
+		# Finding table element with css class: 'ntextbig'
 		table = soup.find('table', {'class': 'ntextbig'})
 
 		if table:
@@ -52,18 +52,15 @@ def get_tracking_status():
 		'status': ['in', ['Awaiting Receipt', 'Awaiting Confirmation']]
 	}, fields=['name', 'tracking_number'])
 
-	resultados = {}
+	results = {}
 
 	for parcel in parcels:
 		# Verificar que el tracking_number no esté vacío
 		# Realizar el scraping para obtener el estado
 		status = scrape_tracking_status(parcel.tracking_number)
 
-		# Guardar el resultado en el diccionario
-		resultados[parcel.tracking_number] = status
+		results[parcel.tracking_number] = status
 
-		# Pausa de 3 segundos
 		# time.sleep(0.5)
 
-	# Retornar el diccionario de resultados
-	return resultados
+	return results

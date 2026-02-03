@@ -22,7 +22,7 @@ class Parcel(Document):
 
 		assisted_purchase: DF.Check
 		cargo_shipment: DF.Link | None
-		carrier: DF.Literal["Drop Off", "Pick Up", "Unknown", "Amazon", "USPS", "UPS", "DHL", "FedEx", "OnTrac", "GOFO Express", "Cainiao", "SpeedX", "SF Express", "Yanwen", "YunExpress", "SunYou", "Pitney Bowes", "Veho"]
+		carrier: DF.Link
 		carrier_est_delivery: DF.Datetime | None
 		carrier_est_weight: DF.Float
 		carrier_last_detail: DF.SmallText | None
@@ -67,7 +67,7 @@ class Parcel(Document):
 
 	@override
 	def save(self, request_data_from_api=False, *args, **kwargs):
-		""" Override def to change validation behaviour. Useful when called from outside a form. """
+		""" Override def to change validation behavior. Useful when called from outside a form. """
 		if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
 			self.flags.ignore_permissions = self.flags.ignore_validate = self.flags.ignore_mandatory = self.flags.ignore_links = True
 			self.request_data_from_api()

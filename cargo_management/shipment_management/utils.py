@@ -9,7 +9,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 	# wrs = frappe.get_all('Cargo Shipment Line', fields='warehouse_receipt', filters={'parent': cargo_shipment}, order_by='idx', pluck='warehouse_receipt')
 
 	# TODO: WORKING: OPTIMIZE FULL
-	VIA_SQL = "CONCAT('<p>Via: ', IF(p.transportation = 'Air', 'Aereo', 'Maritimo'), '</p>')"
+	via_sql = "CONCAT('<p>Via: ', IF(p.transportation = 'Air', 'Aereo', 'Maritimo'), '</p>')"
 
 	packages = frappe.db.sql("""
 		SELECT
@@ -37,7 +37,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 		WHERE csl.parent = %(cargo_shipment)s
 		GROUP BY p.name
 		ORDER BY p.customer_name
-	""".format(via_sql=VIA_SQL), {
+	""".format(via_sql=via_sql), {
 		'cargo_shipment': cargo_shipment
 	}, as_dict=True)
 

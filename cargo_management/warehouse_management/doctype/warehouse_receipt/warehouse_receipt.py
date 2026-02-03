@@ -43,7 +43,7 @@ class WarehouseReceipt(Document):
 			'packages': packages
 		})
 
-	# TODO: Actually change the status after the package is validated and creadted. maybe at status change from draft to open?
+	# TODO: Actually change the status after the package is validated and created. maybe at status change from draft to open?
 
 	def change_status(self, new_status):
 		""" Validates the current status of the warehouse receipt and change it if it's possible. """
