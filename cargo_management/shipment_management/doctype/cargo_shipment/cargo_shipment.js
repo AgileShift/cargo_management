@@ -77,6 +77,6 @@ frappe.ui.form.on('Cargo Shipment Warehouse', {
 	button: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
 
-		window.open('http://everest.cargotrack.net/m/track.asp?track=' + row.reference);
+		window.open('https://everest.cargotrack.net/m/track.asp?track=' + row.reference);
 	}
 });

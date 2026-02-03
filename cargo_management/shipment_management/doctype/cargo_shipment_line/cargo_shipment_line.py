@@ -10,7 +10,7 @@ class CargoShipmentLine(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		carrier: DF.Literal["Amazon", "USPS", "UPS", "FedEx", "DHL", "LaserShip", "Drop Off", "Pick Up"]
+		carrier: DF.Link | None
 		carrier_est_weight: DF.Float
 		carrier_real_delivery: DF.Datetime | None
 		customer: DF.Link | None
@@ -30,4 +30,5 @@ class CargoShipmentLine(Document):
 		warehouse_receipt: DF.Link | None
 		width: DF.Float
 	# end: auto-generated types
+
 	pass
