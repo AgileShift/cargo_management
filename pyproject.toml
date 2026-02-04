@@ -24,6 +24,11 @@ build-backend = "flit_core.buildapi"
 [tool.bench.dev-dependencies]
 # package_name = "~=1.1.0"
 
+# Ensures that dependencies are present before installing app
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0,<17.0.0"
+erpnext = ">=16.0.0,<17.0.0"
+
 [tool.ruff]
 line-length = 110
 target-version = "py314"

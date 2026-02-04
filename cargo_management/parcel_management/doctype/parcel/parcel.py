@@ -121,7 +121,7 @@ class Parcel(Document):
 
 	def request_data_from_api(self):
 		""" This selects the corresponding API to request data. Using Polymorphism. """
-		carrier_api = frappe.get_file_json(frappe.get_app_path('Cargo Management', 'public', 'carriers.json'))['CARRIERS'].get(self.carrier, {}).get('api')
+		carrier_api = frappe.get_value('Carrier', self.carrier, 'api')
 
 		match carrier_api:
 			case 'EasyPost':
