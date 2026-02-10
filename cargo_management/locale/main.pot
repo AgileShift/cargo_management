@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: contacto@gruporeal.org\n"
-"POT-Creation-Date: 2026-02-02 20:31-0615\n"
-"PO-Revision-Date: 2026-02-02 20:31-0615\n"
+"POT-Creation-Date: 2026-02-09 19:17-0615\n"
+"PO-Revision-Date: 2026-02-09 19:17-0615\n"
 "Last-Translator: contacto@gruporeal.org\n"
 "Language-Team: contacto@gruporeal.org\n"
 "MIME-Version: 1.0\n"
@@ -459,7 +459,7 @@ msgstr ""
 
 #. Label of the easypost_id (Data) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Easypost ID"
+msgid "EasyPost ID"
 msgstr ""
 
 #. Label of the most_used_item_code_10 (Button) field in DocType 'Cargo
@@ -565,7 +565,7 @@ msgstr ""
 msgid "For Delivery or Pickup"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:69
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:71
 msgid "Get Updates from Carrier"
 msgstr ""
 
@@ -796,7 +796,7 @@ msgstr ""
 msgid "Pre Transit"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:76
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:78
 msgid "Previsualization"
 msgstr ""
 
@@ -880,7 +880,7 @@ msgstr ""
 msgid "Repuestos Moto - PESO"
 msgstr ""
 
-#. Description of the 'Easypost ID' (Data) field in DocType 'Parcel'
+#. Description of the 'EasyPost ID' (Data) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Required to fetch data after an easypost tracking number is created"
 msgstr ""
@@ -1089,7 +1089,7 @@ msgstr ""
 msgid "Transit Time & Dispatch Days - AIR"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:86
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:88
 msgid "Updating from Carrier..."
 msgstr ""
 
