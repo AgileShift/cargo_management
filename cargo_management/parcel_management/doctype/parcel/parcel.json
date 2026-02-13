@@ -40,14 +40,11 @@
   "content",
   "totals_section",
   "column_break_9",
-  "est_departure",
-  "est_delivery_1",
-  "est_delivery_2",
+  "notes",
   "column_break_10",
   "shipper",
   "order_number",
   "order_date",
-  "notes",
   "column_break_11",
   "shipping_amount",
   "has_taxes",
@@ -361,22 +358,6 @@
    "label": "Residential Address"
   },
   {
-   "fieldname": "est_delivery_1",
-   "fieldtype": "Date",
-   "label": "Estimated Delivery Date (Earliest)"
-  },
-  {
-   "fieldname": "est_delivery_2",
-   "fieldtype": "Date",
-   "label": "Estimated Delivery Date (Latest)"
-  },
-  {
-   "description": "Date on which it will be shipped",
-   "fieldname": "est_departure",
-   "fieldtype": "Date",
-   "label": "Estimated Departure Date"
-  },
-  {
    "allow_in_quick_entry": 1,
    "fieldname": "order_date",
    "fieldtype": "Date",
@@ -468,7 +449,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2026-02-02 21:16:32.437724",
+ "modified": "2026-02-13 08:59:55.387532",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

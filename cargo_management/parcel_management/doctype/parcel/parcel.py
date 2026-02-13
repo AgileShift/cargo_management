@@ -33,9 +33,6 @@ class Parcel(Document):
 		customer: DF.Link | None
 		customer_name: DF.Data | None
 		easypost_id: DF.Data | None
-		est_delivery_1: DF.Date | None
-		est_delivery_2: DF.Date | None
-		est_departure: DF.Date | None
 		has_taxes: DF.Check
 		notes: DF.SmallText | None
 		order_date: DF.Date | None
