@@ -168,7 +168,7 @@
   "doctype": "Carrier",
   "modified": "2026-01-27 13:33:22.193155",
   "name": "Cainiao",
-  "regex": "^LP00|^CNUSUP000",
+  "regex": "^LP00|^CNUSUP000|^CNG00",
   "regex_notes": "Cainiao can overlap with Yanwen and SunYou tracking numbers.",
   "tracking_urls": [
    {

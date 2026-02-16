@@ -73,7 +73,9 @@ cargo_management = {
 			});
 		}
 
-		new frappe.ui.Dialog({animate: false, size: 'small', minimizable: true, title: __('Search'), fields: fields}).show();
+		let size = fields.length <= 6 ? 'small' : (fields.length <= 10 ? 'medium' : 'large'); // Dynamically set dialog size based on number of fields
+
+		new frappe.ui.Dialog({animate: false, size: size, minimizable: false, title: __('Search'), fields: fields}).show();
 	},
 
 	_carrier_section_for_dialog(label, tracking_number, carrier = null) {
