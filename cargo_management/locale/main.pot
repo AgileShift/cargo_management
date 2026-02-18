@@ -6,11 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
-"Report-Msgid-Bugs-To: contacto@gruporeal.org\n"
-"POT-Creation-Date: 2026-02-09 19:17-0615\n"
-"PO-Revision-Date: 2026-02-09 19:17-0615\n"
-"Last-Translator: contacto@gruporeal.org\n"
-"Language-Team: contacto@gruporeal.org\n"
+"Report-Msgid-Bugs-To: dev@gruporeal.org\n"
+"POT-Creation-Date: 2026-02-18 11:37-0615\n"
+"PO-Revision-Date: 2026-02-18 11:37-0615\n"
+"Last-Translator: dev@gruporeal.org\n"
+"Language-Team: dev@gruporeal.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,7 +55,9 @@ msgid "<span class=\"h4\">With Carrier</span>"
 msgstr ""
 
 #. Name of a Workspace
+#. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/workspace/air_parcels/air_parcels.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "AIR Parcels"
 msgstr ""
 
@@ -242,8 +244,15 @@ msgstr ""
 msgid "Billable gross weight of the cargo shipment receipt"
 msgstr ""
 
+#. Label of a Workspace Sidebar Item
+#: cargo_management/workspace_sidebar/parcels.json
+msgid "By Transport"
+msgstr ""
+
 #. Name of a DocType
+#. Label of a Workspace Sidebar Item
 #: cargo_management/shipment_management/doctype/cargo_packing_list/cargo_packing_list.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "Cargo Packing List"
 msgstr ""
 
@@ -260,11 +269,13 @@ msgstr ""
 #. Name of a DocType
 #. Group in Cargo Shipment's connections
 #. Label of the cargo_shipment (Link) field in DocType 'Cargo Shipment Receipt'
+#. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/purchase_management/custom/purchase_invoice_item.json
 #: cargo_management/shipment_management/doctype/cargo_packing_list/cargo_packing_list.json
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "Cargo Shipment"
 msgstr ""
 
@@ -276,8 +287,10 @@ msgstr ""
 #. Label of the custom_cargo_shipment_receipt (Link) field in DocType 'Purchase
 #. Invoice Item'
 #. Name of a DocType
+#. Label of a Workspace Sidebar Item
 #: cargo_management/purchase_management/custom/purchase_invoice_item.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "Cargo Shipment Receipt"
 msgstr ""
 
@@ -410,12 +423,6 @@ msgstr ""
 msgid "Customer Description"
 msgstr ""
 
-#. Description of the 'Estimated Departure Date' (Date) field in DocType
-#. 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Date on which it will be shipped"
-msgstr ""
-
 #. Label of the days_in_transit (Section Break) field in DocType 'Quotation'
 #: cargo_management/parcel_selling/custom/quotation.json
 msgid "Days in Transit"
@@ -473,21 +480,6 @@ msgstr ""
 #: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Envelope"
-msgstr ""
-
-#. Label of the est_delivery_1 (Date) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Estimated Delivery Date (Earliest)"
-msgstr ""
-
-#. Label of the est_delivery_2 (Date) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Estimated Delivery Date (Latest)"
-msgstr ""
-
-#. Label of the est_departure (Date) field in DocType 'Parcel'
-#: cargo_management/parcel_management/doctype/parcel/parcel.json
-msgid "Estimated Departure Date"
 msgstr ""
 
 #. Label of the estimated_gross_weight_by_carriers_in_pounds (Float) field in
@@ -619,7 +611,9 @@ msgid "Internal reference code."
 msgstr ""
 
 #. Name of a Workspace
+#. Label of a Workspace Sidebar Item
 #: cargo_management/support_management/workspace/issues_and_tasks/issues_and_tasks.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "Issues and Tasks"
 msgstr ""
 
@@ -766,11 +760,11 @@ msgstr ""
 msgid "Parcel Selling Settings"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.py:140
+#: cargo_management/parcel_management/doctype/parcel/parcel.py:137
 msgid "Parcel has been updated from {} API."
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.py:132
+#: cargo_management/parcel_management/doctype/parcel/parcel.py:129
 msgid "Parcel is handled by a carrier we can't track."
 msgstr ""
 
@@ -913,7 +907,9 @@ msgid "Ropa - PESO"
 msgstr ""
 
 #. Name of a Workspace
+#. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/workspace/sea_parcels/sea_parcels.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "SEA Parcels"
 msgstr ""
 
@@ -1136,7 +1132,9 @@ msgid "Warehouse Description"
 msgstr ""
 
 #. Name of a Workspace
+#. Label of a Workspace Sidebar Item
 #: cargo_management/warehouse_management/workspace/warehouse_operations/warehouse_operations.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "Warehouse Operations"
 msgstr ""
 
@@ -1145,10 +1143,12 @@ msgstr ""
 #. Label of the warehouse_receipt (Link) field in DocType 'Cargo Shipment
 #. Receipt Line'
 #. Name of a DocType
+#. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+#: cargo_management/workspace_sidebar/parcels.json
 msgid "Warehouse Receipt"
 msgstr ""
 
