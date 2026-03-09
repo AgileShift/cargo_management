@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "AIR Parcels",
  "links": [],
- "modified": "2025-12-28 16:32:13.667425",
+ "modified": "2026-03-09 16:21:28.306122",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "AIR Parcels",
@@ -31,7 +31,16 @@
    "format": "{} Delayed",
    "label": "Arriving Late",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"transportation\":[\"=\",\"Air\"],\n    \"status\":[\"=\",\"Awaiting Receipt\"],\n    \"carrier_est_delivery\": [\"Between\", [moment().add(-2, 'months').format(), moment().add(-1, 'days').format()]]\n}",
+   "stats_filter": "[[\"Parcel\",\"transportation\",\"=\",\"Air\"],[\"Parcel\",\"status\",\"=\",\"Awaiting Receipt\"],[\"Parcel\",\"carrier_est_delivery\",\"Timespan\",\"last 90 days\"]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Returned",
+   "label": "Returned to Sender",
+   "link_to": "Parcel",
+   "stats_filter": "[[\"Parcel\",\"transportation\",\"=\",\"Air\"],[\"Parcel\",\"carrier_status\",\"=\",\"Return To Sender\"],[\"Parcel\",\"creation\",\"Timespan\",\"last 30 days\"]]",
    "type": "DocType"
   },
   {
@@ -41,6 +50,15 @@
    "label": "Awaiting Receipt",
    "link_to": "Parcel",
    "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"Awaiting Receipt\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "In Extraordinary Confirmation",
+   "link_to": "Parcel",
+   "stats_filter": "[[\"Parcel\",\"transportation\",\"=\",\"Air\"],[\"Parcel\",\"status\",\"=\",\"In Extraordinary Confirmation\"]]",
    "type": "DocType"
   },
   {
@@ -69,15 +87,6 @@
    "type": "DocType"
   },
   {
-   "color": "Orange",
-   "doc_view": "List",
-   "format": "{} Returned",
-   "label": "Returned to Sender",
-   "link_to": "Parcel",
-   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"creation\":[\"Timespan\",\"this month\"],\"carrier_status\":[\"=\",\"Return To Sender\"]}",
-   "type": "DocType"
-  },
-  {
    "color": "Green",
    "doc_view": "List",
    "format": "{} Delivered",
@@ -93,15 +102,6 @@
    "label": "Awaiting Confirmation",
    "link_to": "Parcel",
    "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"in\",[\"Awaiting Confirmation\",\"In Extraordinary Confirmation\"]]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Pink",
-   "doc_view": "List",
-   "format": "{} Pending",
-   "label": "In Extraordinary Confirmation",
-   "link_to": "Parcel",
-   "stats_filter": "{\"transportation\":[\"=\",\"Air\"],\"status\":[\"=\",\"In Extraordinary Confirmation\"]}",
    "type": "DocType"
   },
   {

@@ -9,11 +9,11 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "ship",
- "idx": 2,
+ "idx": 5,
  "is_hidden": 0,
  "label": "SEA Parcels",
  "links": [],
- "modified": "2025-12-28 13:22:32.980981",
+ "modified": "2026-03-09 16:22:58.348950",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "SEA Parcels",
@@ -31,7 +31,16 @@
    "format": "{} Delayed",
    "label": "Arriving Late",
    "link_to": "Parcel",
-   "stats_filter": "{\n    \"transportation\":[\"=\",\"Sea\"],\n    \"status\":[\"=\",\"Awaiting Receipt\"],\n    \"carrier_est_delivery\": [\"Between\", [moment().add(-2, 'months').format(), moment().add(-1, 'days').format()]]\n}",
+   "stats_filter": "[[\"Parcel\",\"transportation\",\"=\",\"Sea\"],[\"Parcel\",\"status\",\"=\",\"Awaiting Receipt\"],[\"Parcel\",\"carrier_est_delivery\",\"Timespan\",\"last 90 days\"]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Returned",
+   "label": "Returned to Sender",
+   "link_to": "Parcel",
+   "stats_filter": "[[\"Parcel\",\"transportation\",\"=\",\"Sea\"],[\"Parcel\",\"carrier_status\",\"=\",\"Return To Sender\"],[\"Parcel\",\"creation\",\"Timespan\",\"last 30 days\"]]",
    "type": "DocType"
   },
   {
@@ -66,15 +75,6 @@
    "label": "Without Carrier Data",
    "link_to": "Parcel",
    "stats_filter": "{\"transportation\":[\"=\",\"Sea\"],\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Unknown\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Orange",
-   "doc_view": "List",
-   "format": "{} Returned",
-   "label": "Returned to Sender",
-   "link_to": "Parcel",
-   "stats_filter": "{\"transportation\":[\"=\",\"Sea\"],\"creation\":[\"Timespan\",\"this month\"],\"carrier_status\":[\"=\",\"Return To Sender\"]}",
    "type": "DocType"
   },
   {

@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Parcels",
  "links": [],
- "modified": "2026-01-18 15:16:21.524339",
+ "modified": "2026-03-09 16:20:09.033019",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcels",
@@ -26,6 +26,15 @@
  "sequence_id": 0.0,
  "shortcuts": [
   {
+   "color": "Pink",
+   "doc_view": "List",
+   "format": "{} Delayed",
+   "label": "Arriving Late",
+   "link_to": "Parcel",
+   "stats_filter": "[[\"Parcel\",\"status\",\"=\",\"Awaiting Receipt\"],[\"Parcel\",\"carrier_est_delivery\",\"Timespan\",\"last 90 days\"]]",
+   "type": "DocType"
+  },
+  {
    "color": "Green",
    "doc_view": "List",
    "label": "Active Parcels",
@@ -34,20 +43,20 @@
    "type": "DocType"
   },
   {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Returned",
+   "label": "Returned to Sender",
+   "link_to": "Parcel",
+   "stats_filter": "[[\"Parcel\",\"carrier_status\",\"=\",\"Return To Sender\"],[\"Parcel\",\"creation\",\"Timespan\",\"last 30 days\"]]",
+   "type": "DocType"
+  },
+  {
    "color": "Grey",
    "doc_view": "New",
    "label": "Add Parcel",
    "link_to": "Parcel",
    "stats_filter": "[]",
-   "type": "DocType"
-  },
-  {
-   "color": "Pink",
-   "doc_view": "List",
-   "format": "{} Delayed",
-   "label": "Arriving Late",
-   "link_to": "Parcel",
-   "stats_filter": "{\n    \"status\":[\"=\",\"Awaiting Receipt\"],\n    \"carrier_est_delivery\": [\"Between\", [moment().add(-2, 'months').format(), moment().add(-1, 'days').format()]]\n}",
    "type": "DocType"
   },
   {
@@ -82,15 +91,6 @@
    "label": "Without Carrier Data",
    "link_to": "Parcel",
    "stats_filter": "{\"status\":[\"=\",\"Awaiting Receipt\"],\"carrier_status\":[\"=\",\"Unknown\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Orange",
-   "doc_view": "List",
-   "format": "{} Returned",
-   "label": "Returned to Sender",
-   "link_to": "Parcel",
-   "stats_filter": "{\"creation\":[\"Timespan\",\"this month\"],\"carrier_status\":[\"=\",\"Return To Sender\"]}",
    "type": "DocType"
   },
   {
