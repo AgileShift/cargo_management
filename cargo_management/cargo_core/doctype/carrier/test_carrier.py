@@ -8,7 +8,6 @@ EXTRA_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 
-
 class IntegrationTestCarrier(IntegrationTestCase):
 	"""
 	Integration tests for Carrier.

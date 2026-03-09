@@ -2,22 +2,22 @@ app_name = "cargo_management"
 app_title = "Cargo Management"
 app_publisher = "Agile Shift"
 app_description = "ERPNext Cargo Management for Freight Forwarders"
-app_email = "contacto@gruporeal.org"
+app_email = "dev@gruporeal.org"
 app_license = "agpl-3.0"
 
 # Apps
 # ------------------
 
-# required_apps = [] # TODO: Put gr Tools in here!
+# required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-add_to_apps_screen = [{}]
+# add_to_apps_screen = [
 # 	{
 # 		"name": app_name,
 # 		"logo": "/assets/cargo_management/logo.png",
 # 		"title": app_title,
 # 		"route": "/cargo_management",
-# 		#"has_permission": "erpnext.api.permission.has_app_permission"
+# 		"has_permission": "cargo_management.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -40,7 +40,7 @@ app_include_js = "cargo_management.bundle.js"
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
-# page_js = {"page" : "public/js/file.js"}
+# page_js = {"page": "public/js/file.js"}
 
 # Include js in doctype views: override/extend Standard Form Scripts.
 doctype_js = {
@@ -85,8 +85,8 @@ doctype_js = {
 
 # add methods and filters to jinja environment
 # jinja = {
-#   "methods": "v15.utils.jinja_methods",
-#   "filters": "v15.utils.jinja_filters"
+#   "methods": "cargo_management.utils.jinja_methods",
+#   "filters": "cargo_management.utils.jinja_filters"
 # }
 
 # Installation
@@ -182,7 +182,7 @@ doc_events = {
 # Override standard doctype classes
 
 # override_doctype_class = {
-#   "ToDo": "custom_app.overrides.CustomToDo"
+#   "Doctype": "cargo_management.overrides.CustomSalesInvoice"
 # }
 
 # Extend DocType Class
@@ -218,13 +218,13 @@ doc_events = {
 
 # Request Events
 # ----------------
-# before_request = ["v15.utils.before_request"]
-# after_request = ["v15.utils.after_request"]
+# before_request = ["cargo_management.utils.before_request"]
+# after_request = ["cargo_management.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["v15.utils.before_job"]
-# after_job = ["v15.utils.after_job"]
+# before_job = ["cargo_management.utils.before_job"]
+# after_job = ["cargo_management.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -260,14 +260,17 @@ doc_events = {
 # Automatically update python controller files with type annotations for this app.
 export_python_type_annotations = True
 
+# Require all whitelisted methods to have type annotations
+require_type_annotated_api_methods = True
+
 # default_log_clearing_doctypes = {
-# 	"Logging DocType Name": 30  # days to retain logs
+# 	"Logging DocType Name": 30 # days to retain logs
 # }
 
 # Translation
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
-ignore_translatable_strings_from = ['frappe', 'erpnext', 'hrms']
+ignore_translatable_strings_from = ["frappe", "erpnext", "hrms"]
 
 # Doctypes for Global Search
 global_search_doctypes = {
@@ -279,9 +282,13 @@ global_search_doctypes = {
 	]
 }
 
+# Extend Bootinfo
 extend_bootinfo = "cargo_management.boot.boot_session"
 
-# TODO: Please Work on the Issues and Tasks Management for v16
+# TODO: Please Work on the Issues and Tasks Management for v16.
+# FIXME: Maybe migrate all this to a custom app for each company?
+# so this details wont need to live on the core app
+# Fixtures
 fixtures = [
 	"Carrier",
 	"Issue Type",
