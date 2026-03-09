@@ -28,7 +28,7 @@ frappe.listview_settings['Parcel'] = {
 
 			const tracking_number_filter = args.filters.findIndex(f => f[1] === 'tracking_number');  // f -> ['Doctype', 'field', 'sql_search_term', 'value']
 
-			if (tracking_number_filter >= 0) {  // We have 'tracking_name' filter being filtered. -> tracking_number_filter will contain index if found
+			if (tracking_number_filter >= 0) {  // We have a 'tracking_name' filter being filtered. -> tracking_number_filter will contain the index if found
 				args.filters.splice(tracking_number_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
 
 				const search_term = cargo_management.find_carrier_by_tracking_number(tracking_number_field.get_input_value()).search_term;
@@ -73,7 +73,6 @@ frappe.listview_settings['Parcel'] = {
 
 	formatters: {
 		transportation: (value) => cargo_management.transportation_formatter(value),
-		sub_status: (value) => value, // TODO: Complete this
 		name: (value, df, doc) => (value !== doc.tracking_number) ? `<b>${value}</b>` : ''
 	}
 

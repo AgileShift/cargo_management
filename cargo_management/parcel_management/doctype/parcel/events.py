@@ -2,8 +2,8 @@ import frappe
 
 
 def get_permission_query_conditions(user):
-	# Problem is permission_query_conditions is called after the get() method
-	# and the get_methods calls the frappe.form_dict, so its too late to change it!
+	# The problem is permission_query_conditions is called after the get() method
+	# and the get_methods calls the frappe.form_dict, so it's too late to change it!
 	print('get_permission_query_conditions: PARCEL')
 
 	print(frappe.form_dict.cmd)

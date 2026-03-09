@@ -14,6 +14,8 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 		this.init_post_render_dialog_operations(); // Custom method to modify DOM properties after the dialog has been rendered
 
 		frappe.meta.docfield_map['Parcel']['transportation'].fieldtype = 'Select'; // FIXME: Resetting the fieldtype to 'Select' to avoid problems in other parts of the system(ListView Filter and Form Field)
+
+		// TODO: add this https://github.com/frappe/frappe/pull/37524
 	}
 
 	add_extra_fields() {

@@ -49,12 +49,13 @@
   "shipping_amount",
   "has_taxes",
   "total",
+  "connections_tab",
   "links_section",
+  "warehouse_receipt",
   "cargo_shipment",
-  "explained_status",
-  "easypost_id",
   "column_break_12",
-  "warehouse_receipt"
+  "easypost_id",
+  "explained_status"
  ],
  "fields": [
   {
@@ -69,8 +70,8 @@
    "in_standard_filter": 1,
    "label": "Tracking Number",
    "no_copy": 1,
+   "not_nullable": 1,
    "reqd": 1,
-   "sticky": 1,
    "unique": 1,
    "width": "10px"
   },
@@ -95,8 +96,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Customer Name",
-   "read_only": 1,
-   "sticky": 1
+   "read_only": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -312,8 +312,6 @@
    "search_index": 1
   },
   {
-   "collapsible": 1,
-   "collapsible_depends_on": "eval: in_list(['Sorting', 'Available to Pickup'], doc.status)",
    "fieldname": "links_section",
    "fieldtype": "Section Break",
    "label": "Links"
@@ -355,7 +353,8 @@
    "fieldtype": "Check",
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Residential Address"
+   "label": "Residential Address",
+   "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -419,6 +418,12 @@
   {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
   }
  ],
  "grid_page_length": 50,
@@ -449,7 +454,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2026-02-13 08:59:55.387532",
+ "modified": "2026-03-03 18:13:57.888113",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

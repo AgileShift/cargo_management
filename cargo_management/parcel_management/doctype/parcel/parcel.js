@@ -4,7 +4,7 @@ frappe.ui.form.on("Parcel", {
 
 	onload(frm) {
 		// Moving this piece of code outside setup. because it's not working inside "setup"
-		// frm.page.sidebar.toggle(false);
+		// frm.page.sidebar.toggle(false); # FIXME: https://github.com/frappe/frappe/pull/37265 . Remove all Toggles for classBase change
 		//this.page.sidebar.hide();
 
 		// FIXME: Observe if the indicator changes. This is useful for the 'Not Saved' status aka is_dirty(). We cannot read that from the events available
