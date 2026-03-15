@@ -79,7 +79,6 @@ doctype_js = {
 # automatically load and sync documents of this doctype from downstream apps
 # importable_doctypes = [doctype_1]
 
-
 # Jinja
 # ----------
 
@@ -130,7 +129,7 @@ doctype_js = {
 # permission_query_conditions = {
 # 	"Parcel": "cargo_management.parcel_management.doctype.parcel.events.get_permission_query_conditions",
 # }
-
+#
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
@@ -272,6 +271,9 @@ require_type_annotated_api_methods = True
 # List of apps whose translatable strings should be excluded from this app's translations.
 ignore_translatable_strings_from = ["frappe", "erpnext", "hrms"]
 
+# Extend Bootinfo
+extend_bootinfo = "cargo_management.boot.boot_session"
+
 # Doctypes for Global Search
 global_search_doctypes = {
 	"Default": [
@@ -282,12 +284,6 @@ global_search_doctypes = {
 	]
 }
 
-# Extend Bootinfo
-extend_bootinfo = "cargo_management.boot.boot_session"
-
-# TODO: Please Work on the Issues and Tasks Management for v16.
-# FIXME: Maybe migrate all this to a custom app for each company?
-# so this details wont need to live on the core app
 # Fixtures
 fixtures = [
 	"Carrier",
