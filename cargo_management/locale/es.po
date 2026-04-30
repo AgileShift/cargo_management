@@ -1,16 +1,16 @@
 # Translations template for Cargo Management.
 # Copyright (C) 2026 Agile Shift
 # This file is distributed under the same license as the Cargo Management project.
-# FIRST AUTHOR <contacto@gruporeal.org>, 2024.
+# FIRST AUTHOR <dev@gruporeal.org>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
-"Report-Msgid-Bugs-To: contacto@gruporeal.org\n"
+"Report-Msgid-Bugs-To: dev@gruporeal.org\n"
 "POT-Creation-Date: 2026-02-18 11:37-0745\n"
 "PO-Revision-Date: 2024-09-21 08:15-3815\n"
-"Last-Translator: contacto@gruporeal.org\n"
-"Language-Team: contacto@gruporeal.org\n"
+"Last-Translator: dev@gruporeal.org\n"
+"Language-Team: dev@gruporeal.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
