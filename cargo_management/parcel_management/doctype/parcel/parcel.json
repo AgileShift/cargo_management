@@ -40,6 +40,7 @@
   "content",
   "totals_section",
   "column_break_9",
+  "sales_order",
   "notes",
   "column_break_10",
   "shipper",
@@ -49,7 +50,6 @@
   "shipping_amount",
   "has_taxes",
   "total",
-  "connections_tab",
   "links_section",
   "warehouse_receipt",
   "cargo_shipment",
@@ -203,6 +203,8 @@
    "description": "Store that sends the package",
    "fieldname": "shipper",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Shipper",
    "options": "Brand"
   },
@@ -217,6 +219,7 @@
    "allow_in_quick_entry": 1,
    "fieldname": "order_number",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Number of Order"
   },
   {
@@ -420,10 +423,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "connections_tab",
-   "fieldtype": "Tab Break",
-   "label": "Connections",
-   "show_dashboard": 1
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sales Order",
+   "link_filters": "[[\"Sales Order\",\"status\",\"not in\",[\"Cancelled\",\"Closed\"]]]",
+   "options": "Sales Order"
   }
  ],
  "grid_page_length": 50,
@@ -454,7 +462,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2026-03-03 18:13:57.888113",
+ "modified": "2026-04-29 20:35:52.739244",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",

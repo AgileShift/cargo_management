@@ -38,6 +38,7 @@ class Parcel(Document):
 		order_date: DF.Date | None
 		order_number: DF.Data | None
 		residential_address: DF.Check
+		sales_order: DF.Link | None
 		shipper: DF.Link | None
 		shipping_amount: DF.Currency
 		signed_by: DF.Data | None
