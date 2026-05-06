@@ -2,9 +2,11 @@ frappe.ui.form.on("Sales Invoice", {
 
 	refresh(frm) {
 
+		if (frm.doc.status !== "Draft")
+			return;
+
 		// Show Message on Advances
 		(frm.doc.advances || []).forEach((adv) => {
-
 			frm.layout.show_message(`
 				<div>
 					Credito: <a href="/app/payment-entry/${adv.reference_name}">${adv.reference_name}</a> <br/>

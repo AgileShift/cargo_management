@@ -10,9 +10,25 @@ cargo_management = {
 		'Air': {icon: 'plane', color: 'red'}
 	},
 
-	// With this we can handle all our App Status Indicator Colors
-	get_indicator: (status) => [__(doc.status), {
-		// TODO: WORK IN PROGRESS
+	// With this we can handle all our App Status Indicator Colors | Unused: light-blue
+	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
+	get_indicator: (status) => [__(status), {
+		'Open': 'blue',
+
+		'Awaiting Receipt': 'blue',
+		'Awaiting Confirmation': 'orange',
+		'In Extraordinary Confirmation': 'pink',
+		'Awaiting Departure': 'yellow',
+		'In Transit': 'purple',
+		'In Customs': 'gray',
+		'Sorting': 'green',
+		'To Bill': 'green',
+		'Unpaid': 'red',
+		'For Delivery or Pickup': 'cyan',
+		'Finished': 'darkgrey',
+		'Cancelled': 'red',
+		'Never Arrived': 'red',
+		'Returned to Sender': 'red',
 	}[status], 'status,=,' + status],
 
 	find_carrier_by_tracking_number(tracking_number) {
@@ -32,7 +48,7 @@ cargo_management = {
 			// TODO: Create a Multiselect Control for Carriers
 			if (match) {
 				console.log(match);
-				Object.assign(response, {carrier, search_term: match[1] || match[2] || match[3] || tracking_number}); // If a captured group exists add it
+				Object.assign(response, {carrier, search_term: match[1] || match[2] || match[3] || tracking_number}); // If a captured group exist add it
 				return true;
 			}
 		});

@@ -46,28 +46,12 @@ frappe.listview_settings['Parcel'] = {
 		//FIXME: Delete after Finish! frappe.ui.form.make_quick_entry('Parcel', null, null, '');
 	},
 
-	// Unused: light-blue. // TODO: Migrate to Document States? Maybe when frappe core starts using it.
-	get_indicator: (doc) => [__(doc.status), {
-		'Awaiting Receipt': 'blue',
-		'Awaiting Confirmation': 'orange',
-		'In Extraordinary Confirmation': 'pink',
-		'Awaiting Departure': 'yellow',
-		'In Transit': 'purple',
-		'In Customs': 'gray',
-		'Sorting': 'green',
-		'To Bill': 'green',
-		'Unpaid': 'red',
-		'For Delivery or Pickup': 'cyan',
-		'Finished': 'darkgrey',
-		'Cancelled': 'red',
-		'Never Arrived': 'red',
-		'Returned to Sender': 'red',
-	}[doc.status], 'status,=,' + doc.status],
+	get_indicator: (doc) => cargo_management.get_indicator(doc.status),
 
 	button: {
 		show: () => true,
 		get_label: () => __('Search'),
-		get_description: () => '',
+		get_description: () => __('Search'),
 		action: (doc) => cargo_management.open_carriers_dialog(doc)
 	},
 
