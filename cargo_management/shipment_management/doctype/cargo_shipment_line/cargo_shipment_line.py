@@ -18,7 +18,7 @@ class CargoShipmentLine(Document):
 		description: DF.SmallText | None
 		height: DF.Float
 		length: DF.Float
-		package: DF.Link
+		parcel: DF.Link
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data

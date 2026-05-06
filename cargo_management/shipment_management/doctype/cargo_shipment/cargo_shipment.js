@@ -6,14 +6,14 @@ frappe.ui.form.on('Cargo Shipment', {
 		frm.page.sidebar.toggle(false); // Hide Sidebar to better focus on the doc
 
 		// TODO: add dot Indicator
-		//frm.set_indicator_formatter("package", function(doc) {
+		//frm.set_indicator_formatter("parcel", function(doc) {
 		//	return 'orange';
 		//});
 	},
 
 	onload(frm) {
-		// Only packages on Warehouse Receipt
-		// frm.set_query('package', 'cargo_shipment_lines', () => {
+		// Only Parcels on Warehouse Receipt
+		// frm.set_query('parcel', 'cargo_shipment_lines', () => {
 		//     return {
 		//         filters: {status: 'Awaiting Departure'}
 		//     }
@@ -44,14 +44,14 @@ frappe.ui.form.on('Cargo Shipment', {
 
 	build_custom_action_items(frm) {
 		if (frm.doc.status === 'Awaiting Departure') {
-			frm.page.add_action_item(__('Confirm Packages'), () => {
+			frm.page.add_action_item(__('Confirm Parcels'), () => {
 				frappe.call({
 					method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
 					freeze: true,
 					args: {
 						source_doc_name: frm.doc.name,
 						new_status: 'Awaiting Departure',
-						msg_title: __('Confirmed Packages')
+						msg_title: __('Confirmed Parcels')
 					}
 				});
 			});
