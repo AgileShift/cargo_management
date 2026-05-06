@@ -16,6 +16,7 @@ class WarehouseReceipt(Document):
 		carrier_gross_weight: DF.Float
 		date: DF.Date
 		gross_weight: DF.Float
+		manual_weight: DF.Check
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
 		total_volume: DF.Float
 		transportation: DF.Literal["", "Sea", "Air"]
@@ -24,6 +25,9 @@ class WarehouseReceipt(Document):
 	# end: auto-generated types
 
 	def validate(self):
+
+		if self.manual_weight:
+			return
 
 		self.gross_weight = 0
 		self.carrier_gross_weight = 0
