@@ -1,41 +1,33 @@
 {
  "actions": [],
  "allow_copy": 1,
- "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2020-06-14 12:50:41.615167",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "departure_date",
-  "column_break_hnxe",
-  "column_break_3",
-  "transportation_multicheck_html",
   "transportation",
+  "warehouse",
+  "column_break_hiid",
+  "date",
+  "column_break_hnxe",
   "status",
   "sb_0",
   "warehouse_receipt_lines",
   "section_totals",
-  "warehouse_est_gross_weight",
+  "gross_weight",
+  "total_volume",
   "column_break_16",
-  "volumetric_weight",
   "column_break_14",
-  "carrier_est_gross_weight"
+  "carrier_gross_weight"
  ],
  "fields": [
   {
    "fieldname": "column_break_hnxe",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "transportation_multicheck_html",
-   "fieldtype": "HTML"
   },
   {
    "bold": 1,
@@ -64,15 +56,6 @@
    "search_index": 1
   },
   {
-   "bold": 1,
-   "description": "Real departure date of cargo shipment to his final destination.",
-   "fieldname": "departure_date",
-   "fieldtype": "Date",
-   "in_preview": 1,
-   "label": "Departure Date",
-   "read_only": 1
-  },
-  {
    "fieldname": "sb_0",
    "fieldtype": "Section Break"
   },
@@ -91,28 +74,8 @@
    "fieldtype": "Section Break"
   },
   {
-   "bold": 1,
-   "description": "Total weight in pounds.",
-   "fieldname": "warehouse_est_gross_weight",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "label": "Total Weight (lb)",
-   "non_negative": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "column_break_16",
    "fieldtype": "Column Break"
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "default": "0.00",
-   "description": "Weight in pounds provided by the warehouse (if available).",
-   "fieldname": "volumetric_weight",
-   "fieldtype": "Float",
-   "in_preview": 1,
-   "label": "Total Vol. Weight"
   },
   {
    "fieldname": "column_break_14",
@@ -120,10 +83,56 @@
   },
   {
    "bold": 1,
-   "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
-   "fieldname": "carrier_est_gross_weight",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse",
+   "link_filters": "[[\"Warehouse\",\"is_group\",\"=\",0],[\"Warehouse\",\"disabled\",\"=\",0]]",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hiid",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "description": "Gross weight of the packages as measured by the carriers (if available).",
+   "fieldname": "carrier_gross_weight",
    "fieldtype": "Float",
-   "label": "Estimated Gross Weight by Carriers (in pounds)",
+   "label": "Gross Weight by Carriers (lb)",
+   "non_negative": 1,
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_volume",
+   "fieldtype": "Float",
+   "label": "Total Volume (CBM)",
+   "non_negative": 1,
+   "precision": "3",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "description": "Weight in pounds provided by the warehouse (if available).",
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Total Weight (lb)",
+   "non_negative": 1,
+   "precision": "2",
    "read_only": 1
   }
  ],
@@ -134,7 +143,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2025-01-14 19:36:36.384998",
+ "modified": "2026-05-06 11:51:59.074552",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
@@ -145,8 +154,6 @@
    "create": 1,
    "delete": 1,
    "email": 1,
-   "export": 1,
-   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
@@ -187,9 +194,9 @@
    "share": 1
   }
  ],
+ "row_format": "Dynamic",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
- "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

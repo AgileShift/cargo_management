@@ -1,11 +1,10 @@
 frappe.ui.form.on('Warehouse Receipt', {
-	// TODO: Delete Most of this
 
-	setup: function (frm) {
+	setup(frm) {
 		frm.page.sidebar.toggle(false); // Hide Sidebar
 	},
 
-	tracking_number: function (frm) {
+	tracking_number(frm) {
 		frm.doc.tracking_number = frm.doc.tracking_number.trim().toUpperCase();  // Sanitize field
 
 		if (!frm.doc.tracking_number) {
@@ -32,7 +31,7 @@ frappe.ui.form.on('Warehouse Receipt', {
 	},
 
 	// Custom Functions
-	show_selector_dialog: function (frm, opts) {
+	show_selector_dialog(frm, opts) {
 		// https://frappeframework.com/docs/v13/user/en/api/controls & https://frappeframework.com/docs/v13/user/en/api/dialog
 		// MultiselectDialog with Package List -> Issue: can select multiple
 		// Dialog with a Table Field of Package List -> Issue: can select multiple and needs a select button
@@ -62,7 +61,7 @@ frappe.ui.form.on('Warehouse Receipt', {
 		selector_dialog.show();
 	},
 
-	set_package: function (frm, coincidence) {
+	set_package(frm, coincidence) {
 		const doc_name = coincidence.name || coincidence;
 
 		frappe.db.get_doc('Package', doc_name).then(doc => {
