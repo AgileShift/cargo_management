@@ -11,7 +11,7 @@ def update_status(source_doc_name: str, new_status: str):
 	# HOTFIX
 	cargo_shipment = frappe.get_doc('Cargo Shipment', doc.cargo_shipment)
 
-	# We Mark the actual child tables added to the parent, because we can dynamically add
+	# We Mark the actual child tables added to the parent because we can dynamically add
 	update_status_in_bulk(docs_to_update={
 		'Cargo Shipment Receipt': [doc.name],
 		'Cargo Shipment': [doc.cargo_shipment],
@@ -29,7 +29,7 @@ def make_sales_invoice(doc):
 	doc = frappe.parse_json(doc)
 	cargo_shipment_receipt = frappe.get_doc('Cargo Shipment Receipt', doc.get('name'))
 
-	# Sorting all the customers data in a single dict
+	# Sorting all the customer data in a single dict
 	customers_to_invoice = defaultdict(list)
 	warning_messages = []
 	for item in cargo_shipment_receipt.cargo_shipment_receipt_lines:
@@ -44,7 +44,7 @@ def make_sales_invoice(doc):
 		customers_to_invoice[item.customer].append(item)
 
 	# print('warning_messages')
-	# frappe.msgprint(msg=warning_messages, title='Advertencias', as_list=True, indicator='orange')
+	# frappe.msgprint(msg=warning_messages, title=_('Warnings'), as_list=True, indicator='orange')
 
 	# if not customers_to_invoice:
 	#     return None
@@ -78,13 +78,13 @@ def make_sales_invoice(doc):
 			# if item.item_price > 0.00:
 			#     item_data.update({'price_list_rate': item.item_price}) # TODO: Remove this field?
 
-			sales_invoice.append('items', item_data)  # Add each items
+			sales_invoice.append('items', item_data)  # Add each item
 			# csrl_invoiced_items.append(item.name)
 
 		print('Before Saving?')
 
 		sales_invoice.set_missing_values()
-		sales_invoice.save(ignore_permissions=True)  # Saving a invoice as draft
+		sales_invoice.save(ignore_permissions=True)  # Saving the invoice as draft
 
 		print('creating sales invoice?')
 
@@ -96,7 +96,7 @@ def make_sales_invoice(doc):
 	# frappe.db.commit()  # Save all?
 
 	# cargo_shipment_receipt.notify_update()
-	# cargo_shipment_receipt.save(ignore_permissions=True)  # Send update notify
+	# cargo_shipment_receipt.save(ignore_permissions=True) # Send update notify
 
 	# TODO: Work in Progress
 	update_status_in_bulk(docs_to_update={

@@ -216,8 +216,8 @@ frappe.ui.form.on("Parcel", {
 				}
 			},
 			add_filters_group: 1,
-			action: (jkjk) => {
-				console.log(jkjk);
+			action: (r) => {
+				console.log(r);
 			},
 			primary_action_label: __('Select')
 		});
@@ -250,5 +250,5 @@ frappe.ui.form.on('Parcel Content', {
 		frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
 	},
 });
-//201 - FIXME: Giving PROBLEMS
+// 201 - FIXME: Giving PROBLEMS
 // 254 -> Working on Frappe Boot Info for Carriers!

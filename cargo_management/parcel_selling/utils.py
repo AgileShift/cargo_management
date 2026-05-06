@@ -2,7 +2,7 @@ import frappe
 
 
 def sales_invoice_on_submit(doc, method):
-	""" Change status of package after submit. """
+	""" Change the status of the package after submitting. """
 
 	# TODO: Avoid duplicate tracking
 	for item in doc.items:  # Iter over all items on sales invoice
@@ -17,8 +17,8 @@ def sales_invoice_on_submit(doc, method):
 
 
 def sales_invoice_on_update_after_submit(doc, method):
-	""" Change status of package after submit. """
-	# THIS is a HOTFIX: Not recommended way. The hook is for 'on_change'
+	""" Change the status of the package after submitting. """
+	# FIXME: THIS is a HOTFIX: Not recommended way. The hook is for 'on_change'
 	if doc.status != 'Paid':
 		return
 
