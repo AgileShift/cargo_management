@@ -77,28 +77,28 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 		frm.clear_table('cargo_shipment_receipt_lines');
 
 		frappe.call({
-			method: 'cargo_management.shipment_management.utils.get_packages_and_wr_in_cargo_shipment',
+			method: 'cargo_management.shipment_management.utils.get_parcels_and_wr_in_cargo_shipment',
 			type: 'GET',
 			args: {cargo_shipment: frm.doc.cargo_shipment},
 			freeze: true,
-			freeze_message: __('Adding Packages...'),
+			freeze_message: __('Adding Parcels...'),
 		}).then(r => {
 
-			r.message.packages.forEach(package_doc => {
+			r.message.parcels.forEach(parcel => {
 				frm.add_child('cargo_shipment_receipt_lines', {
-					'content': package_doc.customer_description,
-					// 'item_code': package_doc.item_code, TODO: This is not working, because the package can have more than once item code
+					'content': parcel.customer_description,
+					// 'item_code': parcel.item_code, TODO: This is not working, because the package can have more than once item code
 
-					'customer': package_doc.customer,
-					'customer_name': package_doc.customer_name,
+					'customer': parcel.customer,
+					'customer_name': parcel.customer_name,
 
-					'package': package_doc.name,
-					'package_2': package_doc.tracking_number,
-					'carrier_est_weight': package_doc.carrier_est_weight,
+					'package': parcel.name,
+					'package_2': parcel.tracking_number,
+					'carrier_est_weight': parcel.carrier_est_weight,
 
-					'assisted_purchase': package_doc.assisted_purchase,
-					'transportation': package_doc.transportation,
-					'shipper': package_doc.shipper,
+					'assisted_purchase': parcel.assisted_purchase,
+					'transportation': parcel.transportation,
+					'shipper': parcel.shipper,
 				});
 			});
 

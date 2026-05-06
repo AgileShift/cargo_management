@@ -2,8 +2,8 @@ import frappe
 
 
 @frappe.whitelist(methods='GET')
-def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
-	""" Get all packages and warehouse receipts connected to a cargo shipment. """
+def get_parcels_and_wr_in_cargo_shipment(cargo_shipment: str):
+	""" Get all parcels and warehouse receipts connected to a cargo shipment. """
 
 	# TODO: Delete: wrs and warehouse_receipts in sql
 	# wrs = frappe.get_all('Cargo Shipment Line', fields='warehouse_receipt', filters={'parent': cargo_shipment}, order_by='idx', pluck='warehouse_receipt')
@@ -11,7 +11,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 	# TODO: WORKING: OPTIMIZE FULL
 	via_sql = "CONCAT('<p>Via: ', IF(p.transportation = 'Air', 'Aereo', 'Maritimo'), '</p>')"
 
-	packages = frappe.db.sql("""
+	parcels = frappe.db.sql("""
 		SELECT
 			p.name, p.tracking_number, p.customer, p.customer_name, p.carrier_est_weight, p.assisted_purchase, p.shipper, p.transportation,
 			CONCAT(
@@ -33,7 +33,7 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 			) AS customer_description
 		FROM tabParcel p
 			LEFT JOIN `tabParcel Content` pc ON pc.parent = p.name
-			INNER JOIN `tabCargo Shipment Line` csl ON csl.package = p.name
+			INNER JOIN `tabCargo Shipment Line` csl ON csl.parcel = p.name
 		WHERE csl.parent = %(cargo_shipment)s
 		GROUP BY p.name
 		ORDER BY p.customer_name
@@ -42,5 +42,5 @@ def get_packages_and_wr_in_cargo_shipment(cargo_shipment: str):
 	}, as_dict=True)
 
 	return {
-		'packages': packages
+		'parcels': parcels
 	}

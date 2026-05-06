@@ -29,4 +29,5 @@ class CargoShipmentReceiptLine(Document):
 		transportation: DF.Literal["Air", "Sea"]
 		warehouse_receipt: DF.Link | None
 	# end: auto-generated types
+
 	pass

@@ -22,10 +22,10 @@ def update_status(source_doc_name: str, new_status: str):
 
 @frappe.whitelist(methods='POST')
 def make_sales_invoice(doc):
-	# TODO: Que se guarde el invoice en cada uno, para que no se repita la creacion de cada factura, en cada intento
+	# TODO: Save Sales Invoice on each row, para que no se repita la creacion de cada factura, en cada intento
 	# TODO: Set customer if not set!
 
-	""" Create a sales invoice for each customer with items as packages. From Cargo Shipment Receipt """
+	""" Create a sales invoice for each customer with items as parcels. From Cargo Shipment Receipt """
 	doc = frappe.parse_json(doc)
 	cargo_shipment_receipt = frappe.get_doc('Cargo Shipment Receipt', doc.get('name'))
 
@@ -43,7 +43,6 @@ def make_sales_invoice(doc):
 
 		customers_to_invoice[item.customer].append(item)
 
-	# print('warning_messages')
 	# frappe.msgprint(msg=warning_messages, title=_('Warnings'), as_list=True, indicator='orange')
 
 	# if not customers_to_invoice:
