@@ -137,7 +137,7 @@
    "label": "Additional Data from Carrier"
   },
   {
-   "description": "Estimated delivery date provided by the carrier",
+   "description": "Estimated delivery date provided by the carrier (if available)",
    "fieldname": "carrier_est_delivery",
    "fieldtype": "Datetime",
    "label": "Carrier estimated delivery date"
@@ -155,7 +155,7 @@
   {
    "bold": 1,
    "depends_on": "eval: doc.carrier_est_weight > 0.00;",
-   "description": "Estimated weight of the package as measured by the carrier",
+   "description": "Estimated weight of the parcel as measured by the carrier (if available).",
    "fieldname": "carrier_est_weight",
    "fieldtype": "Float",
    "label": "Carrier estimated weight (in pounds)",
@@ -166,7 +166,7 @@
   {
    "bold": 1,
    "depends_on": "eval: !doc.__islocal;",
-   "description": "Current status of the package",
+   "description": "Current status of the parcel",
    "fieldname": "carrier_status",
    "fieldtype": "Select",
    "in_standard_filter": 1,
@@ -185,7 +185,7 @@
   },
   {
    "bold": 1,
-   "description": "The name of the person who signed for the package",
+   "description": "The name of the person who signed for the parcel",
    "fieldname": "signed_by",
    "fieldtype": "Data",
    "label": "Signed by",
@@ -266,7 +266,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "0",
-   "description": "Package was purchased using Shopping Assistance Service",
+   "description": "Parcel was purchased using Shopping Assistance Service",
    "fieldname": "assisted_purchase",
    "fieldtype": "Check",
    "in_preview": 1,
@@ -351,7 +351,7 @@
    "allow_in_quick_entry": 1,
    "bold": 1,
    "default": "0",
-   "description": "Package was sent to a Residential Address(Non Freight Forwarder)",
+   "description": "Parcel was sent to a Residential Address(Non Freight Forwarder)",
    "fieldname": "residential_address",
    "fieldtype": "Check",
    "in_preview": 1,
@@ -444,7 +444,7 @@
   {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment",
-   "link_fieldname": "package"
+   "link_fieldname": "parcel"
   },
   {
    "group": "Cargo Shipment",
@@ -462,7 +462,7 @@
    "link_fieldname": "package"
   }
  ],
- "modified": "2026-04-29 20:35:52.739244",
+ "modified": "2026-05-06 12:26:47.466959",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
