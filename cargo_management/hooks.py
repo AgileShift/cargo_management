@@ -47,9 +47,9 @@ doctype_js = {
 	# "Quotation": "public/js/doctype/quotation.js"  # TODO: WORKING HERE
 	"Sales Invoice": "public/js/doctype/sales_invoice.js"
 }
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+# doctype_list_js = {"doctype": "public/js/doctype_list.js"}
+# doctype_tree_js = {"doctype": "public/js/doctype_tree.js"}
+# doctype_calendar_js = {"doctype": "public/js/doctype_calendar.js"}
 
 # Svg Icons
 # ------------------
@@ -127,7 +127,7 @@ doctype_js = {
 # Permissions evaluated in scripted ways
 
 # permission_query_conditions = {
-# 	"Parcel": "cargo_management.parcel_management.doctype.parcel.events.get_permission_query_conditions",
+# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
 # has_permission = {
@@ -271,7 +271,7 @@ require_type_annotated_api_methods = True
 # List of apps whose translatable strings should be excluded from this app's translations.
 ignore_translatable_strings_from = ["frappe", "erpnext", "hrms"]
 
-# Extend Bootinfo
+# Extend bootinfo
 extend_bootinfo = "cargo_management.boot.boot_session"
 
 # Doctypes for Global Search
