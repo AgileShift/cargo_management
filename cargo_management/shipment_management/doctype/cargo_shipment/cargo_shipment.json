@@ -101,7 +101,7 @@
   },
   {
    "bold": 1,
-   "description": "Estimated gross weight (in pounds) of the packages provided by the warehouse (if available).",
+   "description": "Estimated gross weight (in pounds) of the parcels provided by the warehouse (if available).",
    "fieldname": "estimated_gross_weight_by_warehouse_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Warehouse (in pounds)",
@@ -110,7 +110,7 @@
   },
   {
    "bold": 1,
-   "description": "Estimated gross weight of the packages as measured by the carriers (if available).",
+   "description": "Estimated gross weight of the parcels as measured by the carriers (if available).",
    "fieldname": "estimated_gross_weight_by_carriers_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Carriers (in pounds)",
@@ -177,7 +177,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-05-06 12:17:11.306964",
+ "modified": "2026-05-08 09:25:15.022973",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

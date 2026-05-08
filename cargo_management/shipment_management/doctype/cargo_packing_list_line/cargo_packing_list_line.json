@@ -21,13 +21,13 @@
    "fieldname": "wr_reference",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "WR Reference"
+   "label": "Warehouse Receipt"
   },
   {
    "fieldname": "package",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Package"
+   "label": "Parcel"
   },
   {
    "columns": 2,
@@ -38,7 +38,7 @@
   },
   {
    "columns": 2,
-   "description": "Package description provided by the warehouse (if available).",
+   "description": "Parcel description provided by the warehouse (if available).",
    "fieldname": "warehouse_description",
    "fieldtype": "Small Text",
    "in_list_view": 1,
@@ -63,7 +63,7 @@
   },
   {
    "columns": 2,
-   "description": "Name on the package label.",
+   "description": "Name on the parcel label.",
    "fieldname": "consignee",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -72,12 +72,14 @@
  ],
  "istable": 1,
  "links": [],
- "modified": "2021-08-31 13:33:31.315397",
+ "modified": "2026-05-08 09:26:59.536222",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Packing List Line",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }
