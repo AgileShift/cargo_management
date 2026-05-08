@@ -1,5 +1,5 @@
 import frappe
-from cargo_management.utils import get_list_from_child_table
+from cargo_management.utils import pluck_child_field
 from frappe.model.document import Document
 
 
@@ -33,17 +33,18 @@ class CargoShipment(Document):
 
 		# TODO: Validate if any problem!
 		frappe.db.sql("""
-					  UPDATE tabParcel
-		              SET cargo_shipment = %(cs_name)s
-		              WHERE `name` IN %(parcels)s
-			            AND COALESCE(cargo_shipment, '') != %(cs_name)s
-		              """, {
-						  'cs_name': self.name,
-						  'parcels': get_list_from_child_table(self.cargo_shipment_lines,
-			                                                   'parcel')
-					  })
+			UPDATE tabParcel
+			SET cargo_shipment = %(cs_name)s
+			WHERE `name` IN %(parcels)s
+			AND COALESCE(cargo_shipment, '') != %(cs_name)s
+			""", {
+				'cs_name': self.name,
+				'parcels': pluck_child_field(self.cargo_shipment_lines, 'parcel')
+			}
+		)
 
-		wrs_in_cs = get_list_from_child_table(self.cargo_shipment_lines, 'warehouse_receipt')
+		wrs_in_cs = pluck_child_field(self.cargo_shipment_lines, 'warehouse_receipt')
+
 		if wrs_in_cs:  # If empty we don't touch the DB  # FIXME: Performance?
 			pass  # TODO: THis is for???
 
@@ -58,8 +59,7 @@ class CargoShipment(Document):
 		# TODO: Finish
 		if self.status != new_status and \
 			(self.status == 'Awaiting Departure' and new_status == 'In Transit') or \
-			(self.status in ['Awaiting Departure',
-			                 'In Transit'] and new_status == 'Sorting') or \
+			(self.status in ['Awaiting Departure', 'In Transit'] and new_status == 'Sorting') or \
 			(self.status == 'Sorting' and new_status == 'Finished'):
 			self.status = new_status
 			return True

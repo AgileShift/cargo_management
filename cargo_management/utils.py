@@ -1,9 +1,8 @@
 import frappe
 
 
-def get_list_from_child_table(child_lines: list, field: str):
-	""" This takes a List of Dicts [{}] and return a List of Uniques values. """
-	return list(set(child_line.get(field) for child_line in child_lines if child_line.get(field)))  # FIXME: Performance?
+def pluck_child_field(child_rows: list | None, fieldname: str) -> list[str]:
+	return [value for row in child_rows or [] if (value := row.get(fieldname))]
 
 
 # https://github.com/frappe/frappe/pull/23414
@@ -14,7 +13,7 @@ def update_status_in_bulk(docs_to_update: dict, new_status: str = None, msg_titl
 	@param docs_to_update: {'Doctype': [names] } or { 'Doctype': {'doc_names': [names], 'new_status': 'string' } }
 	@param new_status: str. To be used in Doctype where new status was not explicitly declared in docs_to_update dict
 	@param msg_title: str. Title for the dialog
-	@param mute_emails: bool. This activates or deactivates notifications on backend. True if not sent
+	@param mute_emails: bool. This activates or deactivates notifications on the backend. True if not sent
 	"""
 	message, iter_doc = [], 0  # For Gathering Message, counter of current iter of all doc_names
 	total_doc_names = sum(len(docs) if type(docs) is list else len(docs['doc_names']) for docs in docs_to_update.values())

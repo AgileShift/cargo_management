@@ -2,18 +2,17 @@ import './controls/transportation_multicheck';
 import './utils/parcel_quick_entry';
 import './controls/overrides';
 
-frappe.provide('cargo_management');
+const cargo_management = frappe.provide('cargo_management');
 
-cargo_management = {
+Object.assign(cargo_management, {
 	TRANSPORTATIONS: {
 		'Sea': {icon: 'ship', color: 'blue'},
 		'Air': {icon: 'plane', color: 'red'}
 	},
 
-	// With this we can handle all our App Status Indicator Colors | Unused: light-blue
 	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
 	get_indicator: (status) => [__(status), {
-		'Open': 'blue',
+		'Open': 'light-blue',
 
 		'Awaiting Receipt': 'blue',
 		'Awaiting Confirmation': 'orange',
@@ -39,18 +38,16 @@ cargo_management = {
 		if (!tracking_number || tracking_number.length <= 6)
 			return response; // If data is not returned, fields will be erased. Affected Views: List, Form and QuickEntry
 
-		// TODO: Add More Carriers: 'LY', 'LB', 'LW'
-		// TODO: AQ are china Post, LW are USPS => Check if new need to added
-		Object.entries(frappe.boot['carriers']).find(([carrier, {regex}]) => {
+		Object.entries(frappe.boot?.carriers || {}).some(([carrier, {regex}]) => {
 			if (!regex) return false;
 			const match = tracking_number.match(regex);
 
+			if (!match) return false;
+
 			// TODO: Create a Multiselect Control for Carriers
-			if (match) {
-				console.log(match);
-				Object.assign(response, {carrier, search_term: match[1] || match[2] || match[3] || tracking_number}); // If a captured group exist add it
-				return true;
-			}
+			Object.assign(response, {carrier, search_term: match[1] || match[2] || match[3] || tracking_number}); // If a captured group exist add it
+
+			return true;
 		});
 
 		return response; // If no match is found, default values will be returned.
@@ -114,7 +111,7 @@ cargo_management = {
 		return fields;
 	}
 
-};
+});
 // TODO 98: Working on Frappe Boot Info!
 // TODO: 135(Bracket) WORKING on TransportationMultiSelect Single Control
 // 127 -> 1 error, 5 warning, 2 warning, 8 typos - 29 October 2025
