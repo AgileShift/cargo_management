@@ -1,5 +1,5 @@
 import frappe
-from cargo_management.utils import get_list_from_child_table
+from cargo_management.utils import pluck_child_field
 from frappe.model.document import Document
 
 
@@ -37,30 +37,29 @@ class WarehouseReceipt(Document):
 			self.carrier_gross_weight += row.carrier_weight or 0.00
 
 	def on_update(self):
-		""" Add Warehouse Receipt Link to the Package. This allows to have mutual reference WR to Package. """
-		# FIXME: If Warehouse Receipt is deleted, remove link from Package
+		""" Add Warehouse Receipt Link to the Parcel """
+		# FIXME: If Warehouse Receipt is deleted, remove link from Parcel
 		# TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
+		# TODO: Change the warehouse_receipt field on Parcel only if it is different
 
-		# We only change the warehouse_receipt field if it is different from the current
-		parcels = get_list_from_child_table(self.warehouse_receipt_lines, 'parcel')
+		parcel_names = pluck_child_field(self.warehouse_receipt_lines, 'parcel')
 
-		if not parcels:
+		if not parcel_names:
 			return
 
-		# TODO: Improve
-		frappe.db.sql("""
-					  UPDATE tabParcel SET warehouse_receipt = %(wr_name)s
-					  WHERE name IN %(parcels)s AND COALESCE(warehouse_receipt, '') != %(wr_name)s
-		""", {
-			'wr_name': self.name,
-			'parcels': parcels
-		})
-
-	# TODO: Actually change the status after the parcel is validated and created. maybe at status change from draft to open?
+		parcel = frappe.qb.DocType('Parcel')
+		(
+			frappe.qb.update(parcel)
+			.set(parcel.warehouse_receipt, self.name)
+			.where(parcel.name.isin(parcel_names))
+			.where(
+				parcel.warehouse_receipt.isnull() | parcel.warehouse_receipt != self.name
+			)
+		).run()
 
 	def change_status(self, new_status):
 		""" Validates the current status of the warehouse receipt and change it if it's possible. """
-
+		# TODO: Change the status after the parcel is created and validated. maybe at status change from draft to open?
 		# TODO: Validate this when status is changed on Form-View or List-View
 
 		# TODO: FINISH
@@ -73,3 +72,4 @@ class WarehouseReceipt(Document):
 			return True
 
 		return False
+# 87 Working on the Link Motor

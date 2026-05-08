@@ -26,9 +26,6 @@ class WarehouseReceiptLine(Document):
 		width: DF.Float
 	# end: auto-generated types
 
-	pass
-
 	@property
-	def volumetric_weight(self):
+	def volume(self):
 		return self.length * self.width * self.height
-

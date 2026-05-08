@@ -16,7 +16,7 @@ class API17Track:
 
 	# FIXME: VALIDATE PLEASE
 	CARRIER_CODES: dict = {
-		'Amazon': 100143,  # Swiship it works =? DISABLE IT PLEASE
+		'Amazon': 100143,  # Swiship it works =? DISABLE IT, PLEASE
 		'FedEx': 100003,
 		'OnTrac': 100049,
 		'Cainiao': 190271,
