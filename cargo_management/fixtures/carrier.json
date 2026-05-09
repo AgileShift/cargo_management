@@ -3,36 +3,14 @@
   "api": "",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-27 13:27:43.371841",
-  "name": "Unknown",
-  "regex": "",
-  "regex_notes": "",
-  "tracking_urls": [
-   {
-    "label": "Parcels",
-    "url": "https://parcelsapp.com/en/tracking/"
-   },
-   {
-    "label": "17Track",
-    "url": "https://t.17track.net/en#nums="
-   },
-   {
-    "label": "EVEREST",
-    "url": "https://everest.cargotrack.net/m/track.asp?track="
-   }
-  ]
- },
- {
-  "api": "",
-  "docstatus": 0,
-  "doctype": "Carrier",
-  "modified": "2026-01-22 12:29:26.481970",
+  "modified": "2026-05-09 15:12:04.199018",
   "name": "Drop Off",
   "regex": null,
   "regex_notes": null,
   "tracking_urls": [
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -41,13 +19,14 @@
   "api": "",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-18 20:53:55.904246",
+  "modified": "2026-05-09 15:12:06.900557",
   "name": "Pick Up",
   "regex": null,
   "regex_notes": null,
   "tracking_urls": [
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -56,13 +35,14 @@
   "api": "",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:26:20.723367",
+  "modified": "2026-05-09 15:03:58.622657",
   "name": "Amazon",
   "regex": "^TBA",
   "regex_notes": "Amazon tracking numbers usually start with TBA.",
   "tracking_urls": [
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -71,17 +51,19 @@
   "api": "EasyPost",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:46:02.512970",
+  "modified": "2026-05-09 15:12:14.047119",
   "name": "USPS",
   "regex": "^9(?:.{21}|.{25})$|^420.{5}(9(?:.{21}|.{25}))$",
   "regex_notes": "USPS tracking numbers may start with 9: **9** 400111108296364807659  \nor  \nincludes ZIP code prefix as first 8 digits(420xxxxx): 42033165 **9** 274890983426386918697",
   "tracking_urls": [
    {
     "label": "USPS",
+    "type": "Official",
     "url": "https://tools.usps.com/go/TrackConfirmAction?tLabels="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -90,17 +72,19 @@
   "api": "EasyPost",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:24:32.979690",
+  "modified": "2026-05-09 15:04:06.554887",
   "name": "UPS",
   "regex": "^1Z",
   "regex_notes": "UPS tracking numbers usually start with 1Z.",
   "tracking_urls": [
    {
     "label": "UPS",
+    "type": "Official",
     "url": "https://www.ups.com/track?tracknum="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -109,17 +93,19 @@
   "api": "EasyPost",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:36:32.943178",
+  "modified": "2026-05-09 15:12:18.379928",
   "name": "DHL",
   "regex": "^.{10}$",
   "regex_notes": "DHL tracking numbers are typically 10 characters long.",
   "tracking_urls": [
    {
     "label": "DHL",
+    "type": "Official",
     "url": "https://www.dhl.com/en/express/tracking.shtml?AWB="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -128,17 +114,19 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-27 13:27:33.076230",
+  "modified": "2026-05-09 15:12:23.835589",
   "name": "FedEx",
   "regex": "^.{12}$|^.{22}([1-9].{11})$|^612.{17}$|^92(612.{17})$|^420.{5}92(612.{17})$",
   "regex_notes": "FedEx tracking numbers are often 12 digits or embedded in longer strings.\n* 9622001900005105596800 **5**49425980480 (Last 12 digits is tracking)\n* **612**90982157320543198: Starts with 612 Is a FedEx Tracking\n\nAlso If Starts with: 92612 or with zipcode(420xxxxx) can be handled by FedEx or USPS. \n\n* **92612**90980949456651012\n* 42033166**926129**0980949456651012\n\nsearch_term needs to starts at 612.",
   "tracking_urls": [
    {
     "label": "FedEx",
+    "type": "Official",
     "url": "https://www.fedex.com/apps/fedextrack/?trackingnumber="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -147,17 +135,19 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:38:11.433581",
+  "modified": "2026-05-09 15:12:27.663901",
   "name": "OnTrac",
   "regex": "^1LS|^D100",
   "regex_notes": "OnTrac(Formerly LaserShip) tracking numbers usually start with 1LS or D100.\n\n",
   "tracking_urls": [
    {
     "label": "OnTrac",
+    "type": "Official",
     "url": "https://www.ontrac.com/tracking/?number="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -166,25 +156,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-27 13:33:22.193155",
+  "modified": "2026-05-09 15:12:34.760829",
   "name": "Cainiao",
   "regex": "^LP00|^CNUSUP000|^CNG00",
   "regex_notes": "Cainiao can overlap with Yanwen and SunYou tracking numbers.",
   "tracking_urls": [
    {
     "label": "Cainiao",
+    "type": "Official",
     "url": "https://global.cainiao.com/detail.htm?mailNoList="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -193,25 +187,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-27 18:40:21.362702",
+  "modified": "2026-05-09 15:12:46.144919",
   "name": "SpeedX",
   "regex": "^SPX|^SPXMIA|^SPX[0-9]EG",
   "regex_notes": "SpeedX tracking numbers usually start with SPX.",
   "tracking_urls": [
    {
     "label": "SpeedX",
+    "type": "Official",
     "url": "https://tracking.speedx.io/"
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -220,25 +218,34 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:25:40.180849",
+  "modified": "2026-05-09 15:14:15.070939",
   "name": "SF Express",
   "regex": "^SF",
   "regex_notes": "SF Express tracking numbers usually start with SF.",
   "tracking_urls": [
    {
     "label": "SF Express",
+    "type": "Official",
     "url": "https://www.sf-express.com/cn/en/dynamic_function/waybill/#search/bill-number/"
    },
    {
+    "label": "SF Express USA",
+    "type": "Alternative",
+    "url": "https://www.sf-international.com/us/en/support/querySupport/waybill?No="
+   },
+   {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -247,25 +254,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:39:32.643255",
+  "modified": "2026-05-09 15:14:25.797417",
   "name": "Yanwen",
   "regex": "^ALS00|^S000|^UY|^YWMIA0100",
   "regex_notes": "Some Yanwen shipments are delivered by USPS.\n\nUY numbers usually end with CZ.",
   "tracking_urls": [
    {
     "label": "Yanwen",
+    "type": "Official",
     "url": "https://www.yanwenexpress.com/tracking.html?label="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -274,25 +285,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:37:29.366460",
+  "modified": "2026-05-09 15:14:33.854527",
   "name": "YunExpress",
   "regex": "^YT|^YU00",
   "regex_notes": "Some shipments are handed over to USPS or OnTrac for final delivery.",
   "tracking_urls": [
    {
     "label": "YunExpress",
+    "type": "Official",
     "url": "https://www.yuntrack.com/parcelTracking?id="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -301,25 +316,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-25 20:25:20.834253",
+  "modified": "2026-05-09 15:14:41.354853",
   "name": "SunYou",
   "regex": "^SY",
   "regex_notes": "Tracking numbers usually start with:\n* SYUS\n* SYAE\n* SYBA",
   "tracking_urls": [
    {
     "label": "SunYou",
+    "type": "Official",
     "url": "https://www.sypost.net/search?orderNo="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -328,25 +347,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-29 09:54:40.492090",
+  "modified": "2026-05-09 15:14:49.849501",
   "name": "Veho",
   "regex": "^1V",
   "regex_notes": "Tracking numbers usually start with 1V.\n\nLength validation may be required.",
   "tracking_urls": [
    {
     "label": "Veho",
+    "type": "Official",
     "url": "https://track.shipveho.com/#/trackingId/"
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -355,25 +378,29 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-27 13:54:38.855342",
+  "modified": "2026-05-09 14:58:55.077211",
   "name": "GOFO",
   "regex": "^GFUS010",
   "regex_notes": "GOFO Express tracking numbers start with GFUS010.",
   "tracking_urls": [
    {
     "label": "GOFO",
+    "type": "Official",
     "url": "https://www.gofo.com/us/track?searchID="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -382,29 +409,34 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-29 09:54:43.407431",
+  "modified": "2026-05-09 15:03:30.278670",
   "name": "UniUni",
   "regex": "^UUS|^UUSC0000",
   "regex_notes": "Some YunExpress and Cainiao shipments are delivered by UniUni\n",
   "tracking_urls": [
    {
     "label": "UniUni",
+    "type": "Official",
     "url": "https://www.uniuni.com/tracking/?no="
    },
    {
     "label": "Cainiao",
+    "type": "Alternative",
     "url": "https://global.cainiao.com/detail.htm?mailNoList="
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -413,21 +445,24 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-27 14:00:08.461495",
+  "modified": "2026-05-09 15:03:44.360478",
   "name": "SwiftX",
   "regex": "^SWX",
   "regex_notes": null,
   "tracking_urls": [
    {
     "label": "SwiftX",
+    "type": "Official",
     "url": "https://swiftx-express.com/track?trackingNumber="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]
@@ -436,25 +471,55 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-01-29 09:53:51.278795",
+  "modified": "2026-05-09 14:45:49.105832",
   "name": "ShipGlobal India",
   "regex": "^SG",
   "regex_notes": null,
   "tracking_urls": [
    {
     "label": "ShipGlobal.in",
+    "type": "Official",
     "url": "https://shipglobal.in/tracking/?awb="
    },
    {
     "label": "Parcels",
+    "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
    },
    {
     "label": "17Track",
+    "type": "Fallback",
     "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",
+    "type": "Internal",
+    "url": "https://everest.cargotrack.net/m/track.asp?track="
+   }
+  ]
+ },
+ {
+  "api": "",
+  "docstatus": 0,
+  "doctype": "Carrier",
+  "modified": "2026-05-09 15:03:53.496980",
+  "name": "Unknown",
+  "regex": "",
+  "regex_notes": "",
+  "tracking_urls": [
+   {
+    "label": "Parcels",
+    "type": "Fallback",
+    "url": "https://parcelsapp.com/en/tracking/"
+   },
+   {
+    "label": "17Track",
+    "type": "Fallback",
+    "url": "https://t.17track.net/en#nums="
+   },
+   {
+    "label": "EVEREST",
+    "type": "Internal",
     "url": "https://everest.cargotrack.net/m/track.asp?track="
    }
   ]

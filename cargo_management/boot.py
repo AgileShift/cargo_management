@@ -11,16 +11,18 @@ def boot_session(bootinfo):
 		frappe.qb.from_(carrier)
 		.left_join(carrier_urls)
 		.on(carrier.name == carrier_urls.parent)
-		.select(carrier.name, carrier.api, carrier.regex, carrier_urls.label, carrier_urls.url)
-		.run(as_dict=True)
-	)
+		.select(
+			carrier.name, carrier.api, carrier.regex,
+			carrier_urls.idx, carrier_urls.label, carrier_urls.url, carrier_urls.type
+		).orderby(carrier_urls.idx)
+	).run(as_dict=True)
 
 	carriers = {}
 	for carrier in query:
-		name = carrier['name']
+		carrier_name = carrier['name']
 
 		carriers.setdefault(
-			name,
+			carrier_name,
 			{
 				'api': carrier['api'],
 				'regex': carrier['regex'],
@@ -29,9 +31,11 @@ def boot_session(bootinfo):
 		)
 
 		if url := carrier.get('url'):  # Carrier Tracking URL
-			carriers[name]['tracking_urls'].append({
+			carriers[carrier_name]['tracking_urls'].append({
+				'idx': carrier.get('idx'),
 				'label': carrier.get('label'),
-				'url': url
+				'url': url,
+				'type': carrier.get('type')
 			})
 
 	bootinfo.carriers = carriers

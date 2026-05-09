@@ -14,6 +14,7 @@ class CarrierTrackingURL(Document):
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
+		type: DF.Literal["Official", "Alternative", "Fallback", "Internal"]
 		url: DF.Data
 	# end: auto-generated types
 

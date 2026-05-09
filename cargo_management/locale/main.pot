@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: dev@gruporeal.org\n"
-"POT-Creation-Date: 2026-05-08 09:27-0615\n"
-"PO-Revision-Date: 2026-05-08 09:27-0615\n"
+"POT-Creation-Date: 2026-05-09 15:16-0615\n"
+"PO-Revision-Date: 2026-05-09 15:16-0615\n"
 "Last-Translator: dev@gruporeal.org\n"
 "Language-Team: dev@gruporeal.org\n"
 "MIME-Version: 1.0\n"
@@ -122,6 +122,11 @@ msgstr ""
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Air"
+msgstr ""
+
+#. Option for the 'Type' (Select) field in DocType 'Carrier Tracking URL'
+#: cargo_management/cargo_core/doctype/carrier_tracking_url/carrier_tracking_url.json
+msgid "Alternative"
 msgstr ""
 
 #. Label of the arrival_date (Date) field in DocType 'Cargo Shipment'
@@ -559,6 +564,11 @@ msgstr ""
 msgid "External API used for automated tracking updates (if applicable)"
 msgstr ""
 
+#. Option for the 'Type' (Select) field in DocType 'Carrier Tracking URL'
+#: cargo_management/cargo_core/doctype/carrier_tracking_url/carrier_tracking_url.json
+msgid "Fallback"
+msgstr ""
+
 #. Option for the 'Status' (Select) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "For Delivery or Pickup"
@@ -717,6 +727,11 @@ msgstr ""
 
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:66
 msgid "Now in Transit"
+msgstr ""
+
+#. Option for the 'Type' (Select) field in DocType 'Carrier Tracking URL'
+#: cargo_management/cargo_core/doctype/carrier_tracking_url/carrier_tracking_url.json
+msgid "Official"
 msgstr ""
 
 #. Label of a quick_list in the Warehouse Operations Workspace

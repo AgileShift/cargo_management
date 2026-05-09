@@ -6,7 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "label",
-  "url"
+  "url",
+  "type"
  ],
  "fields": [
   {
@@ -21,18 +22,29 @@
   },
   {
    "bold": 1,
+   "columns": 4,
    "fieldname": "url",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "URL",
    "options": "URL",
    "reqd": 1
+  },
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Official\nAlternative\nFallback\nInternal",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "istable": 1,
  "links": [],
- "modified": "2026-01-18 23:26:12.644463",
+ "modified": "2026-05-09 14:45:43.109112",
  "modified_by": "Administrator",
  "module": "Cargo Core",
  "name": "Carrier Tracking URL",

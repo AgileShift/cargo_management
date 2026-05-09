@@ -97,10 +97,11 @@ Object.assign(cargo_management, {
 		const urls = frappe.boot['carriers'][carrier]['tracking_urls'];
 		let fields = [{fieldtype: 'Section Break', label: `${label} (${carrier}): ${tracking_number}`}];
 
-		urls.forEach((url, i) => {
+		urls.forEach((tracking_url, i) => {
+			let input_class = tracking_url.type === 'Official' ?  'btn-success' : tracking_url.type === 'Internal' ?  'btn-info' :  'btn-default';
 			fields.push({
-				fieldtype: 'Button', label: url.label, input_class: "btn-block btn-primary",  // FIXME: btn-default
-				click: () => window.open(url.url + tracking_number)
+				fieldtype: 'Button', label: tracking_url.label, input_class: `btn-block ${input_class}`,  // FIXME:  btn-primary
+				click: () => window.open(tracking_url.url + tracking_number)
 			});
 
 			if (i < urls.length - 1) {
