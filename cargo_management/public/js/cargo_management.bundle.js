@@ -98,7 +98,7 @@ Object.assign(cargo_management, {
 		let fields = [{fieldtype: 'Section Break', label: `${label} (${carrier}): ${tracking_number}`}];
 
 		urls.forEach((tracking_url, i) => {
-			let input_class = tracking_url.type === 'Official' ?  'btn-success' : tracking_url.type === 'Internal' ?  'btn-info' :  'btn-default';
+			let input_class = tracking_url.type === 'Official' ?  'btn-primary' : tracking_url.type === 'Internal' ?  'btn-danger' :  'btn-info';
 			fields.push({
 				fieldtype: 'Button', label: tracking_url.label, input_class: `btn-block ${input_class}`,  // FIXME:  btn-primary
 				click: () => window.open(tracking_url.url + tracking_number)
