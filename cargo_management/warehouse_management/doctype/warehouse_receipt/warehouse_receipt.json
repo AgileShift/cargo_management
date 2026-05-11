@@ -15,15 +15,23 @@
   "date",
   "column_break_hnxe",
   "status",
+  "type",
   "sb_0",
   "warehouse_receipt_lines",
   "section_totals",
+  "column_break_wzhu",
   "gross_weight",
   "total_volume",
   "column_break_16",
   "manual_weight",
   "column_break_14",
-  "carrier_gross_weight"
+  "carrier_gross_weight",
+  "section_break_xwxs",
+  "length",
+  "column_break_teki",
+  "width",
+  "column_break_grgn",
+  "height"
  ],
  "fields": [
   {
@@ -44,6 +52,7 @@
   },
   {
    "bold": 1,
+   "default": "Open",
    "depends_on": "eval: !doc.__islocal",
    "fieldname": "status",
    "fieldtype": "Select",
@@ -51,10 +60,12 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Status",
+   "no_copy": 1,
    "options": "Open\nAwaiting Departure\nIn Transit\nSorting\nFinished",
    "read_only": 1,
    "reqd": 1,
-   "search_index": 1
+   "search_index": 1,
+   "sticky": 1
   },
   {
    "fieldname": "sb_0",
@@ -144,6 +155,46 @@
    "fieldname": "manual_weight",
    "fieldtype": "Check",
    "label": "Manual Weight"
+  },
+  {
+   "fieldname": "section_break_xwxs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "label": "Length (in)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_teki",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "label": "Width (in)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_grgn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "label": "Height (in)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_wzhu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nBox\nEH Container\nParcel Bag(Sack)"
   }
  ],
  "links": [
@@ -151,9 +202,15 @@
    "group": "Parcel",
    "link_doctype": "Parcel",
    "link_fieldname": "warehouse_receipt"
+  },
+  {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment",
+   "link_fieldname": "warehouse_receipt",
+   "parent_doctype": "Cargo Shipment"
   }
  ],
- "modified": "2026-05-06 11:59:22.420519",
+ "modified": "2026-05-11 13:31:05.061757",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
@@ -207,6 +264,7 @@
  "row_format": "Dynamic",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
+ "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

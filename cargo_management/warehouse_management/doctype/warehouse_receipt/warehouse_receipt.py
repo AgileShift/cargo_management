@@ -16,12 +16,16 @@ class WarehouseReceipt(Document):
 		carrier_gross_weight: DF.Float
 		date: DF.Date
 		gross_weight: DF.Float
+		height: DF.Float
+		length: DF.Float
 		manual_weight: DF.Check
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
 		total_volume: DF.Float
 		transportation: DF.Literal["", "Sea", "Air"]
+		type: DF.Literal["", "Box", "EH Container", "Parcel Bag(Sack)"]
 		warehouse: DF.Link
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
+		width: DF.Float
 	# end: auto-generated types
 
 	def validate(self):

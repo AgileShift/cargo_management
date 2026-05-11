@@ -10,12 +10,16 @@ class CargoShipmentWarehouse(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		height: DF.Float
+		length: DF.Float
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
-		reference: DF.Data
+		reference: DF.Data | None
+		type: DF.Data | None
 		warehouse_receipt: DF.Link
 		weight: DF.Float
+		width: DF.Float
 	# end: auto-generated types
 
 	pass

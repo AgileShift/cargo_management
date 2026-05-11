@@ -8,7 +8,11 @@
  "field_order": [
   "warehouse_receipt",
   "reference",
-  "weight"
+  "length",
+  "width",
+  "height",
+  "weight",
+  "type"
  ],
  "fields": [
   {
@@ -16,8 +20,7 @@
    "fieldname": "reference",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Reference",
-   "reqd": 1
+   "label": "Reference"
   },
   {
    "bold": 1,
@@ -28,6 +31,7 @@
    "in_list_view": 1,
    "label": "Weight (lb)",
    "non_negative": 1,
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -39,11 +43,47 @@
    "label": "Warehouse Receipt",
    "options": "Warehouse Receipt",
    "reqd": 1
+  },
+  {
+   "fetch_from": "warehouse_receipt.length",
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Length (in)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "warehouse_receipt.type",
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "warehouse_receipt.width",
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Width (in)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "warehouse_receipt.height",
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Height (in)",
+   "precision": "2",
+   "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2026-05-06 12:05:42.266526",
+ "modified": "2026-05-11 13:34:17.470074",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Warehouse",
