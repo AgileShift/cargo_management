@@ -20,18 +20,17 @@
   "warehouse_receipt_lines",
   "section_totals",
   "column_break_wzhu",
-  "gross_weight",
-  "total_volume",
-  "column_break_16",
-  "manual_weight",
-  "column_break_14",
-  "carrier_gross_weight",
-  "section_break_xwxs",
   "length",
   "column_break_teki",
   "width",
   "column_break_grgn",
-  "height"
+  "height",
+  "column_break_16",
+  "manual_weight",
+  "gross_weight",
+  "total_volume",
+  "column_break_14",
+  "carrier_gross_weight"
  ],
  "fields": [
   {
@@ -157,10 +156,6 @@
    "label": "Manual Weight"
   },
   {
-   "fieldname": "section_break_xwxs",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "length",
    "fieldtype": "Float",
    "label": "Length (in)",
@@ -210,7 +205,7 @@
    "parent_doctype": "Cargo Shipment"
   }
  ],
- "modified": "2026-05-11 13:31:05.061757",
+ "modified": "2026-05-11 13:57:03.369374",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
@@ -264,7 +259,7 @@
  "row_format": "Dynamic",
  "show_name_in_global_search": 1,
  "show_preview_popup": 1,
- "sort_field": "creation",
+ "sort_field": "date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1
