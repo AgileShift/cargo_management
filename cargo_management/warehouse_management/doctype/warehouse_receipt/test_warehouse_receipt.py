@@ -1,5 +1,17 @@
-from frappe.tests.utils import FrappeTestCase
+from frappe.tests import IntegrationTestCase
 
 
-class TestWarehouseReceipt(FrappeTestCase):
+# On IntegrationTestCase, the doctype test records and all
+# link-field test record dependencies are recursively loaded
+# Use these module variables to add/remove to/from that list
+EXTRA_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
+IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
+
+
+class IntegrationTestWarehouseReceipt(IntegrationTestCase):
+	"""
+	Integration tests for WarehouseReceipt.
+	Use this class for testing interactions between multiple components.
+	"""
+
 	pass
