@@ -1,24 +1,8 @@
 ## ERPNext Cargo Management
 
 ---
-* WIP  
-bench export-fixtures --app cargo_management
-
-TODO: WORK HEAVILY ON THE TRANSLATIONS
-bench generate-pot-file --app cargo_management
-bench update-po-files --app cargo_management --locale es
-
-TODO: https://github.com/frappe/frappe/pull/36846
-
-Personalize Mobile View: https://github.com/frappe/frappe/pull/36759
-
-URGENT ADD TO API: https://github.com/frappe/frappe/pull/36744
-
-### TODO: Migrate Fixtures to Hidden App → Private repo for business-critical data
-
-Update readme con: logistic engine y SLAs
-
-# TODO: https://docs.easypost.com/docs/trackers
+# WIP:  
+* https://github.com/orgs/AgileShift/projects/1/
 ---
 
 **ERPNext Cargo Management is a fully-fledged ERPNext solution designed for freight forwarding companies.**
@@ -35,7 +19,7 @@ It leverages core functionalities from **ERPNext**, such as **Accounting, Stock,
 - **Cargo Core**: TODO: But will have the new engines :D 
 - **Parcel Management**: Manages the parcels, integrates tracking APIs and handles notifications.
 - **Warehouse Management:** Handles the receipt of parcels in warehouses.
-- **Shipment Management:** Manages shipments and receipts, also generates packing lists for each shipment.
+- **Shipment Management:** Manages shipments and receipts.
 - **WIP Refactor Name: Selling Management:** Customizes ERPNext modules for invoicing parcels and managing customer import orders.
 - **Purchase Management:** TODO
 - **Support Management**: Customizes ERPNext modules for customer support related to parcels and orders.
@@ -52,7 +36,7 @@ It leverages core functionalities from **ERPNext**, such as **Accounting, Stock,
 - [Frappe Nextcloud](https://github.com/AgileShift/frappe_nextcloud) – WORK on Progress
 
 ### List of Carriers Currently Supported:
-Last checked: 8 May 2026
+Last checked: 13 May 2026
 
 | Carrier     |    EasyPost    |  17Track  |
 |:------------|:--------------:|:---------:|
@@ -89,10 +73,6 @@ Last checked: 8 May 2026
 2. Set the **API Key**: `$ bench set-config 17track_api_key API_KEY`
 3. Set up the **Webhook URL** on 17Track: `{HOST}/api/method/cargo_management.parcel_management.doctype.parcel.api.17track_api.17track_webhook`
 
-# TODO: WORKING
-https://github.com/frappe/frappe/wiki/Writing-an-IntegrationTestCase-in-Frappe:-A-Step%E2%80%90by%E2%80%90Step-Guide
-
-
 ### Parcel Flow → WORKING ON
 1. **Parcels** are created and can be related to a specific customer
    1. Content of the parcel can be added and its related Item for invoice Purposes.
@@ -123,26 +103,6 @@ https://github.com/frappe/frappe/wiki/Writing-an-IntegrationTestCase-in-Frappe:-
 - The customizations allow us to:
   - Invoice a **Customer** for the Logistic Services and Products in Stock offered.
   - Link the **Sales Invoice** with a Parcel and update its statuses.
-
-
-#### Helpers
-- **Cargo Packing List**: is a "Packing List" for the **Cargo Shipment**:
-  1. Gets all the content declared by the **Customer** and the content declared by the **Warehouse** of the parcels in a **Cargo Shipment**
-  2. It allows modifying the content and amount declared only for Print.
-  3. WORKING
-
-## Work in progress. But it's stable for usage
-- WORKING
-  1. Packing Slip for customs:
-  2. Fetching data of prices and quotations from parcels to Cargo Shipment Receipt: WORKING
-- FUTURE:
-  1. Setting data of prices in CSR to Sales Invoice
-  2. Working in the Sales Orders!
-
-
-##### Code-related TODO:
-1. Migrate SQL to QueryBuilder? using Pypika?
-
 
 #### Contributing
 

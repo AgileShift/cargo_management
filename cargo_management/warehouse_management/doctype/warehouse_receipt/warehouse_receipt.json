@@ -205,7 +205,7 @@
    "parent_doctype": "Cargo Shipment"
   }
  ],
- "modified": "2026-05-11 13:57:03.369374",
+ "modified": "2026-05-12 11:42:44.376426",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
