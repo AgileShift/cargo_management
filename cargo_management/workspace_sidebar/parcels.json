@@ -103,15 +103,6 @@
   {
    "child": 0,
    "collapsible": 1,
-   "indent": 0,
-   "keep_closed": 0,
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Spacer"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
    "icon": "sell",
    "indent": 1,
    "keep_closed": 0,
@@ -206,50 +197,6 @@
   {
    "child": 0,
    "collapsible": 1,
-   "indent": 0,
-   "keep_closed": 0,
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Spacer"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "icon": "warehouse",
-   "indent": 1,
-   "keep_closed": 0,
-   "label": "Warehouse",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Section Break"
-  },
-  {
-   "child": 1,
-   "collapsible": 1,
-   "icon": "git-compare-arrows",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Warehouse Operations",
-   "link_to": "Warehouse Operations",
-   "link_type": "Workspace",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 1,
-   "collapsible": 1,
-   "icon": "arrow-right-from-line",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Warehouse Receipt",
-   "link_to": "Warehouse Receipt",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
    "icon": "waypoints",
    "indent": 1,
    "keep_closed": 0,
@@ -295,25 +242,39 @@
    "type": "Link"
   },
   {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "warehouse",
+   "indent": 1,
+   "keep_closed": 0,
+   "label": "Warehouse",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Section Break"
+  },
+  {
    "child": 1,
    "collapsible": 1,
-   "icon": "clipboard-list",
+   "icon": "git-compare-arrows",
    "indent": 0,
    "keep_closed": 0,
-   "label": "Cargo Packing List",
-   "link_to": "Cargo Packing List",
-   "link_type": "DocType",
+   "label": "Warehouse Operations",
+   "link_to": "Warehouse Operations",
+   "link_type": "Workspace",
    "show_arrow": 0,
    "type": "Link"
   },
   {
-   "child": 0,
+   "child": 1,
    "collapsible": 1,
+   "icon": "arrow-right-from-line",
    "indent": 0,
    "keep_closed": 0,
+   "label": "Warehouse Receipt",
+   "link_to": "Warehouse Receipt",
    "link_type": "DocType",
    "show_arrow": 0,
-   "type": "Spacer"
+   "type": "Link"
   },
   {
    "child": 0,
@@ -328,7 +289,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-02-02 14:59:28.800538",
+ "modified": "2026-05-13 14:00:06.486547",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcels",
