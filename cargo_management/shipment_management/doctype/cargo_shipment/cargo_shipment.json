@@ -15,7 +15,6 @@
   "column_break_2",
   "transportation",
   "status",
-  "mute_emails",
   "section_break_n2zav",
   "warehouse_lines",
   "section_break_rctv",
@@ -40,13 +39,6 @@
    "options": "Awaiting Departure\nIn Transit\nSorting\nFinished",
    "reqd": 1,
    "search_index": 1
-  },
-  {
-   "default": "1",
-   "fieldname": "mute_emails",
-   "fieldtype": "Check",
-   "label": "Don't Send Emails",
-   "print_hide": 1
   },
   {
    "bold": 1,
@@ -177,7 +169,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-05-08 09:25:15.022973",
+ "modified": "2026-05-14 11:49:10.468093",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

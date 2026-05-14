@@ -13,4 +13,4 @@ def update_status(source_doc_name: str, new_status: str, msg_title: str):
         'Cargo Shipment': [doc.name],
         'Warehouse Receipt': wrs_in_cs,
         'Parcel': parcels_in_cs
-    }, new_status=new_status, msg_title=msg_title, mute_emails=doc.mute_emails)  # todo: Work on msg_title
+    }, new_status=new_status, msg_title=msg_title)  # todo: Work on msg_title

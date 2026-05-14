@@ -18,15 +18,15 @@ def update_status(source_doc_name: str, new_status: str):
 		'Cargo Shipment': [doc.cargo_shipment],
 		'Warehouse Receipt': pluck_child_field(cargo_shipment.cargo_shipment_lines, 'warehouse_receipt'),
 		'Parcel': pluck_child_field(doc.cargo_shipment_receipt_lines, 'package')
-	}, new_status=new_status, msg_title=_('Marked as Sorting'), mute_emails=doc.mute_emails)
+	}, new_status=new_status, msg_title=_('Marked as Sorting'))
 
 
 @frappe.whitelist(methods='POST')
 def make_sales_invoice(doc):
+	""" Creates sales invoices for each customer with items as parcels. From Cargo Shipment Receipt """
+
 	# TODO: Save Sales Invoice on each row, para que no se repita la creacion de cada factura, en cada intento
 	# TODO: Set customer if not set!
-
-	""" Create a sales invoice for each customer with items as parcels. From Cargo Shipment Receipt """
 	doc = frappe.parse_json(doc)
 	cargo_shipment_receipt = frappe.get_doc('Cargo Shipment Receipt', doc.get('name'))
 
@@ -104,6 +104,6 @@ def make_sales_invoice(doc):
 		'Cargo Shipment': {'doc_names': [cargo_shipment_receipt.cargo_shipment], 'new_status': 'Finished'},
 		# 'Warehouse Receipt': {'doc_names': get_list_from_child_table(cargo_shipment_receipt.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'), 'new_status': 'Finished'},
 		'Parcel': pluck_child_field(doc.cargo_shipment_receipt_lines, 'package')
-	}, new_status='To Bill', msg_title=_('Updating Parcels'), mute_emails=doc.mute_emails)
+	}, new_status='To Bill', msg_title=_('Updating Parcels'))
 
 	return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table?

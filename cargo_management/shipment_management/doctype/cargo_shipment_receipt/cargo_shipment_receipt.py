@@ -16,7 +16,6 @@ class CargoShipmentReceipt(Document):
 		cargo_shipment_receipt_lines: DF.Table[CargoShipmentReceiptLine]
 		departure_date: DF.Date | None
 		gross_weight: DF.Float
-		mute_emails: DF.Check
 		status: DF.Literal["Awaiting Receipt", "Sorting", "Finished"]
 		transportation: DF.Literal["Sea", "Air"]
 	# end: auto-generated types

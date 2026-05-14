@@ -14,7 +14,6 @@
   "column_break_p4gz",
   "cargo_shipment",
   "status",
-  "mute_emails",
   "section_break_6",
   "cargo_shipment_receipt_lines",
   "gross_weight"
@@ -88,13 +87,6 @@
    "read_only": 1
   },
   {
-   "default": "1",
-   "fieldname": "mute_emails",
-   "fieldtype": "Check",
-   "label": "Don't Send Emails",
-   "print_hide": 1
-  },
-  {
    "fieldname": "c_column",
    "fieldtype": "Column Break"
   },
@@ -122,7 +114,7 @@
    "link_fieldname": "custom_cargo_shipment_receipt"
   }
  ],
- "modified": "2026-05-14 11:37:36.559704",
+ "modified": "2026-05-14 11:49:39.000130",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",
