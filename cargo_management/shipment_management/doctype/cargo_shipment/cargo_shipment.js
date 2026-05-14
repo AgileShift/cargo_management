@@ -1,14 +1,9 @@
 frappe.ui.form.on('Cargo Shipment', {
-	// TODO: Formatter for warehouse receipt item?
-
 	setup(frm) {
-		// TODO: Delete this on v16?
-		frm.page.sidebar.toggle(false); // Hide Sidebar to better focus on the doc
+		frm.page.sidebar.toggle(false); // Hide Sidebar
 
-		// TODO: add dot Indicator
-		//frm.set_indicator_formatter("parcel", function(doc) {
-		//	return 'orange';
-		//});
+		cargo_management.set_transportation_indicator(frm, 'warehouse_receipt');
+		cargo_management.set_transportation_indicator(frm, 'parcel');
 	},
 
 	onload(frm) {

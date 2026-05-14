@@ -1,5 +1,6 @@
 import './controls/transportation_multicheck';
 import './utils/parcel_quick_entry';
+import './utils/indicators';
 import './controls/overrides';
 
 const cargo_management = frappe.provide('cargo_management');

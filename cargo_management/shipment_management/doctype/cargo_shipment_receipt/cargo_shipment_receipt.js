@@ -1,9 +1,10 @@
 frappe.ui.form.on('Cargo Shipment Receipt', {
 	// TODO: On Save set customer on the package that are not set!
-	// TODO: Formatter for Package item?
 
 	setup(frm) {
-		frm.page.sidebar.toggle(false); // Hide Sidebar to focus better on the doc
+		frm.page.sidebar.toggle(false); // Hide Sidebar
+
+		cargo_management.set_transportation_indicator(frm, 'package');
 	},
 
 	onload: function (frm) {
