@@ -20,7 +20,6 @@ class WarehouseReceipt(Document):
 		length: DF.Float
 		manual_weight: DF.Check
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
-		total_volume: DF.Float
 		transportation: DF.Literal["", "Sea", "Air"]
 		type: DF.Literal["", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
 		warehouse: DF.Link
@@ -28,17 +27,21 @@ class WarehouseReceipt(Document):
 		width: DF.Float
 	# end: auto-generated types
 
-	def validate(self):
+	def before_validate(self):
+		if len(self.warehouse_receipt_lines) == 1:
+			self._apply_single_line_defaults()
+			return
+
+		self.carrier_gross_weight = 0
+		for row in self.warehouse_receipt_lines:
+			self.carrier_gross_weight += row.carrier_weight or 0.00
 
 		if self.manual_weight:
 			return
 
 		self.gross_weight = 0
-		self.carrier_gross_weight = 0
-
 		for row in self.warehouse_receipt_lines:
 			self.gross_weight += row.warehouse_weight or 0.00
-			self.carrier_gross_weight += row.carrier_weight or 0.00
 
 	def on_update(self):
 		""" Add Warehouse Receipt Link to the Parcel """
@@ -60,6 +63,19 @@ class WarehouseReceipt(Document):
 				parcel.warehouse_receipt.isnull() | parcel.warehouse_receipt != self.name
 			)
 		).run()
+
+	@property
+	def total_volume_cuft(self):
+		return sum(row.volume_cuft for row in self.warehouse_receipt_lines)
+
+	def _apply_single_line_defaults(self):
+		""" Set the defaults for single line warehouse receipts """
+		row = self.warehouse_receipt_lines[0]
+
+		self.type = row.type
+		self.length = row.length
+		self.width = row.width
+		self.height = row.height
 
 	def change_status(self, new_status):
 		""" Validates the current status of the warehouse receipt and change it if it's possible. """

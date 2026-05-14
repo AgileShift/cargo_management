@@ -28,7 +28,7 @@
   "column_break_16",
   "manual_weight",
   "gross_weight",
-  "total_volume",
+  "total_volume_cuft",
   "column_break_14",
   "carrier_gross_weight"
  ],
@@ -71,6 +71,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "warehouse_receipt_lines",
    "fieldtype": "Table",
    "in_preview": 1,
@@ -128,15 +129,6 @@
   },
   {
    "alignment": "Center",
-   "fieldname": "total_volume",
-   "fieldtype": "Float",
-   "label": "Total Volume (CBM)",
-   "non_negative": 1,
-   "precision": "3",
-   "read_only": 1
-  },
-  {
-   "alignment": "Center",
    "bold": 1,
    "description": "Weight provided by the warehouse (if available).",
    "fieldname": "gross_weight",
@@ -190,6 +182,16 @@
    "fieldtype": "Select",
    "label": "Type",
    "options": "\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet"
+  },
+  {
+   "alignment": "Center",
+   "fieldname": "total_volume_cuft",
+   "fieldtype": "Float",
+   "is_virtual": 1,
+   "label": "Total Volume (cu ft)",
+   "non_negative": 1,
+   "precision": "3",
+   "read_only": 1
   }
  ],
  "links": [
@@ -205,7 +207,7 @@
    "parent_doctype": "Cargo Shipment"
   }
  ],
- "modified": "2026-05-14 14:48:51.878879",
+ "modified": "2026-05-14 16:47:02.633930",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
