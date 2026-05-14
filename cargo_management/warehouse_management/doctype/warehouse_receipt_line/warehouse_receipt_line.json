@@ -100,7 +100,7 @@
   {
    "bold": 1,
    "columns": 3,
-   "description": "Delivery date provided by the carrier (if available).",
+   "description": "Delivery timestamp provided by the carrier (if available).",
    "fetch_from": "parcel.carrier_real_delivery",
    "fieldname": "carrier_delivered_at",
    "fieldtype": "Datetime",
@@ -150,7 +150,7 @@
    "sticky": 1
   },
   {
-   "description": "Calculated volume in cubic feet based on package dimensions.",
+   "description": "Calculated volume based on package dimensions (if dimensions are available).",
    "fieldname": "volume_cuft",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -164,7 +164,7 @@
  "grid_page_length": 100,
  "istable": 1,
  "links": [],
- "modified": "2026-05-14 14:15:34.422336",
+ "modified": "2026-05-14 15:03:06.387169",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt Line",

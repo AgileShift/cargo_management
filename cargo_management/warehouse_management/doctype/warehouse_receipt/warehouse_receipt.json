@@ -118,7 +118,7 @@
   },
   {
    "bold": 1,
-   "description": "Gross weight of the packages as measured by the carriers (if available).",
+   "description": "Weight of the parcels as measured by the carriers (if available).",
    "fieldname": "carrier_gross_weight",
    "fieldtype": "Float",
    "label": "Gross Weight by Carriers (lb)",
@@ -138,7 +138,7 @@
   {
    "alignment": "Center",
    "bold": 1,
-   "description": "Weight in pounds provided by the warehouse (if available).",
+   "description": "Weight provided by the warehouse (if available).",
    "fieldname": "gross_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -205,7 +205,7 @@
    "parent_doctype": "Cargo Shipment"
   }
  ],
- "modified": "2026-05-14 14:11:21.652962",
+ "modified": "2026-05-14 14:48:51.878879",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
@@ -244,16 +244,6 @@
    "role": "Sales User",
    "share": 1,
    "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "permlevel": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Desk User",
-   "share": 1
   }
  ],
  "row_format": "Dynamic",

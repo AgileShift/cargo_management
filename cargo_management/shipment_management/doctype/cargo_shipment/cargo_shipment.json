@@ -19,7 +19,7 @@
   "warehouse_lines",
   "section_break_rctv",
   "cargo_shipment_lines",
-  "additional_information_section",
+  "section_break_ofem",
   "pieces",
   "section_break_mukh7",
   "estimated_gross_weight_by_warehouse_in_pounds",
@@ -87,13 +87,8 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "additional_information_section",
-   "fieldtype": "Tab Break",
-   "label": "Additional Information"
-  },
-  {
    "bold": 1,
-   "description": "Estimated gross weight (in pounds) of the parcels provided by the warehouse (if available).",
+   "description": "Weight of the parcels as measured by the warehouse (if available).",
    "fieldname": "estimated_gross_weight_by_warehouse_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Warehouse (in pounds)",
@@ -102,7 +97,7 @@
   },
   {
    "bold": 1,
-   "description": "Estimated gross weight of the parcels as measured by the carriers (if available).",
+   "description": "Weight of the parcels as measured by the carriers (if available).",
    "fieldname": "estimated_gross_weight_by_carriers_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Carriers (in pounds)",
@@ -148,6 +143,10 @@
    "fieldname": "section_break_rctv",
    "fieldtype": "Section Break",
    "label": "Packing List"
+  },
+  {
+   "fieldname": "section_break_ofem",
+   "fieldtype": "Section Break"
   }
  ],
  "grid_page_length": 50,
@@ -169,7 +168,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-05-14 11:49:10.468093",
+ "modified": "2026-05-14 14:47:10.426409",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
