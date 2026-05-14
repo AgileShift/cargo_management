@@ -22,7 +22,7 @@ class WarehouseReceipt(Document):
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
 		total_volume: DF.Float
 		transportation: DF.Literal["", "Sea", "Air"]
-		type: DF.Literal["", "Box", "EH Container", "Parcel Bag(Sack)", "Pallet"]
+		type: DF.Literal["", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
 		warehouse: DF.Link
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
 		width: DF.Float

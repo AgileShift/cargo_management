@@ -17,15 +17,17 @@ class WarehouseReceiptLine(Document):
 		height: DF.Float
 		length: DF.Float
 		parcel: DF.Link
-		parcel_transportation: DF.Literal["Sea", "Air"]
+		parcel_transportation: DF.Literal["", "Sea", "Air"]
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
-		type: DF.Literal["", "Box", "Envelope", "Pallet", "Mail"]
+		type: DF.Literal["", "Box", "Envelope", "Bag", "Pallet", "Tube"]
 		warehouse_weight: DF.Float
 		width: DF.Float
 	# end: auto-generated types
 
 	@property
-	def volume(self):
-		return self.length * self.width * self.height
+	def volume_cuft(self):
+		if not self.length or not self.width or not self.height:
+			return 0
+		return (self.length * self.width * self.height) / 1728
