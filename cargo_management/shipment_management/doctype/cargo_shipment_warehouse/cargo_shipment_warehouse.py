@@ -16,6 +16,7 @@ class CargoShipmentWarehouse(Document):
 		parentfield: DF.Data
 		parenttype: DF.Data
 		reference: DF.Data | None
+		transportation: DF.Literal["Sea", "Air"]
 		type: DF.Data | None
 		warehouse_receipt: DF.Link
 		weight: DF.Float

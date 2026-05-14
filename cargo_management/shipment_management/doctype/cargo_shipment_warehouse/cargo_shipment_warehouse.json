@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "warehouse_receipt",
+  "transportation",
   "reference",
   "length",
   "width",
@@ -79,11 +80,24 @@
    "label": "Height (in)",
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "bold": 1,
+   "columns": 2,
+   "fetch_from": "warehouse_receipt.transportation",
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Transportation",
+   "options": "Sea\nAir",
+   "read_only": 1,
+   "reqd": 1,
+   "sticky": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2026-05-11 13:34:17.470074",
+ "modified": "2026-05-14 11:14:46.369378",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Warehouse",
