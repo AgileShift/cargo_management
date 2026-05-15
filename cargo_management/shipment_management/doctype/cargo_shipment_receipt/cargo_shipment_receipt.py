@@ -21,18 +21,22 @@ class CargoShipmentReceipt(Document):
 	# end: auto-generated types
 
 	# TODO: Set customer on update!
+	def before_validate(self):
+		self.gross_weight = 0
+		for parcel in self.cargo_shipment_receipt_lines:
+			self.gross_weight += parcel.gross_weight
 
 	def validate(self):
 		# TODO: make this sort function refresh the table
 		sorted_list = sorted(
 			self.cargo_shipment_receipt_lines,
-			key=lambda item: (
-				item.customer_name if item.customer_name else '',
-				-float(item.gross_weight) if item.gross_weight else 0.00
+			key=lambda parcel: (
+				parcel.customer_name if parcel.customer_name else '',
+				-float(parcel.gross_weight) if parcel.gross_weight else 0.00
 			)
 		)
-		for i, item in enumerate(sorted_list, start=1):
-			item.idx = i
+		for i, parcel in enumerate(sorted_list, start=1):
+			parcel.idx = i
 
 	def change_status(self, new_status):
 		""" Validates the current status of the cargo shipment receipt and change it if it's possible. """
@@ -41,7 +45,7 @@ class CargoShipmentReceipt(Document):
 		# TODO: Finish
 		if self.status != new_status and \
 				(self.status == 'Awaiting Receipt' and new_status == 'Sorting') or \
-				(self.status == 'Sorting' and new_status =='Finished'):
+				(self.status == 'Sorting' and new_status == 'Finished'):
 			self.status = new_status
 			return True
 

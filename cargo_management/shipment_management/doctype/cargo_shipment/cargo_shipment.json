@@ -21,9 +21,8 @@
   "cargo_shipment_lines",
   "section_break_ofem",
   "pieces",
-  "section_break_mukh7",
+  "column_break_jtnn",
   "estimated_gross_weight_by_warehouse_in_pounds",
-  "column_break_sd4xs",
   "estimated_gross_weight_by_carriers_in_pounds"
  ],
  "fields": [
@@ -64,6 +63,7 @@
    "fieldtype": "Table",
    "in_preview": 1,
    "in_standard_filter": 1,
+   "label": "Packing List",
    "options": "Cargo Shipment Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
@@ -120,19 +120,11 @@
   {
    "fieldname": "warehouse_lines",
    "fieldtype": "Table",
+   "label": "Warehouse Receipts",
    "options": "Cargo Shipment Warehouse"
   },
   {
    "fieldname": "section_break_n2zav",
-   "fieldtype": "Section Break",
-   "label": "Warehouse Receipts"
-  },
-  {
-   "fieldname": "column_break_sd4xs",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_mukh7",
    "fieldtype": "Section Break"
   },
   {
@@ -141,12 +133,15 @@
   },
   {
    "fieldname": "section_break_rctv",
-   "fieldtype": "Section Break",
-   "label": "Packing List"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "section_break_ofem",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_jtnn",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
@@ -168,7 +163,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-05-14 14:47:10.426409",
+ "modified": "2026-05-15 09:35:20.203471",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
