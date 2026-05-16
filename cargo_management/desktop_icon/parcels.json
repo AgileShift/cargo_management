@@ -11,11 +11,12 @@
  "link_to": "Parcels",
  "link_type": "Workspace Sidebar",
  "logo_url": "/assets/erpnext/desktop_icons/stock.svg",
- "modified": "2026-02-02 14:53:57.668524",
+ "modified": "2026-05-15 20:57:43.677804",
  "modified_by": "Administrator",
  "name": "Parcels",
  "owner": "Administrator",
  "restrict_removal": 1,
  "roles": [],
+ "sidebar": "Parcels",
  "standard": 1
 }

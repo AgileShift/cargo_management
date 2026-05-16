@@ -43,7 +43,6 @@ class Parcel(Document):
 		shipping_amount: DF.Currency
 		signed_by: DF.Data | None
 		status: DF.Literal["Awaiting Receipt", "Awaiting Confirmation", "In Extraordinary Confirmation", "Awaiting Departure", "In Transit", "In Customs", "Sorting", "To Bill", "Unpaid", "For Delivery or Pickup", "Finished", "Cancelled", "Never Arrived", "Returned to Sender"]
-		sub_status: DF.Literal["", "At Origin", "Delayed"]
 		total: DF.Currency
 		tracking_number: DF.Data
 		transportation: DF.Literal["Sea", "Air"]
@@ -51,10 +50,10 @@ class Parcel(Document):
 	# end: auto-generated types
 
 	"""  All these are Frappe Core Flags:
-		'ignore_links':       avoid: _validate_links()
-		'ignore_validate':    avoid: validate() and before_save()
-		'ignore_mandatory':   avoid: _validate_mandatory()
-		'ignore_permissions': avoid: will not check for permissions globally.
+		ignore_links:       avoid: _validate_links()
+		ignore_validate:    avoid: validate() and before_save()
+		ignore_mandatory:   avoid: _validate_mandatory()
+		ignore_permissions: avoid: will not check for permissions globally.
 	"""
 
 	@override
@@ -66,7 +65,7 @@ class Parcel(Document):
 	@override
 	def save(self, request_data_from_api=False, *args, **kwargs):
 		""" Override def to change validation behavior. Useful when called from outside a form. """
-		if request_data_from_api:  # If True we fetch data from API, ignore ALL checks and save it.
+		if request_data_from_api:  # If True, we fetch data from API, ignore ALL checks and save it.
 			self.flags.ignore_permissions = self.flags.ignore_validate = self.flags.ignore_mandatory = self.flags.ignore_links = True
 			self.request_data_from_api()
 
@@ -77,7 +76,7 @@ class Parcel(Document):
 		self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase with no spaces
 
 	def before_save(self):
-		""" Before saved in DB and after validated. Add new data. This runs on Insert(Create) or Save(Update)"""
+		""" Before saved in DB and after validated. Add new data. This runs on Insert (Create) or Save (Update)"""
 		if self.is_new():
 			self.request_data_from_api()
 			# TODO: WORK ON THIS CHANGE!
@@ -139,12 +138,12 @@ class Parcel(Document):
 		except Exception as e:
 			frappe.log_error(f"API Error: {type(e).__name__} -> {e}", reference_doctype='Parcel', reference_name=api_data.get('data', {}).get('number', None))
 
-	def _request_data_from_easypost_api(self) :
+	def _request_data_from_easypost_api(self):
 		""" Handles POST or GET to the Easypost API. Also parses the data. """
 		try:
 			if self.easypost_id:  # Parcel exists on Database. Request updates from API.
 				return EasyPostAPI(self.carrier).retrieve_package_data(self.easypost_id)
-			else:  # Parcel don't exist on System or EasyPost. We create a new one and attach it.
+			else:  # Parcel doesn't exist on System or EasyPost. We create a new one and attach it.
 				return EasyPostAPI(self.carrier).register_package(self.tracking_number)
 		except EasyPostAPIError as e:
 			frappe.msgprint(msg=str(e.__dict__), title='EasyPost API Error', raise_exception=False, indicator='red')
@@ -160,7 +159,7 @@ class Parcel(Document):
 				return api_data
 		except Exception as e:
 			frappe.msgprint(msg=str(e), title='17Track API Error', raise_exception=False, indicator='red')
-			return None  # HOTFIX for "if not api_data:"
+			return None  # HOTFIX for "if not api_data"
 
 	def update_from_api_data(self, api_data: dict) -> None:
 		""" This updates the parcel with the data from the API. """
@@ -179,8 +178,7 @@ class Parcel(Document):
 
 # FIXME: 19 warning, 20 w warning, 83 typos -> 287
 # FIXME: 2 warning, 20 w warning, 85 typos -> 276
-# 292 Refactor de constantes y estados
-# FIXME 311: 2 warning, 29 w warning, 21 typos -> 276 | Corregir State Machine y COLOR usage!
-# FIXME 313: 9 Warning, 29 w warning, 22 typos -> 303 | Corregir State Machine y Color Usage!
-# TODO: 306 -> State Design Pattern -> Utils file plus Parcel States, and explained status message not working!
-# 197 -> A punto de integrar el MachineState con el State
+# 292 Parcel State constants Refactor
+# FIXME 313: 9 Warning, 29 w warning, 22 typos -> 303 | FIX State Machine y Color Usage!
+# TODO: 306 -> State Design Pattern -> Utils file + ParcelStates + explained_status message!
+# 197 -> about to integrate MachineState with State
