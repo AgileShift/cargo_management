@@ -9,34 +9,39 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "section_break_axfz",
   "transportation",
   "warehouse",
-  "column_break_hiid",
+  "cb_0",
   "date",
-  "column_break_hnxe",
+  "cb_1",
   "status",
   "type",
   "sb_0",
   "warehouse_receipt_lines",
-  "section_totals",
-  "column_break_wzhu",
+  "section_break_snaf",
+  "column_break_oald",
+  "column_break_epal",
+  "column_break_fskb",
+  "column_break_vyiz",
+  "total_pieces",
+  "column_break_zxhf",
+  "total_parcels",
+  "sb_1",
+  "cb_2",
   "length",
-  "column_break_teki",
+  "cb_3",
   "width",
-  "column_break_grgn",
+  "cb_4",
   "height",
-  "column_break_16",
+  "cb_5",
   "manual_weight",
   "gross_weight",
   "total_volume_cuft",
-  "column_break_14",
+  "cb_6",
   "carrier_gross_weight"
  ],
  "fields": [
-  {
-   "fieldname": "column_break_hnxe",
-   "fieldtype": "Column Break"
-  },
   {
    "bold": 1,
    "fieldname": "transportation",
@@ -63,12 +68,12 @@
    "options": "Open\nAwaiting Departure\nIn Transit\nSorting\nFinished",
    "read_only": 1,
    "reqd": 1,
-   "search_index": 1,
-   "sticky": 1
+   "search_index": 1
   },
   {
    "fieldname": "sb_0",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hide_border": 1
   },
   {
    "allow_bulk_edit": 1,
@@ -79,19 +84,6 @@
    "options": "Warehouse Receipt Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
    "reqd": 1
-  },
-  {
-   "depends_on": "eval: !doc.__islocal",
-   "fieldname": "section_totals",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_16",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_14",
-   "fieldtype": "Column Break"
   },
   {
    "bold": 1,
@@ -114,15 +106,12 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_hiid",
-   "fieldtype": "Column Break"
-  },
-  {
+   "alignment": "Center",
    "bold": 1,
    "description": "Weight of the parcels as measured by the carriers (if available).",
    "fieldname": "carrier_gross_weight",
    "fieldtype": "Float",
-   "label": "Gross Weight by Carriers (lb)",
+   "label": "Total Weight by Carriers (lb)",
    "non_negative": 1,
    "precision": "2",
    "read_only": 1
@@ -145,42 +134,36 @@
    "default": "0",
    "fieldname": "manual_weight",
    "fieldtype": "Check",
-   "label": "Manual Weight"
+   "label": "Set Weight"
   },
   {
+   "alignment": "Center",
    "fieldname": "length",
    "fieldtype": "Float",
    "label": "Length (in)",
    "precision": "2"
   },
   {
-   "fieldname": "column_break_teki",
-   "fieldtype": "Column Break"
-  },
-  {
+   "alignment": "Center",
    "fieldname": "width",
    "fieldtype": "Float",
    "label": "Width (in)",
    "precision": "2"
   },
   {
-   "fieldname": "column_break_grgn",
-   "fieldtype": "Column Break"
-  },
-  {
+   "alignment": "Center",
    "fieldname": "height",
    "fieldtype": "Float",
    "label": "Height (in)",
    "precision": "2"
   },
   {
-   "fieldname": "column_break_wzhu",
-   "fieldtype": "Column Break"
-  },
-  {
+   "bold": 1,
    "fieldname": "type",
    "fieldtype": "Select",
-   "label": "Type",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Package Type",
    "options": "\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet"
   },
   {
@@ -192,6 +175,89 @@
    "non_negative": 1,
    "precision": "3",
    "read_only": 1
+  },
+  {
+   "alignment": "Center",
+   "bold": 1,
+   "fieldname": "total_pieces",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Total Pieces",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "alignment": "Center",
+   "bold": 1,
+   "description": "Unique Parcels",
+   "fieldname": "total_parcels",
+   "fieldtype": "Int",
+   "label": "Total Parcels",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval: !doc.__islocal",
+   "fieldname": "sb_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cb_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cb_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cb_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cb_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cb_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_snaf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_oald",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zxhf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_epal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_axfz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_fskb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vyiz",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -207,7 +273,7 @@
    "parent_doctype": "Cargo Shipment"
   }
  ],
- "modified": "2026-05-14 16:47:02.633930",
+ "modified": "2026-05-16 00:14:00.160769",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",

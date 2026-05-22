@@ -20,6 +20,8 @@ class WarehouseReceipt(Document):
 		length: DF.Float
 		manual_weight: DF.Check
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
+		total_parcels: DF.Int
+		total_pieces: DF.Int
 		transportation: DF.Literal["", "Sea", "Air"]
 		type: DF.Literal["", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
 		warehouse: DF.Link
@@ -54,6 +56,7 @@ class WarehouseReceipt(Document):
 		if not parcel_names:
 			return
 
+		# FIXME: THIS QUERY IS BAD |  CHECK PRODUCTION, esta poniendole a todos los parcels, ignorando el parcel.name.isin
 		parcel = frappe.qb.DocType('Parcel')
 		(
 			frappe.qb.update(parcel)

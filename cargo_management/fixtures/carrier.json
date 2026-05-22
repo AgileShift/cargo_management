@@ -409,7 +409,7 @@
   "api": "17Track",
   "docstatus": 0,
   "doctype": "Carrier",
-  "modified": "2026-05-09 15:03:30.278670",
+  "modified": "2026-05-21 11:58:16.091970",
   "name": "UniUni",
   "regex": "^UUS|^UUSC0000",
   "regex_notes": "Some YunExpress and Cainiao shipments are delivered by UniUni\n",
@@ -425,14 +425,14 @@
     "url": "https://global.cainiao.com/detail.htm?mailNoList="
    },
    {
-    "label": "17Track",
-    "type": "Fallback",
-    "url": "https://t.17track.net/en#nums="
-   },
-   {
     "label": "Parcels",
     "type": "Fallback",
     "url": "https://parcelsapp.com/en/tracking/"
+   },
+   {
+    "label": "17Track",
+    "type": "Fallback",
+    "url": "https://t.17track.net/en#nums="
    },
    {
     "label": "EVEREST",

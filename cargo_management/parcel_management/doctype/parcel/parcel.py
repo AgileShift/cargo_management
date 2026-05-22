@@ -71,19 +71,20 @@ class Parcel(Document):
 
 		return super(Parcel, self).save(*args, **kwargs)
 
-	def validate(self):
-		""" Sanitize fields """
-		self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase with no spaces
-
 	def before_save(self):
 		""" Before saved in DB and after validated. Add new data. This runs on Insert (Create) or Save (Update)"""
+
+		""" Sanitize fields """
+		self.tracking_number = self.tracking_number.strip().upper()  # Only uppercase with no spaces
+		self.order_number = (self.order_number or '').strip().upper()  # Fixme: Improve this
+
 		if self.is_new():
 			self.request_data_from_api()
 			# TODO: WORK ON THIS CHANGE!
 		elif self.has_value_changed('carrier') or self.has_value_changed('tracking_number'):  # Exists and data has changed
 			self.easypost_id = None  # Value has changed. We reset the ID. FIXME: Move this when we have new APIs.
 			self.request_data_from_api()
-			frappe.msgprint("Carrier or Tracking Number has changed, we have requested new data.", indicator='yellow', alert=True)
+			frappe.msgprint(_('Carrier or Tracking Number has changed, we have requested new data.'), indicator='yellow', alert=True)
 
 	def change_status(self, new_status: Status) -> bool:
 		"""
