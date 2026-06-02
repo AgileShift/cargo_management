@@ -275,9 +275,10 @@ ignore_translatable_strings_from = ["frappe", "erpnext", "hrms"]
 extend_bootinfo = "cargo_management.boot.boot_session"
 
 # Doctypes for Global Search
+# TODO: Improve this for v16 <3
 global_search_doctypes = {
 	"Default": [
-		{"doctype": "Parcel"},
+		{"doctype": "Parcel", "index": 0},
 		{"doctype": "Warehouse Receipt"},
 		{"doctype": "Cargo Shipment"},
 		{"doctype": "Cargo Shipment Receipt"},

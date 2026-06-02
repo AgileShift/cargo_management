@@ -22,6 +22,7 @@ class Parcel(Document):
 
 		assisted_purchase: DF.Check
 		cargo_shipment: DF.Link | None
+		cargo_shipment_receipt: DF.Link | None
 		carrier: DF.Link
 		carrier_est_delivery: DF.Datetime | None
 		carrier_est_weight: DF.Float
@@ -143,9 +144,9 @@ class Parcel(Document):
 		""" Handles POST or GET to the Easypost API. Also parses the data. """
 		try:
 			if self.easypost_id:  # Parcel exists on Database. Request updates from API.
-				return EasyPostAPI(self.carrier).retrieve_package_data(self.easypost_id)
+				return EasyPostAPI(self.carrier).retrieve_parcel_data(self.easypost_id)
 			else:  # Parcel doesn't exist on System or EasyPost. We create a new one and attach it.
-				return EasyPostAPI(self.carrier).register_package(self.tracking_number)
+				return EasyPostAPI(self.carrier).register_parcel(self.tracking_number)
 		except EasyPostAPIError as e:
 			frappe.msgprint(msg=str(e.__dict__), title='EasyPost API Error', raise_exception=False, indicator='red')
 
@@ -153,9 +154,9 @@ class Parcel(Document):
 	def _request_data_from_17track_api(self):
 		try:
 			if self.easypost_id:
-				return API17Track(self.carrier).retrieve_package_data(self.tracking_number)
+				return API17Track(self.carrier).retrieve_parcel_data(self.tracking_number)
 			else:
-				api_data = API17Track(self.carrier).register_package(self.tracking_number)
+				api_data = API17Track(self.carrier).register_parcel(self.tracking_number)
 				self.easypost_id = api_data['tag']  # api_data.get('tag', frappe.generate_hash(length=10))
 				return api_data
 		except Exception as e:

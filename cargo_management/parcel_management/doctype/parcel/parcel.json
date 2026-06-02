@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
@@ -52,6 +53,7 @@
   "links_section",
   "warehouse_receipt",
   "cargo_shipment",
+  "cargo_shipment_receipt",
   "column_break_12",
   "easypost_id",
   "explained_status"
@@ -202,7 +204,7 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "description": "Store that sends the package",
+   "description": "Store that sends the parcel",
    "fieldname": "shipper",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -417,11 +419,25 @@
    "bold": 1,
    "fieldname": "sales_order",
    "fieldtype": "Link",
+   "in_global_search": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Sales Order",
    "link_filters": "[[\"Sales Order\",\"status\",\"not in\",[\"Cancelled\",\"Closed\"]]]",
    "options": "Sales Order"
+  },
+  {
+   "bold": 1,
+   "fieldname": "cargo_shipment_receipt",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Cargo Shipment Receipt",
+   "options": "Cargo Shipment",
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
@@ -439,20 +455,21 @@
   {
    "group": "Cargo Shipment",
    "link_doctype": "Cargo Shipment Receipt",
-   "link_fieldname": "package"
+   "link_fieldname": "parcel"
   },
   {
    "group": "Selling",
    "link_doctype": "Sales Order",
-   "link_fieldname": "package"
+   "link_fieldname": "custom_parcel"
   },
   {
    "group": "Selling",
    "link_doctype": "Sales Invoice",
-   "link_fieldname": "package"
+   "link_fieldname": "custom_parcel"
   }
  ],
- "modified": "2026-05-15 21:02:28.409451",
+ "max_attachments": 10,
+ "modified": "2026-06-02 14:33:17.311877",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcel",
