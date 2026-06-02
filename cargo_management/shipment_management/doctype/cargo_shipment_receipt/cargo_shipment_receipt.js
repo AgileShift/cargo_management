@@ -1,32 +1,18 @@
 frappe.ui.form.on('Cargo Shipment Receipt', {
-	// TODO: On Save set customer on the package that are not set!
+	// TODO: On Save set customer on the parcel that are not set!
 
 	setup(frm) {
 		frm.page.sidebar.toggle(false); // Hide Sidebar
 
-		cargo_management.set_transportation_indicator(frm, 'package');
+		cargo_management.set_transportation_indicator(frm, 'parcel');
 	},
 
 	onload: function (frm) {
-		// Adding the two possible ways to trigger a fetch for customer_name : FIXME REVIEW THIS!. what happens on multiple customers same tracking?
-		frm.add_fetch('package', 'customer_name', 'customer_name');
-		frm.add_fetch('customer', 'customer_name', 'customer_name');
-
 		// TODO: Set Query for cargo_shipment_receipt_warehouse_lines
-		frm.set_query('package', 'cargo_shipment_receipt_lines', () => {
-			return {
-				filters: {
-					status: ['not in', ['In Customs', 'Sorting', 'Available to Pickup', 'Finished']],
-				}
-			};
-		});
-		frm.set_query('item_code', 'cargo_shipment_receipt_lines', () => {
-			return {
-				filters: {
-					name: ['not like', '%ASIS%']
-				}
-			}
-		})
+
+		// Adding the two possible ways to trigger a fetch for customer_name : FIXME REVIEW THIS!. what happens on multiple customers same tracking?
+		frm.add_fetch('parcel', 'customer_name', 'customer_name');
+		frm.add_fetch('customer', 'customer_name', 'customer_name');
 	},
 
 	refresh: function (frm) {
@@ -88,13 +74,13 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 			r.message.parcels.forEach(parcel => {
 				frm.add_child('cargo_shipment_receipt_lines', {
 					'content': parcel.customer_description,
-					// 'item_code': parcel.item_code, TODO: This is not working, because the package can have more than once item code
+					// 'item_code': parcel.item_code, TODO: This is not working, because the parcel can have more than once item code
 
 					'customer': parcel.customer,
 					'customer_name': parcel.customer_name,
 
-					'package': parcel.name,
-					'package_2': parcel.tracking_number,
+					'parcel': parcel.name,
+					'parcel_2': parcel.tracking_number,
 					'carrier_est_weight': parcel.carrier_est_weight,
 
 					'assisted_purchase': parcel.assisted_purchase,

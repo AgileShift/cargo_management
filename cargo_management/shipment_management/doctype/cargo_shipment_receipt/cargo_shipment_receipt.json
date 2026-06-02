@@ -1,5 +1,8 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:cargo_shipment",
  "creation": "2020-11-03 16:50:04.125725",
@@ -75,7 +78,7 @@
    "allow_bulk_edit": 1,
    "fieldname": "cargo_shipment_receipt_lines",
    "fieldtype": "Table",
-   "label": "Packages in Cargo Shipment Receipt",
+   "label": "Parcels in Cargo Shipment Receipt",
    "options": "Cargo Shipment Receipt Line",
    "reqd": 1
   },
@@ -114,7 +117,7 @@
    "link_fieldname": "custom_cargo_shipment_receipt"
   }
  ],
- "modified": "2026-05-15 17:40:47.170333",
+ "modified": "2026-06-02 14:39:02.965460",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",
@@ -146,9 +149,8 @@
  "row_format": "Dynamic",
  "search_fields": "cargo_shipment,status",
  "show_name_in_global_search": 1,
- "sort_field": "modified",
+ "sort_field": "arrival_date",
  "sort_order": "DESC",
  "states": [],
- "timeline_field": "cargo_shipment",
  "track_changes": 1
 }

@@ -17,7 +17,7 @@ def update_status(source_doc_name: str, new_status: str):
 		'Cargo Shipment Receipt': [doc.name],
 		'Cargo Shipment': [doc.cargo_shipment],
 		'Warehouse Receipt': pluck_child_field(cargo_shipment.cargo_shipment_lines, 'warehouse_receipt'),
-		'Parcel': pluck_child_field(doc.cargo_shipment_receipt_lines, 'package')
+		'Parcel': pluck_child_field(doc.cargo_shipment_receipt_lines, 'parcel')
 	}, new_status=new_status, msg_title=_('Marked as Sorting'))
 
 
@@ -35,11 +35,11 @@ def make_sales_invoice(doc):
 	warning_messages = []
 	for item in cargo_shipment_receipt.cargo_shipment_receipt_lines:
 		if not item.customer:
-			frappe.throw('Agregar cliente a fila: {}, Paquete: {}'.format(item.get('idx'), item.get('package')))
+			frappe.throw('Agregar cliente a fila: {}, Paquete: {}'.format(item.get('idx'), item.get('parcel')))
 
 		if item.sales_invoice:
 			# TODO: What happens if invoice exists and there is a new sales item?
-			warning_messages.append('No se creara factura para: {}. Ya tiene Factura.'.format(item.get('package')))
+			warning_messages.append('No se creara factura para: {}. Ya tiene Factura.'.format(item.get('parcel')))
 			continue
 
 		customers_to_invoice[item.customer].append(item)
@@ -66,7 +66,7 @@ def make_sales_invoice(doc):
 		for item in customers_to_invoice[customer]:
 			item_data = {  # Always pass this data
 				'item_code': item.item_code,
-				'package': item.package,
+				'custom_parcel': item.parcel,
 				'qty': item.billable_qty_or_weight or item.gross_weight,  # TODO: Rename billable_qty_or_weight
 				'weight_per_unit': item.gross_weight if item.billable_qty_or_weight else 1,
 				'total_weight': item.gross_weight,
@@ -103,7 +103,7 @@ def make_sales_invoice(doc):
 		'Cargo Shipment Receipt': {'doc_names': [cargo_shipment_receipt.name], 'new_status': 'Finished'},
 		'Cargo Shipment': {'doc_names': [cargo_shipment_receipt.cargo_shipment], 'new_status': 'Finished'},
 		# 'Warehouse Receipt': {'doc_names': get_list_from_child_table(cargo_shipment_receipt.cargo_shipment_receipt_warehouse_lines, 'warehouse_receipt'), 'new_status': 'Finished'},
-		'Parcel': pluck_child_field(doc.cargo_shipment_receipt_lines, 'package')
+		'Parcel': pluck_child_field(doc.cargo_shipment_receipt_lines, 'parcel')
 	}, new_status='To Bill', msg_title=_('Updating Parcels'))
 
 	return customers_to_invoice  # TODO: Return the new sales invoice and update the cargo shipment table?

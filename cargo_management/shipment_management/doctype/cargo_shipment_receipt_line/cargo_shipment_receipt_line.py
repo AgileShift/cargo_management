@@ -19,8 +19,8 @@ class CargoShipmentReceiptLine(Document):
 		gross_weight: DF.Float
 		item_code: DF.Link | None
 		item_price: DF.Currency
-		package: DF.Link
-		package_2: DF.Data | None
+		parcel: DF.Link
+		parcel_2: DF.Data | None
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data

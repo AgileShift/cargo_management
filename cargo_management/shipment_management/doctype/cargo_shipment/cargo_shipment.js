@@ -6,25 +6,15 @@ frappe.ui.form.on('Cargo Shipment', {
 		cargo_management.set_transportation_indicator(frm, 'parcel');
 	},
 
-	onload(frm) {
-		// Only Parcels on Warehouse Receipt
-		// frm.set_query('parcel', 'cargo_shipment_lines', () => {
-		//     return {
-		//         filters: {status: 'Awaiting Departure'}
-		//     }
-		// });
-		frm.set_df_property('expected_arrival_date', 'reqd', true);
-	},
-
+	onload(frm) {},
 
 	refresh: function (frm) {
-		// TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
-		// TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
-
 		if (frm.is_new()) {
 			return;
 		}
-
+		
+		// TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
+		// TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
 		frm.page.indicator.parent().append(cargo_management.transportation_indicator(frm.doc.transportation));
 
 		frm.events.build_custom_action_items(frm); // Adding Custom Action Items

@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "allow_copy": 1,
  "allow_rename": 1,
  "autoname": "prompt",
@@ -71,7 +72,8 @@
   {
    "fieldname": "expected_arrival_date",
    "fieldtype": "Date",
-   "label": "Expected Arrival Date"
+   "label": "Expected Arrival Date",
+   "reqd": 1
   },
   {
    "bold": 1,
@@ -163,7 +165,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-05-15 09:35:20.203471",
+ "modified": "2026-06-02 14:30:30.668116",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

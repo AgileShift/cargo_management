@@ -19,7 +19,7 @@ class CargoShipment(Document):
 		departure_date: DF.Date
 		estimated_gross_weight_by_carriers_in_pounds: DF.Float
 		estimated_gross_weight_by_warehouse_in_pounds: DF.Float
-		expected_arrival_date: DF.Date | None
+		expected_arrival_date: DF.Date
 		pieces: DF.Int
 		status: DF.Literal["Awaiting Departure", "In Transit", "Sorting", "Finished"]
 		transportation: DF.Literal["Sea", "Air"]

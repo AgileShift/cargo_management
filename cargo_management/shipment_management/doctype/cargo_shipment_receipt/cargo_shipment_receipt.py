@@ -24,7 +24,7 @@ class CargoShipmentReceipt(Document):
 	def before_validate(self):
 		self.gross_weight = 0
 		for parcel in self.cargo_shipment_receipt_lines:
-			self.gross_weight += parcel.gross_weight
+			self.gross_weight += parcel.gross_weight or 0.00
 
 	def validate(self):
 		# TODO: make this sort function refresh the table
