@@ -28,13 +28,13 @@ class EasyPostAPI:
 		# self.carrier_uses_utc = self.CARRIER_USING_UTC.get(carrier, False) # FIXME: This can be used with another carriers
 		self.client = easypost.EasyPostClient(api_key=frappe.conf['easypost_api_key'])  # New EasyPost Client
 
-	def register_package(self, tracking_number: str) -> dict:
+	def register_parcel(self, tracking_number: str) -> dict:
 		""" Register a Tracking on EasyPost API """
 		easypost_obj = self.client.tracker.create(tracking_code=tracking_number, carrier=self.carrier)
 		#FIXME: PATCH self.client.subscribe_to_request_hook(id=easypost_obj.id, url=frappe.conf['easypost_webhook_url'])
 		return self._build_parcel_data(easypost_obj)
 
-	def retrieve_package_data(self, easypost_id: str) -> dict:
+	def retrieve_parcel_data(self, easypost_id: str) -> dict:
 		""" Retrieve data from EasyPost using the ID provided. """
 		easypost_obj = self.client.tracker.retrieve(id=easypost_id)
 		return self._build_parcel_data(easypost_obj)

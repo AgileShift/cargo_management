@@ -74,7 +74,7 @@ class API17Track:
 			case self.QUOTA_LIMIT | _:
 				raise Exception(response.rejected[0].error)
 
-	def register_package(self, tracking_number: str):
+	def register_parcel(self, tracking_number: str):
 		""" Register a Tracking on 17Track """
 		unique_tag = frappe.generate_hash(tracking_number, length=15)
 
@@ -87,9 +87,9 @@ class API17Track:
 
 		# FIXME: QUICK HACK!, maybe will not work
 
-		return self.retrieve_package_data(tracking_number)  # Update the Parcel Data (Status, etc
+		return self.retrieve_parcel_data(tracking_number)  # Update the Parcel Data (Status, etc
 
-	def retrieve_package_data(self, tracking_number: str) -> dict:
+	def retrieve_parcel_data(self, tracking_number: str) -> dict:
 		""" Retrieve data from 17Track Tracking """
 		obj_17track = self._build_request('gettrackinfo', payload=[{
 			"number": tracking_number
