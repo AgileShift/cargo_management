@@ -1,7 +1,7 @@
 {
  "app": "cargo_management",
  "charts": [],
- "content": "[{\"id\":\"XjOPvSShqa\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LiYyEqdcg6\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Package without Instructions\",\"col\":6}},{\"id\":\"oU7VPnt4Ha\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Service Change\",\"col\":6}},{\"id\":\"u64_W_iuWU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1cSKlZwclb\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Needs: Receipt Confirmation\",\"col\":4}},{\"id\":\"MybEu1et1s\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"oe85Dlc69Q\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Needs: Follow Up\",\"col\":4}}]",
+ "content": "[{\"id\":\"XjOPvSShqa\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"LiYyEqdcg6\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Parcel without Instructions\",\"col\":6}},{\"id\":\"oU7VPnt4Ha\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Service Change\",\"col\":6}},{\"id\":\"u64_W_iuWU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1cSKlZwclb\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Needs: Receipt Confirmation\",\"col\":4}},{\"id\":\"MybEu1et1s\",\"type\":\"spacer\",\"data\":{\"col\":4}},{\"id\":\"oe85Dlc69Q\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Needs: Follow Up\",\"col\":4}}]",
  "creation": "2024-01-18 08:41:23.477058",
  "custom_blocks": [],
  "docstatus": 0,
@@ -9,12 +9,12 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "support",
- "idx": 0,
+ "idx": 2,
  "indicator_color": "green",
  "is_hidden": 0,
  "label": "Issues and Tasks",
  "links": [],
- "modified": "2025-12-28 13:58:48.427742",
+ "modified": "2026-06-02 14:35:27.945648",
  "modified_by": "Administrator",
  "module": "Support Management",
  "name": "Issues and Tasks",
@@ -25,8 +25,8 @@
  "quick_lists": [
   {
    "document_type": "Issue",
-   "label": "Package without Instructions",
-   "quick_list_filter": "[[\"Issue\",\"issue_type\",\"=\",\"Package without Instructions\"]]"
+   "label": "Parcel without Instructions",
+   "quick_list_filter": "[[\"Issue\",\"issue_type\",\"=\",\"Parcel without Instructions\"]]"
   },
   {
    "document_type": "Issue",
