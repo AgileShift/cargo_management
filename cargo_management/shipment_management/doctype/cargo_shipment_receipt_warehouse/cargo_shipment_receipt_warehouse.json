@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "creation": "2026-06-03 07:29:43.517487",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "warehouse_receipt",
+  "transportation",
+  "reference",
+  "length",
+  "width",
+  "height",
+  "weight",
+  "type"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "warehouse_receipt",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Warehouse Receipt",
+   "options": "Warehouse Receipt",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "columns": 2,
+   "fetch_from": "warehouse_receipt.transportation",
+   "fieldname": "transportation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Transportation",
+   "options": "Sea\nAir",
+   "read_only": 1,
+   "reqd": 1,
+   "sticky": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference"
+  },
+  {
+   "fetch_from": "warehouse_receipt.length",
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Length (in)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "warehouse_receipt.width",
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Width (in)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "warehouse_receipt.height",
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Height (in)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "fetch_from": "warehouse_receipt.total_warehouse_weight",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight (lb)",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "warehouse_receipt.type",
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Type",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 10,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-03 07:29:43.517487",
+ "modified_by": "Administrator",
+ "module": "Shipment Management",
+ "name": "Cargo Shipment Receipt Warehouse",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 5,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

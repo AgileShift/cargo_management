@@ -7,6 +7,7 @@ def boot_session(bootinfo):
 	carrier = frappe.qb.DocType('Carrier')
 	carrier_urls = frappe.qb.DocType('Carrier Tracking URL')
 
+	# TODO: frappe.get_docs -> That new change can reduce drastically this code
 	query = (
 		frappe.qb.from_(carrier)
 		.left_join(carrier_urls)
