@@ -1,9 +1,12 @@
-import frappe
-from cargo_management.utils import pluck_child_field
+from cargo_management.engine import LinkSyncMixin, LinkSyncRule
+from cargo_management.engine.utils import pluck_child_field
 from frappe.model.document import Document
 
 
-class WarehouseReceipt(Document):
+CBM_PER_CUFT = 0.028316846592
+
+
+class WarehouseReceipt(Document, LinkSyncMixin):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -13,69 +16,82 @@ class WarehouseReceipt(Document):
 		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import WarehouseReceiptLine
 		from frappe.types import DF
 
-		carrier_gross_weight: DF.Float
 		date: DF.Date
-		gross_weight: DF.Float
 		height: DF.Float
 		length: DF.Float
 		manual_weight: DF.Check
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
+		total_carrier_weight: DF.Float
 		total_parcels: DF.Int
 		total_pieces: DF.Int
+		total_warehouse_weight: DF.Float
 		transportation: DF.Literal["", "Sea", "Air"]
-		type: DF.Literal["", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
+		type: DF.Literal["", "Loose", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
 		warehouse: DF.Link
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
 		width: DF.Float
 	# end: auto-generated types
 
+	link_sync_rules = (
+		LinkSyncRule("warehouse_receipt_lines", "parcel", "Parcel", "warehouse_receipt"),
+	)
+
 	def before_validate(self):
-		if len(self.warehouse_receipt_lines) == 1:
-			self._apply_single_line_defaults()
-			return
+		self._apply_requested_single_line_defaults()
+		total_warehouse_weight, self.total_carrier_weight = 0, 0
 
-		self.carrier_gross_weight = 0
 		for row in self.warehouse_receipt_lines:
-			self.carrier_gross_weight += row.carrier_weight or 0.00
+			total_warehouse_weight += row.warehouse_weight
+			self.total_carrier_weight += row.carrier_weight
 
-		if self.manual_weight:
-			return
+		if not self.manual_weight:
+			self.total_warehouse_weight = total_warehouse_weight
 
-		self.gross_weight = 0
-		for row in self.warehouse_receipt_lines:
-			self.gross_weight += row.warehouse_weight or 0.00
+		self.total_parcels = len(set(pluck_child_field(self.warehouse_receipt_lines, "parcel")))
+		self.validate_link_sync()
+
+	def before_save(self):
+		self.capture_link_sync_state()
 
 	def on_update(self):
-		""" Add Warehouse Receipt Link to the Parcel """
-		# FIXME: If Warehouse Receipt is deleted, remove link from Parcel
-		# TODO: Add extra fields from Warehouse Receipt -> Receipt Date & Weight
-		# TODO: Change the warehouse_receipt field on Parcel only if it is different
+		self.sync_links()
 
-		parcel_names = pluck_child_field(self.warehouse_receipt_lines, 'parcel')
-
-		if not parcel_names:
-			return
-
-		# FIXME: THIS QUERY IS BAD |  CHECK PRODUCTION, esta poniendole a todos los parcels, ignorando el parcel.name.isin
-		parcel = frappe.qb.DocType('Parcel')
-		(
-			frappe.qb.update(parcel)
-			.set(parcel.warehouse_receipt, self.name)
-			.where(parcel.name.isin(parcel_names))
-			.where(
-				parcel.warehouse_receipt.isnull() | parcel.warehouse_receipt != self.name
-			)
-		).run()
+	def on_trash(self):
+		self.unlink_synced_links()
 
 	@property
 	def total_volume_cuft(self):
-		return sum(row.volume_cuft for row in self.warehouse_receipt_lines)
+		return sum(row.volume_cuft for row in self.warehouse_receipt_lines) or self._calculate_volume_cuft(
+			self.length,
+			self.width,
+			self.height,
+		)
+
+	@property
+	def total_volume_cbm(self):
+		return self.total_volume_cuft * CBM_PER_CUFT
+
+	def _apply_requested_single_line_defaults(self):
+		if not self.get("copy_single_line_details"):
+			return
+
+		if len(self.warehouse_receipt_lines) == 1:
+			self._apply_single_line_defaults()
+
+		self.copy_single_line_details = 0
+
+	@staticmethod
+	def _calculate_volume_cuft(length: float, width: float, height: float) -> float:
+		if not length or not width or not height:
+			return 0
+
+		return (length * width * height) / 1728
 
 	def _apply_single_line_defaults(self):
 		""" Set the defaults for single line warehouse receipts """
 		row = self.warehouse_receipt_lines[0]
 
-		self.type = row.type
+		self.type = row.package_type
 		self.length = row.length
 		self.width = row.width
 		self.height = row.height
@@ -95,4 +111,3 @@ class WarehouseReceipt(Document):
 			return True
 
 		return False
-# 87 Working on the Link Motor

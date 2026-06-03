@@ -16,12 +16,12 @@ class WarehouseReceiptLine(Document):
 		customer_name: DF.ReadOnly | None
 		height: DF.Float
 		length: DF.Float
+		package_type: DF.Literal["", "Box", "Envelope", "Bag", "Tube", "Pallet"]
 		parcel: DF.Link
 		parcel_transportation: DF.Literal["", "Sea", "Air"]
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
-		type: DF.Literal["", "Box", "Envelope", "Bag", "Pallet", "Tube"]
 		warehouse_weight: DF.Float
 		width: DF.Float
 	# end: auto-generated types

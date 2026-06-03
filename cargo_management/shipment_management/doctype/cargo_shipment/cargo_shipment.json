@@ -115,7 +115,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Transportation",
-   "options": "Sea\nAir",
+   "options": "\nSea\nAir",
    "reqd": 1,
    "search_index": 1
   },
@@ -165,7 +165,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-06-02 14:30:30.668116",
+ "modified": "2026-06-03 08:50:50.953871",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

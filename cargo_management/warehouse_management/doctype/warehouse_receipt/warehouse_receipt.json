@@ -1,12 +1,13 @@
 {
  "actions": [],
  "allow_copy": 1,
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
- "creation": "2020-06-14 12:50:41.615167",
+ "creation": "2026-06-03 08:32:57.443784",
  "default_view": "List",
  "doctype": "DocType",
- "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "section_break_axfz",
@@ -20,13 +21,14 @@
   "sb_0",
   "warehouse_receipt_lines",
   "section_break_snaf",
-  "column_break_oald",
   "column_break_epal",
-  "column_break_fskb",
-  "column_break_vyiz",
   "total_pieces",
-  "column_break_zxhf",
+  "column_break_oald",
   "total_parcels",
+  "column_break_vyiz",
+  "column_break_fskb",
+  "manual_weight",
+  "column_break_zxhf",
   "sb_1",
   "cb_2",
   "length",
@@ -34,12 +36,12 @@
   "width",
   "cb_4",
   "height",
-  "cb_5",
-  "manual_weight",
-  "gross_weight",
-  "total_volume_cuft",
   "cb_6",
-  "carrier_gross_weight"
+  "total_warehouse_weight",
+  "total_carrier_weight",
+  "cb_5",
+  "total_volume_cuft",
+  "total_volume_cbm"
  ],
  "fields": [
   {
@@ -106,41 +108,17 @@
    "reqd": 1
   },
   {
-   "alignment": "Center",
-   "bold": 1,
-   "description": "Weight of the parcels as measured by the carriers (if available).",
-   "fieldname": "carrier_gross_weight",
-   "fieldtype": "Float",
-   "label": "Total Weight by Carriers (lb)",
-   "non_negative": 1,
-   "precision": "2",
-   "read_only": 1
-  },
-  {
-   "alignment": "Center",
-   "bold": 1,
-   "description": "Weight provided by the warehouse (if available).",
-   "fieldname": "gross_weight",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "label": "Total Weight (lb)",
-   "non_negative": 1,
-   "precision": "2",
-   "read_only": 1,
-   "read_only_depends_on": "eval: !doc.manual_weight;"
-  },
-  {
    "default": "0",
    "fieldname": "manual_weight",
    "fieldtype": "Check",
-   "label": "Set Weight"
+   "label": "Manual Weight"
   },
   {
    "alignment": "Center",
    "fieldname": "length",
    "fieldtype": "Float",
    "label": "Length (in)",
+   "non_negative": 1,
    "precision": "2"
   },
   {
@@ -148,6 +126,7 @@
    "fieldname": "width",
    "fieldtype": "Float",
    "label": "Width (in)",
+   "non_negative": 1,
    "precision": "2"
   },
   {
@@ -155,6 +134,7 @@
    "fieldname": "height",
    "fieldtype": "Float",
    "label": "Height (in)",
+   "non_negative": 1,
    "precision": "2"
   },
   {
@@ -164,14 +144,25 @@
    "in_list_view": 1,
    "in_preview": 1,
    "label": "Package Type",
-   "options": "\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet"
+   "options": "\nLoose\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet",
+   "reqd": 1
   },
   {
    "alignment": "Center",
    "fieldname": "total_volume_cuft",
    "fieldtype": "Float",
    "is_virtual": 1,
-   "label": "Total Volume (cu ft)",
+   "label": "Volume (cu ft)",
+   "non_negative": 1,
+   "precision": "3",
+   "read_only": 1
+  },
+  {
+   "alignment": "Center",
+   "fieldname": "total_volume_cbm",
+   "fieldtype": "Float",
+   "is_virtual": 1,
+   "label": "Volume (CBM)",
    "non_negative": 1,
    "precision": "3",
    "read_only": 1
@@ -181,7 +172,6 @@
    "bold": 1,
    "fieldname": "total_pieces",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "in_preview": 1,
    "label": "Total Pieces",
    "non_negative": 1,
@@ -190,13 +180,17 @@
   {
    "alignment": "Center",
    "bold": 1,
+   "default": "0",
    "description": "Unique Parcels",
    "fieldname": "total_parcels",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Total Parcels",
    "non_negative": 1,
    "read_only": 1,
-   "reqd": 1
+   "reqd": 1,
+   "show_description_on_click": 1,
+   "sticky": 1
   },
   {
    "fieldname": "cb_0",
@@ -258,6 +252,33 @@
   {
    "fieldname": "column_break_vyiz",
    "fieldtype": "Column Break"
+  },
+  {
+   "alignment": "Center",
+   "bold": 1,
+   "description": "Weight provided by the warehouse (if available).",
+   "fieldname": "total_warehouse_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Total Weight (lb)",
+   "non_negative": 1,
+   "precision": "2",
+   "read_only_depends_on": "eval: !doc.manual_weight;",
+   "show_description_on_click": 1,
+   "sticky": 1
+  },
+  {
+   "alignment": "Center",
+   "bold": 1,
+   "description": "Weight of the parcels as measured by the carriers (if available).",
+   "fieldname": "total_carrier_weight",
+   "fieldtype": "Float",
+   "label": "Total Carrier Weight (lb)",
+   "non_negative": 1,
+   "precision": "2",
+   "read_only": 1,
+   "show_description_on_click": 1
   }
  ],
  "links": [
@@ -271,9 +292,14 @@
    "link_doctype": "Cargo Shipment",
    "link_fieldname": "warehouse_receipt",
    "parent_doctype": "Cargo Shipment"
+  },
+  {
+   "group": "Cargo Shipment",
+   "link_doctype": "Cargo Shipment Receipt",
+   "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2026-05-16 00:14:00.160769",
+ "modified": "2026-06-03 08:37:10.364677",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",

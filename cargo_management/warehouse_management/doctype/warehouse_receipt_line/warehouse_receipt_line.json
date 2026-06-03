@@ -1,6 +1,7 @@
 {
  "actions": [],
- "creation": "2020-06-15 06:50:54.767049",
+ "allow_bulk_edit": 1,
+ "creation": "2026-06-03 06:51:32.001013",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -17,18 +18,9 @@
   "height",
   "warehouse_weight",
   "volume_cuft",
-  "type"
+  "package_type"
  ],
  "fields": [
-  {
-   "columns": 2,
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Type",
-   "options": "\nBox\nEnvelope\nBag\nPallet\nTube",
-   "sticky": 1
-  },
   {
    "columns": 1,
    "default": "0.00",
@@ -69,8 +61,8 @@
    "label": "Parcel",
    "options": "Parcel",
    "reqd": 1,
-   "search_index": 1,
-   "sticky": 1
+   "sticky": 1,
+   "unique": 1
   },
   {
    "columns": 2,
@@ -160,12 +152,21 @@
    "non_negative": 1,
    "precision": "3",
    "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Package Type",
+   "options": "\nBox\nEnvelope\nBag\nTube\nPallet",
+   "sticky": 1
   }
  ],
  "grid_page_length": 100,
  "istable": 1,
  "links": [],
- "modified": "2026-05-14 15:53:52.555555",
+ "modified": "2026-06-03 08:51:58.481606",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt Line",
@@ -174,7 +175,6 @@
  "quick_entry": 1,
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 30,
- "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

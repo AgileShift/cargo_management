@@ -1,9 +1,8 @@
-import frappe
-from cargo_management.utils import pluck_child_field
+from cargo_management.engine import LinkSyncMixin, LinkSyncRule
 from frappe.model.document import Document
 
 
-class CargoShipment(Document):
+class CargoShipment(Document, LinkSyncMixin):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -22,34 +21,26 @@ class CargoShipment(Document):
 		expected_arrival_date: DF.Date
 		pieces: DF.Int
 		status: DF.Literal["Awaiting Departure", "In Transit", "Sorting", "Finished"]
-		transportation: DF.Literal["Sea", "Air"]
+		transportation: DF.Literal["", "Sea", "Air"]
 		warehouse_lines: DF.Table[CargoShipmentWarehouse]
 	# end: auto-generated types
 
+	link_sync_rules = (
+		LinkSyncRule("cargo_shipment_lines", "parcel", "Parcel", "cargo_shipment"),
+	)
+
+	def before_validate(self):
+		self.validate_link_sync()
+
+	def before_save(self):
+		self.capture_link_sync_state()
+
 	def on_update(self):
-		""" Add Departure Date to all Warehouse Receipt Linked """
-		# TODO: What if cargo shipment is deleted?
+		# TODO: Add Departure Date to all Warehouse Receipt Linked
+		self.sync_links()
 
-		# TODO: Validate if any problem!
-		frappe.db.sql("""
-			UPDATE tabParcel
-			SET cargo_shipment = %(cs_name)s
-			WHERE `name` IN %(parcels)s
-			AND COALESCE(cargo_shipment, '') != %(cs_name)s
-			""", {
-				'cs_name': self.name,
-				'parcels': pluck_child_field(self.cargo_shipment_lines, 'parcel')
-			}
-		)
-
-		wrs_in_cs = pluck_child_field(self.cargo_shipment_lines, 'warehouse_receipt')
-
-		if wrs_in_cs:  # If empty we don't touch the DB  # FIXME: Performance?
-			pass  # TODO: THis is for???
-
-	# frappe.db.sql("UPDATE `tabWarehouse Receipt` SET departure_date = %(date)s WHERE name IN %(wrs_in_cs)s", {
-	#     'date': self.departure_date, 'wrs_in_cs': wrs_in_cs
-	# })
+	def on_trash(self):
+		self.unlink_synced_links()
 
 	def change_status(self, new_status):
 		""" Validates the current status of the cargo shipment and change it if it's possible. """

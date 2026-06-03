@@ -4,7 +4,7 @@
  "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:cargo_shipment",
+ "autoname": "prompt",
  "creation": "2020-11-03 16:50:04.125725",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -17,13 +17,15 @@
   "column_break_p4gz",
   "cargo_shipment",
   "status",
+  "section_break_jjhw",
+  "cargo_shipment_receipt_warehouse",
   "section_break_6",
   "cargo_shipment_receipt_lines",
   "gross_weight"
  ],
  "fields": [
   {
-   "allow_in_quick_entry": 1,
+   "bold": 1,
    "columns": 2,
    "description": "Reference of the cargo shipment to be received.",
    "fieldname": "cargo_shipment",
@@ -33,7 +35,6 @@
    "in_standard_filter": 1,
    "label": "Cargo Shipment",
    "options": "Cargo Shipment",
-   "read_only_depends_on": "eval: !doc.__islocal",
    "reqd": 1,
    "unique": 1
   },
@@ -68,7 +69,8 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Arrival Date"
+   "label": "Arrival Date",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_6",
@@ -105,9 +107,18 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Transportation",
-   "options": "Sea\nAir",
+   "options": "\nSea\nAir",
    "reqd": 1,
    "sticky": 1
+  },
+  {
+   "fieldname": "section_break_jjhw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cargo_shipment_receipt_warehouse",
+   "fieldtype": "Table",
+   "options": "Cargo Shipment Receipt Warehouse"
   }
  ],
  "links": [
@@ -117,11 +128,11 @@
    "link_fieldname": "custom_cargo_shipment_receipt"
   }
  ],
- "modified": "2026-06-02 14:39:02.965460",
+ "modified": "2026-06-03 09:11:00.429699",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",
- "naming_rule": "By fieldname",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {
@@ -152,5 +163,6 @@
  "sort_field": "arrival_date",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "cargo_shipment",
  "track_changes": 1
 }

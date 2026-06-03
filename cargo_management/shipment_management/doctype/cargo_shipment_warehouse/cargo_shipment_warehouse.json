@@ -26,7 +26,7 @@
   {
    "bold": 1,
    "columns": 1,
-   "fetch_from": "warehouse_receipt.gross_weight",
+   "fetch_from": "warehouse_receipt.total_warehouse_weight",
    "fieldname": "weight",
    "fieldtype": "Float",
    "in_list_view": 1,

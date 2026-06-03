@@ -1,7 +1,8 @@
+from cargo_management.engine import LinkSyncMixin, LinkSyncRule
 from frappe.model.document import Document
 
 
-class CargoShipmentReceipt(Document):
+class CargoShipmentReceipt(Document, LinkSyncMixin):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -9,22 +10,38 @@ class CargoShipmentReceipt(Document):
 
 	if TYPE_CHECKING:
 		from cargo_management.shipment_management.doctype.cargo_shipment_receipt_line.cargo_shipment_receipt_line import CargoShipmentReceiptLine
+		from cargo_management.shipment_management.doctype.cargo_shipment_receipt_warehouse.cargo_shipment_receipt_warehouse import CargoShipmentReceiptWarehouse
 		from frappe.types import DF
 
-		arrival_date: DF.Date | None
+		arrival_date: DF.Date
 		cargo_shipment: DF.Link
 		cargo_shipment_receipt_lines: DF.Table[CargoShipmentReceiptLine]
+		cargo_shipment_receipt_warehouse: DF.Table[CargoShipmentReceiptWarehouse]
 		departure_date: DF.Date | None
 		gross_weight: DF.Float
 		status: DF.Literal["Awaiting Receipt", "Sorting", "Finished"]
-		transportation: DF.Literal["Sea", "Air"]
+		transportation: DF.Literal["", "Sea", "Air"]
 	# end: auto-generated types
+
+	link_sync_rules = (
+		LinkSyncRule("cargo_shipment_receipt_lines", "parcel", "Parcel", "cargo_shipment_receipt"),
+	)
 
 	# TODO: Set customer on update!
 	def before_validate(self):
 		self.gross_weight = 0
 		for parcel in self.cargo_shipment_receipt_lines:
 			self.gross_weight += parcel.gross_weight or 0.00
+		self.validate_link_sync()
+
+	def before_save(self):
+		self.capture_link_sync_state()
+
+	def on_update(self):
+		self.sync_links()
+
+	def on_trash(self):
+		self.unlink_synced_links()
 
 	def validate(self):
 		# TODO: make this sort function refresh the table
