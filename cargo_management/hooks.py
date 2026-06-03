@@ -272,7 +272,7 @@ require_type_annotated_api_methods = True
 ignore_translatable_strings_from = ["frappe", "erpnext", "hrms"]
 
 # Extend bootinfo
-extend_bootinfo = "cargo_management.boot.boot_session"
+extend_bootinfo = "cargo_management.config.boot.boot_session"
 
 # Doctypes for Global Search
 # TODO: Improve this for v16 <3

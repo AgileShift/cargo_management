@@ -12,7 +12,7 @@ frappe.ui.form.on('Cargo Shipment', {
 		if (frm.is_new()) {
 			return;
 		}
-		
+
 		// TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
 		// TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
 		frm.page.indicator.parent().append(cargo_management.transportation_indicator(frm.doc.transportation));
@@ -29,34 +29,26 @@ frappe.ui.form.on('Cargo Shipment', {
 
 	build_custom_action_items(frm) {
 		if (frm.doc.status === 'Awaiting Departure') {
-			frm.page.add_action_item(__('Confirm Parcels'), () => {
-				frappe.call({
-					method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
-					freeze: true,
-					args: {
-						source_doc_name: frm.doc.name,
-						new_status: 'Awaiting Departure',
-						msg_title: __('Confirmed Parcels')
-					}
-				});
-			});
-
-			frm.page.add_action_item(__('Confirm Transit'), () => {
-				frappe.call({
-					method: 'cargo_management.shipment_management.doctype.cargo_shipment.actions.update_status',
-					freeze: true,
-					args: {
-						source_doc_name: frm.doc.name,
-						new_status: 'In Transit',
-						msg_title: __('Now in Transit')
-					} // TODO: Refresh DOC in callback
-				});
-			});
+			frm.events.add_status_action(frm, __('Confirm Parcels'), 'Awaiting Departure', __('Confirmed Parcels'));
+			frm.events.add_status_action(frm, __('Confirm Transit'), 'In Transit', __('Now in Transit'));
 		} else {
 			frm.page.clear_actions_menu();
 		}
+	},
+
+	add_status_action(frm, label, new_status, msg_title) {
+		frm.page.add_action_item(label, () => {
+			frappe.call({
+				method: 'cargo_management.engine.status_update.update_cargo_shipment_status',
+				freeze: true,
+				args: {
+					source_doc_name: frm.doc.name,
+					new_status,
+					msg_title
+				}
+			}); // TODO: Refresh DOC in callback
+		});
 	}
 });
-
 
 frappe.ui.form.on('Cargo Shipment Warehouse', {});

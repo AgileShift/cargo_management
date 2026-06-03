@@ -20,38 +20,37 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 		// TODO: Add a button to sort child table by customer name.
 		// TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
 		// TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
-
 		if (frm.is_new()) {
 			return;
 		}
 
-		if (frm.doc.status === 'Awaiting Receipt' || frm.doc.status === 'Sorting') { // Awaiting or actually sorting
-
+		if (frm.doc.status === 'Awaiting Receipt') { // Awaiting or actually sorting
 			frm.page.add_action_item(__('Mark as Sorting'), () => {
 				frappe.call({
-					method: 'cargo_management.shipment_management.doctype.cargo_shipment_receipt.actions.update_status',
+					method: 'cargo_management.engine.status_update.update_cargo_shipment_receipt_status',
 					freeze: true,
 					args: {
 						source_doc_name: frm.doc.name,
-						new_status: 'Sorting'
+						new_status: 'Sorting',
+						msg_title: __('Marked as Sorting')
 					}
-				});
+				}); // TODO: Refresh DOC in callback
 			});
+		} else if (frm.doc.status === 'Sorting') {
+			frm.add_custom_button(__('Sales Invoice'), () => {
+				frappe.call({
+					method: 'cargo_management.engine.sales_invoice.make_sales_invoice_from_cargo_shipment_receipt',
+					args: {doc: frm.doc},
+					freeze: true,
+					freeze_message: __('Creating Sales Invoice...')
+				});//.then(r => { // Return customers invoices
+				// frm.refresh_field('cargo_shipment_receipt_lines');
+				// });
+			}, __('Create'));
 
-			if (frm.doc.status === 'Sorting') {
-				frm.add_custom_button(__('Sales Invoice'), () => {
-					frappe.call({
-						method: 'cargo_management.shipment_management.doctype.cargo_shipment_receipt.actions.make_sales_invoice',
-						args: {doc: frm.doc},
-						freeze: true,
-						freeze_message: __('Creating Sales Invoice...')
-					});//.then(r => { // Return customers invoices
-					// frm.refresh_field('cargo_shipment_receipt_lines');
-					// });
-				}, __('Create'));
-
-				frm.page.set_inner_btn_group_as_primary(__('Create'));
-			}
+			frm.page.set_inner_btn_group_as_primary(__('Create'));
+		} else {
+			frm.page.clear_actions_menu();
 		}
 	},
 
@@ -92,19 +91,77 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 			// Refresh the modified tables inside the callback after execution is done
 			frm.refresh_field('cargo_shipment_receipt_lines');
 		});
-
-	},
-
-	// TODO: This can be improved more dynamically -> // HELPERS -> Fix or Make more Dynamic
-	update_item_code: function (frm, cdt, cdn, item_code) {
-		locals[cdt][cdn].item_code = item_code;  // Getting Content Child Row being edited
-		refresh_field('item_code', cdn, 'cargo_shipment_receipt_lines');
-		frm.dirty();
 	},
 });
 
 frappe.ui.form.on('Cargo Shipment Receipt Line', {
 	// TODO: We should allow always customer to be read not read_only?
+	// TODO: Add a button to trigger this info!
+	// TODO ADD Extra Info: Warehouse Weight, Carrier Weight, Gross Weight:
+	// TODO: This can be improved more dynamically -> // HELPERS -> Fix or Make more Dynamic
+
+	form_render: function (frm, cdt, cdn) {
+		const row = frm.fields_dict.cargo_shipment_receipt_lines.grid.grid_rows_by_docname[cdn];
+
+		if (!row?.grid_form?.fields_dict?.item_code) {
+			return;
+		}
+
+		row.grid_form.wrapper.find('.item-code-shortcuts').remove();
+
+		const shortcuts = $(`
+			<div class="item-code-shortcuts form-group">
+				<div class="item-code-shortcuts-header">${__('Shortcuts')}</div>
+				<div class="item-code-shortcuts-list"></div>
+			</div>
+		`);
+		const button_group = shortcuts.find('.item-code-shortcuts-list');
+
+		$('<button class="btn btn-xs btn-default item-code-shortcut" type="button"></button>')
+			.text('1 LB')
+			.on('click', () => { // Set Default Weight
+				locals[cdt][cdn].gross_weight = 1.00;
+				refresh_field('gross_weight', cdn, 'cargo_shipment_receipt_lines');
+				frm.dirty();
+			}).appendTo(button_group);
+
+		// TODO: This can be improved more dynamically -> // HELPERS -> Fix or Make more Dynamic
+		[
+			'IP Varios - PESO',
+			'IP Ropa - PESO',
+			'IP Zapatos - PESO',
+			'IP Cosméticos - PESO',
+			'IP Skincare - PESO',
+			'IP Perfumes - PESO',
+			'IP Peluches - PESO',
+			'IP Juguetes - PESO',
+			'IP Reloj - PESO',
+			'IP Electronico - PESO',
+			'IP Salud y Hogar - PESO',
+			'IP Vitaminas y Suplementos - PESO',
+			'IP Repuestos - PESO',
+			'IP Repuesto Auto - PESO',
+			'IP Repuesto de Moto - PESO'
+		].forEach(item_code => {
+			$('<button class="btn btn-xs btn-default item-code-shortcut" type="button"></button>')
+				.text(item_code.replace('IP ', ''))
+				.attr('title', item_code)
+				.on('click', () => {
+					locals[cdt][cdn].item_code = item_code;  // Getting Content Child Row being edited
+					refresh_field('item_code', cdn, 'cargo_shipment_receipt_lines');
+					frm.dirty();
+				}).appendTo(button_group);
+		});
+
+		row.grid_form.fields_dict.section_break_bhmz.wrapper.after(shortcuts);
+
+		button_group.css({
+			'display': 'grid',
+			'grid-template-columns': 'repeat(auto-fit, minmax(170px, 1fr))',
+			'gap': '8px',
+			'align-items': 'center'
+		});
+	},
 
 	item_code: function (frm, cdt, cdn) {
 		const item = locals[cdt][cdn];
@@ -115,30 +172,5 @@ frappe.ui.form.on('Cargo Shipment Receipt Line', {
 			frm.fields_dict['cargo_shipment_receipt_lines'].grid.update_docfield_property('billable_qty_or_weight', 'hidden', true);
 		}
 	},
-
-	// TODO: Add a button to trigger this info!
-	// TODO ADD Extra Info: Warehouse Weight, Carrier Weight, Gross Weight:
-	// TODO: This can be improved more dynamically -> // HELPERS -> Fix or Make more Dynamic
-	default_weight: function (frm, cdt, cdn) {
-		locals[cdt][cdn].gross_weight = 1.00;  // Getting Content Child Row being edited
-		refresh_field('gross_weight', cdn, 'cargo_shipment_receipt_lines');
-		frm.dirty();
-	},
-
-	most_used_item_code_1: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Varios - PESO'),
-	most_used_item_code_2: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Ropa - PESO'),
-	most_used_item_code_3: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Zapatos - PESO'),
-	most_used_item_code_4: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Cosméticos - PESO'),
-	most_used_item_code_5: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Skincare - PESO'),
-	most_used_item_code_6: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Perfumes - PESO'),
-	most_used_item_code_7: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Peluches - PESO'),
-	most_used_item_code_8: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Juguetes - PESO'),
-	most_used_item_code_9: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Reloj - PESO'),
-	most_used_item_code_10: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Electronico - PESO'),
-	most_used_item_code_11: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Salud y Hogar - PESO'),
-	most_used_item_code_12: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Vitaminas y Suplementos - PESO'),
-	most_used_item_code_13: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Repuestos - PESO'),
-	most_used_item_code_14: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Repuesto Auto - PESO'),
-	most_used_item_code_15: (frm, cdt, cdn) => frm.events.update_item_code(frm, cdt, cdn, 'IP Repuesto de Moto - PESO')
-
 });
+// 148, my code is garbage
