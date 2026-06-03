@@ -16,6 +16,8 @@ class WarehouseReceipt(Document, LinkSyncMixin):
 		from cargo_management.warehouse_management.doctype.warehouse_receipt_line.warehouse_receipt_line import WarehouseReceiptLine
 		from frappe.types import DF
 
+		cargo_shipment: DF.Link | None
+		cargo_shipment_receipt: DF.Link | None
 		date: DF.Date
 		height: DF.Float
 		length: DF.Float

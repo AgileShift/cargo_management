@@ -18,6 +18,7 @@
   "status",
   "section_break_n2zav",
   "warehouse_lines",
+  "cargo_shipment_receipt",
   "section_break_rctv",
   "cargo_shipment_lines",
   "section_break_ofem",
@@ -144,6 +145,12 @@
   {
    "fieldname": "column_break_jtnn",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cargo_shipment_receipt",
+   "fieldtype": "Link",
+   "label": "Cargo Shipment Receipt",
+   "options": "Cargo Shipment Receipt"
   }
  ],
  "grid_page_length": 50,
@@ -152,6 +159,11 @@
   {
    "group": "Parcel",
    "link_doctype": "Parcel",
+   "link_fieldname": "cargo_shipment"
+  },
+  {
+   "group": "Warehouse",
+   "link_doctype": "Warehouse Receipt",
    "link_fieldname": "cargo_shipment"
   },
   {
@@ -165,7 +177,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-06-03 08:50:50.953871",
+ "modified": "2026-06-03 18:14:45.845896",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

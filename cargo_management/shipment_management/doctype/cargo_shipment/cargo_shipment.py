@@ -15,6 +15,7 @@ class CargoShipment(Document, LinkSyncMixin):
 
 		arrival_date: DF.Date | None
 		cargo_shipment_lines: DF.Table[CargoShipmentLine]
+		cargo_shipment_receipt: DF.Link | None
 		departure_date: DF.Date
 		estimated_gross_weight_by_carriers_in_pounds: DF.Float
 		estimated_gross_weight_by_warehouse_in_pounds: DF.Float
@@ -26,6 +27,7 @@ class CargoShipment(Document, LinkSyncMixin):
 	# end: auto-generated types
 
 	link_sync_rules = (
+		LinkSyncRule("warehouse_lines", "warehouse_receipt", "Warehouse Receipt", "cargo_shipment"),
 		LinkSyncRule("cargo_shipment_lines", "parcel", "Parcel", "cargo_shipment"),
 	)
 

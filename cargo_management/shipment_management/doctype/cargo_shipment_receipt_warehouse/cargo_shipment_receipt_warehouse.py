@@ -10,14 +10,14 @@ class CargoShipmentReceiptWarehouse(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		gross_weight: DF.Float
 		height: DF.Float
 		length: DF.Float
+		package_type: DF.Data | None
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
-		reference: DF.Data | None
 		transportation: DF.Literal["Sea", "Air"]
-		type: DF.Data | None
 		warehouse_receipt: DF.Link
 		weight: DF.Float
 		width: DF.Float

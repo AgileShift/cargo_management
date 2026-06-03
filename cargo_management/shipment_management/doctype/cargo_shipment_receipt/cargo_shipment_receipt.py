@@ -24,6 +24,8 @@ class CargoShipmentReceipt(Document, LinkSyncMixin):
 	# end: auto-generated types
 
 	link_sync_rules = (
+		# TODO, Add the cargo_shipment_receipt field on the Cargo Shipment
+		LinkSyncRule("cargo_shipment_receipt_warehouse", "warehouse_receipt", "Warehouse Receipt", "cargo_shipment_receipt"),
 		LinkSyncRule("cargo_shipment_receipt_lines", "parcel", "Parcel", "cargo_shipment_receipt"),
 	)
 

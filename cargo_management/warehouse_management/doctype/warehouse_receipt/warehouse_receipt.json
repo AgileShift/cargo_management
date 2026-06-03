@@ -41,7 +41,11 @@
   "total_carrier_weight",
   "cb_5",
   "total_volume_cuft",
-  "total_volume_cbm"
+  "total_volume_cbm",
+  "section_break_oyko",
+  "cargo_shipment",
+  "column_break_abup",
+  "cargo_shipment_receipt"
  ],
  "fields": [
   {
@@ -279,6 +283,26 @@
    "precision": "2",
    "read_only": 1,
    "show_description_on_click": 1
+  },
+  {
+   "fieldname": "section_break_oyko",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cargo_shipment",
+   "fieldtype": "Link",
+   "label": "Cargo Shipment",
+   "options": "Cargo Shipment"
+  },
+  {
+   "fieldname": "column_break_abup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cargo_shipment_receipt",
+   "fieldtype": "Link",
+   "label": "Cargo Shipment Receipt",
+   "options": "Cargo Shipment Receipt"
   }
  ],
  "links": [
@@ -299,7 +323,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2026-06-03 08:37:10.364677",
+ "modified": "2026-06-03 18:01:02.846348",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
