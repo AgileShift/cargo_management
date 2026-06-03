@@ -1,0 +1,95 @@
+from collections import defaultdict
+
+import frappe
+from frappe import _
+
+from cargo_management.engine.status_update import BulkStatusUpdate
+
+
+@frappe.whitelist(methods="POST")
+def make_sales_invoice_from_cargo_shipment_receipt(doc):
+	"""Creates sales invoices for each customer with items as parcels."""
+
+	# TODO: Save Sales Invoice on each row, para que no se repita la creacion de cada factura, en cada intento
+	# TODO: Set customer if not set!
+	doc = frappe.parse_json(doc)
+	cargo_shipment_receipt = frappe.get_doc('Cargo Shipment Receipt', doc.get('name'))
+
+	# Sorting all the customer data in a single dict
+	customers_to_invoice = defaultdict(list)
+	warning_messages = []
+	for item in cargo_shipment_receipt.cargo_shipment_receipt_lines:
+		if not item.customer:
+			frappe.throw('Agregar cliente a fila: {}, Paquete: {}'.format(item.get('idx'), item.get('parcel')))
+
+		if item.sales_invoice:
+			# TODO: What happens if invoice exists and there is a new sales item?
+			warning_messages.append('No se creara factura para: {}. Ya tiene Factura.'.format(item.get('parcel')))
+			continue
+
+		customers_to_invoice[item.customer].append(item)
+
+	# frappe.msgprint(msg=warning_messages, title=_('Warnings'), as_list=True, indicator='orange')
+
+	# if not customers_to_invoice:
+	#     return None
+
+	# Creating a Sales Invoice for each customer
+	# TODO: Validate fields and throw before start to create sales order!
+	for customer in customers_to_invoice:
+		sales_invoice = frappe.new_doc('Sales Invoice')
+		sales_invoice.customer = customer  # Company and Currency are automatically set
+
+		# Extra Work on this. for more Personalization and Help to User!
+		sales_invoice.set_posting_time = True
+		sales_invoice.language = 'es'
+		sales_invoice.allocate_advances_automatically = True  # Fetch advanced received from sales order or older invoices
+		sales_invoice.due_date = frappe.utils.add_days(None, 7)  # 7 Days "Credit" by default
+
+		# Iterate over customer items to invoice
+		# csrl_invoiced_items = []
+		for item in customers_to_invoice[customer]:
+			item_data = {  # Always pass this data
+				'item_code': item.item_code,
+				'custom_parcel': item.parcel,
+				'qty': item.billable_qty_or_weight or item.gross_weight,  # TODO: Rename billable_qty_or_weight
+				'weight_per_unit': item.gross_weight if item.billable_qty_or_weight else 1,
+				'total_weight': item.gross_weight,
+				'description': item.content.replace('\n', '<br>').replace('\t', '&emsp;') or item.item_code,  # FIXME(Change to Text Editor)?
+
+				'price_list_rate': 0.00  # HOT FIX
+			}
+
+			# if item.item_price > 0.00:
+			#     item_data.update({'price_list_rate': item.item_price}) # TODO: Remove this field?
+
+			sales_invoice.append('items', item_data)  # Add each item
+			# csrl_invoiced_items.append(item.name)
+
+		print('Before Saving?')
+
+		sales_invoice.set_missing_values()
+		sales_invoice.save(ignore_permissions=True)  # Saving the invoice as draft
+
+		print('creating sales invoice?')
+
+		# for item in csrl_invoiced_items:
+		#     print(item, sales_invoice.name)
+		#     frappe.db.set_value('Cargo Shipment Receipt Line', item, 'sales_invoice', sales_invoice.name, update_modified=False)
+		#     frappe.db.commit()  # TODO: Not the best way. but its working
+
+	# frappe.db.commit()  # Save all?
+
+	# cargo_shipment_receipt.notify_update()
+	# cargo_shipment_receipt.save(ignore_permissions=True) # Send update notify
+
+	# TODO: Work in Progress
+	(
+		BulkStatusUpdate(new_status="To Bill", msg_title=_("Updating Parcels"))
+		.include_doc("Cargo Shipment Receipt", cargo_shipment_receipt.name, new_status="Finished")
+		.include_doc("Cargo Shipment", cargo_shipment_receipt.cargo_shipment, new_status="Finished")
+		.include_child_links("Parcel", cargo_shipment_receipt.cargo_shipment_receipt_lines, "parcel")
+		.run()
+	)
+
+	return customers_to_invoice
