@@ -12,6 +12,7 @@ class LinkSyncRule:
 	child_link_field: str
 	target_doctype: str
 	target_link_field: str
+	allow_duplicate_links: bool = False
 
 
 class LinkSyncMixin:
@@ -20,7 +21,8 @@ class LinkSyncMixin:
 	def validate_link_sync(self):
 		for rule in self.link_sync_rules:
 			target_names = pluck_child_field(self.get(rule.child_table), rule.child_link_field)
-			self._validate_duplicate_links(rule, target_names)
+			if not rule.allow_duplicate_links:
+				self._validate_duplicate_links(rule, target_names)
 			self._validate_existing_links(rule, target_names)
 
 	def capture_link_sync_state(self):
