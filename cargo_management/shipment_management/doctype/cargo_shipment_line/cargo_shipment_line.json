@@ -9,24 +9,14 @@
   "warehouse_receipt",
   "parcel",
   "transportation",
-  "section_break_3",
+  "column_break_kgtd",
   "customer",
-  "column_break_5",
   "customer_name",
   "warehouse_details_section",
   "received_date",
   "description",
   "column_break_9",
   "warehouse_est_weight",
-  "type",
-  "carrier",
-  "dimensions_section",
-  "length",
-  "column_break_16",
-  "width",
-  "volumetric_weight",
-  "column_break_18",
-  "height",
   "additional_data_from_carrier_section",
   "carrier_real_delivery",
   "column_break_22",
@@ -47,35 +37,11 @@
   },
   {
    "columns": 1,
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "label": "Type",
-   "options": "Box\nEnvelope\nPallet"
-  },
-  {
-   "columns": 1,
-   "fetch_from": "parcel.carrier",
-   "fieldname": "carrier",
-   "fieldtype": "Link",
-   "label": "Carrier",
-   "options": "Carrier",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "column_break_5",
-   "fieldtype": "Column Break"
-  },
-  {
-   "columns": 1,
    "description": "Parcel description provided by the warehouse (if available).",
    "fieldname": "description",
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Description"
-  },
-  {
-   "fieldname": "section_break_3",
-   "fieldtype": "Section Break"
   },
   {
    "fetch_from": "parcel.customer",
@@ -127,32 +93,6 @@
    "non_negative": 1
   },
   {
-   "fieldname": "length",
-   "fieldtype": "Float",
-   "label": "Length (in)",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "width",
-   "fieldtype": "Float",
-   "label": "Width (in)",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "height",
-   "fieldtype": "Float",
-   "label": "Height (in)",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "column_break_16",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_18",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "additional_data_from_carrier_section",
    "fieldtype": "Section Break",
    "label": "Additional Data from Carrier"
@@ -186,18 +126,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "dimensions_section",
-   "fieldtype": "Section Break",
-   "label": "Dimensions"
-  },
-  {
-   "fieldname": "volumetric_weight",
-   "fieldtype": "Float",
-   "label": "Volume (cu ft)",
-   "print_hide_if_no_value": 1,
-   "read_only": 1
-  },
-  {
    "bold": 1,
    "fetch_from": "parcel.transportation",
    "fieldname": "transportation",
@@ -220,12 +148,16 @@
    "reqd": 1,
    "search_index": 1,
    "sticky": 1
+  },
+  {
+   "fieldname": "column_break_kgtd",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 100,
  "istable": 1,
  "links": [],
- "modified": "2026-06-02 14:43:46.199038",
+ "modified": "2026-06-04 16:16:52.456529",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Line",
