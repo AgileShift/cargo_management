@@ -1,11 +1,13 @@
 {
  "actions": [],
  "allow_bulk_edit": 1,
+ "allow_copy": 1,
  "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2020-11-03 16:50:04.125725",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -128,7 +130,7 @@
    "link_fieldname": "custom_cargo_shipment_receipt"
   }
  ],
- "modified": "2026-06-03 09:11:00.429699",
+ "modified": "2026-06-04 19:03:09.876663",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",

@@ -7,20 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: dev@gruporeal.org\n"
-"POT-Creation-Date: 2026-06-02 14:40-0615\n"
-"PO-Revision-Date: 2026-06-02 14:40-0615\n"
+"POT-Creation-Date: 2026-06-04 19:07-0615\n"
+"PO-Revision-Date: 2026-06-04 19:07-0615\n"
 "Last-Translator: dev@gruporeal.org\n"
 "Language-Team: dev@gruporeal.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
-
-#. Label of the default_weight (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "1 Libra"
-msgstr ""
 
 #. Option for the 'Tracking API' (Select) field in DocType 'Carrier'
 #: cargo_management/cargo_core/doctype/carrier/carrier.json
@@ -81,7 +75,7 @@ msgstr ""
 msgid "Add To Quote"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:71
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:70
 msgid "Adding Parcels..."
 msgstr ""
 
@@ -113,6 +107,8 @@ msgstr ""
 #. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
 #. Receipt Line'
 #. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
+#. Receipt Warehouse'
+#. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
 #. Warehouse'
 #. Option for the 'Transportation' (Select) field in DocType 'Warehouse
 #. Receipt'
@@ -123,6 +119,7 @@ msgstr ""
 #: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
@@ -241,7 +238,8 @@ msgid "Awaiting Receipt"
 msgstr ""
 
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
-#. Option for the 'Type' (Select) field in DocType 'Warehouse Receipt Line'
+#. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt
+#. Line'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Bag"
@@ -277,6 +275,7 @@ msgstr ""
 #. Name of a DocType
 #. Group in Cargo Shipment's connections
 #. Label of the cargo_shipment (Link) field in DocType 'Cargo Shipment Receipt'
+#. Label of the cargo_shipment (Link) field in DocType 'Warehouse Receipt'
 #. Group in Warehouse Receipt's connections
 #. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
@@ -296,11 +295,16 @@ msgstr ""
 #. Label of the cargo_shipment_receipt (Link) field in DocType 'Parcel'
 #. Label of the custom_cargo_shipment_receipt (Link) field in DocType 'Purchase
 #. Invoice Item'
+#. Label of the cargo_shipment_receipt (Link) field in DocType 'Cargo Shipment'
 #. Name of a DocType
+#. Label of the cargo_shipment_receipt (Link) field in DocType 'Warehouse
+#. Receipt'
 #. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/purchase_management/custom/purchase_invoice_item.json
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/workspace_sidebar/parcels.json
 msgid "Cargo Shipment Receipt"
 msgstr ""
@@ -308,6 +312,11 @@ msgstr ""
 #. Name of a DocType
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
 msgid "Cargo Shipment Receipt Line"
+msgstr ""
+
+#. Name of a DocType
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
+msgid "Cargo Shipment Receipt Warehouse"
 msgstr ""
 
 #. Name of a DocType
@@ -387,11 +396,11 @@ msgstr ""
 msgid "Confirm Parcels"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:44
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:33
 msgid "Confirm Transit"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:39
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:32
 msgid "Confirmed Parcels"
 msgstr ""
 
@@ -405,18 +414,12 @@ msgstr ""
 msgid "Consolidated Tracking Number"
 msgstr ""
 
-#. Label of the most_used_item_code_4 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Cosmeticos - PESO"
-msgstr ""
-
 #. Description of the 'Pieces' (Int) field in DocType 'Cargo Shipment'
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 msgid "Count of pieces(boxes) provided by the warehouse (if available)."
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:47
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:45
 msgid "Creating Sales Invoice..."
 msgstr ""
 
@@ -454,6 +457,10 @@ msgstr ""
 msgid "Detail Pricing"
 msgstr ""
 
+#: cargo_management/engine/link_sync.py:118
+msgid "Duplicate {0}"
+msgstr ""
+
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "EH Container"
@@ -469,16 +476,9 @@ msgstr ""
 msgid "EasyPost ID"
 msgstr ""
 
-#. Label of the most_used_item_code_10 (Button) field in DocType 'Cargo
-#. Shipment Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Electronicos - PESO"
-msgstr ""
-
-#. Option for the 'Type' (Select) field in DocType 'Cargo Shipment Line'
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
-#. Option for the 'Type' (Select) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
+#. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt
+#. Line'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Envelope"
@@ -542,11 +542,12 @@ msgstr ""
 msgid "Has Taxes"
 msgstr ""
 
-#. Label of the height (Float) field in DocType 'Cargo Shipment Line'
+#. Label of the height (Float) field in DocType 'Cargo Shipment Receipt
+#. Warehouse'
 #. Label of the height (Float) field in DocType 'Cargo Shipment Warehouse'
 #. Label of the height (Float) field in DocType 'Warehouse Receipt'
 #. Label of the height (Float) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
@@ -587,17 +588,12 @@ msgstr ""
 msgid "Issues and Tasks"
 msgstr ""
 
-#. Label of the most_used_item_code_8 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Juguetes - PESO"
-msgstr ""
-
-#. Label of the length (Float) field in DocType 'Cargo Shipment Line'
+#. Label of the length (Float) field in DocType 'Cargo Shipment Receipt
+#. Warehouse'
 #. Label of the length (Float) field in DocType 'Cargo Shipment Warehouse'
 #. Label of the length (Float) field in DocType 'Warehouse Receipt'
 #. Label of the length (Float) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
@@ -609,11 +605,22 @@ msgstr ""
 msgid "Longest Arrival Date"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:30
+#. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+msgid "Loose"
+msgstr ""
+
+#. Label of the manual_weight (Check) field in DocType 'Warehouse Receipt'
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+msgid "Manual Weight"
+msgstr ""
+
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:28
 msgid "Mark as Sorting"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/actions.py:21
+#: cargo_management/engine/status_update.py:87
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:35
 msgid "Marked as Sorting"
 msgstr ""
 
@@ -637,7 +644,7 @@ msgstr ""
 msgid "New Warehouse Receipt"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:51
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:33
 msgid "Now in Transit"
 msgstr ""
 
@@ -656,15 +663,19 @@ msgstr ""
 msgid "Out For Delivery"
 msgstr ""
 
+#. Label of the package_type (Data) field in DocType 'Cargo Shipment Receipt
+#. Warehouse'
 #. Label of the type (Select) field in DocType 'Warehouse Receipt'
+#. Label of the package_type (Select) field in DocType 'Warehouse Receipt Line'
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+#: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Package Type"
 msgstr ""
 
-#. Option for the 'Type' (Select) field in DocType 'Cargo Shipment Line'
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
-#. Option for the 'Type' (Select) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
+#. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt
+#. Line'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Pallet"
@@ -706,12 +717,6 @@ msgstr ""
 msgid "Parcel Content"
 msgstr ""
 
-#. Description of the 'Description' (Small Text) field in DocType 'Cargo
-#. Shipment Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
-msgid "Parcel description provided by the warehouse (if available)."
-msgstr ""
-
 #: cargo_management/parcel_management/doctype/parcel/parcel.py:139
 msgid "Parcel has been updated from {} API."
 msgstr ""
@@ -739,18 +744,6 @@ msgstr ""
 #. Shipment Receipt'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
 msgid "Parcels in Cargo Shipment Receipt"
-msgstr ""
-
-#. Label of the most_used_item_code_7 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Peluches - PESO"
-msgstr ""
-
-#. Label of the most_used_item_code_6 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Perfumes - PESO"
 msgstr ""
 
 #. Label of the pieces (Int) field in DocType 'Cargo Shipment'
@@ -820,30 +813,6 @@ msgstr ""
 msgid "Regular expression used to detect the carrier from a tracking number"
 msgstr ""
 
-#. Label of the most_used_item_code_9 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Reloj - PESO"
-msgstr ""
-
-#. Label of the most_used_item_code_14 (Button) field in DocType 'Cargo
-#. Shipment Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Repuesto Auto - PESO"
-msgstr ""
-
-#. Label of the most_used_item_code_13 (Button) field in DocType 'Cargo
-#. Shipment Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Repuestos - PESO"
-msgstr ""
-
-#. Label of the most_used_item_code_15 (Button) field in DocType 'Cargo
-#. Shipment Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Repuestos Moto - PESO"
-msgstr ""
-
 #. Description of the 'EasyPost ID' (Data) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Required to fetch data after an easypost tracking number is created"
@@ -870,23 +839,11 @@ msgstr ""
 msgid "Returned to Sender"
 msgstr ""
 
-#. Label of the most_used_item_code_2 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Ropa - PESO"
-msgstr ""
-
 #. Name of a Workspace
 #. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/workspace/sea_parcels/sea_parcels.json
 #: cargo_management/workspace_sidebar/parcels.json
 msgid "SEA Parcels"
-msgstr ""
-
-#. Label of the most_used_item_code_11 (Button) field in DocType 'Cargo
-#. Shipment Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Salud y Hogar - PESO"
 msgstr ""
 
 #. Option for the 'Transportation' (Select) field in DocType 'Parcel'
@@ -898,6 +855,8 @@ msgstr ""
 #. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
 #. Receipt Line'
 #. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
+#. Receipt Warehouse'
+#. Option for the 'Transportation' (Select) field in DocType 'Cargo Shipment
 #. Warehouse'
 #. Option for the 'Transportation' (Select) field in DocType 'Warehouse
 #. Receipt'
@@ -908,6 +867,7 @@ msgstr ""
 #: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
@@ -917,11 +877,6 @@ msgstr ""
 #. Label of a quick_list in the Issues and Tasks Workspace
 #: cargo_management/support_management/workspace/issues_and_tasks/issues_and_tasks.json
 msgid "Service Change"
-msgstr ""
-
-#. Label of the manual_weight (Check) field in DocType 'Warehouse Receipt'
-#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
-msgid "Set Weight"
 msgstr ""
 
 #. Label of the shipper (Link) field in DocType 'Parcel'
@@ -939,12 +894,6 @@ msgstr ""
 #. Label of the signed_by (Data) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Signed by"
-msgstr ""
-
-#. Label of the most_used_item_code_5 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Skincare - PESO"
 msgstr ""
 
 #. Option for the 'Status' (Select) field in DocType 'Parcel'
@@ -974,6 +923,10 @@ msgstr ""
 msgid "The name of the person who signed for the parcel"
 msgstr ""
 
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.js:14
+msgid "This Warehouse Receipt has one parcel line. Copy package type and dimensions from the line to the Warehouse Receipt?"
+msgstr ""
+
 #. Label of a shortcut in the AIR Parcels Workspace
 #. Label of a shortcut in the Parcels Workspace
 #. Label of a shortcut in the SEA Parcels Workspace
@@ -992,6 +945,12 @@ msgstr ""
 msgid "To Bill and Unpaid"
 msgstr ""
 
+#. Label of the total_carrier_weight (Float) field in DocType 'Warehouse
+#. Receipt'
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+msgid "Total Carrier Weight (lb)"
+msgstr ""
+
 #. Label of the total_parcels (Int) field in DocType 'Warehouse Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Total Parcels"
@@ -1002,20 +961,10 @@ msgstr ""
 msgid "Total Pieces"
 msgstr ""
 
-#. Label of the total_volume_cuft (Float) field in DocType 'Warehouse Receipt'
-#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
-msgid "Total Volume (cu ft)"
-msgstr ""
-
-#. Label of the gross_weight (Float) field in DocType 'Warehouse Receipt'
-#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
-msgid "Total Weight (lb)"
-msgstr ""
-
-#. Label of the carrier_gross_weight (Float) field in DocType 'Warehouse
+#. Label of the total_warehouse_weight (Float) field in DocType 'Warehouse
 #. Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
-msgid "Total Weight by Carriers (lb)"
+msgid "Total Weight (lb)"
 msgstr ""
 
 #. Label of the api (Select) field in DocType 'Carrier'
@@ -1050,7 +999,8 @@ msgid "Transit Days - SEA"
 msgstr ""
 
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
-#. Option for the 'Type' (Select) field in DocType 'Warehouse Receipt Line'
+#. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt
+#. Line'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Tube"
@@ -1062,7 +1012,7 @@ msgstr ""
 msgid "Unique Parcels"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/actions.py:107
+#: cargo_management/engine/sales_invoice.py:88
 msgid "Updating Parcels"
 msgstr ""
 
@@ -1070,22 +1020,14 @@ msgstr ""
 msgid "Updating from Carrier..."
 msgstr ""
 
-#. Label of the most_used_item_code_1 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Varios - PESO"
+#. Label of the total_volume_cbm (Float) field in DocType 'Warehouse Receipt'
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+msgid "Volume (CBM)"
 msgstr ""
 
-#. Label of the most_used_item_code_12 (Button) field in DocType 'Cargo
-#. Shipment Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Vitaminas y Suplementos - PESO"
-msgstr ""
-
-#. Label of the volumetric_weight (Float) field in DocType 'Cargo Shipment
-#. Line'
+#. Label of the total_volume_cuft (Float) field in DocType 'Warehouse Receipt'
 #. Label of the volume_cuft (Float) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Volume (cu ft)"
 msgstr ""
@@ -1108,16 +1050,21 @@ msgid "Warehouse Operations"
 msgstr ""
 
 #. Label of the warehouse_receipt (Link) field in DocType 'Parcel'
+#. Label of the warehouse_lines (Table) field in DocType 'Cargo Shipment'
 #. Label of the warehouse_receipt (Link) field in DocType 'Cargo Shipment Line'
 #. Label of the warehouse_receipt (Link) field in DocType 'Cargo Shipment
 #. Receipt Line'
+#. Label of the warehouse_receipt (Link) field in DocType 'Cargo Shipment
+#. Receipt Warehouse'
 #. Label of the warehouse_receipt (Link) field in DocType 'Cargo Shipment
 #. Warehouse'
 #. Name of a DocType
 #. Label of a Workspace Sidebar Item
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/workspace_sidebar/parcels.json
@@ -1129,11 +1076,6 @@ msgstr ""
 msgid "Warehouse Receipt Line"
 msgstr ""
 
-#. Label of the warehouse_lines (Table) field in DocType 'Cargo Shipment'
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
-msgid "Warehouse Receipts"
-msgstr ""
-
 #. Label of the warehouse_est_weight (Float) field in DocType 'Cargo Shipment
 #. Line'
 #. Label of the warehouse_weight (Float) field in DocType 'Warehouse Receipt
@@ -1143,7 +1085,10 @@ msgstr ""
 msgid "Warehouse Weight (lb)"
 msgstr ""
 
+#. Label of the weight (Float) field in DocType 'Cargo Shipment Receipt
+#. Warehouse'
 #. Label of the weight (Float) field in DocType 'Cargo Shipment Warehouse'
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 msgid "Weight (lb)"
 msgstr ""
@@ -1173,7 +1118,7 @@ msgstr ""
 
 #. Description of the 'Estimated Gross Weight by Carriers (in pounds)' (Float)
 #. field in DocType 'Cargo Shipment'
-#. Description of the 'Total Weight by Carriers (lb)' (Float) field in DocType
+#. Description of the 'Total Carrier Weight (lb)' (Float) field in DocType
 #. 'Warehouse Receipt'
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
@@ -1192,11 +1137,12 @@ msgstr ""
 msgid "Weight provided by the warehouse (if available)."
 msgstr ""
 
-#. Label of the width (Float) field in DocType 'Cargo Shipment Line'
+#. Label of the width (Float) field in DocType 'Cargo Shipment Receipt
+#. Warehouse'
 #. Label of the width (Float) field in DocType 'Cargo Shipment Warehouse'
 #. Label of the width (Float) field in DocType 'Warehouse Receipt'
 #. Label of the width (Float) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_line/cargo_shipment_line.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
 #: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
@@ -1212,10 +1158,16 @@ msgstr ""
 msgid "Without Carrier Data"
 msgstr ""
 
-#. Label of the most_used_item_code_3 (Button) field in DocType 'Cargo Shipment
-#. Receipt Line'
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
-msgid "Zapatos - PESO"
+#: cargo_management/engine/link_sync.py:139
+msgid "{0} Already Linked"
+msgstr ""
+
+#: cargo_management/engine/link_sync.py:115
+msgid "{0} {1} appears more than once."
+msgstr ""
+
+#: cargo_management/engine/link_sync.py:132
+msgid "{0} {1} is already linked to {2}."
 msgstr ""
 
 #. Count format of shortcut in the AIR Parcels Workspace

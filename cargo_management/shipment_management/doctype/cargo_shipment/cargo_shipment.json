@@ -2,9 +2,12 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_copy": 1,
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2020-06-14 12:54:12.963505",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -123,7 +126,7 @@
   {
    "fieldname": "warehouse_lines",
    "fieldtype": "Table",
-   "label": "Warehouse Receipts",
+   "label": "Warehouse Receipt",
    "options": "Cargo Shipment Warehouse"
   },
   {
@@ -177,7 +180,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-06-03 18:14:45.845896",
+ "modified": "2026-06-04 19:06:06.288633",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",

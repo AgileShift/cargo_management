@@ -14,7 +14,6 @@ class CargoShipmentLine(Document):
 		carrier_real_delivery: DF.Datetime | None
 		customer: DF.Link | None
 		customer_name: DF.Data | None
-		description: DF.SmallText | None
 		parcel: DF.Link
 		parent: DF.Data
 		parentfield: DF.Data

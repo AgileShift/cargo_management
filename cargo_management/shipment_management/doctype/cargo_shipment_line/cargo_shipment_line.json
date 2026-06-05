@@ -14,7 +14,6 @@
   "customer_name",
   "warehouse_details_section",
   "received_date",
-  "description",
   "column_break_9",
   "warehouse_est_weight",
   "additional_data_from_carrier_section",
@@ -32,16 +31,9 @@
    "in_list_view": 1,
    "label": "Warehouse Receipt",
    "options": "Warehouse Receipt",
+   "read_only": 1,
    "search_index": 1,
    "sticky": 1
-  },
-  {
-   "columns": 1,
-   "description": "Parcel description provided by the warehouse (if available).",
-   "fieldname": "description",
-   "fieldtype": "Small Text",
-   "in_list_view": 1,
-   "label": "Description"
   },
   {
    "fetch_from": "parcel.customer",
@@ -90,7 +82,8 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Warehouse Weight (lb)",
-   "non_negative": 1
+   "non_negative": 1,
+   "precision": "2"
   },
   {
    "fieldname": "additional_data_from_carrier_section",
@@ -123,10 +116,13 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Carrier Weight (lb)",
+   "non_negative": 1,
+   "precision": "2",
    "read_only": 1
   },
   {
    "bold": 1,
+   "columns": 1,
    "fetch_from": "parcel.transportation",
    "fieldname": "transportation",
    "fieldtype": "Select",
@@ -134,11 +130,12 @@
    "label": "Transportation",
    "options": "Sea\nAir",
    "read_only": 1,
+   "reqd": 1,
    "sticky": 1
   },
   {
    "bold": 1,
-   "columns": 1,
+   "columns": 2,
    "fieldname": "parcel",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -157,7 +154,7 @@
  "grid_page_length": 100,
  "istable": 1,
  "links": [],
- "modified": "2026-06-04 16:16:52.456529",
+ "modified": "2026-06-04 19:00:14.786466",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Line",
