@@ -12,16 +12,6 @@ frappe.ui.form.on("Parcel", {
 				frm.page.clear_custom_actions();  // Clear Custom buttons
 			});
 
-		// Setting custom queries
-		frm.set_query('item_code', 'content', () => {
-			return {
-				filters: {
-					'is_sales_item': true,
-					'has_variants': false
-				}
-			}
-		});
-
 		// Setting Currency Labels
 		frm.set_currency_labels(['total', 'shipping_amount'], 'USD');
 		frm.set_currency_labels(['rate', 'amount'], 'USD', 'content');
