@@ -8,6 +8,8 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 	},
 
 	onload: function (frm) {
+		cargo_management.setup_form_transportation_indicator(frm);
+
 		// TODO: Set Query for cargo_shipment_receipt_warehouse_lines
 
 		// Adding the two possible ways to trigger a fetch for customer_name : FIXME REVIEW THIS!. what happens on multiple customers same tracking?
@@ -23,6 +25,8 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 		if (frm.is_new()) {
 			return;
 		}
+
+		cargo_management.render_form_transportation_indicator(frm);
 
 		if (frm.doc.status === 'Awaiting Receipt') { // Awaiting or actually sorting
 			frm.page.add_action_item(__('Mark as Sorting'), () => {

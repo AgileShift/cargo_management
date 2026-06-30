@@ -57,16 +57,19 @@ Object.assign(cargo_management, {
 	icon_html: (icon) => ` <i class="fa fa-${icon}"></i>`, // Watch the first whitespace
 
 	transportation_formatter(transportation) {
-		const opts = this.TRANSPORTATIONS[transportation];
+		if (!transportation) return '';
+
+		const opts = this.TRANSPORTATIONS[transportation] || {color: 'gray'};
+		const icon = opts.icon ? this.icon_html(opts.icon) : '';
 
 		return `<span class="indicator-pill ${opts.color} filterable no-indicator-dot ellipsis" data-filter="transportation,=,${transportation}">
-            <span class="ellipsis">${__(transportation)}${this.icon_html(opts.icon)}</span>
+            <span class="ellipsis">${__(transportation)}${icon}</span>
         </span>`; // See more of this on list/list_view.js -> get_indicator_html();
 	},
 	transportation_indicator(transportation) {
 		const opts = this.TRANSPORTATIONS[transportation];
 
-		return `<span class="indicator-pill no-indicator-dot whitespace-nowrap ${opts.color}" style="margin-left: 10px">
+		return `<span class="indicator-pill no-indicator-dot whitespace-nowrap ${opts.color} transportation-indicator" style="margin-left: 10px">
 			<span>${__(transportation)}${this.icon_html(opts.icon)}</span>
 		</span>`; // See more of this on ui/page.js -> set_indicator() and clear_indicator()
 	},
