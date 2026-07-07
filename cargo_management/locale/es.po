@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: dev@gruporeal.org\n"
-"POT-Creation-Date: 2026-06-04 19:07-0745\n"
-"PO-Revision-Date: 2024-09-21 08:15-6145\n"
+"POT-Creation-Date: 2026-07-07 11:02-0745\n"
+"PO-Revision-Date: 2024-09-21 08:15-6215\n"
 "Last-Translator: dev@gruporeal.org\n"
 "Language-Team: dev@gruporeal.org\n"
 "MIME-Version: 1.0\n"
@@ -71,11 +71,7 @@ msgstr ""
 msgid "Add Parcel"
 msgstr "Agregar Paquete"
 
-#: cargo_management/public/js/doctype/quotation.js:211
-msgid "Add To Quote"
-msgstr ""
-
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:70
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:75
 msgid "Adding Parcels..."
 msgstr ""
 
@@ -369,33 +365,23 @@ msgstr "Estado según el transportista"
 msgid "Carrier status detail"
 msgstr "Detalle del estado según el transportista"
 
-#. Label of the closest_arrival_date (Date) field in DocType 'Quotation Item'
-#: cargo_management/parcel_selling/custom/quotation_item.json
-msgid "Closest Arrival Date"
-msgstr ""
-
-#. Label of the closest_departure_date (Date) field in DocType 'Quotation Item'
-#: cargo_management/parcel_selling/custom/quotation_item.json
-msgid "Closest Departure Date"
-msgstr ""
-
 #: cargo_management/public/js/utils/parcel_dialog_selector.js:11
 msgid "Coincidences found for: {0}"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:32
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:34
 msgid "Confirm Parcels"
 msgstr "Confirmar Paquetes"
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:33
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:35
 msgid "Confirm Transit"
 msgstr "Confirmar Transito"
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:32
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:34
 msgid "Confirmed Parcels"
 msgstr "Paquetes Confirmados"
 
-#: cargo_management/public/js/cargo_management.bundle.js:85
+#: cargo_management/public/js/utils/carriers.js:38
 msgid "Consolidated #{0}"
 msgstr "Consolidado #{0}"
 
@@ -410,7 +396,7 @@ msgstr ""
 msgid "Count of pieces(boxes) provided by the warehouse (if available)."
 msgstr "Recuento de piezas (cajas) proporcionadas por el almacén (si está disponible)."
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:45
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:50
 msgid "Creating Sales Invoice..."
 msgstr "Creando Facturas de Venta..."
 
@@ -418,11 +404,6 @@ msgstr "Creando Facturas de Venta..."
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Current status of the parcel"
 msgstr "Estado actual del paquete"
-
-#. Label of the days_in_transit (Section Break) field in DocType 'Quotation'
-#: cargo_management/parcel_selling/custom/quotation.json
-msgid "Days in Transit"
-msgstr ""
 
 #. Description of the 'Carrier Delivered At' (Datetime) field in DocType
 #. 'Parcel'
@@ -442,14 +423,9 @@ msgstr "Fecha de entrega proporcionada por el transportista (si está disponible
 msgid "Departure Date"
 msgstr "Fecha de Despacho"
 
-#. Label of the detail_pricing (Check) field in DocType 'Quotation'
-#: cargo_management/parcel_selling/custom/quotation.json
-msgid "Detail Pricing"
-msgstr ""
-
 #: cargo_management/engine/link_sync.py:118
 msgid "Duplicate {0}"
-msgstr ""
+msgstr "Duplicado {0}"
 
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
@@ -512,7 +488,7 @@ msgstr ""
 msgid "For Delivery or Pickup"
 msgstr "Para Entrega o Retiro"
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:71
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:56
 msgid "Get Updates from Carrier"
 msgstr "Actualizar datos del transportista"
 
@@ -525,11 +501,6 @@ msgstr ""
 #. Receipt Line'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
 msgid "Gross weight of the parcel"
-msgstr ""
-
-#. Label of the has_taxes (Check) field in DocType 'Quotation Item'
-#: cargo_management/parcel_selling/custom/quotation_item.json
-msgid "Has Taxes"
 msgstr ""
 
 #. Label of the height (Float) field in DocType 'Cargo Shipment Receipt
@@ -590,11 +561,6 @@ msgstr ""
 msgid "Length (in)"
 msgstr ""
 
-#. Label of the longest_arrival_date (Date) field in DocType 'Quotation Item'
-#: cargo_management/parcel_selling/custom/quotation_item.json
-msgid "Longest Arrival Date"
-msgstr ""
-
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Loose"
@@ -605,12 +571,12 @@ msgstr ""
 msgid "Manual Weight"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:28
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:33
 msgid "Mark as Sorting"
 msgstr ""
 
 #: cargo_management/engine/status_update.py:87
-#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:35
+#: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:40
 msgid "Marked as Sorting"
 msgstr ""
 
@@ -634,7 +600,7 @@ msgstr "Nunca Llegó"
 msgid "New Warehouse Receipt"
 msgstr ""
 
-#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:33
+#: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:35
 msgid "Now in Transit"
 msgstr ""
 
@@ -655,9 +621,11 @@ msgstr ""
 
 #. Label of the package_type (Data) field in DocType 'Cargo Shipment Receipt
 #. Warehouse'
-#. Label of the type (Select) field in DocType 'Warehouse Receipt'
+#. Label of the type (Data) field in DocType 'Cargo Shipment Warehouse'
+#. Label of the package_type (Select) field in DocType 'Warehouse Receipt'
 #. Label of the package_type (Select) field in DocType 'Warehouse Receipt Line'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_warehouse/cargo_shipment_receipt_warehouse.json
+#: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Package Type"
@@ -746,15 +714,6 @@ msgstr "Piezas"
 msgid "Pre Transit"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:78
-msgid "Previsualization"
-msgstr "Previsualización"
-
-#. Label of the purchase_assistance (Check) field in DocType 'Quotation'
-#: cargo_management/parcel_selling/custom/quotation.json
-msgid "Purchase Assistance"
-msgstr "Asistencia de Compra"
-
 #. Description of the 'Billable Quantity' (Float) field in DocType 'Cargo
 #. Shipment Receipt Line'
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt_line/cargo_shipment_receipt_line.json
@@ -787,11 +746,6 @@ msgstr ""
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.json
 msgid "Reference of the cargo shipment to be received."
 msgstr "Referencia del envío de carga a recibir."
-
-#. Label of the regex (Code) field in DocType 'Carrier'
-#: cargo_management/cargo_core/doctype/carrier/carrier.json
-msgid "Regex"
-msgstr ""
 
 #. Label of the regex_notes (Markdown Editor) field in DocType 'Carrier'
 #: cargo_management/cargo_core/doctype/carrier/carrier.json
@@ -870,11 +824,6 @@ msgstr ""
 msgid "Shipper"
 msgstr "Vendedor"
 
-#. Label of the shipping_cost (Float) field in DocType 'Quotation Item'
-#: cargo_management/parcel_selling/custom/quotation_item.json
-msgid "Shipping Cost"
-msgstr ""
-
 #. Label of the signed_by (Data) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Signed by"
@@ -891,12 +840,6 @@ msgstr "Firmado por"
 msgid "Sorting"
 msgstr "Clasificando"
 
-#. Label of the specific_data_2 (Section Break) field in DocType 'Quotation
-#. Item'
-#: cargo_management/parcel_selling/custom/quotation_item.json
-msgid "Specific Data 2"
-msgstr ""
-
 #. Description of the 'Shipper' (Link) field in DocType 'Parcel'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Store that sends the parcel"
@@ -906,10 +849,6 @@ msgstr "Tienda que envía el paquete"
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "The name of the person who signed for the parcel"
 msgstr "El nombre de la persona que firmó el paquete"
-
-#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.js:14
-msgid "This Warehouse Receipt has one parcel line. Copy package type and dimensions from the line to the Warehouse Receipt?"
-msgstr ""
 
 #. Label of a shortcut in the AIR Parcels Workspace
 #. Label of a shortcut in the Parcels Workspace
@@ -940,7 +879,9 @@ msgstr ""
 msgid "Total Parcels"
 msgstr ""
 
+#. Label of the total_pieces (Int) field in DocType 'Cargo Shipment Warehouse'
 #. Label of the total_pieces (Int) field in DocType 'Warehouse Receipt'
+#: cargo_management/shipment_management/doctype/cargo_shipment_warehouse/cargo_shipment_warehouse.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Total Pieces"
 msgstr ""
@@ -960,8 +901,8 @@ msgstr ""
 #. Label of the tracking_number (Data) field in DocType 'Parcel Content'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/parcel_management/doctype/parcel_content/parcel_content.json
-#: cargo_management/public/js/cargo_management.bundle.js:76
-#: cargo_management/public/js/utils/parcel_quick_entry.js:33
+#: cargo_management/public/js/quick_entry/parcel.js:33
+#: cargo_management/public/js/utils/carriers.js:29
 msgid "Tracking Number"
 msgstr "Número de Rastreo"
 
@@ -969,18 +910,6 @@ msgstr "Número de Rastreo"
 #: cargo_management/cargo_core/doctype/carrier/carrier.json
 msgid "Tracking URLs"
 msgstr "URLs de Rastreo"
-
-#. Label of the transit_days_air (Int) field in DocType 'Quotation'
-#. Label of the transit_days_air_2 (Int) field in DocType 'Quotation'
-#: cargo_management/parcel_selling/custom/quotation.json
-msgid "Transit Days - AIR"
-msgstr ""
-
-#. Label of the transit_days_sea (Int) field in DocType 'Quotation'
-#. Label of the transit_days_sea_2 (Int) field in DocType 'Quotation'
-#: cargo_management/parcel_selling/custom/quotation.json
-msgid "Transit Days - SEA"
-msgstr ""
 
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt'
 #. Option for the 'Package Type' (Select) field in DocType 'Warehouse Receipt
@@ -1000,7 +929,7 @@ msgstr ""
 msgid "Updating Parcels"
 msgstr ""
 
-#: cargo_management/parcel_management/doctype/parcel/parcel.js:88
+#: cargo_management/parcel_management/doctype/parcel/parcel.js:66
 msgid "Updating from Carrier..."
 msgstr "Actualizando desde el transportista..."
 
