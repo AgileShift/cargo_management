@@ -40,7 +40,7 @@ frappe.ui.form.ParcelQuickEntryForm = class ParcelQuickEntryForm extends frappe.
 		let {tracking_number, transportation, carrier, extra_services_section, content_section, content} = this.dialog.fields_dict;
 
 		tracking_number.df.onchange = function () {  // Override onchange to sanitize field and set carrier
-			const data = cargo_management.find_carrier_by_tracking_number(this.get_input_value());
+			const data = cargo_management.carriers.find_by_tracking_number(this.get_input_value());
 
 			carrier.set_input(data.carrier);      // Update the Carrier field
 			this.set_input(data.tracking_number); // Tracking Number returned is sanitized
