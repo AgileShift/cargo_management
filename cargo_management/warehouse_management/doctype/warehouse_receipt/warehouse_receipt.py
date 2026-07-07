@@ -22,13 +22,13 @@ class WarehouseReceipt(Document, LinkSyncMixin):
 		height: DF.Float
 		length: DF.Float
 		manual_weight: DF.Check
+		package_type: DF.Literal["", "Loose", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
 		status: DF.Literal["Open", "Awaiting Departure", "In Transit", "Sorting", "Finished"]
 		total_carrier_weight: DF.Float
 		total_parcels: DF.Int
 		total_pieces: DF.Int
 		total_warehouse_weight: DF.Float
 		transportation: DF.Literal["", "Sea", "Air"]
-		type: DF.Literal["", "Loose", "Box", "Envelope", "Bag", "Tube", "EH Container", "Parcel Bag(Sack)", "Pallet"]
 		warehouse: DF.Link
 		warehouse_receipt_lines: DF.Table[WarehouseReceiptLine]
 		width: DF.Float
@@ -39,7 +39,6 @@ class WarehouseReceipt(Document, LinkSyncMixin):
 	)
 
 	def before_validate(self):
-		self._apply_requested_single_line_defaults()
 		total_warehouse_weight, self.total_carrier_weight = 0, 0
 
 		for row in self.warehouse_receipt_lines:
@@ -73,30 +72,12 @@ class WarehouseReceipt(Document, LinkSyncMixin):
 	def total_volume_cbm(self):
 		return self.total_volume_cuft * CBM_PER_CUFT
 
-	def _apply_requested_single_line_defaults(self):
-		if not self.get("copy_single_line_details"):
-			return
-
-		if len(self.warehouse_receipt_lines) == 1:
-			self._apply_single_line_defaults()
-
-		self.copy_single_line_details = 0
-
 	@staticmethod
 	def _calculate_volume_cuft(length: float, width: float, height: float) -> float:
 		if not length or not width or not height:
 			return 0
 
 		return (length * width * height) / 1728
-
-	def _apply_single_line_defaults(self):
-		""" Set the defaults for single line warehouse receipts """
-		row = self.warehouse_receipt_lines[0]
-
-		self.type = row.package_type
-		self.length = row.length
-		self.width = row.width
-		self.height = row.height
 
 	def change_status(self, new_status):
 		""" Validates the current status of the warehouse receipt and change it if it's possible. """

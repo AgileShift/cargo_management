@@ -7,8 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "warehouse_receipt",
+  "date",
   "transportation",
   "reference",
+  "total_pieces",
   "length",
   "width",
   "height",
@@ -51,17 +53,19 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Length (in)",
+   "non_negative": 1,
    "precision": "2",
    "read_only": 1
   },
   {
    "bold": 1,
-   "fetch_from": "warehouse_receipt.type",
+   "fetch_from": "warehouse_receipt.package_type",
    "fieldname": "type",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Type",
-   "read_only": 1
+   "label": "Package Type",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fetch_from": "warehouse_receipt.width",
@@ -69,6 +73,7 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Width (in)",
+   "non_negative": 1,
    "precision": "2",
    "read_only": 1
   },
@@ -78,6 +83,7 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Height (in)",
+   "non_negative": 1,
    "precision": "2",
    "read_only": 1
   },
@@ -89,15 +95,37 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Transportation",
-   "options": "Sea\nAir",
+   "options": "\nSea\nAir",
    "read_only": 1,
    "reqd": 1,
    "sticky": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "warehouse_receipt.date",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "read_only": 1,
+   "reqd": 1,
+   "sticky": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "warehouse_receipt.total_pieces",
+   "fieldname": "total_pieces",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Pieces",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2026-05-14 11:14:46.369378",
+ "modified": "2026-06-29 19:33:27.019651",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Warehouse",

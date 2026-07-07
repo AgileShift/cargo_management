@@ -17,7 +17,7 @@
   "date",
   "cb_1",
   "status",
-  "type",
+  "package_type",
   "sb_0",
   "warehouse_receipt_lines",
   "section_break_snaf",
@@ -58,7 +58,8 @@
    "label": "Transportation",
    "options": "\nSea\nAir",
    "reqd": 1,
-   "search_index": 1
+   "search_index": 1,
+   "sticky": 1
   },
   {
    "bold": 1,
@@ -142,16 +143,6 @@
    "precision": "2"
   },
   {
-   "bold": 1,
-   "fieldname": "type",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_preview": 1,
-   "label": "Package Type",
-   "options": "\nLoose\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet",
-   "reqd": 1
-  },
-  {
    "alignment": "Center",
    "fieldname": "total_volume_cuft",
    "fieldtype": "Float",
@@ -205,7 +196,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval: !doc.__islocal",
    "fieldname": "sb_1",
    "fieldtype": "Section Break"
   },
@@ -289,20 +279,42 @@
    "fieldtype": "Section Break"
   },
   {
+   "bold": 1,
    "fieldname": "cargo_shipment",
    "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Cargo Shipment",
-   "options": "Cargo Shipment"
+   "options": "Cargo Shipment",
+   "read_only": 1,
+   "search_index": 1
   },
   {
    "fieldname": "column_break_abup",
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
    "fieldname": "cargo_shipment_receipt",
    "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Cargo Shipment Receipt",
-   "options": "Cargo Shipment Receipt"
+   "options": "Cargo Shipment Receipt",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Package Type",
+   "options": "\nLoose\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet",
+   "reqd": 1
   }
  ],
  "links": [
@@ -323,7 +335,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2026-06-03 18:01:02.846348",
+ "modified": "2026-06-17 17:40:33.701282",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",
