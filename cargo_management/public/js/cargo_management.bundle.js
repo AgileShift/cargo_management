@@ -15,6 +15,3 @@ Object.assign(cargo_management, {
 	icon_html: (icon) => ` <i class="fa fa-${icon}"></i>`, // Watch the first whitespace
 
 });
-// TODO: 135(Bracket) WORKING on TransportationMultiSelect Single Control
-// 127 -> 1 error, 5 warning, 2 warning, 8 typos - 29 October 2025
-// 120 -> 22 January 2026 -> Refactor for v16 Carrier Info on Frappe Boot(Already deleted some dead code)
