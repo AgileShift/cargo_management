@@ -3,7 +3,7 @@ frappe.ui.form.on("Parcel", {
 	setup(frm) {},
 
 	onload(frm) {
-		cargo_management.setup_form_transportation_indicator(frm);
+		cargo_management.form_view.setup_transportation_indicator(frm);
 
 		$(frm.wrapper)
 			.off('dirty.parcel_dirty_ui')
@@ -22,7 +22,7 @@ frappe.ui.form.on("Parcel", {
 			return;
 		}
 
-		cargo_management.render_form_transportation_indicator(frm); // Add Extra Indicator
+		cargo_management.form_view.render_transportation_indicator(frm); // Add Extra Indicator
 
 		frm.events.show_explained_status(frm); // Show 'Explained Status' as Intro Message
 		frm.events.build_custom_actions(frm);  // Adding custom buttons
@@ -35,7 +35,7 @@ frappe.ui.form.on("Parcel", {
 			return;
 		}
 
-		frm.doc.carrier = cargo_management.find_carrier_by_tracking_number(frm.doc.tracking_number).carrier;
+		frm.doc.carrier = cargo_management.carriers.find_by_tracking_number(frm.doc.tracking_number).carrier;
 
 		refresh_many(['tracking_number', 'carrier']);
 	},
@@ -56,7 +56,7 @@ frappe.ui.form.on("Parcel", {
 			frm.add_custom_button(__('Get Updates from Carrier'), () => frm.events.get_data_from_api(frm));
 		}
 
-		frm.add_custom_button(__('Search'), () => cargo_management.open_carriers_dialog(frm.doc));
+		frm.add_custom_button(__('Search'), () => cargo_management.carriers.open_dialog(frm.doc));
 	},
 
 	get_data_from_api(frm) {
@@ -99,5 +99,3 @@ frappe.ui.form.on('Parcel Content', {
 		frm.events.calculate_content_amounts_and_total(frm, cdt, cdn);
 	},
 });
-// 201 - FIXME: Giving PROBLEMS
-// 254 -> Working on Frappe Boot Info for Carriers!

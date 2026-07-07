@@ -4,11 +4,12 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 	setup(frm) {
 		frm.page.sidebar.toggle(false); // Hide Sidebar
 
-		cargo_management.set_transportation_indicator(frm, 'parcel');
+		cargo_management.form_view.set_child_transportation_indicator_formatter(frm, 'warehouse_receipt');
+		cargo_management.form_view.set_child_transportation_indicator_formatter(frm, 'parcel');
 	},
 
 	onload: function (frm) {
-		cargo_management.setup_form_transportation_indicator(frm);
+		cargo_management.form_view.setup_transportation_indicator(frm);
 
 		// TODO: Set Query for cargo_shipment_receipt_warehouse_lines
 
@@ -26,7 +27,7 @@ frappe.ui.form.on('Cargo Shipment Receipt', {
 			return;
 		}
 
-		cargo_management.render_form_transportation_indicator(frm);
+		cargo_management.form_view.render_transportation_indicator(frm);
 
 		if (frm.doc.status === 'Awaiting Receipt') { // Awaiting or actually sorting
 			frm.page.add_action_item(__('Mark as Sorting'), () => {

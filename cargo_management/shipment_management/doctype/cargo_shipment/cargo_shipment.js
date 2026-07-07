@@ -2,12 +2,12 @@ frappe.ui.form.on('Cargo Shipment', {
 	setup(frm) {
 		frm.page.sidebar.toggle(false); // Hide Sidebar
 
-		cargo_management.set_transportation_indicator(frm, 'warehouse_receipt');
-		cargo_management.set_transportation_indicator(frm, 'parcel');
+		cargo_management.form_view.set_child_transportation_indicator_formatter(frm, 'warehouse_receipt');
+		cargo_management.form_view.set_child_transportation_indicator_formatter(frm, 'parcel');
 	},
 
 	onload(frm) {
-		cargo_management.setup_form_transportation_indicator(frm);
+		cargo_management.form_view.setup_transportation_indicator(frm);
 	},
 
 	refresh: function (frm) {
@@ -17,7 +17,7 @@ frappe.ui.form.on('Cargo Shipment', {
 
 		// TODO: Add intro message when the cargo shipment is on a cargo shipment receipt
 		// TODO: Add Progress: dashboard.add_progress or frappe.chart of type: percentage
-		cargo_management.render_form_transportation_indicator(frm);
+		cargo_management.form_view.render_transportation_indicator(frm);
 
 		frm.events.build_custom_action_items(frm); // Adding Custom Action Items
 	},

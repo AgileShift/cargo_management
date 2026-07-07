@@ -16,12 +16,12 @@
   "expected_arrival_date",
   "arrival_date",
   "column_break_crqf",
+  "cargo_shipment_receipt",
   "column_break_2",
   "transportation",
   "status",
   "section_break_n2zav",
   "warehouse_lines",
-  "cargo_shipment_receipt",
   "section_break_rctv",
   "cargo_shipment_lines",
   "section_break_ofem",
@@ -60,7 +60,8 @@
    "fieldname": "pieces",
    "fieldtype": "Int",
    "in_preview": 1,
-   "label": "Pieces"
+   "label": "Pieces",
+   "non_negative": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -98,6 +99,7 @@
    "fieldname": "estimated_gross_weight_by_warehouse_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Warehouse (in pounds)",
+   "non_negative": 1,
    "precision": "2",
    "read_only": 1
   },
@@ -107,6 +109,8 @@
    "fieldname": "estimated_gross_weight_by_carriers_in_pounds",
    "fieldtype": "Float",
    "label": "Estimated Gross Weight by Carriers (in pounds)",
+   "non_negative": 1,
+   "precision": "2",
    "read_only": 1
   },
   {
@@ -180,7 +184,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-06-04 19:06:06.288633",
+ "modified": "2026-06-12 14:59:36.918390",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
