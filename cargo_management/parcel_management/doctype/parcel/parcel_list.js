@@ -31,7 +31,7 @@ frappe.listview_settings['Parcel'] = {
 			if (tracking_number_filter >= 0) {  // We have a 'tracking_name' filter being filtered. -> tracking_number_filter will contain the index if found
 				args.filters.splice(tracking_number_filter, 1);  // Removing 'name' filter from 'filters'. It's a 'standard_filter'
 
-				const search_term = cargo_management.find_carrier_by_tracking_number(tracking_number_field.get_input_value()).search_term;
+				const search_term = cargo_management.carriers.find_by_tracking_number(tracking_number_field.get_input_value()).search_term;
 
 				// TODO: WORK -> We will not use the main field from now on
 				args.or_filters = ['name', 'tracking_number'].map(field => [
@@ -46,21 +46,17 @@ frappe.listview_settings['Parcel'] = {
 		//FIXME: Delete after Finish! frappe.ui.form.make_quick_entry('Parcel', null, null, '');
 	},
 
-	get_indicator: (doc) => cargo_management.get_indicator(doc.status),
+	get_indicator: (doc) => cargo_management.list_view.get_indicator(doc.status),
 
 	button: {
 		show: () => true,
 		get_label: () => __('Search'),
 		get_description: () => __('Search'),
-		action: (doc) => cargo_management.open_carriers_dialog(doc)
+		action: (doc) => cargo_management.carriers.open_dialog(doc)
 	},
 
 	formatters: {
-		transportation: (value) => cargo_management.transportation_formatter(value),
+		transportation: (value) => cargo_management.list_view.transportation_formatter(value),
 		name: (value, df, doc) => (value !== doc.tracking_number) ? `<b>${value}</b>` : ''
 	}
-
 };
-// 119 FIXME: Create more functions, and move them to cargo_management.js
-// 6 warning, 4 typo // TODO: 115 -> Working on frappe boot info
-// 83 TODO: listview.get_args WE NEED TO MOVE THIS. To Work on the backend
