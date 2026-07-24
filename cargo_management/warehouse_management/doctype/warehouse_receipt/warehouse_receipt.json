@@ -10,26 +10,19 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_axfz",
   "transportation",
-  "warehouse",
   "cb_0",
-  "date",
+  "warehouse",
   "cb_1",
+  "date",
   "status",
-  "package_type",
   "sb_0",
   "warehouse_receipt_lines",
-  "section_break_snaf",
-  "column_break_epal",
-  "total_pieces",
-  "column_break_oald",
-  "total_parcels",
-  "column_break_vyiz",
-  "column_break_fskb",
-  "manual_weight",
-  "column_break_zxhf",
   "sb_1",
+  "column_break_vyiz",
+  "total_pieces",
+  "total_parcels",
+  "total_carrier_weight",
   "cb_2",
   "length",
   "cb_3",
@@ -37,12 +30,13 @@
   "cb_4",
   "height",
   "cb_6",
+  "manual_weight",
   "total_warehouse_weight",
-  "total_carrier_weight",
-  "cb_5",
   "total_volume_cuft",
   "total_volume_cbm",
-  "section_break_oyko",
+  "cb_5",
+  "package_type",
+  "section_break_links",
   "cargo_shipment",
   "column_break_abup",
   "cargo_shipment_receipt"
@@ -147,7 +141,7 @@
    "fieldname": "total_volume_cuft",
    "fieldtype": "Float",
    "is_virtual": 1,
-   "label": "Volume (cu ft)",
+   "label": "Total Volume (cu ft)",
    "non_negative": 1,
    "precision": "3",
    "read_only": 1
@@ -157,7 +151,7 @@
    "fieldname": "total_volume_cbm",
    "fieldtype": "Float",
    "is_virtual": 1,
-   "label": "Volume (CBM)",
+   "label": "Total Volume (CBM)",
    "non_negative": 1,
    "precision": "3",
    "read_only": 1
@@ -175,7 +169,6 @@
   {
    "alignment": "Center",
    "bold": 1,
-   "default": "0",
    "description": "Unique Parcels",
    "fieldname": "total_parcels",
    "fieldtype": "Int",
@@ -183,7 +176,6 @@
    "label": "Total Parcels",
    "non_negative": 1,
    "read_only": 1,
-   "reqd": 1,
    "show_description_on_click": 1,
    "sticky": 1
   },
@@ -220,30 +212,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_snaf",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_oald",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_zxhf",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_epal",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_axfz",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_fskb",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_vyiz",
    "fieldtype": "Column Break"
   },
@@ -255,28 +223,13 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "in_preview": 1,
-   "label": "Total Weight (lb)",
+   "label": "Total Warehouse Weight (lb)",
+   "mandatory_depends_on": "eval: doc.manual_weight;",
    "non_negative": 1,
    "precision": "2",
    "read_only_depends_on": "eval: !doc.manual_weight;",
    "show_description_on_click": 1,
    "sticky": 1
-  },
-  {
-   "alignment": "Center",
-   "bold": 1,
-   "description": "Weight of the parcels as measured by the carriers (if available).",
-   "fieldname": "total_carrier_weight",
-   "fieldtype": "Float",
-   "label": "Total Carrier Weight (lb)",
-   "non_negative": 1,
-   "precision": "2",
-   "read_only": 1,
-   "show_description_on_click": 1
-  },
-  {
-   "fieldname": "section_break_oyko",
-   "fieldtype": "Section Break"
   },
   {
    "bold": 1,
@@ -315,6 +268,24 @@
    "label": "Package Type",
    "options": "\nLoose\nBox\nEnvelope\nBag\nTube\nEH Container\nParcel Bag(Sack)\nPallet",
    "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_links",
+   "fieldtype": "Section Break",
+   "label": "Links"
+  },
+  {
+   "alignment": "Center",
+   "bold": 1,
+   "description": "Weight of the parcels as measured by the carriers (if available).",
+   "fieldname": "total_carrier_weight",
+   "fieldtype": "Float",
+   "label": "Total Carrier Weight (lb)",
+   "non_negative": 1,
+   "precision": "2",
+   "read_only": 1,
+   "show_description_on_click": 1
   }
  ],
  "links": [
@@ -335,7 +306,7 @@
    "link_fieldname": "warehouse_receipt"
   }
  ],
- "modified": "2026-06-17 17:40:33.701282",
+ "modified": "2026-07-23 22:52:44.264057",
  "modified_by": "Administrator",
  "module": "Warehouse Management",
  "name": "Warehouse Receipt",

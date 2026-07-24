@@ -66,7 +66,6 @@ frappe.ui.form.on("Parcel", {
 			freeze: true, freeze_message: __('Updating from Carrier...'), args: {source_name: frm.doc.name},
 			callback: (r) => {
 				// FIXME: "Not Saved" indicator cannot be changed.
-				console.log('Need to work in here. problems in v14');
 				//frappe.model.sync(r.message);
 				//frm.refresh();
 			}
