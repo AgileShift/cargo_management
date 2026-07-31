@@ -49,6 +49,8 @@ class WarehouseReceipt(Document, LinkSyncMixin):
 			self.total_warehouse_weight = total_warehouse_weight
 
 		self.total_parcels = len(set(pluck_child_field(self.warehouse_receipt_lines, "parcel")))
+
+	def validate(self):
 		self.validate_link_sync()
 
 	def before_save(self):

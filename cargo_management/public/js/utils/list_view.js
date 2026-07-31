@@ -1,8 +1,6 @@
 const cargo_management = frappe.provide('cargo_management');
 
 cargo_management.list_view = {
-
-	// TODO: Migrate to Document States? Maybe when frappe core starts using it.
 	get_indicator: (status) => [__(status), {
 		'Open': 'light-blue',
 
@@ -32,5 +30,4 @@ cargo_management.list_view = {
 			<span class="ellipsis">${__(transportation)}${icon}</span>
 		</span>`; // See more of this on list/list_view.js -> get_indicator_html();
 	}
-
 };

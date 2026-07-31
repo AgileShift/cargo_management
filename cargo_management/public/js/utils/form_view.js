@@ -9,7 +9,7 @@ cargo_management.form_view = {
 		});
 	},
 
-	format_transportation_indicator(transportation) {
+	transportation_indicator(transportation) {
 		if (!transportation || !cargo_management.TRANSPORTATIONS[transportation]) {
 			return '';
 		}
@@ -32,10 +32,12 @@ cargo_management.form_view = {
 			return;
 		}
 
-		frm.page.indicator.parent().append(cargo_management.form_view.format_transportation_indicator(transportation));
+		frm.page.indicator.parent().append(cargo_management.form_view.transportation_indicator(transportation));
 	},
 
 	setup_transportation_indicator(frm) {
+		cargo_management.form_view.clear_transportation_indicator(frm);
+
 		$(frm.wrapper)
 			.off('dirty.form_transportation_indicator')
 			.on('dirty.form_transportation_indicator', () => {

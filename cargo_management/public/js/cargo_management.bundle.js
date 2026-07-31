@@ -13,5 +13,4 @@ Object.assign(cargo_management, {
 	},
 
 	icon_html: (icon) => ` <i class="fa fa-${icon}"></i>`, // Watch the first whitespace
-
 });

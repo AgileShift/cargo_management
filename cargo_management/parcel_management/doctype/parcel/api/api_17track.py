@@ -117,7 +117,7 @@ class API17Track:
 		self.data: dict = {
 			'carrier_status': self.STATUSES.get(stat := self.unscrub(obj_17track.latest_status.status), stat),  # unscrub
 			'carrier_status_detail': self.unscrub(obj_17track.latest_status.sub_status),               # Normalize SubStatus
-			'carrier_est_weight': round(float(obj_17track.misc_info.weight_kg or 0.00) * 2.20462, 1),  # From KG to Pounds
+			'carrier_est_weight': round(float(obj_17track.misc_info.weight_kg or obj_17track.misc_info.weight_raw or 0.00) * 2.20462, 1),  # From KG to Pounds
 		}
 
 		# Change 'status' if the 'status_detail' gives us more information about it!
