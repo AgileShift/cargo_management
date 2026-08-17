@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cargo Management VERSION\n"
 "Report-Msgid-Bugs-To: dev@gruporeal.org\n"
-"POT-Creation-Date: 2026-07-07 11:02-0745\n"
-"PO-Revision-Date: 2024-09-21 08:15-6215\n"
+"POT-Creation-Date: 2026-08-17 17:56-0745\n"
+"PO-Revision-Date: 2024-09-21 08:15-6615\n"
 "Last-Translator: dev@gruporeal.org\n"
 "Language-Team: dev@gruporeal.org\n"
 "MIME-Version: 1.0\n"
@@ -66,11 +66,6 @@ msgstr "Paquetes Activos"
 msgid "Actual Date of Receipt provided by the warehouse (if available)."
 msgstr ""
 
-#. Label of a shortcut in the Parcels Workspace
-#: cargo_management/parcel_management/workspace/parcels/parcels.json
-msgid "Add Parcel"
-msgstr "Agregar Paquete"
-
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:75
 msgid "Adding Parcels..."
 msgstr ""
@@ -114,6 +109,11 @@ msgstr ""
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Air"
 msgstr "Aéreo"
+
+#. Label of a Workspace Sidebar Item
+#: cargo_management/workspace_sidebar/parcels.json
+msgid "All Parcels"
+msgstr "Todos los Paquetes"
 
 #. Option for the 'Type' (Select) field in DocType 'Carrier Tracking URL'
 #: cargo_management/cargo_core/doctype/carrier_tracking_url/carrier_tracking_url.json
@@ -201,14 +201,12 @@ msgstr "Esperando Confirmación"
 #. Label of a shortcut in the Parcels Workspace
 #. Label of a shortcut in the SEA Parcels Workspace
 #. Option for the 'Status' (Select) field in DocType 'Cargo Shipment'
-#. Label of a quick_list in the Shipments Workspace
 #. Option for the 'Status' (Select) field in DocType 'Warehouse Receipt'
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 #: cargo_management/parcel_management/workspace/air_parcels/air_parcels.json
 #: cargo_management/parcel_management/workspace/parcels/parcels.json
 #: cargo_management/parcel_management/workspace/sea_parcels/sea_parcels.json
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.json
-#: cargo_management/shipment_management/workspace/shipments/shipments.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Awaiting Departure"
 msgstr "Esperando Despacho"
@@ -365,10 +363,6 @@ msgstr "Estado según el transportista"
 msgid "Carrier status detail"
 msgstr "Detalle del estado según el transportista"
 
-#: cargo_management/public/js/utils/parcel_dialog_selector.js:11
-msgid "Coincidences found for: {0}"
-msgstr ""
-
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:34
 msgid "Confirm Parcels"
 msgstr "Confirmar Paquetes"
@@ -404,6 +398,11 @@ msgstr "Creando Facturas de Venta..."
 #: cargo_management/parcel_management/doctype/parcel/parcel.json
 msgid "Current status of the parcel"
 msgstr "Estado actual del paquete"
+
+#. Option for the 'Carrier status' (Select) field in DocType 'Parcel'
+#: cargo_management/parcel_management/doctype/parcel/parcel.json
+msgid "Delivered"
+msgstr ""
 
 #. Description of the 'Carrier Delivered At' (Datetime) field in DocType
 #. 'Parcel'
@@ -569,11 +568,11 @@ msgstr ""
 #. Label of the manual_weight (Check) field in DocType 'Warehouse Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Manual Weight"
-msgstr ""
+msgstr "Peso Manual"
 
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:33
 msgid "Mark as Sorting"
-msgstr ""
+msgstr "Marcar como Clasificando"
 
 #: cargo_management/engine/status_update.py:87
 #: cargo_management/shipment_management/doctype/cargo_shipment_receipt/cargo_shipment_receipt.js:40
@@ -595,11 +594,6 @@ msgstr ""
 msgid "Never Arrived"
 msgstr "Nunca Llegó"
 
-#. Label of a shortcut in the Warehouse Operations Workspace
-#: cargo_management/warehouse_management/workspace/warehouse_operations/warehouse_operations.json
-msgid "New Warehouse Receipt"
-msgstr ""
-
 #: cargo_management/shipment_management/doctype/cargo_shipment/cargo_shipment.js:35
 msgid "Now in Transit"
 msgstr ""
@@ -607,11 +601,6 @@ msgstr ""
 #. Option for the 'Type' (Select) field in DocType 'Carrier Tracking URL'
 #: cargo_management/cargo_core/doctype/carrier_tracking_url/carrier_tracking_url.json
 msgid "Official"
-msgstr ""
-
-#. Label of a quick_list in the Warehouse Operations Workspace
-#: cargo_management/warehouse_management/workspace/warehouse_operations/warehouse_operations.json
-msgid "Open Warehouse Receipt"
 msgstr ""
 
 #. Option for the 'Carrier status' (Select) field in DocType 'Parcel'
@@ -886,10 +875,20 @@ msgstr ""
 msgid "Total Pieces"
 msgstr ""
 
+#. Label of the total_volume_cbm (Float) field in DocType 'Warehouse Receipt'
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+msgid "Total Volume (CBM)"
+msgstr ""
+
+#. Label of the total_volume_cuft (Float) field in DocType 'Warehouse Receipt'
+#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
+msgid "Total Volume (cu ft)"
+msgstr ""
+
 #. Label of the total_warehouse_weight (Float) field in DocType 'Warehouse
 #. Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
-msgid "Total Weight (lb)"
+msgid "Total Warehouse Weight (lb)"
 msgstr ""
 
 #. Label of the api (Select) field in DocType 'Carrier'
@@ -933,33 +932,9 @@ msgstr ""
 msgid "Updating from Carrier..."
 msgstr "Actualizando desde el transportista..."
 
-#. Label of the total_volume_cbm (Float) field in DocType 'Warehouse Receipt'
-#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
-msgid "Volume (CBM)"
-msgstr ""
-
-#. Label of the total_volume_cuft (Float) field in DocType 'Warehouse Receipt'
 #. Label of the volume_cuft (Float) field in DocType 'Warehouse Receipt Line'
-#: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 #: cargo_management/warehouse_management/doctype/warehouse_receipt_line/warehouse_receipt_line.json
 msgid "Volume (cu ft)"
-msgstr ""
-
-#. Label of a shortcut in the Warehouse Operations Workspace
-#: cargo_management/warehouse_management/workspace/warehouse_operations/warehouse_operations.json
-msgid "WRs Awaiting Departure"
-msgstr ""
-
-#. Label of a shortcut in the Warehouse Operations Workspace
-#: cargo_management/warehouse_management/workspace/warehouse_operations/warehouse_operations.json
-msgid "WRs In Transit"
-msgstr ""
-
-#. Name of a Workspace
-#. Label of a Workspace Sidebar Item
-#: cargo_management/warehouse_management/workspace/warehouse_operations/warehouse_operations.json
-#: cargo_management/workspace_sidebar/parcels.json
-msgid "Warehouse Operations"
 msgstr ""
 
 #. Label of the warehouse_receipt (Link) field in DocType 'Parcel'
@@ -1040,8 +1015,8 @@ msgstr ""
 msgid "Weight of the parcels as measured by the warehouse (if available)."
 msgstr "Peso según el almacén (en libras)"
 
-#. Description of the 'Total Weight (lb)' (Float) field in DocType 'Warehouse
-#. Receipt'
+#. Description of the 'Total Warehouse Weight (lb)' (Float) field in DocType
+#. 'Warehouse Receipt'
 #: cargo_management/warehouse_management/doctype/warehouse_receipt/warehouse_receipt.json
 msgid "Weight provided by the warehouse (if available)."
 msgstr "Peso Bruto estimado según el almacén (en libras)"
