@@ -220,18 +220,6 @@
   {
    "child": 1,
    "collapsible": 1,
-   "icon": "git-compare-arrows",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Warehouse Operations",
-   "link_to": "Warehouse Operations",
-   "link_type": "Workspace",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 1,
-   "collapsible": 1,
    "icon": "arrow-right-from-line",
    "indent": 0,
    "keep_closed": 0,
@@ -247,22 +235,10 @@
    "icon": "waypoints",
    "indent": 1,
    "keep_closed": 0,
-   "label": "Shipment",
+   "label": "Shipments",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Section Break"
-  },
-  {
-   "child": 1,
-   "collapsible": 1,
-   "icon": "earth",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Shipments",
-   "link_to": "Shipments",
-   "link_type": "Workspace",
-   "show_arrow": 0,
-   "type": "Link"
   },
   {
    "child": 1,
@@ -301,7 +277,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-08-17 17:18:15.574773",
+ "modified": "2026-08-17 17:49:49.762140",
  "modified_by": "Administrator",
  "module": "Parcel Management",
  "name": "Parcels",
