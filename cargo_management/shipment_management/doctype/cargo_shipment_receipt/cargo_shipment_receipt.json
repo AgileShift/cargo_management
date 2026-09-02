@@ -6,18 +6,18 @@
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
- "creation": "2020-11-03 16:50:04.125725",
+ "creation": "2026-07-25 11:08:49.461989",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "transportation",
+  "column_break_vrcb",
+  "cargo_shipment",
+  "column_break_p4gz",
   "departure_date",
   "arrival_date",
-  "c_column",
-  "transportation",
-  "column_break_p4gz",
-  "cargo_shipment",
   "status",
   "section_break_jjhw",
   "cargo_shipment_receipt_warehouse",
@@ -94,10 +94,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "c_column",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_p4gz",
    "fieldtype": "Column Break"
   },
@@ -121,6 +117,10 @@
    "fieldname": "cargo_shipment_receipt_warehouse",
    "fieldtype": "Table",
    "options": "Cargo Shipment Receipt Warehouse"
+  },
+  {
+   "fieldname": "column_break_vrcb",
+   "fieldtype": "Column Break"
   }
  ],
  "links": [
@@ -130,7 +130,7 @@
    "link_fieldname": "custom_cargo_shipment_receipt"
   }
  ],
- "modified": "2026-06-04 19:03:09.876663",
+ "modified": "2026-08-17 17:41:42.379780",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment Receipt",
