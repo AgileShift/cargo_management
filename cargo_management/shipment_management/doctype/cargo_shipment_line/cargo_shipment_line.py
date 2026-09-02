@@ -18,7 +18,6 @@ class CargoShipmentLine(Document):
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
-		received_date: DF.Date | None
 		transportation: DF.Literal["Sea", "Air"]
 		warehouse_est_weight: DF.Float
 		warehouse_receipt: DF.Link | None
