@@ -13,7 +13,6 @@ class CargoShipment(Document, LinkSyncMixin):
 		from cargo_management.shipment_management.doctype.cargo_shipment_warehouse.cargo_shipment_warehouse import CargoShipmentWarehouse
 		from frappe.types import DF
 
-		arrival_date: DF.Date | None
 		cargo_shipment_lines: DF.Table[CargoShipmentLine]
 		cargo_shipment_receipt: DF.Link | None
 		departure_date: DF.Date
