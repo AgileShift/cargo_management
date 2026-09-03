@@ -63,11 +63,11 @@
    "non_negative": 1
   },
   {
+   "allow_bulk_edit": 1,
    "allow_in_quick_entry": 1,
    "fieldname": "cargo_shipment_lines",
    "fieldtype": "Table",
    "in_preview": 1,
-   "in_standard_filter": 1,
    "label": "Packing List",
    "options": "Cargo Shipment Line",
    "read_only_depends_on": "eval: doc.status == 'Finished';",
@@ -118,10 +118,12 @@
    "search_index": 1
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "warehouse_lines",
    "fieldtype": "Table",
    "label": "Warehouse Receipt",
-   "options": "Cargo Shipment Warehouse"
+   "options": "Cargo Shipment Warehouse",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_n2zav",
@@ -174,7 +176,7 @@
    "link_fieldname": "custom_cargo_shipment"
   }
  ],
- "modified": "2026-09-02 08:49:22.575414",
+ "modified": "2026-09-03 16:12:21.650507",
  "modified_by": "Administrator",
  "module": "Shipment Management",
  "name": "Cargo Shipment",
