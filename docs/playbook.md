@@ -1,331 +1,548 @@
-# QuickBox - Flujos Ideales - Crear PlayBook
+# QuickBox Functional Playbook
 
-## Flujos
+Este documento conserva y organiza la visión funcional definida originalmente en **QuickBox - Flujos Ideales - Crear PlayBook** (2019).
 
-### Flujos de Facturaciones
+No describe por sí solo el comportamiento actual de la aplicación ni establece políticas comerciales. Su propósito es preservar el modelo deseado, sus procesos, entradas y resultados esperados para derivar y revisar el [backlog funcional](functional-backlog.md).
 
-1. Cuando el cliente se compra
-2. Cuando le compramos(Online) al cliente
-   - Flujo de Compras(Por verse)
-3. Cierre de caja de facturas del dia?
+## Clasificación del contenido
 
-### Flujo de Regla de Precios
+- **Operación confirmada:** ocurre actualmente.
+- **Modelo esperado:** describe cómo debería funcionar integralmente.
+- **Decisión pendiente:** requiere una definición comercial u operativa.
+- **Referencia histórica:** conserva una idea o regla del documento de 2019 sin declararla vigente.
 
-1. Separar por servicios
-2. Tabla de Costos por Tarjetas
+<a id="imp-01"></a>
 
-### Flujo de Entregas
+## IMP-01 · Importación realizada por el cliente
 
-1. Cuando el cliente retira en local(Sin importar la forma de pago)
-2. Cuando es via delivery Local:
-   - Cuando El mensajero recibe efectivo
-3. Cierre de caja de entregas del dia?
+**Clasificación:** operación confirmada y modelo esperado.
 
-### Flujo de Soporte
+### Objetivo
 
-1. Incidencias cuando el cliente se compra
-2. Incidencias cuando el nosotros le compramos al cliente
-3. Esto va relacionado con el flujo de terminos y condiciones
+Importar un paquete comprado directamente por el cliente y mantener su trazabilidad desde el número de rastreo hasta el retiro o la entrega.
 
-### Flujo de Caja
+### Entrada
 
-1. Pago Total
-2. Pago Total + Adelanto
-3. Pago Parcial + Pago anterior(Adelanto)
-4. Pagos con Tarjeta:
-   - Activar Reglas de Precios
-   - Tabla de Comisiones
-   - Pagos al contado o pagos con financiamientos
+- Número de rastreo proporcionado por el cliente.
+- Cliente, servicio de transporte y descripción del paquete.
 
-### Flujo de Reporte Operativo
+### Proceso
 
-1. Paquetes Rezagados, Atrasados
-2. Compras Rezagados, Atrasados
-3. Soportes pendientes
-4. Notificaciones via CRON(Definir medios)?
+1. El número de rastreo se registra en `Parcel`.
+2. Se da seguimiento externo al paquete.
+3. En **Origen**, el paquete se confirma mediante `Warehouse Receipt` y se incorpora a un `Cargo Shipment`.
+4. En **Destino**, la carga se recibe mediante `Cargo Shipment Receipt`.
+5. Se pesan, rotulan y clasifican los paquetes.
+6. Se genera la factura de importación.
+7. El cliente paga y solicita retiro o entrega.
 
-### Flujo de Terminos, Politicas y Condiciones
+### Salidas
 
-1. Determinadas por el tipo de facturacion
-2. Determinada por el tipo de tienda o transportista?
+- Paquete relacionado con su cliente.
+- Historial logístico.
+- `Sales Invoice` por los servicios prestados.
+- Pago, retiro o entrega.
 
-### Flujo de Facturación de Membresias\Servicios
+### Eventos que requieren seguimiento
 
-Relacionado con Flujo Terminos y Politicas(Mostrar claramente los terminos)
+- El paquete fue entregado por el transportista.
+- El paquete sufrió un retraso.
+- El paquete fue firmado por una persona ajena al personal de Origen.
+- La entrega falló, fue reagendada, quedó disponible para retiro o fue devuelta.
 
-Relacionado con Flujo de Pagos(Impresion de Recibos)
+<a id="asc-01"></a>
 
-1. Servicio de Seguros x Producto o Envio
-2. Servicio de Libras Prepagadas
-3. Membresia para tarifas preferenciales o Deliverys x mes
-4. Membresia para envios con seguros
-5. Membresia para creditos?
-6. Acumulacion de Puntos o Tarjeta acumulable fisica con CODIGO
+## ASC-01 · Asistencia de compra
 
-### Flujo de Notificaciones automaticas al cliente? - (Puede revelar incosistencias)
+**Clasificación:** operación confirmada y modelo esperado.
 
-### Flujo de Creditos
+QuickBox compra al proveedor el producto solicitado por el cliente. El proceso comercial existe actualmente; su trazabilidad integral entre documentos continúa siendo el modelo funcional esperado.
 
-1. Sistema de creditos en importaciones
-2. Sistema de Creditos en Ordenes de Venta(Asistencia)
-3. Tarifas segun creditos
+### Entrada
 
-## Modulo de compra
+- Enlaces de los productos.
+- Talla, color, cantidad y demás variantes necesarias.
+- Datos del cliente.
+- Cotización aprobada.
+- Adelanto confirmado o crédito autorizado.
 
-- QuickBox Nicaragua compra al proveedor el producto solicitado por nuestro cliente.
+### Proceso comercial confirmado
 
-### Flujo de trabajo cuando nosotros realizamos la compra del producto por el cliente
+1. El cliente envía los enlaces de los productos.
+2. Se prepara la cotización.
+3. Se confirma la compra con el cliente.
+4. Se recibe el adelanto acordado o se autoriza el crédito.
+5. QuickBox realiza la compra.
+6. Se obtiene el número de rastreo y se registra el paquete.
+7. El paquete continúa por el flujo logístico ordinario.
 
-1. Se realiza la cotización:
-   - El cliente envía distintos enlaces y con respecto a eso le brindamos la cotización
-2. Se realiza la venta al cliente(Sales Order):
-   - Convertir la cotización en una orden de venta
-3. Se recibe un adelanto(Payment Entry) o se financia:
-   - El cliente realiza un depósito en nuestra cuenta de banco por un monto establecido para realizar su compra.(Modulo de cuentas de bancos)
-   - Si el cliente es de confianza, nosotros realizamos la compra sin solicitar un depósito.(Modul de credito)
-4. Se realiza la orden al proveedor que nos brinda el cliente(Purchase Order):
-   - El proveedor nos brinda un numero de rastreo que usamos para darle seguimiento al paquete.
-   - Necesitamos darle seguimiento a la cuenta de banco con la que se realiza este pago al proveedor.(Modulo de cuentas de banco)
-5. Se recibe el producto en almacén en USA:
-   - El personal en USA sube el número de rastreo a un sistema de ellos y le llama “Warehouse Receipt”, esto se verifica manualmente por nosotros
-   - Una hoja de entrada de inventario puede tener uno o muchos números de rastreo. (Modulo de Inventario)
-6. Se transporte el producto desde USA hasta Nicaragua:
-   - El personal en USA envía los paquetes hacia Nicaragua y sube un registro al sistema de ellos, en el cual nosotros verificamos manualmente
-   - Con el registro de exportación podemos brindar una fecha aproximada de entrega al cliente en Nicaragua(Modulo de Venta)
-7. Se reciben los paquetes en Oficina:
-   - Se procede a realizar un inventario de recepción
-   - Se notifica al cliente cuando los paquetes están en nuestra oficina:
-     - Si se necesita se solicita una factura de la compra del cliente para brindarle el valor de importación.
-   - El cliente puede solicitar retirar el paquete personalmente o solicitar un envio hasta su casa por un cargo extra:
-     - En caso de solicitar envío, programamos una entrega(Delivery Note) con un mensajero externo(Necesitamos una hoja de ruta) y se realiza un cobro adicional(Modulo de entregas)
-   - El cliente puede pagar en efectivo o transferencia(Payment Entry):
-     - Este pago se debe de registrar ya que puede realizar pagos parciales con diferentes métodos para completar el pago de su factura(Modulo cuenta de bancos)
+### Modelo documental esperado
 
-### Flujo de trabajo cuando solo importamos la paqueteria
+1. Preparar una `Quotation`.
+2. Convertir la cotización aprobada en `Sales Order`.
+3. Registrar el adelanto mediante `Payment Entry` o aplicar el crédito autorizado.
+4. Registrar la compra al proveedor mediante `Purchase Order`.
+5. Relacionar el número de rastreo y el `Parcel` con la asistencia de compra.
+6. Procesar el paquete en Origen y Destino.
+7. Generar la `Sales Invoice` correspondiente.
+8. Registrar el saldo restante.
+9. Completar el retiro o la entrega.
 
-1. El cliente nos envia el numero de rastreo que le brindó su proveedor:
-   - El número se registra en nuestro sistema(Parcel)
-   - Le podemos dar seguimiento al paquete y generar "Alertas" en ciertos eventos:
-     1. Paquete se entrego(Modulo de inventario)
-     2. Paquete se retraso
-     3. Paquete fue firmado por alguien fuera de nuestro personal
-   - Se repiten todos los pasos del flujo "cuando nosotros realizamos la compra" desde el paso 5 hasta el último paso.
+### Base técnica parcial
 
-### Flujo de trabajo cuando vendemos los productos
+- `Parcel` identifica si se trata de una compra asistida.
+- `Parcel` puede relacionarse con una `Sales Order`.
+- Los ítems de venta pueden relacionarse con un `Parcel`.
+- Estas relaciones no demuestran por sí solas que la cotización, el adelanto, la compra al proveedor y la facturación estén conectados automáticamente de principio a fin.
 
-1. Se repiten todos los pasos del flujo "cuando nosotros realizamos la compra" desde el paso 4 hasta el paso 6
-2. Se realiza una orden de venta al cliente
-3. Se realiza una factura
-4. Se agenda una entrega(Cliente paga al momento de la entrega)
-5. Inventario disminuye de inmediato
+### Salidas
 
----
+- Compra aprobada y realizada.
+- Adelanto o crédito registrado.
+- Compra al proveedor.
+- Paquete y número de rastreo relacionados.
+- Facturación de los productos y servicios.
+- Saldo final y entrega.
 
-## Modulo de Entregas
+### Decisiones pendientes
 
-- Hoja de entregas por dia y hora
-- Crear una hoja de ruta de los clientes marcados como envio por delivery
+- Documento autoritativo para iniciar la solicitud.
+- Condiciones para comprar sin adelanto.
+- Relación contable y documental con la compra al proveedor.
+- Momento y documento de cierre de la asistencia.
 
-## Modulo de cuentas de banco <- Modulo de Ventas
+<a id="log-01"></a>
 
-- Arqueos
-- Registro de pagos de clientes y a proveedores
-- Reporte
+## LOG-01 · Logística en Origen y Destino
 
-## Modulo de credito a cliente
+**Clasificación:** operación confirmada.
 
-- Manejo de cartera de clientes con credito abierto
+> **Texto original de 2019:** “Se recibe el producto en almacén en USA” y “Se transporta el producto desde USA hasta Nicaragua”.
 
-### Flujo
+El modelo vigente utiliza los conceptos **Origen** y **Destino**. Una operación puede tener ubicaciones diferentes sin cambiar su flujo funcional.
 
-- Manejo de clientes y cuentas por cobrar
-- Verficacion de limite de credito
-- Alerta de incumplimiento cada 24 horas luego de 5 dias
-- Aplicar regla de seguridad, luego de Y incumplimientos se negara el credito al cliente por un periodo de tiempo X
+### Origen
 
-## Modulo de Inventario
+1. El paquete se recibe y verifica mediante `Warehouse Receipt`.
+2. Un recibo puede contener uno o varios números de rastreo.
+3. Los recibos se agregan al `Cargo Shipment`.
+4. La carga se prepara y sale desde Origen.
 
-- Ingreso, control y salida de mercaderia
-- Alerta de mercaderia de cliente con X dias de NO ENTREGA
+### Destino
 
-### Los siguientes procesos deberán ser automatizados
+1. Se recibe el `Cargo Shipment` mediante `Cargo Shipment Receipt`.
+2. Se realiza el inventario de recepción.
+3. Los paquetes se pesan, rotulan y clasifican.
+4. Las facturas se generan desde la recepción.
+5. Las tarifas y descripciones se revisan manualmente antes de continuar con el cobro.
 
-Al recibir la carga en oficina(de manera semanal), tenemos que registrar una entrada a bodega:
+### Automatización de la recepción
 
-- Se escanea cada número de rastreo
-- Se pesa cada paquete
-- Se procede a realizar la factura al cliente:
-  - Una factura puede contener el servicio de importacion de 1 o varios paquetes
-- Se procede a notificar al cliente
+> **Texto original de 2019:** “Una pantalla que permite precargar todos los paquetes que existen en una hoja de movimiento de bodega. En esta pantalla se agrega rápidamente el peso y el valor de factura de cada paquete; una vez terminado de inventariar toda la paquetería se guarda esta hoja de recepción y se generan automáticamente las facturas”.
 
-### Solucion
+Parte de este modelo existe actualmente mediante `Cargo Shipment Receipt`: carga los paquetes relacionados, permite procesar su información y genera las facturas. Continúa pendiente evaluar cualquier necesidad adicional de automatización o notificación.
 
-Una pantalla que permite precargar todos los paquetes que existen en una "hoja de movimiento de bodega"(USA a Nicaragua).
+### Salidas
 
-En esta pantalla se agrega rápidamente: el peso y el valor de factura de cada paquete, Una vez terminado de inventariar toda la paquetería se guarda esta "hoja de recepción" y se generan automáticamente las facturas y se le notifica al cliente: vía correo o vía SMS
+- Recepción confirmada en Origen.
+- Embarque preparado.
+- Recepción confirmada en Destino.
+- Paquetes pesados, rotulados y clasificados.
+- Facturas generadas y revisadas.
 
-## Modulo de rastreo
+<a id="fac-01"></a>
 
-- Seleccion de producto a rastreas, cada producto(compra a cliente) ya debe tener su TrackingID correspondiente.
-- Alertas
-  - Entrega
-  - Extravio
-  - Paquete fue firmado por alguien fuera de nuestro personal
-  - Retraso
-  - ...
+## FAC-01 · Facturación y precios
 
-Le damos seguimiento a los paquetes con los números de rastreo(Esto nos permite accionar antes que pase demasiado tiempo):
+**Clasificación:** operación confirmada, modelo esperado y decisiones pendientes.
 
-- actualmente el seguimiento es manual y genera mucho trabajo al personal
+### Escenarios de facturación
 
-Usaremos el API de EasyPost(Tracking)
+1. Importación realizada por el cliente.
+2. Asistencia de compra.
+3. Venta de productos.
+4. Servicios adicionales aprobados.
 
-Bajo ciertos eventos un paquete debe de ser alertado directamente a nuestro personal y al cliente:
+### Venta de productos
 
-- El paquete falla al ser entregado
-- El paquete es recibido(Firmado) por una persona ajena a nuestro personal
-- El paquete no logro ser entregado por que la entrega se realiza fuera de horario de oficina
-- El paquete no logró ser entregado y se reagendara para el siguiente dia habil
-- El paquete no logró ser entregado y se necesita que alguien reagende la entrega, de lo contrario aparece para que se retire en las oficinas de la empresa de envíos.
-- El paquete sufrió un retraso
-- El paquete ha sido entregado:
-  - Solicitamos al cliente nos brinde máximo 24 horas para que confirmemos la recepción:
-    - 24 horas es el tiempo en que el personal en Miami demora en subir los paquetes a su sistema y así nosotros confirmar la recepción.
-    - Si han pasado más de 24 horas y aun no aparece en el sistema de Miami se genera una alerta para realizar una solicitud directamente al personal de Miami. Así de esa manera confirmar la recepción pronta o decirle al cliente que su paquete fue entregado incorrectamente.
-- Cuando un paquete aparece como despachado de Miami(Ellos nos brindan una hoja de salida), notificar al cliente una fecha próxima de entrega
+El documento original propone este flujo:
 
-### Los clientes solicitan actualizaciones sobre sus paquetes muchas veces al día
+1. Registrar la compra al proveedor.
+2. Recibir y trasladar los productos.
+3. Crear la `Sales Order` del cliente.
+4. Generar la `Sales Invoice`.
+5. Programar la entrega cuando corresponda.
+6. Disminuir el inventario conforme al documento de entrega o venta aplicable.
 
-**Solución:**
+### Modelo esperado
 
-Brindarle un código a cada cliente que permita
+- Una factura puede incluir el servicio de importación de uno o varios paquetes.
+- Las reglas de precios deben distinguir los servicios.
+- La estimación debe conservar los datos utilizados para calcularla.
+- El valor definitivo puede ajustarse con el peso y las condiciones confirmadas en Destino.
 
-Que inicie sesión y pueda ejecutar las siguientes acciones:
+### Cotizador
 
-- Verificar el estado de sus paquetes:
-  - Solicitar más información si un paquete sobrepasa las 24 horas y sigue sin aparecer:
-    - Esto enviaría una alerta al personal para que se comuniquen directamente con el cliente.
-- Reportar números de rastreo de sus proveedores
-- Ver sus facturas pendientes:
-  - Subir un comprobante de pago(la foto de un voucher)
-- Ver su historial de facturas
-- Realizar una solicitud de compra de productos:
-  - Cuando esta solicitud es atendida se envía una alerta al cliente, si la aprueba, se procede con el flujo de compra anteriormente descrito.
-- Historial de incidencias
+> **Texto original de 2019:** “La cotizadora de precios (Top Prioridad) debería de enviar el costo de precio por libra al día por el peso aproximado que proveyeron y el valor aproximado de calzar todo; de lo contrario el cambio sería al momento del pesaje final en DESTINO (MGA)”.
 
----
+Se conserva como modelo esperado. Las fórmulas, rutas, tarifas, mínimos, impuestos, vigencia de la cotización y ajustes aduaneros requieren definición antes de implementarse.
 
-Necesitaremos desarrollador los siguientes módulos para mejorar la atención al cliente
+### Decisiones pendientes
 
-## Módulo de incidencias
+- Reglas de precio por servicio.
+- Tabla de comisiones por pagos con tarjeta.
+- Tratamiento de pagos de contado y financiamientos.
+- Variaciones por retención o ajustes aduaneros.
+- Datos y vigencia de las cotizaciones.
 
-- incidencia cuando un paquete llegue a nombre incorrecto( no usen su código de cliente)
-- Incidencia cuando un paquete nos llegue en malas condiciones
-- Incidencia cuando un paquete nos llegue con productos faltantes o en mal estado
-- Resolucion de incidencias
+<a id="pag-01"></a>
 
-Este módulo de incidencia nos debe de permitir generar un reembolso al cliente en caso de ganar la incidencia o notificarle de otro tipo de resolución
+## PAG-01 · Pagos, adelantos y crédito
 
-### Ejemplo
+**Clasificación:** operación confirmada, modelo esperado y decisiones pendientes.
 
-- si un paquete llega a nombre incorrecto se genera un cobro de $5, se le debe de notificar al cliente si desea importarlo y pagar el extra o enviar a alguien al almacén a retirarlo
-- Si un paquete llega a nosotros y sus productos se encuentran en mal estado. O Si un paquete muestra que fue entregado pero aparece firmado por otra persona o el paquete muestra que fue entregado y realmente no lo tenemos en USA::
-  - Si nosotros compramos, tenemos que contactarnos con el proveedor para gestionar una garantía
-  - Si el cliente se compró, le apoyamos al cliente a gestionar
-- Si un paquete es dañado al transportarlo:
-  - Generamos la incidencia para proceder a reembolsar al cliente por su compra
-- Si un paquete es extraviado en nuestro almacén o transporte
-  - Generamos la incidencia para proceder a reembolsar al cliente
+### Escenarios de pago
 
----
+1. Pago total.
+2. Pago total utilizando un adelanto anterior.
+3. Pago parcial y aplicación de un adelanto.
+4. Pagos con diferentes métodos.
+5. Pagos con tarjeta.
+6. Crédito autorizado.
 
-## Modulo de Firma digital
+### Modelo esperado
 
-A los clientes se les hara firmar un contrato de servicio, donde se declarara:
+- Registrar cobros de clientes y pagos a proveedores.
+- Relacionar los pagos con sus documentos correspondientes.
+- Permitir pagos parciales mediante diferentes métodos hasta completar la factura.
+- Conservar controles de caja y bancos sin duplicar los documentos contables.
+- Contar con cierres diarios para la facturación y las entregas, relacionados con los documentos que originaron cada cobro.
 
-- Paquetes que lleguen a nombre incorrecto
-  - Cobro extra, más la espera no estimada
-  - O que los lleguen a retirar
-- Metodo de trabajo
-- Tarifas
-  - Detalle más variaciones
-- Tiempos
-  - Retrasos
-- Reclamos y garantias:
-  - No garantía en caso de mal embalaje del proveedor
-  - No garantía para monitores usados
-- Reporte de facturas en casos de electronicos
-  - Que pasa si la factura es alterada
+### Crédito
 
-## Módulo Reporte
+- Manejar clientes y cuentas por cobrar.
+- Verificar el límite disponible antes de autorizar una operación.
+- Alertar sobre incumplimientos.
+- Aplicar restricciones únicamente conforme a reglas aprobadas.
 
-De manera manual encontramos a los clientes que solían ser recurrentes y perdieron la Constancia para contactarlos y activarlos nuevamente, necesitamos una manera rápida de generar un reporte de estos clientes:
+> **Texto original de 2019:** “Alerta de incumplimiento cada 24 horas luego de 5 días” y “luego de Y incumplimientos se negará el crédito al cliente por un periodo de tiempo X”.
 
-- Más activos( de 3 a más )
-- Menos activos(1)
-- Nuevos
-- Cero actividad
+Los plazos, cantidades de incumplimientos, restricciones y autoridades de aprobación continúan como decisiones comerciales pendientes.
 
-Reporte de ventas
+### Salidas
 
-Reporte de ganancia por cada traslado de mercancía
+- Pago o adelanto registrado.
+- Saldo actualizado.
+- Crédito evaluado.
+- Operación autorizada o remitida a revisión.
 
-Reporte de clientes solicitando envíos locales y su gasto
+<a id="ent-01"></a>
 
-## Politicas
+## ENT-01 · Retiros y entregas
 
-1. Variacion de precio si la carga es retenida.
-   - Las cotizaciones pueden variar de precio en caso de retencion.
-2. Las tarifas son de referencia, para obtener un valor aproximado de importac
-   - Sin embargo aduana puede ajustar el valor de impuestos por tu compra.
-3. Que no transportamos
-   - Que paso si lo envias
-4. Que pasa si no retira
-   - Cobro de Almacenamiento
-5. Somos un Gestor Logistico no una agencia aduanera
-6.
+**Clasificación:** operación confirmada y modelo esperado.
 
-## Addons
+### Escenarios
 
-1. Seguro:
-   - Definir proceso para la reclamacion.
-   - Se invlida si no se demuestra que se nos entrego
-   - Que compras no aseguramos
+1. El cliente retira en el local, sin importar la forma de pago.
+2. El cliente solicita una entrega local.
+3. El mensajero recibe efectivo o entrega vuelto.
+4. El cliente solicita una entrega nacional.
 
-## Funcionalides
+### Modelo esperado
 
-Aviso de avance en caso de retencion
+- Crear una hoja de entregas por día y hora.
+- Generar una ruta para los clientes marcados para entrega.
+- Agrupar paquetes listos.
+- Asignar responsable.
+- Registrar el monto por cobrar y el vuelto que debe llevarse.
+- Registrar el resultado de cada entrega.
 
-Aviso de retiro
+### Salidas
 
-Aviso de multa por no retiro
+- Retiro confirmado.
+- Entrega programada.
+- Ruta preparada.
+- Cobro y resultado conciliados.
 
----
+### Decisiones pendientes
 
-## La cotizadora de precios(Top Prioridad)
+- Programación y asignación.
+- Intentos fallidos.
+- Evidencia de entrega.
+- Cierre y liquidación con mensajeros.
 
-Deberia de enviar el costo de precio por libra al dia
+<a id="seg-01"></a>
 
-por el peso aproximado que proveyeron y el valor aproximado de calzar todo
+## SEG-01 · Seguimiento y excepciones del transportista
 
-de lo contrario el cambio seria al momento del pesaje final en DESTINO(MGA)
+**Clasificación:** operación confirmada y modelo esperado.
 
-Para eso necesitamos el documento de rutas, y tarifarios :D??
+El seguimiento externo es un proceso lateral al ciclo logístico del `Parcel`. EasyPost y 17Track ya proporcionan integraciones para recibir información del transportista.
 
----
+> **Texto original de 2019:** “Usaremos el API de EasyPost (Tracking)”.
 
-## Rating sobre el shipper
+EasyPost ya no es únicamente una propuesta futura. El modelo esperado es normalizar los eventos recibidos y convertir únicamente las excepciones válidas en acciones para el personal.
 
-Que los clientes puedan dar rating sobre el shipper
+> **Texto original de 2019:** “Actualmente el seguimiento es manual y genera mucho trabajo al personal”.
 
-Ofrecer algun tipo de programa de puntos sobre las califaciones si se hacen publicas.
+Las integraciones reducen parte de la consulta manual, pero no demuestran que el seguimiento y la resolución de todas las excepciones estén automatizados.
 
-Por ejemplo, Despues de recibida su compra
+### Eventos contemplados
 
-Darle la opcionde valorar:
+- Entrega fallida.
+- Firma por una persona ajena al personal de Origen.
+- Intento fuera del horario de atención.
+- Entrega reagendada.
+- Paquete disponible para retiro.
+- Retraso.
+- Devolución al remitente.
+- Marcado como entregado, pero aún no confirmado en `Warehouse Receipt`.
+- Salida desde Origen.
 
-1. La traida, el servicio
-2. El shipper, como le salio su compra
-   - Esto generaria:
-     1. Valorar Shipper
-     2. Valorar Producto en detalle
+### Confirmación posterior a la entrega del transportista
+
+> **Texto original de 2019:** “Solicitamos al cliente nos brinde máximo 24 horas para que confirmemos la recepción” y “si han pasado más de 24 horas y aún no aparece en el sistema de Miami se genera una alerta”.
+
+El tiempo de espera, el calendario de atención, los destinatarios de la alerta y las reglas de escalamiento deben definirse. La ausencia de confirmación no debe interpretarse automáticamente como extravío.
+
+### Salidas
+
+- Estado externo actualizado.
+- Excepción identificada.
+- Seguimiento asignado.
+- Resolución documentada.
+
+<a id="not-01"></a>
+
+## NOT-01 · Notificaciones automáticas
+
+**Clasificación:** modelo esperado y decisión pendiente.
+
+El documento de 2019 propone notificaciones al personal y al cliente para eventos como:
+
+- recepción confirmada;
+- salida desde Origen;
+- retraso;
+- llegada a Destino;
+- facturación;
+- pago;
+- disponibilidad para retiro o entrega;
+- avance cuando exista una retención;
+- cargos o medidas aprobadas por falta de retiro;
+- incidencias y resoluciones.
+
+Las notificaciones deben enviarse solamente después de validar el evento correspondiente.
+
+### Decisiones pendientes
+
+- Eventos que generan notificaciones.
+- Destinatarios.
+- Canales.
+- Plantillas.
+- Reintentos.
+- Preferencias del cliente.
+- Protección contra mensajes prematuros o duplicados.
+
+<a id="inc-01"></a>
+
+## INC-01 · Incidencias, reclamaciones y resoluciones
+
+**Clasificación:** modelo esperado y decisiones pendientes.
+
+### Casos contemplados
+
+- Paquete recibido con nombre incorrecto.
+- Paquete recibido en malas condiciones.
+- Productos faltantes o dañados.
+- Paquete marcado como entregado, pero no confirmado en Origen.
+- Cambio del servicio de transporte.
+- Daño o extravío durante el traslado.
+
+### Modelo esperado
+
+1. Registrar la incidencia contra el paquete.
+2. Reunir evidencia.
+3. Asignar seguimiento.
+4. Investigar el caso.
+5. Registrar la decisión.
+6. Relacionar cualquier resolución aprobada.
+7. Comunicar el resultado.
+
+### Responsabilidad según el origen de la compra
+
+- Si QuickBox realizó la compra, debe gestionarse el caso con el proveedor.
+- Si el cliente realizó la compra, QuickBox puede apoyarlo en la gestión.
+
+### Valores y resoluciones históricas
+
+> **Texto original de 2019:** “Si un paquete llega a nombre incorrecto se genera un cobro de $5”.
+
+El cobro se conserva únicamente como referencia histórica. Su existencia, monto, condiciones y autorización requieren una decisión comercial vigente.
+
+> **Texto original de 2019:** “Si un paquete es dañado o extraviado en nuestro almacén o transporte, generamos la incidencia para proceder a reembolsar al cliente”.
+
+La incidencia debe permitir registrar la investigación y una resolución aprobada. No se debe prometer automáticamente un reembolso sin definir responsabilidad, evidencia, cobertura y autoridad de aprobación.
+
+<a id="por-01"></a>
+
+## POR-01 · Portal y autoservicio del cliente
+
+**Clasificación:** modelo esperado.
+
+El documento original propone que el cliente pueda:
+
+- iniciar sesión;
+- consultar el estado de sus paquetes;
+- solicitar información adicional;
+- reportar números de rastreo;
+- consultar facturas pendientes;
+- subir comprobantes de pago;
+- consultar su historial de facturas;
+- solicitar una asistencia de compra;
+- aprobar una solicitud atendida;
+- consultar su historial de incidencias.
+
+### Entradas
+
+- Identidad del cliente.
+- Paquetes, ventas, facturas, pagos e incidencias relacionados.
+
+### Salidas
+
+- Solicitudes registradas.
+- Evidencia adjunta.
+- Información consultada conforme a permisos.
+- Acciones remitidas al flujo correspondiente.
+
+### Decisiones pendientes
+
+- Autenticación.
+- Información visible.
+- Permisos.
+- Acciones permitidas.
+- Controles de revisión.
+- Relación con futuras aplicaciones de comercio electrónico.
+
+<a id="inv-01"></a>
+
+## INV-01 · Inventario y almacenamiento
+
+**Clasificación:** operación confirmada, modelo esperado y decisiones pendientes.
+
+### Capacidades
+
+- Ingreso, control y salida de mercadería.
+- Recepción y clasificación de paquetes.
+- Identificación de paquetes pendientes de retiro.
+- Alertas sobre paquetes almacenados durante un período definido.
+
+> **Texto original de 2019:** “Alerta de mercadería de cliente con X días de no entrega”.
+
+El período gratuito, los cargos, la secuencia de avisos, las excepciones y el tratamiento de paquetes abandonados requieren definición comercial y revisión legal.
+
+<a id="ser-01"></a>
+
+## SER-01 · Servicios adicionales
+
+**Clasificación:** referencia histórica y decisiones pendientes.
+
+El documento de 2019 contempla:
+
+- seguro por producto o envío;
+- libras prepagadas;
+- membresías con tarifas preferenciales;
+- membresías con entregas incluidas;
+- membresías con seguro;
+- membresías relacionadas con crédito;
+- acumulación de puntos;
+- calificación del servicio, transportista o producto.
+
+No se consideran servicios aprobados hasta definir:
+
+- productos ofrecidos;
+- precio;
+- cobertura;
+- exclusiones;
+- vencimiento;
+- transferibilidad;
+- reclamaciones;
+- tratamiento contable.
+
+### Garantías históricas
+
+> **Texto original de 2019:** “No garantía en caso de mal embalaje del proveedor” y “No garantía para monitores usados”.
+
+Estas frases se conservan como referencia histórica. Cualquier exclusión de responsabilidad o garantía requiere política aprobada y revisión legal.
+
+### Calificaciones
+
+El modelo contempla que, después de recibir la compra, el cliente pueda valorar:
+
+1. El servicio de importación.
+2. El proveedor o `Shipper`.
+3. El producto.
+
+La visibilidad, moderación y cualquier incentivo por publicar calificaciones permanecen pendientes.
+
+<a id="rep-01"></a>
+
+## REP-01 · Reportes administrativos y operativos
+
+**Clasificación:** modelo esperado.
+
+### Reportes operativos
+
+- Paquetes rezagados o atrasados.
+- Compras rezagadas o atrasadas.
+- Incidencias pendientes.
+- Entregas locales.
+- Paquetes pendientes de retiro.
+
+### Reportes administrativos
+
+- Facturas pendientes.
+- Órdenes de importación pendientes de pago.
+- Cierres de caja.
+- Ventas.
+- Ganancia por traslado de mercancía.
+- Costos de entrega.
+- Actividad de clientes:
+  - más activos;
+  - menos activos;
+  - nuevos;
+  - sin actividad.
+
+Las métricas, fuentes contables, audiencias y períodos deben definirse antes de implementar cada reporte.
+
+> **Texto original de 2019:** “De manera manual encontramos a los clientes que solían ser recurrentes y perdieron la constancia para contactarlos y activarlos nuevamente”.
+
+Se conserva como necesidad de identificar cambios en la actividad de los clientes. La definición de cliente recurrente, inactivo o reactivable continúa pendiente.
+
+<a id="pol-01"></a>
+
+## POL-01 · Políticas, términos y decisiones pendientes
+
+**Clasificación:** referencia histórica y decisiones pendientes.
+
+El documento original identifica la necesidad de establecer términos y políticas según el servicio, la facturación y el transportista.
+
+### Temas conservados
+
+1. Variación del precio cuando una carga es retenida.
+2. Tarifas utilizadas como referencia para una estimación.
+3. Posibles ajustes de impuestos o aduana.
+4. Productos que no se transportan.
+5. Consecuencias de enviar un producto restringido.
+6. Paquetes no retirados y posibles cargos de almacenamiento.
+7. Alcance como gestor logístico.
+8. Reclamaciones y seguros.
+9. Reporte de facturas para artículos electrónicos.
+10. Tratamiento de documentos alterados.
+11. Contrato o aceptación digital de las condiciones del servicio.
+
+Estos temas no constituyen políticas vigentes dentro de este Playbook. Cada uno requiere una definición aprobada en su documentación operativa o legal correspondiente.
+
+## Contenido deliberadamente fuera de alcance
+
+La visión histórica sobre fuerza laboral, control de asistencia y cálculo de planilla pertenece a Frappe HR y a la documentación laboral de Grupo Real. No forma parte del modelo funcional de `cargo_management`.
