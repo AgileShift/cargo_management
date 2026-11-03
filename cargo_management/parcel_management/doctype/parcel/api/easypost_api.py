@@ -1,4 +1,3 @@
-import json
 from datetime import datetime as dt
 
 import easypost
@@ -89,7 +88,7 @@ def easypost_webhook(**kwargs):
 
 	try:
 		data = easypost.util.validate_webhook(
-			event_body=json.dumps(kwargs, separators=(",", ":")).encode(),  # frappe.as_json() adds params and wont work
+			event_body=frappe.request.get_data(),  # Verify the exact bytes signed by EasyPost.
 			headers=frappe.request.headers, webhook_secret=frappe.conf['easypost_webhook_secret']
 		)
 
