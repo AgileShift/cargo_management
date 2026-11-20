@@ -58,13 +58,14 @@
   }
  ],
  "force_re_route_to_default_view": 1,
+ "link_display_mode": "Select",
  "links": [
   {
    "link_doctype": "Parcel",
    "link_fieldname": "carrier"
   }
  ],
- "modified": "2026-01-29 11:34:33.203709",
+ "modified": "2026-11-17 10:07:50.275790",
  "modified_by": "Administrator",
  "module": "Cargo Core",
  "name": "Carrier",
